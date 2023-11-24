@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin:0;
+            padding:0;
+        }
+        a {
+            text-decoration: none;
+        }
+        .wrap {
+            width:1200px;
+            margin : 0 auto;    /* 가운데 정렬 */
+        }
+        .header {
+            background-color:#273443;
+            color:#ffffff;
+            text-align: center;
+            padding:40px 10px;
+        }
+        .menu {
+            width:100%;
+            height:40px;
+        }
+        .menu > ul {
+            margin:0;
+            padding:0;
+        }
+        .menu > ul > li {
+            list-style: none;
+            border:1px solid #000000;
+            background-color:#ffffff;
+            color:#000000;
+            text-align: center;
+            float:left;
+            width:20%;
+            height:40px;
+            line-height:40px;
+        }
+        .menu > ul > li:hover {
+            background-color:#ffffff;
+        }
+        .container {
+            overflow: hidden;
+            background-color:#d8d8d8;
+            height:auto;
+        }
+        .leftmenu {
+            background-color:#f5cfa8;
+            color:#000000;
+            text-align: center;
+            float:left;
+            width:30%;
+            height:500px;
+            line-height:500px;
+        }
+        .content {
+            background-color:#a5c2a7;
+            color:#000000;
+            text-align: center;
+            float:left;
+            width:70%;
+            height:500px;
+            line-height:500px;
+        }
+        .footer {
+            background-color:#d1c3a7;
+            color:#000000;
+            clear :both;
+            padding:30px 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            HEADER
+        </div>
+        <div class="menu">
+            <ul>
+                <li>MENU1</li>
+                <li>MENU2</li>
+                <li>MENU3</li>
+                <li>MENU4</li>
+                <li>MENU5</li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="leftmenu">
+                LCONTENTS
+            </div>
+            <div class="content">
+                CONTENTS
+            </div>
+        </div>
+        <div class="footer">
+            FOOTER
+        </div>
+    </div>
+</body>
+</html>

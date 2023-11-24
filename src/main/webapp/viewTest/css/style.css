@@ -1,0 +1,205 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.wrap {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.header {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.size {
+    position: relative;
+}
+
+.login {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.menu {
+    width: 1200px;
+    margin: 0 auto;
+    height: 40px;
+}
+
+.menu>ul>li {
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    color: #000000;
+    text-align: center;
+    float: left;
+    width: 20%;
+    height: 40px;
+    line-height: 40px;
+}
+
+.menu>ul>li:hover {
+    background-color: #ffffff;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    height: auto;
+}
+
+.container>.size {
+    width: 100%;
+    text-align: center;
+}
+
+.container>.size>.section {
+    box-sizing: border-box;
+    width: 33.3333%;
+    float: left;
+    padding: 5px;
+}
+
+.footer {
+    width: 100%;
+    background-color: #2d2b28;
+    color: #999;
+    clear: both;
+    padding: 30px 0;
+}
+
+.footer>.size {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.footer>.size>.info>p {
+    line-height: 20px;
+}
+
+.footer>.size>.sns_area {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.footer>.size>.sns_area>a {
+    margin: 0 10px;
+}
+
+ul,
+li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.depth2 {
+    width: 100%;
+    background-color: white;
+    z-index: 10;
+
+    /* 자바스크립트로 얘를 숨기면 나왔다가 없어진다. 그래서 새로고침하면 살짝 보인다.
+    때문에 애초에 안보이게 하기 위해서 */
+    display: none;
+}
+
+.visual img {
+    /* 이미지는 뭔가 여백이 있다. */
+    /* 그 여백을 없애기 위해 이미지를 block으로 처리하면 그 여백이 없어진다. */
+    display: block;
+}
+
+.visual {
+    height: 500px;
+    width: 100%;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#popup {
+    position: absolute;
+    z-index: 10000;
+}
+
+#quickmenu {
+    position: absolute;
+    z-index: 10000;
+
+    /* 이런식으로 주면 해상도마다 제각각으로 보이게됨. */
+    /* top:124px;
+    left: 1490px; */
+    /* so, jquery로 줘야한다. */
+}
+
+#top {
+    cursor: pointer;
+}
+
+.info{
+    width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.info > .content{
+    width: 50%;
+    padding: 10px;
+    float: left;
+}
+
+.info >.content > .board_area{
+    width: 100%;
+    border: 1px solid #999;
+    padding: 10px;
+}
+
+.info > .content > .board_area > .board_title{
+    font-size: 25px;
+    line-height: 50px;
+    float: left;
+    cursor: pointer;
+    width: 100px;
+    margin-right: 10px;
+}
+/* 내가 클릭한거만 on으로 바꾸기 */
+/* 나중에 on속성만 넣어줬다빼줬다한다. */
+.info > .content > .board_area > .board_title.on{
+    background-color: #2d2b28;
+    color: white;
+}
+.info > .content > .board_area > .board_contents{
+    display: none;
+}
+.info > .content > .board_area > .board_contents.on{
+    display: block;
+}
+.board_contents{
+    clear: both;
+}
+.board_contents > ul:first-child{
+    border-top: 1px solid #999;
+}
+.board_contents > ul > li{
+    line-height: 40px;
+    font-size: 18px;
+    border-bottom: 1px solid #999;
+}
+.board_contents > ul > li > span{
+    float: right;
+}
