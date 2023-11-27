@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>판매자 회원 가입</h2>
+    <form>
+        <div>
+            아이디*<br>
+            <input type="text">
+            <button>아이디 중복 확인</button>
+        </div>
+        <div>
+            성명*<br>
+            <input type="text">
+        </div>
+        <div>
+            이메일*<br>
+            <input type="text" >
+            <button>이메일 인증</button>
+            <!-- 이메일 인증은 구매자 회원가입의 이메일 인증 가져다 쓰면 될듯. -->
+        </div>
+
+        <div>
+            주소
+            <div><input type="text" disabled placeholder="우편번호"> <button>우편번호 검색</button></div>
+            <div><input type="text" disabled placeholder="기본주소"></div>
+            <div><input type="text" placeholder="상세주소"></div>
+        </div>
+
+        <div>
+            비밀번호*<br>
+            <input type="password">
+        </div>
+        <div>
+            비밀번호 확인*<br>
+            <input type="password">
+        </div>
+        <div>
+            연락처*<br>
+            <input type="text" maxlength="3" value="010"> - <input type="text" maxlength="4" placeholder="XXXX"> - <input type="text" maxlength="4" placeholder="XXXX">
+        </div>
+        <div>
+            사업자 등록번호*<br>
+            <input type="text " placeholder="10자리, '-'없이 숫자만 입력하세요">
+        </div>
+        <div>
+            정산 계좌*<br>
+            <!-- 옵션부분은 나중에 javascript로 추가 요망 -->
+            <select name="" id="">
+                <option value="">은행</option>
+            </select>
+            <input type="text" placeholder="'-'없이 숫자만 입력하세요">
+        </div>
+        <div>
+            <input type="checkbox"> 광고성 마케팅 수신 동의(선택사항)
+        </div>
+        <div>
+            <input type="submit" value="가입하기">
+        </div>
+    </form>
+</body>
+</html>
