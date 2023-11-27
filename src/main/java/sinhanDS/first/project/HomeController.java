@@ -34,5 +34,5 @@ public class HomeController {
 		System.out.println("이건되나보자");
 		return "template";
 	}
-	//한글테스트
+	//한글테스트 정훈
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>회원 정보</h2>
+    <form>
+        <div>
+            아이디*<br>
+            <input type="text" placeholder="본래id" disabled>
+        </div>
+        <hr>
+        <div>
+            성명*<br>
+            <input type="text" placeholder="저희 이름 변경이 되나요?">
+        </div>
+        <hr>
+        <div>
+            기존 비밀번호*<br>
+            <input type="password" placeholder="비밀번호 변경시에만 입력">
+        </div>
+        <div>
+            새 비밀번호*<br>
+            <input type="password">
+        </div>
+        <div>
+            새 비밀번호 확인*<br>
+            <input type="password">
+        </div>
+        <hr>
+        <div>
+            이메일*<br>
+            <input type="text" placeholder="기존 이메일" disabled>
+            <button>이메일 인증</button>
+            <!-- 이메일 인증은 구매자 회원가입의 이메일 인증 가져다 쓰면 될듯. -->
+        </div>
+        <hr>
+        
+        
+        <div>
+            연락처*<br>
+            <input type="text" maxlength="3" value="010"> - <input type="text" maxlength="4" placeholder="XXXX"> - <input type="text" maxlength="4" placeholder="XXXX">
+        </div>
+        <hr>
+        
+        <div>
+            사업자 등록번호*<br>
+            <input type="text " placeholder="10자리, '-'없이 숫자만 입력하세요">
+        </div>
+        <hr>
+        
+        <div>
+            <input type="checkbox"> 광고성 마케팅 수신 동의(선택사항)
+        </div>
+        <hr>
+        <div><a href="">회원 탈퇴</a></div>
+        <hr>
+        <div>
+            <input type="submit" value="가입하기">
+        </div>
+    </form>
+</body>
+</html>

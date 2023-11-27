@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .search-list-array {
+            display: flex;
+            gap: 20px;
+        }
+
+        .search-list-array form {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-list-array select {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search-container">
+        <div class="search-list-array">
+            <form action="추천순" method="get" id="select-option-1">
+                <select name="order" form="select-option-1">
+                    <option value="like">추천순</option>
+                    <option value="price">가격순</option>
+                </select>
+            </form>
+
+            <form action="리스트나열" method="get" id="select-option-2">
+                <select name="order" form="select-option-2">
+                    <option value="12">12개씩</option>
+                    <option value="16">16개씩</option>
+                </select>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

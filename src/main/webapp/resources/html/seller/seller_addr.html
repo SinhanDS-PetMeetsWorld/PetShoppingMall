@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>회원정보</h1>
+    <button type="button">기본정보 변경</button>
+    <button type="button">주소 변경</button>
+    <button type="button">정산 관리</button>
+
+    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
+        
+        <!--주소가 존재하는만큼 td를 생성-->
+        <tr width="800">
+            <td>
+                <br>
+                <div>huzefa bagwala</div>
+                <div>1131 dusstt qwrqrwq, wqrqwrqwr, tx 2404010</div>
+                <div>
+                    <span>Contact - </span>
+                    <span>(936) 421-4214</span>
+                </div>
+                <br>
+            </td>
+            <td>
+                <button type="button" name="modify" onclick="location.href=/*수정.jsp*/''">수정</button> |
+                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
+                <br>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div></div>
+                <hr>
+                <button type="button" name="add_new_address">+ 배송지 추가</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
