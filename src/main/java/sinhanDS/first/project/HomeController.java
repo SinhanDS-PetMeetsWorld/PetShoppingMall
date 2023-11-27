@@ -34,5 +34,5 @@ public class HomeController {
 		
 		return "template";
 	}
-	//한글테스트
+	//한글테스트 정훈
 }
