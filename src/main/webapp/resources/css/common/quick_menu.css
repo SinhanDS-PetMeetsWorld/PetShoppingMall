@@ -1,0 +1,25 @@
+.quick_menu {
+  background-color: #FFDE30;
+  padding: 5px;
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  line-height : 45px;
+  text-align: center;
+}
+
+.quick_menu > .quick_menu_category{
+  background-color: white;
+  text-align: center;
+  width:125px;
+  text-decoration: none;
+  border-radius: 15px;
+  color : black;
+  
+}
+
+.quick_menu_category > a { 
+ 	text-decoration:none;
+ 	color: #333;
+ 	}
