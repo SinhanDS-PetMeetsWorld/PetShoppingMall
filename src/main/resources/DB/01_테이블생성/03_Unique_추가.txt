@@ -1,0 +1,9 @@
+
+ALTER TABLE `PetShoppingMall`.`user` 
+ADD UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE;
+;
+
+
+ALTER TABLE `PetShoppingMall`.`seller` 
+ADD UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE;
+;

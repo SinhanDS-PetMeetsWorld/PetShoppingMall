@@ -72,8 +72,7 @@
 				</c:if>
 				<c:if test="${!empty loginInfo }">
 					<div class="header_login">
-
-
+						
 						<!-- 아이콘이 그림인데 나중에는 버튼으로 바꾸어야함 -->
 						<div class="header_user">
 							<a href="/user/edit.do"><img src="/resources/img/common/user.png" align="right"></a>
@@ -83,7 +82,11 @@
 						<div class="header_cart">
 							<a href="#"><img src="/resources/img/common/cart.png" align="right"></a>
 						</div>
-
+						
+						<div class="header_logout">
+							<a href="/user/logout.do">로그아웃</a>
+						</div>
+					
 					</div>
 				</c:if>
 			</div>
