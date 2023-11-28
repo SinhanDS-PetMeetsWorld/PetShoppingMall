@@ -1,0 +1,20 @@
+INSERT INTO `PetShoppingMall`.`user`
+(`id`,
+`password`,
+`name`,
+`email`,
+`phone`,
+`gender`,
+`birth_date`,
+`advertisement`,
+`join_date`)
+VALUES
+('kimcider',
+'captin',
+'김병천',
+'rlaqudcjs96@naver.com',
+'010-1111-2222',
+0,
+date_format('1996-9-24', '%Y-%m-%d'),
+0,
+sysdate());
