@@ -49,10 +49,25 @@ public class UserController {
 		return "user/edit/user_info";
 	}
 	
-	@PostMapping("/edit.do")
-	public String edit2(HttpSession sess, UserVO vo) {
-		UserVO login = service.edit(vo);
-		sess.setAttribute("loginInfo", login);
-		return "user/edit/user_info";
+	
+	
+	@PostMapping("/update.do")
+	public String edit(UserVO vo, Model model) {
+		System.out.println(vo);
+		
+		int r = service.edit(vo);
+		String msg = "";
+		String url = "edit.do";
+		
+		if (r > 0) {
+			msg = "정상적으로 수정되었습니다.";
+		} else {
+			msg = "수정 오류";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		model.addAttribute("cmd","move");
+		return "common/alert";
 	}
+	
 }
