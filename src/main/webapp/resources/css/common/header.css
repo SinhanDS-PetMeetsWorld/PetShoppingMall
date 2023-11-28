@@ -94,7 +94,7 @@
 
 .header_search {
 	width: 100px;
-	margin: 10px 0 10px 40px;
+	margin: 10px 0 10px 20px;
 	position: absolute;
 	display: inline-block;
 	padding: 10px;
@@ -121,15 +121,26 @@
 .header_login >div > a> img{
 	width: 22px;
 	height: 22px;
-	margin: 0px 20px;
-	
+	margin-right: 25px;
 }
-
-.header_unlogin,
-.header_login {
+.header_login > .header_logout > a{
+	margin-right : 20px;
+}
+.header_unlogin{
     width: 150px;
     height: 30px;
     margin: 25px 0 0 400px;
+    display: inline-block;
+    position: absolute;
+    border: 1px;
+    cursor: pointer;
+
+}
+
+.header_login {
+    width: 180px;
+    height: 30px;
+    margin: 25px 0 0 370px;
     display: inline-block;
     position: absolute;
     border: 1px;
