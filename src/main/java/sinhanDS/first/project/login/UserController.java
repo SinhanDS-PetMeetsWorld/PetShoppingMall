@@ -19,8 +19,6 @@ public class UserController {
 	
 	@GetMapping("/login/login.do")
 	public String login() {
-		
-		System.out.println("들어오나?");
 		return "login/login";
 	}
 	
@@ -29,7 +27,6 @@ public class UserController {
 		UserVO login = service.login(vo);
 		System.out.println(login);
 		if (login == null) { // 로그인 실패
-			System.out.println("불쌍하네요~ 인생이...");
 			model.addAttribute("msg", "아이디 비밀번호가 올바르지 않습니다.");
 			model.addAttribute("cmd", "back");
 			return "common/alert";
