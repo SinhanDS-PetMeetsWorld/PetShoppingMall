@@ -1,0 +1,183 @@
+
+ALTER TABLE `product` ADD CONSTRAINT `FK_seller_TO_product_1` FOREIGN KEY (
+	`seller_no`
+)
+REFERENCES `seller` (
+	`no`
+);
+
+ALTER TABLE `address` ADD CONSTRAINT `FK_user_TO_address_1` FOREIGN KEY (
+	`user_no`
+)
+REFERENCES `user` (
+	`no`
+);
+
+ALTER TABLE `payment` ADD CONSTRAINT `FK_user_TO_payment_1` FOREIGN KEY (
+	`user_no`
+)
+REFERENCES `user` (
+	`no`
+);
+
+ALTER TABLE `payment` ADD CONSTRAINT `FK_finance_company_TO_payment_1` FOREIGN KEY (
+	`finance_company_no`
+)
+REFERENCES `finance_company` (
+	`no`
+);
+
+ALTER TABLE `cart` ADD CONSTRAINT `FK_user_TO_cart_1` FOREIGN KEY (
+	`user_no`
+)
+REFERENCES `user` (
+	`no`
+);
+
+ALTER TABLE `cart` ADD CONSTRAINT `FK_product_TO_cart_1` FOREIGN KEY (
+	`product_no`
+)
+REFERENCES `product` (
+	`no`
+);
+
+ALTER TABLE `cart` ADD CONSTRAINT `FK_cart_option_TO_cart_1` FOREIGN KEY (
+	`cart_option_no`
+)
+REFERENCES `cart_option` (
+	`no`
+);
+
+ALTER TABLE `order_main` ADD CONSTRAINT `FK_user_TO_order_main_1` FOREIGN KEY (
+	`user_no`
+)
+REFERENCES `user` (
+	`no`
+);
+
+ALTER TABLE `option` ADD CONSTRAINT `FK_product_TO_option_1` FOREIGN KEY (
+	`product_no`
+)
+REFERENCES `product` (
+	`no`
+);
+
+ALTER TABLE `cart_option` ADD CONSTRAINT `FK_option_TO_cart_option_1` FOREIGN KEY (
+	`option_no`
+)
+REFERENCES `option` (
+	`no`
+);
+
+ALTER TABLE `order_detail` ADD CONSTRAINT `FK_order_main_TO_order_detail_1` FOREIGN KEY (
+	`order_no`
+)
+REFERENCES `order_main` (
+	`no`
+);
+
+ALTER TABLE `order_detail` ADD CONSTRAINT `FK_product_TO_order_detail_1` FOREIGN KEY (
+	`product_no`
+)
+REFERENCES `product` (
+	`no`
+);
+
+ALTER TABLE `order_detail` ADD CONSTRAINT `FK_delivery_TO_order_detail_1` FOREIGN KEY (
+	`delivery_no`
+)
+REFERENCES `delivery` (
+	`no`
+);
+
+ALTER TABLE `order_detail` ADD CONSTRAINT `FK_user_TO_order_detail_1` FOREIGN KEY (
+	`user_no`
+)
+REFERENCES `user` (
+	`no`
+);
+
+ALTER TABLE `order_detail_option` ADD CONSTRAINT `FK_order_detail_TO_order_detail_option_1` FOREIGN KEY (
+	`order_dno`
+)
+REFERENCES `order_detail` (
+	`no`
+);
+
+ALTER TABLE `save_box` ADD CONSTRAINT `FK_user_TO_save_box_1` FOREIGN KEY (
+	`user_no`
+)
+REFERENCES `user` (
+	`no`
+);
+
+ALTER TABLE `save_box` ADD CONSTRAINT `FK_product_TO_save_box_1` FOREIGN KEY (
+	`product_no`
+)
+REFERENCES `product` (
+	`no`
+);
+
+ALTER TABLE `review` ADD CONSTRAINT `FK_user_TO_review_1` FOREIGN KEY (
+	`user_no`
+)
+REFERENCES `user` (
+	`no`
+);
+
+ALTER TABLE `review` ADD CONSTRAINT `FK_product_TO_review_1` FOREIGN KEY (
+	`no2`
+)
+REFERENCES `product` (
+	`no`
+);
+
+ALTER TABLE `review` ADD CONSTRAINT `FK_order_main_TO_review_1` FOREIGN KEY (
+	`order_no`
+)
+REFERENCES `order_main` (
+	`no`
+);
+
+ALTER TABLE `review` ADD CONSTRAINT `FK_order_detail_TO_review_1` FOREIGN KEY (
+	`order_dno`
+)
+REFERENCES `order_detail` (
+	`no`
+);
+
+ALTER TABLE `product_qna` ADD CONSTRAINT `FK_product_TO_product_qna_1` FOREIGN KEY (
+	`product_no`
+)
+REFERENCES `product` (
+	`no`
+);
+
+ALTER TABLE `settlement_account` ADD CONSTRAINT `FK_seller_TO_settlement_account_1` FOREIGN KEY (
+	`seller_no`
+)
+REFERENCES `seller` (
+	`no`
+);
+
+ALTER TABLE `settlement_account` ADD CONSTRAINT `FK_finance_company_TO_settlement_account_1` FOREIGN KEY (
+	`bank_no`
+)
+REFERENCES `finance_company` (
+	`no`
+);
+
+ALTER TABLE `delivery_fee` ADD CONSTRAINT `FK_order_main_TO_delivery_fee_1` FOREIGN KEY (
+	`order_no`
+)
+REFERENCES `order_main` (
+	`no`
+);
+
+ALTER TABLE `product_category` ADD CONSTRAINT `FK_product_TO_product_category_1` FOREIGN KEY (
+	`product_no`
+)
+REFERENCES `product` (
+	`no`
+);
+
