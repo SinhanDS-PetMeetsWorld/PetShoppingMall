@@ -1,0 +1,23 @@
+INSERT INTO `PetShoppingMall`.`seller`
+(
+`id`,
+`password`,
+`name`,
+`email`,
+`phone`,
+`business_number`,
+`zipcode`,
+`addr1`,
+`addr2`)
+VALUES
+(
+'kimcider',
+'captain',
+'김병천',
+'rlaqudcjs96@naver.com',
+'010-1111-2222',
+'000-1111-22',
+'03048',
+'서울특별시 종로구 청와대로 1',
+'청와대');
+
