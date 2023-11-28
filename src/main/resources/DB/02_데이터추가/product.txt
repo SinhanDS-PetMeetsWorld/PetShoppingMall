@@ -1,0 +1,68 @@
+INSERT INTO `PetShoppingMall`.`product`
+(
+`seller_no`,
+`name`,
+`price`,
+`discount`,
+`stock`,
+`company`,
+`brand`,
+`rating`,
+`image_url`)
+VALUES
+(
+1,
+'동결건조간식 대용량 치킨 닭고기+호박 240g 강아지 고양이 트릿 허글 에프디바이츠',
+12500,
+0,
+500,
+'가로세로',
+'허글허글',
+0,
+'https://shop-phinf.pstatic.net/20221125_181/1669336673676lXvrR_JPEG/70472516390621864_1689661559.jpg?type=m510');
+
+INSERT INTO `PetShoppingMall`.`product`
+(
+`seller_no`,
+`name`,
+`price`,
+`discount`,
+`stock`,
+`company`,
+`brand`,
+`rating`,
+`image_url`)
+VALUES
+(
+1,
+'닥터바이 비욘드츄 100% 식물성 대체육 강아지 간식 다이어트 덴탈 껌',
+15900,
+0,
+500,
+'가로세로',
+'허글허글',
+0,
+'https://shop-phinf.pstatic.net/20230120_152/1674175179032Vfn0w_JPEG/75311067735186629_23355428.jpg?type=m510');
+
+INSERT INTO `PetShoppingMall`.`product`
+(
+`seller_no`,
+`name`,
+`price`,
+`discount`,
+`stock`,
+`company`,
+`brand`,
+`rating`,
+`image_url`)
+VALUES
+(
+2,
+'시저 쇠고기',
+1270,
+0,
+200,
+'사료사료',
+'료사료사',
+0,
+'https://shopping-phinf.pstatic.net/main_5662090/5662090193.20220513100317.jpg?type=f640');

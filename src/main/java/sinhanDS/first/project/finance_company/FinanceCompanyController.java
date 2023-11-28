@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/finance_company")
 public class FinanceCompanyController {
 	@Autowired
 	private FinanceCompanyService service;

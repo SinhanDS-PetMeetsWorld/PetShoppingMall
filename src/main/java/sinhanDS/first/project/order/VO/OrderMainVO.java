@@ -1,7 +1,9 @@
 package sinhanDS.first.project.order.VO;
 
 import java.sql.Date;
+import lombok.Data;
 
+@Data
 public class OrderMainVO {
 	//주문 번호
 	private int no;

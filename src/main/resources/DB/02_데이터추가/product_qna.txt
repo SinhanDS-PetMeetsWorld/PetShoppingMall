@@ -1,0 +1,21 @@
+INSERT INTO `PetShoppingMall`.`product_qna`
+(
+`product_no`,
+`user_no`,
+`seller_no`,
+`question_content`,
+`question_write_date`,
+`answer_content`,
+`answer_write_date`,
+`status`)
+VALUES
+(
+1,
+0,
+1,
+'어떻게 동결했나요?',
+sysdate(),
+'사실 동결 안했어요..',
+sysdate(),
+1);
+
