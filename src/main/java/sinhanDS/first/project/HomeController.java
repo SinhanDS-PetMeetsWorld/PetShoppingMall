@@ -31,7 +31,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		System.out.println("이건되나");
+
 		return "template";
 	}
 	//한글테스트 정훈

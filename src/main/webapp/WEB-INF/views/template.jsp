@@ -63,7 +63,9 @@
                 <%@ include file="./common/quickmenu.jsp"%>
             </div>
 			<div class="contentsright">
-				<div>오른쪽 내용</div>
+				<div>
+					이 부분을 수정하세요!!!
+				</div>
 			</div>
 
         </div>
