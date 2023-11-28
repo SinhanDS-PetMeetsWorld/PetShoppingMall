@@ -49,4 +49,11 @@ public class UserController {
 		sess.setAttribute("loginInfo", login);
 		return "user_info";
 	}
+	
+	@GetMapping("/하.do")
+	public String edit3(HttpSession sess, UserVO vo) {
+		UserVO login = service.edit(vo);
+		sess.setAttribute("loginInfo", login);
+		return "user_info";
+	}
 }
