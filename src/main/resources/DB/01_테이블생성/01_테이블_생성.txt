@@ -1,5 +1,5 @@
 CREATE TABLE `user` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
+	`no`	int	NOT NULL,
 	`id`	varchar(24)	NOT NULL,
 	`password`	varchar(24)	NOT NULL,
 	`name`	varchar(24)	NOT NULL,
@@ -9,36 +9,36 @@ CREATE TABLE `user` (
 	`birth_date`	date	NOT NULL,
 	`advertisement`	boolean	NULL	DEFAULT false,
 	`join_date`	date	NULL
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `product` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`seller_no`	int	NOT NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`seller_no`	int	NOT NULL,
 	`name`	varchar(96)	NOT NULL,
-	`price`	int	NOT NULL	,
+	`price`	int	NOT NULL,
 	`discount`	int	NOT NULL	DEFAULT 0,
-	`stock`	int	NOT NULL	,
+	`stock`	int	NOT NULL,
 	`company`	varchar(48)	NOT NULL,
 	`brand`	varchar(48)	NOT NULL,
 	`rating`	float	NOT NULL	DEFAULT 0	COMMENT '리뷰를 생성할 때 평균 평점을 업데이트',
 	`image_url`	varchar(255)	NULL
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `address` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`user_no`	int	NOT NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`user_no`	int	NOT NULL,
 	`zipcode`	varchar(8)	NOT NULL,
 	`addr1`	varchar(96)	NOT NULL,
 	`addr2`	varchar(96)	NOT NULL,
 	`name`	varchar(24)	NOT NULL,
 	`phone`	varchar(13)	NOT NULL,
 	`comment`	varchar(96)	NULL
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `payment` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`user_no`	int	NOT NULL	,
-	`finance_company_no`	int	NOT NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`user_no`	int	NOT NULL,
+	`finance_company_no`	int	NOT NULL,
 	`name`	varchar(20)	NULL,
 	`type`	int	NOT NULL	COMMENT '계좌 (0)
 신용카드 (1)',
@@ -46,10 +46,10 @@ CREATE TABLE `payment` (
 카드면 카드번호
 
 예시를 들꺼면 신한은행의 계좌번호 포멧으로 들자!'
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `seller` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
 	`id`	varchar(24)	NOT NULL,
 	`password`	varchar(24)	NOT NULL,
 	`name`	varchar(24)	NOT NULL,
@@ -59,36 +59,35 @@ CREATE TABLE `seller` (
 	`zipcode`	varchar(8)	NULL,
 	`addr1`	varchar(96)	NULL,
 	`addr2`	varchar(96)	NULL
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `cart` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`user_no`	int	NOT NULL	,
-	`product_no`	int	NOT NULL	,
-	`quantity`	int	NOT NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`user_no`	int	NOT NULL,
+	`product_no`	int	NOT NULL,
+	`quantity`	int	NOT NULL,
 	`cart_option_no`	int	NOT NULL	
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `order_main` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`user_no`	int	NOT NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`user_no`	int	NOT NULL,
 	`order_date`	date	NOT NULL,
-	`finance_company_no`	int	NOT NULL	,
-	`payment_type`	int	NULL	,
+	`finance_company_no`	int	NOT NULL,
+	`payment_type`	int	NULL,
 	`payment_content`	varchar(96)	NULL,
-	`display`	boolean	NOT NULL	DEFAULT true	COMMENT '사용자가 구매이력을 삭제하면 false로 변경',
 	`zipcode`	varchar(8)	NOT NULL,
 	`addr1`	varchar(96)	NOT NULL,
 	`addr2`	varchar(96)	NOT NULL,
 	`delete`	boolean	NOT NULL	DEFAULT false	COMMENT '삭제 여부',
-	`total_price`	int	NULL	,
-	`total_delivery_fee`	int	NULL	,
+	`total_price`	int	NULL,
+	`total_delivery_fee`	int	NULL,
 	`name`	varchar(96)	NULL
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `option` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`product_no`	int	NOT NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`product_no`	int	NOT NULL,
 	`option`	varchar(24)	NULL	COMMENT '옵션: 색깔, 사이즈 등
 그 값은 내용에',
 	`content`	varchar(48)	NULL	COMMENT '옵션이 size면
@@ -96,28 +95,27 @@ CREATE TABLE `option` (
 옵션이 color면
 내용은 green, black, white',
 	`price`	int	NULL	
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `cart_option` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
 	`option_no`	int	NOT NULL	
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `order_detail` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`order_no`	int	NOT NULL	,
-	`product_no`	int	NOT NULL		COMMENT '주문 상세의 가격, 할인율 등은 상품번호를 통해 join해 올 수 없다.
-현재 상품정보가 바뀐다고 이미 결재한 내역들이 바뀌어서는 안되기 때문이다.',
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`order_no`	int	NOT NULL,
+	`user_no`	int	NULL,
+	`seller_no`	int	NOT NULL,
+	`product_no`	int	NULL,
 	`name`	varchar(96)	NOT NULL,
-	`price`	int	NOT NULL	,
-	`charge`	int	NULL	,
-	`discount_rate`	int	NULL	,
+	`price`	int	NOT NULL,
+	`charge`	int	NULL,
+	`discount_rate`	int	NULL,
 	`company`	varchar(48)	NOT NULL,
 	`brand`	varchar(48)	NOT NULL,
-	`quantity`	int	NULL	,
-	`delivery_no`	int	NULL	,
-	`seller_no`	int	NOT NULL	,
-	`user_no`	int	NOT NULL		COMMENT '작성 가능 리뷰를 불러올 때 주문과 join을 줄이기 위해 추가',
+	`quantity`	int	NULL,
+	`delivery_no`	int	NULL,
 	`order_date`	date	NOT NULL	COMMENT '작성 가능 리뷰를 불러올 때 주문과 join을 줄이기 위해 추가',
 	`delivery_status`	int	NOT NULL	DEFAULT 0	COMMENT '배송 준비(0)
 배송 시작(1)
@@ -125,20 +123,21 @@ CREATE TABLE `order_detail` (
 	`cancle_status`	boolean	NOT NULL	DEFAULT false,
 	`refound_status`	boolean	NULL	DEFAULT false,
 	`reason`	varchar(255)	NULL,
-	`settlement_no`	int	NULL	,
+	`settlement_no`	int	NULL,
 	`purchase_confirmation_date`	date	NULL
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `order_detail_option` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`order_dno`	int	NOT NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`order_dno`	int	NOT NULL,
+	`product_no`	int	NULL,
 	`option`	varchar(24)	NOT NULL,
 	`content`	varchar(48)	NOT NULL,
 	`price`	int	NULL	
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `delivery` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
 	`due_date`	date	NOT NULL,
 	`start_date`	date	NOT NULL,
 	`arrival_date`	date	NOT NULL,
@@ -153,36 +152,31 @@ CREATE TABLE `delivery` (
 	`sender_addr1`	varchar(96)	NULL,
 	`sender_addr2`	varchar(96)	NULL,
 	`status`	boolean	NULL	DEFAULT false	COMMENT '배송중/완료'
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `save_box` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`user_no`	int	NOT NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`user_no`	int	NOT NULL,
 	`product_no`	int	NOT NULL	
-, PRIMARY KEY (`no`));
-
-CREATE TABLE `category` (
-	`no`	int	NOT NULL AUTO_INCREMENT, 
-	`name`	varchar(24)	NOT NULL,
-	`parent_no`	int	NULL		COMMENT '1차 카테고리는 parent_no를 null로
-2차 카테고리는 parent_no를 1차 카테고리no로'
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `review` (
-	`no`	int	NOT NULL AUTO_INCREMENT, 
-	`user_no`	int	NOT NULL	,
-	`no2`	int	NOT NULL	,
-	`order_no`	int	NOT NULL	,
-	`order_dno`	int	NOT NULL	,
+	`no`	int	NOT NULL,
+	`user_no`	int	NOT NULL,
+	`no2`	int	NOT NULL,
+	`order_no`	int	NOT NULL,
+	`order_dno`	int	NOT NULL,
 	`rating`	float	NOT NULL,
 	`content`	varchar(255)	NOT NULL,
 	`image_url`	varchar(255)	NULL,
 	`write_date`	date	NOT NULL
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `product_qna` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`product_no`	int	NOT NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`product_no`	int	NOT NULL,
+	`user_no`	int	NOT NULL,
+	`seller_no`	int	NOT NULL,
 	`question_content`	varchar(255)	NOT NULL,
 	`question_write_date`	date	NOT NULL,
 	`answer_content`	varchar(255)	NULL,
@@ -190,43 +184,43 @@ CREATE TABLE `product_qna` (
 	`status`	int	NOT NULL		COMMENT '답변 대기
 답변 완료
 질문 삭제'
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `finance_company` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
 	`name`	varchar(20)	NULL,
 	`type`	int	NULL		COMMENT '은행 (0)
 카드사 (1)'
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `settlement_account` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`seller_no`	int	NOT NULL	,
-	`bank_no`	int	NOT NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`seller_no`	int	NOT NULL,
+	`bank_no`	int	NOT NULL,
 	`account`	varchar(48)	NOT NULL	COMMENT '예시를 들꺼면 신한은행의 계좌번호 포멧으로 들자!'
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `delivery_fee` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`order_no`	int	NOT NULL	,
-	`seller_no`	int	NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`order_no`	int	NOT NULL,
+	`seller_no`	int	NULL,
 	`fee`	int	NULL	
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `product_category` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`product_no`	int	NOT NULL	,
-	`category1`	int	NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`product_no`	int	NOT NULL,
+	`category1`	int	NULL,
 	`category2`	int	NULL	
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
 
 CREATE TABLE `settlement` (
-	`no`	int	NOT NULL AUTO_INCREMENT,
-	`seller_no`	int	NULL	,
+	`no`	int	NOT NULL	AUTO_INCREMENT,
+	`seller_no`	int	NULL,
 	`request_date`	date	NULL,
 	`settlement_date`	date	NULL,
-	`total_sales`	int	NULL	,
-	`total_charge`	int	NULL	,
-	`total_settlement`	int	NULL	,
+	`total_sales`	int	NULL,
+	`total_charge`	int	NULL,
+	`total_settlement`	int	NULL,
 	`account`	varchar(20)	NULL
-, PRIMARY KEY (`no`));
+, PRIMARY KEY(`no`));
