@@ -53,14 +53,14 @@
 <body>
 	<div class="wrap">
         <div class="header">
-            <%@ include file="./common/header.jsp" %>
+            <%@ include file="/WEB-INF/views/common/header.jsp" %>
         </div>
 
        	
         
         <div class="contents">
         	<div class="quickmenu">
-                <%@ include file="./common/quickmenu.jsp"%>
+                <%@ include file="/WEB-INF/views/common/quickmenu.jsp"%>
             </div>
 			<div class="contentsright">
 				<div>
