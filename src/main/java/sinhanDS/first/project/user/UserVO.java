@@ -12,8 +12,8 @@ public class UserVO {
 	String name;
 	String email;
 	String phone;
-	int gender;
+	int gender;			// 0이 남성, 1은 여성
 	Date birth_date;
-	boolean advertisement;
+	boolean advertisement;	// 0은 false. 선택하지 않은 경우 false
 	Date join_date;
 }

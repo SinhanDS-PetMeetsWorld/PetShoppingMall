@@ -18,7 +18,7 @@ public class UserController {
 	
 	@GetMapping("/login.do")
 	public String login() {
-		return "login/login";
+		return "user/login/login";
 	}
 	
 	@PostMapping("/login.do")
@@ -46,13 +46,13 @@ public class UserController {
 	public String edit(HttpSession sess, Model model) {
 		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
 		model.addAttribute("vo", service.detail(vo));
-		return "user_info";
+		return "user/edit/user_info";
 	}
 	
 	@PostMapping("/edit.do")
 	public String edit2(HttpSession sess, UserVO vo) {
 		UserVO login = service.edit(vo);
 		sess.setAttribute("loginInfo", login);
-		return "user_info";
+		return "user/edit/user_info";
 	}
 }

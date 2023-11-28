@@ -4,7 +4,7 @@
 	<update id="edit" parameterType="sinhanDS.first.project.user.UserVO">
 		UPDATE user SET
 			<if test="pwd != ''">
-			pwd = #{password}
+			password = #{password}
 			</if>
 			name = #{name},
 			email = #{email},

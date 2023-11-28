@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 	public UserVO edit(UserVO vo) {
 		int result = mapper.edit(vo);
 		if(result == 0) {
-			//수정안됨
+			//수정 안됨
 		}
 		return mapper.detail(vo.getNo());
 	}

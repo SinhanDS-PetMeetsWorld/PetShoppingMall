@@ -77,12 +77,12 @@
 
 						<!-- 아이콘이 그림인데 나중에는 버튼으로 바꾸어야함 -->
 						<div class="header_user">
-							<img src="/resources/img/common/user.png" align="right">
+							<a href="/user/edit.do"><img src="/resources/img/common/user.png" align="right"></a>
 						</div>
 
 						<!-- 아이콘이 그림인데 나중에는 버튼으로 바꾸어야함 -->
 						<div class="header_cart">
-							<img src="/resources/img/common/cart.png" align="right">
+							<a href="#"><img src="/resources/img/common/cart.png" align="right"></a>
 						</div>
 						
 					
