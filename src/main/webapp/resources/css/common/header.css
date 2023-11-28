@@ -117,7 +117,8 @@
 	border-style: none;
 	background-color: #f0f0f0;
 }
-.header_login >div > img{
+
+.header_login >div > a> img{
 	width: 22px;
 	height: 22px;
 	margin: 0px 20px;
