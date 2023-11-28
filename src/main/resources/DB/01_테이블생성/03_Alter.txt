@@ -9,3 +9,44 @@ ADD UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE;
 ;
 
 
+ALTER TABLE `PetShoppingMall`.`delivery` 
+CHANGE COLUMN `start_date` `start_date` DATE NULL ,
+CHANGE COLUMN `arrival_date` `arrival_date` DATE NULL ,
+CHANGE COLUMN `receiver_name` `receiver_name` VARCHAR(24) NOT NULL ,
+CHANGE COLUMN `receiver_phone` `receiver_phone` VARCHAR(13) NOT NULL ,
+CHANGE COLUMN `sender_name` `sender_name` VARCHAR(24) NOT NULL ,
+CHANGE COLUMN `sender_phone` `sender_phone` VARCHAR(13) NOT NULL ,
+CHANGE COLUMN `sender_zipcode` `sender_zipcode` VARCHAR(8) NOT NULL ,
+CHANGE COLUMN `sender_addr1` `sender_addr1` VARCHAR(96) NOT NULL ,
+CHANGE COLUMN `sender_addr2` `sender_addr2` VARCHAR(96) NOT NULL ;
+
+
+ALTER TABLE `PetShoppingMall`.`order_detail` 
+DROP FOREIGN KEY `FK_delivery_TO_order_detail_1`;
+ALTER TABLE `PetShoppingMall`.`order_detail` 
+CHANGE COLUMN `user_no` `user_no` INT NOT NULL ,
+CHANGE COLUMN `product_no` `product_no` INT NOT NULL ,
+CHANGE COLUMN `charge` `charge` INT NOT NULL ,
+CHANGE COLUMN `discount_rate` `discount` INT NOT NULL ,
+CHANGE COLUMN `quantity` `quantity` INT NOT NULL ,
+CHANGE COLUMN `delivery_no` `delivery_no` INT NULL ,
+CHANGE COLUMN `refound_status` `refound_status` TINYINT(1) NOT NULL DEFAULT '0' ;
+ALTER TABLE `PetShoppingMall`.`order_detail` 
+ADD CONSTRAINT `FK_delivery_TO_order_detail_1`
+  FOREIGN KEY (`delivery_no`)
+  REFERENCES `PetShoppingMall`.`delivery` (`no`);
+
+  
+  ALTER TABLE `PetShoppingMall`.`order_detail` 
+CHANGE COLUMN `name` `product_name` VARCHAR(96) NOT NULL ,
+CHANGE COLUMN `price` `product_price` INT NOT NULL ;
+  
+  ALTER TABLE `PetShoppingMall`.`review` 
+DROP FOREIGN KEY `FK_product_TO_review_1`;
+ALTER TABLE `PetShoppingMall`.`review` 
+CHANGE COLUMN `no2` `product_no` INT NOT NULL ;
+ALTER TABLE `PetShoppingMall`.`review` 
+ADD CONSTRAINT `FK_product_TO_review_1`
+  FOREIGN KEY (`product_no`)
+  REFERENCES `PetShoppingMall`.`product` (`no`);
+  
