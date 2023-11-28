@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="sinhanDS.first.project.user_info_edit.UserMapper">
-	
-	
-	<update id="user_info_edit" parameterType="sinhanDS.first.project.user_info_edit.UserVO">
+<mapper namespace="sinhanDS.first.project.user.UserMapper">
+	<update id="edit" parameterType="sinhanDS.first.project.user.UserVO">
 		UPDATE user SET
 			<if test="pwd != ''">
 			pwd = #{password}
@@ -17,21 +15,11 @@
 		WHERE no = #{no}
 	</update>
 	
-	<select id="user_info_detail" parameterType="int" resultType="sinhanDS.first.project.user_info_edit.UserVO">
+	<select id="detail" parameterType="int" resultType="sinhanDS.first.project.user.UserVO">
 		SELECT * FROM user WHERE no = #{no}
 	</select>
 	
-	<select id="user_login" parameterType="sinhanDS.first.project.user_info_edit.UserVO" resultType="sinhanDS.first.project.user_info_edit.UserVO">
+	<select id="login" parameterType="sinhanDS.first.project.user.UserVO" resultType="sinhanDS.first.project.user.UserVO">
 		SELECT * FROM user WHERE id=#{id} AND password=#{password}
-	
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </mapper>

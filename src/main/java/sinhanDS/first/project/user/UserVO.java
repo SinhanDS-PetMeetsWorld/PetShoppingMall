@@ -1,4 +1,4 @@
-package sinhanDS.first.project.user_info_edit;
+package sinhanDS.first.project.user;
 
 import java.sql.Date;
 

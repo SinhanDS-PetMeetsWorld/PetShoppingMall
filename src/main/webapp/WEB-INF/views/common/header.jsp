@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,16 +65,27 @@
 					<input type="text" placeholder="     검색어 입력"
 						style="width: 300px; height: 30px; font-size: 10px; border: none;">
 				</div>
-				<!-- 아이콘이 그림인데 나중에는 버튼으로 바꾸어야함 -->
-				<div class="header_cart">
-					<img src="/resources/img/common/cart.png" width="22px"
-						height="22px" align="right">
-				</div>
-				<!-- 아이콘이 그림인데 나중에는 버튼으로 바꾸어야함 -->
-				<div class="header_user">
-					<img src="/resources/img/common/user.png" width="22px"
-						height="22px" align="right">
-				</div>
+				<c:if test="${empty loginInfo }">
+					<div class="header_unlogin">
+						<a href="/user/login.do">로그인</a> | <a href="/project/user/join.do">회원가입</a>
+					</div>
+				</c:if>
+				<c:if test="${!empty loginInfo }">
+					<div class="header_login">
+
+
+						<!-- 아이콘이 그림인데 나중에는 버튼으로 바꾸어야함 -->
+						<div class="header_user">
+							<img src="/resources/img/common/user.png" align="right">
+						</div>
+
+						<!-- 아이콘이 그림인데 나중에는 버튼으로 바꾸어야함 -->
+						<div class="header_cart">
+							<img src="/resources/img/common/cart.png" align="right">
+						</div>
+
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -26,27 +26,7 @@
             </div>
 			<div class="contentsright">
 				<div>
-					 <h2>로그인</h2>
-					    <form action="login.do" method="post">
-					        <div>
-					            <div>
-					                아이디<br>
-					                <input type="text" name="id">
-					            </div>
-					            <div>
-					                비밀번호<br>
-					                <input type="password" name="password">
-					            </div>
-					            <div>
-					                <a href="">회원 가입</a>
-					                <input type="submit" value="로그인">
-					            </div>
-					            <div>
-					                <a href="">아이디 찾기</a> / <a href="">비밀번호 찾기</a>
-					            </div>
-					        </div>
-					    </form>
-					    <a href="">판매자로 로그인하기</a>
+						<h1>신정훈 화이팅~!</h1>
 				</div>
 			</div>
 
@@ -59,5 +39,3 @@
     </div>
 </body>
 </html>
- 
- 
