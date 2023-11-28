@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import sinhanDS.first.project.user.VO.UserVO;
+
 
 @Controller
 @RequestMapping("/user")
@@ -32,7 +34,7 @@ public class UserController {
 		} else { // 로그인 성공
 			System.out.println("로그인 성공");
 			sess.setAttribute("loginInfo", login);
-			return "/index";
+			return "redirect:/";
 		}
 	}
 	
