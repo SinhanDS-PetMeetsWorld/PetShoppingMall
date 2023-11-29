@@ -52,4 +52,13 @@ ADD CONSTRAINT `FK_product_TO_review_1`
   
   ALTER TABLE `PetShoppingMall`.`product` 
 ADD COLUMN `description` TEXT NULL AFTER `image_url`;
+ALTER TABLE `PetShoppingMall`.`user` 
+CHANGE COLUMN `password` `password` VARCHAR(255) NOT NULL ;
+
+  ALTER TABLE `PetShoppingMall`.`product` 
+CHANGE COLUMN `company` `company` VARCHAR(48) NULL ,
+CHANGE COLUMN `brand` `brand` VARCHAR(48) NULL ;
+  
+  ALTER TABLE `PetShoppingMall`.`seller` 
+CHANGE COLUMN `password` `password` VARCHAR(255) NOT NULL ;
   

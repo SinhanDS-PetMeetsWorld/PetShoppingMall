@@ -10,5 +10,16 @@
 		ORDER BY no DESC
 	</select>
 	
-	
+	<insert id="regist" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+		INSERT INTO PetShoppingMall.product
+		(
+			seller_no, name, price, discount, stock,
+			company, brand, rating, image_url, description
+		)
+		VALUES
+		(
+			#{seller_no }, #{name }, #{price }, #{discount }, #{stock },
+			#{company }, #{brand }, #{rating }, #{image_url }, #{description }
+		);
+	</insert>
 </mapper>
