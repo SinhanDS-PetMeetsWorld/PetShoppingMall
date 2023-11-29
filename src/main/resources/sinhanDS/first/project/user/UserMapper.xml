@@ -27,4 +27,28 @@
 	<select id="login" parameterType="sinhanDS.first.project.user.VO.UserVO" resultType="sinhanDS.first.project.user.VO.UserVO">
 		SELECT * FROM user WHERE id=#{id} AND password=MD5(#{password})
 	</select>
+	
+	<insert id="user_regist" parameterType="sinhanDS.first.project.user.VO.UserVO">
+		INSERT INTO user (
+			id, name, email, password, phone, birth_date, gender, advertisement , join_date
+		) VALUES (
+			#{id}, #{name}, #{email}, MD5(#{password}), #{phone}, #{birth_date}, #{gender}, #{advertisement} , NOW()
+		)
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<insert id="initaddr_regist" parameterType="sinhanDS.first.project.user.VO.UserAddressVO">
+		INSERT INTO address (
+			user_no, zipcode, addr1, addr2, name, phone, comment
+		) VALUES (
+			#{user_no}, #{zipcode}, #{addr1}, #{addr2}, #{name}, #{phone}, '기본'
+		);
+	</insert>
+	
+	<insert id="user_address_regist" parameterType="sinhanDS.first.project.user.VO.UserVO">
+		<!-- 생각해보니 저희 이거 uservo로 못받아옴........새 vo하나 파야할거같음; -->
+	</insert>
+	
 </mapper>

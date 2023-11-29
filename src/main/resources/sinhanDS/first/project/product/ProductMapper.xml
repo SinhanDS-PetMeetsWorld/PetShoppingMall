@@ -2,12 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.product.ProductMapper">
 	
-	<!-- 조회 -->
-	<select id="list" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO" resultType="sinhanDS.first.project.product.vo.ProductQnAVO">
-		SELECT question_content 
+	<select id="QNA_list" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO" resultType="sinhanDS.first.project.product.vo.ProductQnAVO">
+		SELECT *  
 		FROM product_qna 
-		WHERE product_no = {#product_no}
 		ORDER BY no DESC
+	</select>
+	
+	<select id ="QNA_review" parameterType = "sinhanDS.first.project.product.vo.ReviewVO" resultType= "sinhanDS.first.project.product.vo.ReviewVO">
+		SELECT * 
+		FROM review
+		ORDER BY no DESC 
 	</select>
 	
 	<insert id="regist" parameterType="sinhanDS.first.project.product.vo.ProductVO">
