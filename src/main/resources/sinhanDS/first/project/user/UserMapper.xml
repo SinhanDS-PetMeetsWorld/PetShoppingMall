@@ -5,7 +5,7 @@
 	<update id="edit" parameterType="sinhanDS.first.project.user.VO.UserVO">
 		UPDATE user SET
 			<if test="password != ''">
-				password = =MD5(#{new_password}),
+				password = MD5(#{new_password}),
 			</if>
 			name = #{name},
 			email = #{email},
