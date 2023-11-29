@@ -95,6 +95,12 @@ public class UserController {
 		return String.valueOf(r);
 	}
 	
+	@ResponseBody
+	@GetMapping("/emailCheck.do")
+	public String emailCheck(@RequestParam String email) {
+		return email;
+	}
+	
 	@PostMapping("/update.do")
 	public String edit(UserVO vo, Model model) {
 		System.out.println("전송 : " + vo);

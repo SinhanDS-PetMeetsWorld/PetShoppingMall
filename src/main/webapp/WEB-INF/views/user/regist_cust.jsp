@@ -121,21 +121,20 @@
     			})
     		})
     	})
-    	$('#emailchecknum_btn').click(function() {
-    		const email = $('#email').val();
-    		const checkInput = $('#emailcheck_num');
-    		
-    		$.ajax({
-    			type : 'get',
-    			url : '<c:url value ="/user/emailCheck?email="/>'+email,
-    			success : function (data) {
-    				console.log("data : " +  data);
-    				checkInput.attr('disabled',false);
-    				var code = data;
-    				alert('인증번호가 전송되었습니다.')
-    			}			
-    		});
-    	});
+    	$(function() {
+    		$('#emailchecknum_btn').click(function() {        		
+        		$.ajax({
+        			type : 'get',
+        			url : 'emailCheck.do',
+        			data : {email:$('#email').val()},
+        			success : function(res) {
+        				console.log(res);
+        				$('#emailcheck_num').attr('disabled', false);
+        				alert('인증번호가 전송되었습니다.');
+        			}			
+        		});
+        	});
+    	})
     </script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
@@ -199,8 +198,8 @@
             이메일*<br>
             <input type="text" name="email" id="email">
             <button type="button" id="emailchecknum_btn">이메일 인증 번호 발송</button><br>
-            <input type="text" name="emailcheck_num" id="emailcheck_num" readonly>
-            <button type="button" id="emailcheck_btn">이메일 인증하기</button>
+            <input type="text" name="emailcheck_num" id="emailcheck_num">
+            <button type="button" id="emailcheck_btn" disabled="disabled">이메일 인증하기</button>
         </div>
         <hr>
         
