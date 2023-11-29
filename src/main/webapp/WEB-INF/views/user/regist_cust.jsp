@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <title>회원가입</title>
     <script>
     var dupCheck = false;
@@ -124,11 +126,11 @@
 	                }
 	
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	                document.getElementById('zipcode').value = data.zonecode;
-	                document.getElementById("addr1").value = roadAddr;
-	                /*
+	                //document.getElementById('zipcode').value = data.zonecode;
+	                //document.getElementById("addr1").value = roadAddr;
+	                
 	                $('#zipcode').val(data.zonecode);
-	                $('#addr1').val(roadAddr); */
+	                $('#addr1').val(roadAddr);
 	            }
 	        }).open();
 	    }
@@ -158,7 +160,7 @@
             이메일*<br>
             <input type="text" name="email" id="email">
             <button>이메일 인증 번호 발송</button><br>
-            <input type="text" name="emailcheck_num" id="emailcheck_num" disabled>
+            <input type="text" name="emailcheck_num" id="emailcheck_num" readonly>
             <button id="emailcheck_btn">이메일 인증하기</button>
         </div>
         <hr>
@@ -166,10 +168,10 @@
         <div>
             주소
             <div>
-            	<input type="text" name="zipcode" id="zipcode" disabled placeholder="우편번호">
+            	<input type="text" name="zipcode" id="zipcode" readonly placeholder="우편번호">
             	<button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button>
             </div>
-            <div><input type="text" name="addr1" id="addr1" disabled placeholder="기본주소"></div>
+            <div><input type="text" name="addr1" id="addr1" readonly placeholder="기본주소"></div>
             <div><input type="text" name="addr2" placeholder="상세주소"></div>
         </div>
         <hr>

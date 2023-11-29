@@ -39,11 +39,11 @@
 		</selectKey>
 	</insert>
 	
-	<insert id="initaddr_regist">
+	<insert id="initaddr_regist" parameterType="sinhanDS.first.project.user.VO.UserAddressVO">
 		INSERT INTO address (
 			user_no, zipcode, addr1, addr2, name, phone, comment
 		) VALUES (
-			#{no}, #{zipcode}, #{addr1}, #{addr2}, #{name}, #{phone}, '기본'
+			#{user_no}, #{zipcode}, #{addr1}, #{addr2}, #{name}, #{phone}, '기본'
 		);
 	</insert>
 	
