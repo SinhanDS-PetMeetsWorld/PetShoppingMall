@@ -15,11 +15,15 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/resources/css/common/template.css">
+
+<script>
+	console.log("${sellerLoginInfo.no}");
+</script>
 </head>
 <body>
 	<div class="wrap">
 		<div class="header">
-			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+			<%@ include file="/WEB-INF/views/common/header_seller.jsp"%>
 		</div>
 
 
@@ -32,25 +36,26 @@
 				<div>
 					<h2>상품 등록</h2>
 					<form action="regist.do" method="post">
+						<input type="hidden" name="seller_no" value="${sellerLoginInfo.no}">
 						<div>
-							상품명*<br> <input type="text" name="product_name">
+							상품명*<br> <input type="text" name="name" required>
 						</div>
 						<div>
-							가격*<br> <input type="text" name="price">
+							가격*<br> <input type="number" name="price" value="0" required>
 						</div>
 						<div>
-							재고*<br> <input type="text" name="stock">
+							재고*<br> <input type="number" name="stock" value="0" required>
 						</div>
 						<div>
 							<div>
-								카테고리 *<br> <select name="category1" id="">
+								카테고리 *<br> <select name="category1" >
 									<option value="0">강아지</option>
 									<option value="1">고양이</option>
-									<option value="2">그외</option>
+									<option value="2">기타</option>
 								</select>
 							</div>
 							<div>
-								세부 카테고리 *<br> <select name="category2" id="">
+								세부 카테고리 *<br> <select name="category2">
 									<option value="temp">temp1</option>
 									<option value="temp">temp2</option>
 									<option value="temp">temp3</option>
@@ -67,7 +72,7 @@
 						<div>옵션추가넣고</div>
 						<div>상품 이미지 넣고</div>
 						<div>
-							할인 가격 <input type="text" name="discount">
+							할인 가격 <input type="number" name="discount" value="0" required>
 						</div>
 
 						<div>상품 설명</div>

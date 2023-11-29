@@ -15,7 +15,7 @@
 <body>
 	<div class="wrap">
         <div class="header">
-            <%@ include file="/WEB-INF/views/common/header.jsp" %>
+            <%@ include file="/WEB-INF/views/common/header_seller.jsp" %>
         </div>
 
        	
@@ -25,28 +25,8 @@
                 <%@ include file="/WEB-INF/views/common/quickmenu.jsp"%>
             </div>
 			<div class="contentsright">
-				<div>	
-						<h2>로그인</h2>
-						    <form method="post" action="login.do">
-						        <div>
-						            <div>
-						                아이디<br>
-						                <input type="text" id = "id" name = "id">
-						            </div>
-						            <div>
-						                비밀번호<br>
-						                <input type="password" id="password" name ="password">
-						            </div>
-						            <div>
-						                <a href="">회원 가입</a>
-						                <input type="submit" value="로그인">
-						            </div>
-						            <div>
-						                <a href="">아이디 찾기</a> / <a href="">비밀번호 찾기</a>
-						            </div>
-						        </div>
-						    </form>
-						    <a href="/seller/login.do">판매자로 로그인하기</a>
+				<div>
+					이 부분을 수정하세요!!!
 				</div>
 			</div>
 

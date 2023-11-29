@@ -38,7 +38,8 @@ public class ProductController {
 	
 	@PostMapping("/regist.do")
 	public String regist(ProductVO vo) {
-		System.out.println("여기옴");
+		System.out.println("vo체크: " + vo);
+		service.regist(vo);
 		
 		return "redirect:/";
 	}

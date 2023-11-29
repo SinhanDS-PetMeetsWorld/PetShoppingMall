@@ -1,12 +1,12 @@
 package sinhanDS.first.project.product;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sinhanDS.first.project.product.vo.ProductQnAVO;
+import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 
 @Service
@@ -30,4 +30,7 @@ public class ProductServiceImpl implements ProductService {
 		return qna_review;
 	}
 	
+	public int regist(ProductVO vo) {
+		return mapper.regist(vo); 
+	};
 }
