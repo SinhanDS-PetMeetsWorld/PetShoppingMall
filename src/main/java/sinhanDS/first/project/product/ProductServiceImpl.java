@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
@@ -30,7 +31,19 @@ public class ProductServiceImpl implements ProductService {
 		return qna_review;
 	}
 	
-	public int regist(ProductVO vo) {
-		return mapper.regist(vo); 
+	public int regist(ProductVO vo, ProductCategoryVO cvo) {
+		int result = mapper.regist(vo);
+		System.out.println("바뀐vo체크: " + vo);
+		for(int i = 0; i < cvo.getCategory1_list().length; i++) {
+			ProductCategoryVO ncvo = new ProductCategoryVO();
+			ncvo.setProduct_no(vo.getNo());
+			ncvo.setCategory1(cvo.getCategory1_list()[i]);
+			ncvo.setCategory2(cvo.getCategory2_list()[i]);
+			System.out.println("ncvo체크: " + ncvo);
+			mapper.regist_category(ncvo);
+		}
+		cvo.setProduct_no(vo.getNo());
+		
+		return result; 
 	};
 }

@@ -16,6 +16,38 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/resources/css/common/template.css">
+
+
+    <style>
+
+        .board_area {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .board_title {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #f0f0f0;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .board_title.on {
+            background-color: #ddd;
+        }
+
+        .board_contents {
+            display: none;
+        }
+
+        .board_contents.active {
+            display: block;
+        }
+
+
+
+    </style>
 </head>
 <body>
 	<div class="wrap">
@@ -78,7 +110,22 @@
 						</div>
 					</div>
 
-					<div class="goods_Q&A">
+			<div class = "goods_review_QNA">
+					<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
+					<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>
+					<div class="board_contents active" id ='review'>
+				   		 <c:forEach var="item" items="${review_list}">
+				       		 <div class="review">
+				             <img src=" ${item.image_url}">
+				             <p>평점 : ${item.rating} </p>
+				             <p>내용 : ${item.content} </p>
+				             <p>작성일 : ${item.write_date} </p>
+				        	 </div>
+				    	</c:forEach>
+					</div>
+					
+					
+					<div class="board_contents" id = "qna">
 				   		 <c:forEach var="item" items="${qna_list}">
 				       		 
 				       		 <div class="Q" onclick="toggleAnswer(this)" >
@@ -91,19 +138,9 @@
 				    	
 				    	</c:forEach>
 					</div>
-					
-					---------------------"절취선"------------------
-					
-					<div class="goods_review">
-				   		 <c:forEach var="item" items="${review_list}">
-				       		 <div class="review">
-				             <img src=" ${item.image_url}">
-				             <p>평점 : ${item.rating} </p>
-				             <p>내용 : ${item.content} </p>
-				             <p>작성일 : ${item.write_date} </p>
-				        	 </div>
-				    	</c:forEach>
-					</div>
+			</div>
+				
+				
 					
 					
 					</div>
@@ -115,7 +152,7 @@
 			</div>
 		</div>
 		
-</div>
+
 				
 <script>
 
@@ -124,6 +161,23 @@ $(".Q").click(function() {
 	$(this).toggleClass('on').siblings().removeClass('on');
 	$(this).next(".A").siblings(".A").slideUp(300); // 1개씩 펼치기
 });
+
+function showBoard(boardId) {
+    const boards = document.querySelectorAll('.board_contents');
+    const titles = document.querySelectorAll('.board_title');
+
+    boards.forEach(board => board.classList.remove('active'));
+    titles.forEach(title => title.classList.remove('on'));
+
+    const selectedBoard = document.getElementById(boardId);
+    const selectedTitle = Array.from(titles).find(title => title.dataset.board === boardId);
+
+    if (selectedBoard && selectedTitle) {
+        selectedBoard.classList.add('active');
+        selectedTitle.classList.add('on');
+    }
+}
+
 
 </script>		
 </body>

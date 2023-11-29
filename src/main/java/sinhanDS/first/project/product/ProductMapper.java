@@ -3,9 +3,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
-import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.product.vo.ReviewVO;
 
 @Mapper
 public interface ProductMapper {
@@ -18,4 +19,5 @@ public interface ProductMapper {
 	
 	
 	int regist(ProductVO vo);
+	int regist_category(ProductCategoryVO vo);
 }
