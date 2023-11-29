@@ -62,8 +62,6 @@ public class UserController {
 	
 	@PostMapping("/regist.do")
 	public String user_regist(UserVO vo, Model model) {
-		System.out.println(vo.getNo()+" "+vo.getZipcode()+" "+vo.getAddr1()+" "+vo.getAddr2()+" "
-				+vo.getName()+" "+vo.getPhone());
 		boolean r = service.user_regist(vo) > 0 ? true : false; // service -> mapper -> sql
 		
 		UserAddressVO addrvo = new UserAddressVO();
@@ -73,8 +71,6 @@ public class UserController {
 		addrvo.setAddr2(vo.getAddr2());
 		addrvo.setName(vo.getName());
 		addrvo.setPhone(vo.getPhone());
-		System.out.println(vo.getNo()+" "+vo.getZipcode()+" "+vo.getAddr1()+" "+vo.getAddr2()+" "
-				+vo.getName()+" "+vo.getPhone());
 		boolean addrr = service.initaddr_regist(addrvo);
 		
 		if (r && addrr) { // 정상적으로 DB에 insert 
@@ -96,9 +92,12 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/emailCheck.do")
+	@RequestMapping("/emailCheck.do")
 	public String emailCheck(@RequestParam String email) {
-		return email;
+		int checkNum = (int)(Math.random()*899999) + 100000;
+		System.out.println(checkNum);
+
+        return Integer.toString(checkNum);
 	}
 	
 	@PostMapping("/update.do")

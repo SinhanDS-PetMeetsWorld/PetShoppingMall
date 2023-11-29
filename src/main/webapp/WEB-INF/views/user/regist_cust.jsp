@@ -98,6 +98,11 @@
     		    return false;
     		} */
     		
+    		if(email_auth == false) {
+    			alert("이메일 인증이 완료되지 않았습니다.");
+    			return;
+    		}
+    		
     		// 전송
     		$("#frm").submit();
     	}
@@ -107,7 +112,6 @@
     				url:'idCheck.do',
     				data:{id:$('#id').val()},
     				success:function(res) {
-    					console.log(res);
     					if (res == 'true') {
     						alert('ID가 중복되었습니다.');
     						$("#id").val('');
@@ -121,20 +125,35 @@
     			})
     		})
     	})
+    	var email_auth_num = '';
     	$(function() {
     		$('#emailchecknum_btn').click(function() {        		
         		$.ajax({
-        			type : 'get',
+        			type : 'post',
         			url : 'emailCheck.do',
         			data : {email:$('#email').val()},
         			success : function(res) {
-        				console.log(res);
-        				$('#emailcheck_num').attr('disabled', false);
+        				$('#emailcheck_btn').attr('disabled', false);
         				alert('인증번호가 전송되었습니다.');
+        				email_auth_num = res;
+        				console.log(email_auth_num);
         			}			
         		});
         	});
     	})
+    	var email_auth = false;
+    	$(function(){
+    		$('#emailcheck_btn').click(function(){
+    			if($('#emailcheck_num').val() == email_auth_num){
+    				alert("이메일 인증 성공");
+    				email_auth = true;
+    				return;
+    			} else {
+    				alert("이메일 인증 실패");
+    				return;
+    			}
+    		});
+    	});
     </script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
