@@ -51,7 +51,7 @@
 								카테고리 *<br> <select name="category1" >
 									<option value="0">강아지</option>
 									<option value="1">고양이</option>
-									<option value="2">그외</option>
+									<option value="2">기타</option>
 								</select>
 							</div>
 							<div>
