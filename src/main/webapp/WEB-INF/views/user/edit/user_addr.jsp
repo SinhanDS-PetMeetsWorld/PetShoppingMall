@@ -27,50 +27,40 @@
             </div>
 			<div class="contentsright">
 				<div>
-<h1>회원정보</h1>
-    <button type="button">기본정보 변경</button>
-    <button type="button">주소 변경</button>
-    <button type="button">결제 수단</button>
-
-    <form name="user_info_modify" action="" method="POST">
-        <span>이름</span>
-        <input type="text" name="name" placeholder="홍길동">
-        <span>아이디</span>
-        <input type="text" name="id" placeholder="hong" disabled>
-        <br>
-        <span>기존 비밀번호</span>
-        <input type="password" name="password" placeholder="비밀번호 변경 시에만 입력하시면 됩니다">
-        <br>
-        <span>새 비밀번호</span>
-        <input type="password" name="new_password">
-        <span>새 비밀번호 확인</span>
-        <input type="password" name="check_password">
-        <br>
-        <span>이메일</span>
-        <input type="email" name="email" placeholder="hong@email.com">
-        <br>
-        <span>연락처</span>
-        <span>
-            <input type="tel" name="phone_first" maxlength="3"/> -
-            <input type="tel" name="phone_middle" maxlength="4"/> -
-            <input type="tel" name="phone_last" maxlength="4"/>
-        </span>
-        <span>성별</span>
-        <input type="radio" name="gender" value="male"> 남성
-        <input type="radio" name="gender" value="female"> 여성
-        <br>
-        <span>생년월일</span>
-        <input type="text" name="birth_year" placeholder="YYYY" maxlength="4"/> -
-        <input type="text" name="birth_month" placeholder="MM" maxlength="2"/> -
-        <input type="text" name="birth_day" placeholder="DD" maxlength="2"/>
-        <br>
-        <input type="radio" name="agreement" value="agreement"> 광고성 마케팅 수신에 동의(선택사항)
-        <span>동의 시 등록된 이메일로 할인 정보를 전달해 드립니다.</span>
-    
-        <button type="button">회원 탈퇴</button>
-        <br>
-        <input type="submit" value="수정">
-    </form> </div>
+					<h1>회원정보</h1>
+					    <button type="button">기본정보 변경</button>
+					    <button type="button">주소 변경</button>
+					    <button type="button">결제 수단</button>
+					
+					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
+					        
+					        <!--주소가 존재하는만큼 td를 생성-->
+					        <tr width="800">
+					            <td>
+					                <br>
+					                <div>addr1</div>
+					                <div>addr2</div>
+					                <div>
+					                    <span>Contact - </span>
+					                    <span>phone</span>
+					                </div>
+					                <br>
+					            </td>
+					            <td>
+					                <button type="button" name="modify" onclick="location.href=/*수정.jsp*/''">수정</button> |
+					                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
+					                <br>
+					            </td>
+					        </tr>
+					        <tr>
+					            <td colspan="2">
+					                <div></div>
+					                <hr>
+					                <button onclick="window.open("./user_add_address.jsp",'add_user_address','width=430,height=500,location=no,status=no');">+ 배송지 추가</button>
+					            </td>
+					        </tr>
+					    </table>
+     				</div>
 			</div>
 
         </div>
