@@ -90,4 +90,14 @@ public class UserController {
 		return "common/alert";
 	}
 	
+	@GetMapping("/edit_addr.do")
+	public String editaddr() {
+		return "user/edit/user_addr";
+	}
+	
+	@GetMapping("/add_addr.do")
+	public String addaddr() {
+		return "user/edit/user_add_addr";
+	}
+	
 }
