@@ -240,7 +240,7 @@
         <hr>
         <div>
             성별 * 
-            <input type="radio" name="gender" value="0" selected>남자
+            <input type="radio" name="gender" value="0" checked>남자
             <input type="radio" name="gender" value="1">여자
         </div>
         <hr>
@@ -249,7 +249,7 @@
         </div>
         <hr>
         <div>
-            <input type="submit" value="가입하기" onclick="goSave();">
+            <input type="button" value="가입하기" onclick="goSave();">
         </div>
     </form>
 </body>

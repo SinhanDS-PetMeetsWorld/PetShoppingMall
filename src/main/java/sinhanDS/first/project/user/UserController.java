@@ -80,7 +80,7 @@ public class UserController {
 		if (r && addrr) { // 정상적으로 DB에 insert 
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "회원가입되었습니다.");
-			model.addAttribute("url", "/project/index.do");
+			model.addAttribute("url", "/login.do");
 		} else { // 등록안됨
 			model.addAttribute("cmd", "back");
 			model.addAttribute("msg", "회원가입실패");
