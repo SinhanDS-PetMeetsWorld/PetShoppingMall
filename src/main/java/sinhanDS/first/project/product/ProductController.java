@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 
@@ -28,13 +28,18 @@ public class ProductController {
 	}
 	
 	@GetMapping("/regist.do")
-	public String regist() {
+	public String regist(Model model) {
+		ProductCategoryVO vo = new ProductCategoryVO();
+		model.addAttribute("vo", vo);
 		return "product/regist/regist_form";
 	}	
 	
-	@PostMapping("/regist.do")
-	public String regist(ProductVO vo) {
+	@GetMapping("/regist_test.do")
+	public String regist(ProductVO vo, ProductCategoryVO[] cvo) {
 		System.out.println("vo체크: " + vo);
+		for(int i = 0; i < cvo.length; i++) {
+			System.out.println("ovo체크: " + i + " " + cvo);
+		}
 		service.regist(vo);
 		
 		return "redirect:/";

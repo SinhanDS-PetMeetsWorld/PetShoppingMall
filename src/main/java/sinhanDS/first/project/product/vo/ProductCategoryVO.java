@@ -1,5 +1,8 @@
 package sinhanDS.first.project.product.vo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -8,6 +11,55 @@ public class ProductCategoryVO {
 	private int product_no;
 	private int category1;
 	private int category2;
+	
+	private List<ArrayList<String>> category;
+	public ProductCategoryVO(){
+		category = new ArrayList<ArrayList<String>>();
+		ArrayList<String> category0 = new ArrayList<>();
+		category0.add("사료");
+		category0.add("간식");
+		category0.add("영양제");
+		category0.add("배변용품");
+		category0.add("건강/관리용품");
+		category0.add("아동/산책용품");
+		category0.add("미용/목욕");
+		category0.add("식기/급수기");
+		category0.add("장난감/훈련");
+		category0.add("의류/패션");
+		category0.add("기타잡화");
+		category.add(category0);
+		
+		ArrayList<String> category1 = new ArrayList<>();
+		category1.add("사료");
+		category1.add("간식");
+		category1.add("영양제");
+		category1.add("배변용품");
+		category1.add("건강/관리용품");
+		category1.add("캣타워/캣폴");
+		category1.add("미용/목욕");
+		category1.add("식기/급수기");
+		category1.add("장난감/훈련");
+		category1.add("의류/패션");
+		category1.add("기타잡화");
+		category.add(category1);
+		
+		ArrayList<String> category2 = new ArrayList<>();
+		category2.add("조류");
+		category2.add("어류");
+		category2.add("햄스터");
+		category2.add("토끼");
+		category2.add("고슴도치");
+		category2.add("기타동물");
+		category.add(category2);
+	}
+	
+	/*
+	private String[][] category = {
+			new String[] {"사료", "간식", "영양제", "배변용품", "건강/관리용품", "아동/산책용품", "미용/목욕", "식기/급수기", "장난감/훈련", "의류/패션", "기타 잡화"},
+			new String[] {"사료", "간식", "영양제", "배변용품", "건강/관리용품", "캣타워/캣폴", "미용/목욕", "식기/급수기", "장난감/훈련", "의류/패션", "기타 잡화"},
+			new String[] {"조류", "어류", "햄스터", "토끼", "고슴도치", "기타 동물"}
+	};
+	*/
 }
 
 /*
@@ -18,7 +70,7 @@ public class ProductCategoryVO {
  	1 간식
  	2 영양제
  	3 배변용품
- 	4 건강 관리용품
+ 	4 건강/관리용품
  	5 아동/산책용품
  	6 미용/목욕
  	7 식기/급수기

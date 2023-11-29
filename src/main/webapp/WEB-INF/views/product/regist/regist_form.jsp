@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -35,8 +37,9 @@
 			<div class="contentsright">
 				<div>
 					<h2>상품 등록</h2>
-					<form action="regist.do" method="post">
-						<input type="hidden" name="seller_no" value="${sellerLoginInfo.no}">
+					<form action="regist_test.do" method="get">
+						<input type="hidden" name="seller_no"
+							value="${sellerLoginInfo.no}">
 						<div>
 							상품명*<br> <input type="text" name="name" required>
 						</div>
@@ -46,20 +49,29 @@
 						<div>
 							재고*<br> <input type="number" name="stock" value="0" required>
 						</div>
-						<div>
-							<div>
-								카테고리 *<br> <select name="category1" >
-									<option value="0">강아지</option>
-									<option value="1">고양이</option>
-									<option value="2">기타</option>
-								</select>
-							</div>
-							<div>
-								세부 카테고리 *<br> <select name="category2">
-									<option value="temp">temp1</option>
-									<option value="temp">temp2</option>
-									<option value="temp">temp3</option>
-								</select>
+						<div class="category_body">
+							<div class="category">
+								<hr>
+								<div>
+									카테고리 *<br> <select name="category1" class="category1">
+										<option value="0">강아지</option>
+										<option value="1">고양이</option>
+										<option value="2">기타</option>
+									</select>
+
+									<div>
+										세부 카테고리 *<br> <select name="category2" class="category2"
+											data-no="${status.index }">
+											<c:forEach var="category" items="${vo.category[0] }"
+												varStatus="status">
+												<option value="${status.index}">${category }</option>
+											</c:forEach>
+										</select>
+									</div>
+
+								</div>
+								<a href="javascript:;" class="add_btn"><img
+									src="/resources/img/plus.png" width="25" height="25" /></a>
 							</div>
 						</div>
 						<div>카테고리 추가 버튼 넣고</div>
@@ -89,10 +101,37 @@
 
 		</div>
 
-
 		<div class="footer">
 			<div class="footer-color"></div>
 		</div>
 	</div>
+	
+	<script>
+		$('.add_btn').on('click', addCategory);
+		$('.category1').on('change', changeCategory2)
+		function addCategory() {
+			let newCategory = $('.category').eq(-1).clone();
+			console.log(newCategory);
+			$(newCategory).find('a').on('click', addCategory);
+			$(newCategory).find('.category1').on('change', changeCategory2)
+			$(this).remove();
+			newCategory.appendTo($('.category_body'));
+		}
+
+		function changeCategory2() {
+			let target = this.parentNode.querySelector('.category2');
+			$(target).empty();
+			
+			<c:forEach items="${vo.category}" var="list" varStatus="status">
+				if(this.value == ${status.index}){
+					
+					<c:forEach items="${list}" var="item" varStatus="status">
+						var newObj = $('<option value="${status.index}">${item }</option>');
+						newObj.appendTo(target);
+					</c:forEach>
+				}
+			</c:forEach>
+		}
+	</script>
 </body>
 </html>
