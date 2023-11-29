@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import sinhanDS.first.project.user.VO.UserAddressVO;
 import sinhanDS.first.project.user.VO.UserVO;
 
 
@@ -57,10 +59,24 @@ public class UserController {
 		return "user/regist_cust";
 	}
 	
-	@PostMapping("/regist.do") //이거 내부 수정해야됨~~
+	@PostMapping("/regist.do")
 	public String user_regist(UserVO vo, Model model) {
-		boolean r = service.user_regist(vo); // service -> mapper -> sql
-		if (r) { // 정상적으로 DB에 insert 
+		System.out.println(vo.getNo()+" "+vo.getZipcode()+" "+vo.getAddr1()+" "+vo.getAddr2()+" "
+				+vo.getName()+" "+vo.getPhone());
+		boolean r = service.user_regist(vo) > 0 ? true : false; // service -> mapper -> sql
+		
+		UserAddressVO addrvo = new UserAddressVO();
+		addrvo.setUser_no(vo.getNo());
+		addrvo.setZipcode(vo.getZipcode());
+		addrvo.setAddr1(vo.getAddr1());
+		addrvo.setAddr2(vo.getAddr2());
+		addrvo.setName(vo.getName());
+		addrvo.setPhone(vo.getPhone());
+		System.out.println(vo.getNo()+" "+vo.getZipcode()+" "+vo.getAddr1()+" "+vo.getAddr2()+" "
+				+vo.getName()+" "+vo.getPhone());
+		boolean addrr = service.initaddr_regist(addrvo);
+		
+		if (r && addrr) { // 정상적으로 DB에 insert 
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "회원가입되었습니다.");
 			model.addAttribute("url", "/project/index.do");
@@ -70,6 +86,12 @@ public class UserController {
 		}
 		return "common/alert";
 	}
+	
+//	@GetMapping("/mailCheck")
+//	@ResponseBody
+//	public String mailCheck(String email) {
+//		System.out.println("인증 요청 이메일: "+email);
+//	}
 	
 	@PostMapping("/update.do")
 	public String edit(UserVO vo, Model model) {

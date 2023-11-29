@@ -1,12 +1,12 @@
 package sinhanDS.first.project.user;
 
 import java.sql.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sinhanDS.first.project.user.VO.UserAddressVO;
 import sinhanDS.first.project.user.VO.UserVO;
 
 
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean user_regist(UserVO vo) {
+	public int user_regist(UserVO vo) {
 		String phone0 = vo.getPhone0();
 		String phone1 = vo.getPhone1();
 		String phone2 = vo.getPhone2();
@@ -68,7 +68,13 @@ public class UserServiceImpl implements UserService {
 		System.out.println(birth_date);
 		vo.setBirth_date(birth_date);
 		
-		return mapper.user_regist(vo) > 0 ? true : false;
+		return mapper.user_regist(vo);
+	}
+	
+	@Override
+	public boolean initaddr_regist(UserAddressVO vo) {
+		
+		return mapper.initaddr_regist(vo) > 0 ? true : false;
 	}
 	
 	@Override

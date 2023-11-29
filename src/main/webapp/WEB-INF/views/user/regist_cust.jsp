@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <title>회원가입</title>
     <script>
     var dupCheck = false;
@@ -15,23 +17,22 @@
     			$("#email").focus();
     			return;
     		}
-    		/*
-    		if (!dupCheck) {
-    			alert('이메일 중복여부를 체크해주세요');
+    		/* if (!dupCheck) {
+    			alert('ID 중복여부를 체크해주세요');
     			return;
-    		}
-    		*/
+    		} */
+
     		var isCon = true;
     		$.ajax({
-				url:'emailCheck.do',
-				data:{email:$('#email').val()},
+				url:'idCheck.do',
+				data:{email:$('#id').val()},
 				async:false,
 				success:function(res) {
 					console.log(res);
 					if (res == 'true') {
-						alert('이메일이 중복되었습니다.');
-						$("#email").val('');
-						$("#email").focus();
+						alert('ID가 중복되었습니다.');
+						$("#id").val('');
+						$("#id").focus();
 						isCon = false;
 						return;
 					}
@@ -43,7 +44,7 @@
     			$("#pw").focus();
     			return;
     		}
-    		if ($("#pw").val() != $("#pw_check").val()) {
+    		/* if ($("#pw").val() != $("#pw_check").val()) {
     			alert('비밀번호를 확인하세요');
     			return;
     		}
@@ -52,7 +53,7 @@
     		if( txt.match(reg) == null ) {
     		    alert("비밀번호는 영문+숫자 조합해서 8자이상 입력하세요");
     		    return false;
-    		}
+    		} */
     		if ($("#name").val() == '') {
     			alert('이름을 입력하세요');
     			$("#name").focus();
@@ -62,30 +63,45 @@
     		$("#frm").submit();
     	}
     	$(function() {
-    		$("#emailCheck").click(function() {
+    		$("#idCheck").click(function() {
     			$.ajax({
-    				url:'emailCheck.do',
-    				data:{email:$('#email').val()},
+    				url:'idCheck.do',
+    				data:{email:$('#id').val()},
     				success:function(res) {
     					console.log(res);
     					if (res == 'true') {
-    						alert('이메일이 중복되었습니다.');
-    						$("#email").val('');
-    						$("#email").focus();
+    						alert('ID가 중복되었습니다.');
+    						$("#id").val('');
+    						$("#id").focus();
     					} else {
     						dupCheck = true;
-    						alert('사용가능한 이메일입니다.');
-    						$("#email").attr('readonly','readonly');
+    						alert('사용가능한 ID입니다.');
+    						$("#id").attr('readonly','readonly');
     					}
     				}
     			})
     		})
-    	})
+    	}) -->
+    	$('#emailcheck_btn').click(function() {
+    		const email = $('#email').val();
+    		const checkInput = $('#emailcheck_num');
+    		
+    		$.ajax({
+    			type : 'get',
+    			url : '<c:url value ="/user/mailCheck?email="/>'+email,
+    			success : function (data) {
+    				console.log("data : " +  data);
+    				checkInput.attr('disabled',false);
+    				var code = data;
+    				alert('인증번호가 전송되었습니다.')
+    			}			
+    		});
+    	});
     </script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-	    function zipcode() {
+	    function zipcode_search() {
 	        new daum.Postcode({
 	            oncomplete: function(data) {
 	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -110,11 +126,9 @@
 	                }
 	
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	                /*
-	                document.getElementById('sample4_postcode').value = data.zonecode;
-	                document.getElementById("sample4_roadAddress").value = roadAddr;
-	                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-	                */
+	                //document.getElementById('zipcode').value = data.zonecode;
+	                //document.getElementById("addr1").value = roadAddr;
+	                
 	                $('#zipcode').val(data.zonecode);
 	                $('#addr1').val(roadAddr);
 	            }
@@ -130,11 +144,11 @@
         <a href="">판매자로 가입하기</a>
     </div>
     <hr>
-    <form name="regist_form" action="regist.do" method="post">
+    <form name="regist_form" id="frm" action="regist.do" method="post">
         <div>
             아이디*<br>
             <input type="text" name="id">
-            <button>아이디 중복 확인</button>
+            <button id="idCheck">아이디 중복 확인</button>
         </div>
         <hr>
         <div>
@@ -144,15 +158,20 @@
         <hr>
         <div>
             이메일*<br>
-            <input type="text" name="email" disabled>
-            <button>이메일 인증</button>
+            <input type="text" name="email" id="email">
+            <button>이메일 인증 번호 발송</button><br>
+            <input type="text" name="emailcheck_num" id="emailcheck_num" readonly>
+            <button id="emailcheck_btn">이메일 인증하기</button>
         </div>
         <hr>
         
         <div>
             주소
-            <div><input type="text" name="zipcode" disabled placeholder="우편번호"> <button>우편번호 검색</button></div>
-            <div><input type="text" name="addr1" disabled placeholder="기본주소"></div>
+            <div>
+            	<input type="text" name="zipcode" id="zipcode" readonly placeholder="우편번호">
+            	<button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button>
+            </div>
+            <div><input type="text" name="addr1" id="addr1" readonly placeholder="기본주소"></div>
             <div><input type="text" name="addr2" placeholder="상세주소"></div>
         </div>
         <hr>
