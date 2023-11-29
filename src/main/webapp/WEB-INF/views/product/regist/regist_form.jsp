@@ -53,14 +53,14 @@
 							<div class="category">
 								<hr>
 								<div>
-									카테고리 *<br> <select name="category1" class="category1">
+									카테고리 *<br> <select name="category1_list" class="category1_list">
 										<option value="0">강아지</option>
 										<option value="1">고양이</option>
 										<option value="2">기타</option>
 									</select>
 
 									<div>
-										세부 카테고리 *<br> <select name="category2" class="category2"
+										세부 카테고리 *<br> <select name="category2_list" class="category2_list"
 											data-no="${status.index }">
 											<c:forEach var="category" items="${vo.category[0] }"
 												varStatus="status">
@@ -108,18 +108,18 @@
 	
 	<script>
 		$('.add_btn').on('click', addCategory);
-		$('.category1').on('change', changeCategory2)
+		$('.category1_list').on('change', changeCategory2)
 		function addCategory() {
 			let newCategory = $('.category').eq(-1).clone();
 			console.log(newCategory);
 			$(newCategory).find('a').on('click', addCategory);
-			$(newCategory).find('.category1').on('change', changeCategory2)
+			$(newCategory).find('.category1_list').on('change', changeCategory2)
 			$(this).remove();
 			newCategory.appendTo($('.category_body'));
 		}
 
 		function changeCategory2() {
-			let target = this.parentNode.querySelector('.category2');
+			let target = this.parentNode.querySelector('.category2_list');
 			$(target).empty();
 			
 			<c:forEach items="${vo.category}" var="list" varStatus="status">

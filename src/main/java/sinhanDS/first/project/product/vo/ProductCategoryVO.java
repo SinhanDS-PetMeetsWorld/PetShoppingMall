@@ -11,6 +11,8 @@ public class ProductCategoryVO {
 	private int product_no;
 	private int category1;
 	private int category2;
+	private int[] category1_list;
+	private int[] category2_list;
 	
 	private List<ArrayList<String>> category;
 	public ProductCategoryVO(){
@@ -52,14 +54,6 @@ public class ProductCategoryVO {
 		category2.add("기타동물");
 		category.add(category2);
 	}
-	
-	/*
-	private String[][] category = {
-			new String[] {"사료", "간식", "영양제", "배변용품", "건강/관리용품", "아동/산책용품", "미용/목욕", "식기/급수기", "장난감/훈련", "의류/패션", "기타 잡화"},
-			new String[] {"사료", "간식", "영양제", "배변용품", "건강/관리용품", "캣타워/캣폴", "미용/목욕", "식기/급수기", "장난감/훈련", "의류/패션", "기타 잡화"},
-			new String[] {"조류", "어류", "햄스터", "토끼", "고슴도치", "기타 동물"}
-	};
-	*/
 }
 
 /*

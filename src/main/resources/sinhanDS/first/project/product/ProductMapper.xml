@@ -25,5 +25,24 @@
 			#{seller_no }, #{name }, #{price }, #{discount }, #{stock },
 			#{company }, #{brand }, #{rating }, #{image_url }, #{description }
 		);
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
+	
+	<insert id="regist_category" parameterType="sinhanDS.first.project.product.vo.ProductCategoryVO">
+		INSERT INTO PetShoppingMall.product_category
+		(
+			product_no,
+			category1,
+			category2)
+			VALUES
+		(
+			#{product_no},
+			#{category1},
+			#{category2}
+		);
+		
+	</insert>
+	
 </mapper>

@@ -39,12 +39,10 @@ public class ProductController {
 	}	
 	
 	@GetMapping("/regist_test.do")
-	public String regist(ProductVO vo, ProductCategoryVO[] cvo) {
+	public String regist(ProductVO vo, ProductCategoryVO cvo) {
 		System.out.println("vo체크: " + vo);
-		for(int i = 0; i < cvo.length; i++) {
-			System.out.println("ovo체크: " + i + " " + cvo);
-		}
-		service.regist(vo);
+		System.out.println("cvo체크: "  +cvo);
+		service.regist(vo, cvo);
 		
 		return "redirect:/";
 	}
