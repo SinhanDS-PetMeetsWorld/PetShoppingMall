@@ -1,7 +1,7 @@
 package sinhanDS.first.project.product;
 import org.apache.ibatis.annotations.Mapper;
 
-import sinhanDS.first.project.product.VO.ProductQnAVO;
+import sinhanDS.first.project.product.vo.ProductQnAVO;
 
 @Mapper
 public interface ProductMapper {
