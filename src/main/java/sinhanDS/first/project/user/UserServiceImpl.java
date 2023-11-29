@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int edit(UserVO vo) {
+		System.out.println(vo);
 		String phone0 = vo.getPhone0();
 		String phone1 = vo.getPhone1();
 		String phone2 = vo.getPhone2();

@@ -26,4 +26,8 @@ public class UserVO {
 	String birth1;
 	String birth2;
 	
+	public void split_phone() {
+		
+	}
+	
 }

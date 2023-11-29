@@ -1,4 +1,4 @@
-package sinhanDS.first.project.product.VO;
+package sinhanDS.first.project.product.vo;
 
 import lombok.Data;
 
@@ -22,4 +22,7 @@ public class ProductVO {
 	private float rating;
 	//이미지url
 	private String image_url;
+	
+	//상품 설명
+	private String description;
 }

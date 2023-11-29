@@ -1,4 +1,4 @@
-package sinhanDS.first.project.product.VO;
+package sinhanDS.first.project.product.vo;
 
 import java.sql.Date;
 

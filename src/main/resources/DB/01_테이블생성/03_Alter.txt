@@ -50,3 +50,6 @@ ADD CONSTRAINT `FK_product_TO_review_1`
   FOREIGN KEY (`product_no`)
   REFERENCES `PetShoppingMall`.`product` (`no`);
   
+  ALTER TABLE `PetShoppingMall`.`product` 
+ADD COLUMN `description` TEXT NULL AFTER `image_url`;
+  
