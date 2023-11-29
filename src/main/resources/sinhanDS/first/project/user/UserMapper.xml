@@ -32,17 +32,19 @@
 		INSERT INTO user (
 			id, name, email, password, phone, birth_date, gender, advertisement , join_date
 		) VALUES (
-			#{id}, #{name}, 'jhyoo1224@gmail.com', MD5(#{password}), #{phone}, #{birth_date}, #{gender}, #{advertisement} , NOW()
+			#{id}, #{name}, #{email}, MD5(#{password}), #{phone}, #{birth_date}, #{gender}, #{advertisement} , NOW()
 		)
 		<selectKey keyProperty="no" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		<!-- 
+	</insert>
+	
+	<insert id="initaddr_regist">
 		INSERT INTO address (
 			user_no, zipcode, addr1, addr2, name, phone, comment
 		) VALUES (
 			#{no}, #{zipcode}, #{addr1}, #{addr2}, #{name}, #{phone}, '기본'
-		) -->
+		);
 	</insert>
 	
 	<insert id="user_address_regist" parameterType="sinhanDS.first.project.user.VO.UserVO">
