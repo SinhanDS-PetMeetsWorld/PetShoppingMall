@@ -10,7 +10,7 @@ INSERT INTO `PetShoppingMall`.`user`
 `join_date`)
 VALUES
 ('kimcider',
-'captain',
+MD5('captain'),
 '김병천',
 'rlaqudcjs96@naver.com',
 '010-1111-2222',

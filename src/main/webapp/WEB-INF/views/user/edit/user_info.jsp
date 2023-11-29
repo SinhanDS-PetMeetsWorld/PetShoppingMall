@@ -32,10 +32,10 @@
 	
 	function doEdit(){
 		if($("#password").val() != ''){
-			if($("#vo_password").val() != $("#password").val()){
+			/*if($("#vo_password").val() != $("#password").val()){
 				alert('현재 비밀번호가 일치하지 않습니다.')
 				return false;
-			}
+			}*/
 			if($("#new_password").val() != $("#check_password").val()){
 				alert('비밀번호 확인이 일치하지 않습니다.');
 				return;
@@ -88,7 +88,7 @@
 						        <input type="hidden" name="temp" id="phone" value="${vo.phone }">
 						        <input type="hidden" name="birth" id="birth" value="${vo.birth_date }">
 						        <input type="hidden" name="no" id="no" value="${vo.no }">
-						        <input type="hidden" name="vo_password" id="vo_password" value="${vo.password }">
+<!-- 						        <input type="hidden" name="vo_password" id="vo_password" value="${vo.password }">   -->
 					        </div>
 					        <span>이름</span>
 					        <input type="text" name="name" placeholder="홍길동" value="${vo.name }">

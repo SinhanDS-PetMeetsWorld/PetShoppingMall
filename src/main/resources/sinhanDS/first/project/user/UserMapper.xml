@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.user.UserMapper">
+
+	<select id="check_password" parameterType="sinhanDS.first.project.user.VO.UserVO" resultType="int">
+		SELECT count(*) FROM user WHERE no = #{no} AND password = MD5(#{password})
+	</select>
 	
 	<update id="edit" parameterType="sinhanDS.first.project.user.VO.UserVO">
 		UPDATE user SET

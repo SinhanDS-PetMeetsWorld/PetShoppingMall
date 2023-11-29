@@ -10,4 +10,5 @@ public interface UserMapper {
 	UserVO detail(int no);
 	UserVO login(UserVO vo);
 	int user_regist(UserVO vo);
+	int check_password(UserVO vo);
 }
