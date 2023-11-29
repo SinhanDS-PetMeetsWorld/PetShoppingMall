@@ -51,4 +51,8 @@
 		<!-- 생각해보니 저희 이거 uservo로 못받아옴........새 vo하나 파야할거같음; -->
 	</insert>
 	
+	<select id="dupId" resultType="Integer" parameterType="String">
+		SELECT COUNT(*) FROM user WHERE id=#{id}
+	</select>
+	
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sinhanDS.first.project.user.VO.UserAddressVO;
@@ -87,11 +88,12 @@ public class UserController {
 		return "common/alert";
 	}
 	
-//	@GetMapping("/mailCheck")
-//	@ResponseBody
-//	public String mailCheck(String email) {
-//		System.out.println("인증 요청 이메일: "+email);
-//	}
+	@ResponseBody
+	@GetMapping("/idCheck.do")
+	public String idCheck(@RequestParam String id) {
+		boolean r = service.dupId(id);
+		return String.valueOf(r);
+	}
 	
 	@PostMapping("/update.do")
 	public String edit(UserVO vo, Model model) {

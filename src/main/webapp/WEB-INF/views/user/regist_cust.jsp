@@ -12,20 +12,21 @@
     <script>
     var dupCheck = false;
     	function goSave() {
-    		if ($("#email").val() == '') {
-    			alert('이메일을 입력하세요');
-    			$("#email").focus();
+    		if ($("#id").val() == '') {
+    			alert('ID는 필수 입력사항입니다.');
+    			$("#id").focus();
     			return;
     		}
-    		/* if (!dupCheck) {
+    		
+    		if (!dupCheck) {
     			alert('ID 중복여부를 체크해주세요');
     			return;
-    		} */
+    		}
 
     		var isCon = true;
     		$.ajax({
 				url:'idCheck.do',
-				data:{email:$('#id').val()},
+				data:{id:$('#id').val()},
 				async:false,
 				success:function(res) {
 					console.log(res);
@@ -39,26 +40,64 @@
 				}
 			})
 			if (!isCon) return;
-    		if ($("#pw").val() == '') {
-    			alert('비밀번호를 입력하세요');
-    			$("#pw").focus();
+    		
+    		if ($("#name").val() == '') {
+    			alert('이름은 필수 입력사항입니다.');
+    			$("#name").focus();
     			return;
     		}
-    		/* if ($("#pw").val() != $("#pw_check").val()) {
-    			alert('비밀번호를 확인하세요');
+    		
+    		if ($("#email").val() == '') {
+    			alert('이메일은 필수 입력사항입니다.');
+    			$("#email").focus();
     			return;
     		}
-    		var reg = /^[A-Za-z0-9]{8,}$/;
+    		
+    		if ($("#zipcode").val() == '') {
+    			alert('우편번호는 필수 입력사항입니다.');
+    			return;
+    		}
+    		
+    		if ($("#addr1").val() == '') {
+    			alert('주소는 필수 입력사항입니다.');
+    			return;
+    		}
+    		
+    		if ($("#addr2").val() == '') {
+    			alert("상세주소는 필수 입력사항입니다.(없으면 '없음'이라고 입력해주세요)");
+    			$("#addr2").focus();
+    			return;
+    		}
+    		
+    		if ($("#password").val() == '') {
+    			alert('비밀번호는 필수 입력사항입니다.');
+    			$("#password").focus();
+    			return;
+    		}
+    		
+    		if ($("#password").val() != $("#password_check").val()) {
+    			alert('비밀번호를 다시 확인하세요(비밀번호 확인란의 내용과 불일치)');
+    			$("#password").focus();
+    			return;
+    		}
+    		
+    		if ($("#phone0").val() == '' || $("#phone1").val() == '' || $("#phone2").val() == '') {
+    			alert("연락처는 필수 입력사항입니다.");
+    			return;
+    		}
+    		
+    		if ($("#birth0").val() == '' || $("#birth1").val() == '' || $("#birth2").val() == '') {
+    			alert("생년월일은 필수 입력사항입니다.");
+    			return;
+    		}
+    		
+    		/*var reg = /^[A-Za-z0-9]{8,}$/;
     		var txt = $("#pw").val();
     		if( txt.match(reg) == null ) {
     		    alert("비밀번호는 영문+숫자 조합해서 8자이상 입력하세요");
     		    return false;
     		} */
-    		if ($("#name").val() == '') {
-    			alert('이름을 입력하세요');
-    			$("#name").focus();
-    			return;
-    		}
+    		
     		// 전송
     		$("#frm").submit();
     	}
@@ -66,7 +105,7 @@
     		$("#idCheck").click(function() {
     			$.ajax({
     				url:'idCheck.do',
-    				data:{email:$('#id').val()},
+    				data:{id:$('#id').val()},
     				success:function(res) {
     					console.log(res);
     					if (res == 'true') {
@@ -81,14 +120,14 @@
     				}
     			})
     		})
-    	}) -->
-    	$('#emailcheck_btn').click(function() {
+    	})
+    	$('#emailchecknum_btn').click(function() {
     		const email = $('#email').val();
     		const checkInput = $('#emailcheck_num');
     		
     		$.ajax({
     			type : 'get',
-    			url : '<c:url value ="/user/mailCheck?email="/>'+email,
+    			url : '<c:url value ="/user/emailCheck?email="/>'+email,
     			success : function (data) {
     				console.log("data : " +  data);
     				checkInput.attr('disabled',false);
@@ -147,21 +186,21 @@
     <form name="regist_form" id="frm" action="regist.do" method="post">
         <div>
             아이디*<br>
-            <input type="text" name="id">
-            <button id="idCheck">아이디 중복 확인</button>
+            <input type="text" name="id" id="id">
+            <button type="button" id="idCheck">아이디 중복 확인</button>
         </div>
         <hr>
         <div>
             성명*<br>
-            <input type="text" name="name">
+            <input type="text" name="name" id="name">
         </div>
         <hr>
         <div>
             이메일*<br>
             <input type="text" name="email" id="email">
-            <button>이메일 인증 번호 발송</button><br>
+            <button type="button" id="emailchecknum_btn">이메일 인증 번호 발송</button><br>
             <input type="text" name="emailcheck_num" id="emailcheck_num" readonly>
-            <button id="emailcheck_btn">이메일 인증하기</button>
+            <button type="button" id="emailcheck_btn">이메일 인증하기</button>
         </div>
         <hr>
         
@@ -172,37 +211,41 @@
             	<button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button>
             </div>
             <div><input type="text" name="addr1" id="addr1" readonly placeholder="기본주소"></div>
-            <div><input type="text" name="addr2" placeholder="상세주소"></div>
+            <div><input type="text" name="addr2" id="addr2" placeholder="상세주소"></div>
         </div>
         <hr>
         
         <div>
             비밀번호*<br>
-            <input type="password" name="password">
+            <input type="password" name="password" id="password">
         </div>
         <div>
             비밀번호 확인*<br>
-            <input type="password">
+            <input type="password" id="password_check">
         </div>
         <hr>
         <div>
             연락처*<br>
-            <input type="text" maxlength="3" value="010" name="phone0"> - <input type="text" maxlength="4" placeholder="XXXX" name="phone1"> - <input type="text" maxlength="4" placeholder="XXXX" name="phone2">
+            <input type="text" maxlength="3" value="010" name="phone0" id="phone0"> 
+            - <input type="text" maxlength="4" placeholder="XXXX" name="phone1" id="phone1"> 
+            - <input type="text" maxlength="4" placeholder="XXXX" name="phone2" id="phone2">
         </div>
         <hr>
         <div>
             생년월일*<br>
-            <input type="text" maxlength="4" placeholder="YYYY" name="birth0"> <input type="text" maxlength="2" placeholder="MM" name="birth1"> <input type="text" maxlength="2" placeholder="DD" name="birth2">
+            <input type="text" maxlength="4" placeholder="YYYY" name="birth0" id="birth0">
+             <input type="text" maxlength="2" placeholder="MM" name="birth1" id="birth1"> 
+             <input type="text" maxlength="2" placeholder="DD" name="birth2" id="birth2">
         </div>
         <hr>
         <div>
             성별 * 
-            <input type="radio" name="gender" value="0">남자
+            <input type="radio" name="gender" value="0" selected>남자
             <input type="radio" name="gender" value="1">여자
         </div>
         <hr>
         <div>
-            <input type="checkbox" name="advertisement"> 광고성 마케팅 수신 동의(선택사항)
+            <input type="checkbox" name="advertisement" checked> 광고성 마케팅 수신 동의(선택사항)
         </div>
         <hr>
         <div>
