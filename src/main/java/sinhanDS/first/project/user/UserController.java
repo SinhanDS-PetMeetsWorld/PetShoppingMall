@@ -56,7 +56,7 @@ public class UserController {
 		return "user/regist_cust";
 	}
 	
-	@PostMapping("/regist.do")
+	@PostMapping("/regist.do") //이거 내부 수정해야됨~~
 	public String user_regist(UserVO vo, Model model) {
 		boolean r = service.user_regist(vo); // service -> mapper -> sql
 		if (r) { // 정상적으로 DB에 insert 

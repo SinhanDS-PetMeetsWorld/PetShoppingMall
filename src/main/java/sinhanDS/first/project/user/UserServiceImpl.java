@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 		String phone0 = vo.getPhone0();
 		String phone1 = vo.getPhone1();
 		String phone2 = vo.getPhone2();
-		String phone = phone0 + phone1 + phone2;
+		String phone = phone0 + "-" + phone1 + "-" + phone2;
 		vo.setPhone(phone);
 
 		SimpleDateFormat sdf = new SimpleDateFormat(vo.getBirth0() + "-" + vo.getBirth1() + "-" + vo.getBirth2());
