@@ -24,9 +24,12 @@ public class UserServiceImpl implements UserService {
 	public UserVO detail(UserVO vo) {
 		return mapper.detail(vo.getNo());
 	}
-
+	
+	
 	@Override
 	public int edit(UserVO vo) {
+		
+		
 		System.out.println(vo);
 		String phone0 = vo.getPhone0();
 		String phone1 = vo.getPhone1();
@@ -42,8 +45,25 @@ public class UserServiceImpl implements UserService {
 		vo.setBirth_date(birth_date);
 		
 		System.out.println(vo);
+
+		if(check_password(vo)) {
+			return mapper.edit(vo);
+		}
+		return 0;
 		
-		return mapper.edit(vo);
 	}
+
+	@Override
+	public boolean check_password(UserVO vo) {
+		int user = mapper.check_password(vo);
+		if(user == 1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+
 
 }

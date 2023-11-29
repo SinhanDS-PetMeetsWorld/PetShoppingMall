@@ -6,4 +6,5 @@ public interface UserService {
 	UserVO login(UserVO vo);
 	UserVO detail(UserVO vo);
 	int edit(UserVO vo);
+	boolean check_password(UserVO vo);
 }

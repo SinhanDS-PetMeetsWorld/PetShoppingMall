@@ -56,7 +56,7 @@ public class UserController {
 	
 	@PostMapping("/update.do")
 	public String edit(UserVO vo, Model model) {
-		System.out.println(vo);
+		System.out.println("전송 : " + vo);
 		
 		int r = service.edit(vo);
 		String msg = "";
