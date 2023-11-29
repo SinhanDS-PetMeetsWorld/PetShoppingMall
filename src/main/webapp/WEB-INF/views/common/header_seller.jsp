@@ -25,7 +25,7 @@
 				</h1>
 				<div class="header_menu">
 					<ul>
-						<li><a href="#">강아지</a>
+						<li><a href="#">판매자</a>
 							<ul>
 								<li><a href="#">사료</a></li>
 								<li><a href="#">장난감</a></li>
@@ -36,7 +36,7 @@
 								<li><a href="#">전자제품</a></li>
 								<li><a href="#">로션</a></li>
 							</ul></li>
-						<li><a href="#">고양이</a>
+						<li><a href="#">헤더</a>
 							<ul>
 								<li><a href="#">사료</a></li>
 								<li><a href="#">장난감</a></li>
@@ -47,7 +47,7 @@
 								<li><a href="#">전자제품</a></li>
 								<li><a href="#">로션</a></li>
 							</ul></li>
-						<li><a href="#">기타</a>
+						<li><a href="#">입니다</a>
 							<ul>
 								<li><a href="#">새</a></li>
 								<li><a href="#">토끼</a></li>

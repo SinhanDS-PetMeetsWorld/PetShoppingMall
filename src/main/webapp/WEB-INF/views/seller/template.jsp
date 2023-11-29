@@ -26,7 +26,7 @@
             </div>
 			<div class="contentsright">
 				<div>
-						<h1>판매자 페이지 입니다.</h1><h1>신정훈 화이팅~!</h1>
+					이 부분을 수정하세요!!!
 				</div>
 			</div>
 

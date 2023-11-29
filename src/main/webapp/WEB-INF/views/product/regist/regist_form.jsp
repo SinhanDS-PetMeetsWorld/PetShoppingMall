@@ -15,11 +15,15 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/resources/css/common/template.css">
+
+<script>
+	console.log("${sellerLoginInfo.no}");
+</script>
 </head>
 <body>
 	<div class="wrap">
 		<div class="header">
-			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+			<%@ include file="/WEB-INF/views/common/header_seller.jsp"%>
 		</div>
 
 
@@ -32,6 +36,7 @@
 				<div>
 					<h2>상품 등록</h2>
 					<form action="regist.do" method="post">
+						<input type="hidden" name="seller_no" value="${sellerLoginInfo.no}">
 						<div>
 							상품명*<br> <input type="text" name="name" required>
 						</div>

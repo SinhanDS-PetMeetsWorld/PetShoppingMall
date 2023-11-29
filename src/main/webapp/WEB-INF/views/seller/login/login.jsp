@@ -19,7 +19,7 @@
 <body>
 	<div class="wrap">
 		<div class="header">
-			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+			<%@ include file="/WEB-INF/views/common/header_seller.jsp"%>
 		</div>
 
 

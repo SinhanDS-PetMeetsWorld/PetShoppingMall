@@ -21,3 +21,26 @@ MD5('captain'),
 '서울특별시 종로구 청와대로 1',
 '청와대');
 
+INSERT INTO `PetShoppingMall`.`seller`
+(
+`id`,
+`password`,
+`name`,
+`email`,
+`phone`,
+`business_number`,
+`zipcode`,
+`addr1`,
+`addr2`)
+VALUES
+(
+'collagom',
+MD5('collagom'),
+'김병천',
+'rlaqudcjs96@naver.com',
+'010-1112-2222',
+'000-1112-22',
+'03048',
+'서울특별시 종로구 청와대로 1',
+'청와대2');
+
