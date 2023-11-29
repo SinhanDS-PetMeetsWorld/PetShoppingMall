@@ -1,13 +1,17 @@
-package sinhanDS.first.project.order.VO;
+package sinhanDS.first.project.product.vo;
 
 import lombok.Data;
 
 @Data
-public class OrderDetailOptionVO {
+public class OptionVO {
+	//번호
 	private int no;
-	private int order_dno;
+	//상품 번호
 	private int product_no;
+	//옵션 제목
 	private String option;
+	//옵션 내용
 	private String content;
+	//가격
 	private int price;
 }

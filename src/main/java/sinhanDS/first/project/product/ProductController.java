@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import sinhanDS.first.project.product.VO.ProductVO;
+import sinhanDS.first.project.product.vo.ProductVO;
+
+
 
 
 @Controller
