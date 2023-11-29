@@ -10,6 +10,8 @@ public class ProductVO {
 	private int seller_no;
 	//상품 명
 	private String name;
+	//상품 가격
+	private int price;
 	//할인 가격
 	private int discount;
 	//재고

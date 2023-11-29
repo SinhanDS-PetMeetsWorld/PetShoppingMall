@@ -25,8 +25,9 @@ public class UserController {
 	
 	@PostMapping("/login.do")
 	public String loginProcess(UserVO vo, HttpSession sess, Model model) {
+		System.out.println("vo체크: " + vo);
 		UserVO login = service.login(vo);
-		System.out.println(login);
+		System.out.println("login: " + login);
 		if (login == null) { // 로그인 실패
 			model.addAttribute("msg", "아이디 비밀번호가 올바르지 않습니다.");
 			model.addAttribute("cmd", "back");
