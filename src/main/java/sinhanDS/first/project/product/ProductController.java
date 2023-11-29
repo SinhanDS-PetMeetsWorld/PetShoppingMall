@@ -1,5 +1,6 @@
 package sinhanDS.first.project.product;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.product.vo.ReviewVO;
 
 @Controller
 @RequestMapping("/product")
@@ -17,44 +19,16 @@ public class ProductController {
 	@Autowired
 	private ProductService service;
 	
-
-	// 신정훈(11 / 29) QNA 페이지 구현	
-	public String view(Model model, ProductQnAVO vo) {
+	// 신정훈(11 / 29) QNA 페이지 , 리뷰 페이지 구현	
+	@GetMapping("/goods.do")
+	public String QNA_Review_list(Model model, ProductQnAVO qnavo , ReviewVO revvo) {
+		List<ProductQnAVO> qna_list = service.QNA_list(qnavo);
+		List<ReviewVO> review_list = service.QNA_review(revvo);
 		
-		
-		return null;
-		
+		model.addAttribute("qna_list",qna_list);
+		model.addAttribute("review_list", review_list);
+		return "product/goods/goods";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	@GetMapping("/regist.do")
