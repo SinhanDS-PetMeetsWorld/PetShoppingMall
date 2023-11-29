@@ -9,5 +9,5 @@ public interface UserMapper {
 	int edit(UserVO vo);
 	UserVO detail(int no);
 	UserVO login(UserVO vo);
-	
+	int user_regist(UserVO vo);
 }

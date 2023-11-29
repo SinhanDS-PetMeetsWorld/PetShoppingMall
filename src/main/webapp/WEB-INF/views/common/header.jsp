@@ -67,7 +67,7 @@
 				</div>
 				<c:if test="${empty loginInfo }">
 					<div class="header_unlogin">
-						<a href="/user/login.do">로그인</a> | <a href="/project/user/join.do">회원가입</a>
+						<a href="/user/login.do">로그인</a> | <a href="/user/join.do">회원가입</a>
 					</div>
 				</c:if>
 				<c:if test="${!empty loginInfo }">

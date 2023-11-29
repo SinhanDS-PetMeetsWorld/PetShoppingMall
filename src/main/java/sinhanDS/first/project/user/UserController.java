@@ -51,7 +51,24 @@ public class UserController {
 		return "user/edit/user_info";
 	}
 	
+	@GetMapping("/join.do")
+	public String join() {
+		return "user/regist_cust";
+	}
 	
+	@PostMapping("/regist.do")
+	public String user_regist(UserVO vo, Model model) {
+		boolean r = service.user_regist(vo); // service -> mapper -> sql
+		if (r) { // 정상적으로 DB에 insert 
+			model.addAttribute("cmd", "move");
+			model.addAttribute("msg", "회원가입되었습니다.");
+			model.addAttribute("url", "/project/index.do");
+		} else { // 등록안됨
+			model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "회원가입실패");
+		}
+		return "common/alert";
+	}
 	
 	@PostMapping("/update.do")
 	public String edit(UserVO vo, Model model) {
