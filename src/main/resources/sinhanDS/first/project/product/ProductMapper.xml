@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.product.ProductMapper">
 	
+	<!-- 조회 -->
+	<select id="list" parameterType="sinhanDS.first.project.product.VO.ProductQnAVO" resultType="sinhanDS.first.project.product.VO.QnAVO">
+		SELECT question_content 
+		FROM product_qna 
+		WHERE product_no = {#product_no}
+		ORDER BY no DESC
+	</select>
+	
+	
 </mapper>
