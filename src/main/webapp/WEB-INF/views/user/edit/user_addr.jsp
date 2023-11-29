@@ -56,7 +56,7 @@
 					            <td colspan="2">
 					                <div></div>
 					                <hr>
-					                <button onclick="window.open("./user_add_address.jsp",'add_user_address','width=430,height=500,location=no,status=no');">+ 배송지 추가</button>
+					                <button onclick="window.open('/user/add_addr.do','add_user_addr', 'width=430,height=500,location=no,status=no,scrollbars=yes');">+ 배송지 추가</button>
 					            </td>
 					        </tr>
 					    </table>

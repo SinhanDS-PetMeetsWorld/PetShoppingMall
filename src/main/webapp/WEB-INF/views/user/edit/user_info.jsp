@@ -80,7 +80,7 @@
 				<div>
 					<h1>회원정보</h1>
 					    <button type="button">기본정보 변경</button>
-					    <button type="button">주소 변경</button>
+					    <button type="button" onclick="location.href='/user/edit_addr.do'">주소 변경</button>
 					    <button type="button">결제 수단</button>
 					
 					    <form id="user_info_modify" name="user_info_modify" action="update.do" method="POST">
