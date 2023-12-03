@@ -28,6 +28,29 @@
 			<%@ include file="/WEB-INF/views/common/header_seller.jsp"%>
 		</div>
 
+		<div class="category_original" style="display:none;">
+			<hr>
+			<div>
+				카테고리 *<br> <select name="category1_list" class="category1_list">
+					<option value="0">강아지</option>
+					<option value="1">고양이</option>
+					<option value="2">기타</option>
+				</select>
+
+				<div>
+					세부 카테고리 *<br> <select name="category2_list"
+						class="category2_list" data-no="${status.index }">
+						<c:forEach var="category" items="${vo.category[0] }"
+							varStatus="status">
+							<option value="${status.index}">${category }</option>
+						</c:forEach>
+					</select>
+				</div>
+
+			</div>
+			<a href="javascript:;" class="add_btn_category"><img
+				src="/resources/img/plus.png" width="25" height="25" /></a>
+		</div>
 
 
 		<div class="contents">
@@ -53,15 +76,16 @@
 							<div class="category">
 								<hr>
 								<div>
-									카테고리 *<br> <select name="category1_list" class="category1_list">
+									카테고리 *<br> <select name="category1_list"
+										class="category1_list">
 										<option value="0">강아지</option>
 										<option value="1">고양이</option>
 										<option value="2">기타</option>
 									</select>
 
 									<div>
-										세부 카테고리 *<br> <select name="category2_list" class="category2_list"
-											data-no="${status.index }">
+										세부 카테고리 *<br> <select name="category2_list"
+											class="category2_list" data-no="${status.index }">
 											<c:forEach var="category" items="${vo.category[0] }"
 												varStatus="status">
 												<option value="${status.index}">${category }</option>
@@ -70,18 +94,22 @@
 									</div>
 
 								</div>
-								<a href="javascript:;" class="add_btn"><img
+								<a href="javascript:;" class="add_btn_category"><img
 									src="/resources/img/plus.png" width="25" height="25" /></a>
 							</div>
 						</div>
-						<div>카테고리 추가 버튼 넣고</div>
 						<div>
 							제조사 <input type="text" name="company">
 						</div>
 						<div>
 							브랜드명 <input type="text" name="brand">
 						</div>
-						<div>옵션추가넣고</div>
+						
+						<div>
+							<a href="javascript:;" class="add_btn_option"><img
+									src="/resources/img/plus.png" width="25" height="25" />옵션 추가</a>
+						</div>
+						
 						<div>상품 이미지 넣고</div>
 						<div>
 							할인 가격 <input type="number" name="discount" value="0" required>
@@ -105,20 +133,23 @@
 			<div class="footer-color"></div>
 		</div>
 	</div>
-	
+
 	<script>
-		$('.add_btn').on('click', addCategory);
-		$('.category1_list').on('change', changeCategory2)
-		function addCategory() {
-			let newCategory = $('.category').eq(-1).clone();
+		$('.add_btn_category').on('click', add_category);
+		$('.category1_list').on('change', change_category2)
+		function add_category() {
+			let newCategory = $('.category_original').clone();
+			$(newCategory).css('display', 'inline');
+			$(newCategory).removeClass('category_original');
+			$(newCategory).addClass('category');
 			console.log(newCategory);
-			$(newCategory).find('a').on('click', addCategory);
-			$(newCategory).find('.category1_list').on('change', changeCategory2)
+			$(newCategory).find('a').on('click', add_category);
+			$(newCategory).find('.category1_list').on('change', change_category2)
 			$(this).remove();
 			newCategory.appendTo($('.category_body'));
 		}
 
-		function changeCategory2() {
+		function change_category2() {
 			let target = this.parentNode.querySelector('.category2_list');
 			$(target).empty();
 			
@@ -132,6 +163,10 @@
 				}
 			</c:forEach>
 		}
+	</script>
+	<script>
+		$('.add_btn_option').on('click', add_option);
+		
 	</script>
 </body>
 </html>
