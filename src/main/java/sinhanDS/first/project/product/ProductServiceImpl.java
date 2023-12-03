@@ -42,17 +42,17 @@ public class ProductServiceImpl implements ProductService {
 			mapper.regist_category(ncvo);
 		}
 		
-		for(int i = 0; i < ovo.getTitle_list().length; i++) {
-			OptionVO novo = new OptionVO();
-			novo.setProduct_no(vo.getNo());
-			novo.setTitle(ovo.getTitle_list()[i]);
-			novo.setContent(ovo.getContent_list()[i]);
-			novo.setPrice(ovo.getPrice_list()[i]);
-			System.out.println("novo체크: " + novo);
-			mapper.regist_option(novo);
+		if(ovo.getTitle_list() != null) {
+			for(int i = 0; i < ovo.getTitle_list().length; i++) {
+				OptionVO novo = new OptionVO();
+				novo.setProduct_no(vo.getNo());
+				novo.setTitle(ovo.getTitle_list()[i]);
+				novo.setContent(ovo.getContent_list()[i]);
+				novo.setPrice(ovo.getPrice_list()[i]);
+				System.out.println("novo체크: " + novo);
+				mapper.regist_option(novo);
+			}
 		}
-		cvo.setProduct_no(vo.getNo());
-		
 		return result; 
 	};
 }

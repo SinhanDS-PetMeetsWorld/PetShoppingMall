@@ -37,7 +37,7 @@ public class ProductController {
 	public String regist(Model model) {
 		ProductCategoryVO vo = new ProductCategoryVO();
 		model.addAttribute("vo", vo);
-		return "product/regist/regist_form";
+		return "seller/regist/regist_form";
 	}	
 	
 	@PostMapping("/regist.do")
@@ -47,7 +47,7 @@ public class ProductController {
 		System.out.println("ovo체크: " + ovo);
 		service.regist(vo, cvo, ovo);
 		
-		return "redirect:/";
+		return "redirect:/seller/index.do";
 	}
 }
 

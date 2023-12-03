@@ -21,9 +21,6 @@
        	
         
         <div class="contents">
-        	<div class="quickmenu">
-                <%@ include file="/WEB-INF/views/common/quickmenu.jsp"%>
-            </div>
 			<div class="contentsright">
 				<div>
 						<h1>신정훈 화이팅~!</h1>

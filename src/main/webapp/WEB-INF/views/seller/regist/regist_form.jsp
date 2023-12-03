@@ -30,7 +30,7 @@
 
 		<div class="contents">
 			<div class="quickmenu">
-				<%@ include file="/WEB-INF/views/common/quickmenu.jsp"%>
+				<%@ include file="/WEB-INF/views/common/quickmenu_seller.jsp"%>
 			</div>
 			<div class="contentsright">
 				<div>

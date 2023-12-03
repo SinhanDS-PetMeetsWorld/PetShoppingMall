@@ -55,5 +55,26 @@ public class regist {
 		
 		mock.perform(req);
 	}
+	@Test
+	public void regist_product_zero_option() throws Exception{
+		RequestBuilder req = MockMvcRequestBuilders.post("/product/regist.do")
+				.param("seller_no", "1")
+				.param("name", "테스트로만든상품")
+				.param("price", "10001")
+				.param("stock", "50")
+				.param("category1_list", "0")
+				.param("category2_list", "1")
+				.param("category1_list", "0")
+				.param("category2_list", "2")
+				.param("category1_list", "2")
+				.param("category2_list", "1")
+				.param("company", "daehanminguk")
+				.param("brand", "jeju")
+				.param("discount", "0")
+//				.param("image_url", "")
+				.param("description", "");
+		
+		mock.perform(req);
+	}
 	
 }
