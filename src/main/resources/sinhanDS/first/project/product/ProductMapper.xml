@@ -35,14 +35,32 @@
 		(
 			product_no,
 			category1,
-			category2)
-			VALUES
+			category2
+		)
+		VALUES
 		(
 			#{product_no},
 			#{category1},
 			#{category2}
 		);
 		
+	</insert>
+	
+	<insert id="regist_option" parameterType="sinhanDS.first.project.product.vo.OptionVO">
+		INSERT INTO PetShoppingMall.product_option
+		(
+			product_no,
+			title,
+			content,
+			price
+		)
+		VALUES
+		(
+			#{product_no},
+			#{title},
+			#{content},
+			#{price}
+		);
 	</insert>
 	
 </mapper>
