@@ -139,9 +139,6 @@
 				    	</c:forEach>
 					</div>
 			</div>
-				
-				
-					
 					
 					</div>
 				</div>
@@ -152,16 +149,15 @@
 			</div>
 		</div>
 		
-
-				
 <script>
-
+// 질문 ,해답 하나씩 켜고 끄기
 $(".Q").click(function() {
     $(this).next(".A").stop().slideToggle(300);
 	$(this).toggleClass('on').siblings().removeClass('on');
 	$(this).next(".A").siblings(".A").slideUp(300); // 1개씩 펼치기
 });
 
+// 탭 구현
 function showBoard(boardId) {
     const boards = document.querySelectorAll('.board_contents');
     const titles = document.querySelectorAll('.board_title');

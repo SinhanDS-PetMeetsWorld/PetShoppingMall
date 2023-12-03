@@ -8,12 +8,24 @@
 		ORDER BY no DESC
 	</select>
 	
-	<select id ="QNA_review" parameterType = "sinhanDS.first.project.product.vo.ReviewVO" resultType= "sinhanDS.first.project.product.vo.ReviewVO">
+	<insert id="QNA_insert" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
+		INSERT INTO product_qna
+		(seller_no, product_no, user_no, question_content, question_write_date, status)
+		VALUES
+		(#{seller_no}, #{product_no}, #{user_no}, #{question_content}, NOW(), 0);
+			<selectKey keyProperty="no" order="AFTER" resultType="int">
+				SELECT LAST_INSERT_ID()
+			</selectKey>
+    </insert>
+	
+	
+	<select id ="Review_list" parameterType = "sinhanDS.first.project.product.vo.ReviewVO" resultType= "sinhanDS.first.project.product.vo.ReviewVO">
 		SELECT * 
 		FROM review
 		ORDER BY no DESC 
 	</select>
 	
+		
 	<insert id="regist" parameterType="sinhanDS.first.project.product.vo.ProductVO">
 		INSERT INTO PetShoppingMall.product
 		(

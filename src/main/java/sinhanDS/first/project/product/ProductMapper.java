@@ -12,10 +12,12 @@ public interface ProductMapper {
 	// QNA 리스트	
 	List<ProductQnAVO> QNA_list (ProductQnAVO vo);
 	// 리뷰 리스트
-	List<ReviewVO> QNA_review (ReviewVO vo);
+	List<ReviewVO> Review_list (ReviewVO vo);
 	// 볼 수 있는 거	
 	ProductQnAVO view(ProductQnAVO vo); 
 	
+	
+	int QNA_insert(ProductQnAVO vo);
 	
 	int regist(ProductVO vo);
 }
