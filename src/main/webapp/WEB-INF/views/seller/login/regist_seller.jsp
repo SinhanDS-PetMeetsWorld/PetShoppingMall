@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <title>회원가입</title>
+    <title>판매자 회원가입</title>
     <script>
     var dupCheck = false;
     	function goSave() {
@@ -86,8 +86,13 @@
     			return;
     		}
     		
-    		if ($("#birth0").val() == '' || $("#birth1").val() == '' || $("#birth2").val() == '') {
-    			alert("생년월일은 필수 입력사항입니다.");
+    		if ($("#business_registnum").val() == '') {
+    			alert("사업자 등록번호는 필수 입력사항입니다.");
+    			return;
+    		}
+    		
+    		if ($("#settle_bank").val() == '' || $("#settle_account").val() == '') {
+    			alert("정산 계좌는 필수 입력사항입니다.");
     			return;
     		}
     		
@@ -194,25 +199,19 @@
 	</script>
 </head>
 <body>
-    <hr>
-    <h2>회원 가입</h2>
-    <hr>
-    <div>
-        <a href="">판매자로 가입하기</a>
-    </div>
-    <hr>
-    <form name="regist_form" id="frm" action="regist.do" method="post">
+    <h2>판매자 회원 가입</h2>
+    <form name="regist_form" id="frm" action="" method="post">
         <div>
             아이디*<br>
             <input type="text" name="id" id="id">
             <button type="button" id="idCheck">아이디 중복 확인</button>
         </div>
         <hr>
+        
         <div>
             성명*<br>
             <input type="text" name="name" id="name">
         </div>
-        <hr>
         <div>
             이메일*<br>
             <input type="text" name="email" id="email">
@@ -221,18 +220,16 @@
             <button type="button" id="emailcheck_btn" disabled="disabled">이메일 인증하기</button>
         </div>
         <hr>
-        
+
         <div>
             주소
-            <div>
-            	<input type="text" name="zipcode" id="zipcode" readonly placeholder="우편번호">
-            	<button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button>
-            </div>
+            <div><input type="text" name="zipcode" id="zipcode" readonly placeholder="우편번호">
+            <button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button></div>
             <div><input type="text" name="addr1" id="addr1" readonly placeholder="기본주소"></div>
             <div><input type="text" name="addr2" id="addr2" placeholder="상세주소"></div>
         </div>
         <hr>
-        
+
         <div>
             비밀번호*<br>
             <input type="password" name="password" id="password">
@@ -242,6 +239,7 @@
             <input type="password" id="password_check">
         </div>
         <hr>
+        
         <div>
             연락처*<br>
             <input type="text" maxlength="3" value="010" name="phone0" id="phone0"> 
@@ -249,23 +247,40 @@
             - <input type="text" maxlength="4" placeholder="XXXX" name="phone2" id="phone2">
         </div>
         <hr>
+        
         <div>
-            생년월일*<br>
-            <input type="text" maxlength="4" placeholder="YYYY" name="birth0" id="birth0">
-             <input type="text" maxlength="2" placeholder="MM" name="birth1" id="birth1"> 
-             <input type="text" maxlength="2" placeholder="DD" name="birth2" id="birth2">
+            사업자 등록번호*<br>
+            <input type="text " id="business_registnum" name="business_registnum" placeholder="10자리, '-'없이 숫자만 입력하세요">
         </div>
         <hr>
+        
         <div>
-            성별 * 
-            <input type="radio" name="gender" value="0" checked>남자
-            <input type="radio" name="gender" value="1">여자
+            정산 계좌*<br>
+            <select name="settle_bank" id="settle_bank">
+                <option value="0">신한은행</option>
+                <option value="1">국민은행</option>
+                <option value="2">KEB하나은행</option>
+                <option value="3">SC제일은행</option>
+                <option value="4">우리은행</option>
+                <option value="5">외환은행</option>
+                <option value="6">한국시티은행</option>
+                <option value="7">경남은행</option>
+                <option value="8">광주은행</option>
+                <option value="9">대구은행</option>
+                <option value="10">부산은행</option>
+                <option value="11">전북은행</option>
+                <option value="12">제주은행</option>
+                <option value="13">기업은행</option>
+                <option value="14">농협은행</option>
+                <option value="15">수협은행</option>
+                <option value="16">한국산업은행</option>
+                <option value="17">한국수출입은행</option>
+                <option value="18">우체국예금보험</option>
+            </select>
+            <input type="text" name="settle_account" id="settle_account" placeholder="'-'없이 숫자만 입력하세요">
         </div>
         <hr>
-        <div>
-            <input type="checkbox" name="advertisement" checked> 광고성 마케팅 수신 동의(선택사항)
-        </div>
-        <hr>
+        
         <div>
             <input type="button" value="가입하기" onclick="goSave();">
         </div>
