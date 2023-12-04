@@ -43,4 +43,9 @@ public class SellerController {
 			return "redirect:/seller/index.do";
 		}
 	}
+	
+	@GetMapping("/seller_regist.do")
+	public String selregist() {
+		return "seller/login/regist_seller";
+	}
 }
