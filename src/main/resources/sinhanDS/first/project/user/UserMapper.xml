@@ -54,4 +54,10 @@
 	<select id="exist_addr" parameterType="int" resultType="sinhanDS.first.project.user.VO.UserAddressVO">
 		SELECT * FROM address WHERE user_no = #{no}
 	</select>	
+
+	<select id="dupId" resultType="Integer" parameterType="String">
+		SELECT COUNT(*) FROM user WHERE id=#{id}
+	</select>
+	
+
 </mapper>

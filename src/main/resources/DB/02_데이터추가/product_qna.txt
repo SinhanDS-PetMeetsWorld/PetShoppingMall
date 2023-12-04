@@ -10,8 +10,8 @@ INSERT INTO `PetShoppingMall`.`product_qna`
 `status`)
 VALUES
 (
+4,
 1,
-0,
 1,
 '어떻게 동결했나요?',
 sysdate(),
@@ -19,3 +19,66 @@ sysdate(),
 sysdate(),
 1);
 
+INSERT INTO `PetShoppingMall`.`product_qna`
+(
+`product_no`,
+`user_no`,
+`seller_no`,
+`question_content`,
+`question_write_date`,
+`answer_content`,
+`answer_write_date`,
+`status`)
+VALUES
+(
+4,
+1,
+1,
+'직접 먹어봤나요??',
+sysdate(),
+'당연하죠',
+sysdate(),
+1);
+
+
+INSERT INTO `PetShoppingMall`.`product_qna`
+(
+`product_no`,
+`user_no`,
+`seller_no`,
+`question_content`,
+`question_write_date`,
+`answer_content`,
+`answer_write_date`,
+`status`)
+VALUES
+(
+4,
+1,
+1,
+'정훈이 잘한다!',
+sysdate(),
+'화이팅!',
+sysdate(),
+1);
+
+INSERT INTO `PetShoppingMall`.`product_qna`
+(
+`product_no`,
+`user_no`,
+`seller_no`,
+`question_content`,
+`question_write_date`,
+`answer_content`,
+`answer_write_date`,
+`status`)
+VALUES
+(
+4,
+1,
+1,
+'콜라곰',
+sysdate(),
+'화이팅!',
+sysdate(),
+1);
