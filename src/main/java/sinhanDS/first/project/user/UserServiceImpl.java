@@ -73,7 +73,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public boolean initaddr_regist(UserAddressVO vo) {
-		
 		return mapper.initaddr_regist(vo) > 0 ? true : false;
 	}
 	

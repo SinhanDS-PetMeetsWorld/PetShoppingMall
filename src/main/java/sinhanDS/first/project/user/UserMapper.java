@@ -13,4 +13,5 @@ public interface UserMapper {
 	int user_regist(UserVO vo);
 	int check_password(UserVO vo);
 	int initaddr_regist(UserAddressVO vo);
+	int exist_addr(UserVO vo);
 }

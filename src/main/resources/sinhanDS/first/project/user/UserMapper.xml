@@ -51,4 +51,7 @@
 		<!-- 생각해보니 저희 이거 uservo로 못받아옴........새 vo하나 파야할거같음; -->
 	</insert>
 	
+	<select id="exist_addr" parameterType="int" resultType="sinhanDS.first.project.user.VO.UserAddressVO">
+		SELECT * FROM address WHERE user_no = #{no}
+	</select>	
 </mapper>

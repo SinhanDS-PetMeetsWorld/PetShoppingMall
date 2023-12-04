@@ -19,8 +19,8 @@
             </div>
             <div>
                 주소
-                <div><input type="text" disabled placeholder="우편번호" name="zipcode"> <button>우편번호 검색</button></div>
-                <div><input type="text" disabled placeholder="기본주소" name="arr1"></div>
+                <div><input type="text" readonly placeholder="우편번호" name="zipcode"> <button>우편번호 검색</button></div>
+                <div><input type="text" readonly placeholder="기본주소" name="arr1"></div>
                 <div><input type="text" placeholder="상세주소" name="arr2"></div>
             </div>
             <div>

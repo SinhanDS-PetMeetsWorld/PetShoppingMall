@@ -113,7 +113,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/edit_addr.do")
-	public String editaddr() {
+	public String editaddr(HttpSession sess, Model model) {
+		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		model.addAttribute("vo", service.exist_addr(vo));
 		return "user/edit/user_addr";
 	}
 	
