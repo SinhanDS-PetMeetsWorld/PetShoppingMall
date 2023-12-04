@@ -1,8 +1,13 @@
 package sinhanDS.first.project.user;
 
+//import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +25,8 @@ import sinhanDS.first.project.user.VO.UserVO;
 public class UserController {
 	@Autowired
 	private UserService service;
+	@Autowired
+	private JavaMailSender javaMailSender;
 	
 	@GetMapping("/login.do")
 	public String login() {
@@ -92,10 +99,27 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/emailCheck.do")
+	@PostMapping("/emailCheck.do")
 	public String emailCheck(@RequestParam String email) {
 		int checkNum = (int)(Math.random()*899999) + 100000;
 		System.out.println(checkNum);
+        
+		try {
+	            MimeMessage message = javaMailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	            
+	            helper.setSubject("Pet Meets World의 이메일 인증 번호입니다.");
+	            helper.setText(
+	            		"이메일 인증 번호는 ["+checkNum+"] 입니다."+
+	            		"회원가입 화면으로 돌아가 이메일 인증 번호 입력 창에 입력하신 뒤, '이메일 인증하기' 버튼을 눌러주세요."
+	            		);
+	            helper.setFrom("meetsworldpet@gmail.com");
+	            helper.setTo(email);
+	            javaMailSender.send(message);
+	            System.out.println("메일 보내기 성공");
+	    }catch(Exception e) {
+	            e.printStackTrace();
+	        }
 
         return Integer.toString(checkNum);
 	}

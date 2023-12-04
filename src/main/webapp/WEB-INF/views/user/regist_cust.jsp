@@ -127,7 +127,7 @@
     	})
     	var email_auth_num = '';
     	$(function() {
-    		$('#emailchecknum_btn').click(function() {        		
+    		$('#emailchecknum_btn').click(function() {    		
         		$.ajax({
         			type : 'post',
         			url : 'emailCheck.do',
