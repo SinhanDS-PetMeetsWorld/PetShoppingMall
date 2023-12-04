@@ -61,4 +61,18 @@ CHANGE COLUMN `brand` `brand` VARCHAR(48) NULL ;
   
   ALTER TABLE `PetShoppingMall`.`seller` 
 CHANGE COLUMN `password` `password` VARCHAR(255) NOT NULL ;
-  
+
+ALTER TABLE `PetShoppingMall`.`option` 
+CHANGE COLUMN `option` `option` VARCHAR(48) NULL DEFAULT NULL COMMENT '옵션: 색깔, 사이즈 등\\\\n그 값은 내용에' ;
+
+ALTER TABLE `PetShoppingMall`.`option` 
+CHANGE COLUMN `option` `option` VARCHAR(24) NOT NULL COMMENT '옵션: 색깔, 사이즈 등\\\\n그 값은 내용에' ,
+CHANGE COLUMN `content` `content` VARCHAR(48) NOT NULL COMMENT '옵션이 size면\\n내용은 255, 260, 270\\n옵션이 color면\\n내용은 green, black, white' ,
+CHANGE COLUMN `price` `price` INT NULL DEFAULT 0 ;
+
+  ALTER TABLE `PetShoppingMall`.`option` 
+RENAME TO  `PetShoppingMall`.`product_option` ;
+ 
+ ALTER TABLE `PetShoppingMall`.`product_option` 
+CHANGE COLUMN `option` `title` VARCHAR(24) NOT NULL COMMENT '옵션: 색깔, 사이즈 등\\\\\\\\n그 값은 내용에' ;
+ 

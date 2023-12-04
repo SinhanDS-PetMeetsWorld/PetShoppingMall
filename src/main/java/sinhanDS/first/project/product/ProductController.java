@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+import sinhanDS.first.project.product.vo.OptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.VO.UserVO;
+
+
 
 @Controller
 @RequestMapping("/product")
@@ -85,18 +87,17 @@ public class ProductController {
 	public String regist(Model model) {
 		ProductCategoryVO vo = new ProductCategoryVO();
 		model.addAttribute("vo", vo);
-		return "product/regist/regist_form";
+		return "seller/regist/regist_form";
 	}	
 	
-	@GetMapping("/regist_test.do")
-	public String regist(ProductVO vo, ProductCategoryVO[] cvo) {
+	@PostMapping("/regist.do")
+	public String regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo) {
 		System.out.println("vo체크: " + vo);
-		for(int i = 0; i < cvo.length; i++) {
-			System.out.println("ovo체크: " + i + " " + cvo);
-		}
-		service.regist(vo);
+		System.out.println("cvo체크: "  +cvo);
+		System.out.println("ovo체크: " + ovo);
+		service.regist(vo, cvo, ovo);
 		
-		return "redirect:/";
+		return "redirect:/seller/index.do";
 	}
 }
 

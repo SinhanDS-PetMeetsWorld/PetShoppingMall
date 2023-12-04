@@ -89,4 +89,9 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public boolean dupId(String id) {
+		return mapper.dupId(id) > 0 ? true : false;
+	}
+
 }
