@@ -36,15 +36,17 @@ public class ProductController {
 		
 		model.addAttribute("qna_list",qna_list);
 		model.addAttribute("review_list", review_list);
-		return "product/goods/goods";
+		return "user/product/goods/goods";
 	}
 	
 	// 신정훈 (12 / 03) QNA 작성 페이지 구현
 	// write페이지에서 등록 페이지를 누르면 insert 메소드가 동작하면서 DB에 insert 
 	@GetMapping("/qnawrite.do")
 	public String QNA_write(Model model , HttpServletRequest request) {
+
+		System.out.println("product_no체크: " + request.getParameter("product_no"));
 		
-		return "product/goods/qnawrite";
+		return "user/product/goods/qnawrite";
 	}
 	
 	@PostMapping("/qnainsert.do")
@@ -54,7 +56,7 @@ public class ProductController {
 		UserVO login = (UserVO)loginsess.getAttribute("loginInfo");
 		
 		HttpSession productsess = request.getSession();
-		ProductVO pno = (ProductVO)productsess.getAttribute("product");
+		ProductVO pno = (ProductVO)productsess.getAttribute("product_no");
 
 		HttpSession Sellersess = request.getSession();
 		SellerVO selno = (SellerVO)Sellersess.getAttribute("seller");
@@ -63,7 +65,7 @@ public class ProductController {
 		// 유저 넘버 , 상품 번호
 		qnavo.setUser_no(login.getNo());
 		// 판매자 넘버 (현재는 2로 강제 지정)
-		qnavo.setSeller_no(2);
+		qnavo.setSeller_no(pno.getSeller_no());
 		// 물품 넘버 (현재는 4로 강제 지정)
 		qnavo.setProduct_no(4);
 		
@@ -80,24 +82,13 @@ public class ProductController {
 		
 		return "common/alert";
 	}
-
 	
 	
-	@GetMapping("/regist.do")
-	public String regist(Model model) {
-		ProductCategoryVO vo = new ProductCategoryVO();
-		model.addAttribute("vo", vo);
-		return "seller/regist/regist_form";
-	}	
-	
-	@PostMapping("/regist.do")
-	public String regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo) {
-		System.out.println("vo체크: " + vo);
-		System.out.println("cvo체크: "  +cvo);
-		System.out.println("ovo체크: " + ovo);
-		service.regist(vo, cvo, ovo);
-		
-		return "redirect:/seller/index.do";
+	@GetMapping("/search.do")
+	public String searchByCategory(HttpServletRequest request) {
+		request.setAttribute("category1", request.getParameter("category1"));
+		request.setAttribute("category2", request.getParameter("category2"));
+		return "user/product/search";
 	}
 }
 
