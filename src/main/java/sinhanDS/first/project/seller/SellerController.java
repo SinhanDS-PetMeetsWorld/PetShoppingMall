@@ -44,8 +44,8 @@ public class SellerController {
 		}
 	}
 	
-	@GetMapping("/seller_regist.do")
+	@GetMapping("/join.do")
 	public String selregist() {
-		return "seller/login/regist_seller";
+		return "seller/login/join";
 	}
 }

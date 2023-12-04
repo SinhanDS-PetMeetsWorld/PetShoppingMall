@@ -64,7 +64,7 @@ public class UserController {
 	
 	@GetMapping("/join.do")
 	public String join() {
-		return "user/regist_cust";
+		return "user/login/join";
 	}
 	
 	@PostMapping("/regist.do")

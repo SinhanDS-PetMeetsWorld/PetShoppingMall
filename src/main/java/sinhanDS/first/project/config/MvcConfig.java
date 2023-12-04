@@ -43,6 +43,8 @@ public class MvcConfig implements WebMvcConfigurer{
 	private String username;
 	@Value("${db.userpassword}")
 	private String userpassword;
+	@Value("${mail.password}")
+	private String mailpassword;
 	
 	
 	
@@ -116,7 +118,7 @@ public class MvcConfig implements WebMvcConfigurer{
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer property() {
 		PropertySourcesPlaceholderConfigurer property = new PropertySourcesPlaceholderConfigurer();
-		property.setLocations(new ClassPathResource("db.properties"));
+		property.setLocations(new ClassPathResource("db.properties"), new ClassPathResource("mail.properties"));
 		return property;
 	}
 	//이메일 발송
@@ -135,7 +137,7 @@ public class MvcConfig implements WebMvcConfigurer{
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
 		mailSender.setUsername("meetsworldpet@gmail.com");
-		mailSender.setPassword("ikhn uekm twtd kkga");
+		mailSender.setPassword(mailpassword);
 		mailSender.setDefaultEncoding("utf-8");
 		return mailSender;
 	}
