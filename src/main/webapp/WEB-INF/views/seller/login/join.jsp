@@ -141,7 +141,6 @@
         				$('#emailcheck_btn').attr('disabled', false);
         				alert('인증번호가 전송되었습니다.');
         				email_auth_num = res;
-        				console.log(email_auth_num);
         			}			
         		});
         	});
@@ -200,7 +199,7 @@
 </head>
 <body>
     <h2>판매자 회원 가입</h2>
-    <form name="regist_form" id="frm" action="" method="post">
+    <form name="regist_form" id="frm" action="regist.do" method="post">
         <div>
             아이디*<br>
             <input type="text" name="id" id="id">
