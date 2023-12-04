@@ -141,7 +141,6 @@
         				$('#emailcheck_btn').attr('disabled', false);
         				alert('인증번호가 전송되었습니다.');
         				email_auth_num = res;
-        				console.log(email_auth_num);
         			}			
         		});
         	});
@@ -200,7 +199,7 @@
 </head>
 <body>
     <h2>판매자 회원 가입</h2>
-    <form name="regist_form" id="frm" action="" method="post">
+    <form name="regist_form" id="frm" action="regist.do" method="post">
         <div>
             아이디*<br>
             <input type="text" name="id" id="id">
@@ -256,26 +255,11 @@
         
         <div>
             정산 계좌*<br>
-            <select name="" id="">
-                <option value="0">신한은행</option>
-                <option value="1">국민은행</option>
-                <option value="2">KEB하나은행</option>
-                <option value="3">SC제일은행</option>
-                <option value="4">우리은행</option>
-                <option value="5">외환은행</option>
-                <option value="6">한국시티은행</option>
-                <option value="7">경남은행</option>
-                <option value="8">광주은행</option>
-                <option value="9">대구은행</option>
-                <option value="10">부산은행</option>
-                <option value="11">전북은행</option>
-                <option value="12">제주은행</option>
-                <option value="13">기업은행</option>
-                <option value="14">농협은행</option>
-                <option value="15">수협은행</option>
-                <option value="16">한국산업은행</option>
-                <option value="17">한국수출입은행</option>
-                <option value="18">우체국예금보험</option>
+            <select name="" id="" data-no="${type.index }">
+				<c:forEach var="type" items="${vo.company[0] }"
+					varStatus="status">
+				<option value="${type.index}">${type }</option>
+				</c:forEach>
             </select>
             <input type="text" name="" id="" placeholder="'-'없이 숫자만 입력하세요">
         </div>
