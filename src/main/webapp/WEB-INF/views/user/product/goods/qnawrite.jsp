@@ -44,12 +44,12 @@
 							<p>작성일: <%= formattedDate %></p>
 				
 				
-		<form method="post" name="frm" id="frm" action="QNA_insert.do" enctype="multipart/form-data" >
+		<form method="post" name="frm" id="frm" action="qnainsert.do" enctype="multipart/form-data" >
         <table class="board_write">
             <tbody>
         
             <td>
-                <textarea name="question_content" id="question_content" style="width: 400px; height: 200px;" placeholder="판매자에게 문의하실 내용을 적어주세요.(최대 255자) 
+                <textarea name="question_content" id="/product/question_content" style="width: 400px; height: 200px;" placeholder="판매자에게 문의하실 내용을 적어주세요.(최대 255자) 
 욕설, 비방 등 작성 시 관리자가 임의로 삭제할 수 있습니다."></textarea>
                 
             </td>
