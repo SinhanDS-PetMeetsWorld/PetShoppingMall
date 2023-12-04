@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
     // 현재 날짜를 가져오기
@@ -29,7 +30,6 @@
         <div class="header">
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
         </div>
-
        	
         <div class="contents">
         	<div class="quickmenu">
@@ -40,7 +40,8 @@
 					    <h2>판매자 문의 작성</h2>
 							<p>작성자: ${loginInfo.id}</p>
 							<p>회원번호: ${loginInfo.no } </p>
-							<p>제품번호: 4 </p>
+							<p>제품번호: ${product_no}</p>
+							<p>판매자번호: ${seller_no}</p>
 							<p>작성일: <%= formattedDate %></p>
 				
 				
@@ -49,7 +50,7 @@
             <tbody>
         
             <td>
-                <textarea name="question_content" id="/product/question_content" style="width: 400px; height: 200px;" placeholder="판매자에게 문의하실 내용을 적어주세요.(최대 255자) 
+                <textarea name="question_content" id="question_content" style="width: 400px; height: 200px;" placeholder="판매자에게 문의하실 내용을 적어주세요.(최대 255자) 
 욕설, 비방 등 작성 시 관리자가 임의로 삭제할 수 있습니다."></textarea>
                 
             </td>
@@ -59,8 +60,17 @@
             </td>
             
             <td>
-            	<input type="hidden" name="product_no" value='4'>
+            	<input type="hidden" name="seller_no" value='${seller_no}'>
             </td>
+
+            
+            <td>
+            	<input type="hidden" name="product_no" value='${product_no}'>
+            </td>
+				
+			<td>
+				<input type ="hidden" name="cmd" value='${move}'> 
+			</td>	
             
             </tbody>
         </table>
@@ -68,7 +78,7 @@
             <a class="btn" href="javascript:goSave();">저장 </a>
         </div>
         </form>		
-
+		
 				</div>
 			</div>
         </div>
@@ -78,13 +88,15 @@
 			<div class="footer-color"></div>
         </div>
     </div>
-    
+   
 <script>
+
 function goSave() {
     // 사용자가 입력한 데이터 가져오기
     var questionContent = $("#question_content").val();
     var userNo = $("input[name='user_no']").val();
-    var productNo = 4;
+    var productNo = $("input[name='product_no']").val();
+    var sellerNo = $("input[name='seller_no']").val();
 
     // Ajax 호출
     $.ajax({
@@ -93,18 +105,22 @@ function goSave() {
         data: {
             question_content: questionContent,
             user_no: userNo,
-            product_no: productNo
+            product_no: productNo,
+            seller_no: sellerNo
         },
         success: function(response) {
-            // 서버에서 반환한 응답 처리
+            // Ajax 성공 시 동작
             console.log(response);
-            // 여기에서 필요한 추가 동작 수행
+            {$cmd}
         },
         error: function(error) {
+            // Ajax 실패 시 동작
             console.error('Error:', error);
         }
     });
+
 }
+
 </script>
 </body>
 </html>
