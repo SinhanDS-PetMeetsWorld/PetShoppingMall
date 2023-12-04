@@ -14,8 +14,7 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, 
 							HttpServletResponse response, 
-							Object handler)
-							throws Exception {
+							Object handler) throws Exception {
 		HttpSession sess = request.getSession();
 		UserVO login = (UserVO)sess.getAttribute("loginInfo");
 		if (login == null) {
