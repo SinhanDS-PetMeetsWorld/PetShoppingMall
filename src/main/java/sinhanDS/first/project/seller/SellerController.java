@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import sinhanDS.first.project.product.vo.OptionVO;
+import sinhanDS.first.project.product.vo.ProductCategoryVO;
+import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
 
 
@@ -37,11 +40,33 @@ public class SellerController {
 			model.addAttribute("cmd", "back");
 			return "common/alert";
 		} else { // 로그인 성공
-			System.out.println("로그인 성공");
 			sess.removeAttribute("loginInfo");
 			sess.setAttribute("sellerLoginInfo", login);
 			return "redirect:/seller/index.do";
 		}
+	}
+	
+	@GetMapping("/logout.do")
+	public String logout(HttpSession sess) {
+		sess.invalidate();
+		return "redirect:/";
+	}
+	
+	@GetMapping("/product/regist.do")
+	public String regist(Model model) {
+		ProductCategoryVO vo = new ProductCategoryVO();
+		model.addAttribute("vo", vo);
+		return "seller/regist/regist_form";
+	}	
+	
+	@PostMapping("/product/regist.do")
+	public String regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo) {
+		System.out.println("vo체크: " + vo);
+		System.out.println("cvo체크: "  +cvo);
+		System.out.println("ovo체크: " + ovo);
+		service.regist(vo, cvo, ovo);
+		
+		return "redirect:/seller/index.do";
 	}
 	
 	@GetMapping("/join.do")

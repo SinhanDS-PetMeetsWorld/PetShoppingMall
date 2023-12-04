@@ -82,24 +82,13 @@ public class ProductController {
 		
 		return "common/alert";
 	}
-
 	
 	
-	@GetMapping("/regist.do")
-	public String regist(Model model) {
-		ProductCategoryVO vo = new ProductCategoryVO();
-		model.addAttribute("vo", vo);
-		return "seller/regist/regist_form";
-	}	
-	
-	@PostMapping("/regist.do")
-	public String regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo) {
-		System.out.println("vo체크: " + vo);
-		System.out.println("cvo체크: "  +cvo);
-		System.out.println("ovo체크: " + ovo);
-		service.regist(vo, cvo, ovo);
-		
-		return "redirect:/seller/index.do";
+	@GetMapping("/search.do")
+	public String searchByCategory(HttpServletRequest request) {
+		request.setAttribute("category1", request.getParameter("category1"));
+		request.setAttribute("category2", request.getParameter("category2"));
+		return "user/product/search";
 	}
 }
 
