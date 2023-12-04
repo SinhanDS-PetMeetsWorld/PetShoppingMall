@@ -23,6 +23,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.zaxxer.hikari.HikariDataSource;
 
+import sinhanDS.first.project.util.CategoryInterceptor;
+import sinhanDS.first.project.util.SellerLoginInterceptor;
+import sinhanDS.first.project.util.UserLoginInterceptor;
+
 
 @Configuration
 @ComponentScan(basePackages = {"sinhanDS.first.project"})
@@ -92,21 +96,36 @@ public class MvcConfig implements WebMvcConfigurer{
 		resolver.setDefaultEncoding("utf-8");
 		return resolver;
 	}
-//	// 인터셉터
-//	@Bean
-//	public LoginInterceptor loginIntercepton() {
-//		return new LoginInterceptor();
-//	}
-//	
-//	@Override
-//	public void addInterceptors(InterceptorRegistry registry) {
-//		// url 설정
-//		registry.addInterceptor(loginIntercepton())
-//						.addPathPatterns("/reply/**")
-//						.excludePathPatterns("/reply/index.do")
-//						.excludePathPatterns("/reply/view.do")
-//						.addPathPatterns("/user/edit.do");
-//	}
+	// 인터셉터
+	@Bean
+	public UserLoginInterceptor userLoginIntercepton() {
+		return new UserLoginInterceptor();
+	}
+	public SellerLoginInterceptor sellerLoginIntercepton() {
+		return new SellerLoginInterceptor();
+	}
+	public CategoryInterceptor categoryInterceptor() {
+		return new CategoryInterceptor();
+	}
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		// url 설정
+		registry.addInterceptor(userLoginIntercepton())
+						.addPathPatterns("/user/**")
+						.excludePathPatterns("/user/join.do")
+						.excludePathPatterns("/user/login.do")
+						.excludePathPatterns("/user/idCheck.do")
+						.excludePathPatterns("/user/emailCheck.do");
+		
+		registry.addInterceptor(sellerLoginIntercepton())
+						.addPathPatterns("/seller/**")
+						.excludePathPatterns("/seller/login.do");
+		
+		registry.addInterceptor(categoryInterceptor())
+						.addPathPatterns("/")
+						.addPathPatterns("/user/**")
+						.addPathPatterns("/product/**");
+	}
 	
 	// 프로퍼티 설정
 	@Bean

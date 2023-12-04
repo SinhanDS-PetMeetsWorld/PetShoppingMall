@@ -21,7 +21,5 @@ public interface ProductMapper {
 	
 	int QNA_insert(ProductQnAVO vo);
 	
-	int regist(ProductVO vo);
-	int regist_category(ProductCategoryVO vo);
-	int regist_option(OptionVO vo);
+
 }

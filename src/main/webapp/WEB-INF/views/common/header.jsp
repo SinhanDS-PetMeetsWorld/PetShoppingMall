@@ -25,38 +25,26 @@
 				</h1>
 				<div class="header_menu">
 					<ul>
-						<li><a href="#">강아지</a>
+						<li>
+							<a>강아지</a>
 							<ul>
-								<li><a href="#">사료</a></li>
-								<li><a href="#">장난감</a></li>
-								<li><a href="#">간식</a></li>
-								<li><a href="#">미용</a></li>
-								<li><a href="#">의류</a></li>
-								<li><a href="#">영양제</a></li>
-								<li><a href="#">전자제품</a></li>
-								<li><a href="#">로션</a></li>
+								<c:forEach var="category2" items="${ProductCategoryVO.category[0]}" varStatus="status">
+									<li><a href="/product/search.do?category1=0&category2=${status.index }">${category2 }</a></li>
+								</c:forEach>
 							</ul></li>
-						<li><a href="#">고양이</a>
+						<li>
+							<a>고양이</a>
 							<ul>
-								<li><a href="#">사료</a></li>
-								<li><a href="#">장난감</a></li>
-								<li><a href="#">간식</a></li>
-								<li><a href="#">미용</a></li>
-								<li><a href="#">의류</a></li>
-								<li><a href="#">영양제</a></li>
-								<li><a href="#">전자제품</a></li>
-								<li><a href="#">로션</a></li>
+								<c:forEach var="category2" items="${ProductCategoryVO.category[1]}" varStatus="status">
+									<li><a href="/product/search.do?category1=1&category2=${status.index }">${category2 }</a></li>
+								</c:forEach>
 							</ul></li>
-						<li><a href="#">기타</a>
+						<li>
+							<a>기타</a>
 							<ul>
-								<li><a href="#">새</a></li>
-								<li><a href="#">토끼</a></li>
-								<li><a href="#">햄스터</a></li>
-								<li><a href="#">물고기</a></li>
-								<li><a href="#">파충류</a></li>
-								<li><a href="#">고슴도치</a></li>
-								<li><a href="#">앵무새</a></li>
-								<li><a href="#">거북이</a></li>
+								<c:forEach var="category2" items="${ProductCategoryVO.category[2]}" varStatus="status">
+									<li><a href="/product/search.do?category1=2&category2=${status.index }">${category2 }</a></li>
+								</c:forEach>
 							</ul></li>
 						<li>
 					</ul>

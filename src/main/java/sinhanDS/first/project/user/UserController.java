@@ -36,7 +36,7 @@ public class UserController {
 			model.addAttribute("cmd", "back");
 			return "common/alert";
 		} else { // 로그인 성공
-			System.out.println("로그인 성공");
+			sess.removeAttribute("sellerLoginInfo");
 			sess.setAttribute("loginInfo", login);
 			return "redirect:/";
 		}

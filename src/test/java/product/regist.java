@@ -25,9 +25,10 @@ public class regist {
 		mock = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 	
+	/* 왜 안되나... */
 	@Test
 	public void regist_product() throws Exception{
-		RequestBuilder req = MockMvcRequestBuilders.post("/product/regist.do")
+		RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/regist.do")
 				.param("seller_no", "1")
 				.param("name", "테스트로만든상품")
 				.param("price", "10001")
@@ -57,7 +58,7 @@ public class regist {
 	}
 	@Test
 	public void regist_product_zero_option() throws Exception{
-		RequestBuilder req = MockMvcRequestBuilders.post("/product/regist.do")
+		RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/regist.do")
 				.param("seller_no", "1")
 				.param("name", "테스트로만든상품")
 				.param("price", "10001")

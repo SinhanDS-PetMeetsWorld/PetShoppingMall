@@ -4,4 +4,55 @@
 	<select id="login" parameterType="sinhanDS.first.project.seller.vo.SellerVO" resultType="sinhanDS.first.project.seller.vo.SellerVO">
 		SELECT * FROM seller WHERE id=#{id} AND password=MD5(#{password})
 	</select>
+	
+			
+	<insert id="regist" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+		INSERT INTO PetShoppingMall.product
+		(
+			seller_no, name, price, discount, stock,
+			company, brand, rating, image_url, description
+		)
+		VALUES
+		(
+			#{seller_no }, #{name }, #{price }, #{discount }, #{stock },
+			#{company }, #{brand }, #{rating }, #{image_url }, #{description }
+		);
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<insert id="regist_category" parameterType="sinhanDS.first.project.product.vo.ProductCategoryVO">
+		INSERT INTO PetShoppingMall.product_category
+		(
+			product_no,
+			category1,
+			category2
+		)
+		VALUES
+		(
+			#{product_no},
+			#{category1},
+			#{category2}
+		);
+		
+	</insert>
+	
+	<insert id="regist_option" parameterType="sinhanDS.first.project.product.vo.OptionVO">
+		INSERT INTO PetShoppingMall.product_option
+		(
+			product_no,
+			title,
+			content,
+			price
+		)
+		VALUES
+		(
+			#{product_no},
+			#{title},
+			#{content},
+			#{price}
+		);
+	</insert>
+	
 </mapper>
