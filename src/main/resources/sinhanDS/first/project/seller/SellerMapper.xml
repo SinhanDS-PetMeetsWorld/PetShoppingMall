@@ -56,6 +56,11 @@
 		);
 	</insert>
 	
+	<select id="productList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * FROM product WHERE seller_no = #{seller_no}
+	</select>
+	
+	
 	<select id="check_password" parameterType="sinhanDS.first.project.seller.vo.SellerVO" resultType="int">
 		SELECT count(*) FROM seller WHERE no = #{no} AND password = MD5(#{password})
 	</select>

@@ -1,6 +1,7 @@
 package sinhanDS.first.project.seller;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,9 @@ public class SellerServiceImpl implements SellerService {
 			}
 		}
 		return result; 
+	}
+	public List<ProductVO> getProductList(int seller_no){
+		return mapper.productList(seller_no);
 	}
 	
 	@Override

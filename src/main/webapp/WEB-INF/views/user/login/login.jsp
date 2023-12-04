@@ -38,7 +38,7 @@
 						                <input type="password" id="password" name ="password">
 						            </div>
 						            <div>
-						                <a href="">회원 가입</a>
+						                <a href="/user/join.do">회원 가입</a>
 						                <input type="submit" value="로그인">
 						            </div>
 						            <div>

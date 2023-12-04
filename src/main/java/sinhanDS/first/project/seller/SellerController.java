@@ -1,5 +1,7 @@
 package sinhanDS.first.project.seller;
 
+import java.util.List;
+
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
@@ -18,8 +20,6 @@ import sinhanDS.first.project.product.vo.OptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
-import sinhanDS.first.project.user.VO.UserAddressVO;
-import sinhanDS.first.project.user.VO.UserVO;
 
 
 @Controller
@@ -77,6 +77,18 @@ public class SellerController {
 		
 		return "redirect:/seller/index.do";
 	}
+	
+	@GetMapping("/product/list.do")
+	public String product_list(HttpSession sess, Model model) {
+		SellerVO vo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		
+		List<ProductVO> list = service.getProductList(vo.getNo());
+		model.addAttribute("list", list);
+		System.out.println("list체크: " + list);
+		return "seller/product/list";
+	}
+	
+	
 	
 	@GetMapping("/join.do")
 	public String selregist() {

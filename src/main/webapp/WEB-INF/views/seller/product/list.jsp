@@ -26,9 +26,11 @@
                 <%@ include file="/WEB-INF/views/common/quickmenu_seller.jsp"%>
             </div>
 			<div class="contentsright">
-				<div>
-					이 부분을 수정하세요!!!
-				</div>
+				<table>
+					<c:forEach items="${list }" var="vo">
+						${vo.name }
+					</c:forEach>
+				</table>
 			</div>
 
         </div>
