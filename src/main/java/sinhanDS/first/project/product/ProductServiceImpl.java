@@ -52,34 +52,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	
-	public int regist(ProductVO vo) {
-		return mapper.regist(vo); 
-	}
 
 
-	public int regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo) {
-		int result = mapper.regist(vo);
-		for(int i = 0; i < cvo.getCategory1_list().length; i++) {
-			ProductCategoryVO ncvo = new ProductCategoryVO();
-			ncvo.setProduct_no(vo.getNo());
-			ncvo.setCategory1(cvo.getCategory1_list()[i]);
-			ncvo.setCategory2(cvo.getCategory2_list()[i]);
-			mapper.regist_category(ncvo);
-		}
-		
-		if(ovo.getTitle_list() != null) {
-			for(int i = 0; i < ovo.getTitle_list().length; i++) {
-				OptionVO novo = new OptionVO();
-				novo.setProduct_no(vo.getNo());
-				novo.setTitle(ovo.getTitle_list()[i]);
-				novo.setContent(ovo.getContent_list()[i]);
-				novo.setPrice(ovo.getPrice_list()[i]);
-				System.out.println("novo체크: " + novo);
-				mapper.regist_option(novo);
-			}
-		}
-		return result; 
-	}
 
 
 	

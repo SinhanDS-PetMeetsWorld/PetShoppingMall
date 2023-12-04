@@ -75,4 +75,37 @@ RENAME TO  `PetShoppingMall`.`product_option` ;
  
  ALTER TABLE `PetShoppingMall`.`product_option` 
 CHANGE COLUMN `option` `title` VARCHAR(24) NOT NULL COMMENT '옵션: 색깔, 사이즈 등\\\\\\\\n그 값은 내용에' ;
+
+ALTER TABLE `PetShoppingMall`.`payment` 
+DROP COLUMN `finance_company_no`;
+ALTER TABLE `PetShoppingMall`.`settlement_account` 
+DROP FOREIGN KEY `FK_finance_company_TO_settlement_account_1`;
+ALTER TABLE `PetShoppingMall`.`settlement_account` 
+DROP COLUMN `bank_no`,
+DROP INDEX `FK_finance_company_TO_settlement_account_1` ;
+;
+drop table finance_company;
+drop table settlement_account;
+drop table payment;
+CREATE TABLE `payment` (
+	`no`	int	NOT NULL,
+	`user_no`	int	NULL	DEFAULT null,
+	`seller_no`	int	NULL	DEFAULT null,
+	`name`	varchar(20)	NULL,
+	`type`	int	NOT NULL	COMMENT '계좌 (0)
+신용카드 (1)',
+	`company`	varchar(96)	NOT NULL	COMMENT '계좌면 계좌번호
+카드면 카드번호
+
+예시를 들꺼면 신한은행의 계좌번호 포멧으로 들자!',
+	`account`	varchar(96)	NOT NULL
+);
+ ALTER TABLE `PetShoppingMall`.`payment` 
+DROP COLUMN `seller_no`;
+ ALTER TABLE `PetShoppingMall`.`seller` 
+ADD COLUMN `bank` INT NOT NULL AFTER `addr2`,
+ADD COLUMN `account` VARCHAR(48) NOT NULL AFTER `bank`,
+CHANGE COLUMN `zipcode` `zipcode` VARCHAR(8) NULL ,
+CHANGE COLUMN `addr1` `addr1` VARCHAR(96) NULL ,
+CHANGE COLUMN `addr2` `addr2` VARCHAR(96) NULL ;
  

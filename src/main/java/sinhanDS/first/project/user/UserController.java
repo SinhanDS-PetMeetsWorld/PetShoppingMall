@@ -1,8 +1,13 @@
 package sinhanDS.first.project.user;
 
+//import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +25,8 @@ import sinhanDS.first.project.user.VO.UserVO;
 public class UserController {
 	@Autowired
 	private UserService service;
+	@Autowired
+	private JavaMailSender javaMailSender;
 	
 	@GetMapping("/login.do")
 	public String login() {
@@ -36,7 +43,7 @@ public class UserController {
 			model.addAttribute("cmd", "back");
 			return "common/alert";
 		} else { // 로그인 성공
-			System.out.println("로그인 성공");
+			sess.removeAttribute("sellerLoginInfo");
 			sess.setAttribute("loginInfo", login);
 			return "redirect:/";
 		}
@@ -45,7 +52,7 @@ public class UserController {
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession sess) {
 		sess.invalidate();
-		return "redirect:/"; //지금은 로그인 페이지로 넘겨버렸는데 나중엔 메인페이지로 보내야할듯요?
+		return "redirect:/";
 	}
 	
 	@GetMapping("/edit.do")
@@ -57,7 +64,7 @@ public class UserController {
 	
 	@GetMapping("/join.do")
 	public String join() {
-		return "user/regist_cust";
+		return "user/login/join";
 	}
 	
 	@PostMapping("/regist.do")
@@ -92,10 +99,26 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/emailCheck.do")
+	@PostMapping("/emailCheck.do")
 	public String emailCheck(@RequestParam String email) {
 		int checkNum = (int)(Math.random()*899999) + 100000;
 		System.out.println(checkNum);
+        
+		try {
+	            MimeMessage message = javaMailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	            
+	            helper.setSubject("Pet Meets World의 이메일 인증 번호입니다.");
+	            helper.setText(
+	            		"이메일 인증 번호는 ["+checkNum+"] 입니다."+
+	            		"회원가입 화면으로 돌아가 이메일 인증 번호 입력 창에 입력하신 뒤, '이메일 인증하기' 버튼을 눌러주세요."
+	            		);
+	            helper.setFrom("meetsworldpet@gmail.com");
+	            helper.setTo(email);
+	            javaMailSender.send(message);
+	    }catch(Exception e) {
+	            e.printStackTrace();
+	        }
 
         return Integer.toString(checkNum);
 	}
@@ -120,13 +143,40 @@ public class UserController {
 	}
 	
 	@GetMapping("/edit_addr.do")
-	public String editaddr() {
+	public String editaddr(HttpSession sess, Model model) {
+		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		model.addAttribute("addressvo", service.exist_addr(vo));
 		return "user/edit/user_addr";
 	}
 	
-	@GetMapping("/add_addr.do")
+	@GetMapping("/add_addr_form.do")
 	public String addaddr() {
-		return "user/edit/user_add_addr";
+		return "user/edit/user_add_addr_form";
+	}
+	
+	@GetMapping("/insert_addr.do")
+	public String insertaddr(HttpSession sess, Model model, UserAddressVO jspvo) {
+		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+			
+		jspvo.setUser_no(vo.getNo());
+		System.out.println(jspvo);		// 현재 로그인한 유저의 no가 들어간 주소VO객체
+		int r = service.insert_addr(jspvo);
+
+		
+		String msg = "";
+		String url = "add_addr_form.do";
+		
+		if (r > 0) {
+			msg = "정상적으로 추가되었습니다.";
+		} else {
+			msg = "주소추가 실패";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		model.addAttribute("cmd","finish_insert");
+		
+		
+		return "user/edit/alert";
 	}
 	
 }

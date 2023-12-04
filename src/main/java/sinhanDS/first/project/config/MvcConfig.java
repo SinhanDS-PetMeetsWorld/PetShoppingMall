@@ -1,5 +1,7 @@
 package sinhanDS.first.project.config;
 
+import java.util.Properties;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -11,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -22,6 +26,10 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.zaxxer.hikari.HikariDataSource;
+
+import sinhanDS.first.project.util.CategoryInterceptor;
+import sinhanDS.first.project.util.SellerLoginInterceptor;
+import sinhanDS.first.project.util.UserLoginInterceptor;
 
 
 @Configuration
@@ -39,6 +47,8 @@ public class MvcConfig implements WebMvcConfigurer{
 	private String username;
 	@Value("${db.userpassword}")
 	private String userpassword;
+	@Value("${mail.password}")
+	private String mailpassword;
 	
 	
 	
@@ -92,28 +102,70 @@ public class MvcConfig implements WebMvcConfigurer{
 		resolver.setDefaultEncoding("utf-8");
 		return resolver;
 	}
-//	// 인터셉터
-//	@Bean
-//	public LoginInterceptor loginIntercepton() {
-//		return new LoginInterceptor();
-//	}
-//	
-//	@Override
-//	public void addInterceptors(InterceptorRegistry registry) {
-//		// url 설정
-//		registry.addInterceptor(loginIntercepton())
-//						.addPathPatterns("/reply/**")
-//						.excludePathPatterns("/reply/index.do")
-//						.excludePathPatterns("/reply/view.do")
-//						.addPathPatterns("/user/edit.do");
-//	}
+	// 인터셉터
+	@Bean
+	public UserLoginInterceptor userLoginIntercepton() {
+		return new UserLoginInterceptor();
+	}
+	@Bean
+	public SellerLoginInterceptor sellerLoginIntercepton() {
+		return new SellerLoginInterceptor();
+	}
+	@Bean
+	public CategoryInterceptor categoryInterceptor() {
+		return new CategoryInterceptor();
+	}
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		// url 설정
+		registry.addInterceptor(userLoginIntercepton())
+						.addPathPatterns("/user/**")
+						.excludePathPatterns("/user/join.do")
+						.excludePathPatterns("/user/login.do")
+						.excludePathPatterns("/user/idCheck.do")
+						.excludePathPatterns("/user/emailCheck.do")
+						.excludePathPatterns("/user/regist.do");
+		
+		registry.addInterceptor(sellerLoginIntercepton())
+						.addPathPatterns("/seller/**")
+						.excludePathPatterns("/seller/login.do")
+						.excludePathPatterns("/seller/join.do")
+						.excludePathPatterns("/seller/idCheck.do")
+						.excludePathPatterns("/seller/emailCheck.do")
+						.excludePathPatterns("/seller/regist.do");
+		
+		registry.addInterceptor(categoryInterceptor())
+						.addPathPatterns("/")
+						.addPathPatterns("/user/**")
+						.addPathPatterns("/product/**");
+	}
 	
 	// 프로퍼티 설정
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer property() {
 		PropertySourcesPlaceholderConfigurer property = new PropertySourcesPlaceholderConfigurer();
-		property.setLocations(new ClassPathResource("db.properties"));
+		property.setLocations(new ClassPathResource("db.properties"), new ClassPathResource("mail.properties"));
 		return property;
+	}
+	//이메일 발송
+	@Bean
+	public JavaMailSender javaMailSender() {
+		Properties mailProperties = new Properties();
+		mailProperties.put("mail.transport.protocol", "smtp");
+		mailProperties.put("mail.smtp.auth", "true");
+		mailProperties.put("mail.smtp.starttls.enable", "true");
+		mailProperties.put("mail.smtp.debug", "true");
+		mailProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		mailProperties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+		
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setJavaMailProperties(mailProperties);
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+		mailSender.setUsername("meetsworldpet@gmail.com");
+		mailSender.setPassword(mailpassword);
+		mailSender.setDefaultEncoding("utf-8");
+		return mailSender;
 	}
 }
 

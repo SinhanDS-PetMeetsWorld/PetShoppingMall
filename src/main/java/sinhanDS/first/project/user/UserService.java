@@ -1,5 +1,7 @@
 package sinhanDS.first.project.user;
 
+import java.util.List;
+
 import sinhanDS.first.project.user.VO.UserAddressVO;
 import sinhanDS.first.project.user.VO.UserVO;
 
@@ -10,5 +12,7 @@ public interface UserService {
 	int user_regist(UserVO vo);
 	boolean check_password(UserVO vo);
 	boolean initaddr_regist(UserAddressVO vo);
-	boolean dupId(String email);
+	boolean dupId(String id);
+	List<UserAddressVO> exist_addr(UserVO vo);
+	int insert_addr(UserAddressVO vo);
 }

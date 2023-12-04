@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head> 
@@ -16,21 +15,26 @@
 <body>
 	<div class="wrap">
         <div class="header">
-            <%@ include file="/WEB-INF/views/common/header_seller.jsp" %>
+            <%@ include file="/WEB-INF/views/common/header.jsp" %>
         </div>
 
        	
         
         <div class="contents">
         	<div class="quickmenu">
-                <%@ include file="/WEB-INF/views/common/quickmenu_seller.jsp"%>
+                <%@ include file="/WEB-INF/views/common/quickmenu_product_category.jsp"%>
             </div>
 			<div class="contentsright">
 				<div>
 					이 부분을 수정하세요!!!
+				
+				
+				
+				
+				
+				
 				</div>
 			</div>
-
         </div>
         
         

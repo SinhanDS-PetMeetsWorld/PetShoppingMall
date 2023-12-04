@@ -1,5 +1,7 @@
 package sinhanDS.first.project.user;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import sinhanDS.first.project.user.VO.UserAddressVO;
@@ -14,4 +16,6 @@ public interface UserMapper {
 	int check_password(UserVO vo);
 	int initaddr_regist(UserAddressVO vo);
 	int dupId(String id);
+	List<UserAddressVO> exist_addr(int user_no);
+	int insert_addr(UserAddressVO vo);
 }

@@ -1,7 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.seller.SellerMapper">
+	
 	<select id="login" parameterType="sinhanDS.first.project.seller.vo.SellerVO" resultType="sinhanDS.first.project.seller.vo.SellerVO">
 		SELECT * FROM seller WHERE id=#{id} AND password=MD5(#{password})
 	</select>
+	
+			
+	<insert id="regist" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+		INSERT INTO PetShoppingMall.product
+		(
+			seller_no, name, price, discount, stock,
+			company, brand, rating, image_url, description
+		)
+		VALUES
+		(
+			#{seller_no }, #{name }, #{price }, #{discount }, #{stock },
+			#{company }, #{brand }, #{rating }, #{image_url }, #{description }
+		);
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<insert id="regist_category" parameterType="sinhanDS.first.project.product.vo.ProductCategoryVO">
+		INSERT INTO PetShoppingMall.product_category
+		(
+			product_no,
+			category1,
+			category2
+		)
+		VALUES
+		(
+			#{product_no},
+			#{category1},
+			#{category2}
+		);
+		
+	</insert>
+	
+	<insert id="regist_option" parameterType="sinhanDS.first.project.product.vo.OptionVO">
+		INSERT INTO PetShoppingMall.product_option
+		(
+			product_no,
+			title,
+			content,
+			price
+		)
+		VALUES
+		(
+			#{product_no},
+			#{title},
+			#{content},
+			#{price}
+		);
+	</insert>
+	
+	<select id="productList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * FROM product WHERE seller_no = #{seller_no}
+	</select>
+	
+	
+	<select id="check_password" parameterType="sinhanDS.first.project.seller.vo.SellerVO" resultType="int">
+		SELECT count(*) FROM seller WHERE no = #{no} AND password = MD5(#{password})
+	</select>
+	
+	<insert id="seller_regist" parameterType="sinhanDS.first.project.seller.vo.SellerVO">
+		INSERT INTO seller (
+			id, name, email, password, phone, business_number, zipcode, addr1, addr2
+		) VALUES (
+			#{id}, #{name}, #{email}, MD5(#{password}), #{phone}, #{business_number}, #{zipcode}, #{addr1}, #{addr2}
+		)
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<select id="dupId" resultType="Integer" parameterType="String">
+		SELECT COUNT(*) FROM seller WHERE id=#{id}
+	</select>
+	
 </mapper>

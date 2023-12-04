@@ -2,6 +2,7 @@ package sinhanDS.first.project.user;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,7 +74,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public boolean initaddr_regist(UserAddressVO vo) {
-		
 		return mapper.initaddr_regist(vo) > 0 ? true : false;
 	}
 	
@@ -92,6 +92,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean dupId(String id) {
 		return mapper.dupId(id) > 0 ? true : false;
+	}
+	
+	@Override
+	public List<UserAddressVO> exist_addr(UserVO vo) {
+		List<UserAddressVO> list = mapper.exist_addr(vo.getNo());
+		return list;
+	}
+	
+	@Override
+	public int insert_addr(UserAddressVO vo) {
+		return mapper.insert_addr(vo);
+		
 	}
 
 }
