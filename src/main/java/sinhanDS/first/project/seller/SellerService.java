@@ -9,5 +9,9 @@ public interface SellerService {
 	public SellerVO login(SellerVO vo);
 	
 	public int regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo);
+	
+	int seller_regist(SellerVO vo);
+	boolean check_password(SellerVO vo);
+	boolean dupId(String id);
 
 }

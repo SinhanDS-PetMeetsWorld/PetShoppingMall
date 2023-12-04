@@ -13,4 +13,8 @@ public interface SellerMapper {
 	int regist(ProductVO vo);
 	int regist_category(ProductCategoryVO vo);
 	int regist_option(OptionVO vo);
+	
+	int seller_regist(SellerVO vo);
+	int check_password(SellerVO vo);
+	int dupId(String id);
 }

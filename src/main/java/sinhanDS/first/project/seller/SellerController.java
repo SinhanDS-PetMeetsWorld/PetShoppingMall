@@ -1,18 +1,25 @@
 package sinhanDS.first.project.seller;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import sinhanDS.first.project.product.vo.OptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.user.VO.UserAddressVO;
+import sinhanDS.first.project.user.VO.UserVO;
 
 
 @Controller
@@ -20,6 +27,8 @@ import sinhanDS.first.project.seller.vo.SellerVO;
 public class SellerController {
 	@Autowired
 	private SellerService service;
+	@Autowired
+	private JavaMailSender javaMailSender;
 	
 	@GetMapping("/index.do")
 	public String index() {
@@ -72,5 +81,53 @@ public class SellerController {
 	@GetMapping("/join.do")
 	public String selregist() {
 		return "seller/login/join";
+	}
+	
+	@PostMapping("/regist.do")
+	public String user_regist(SellerVO vo, Model model) {
+		boolean r = service.seller_regist(vo) > 0 ? true : false; // service -> mapper -> sql
+		
+		if (r) { // 정상적으로 DB에 insert 
+			model.addAttribute("cmd", "move");
+			model.addAttribute("msg", "회원가입되었습니다.");
+			model.addAttribute("url", "/login.do");
+		} else { // 등록안됨
+			model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "회원가입실패");
+		}
+		return "common/alert";
+	}
+	
+	@ResponseBody
+	@GetMapping("/idCheck.do")
+	public String idCheck(@RequestParam String id) {
+		boolean r = service.dupId(id);
+		return String.valueOf(r);
+	}
+	
+	@ResponseBody
+	@PostMapping("/emailCheck.do")
+	public String emailCheck(@RequestParam String email) {
+		int checkNum = (int)(Math.random()*899999) + 100000;
+		System.out.println(checkNum);
+        
+		try {
+	            MimeMessage message = javaMailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	            
+	            helper.setSubject("Pet Meets World의 이메일 인증 번호입니다.");
+	            helper.setText(
+	            		"이메일 인증 번호는 ["+checkNum+"] 입니다."+
+	            		"회원가입 화면으로 돌아가 이메일 인증 번호 입력 창에 입력하신 뒤, '이메일 인증하기' 버튼을 눌러주세요."
+	            		);
+	            helper.setFrom("meetsworldpet@gmail.com");
+	            helper.setTo(email);
+	            javaMailSender.send(message);
+	            System.out.println("메일 보내기 성공");
+	    }catch(Exception e) {
+	            e.printStackTrace();
+	        }
+
+        return Integer.toString(checkNum);
 	}
 }

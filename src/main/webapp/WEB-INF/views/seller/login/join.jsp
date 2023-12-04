@@ -86,15 +86,15 @@
     			return;
     		}
     		
-    		if ($("#business_registnum").val() == '') {
+    		if ($("#business_number").val() == '') {
     			alert("사업자 등록번호는 필수 입력사항입니다.");
     			return;
     		}
     		
-    		if ($("#settle_bank").val() == '' || $("#settle_account").val() == '') {
+    		/*if ($("#").val() == '' || $("").val() == '') {
     			alert("정산 계좌는 필수 입력사항입니다.");
     			return;
-    		}
+    		}*/
     		
     		/*var reg = /^[A-Za-z0-9]{8,}$/;
     		var txt = $("#pw").val();
@@ -250,13 +250,13 @@
         
         <div>
             사업자 등록번호*<br>
-            <input type="text " id="business_registnum" name="business_registnum" placeholder="10자리, '-'없이 숫자만 입력하세요">
+            <input type="text" id="business_number" name="business_number" placeholder="10자리, '-'없이 숫자만 입력하세요">
         </div>
         <hr>
         
         <div>
             정산 계좌*<br>
-            <select name="settle_bank" id="settle_bank">
+            <select name="" id="">
                 <option value="0">신한은행</option>
                 <option value="1">국민은행</option>
                 <option value="2">KEB하나은행</option>
@@ -277,7 +277,7 @@
                 <option value="17">한국수출입은행</option>
                 <option value="18">우체국예금보험</option>
             </select>
-            <input type="text" name="settle_account" id="settle_account" placeholder="'-'없이 숫자만 입력하세요">
+            <input type="text" name="" id="" placeholder="'-'없이 숫자만 입력하세요">
         </div>
         <hr>
         
