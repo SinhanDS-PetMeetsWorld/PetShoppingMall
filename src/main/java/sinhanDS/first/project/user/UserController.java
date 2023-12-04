@@ -122,13 +122,38 @@ public class UserController {
 	@GetMapping("/edit_addr.do")
 	public String editaddr(HttpSession sess, Model model) {
 		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
-		model.addAttribute("vo", service.exist_addr(vo));
+		model.addAttribute("addressvo", service.exist_addr(vo));
 		return "user/edit/user_addr";
 	}
 	
-	@GetMapping("/add_addr.do")
+	@GetMapping("/add_addr_form.do")
 	public String addaddr() {
-		return "user/edit/user_add_addr";
+		return "user/edit/user_add_addr_form";
+	}
+	
+	@GetMapping("/insert_addr.do")
+	public String insertaddr(HttpSession sess, Model model, UserAddressVO jspvo) {
+		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+			
+		jspvo.setUser_no(vo.getNo());
+		System.out.println(jspvo);		// 현재 로그인한 유저의 no가 들어간 주소VO객체
+		int r = service.insert_addr(jspvo);
+
+		
+		String msg = "";
+		String url = "add_addr_form.do";
+		
+		if (r > 0) {
+			msg = "정상적으로 추가되었습니다.";
+		} else {
+			msg = "주소추가 실패";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		model.addAttribute("cmd","finish_insert");
+		
+		
+		return "user/edit/alert";
 	}
 	
 }

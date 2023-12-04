@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head> 
@@ -12,6 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
 
+	
 </head>
 <body>
 	<div class="wrap">
@@ -35,28 +39,31 @@
 					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
 					        
 					        <!--주소가 존재하는만큼 td를 생성-->
-					        <tr width="800">
-					            <td>
-					                <br>
-					                <div>addr1</div>
-					                <div>addr2</div>
-					                <div>
-					                    <span>Contact - </span>
-					                    <span>phone</span>
-					                </div>
-					                <br>
-					            </td>
-					            <td>
-					                <button type="button" name="modify" onclick="location.href=/*수정.jsp*/''">수정</button> |
-					                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
-					                <br>
-					            </td>
-					        </tr>
+						    <c:forEach var="vo" items="${addressvo }">
+						        <tr width="800">
+						            <td>
+						                <br>
+						                <div>${vo.addr1 }</div>
+						                <div>${vo.addr2 }</div>
+						                <div>
+						                    <span>Contact - </span>
+						                    <span>${vo.phone}</span>
+						                </div>
+						                <div></div>
+						                <br>
+						            </td>
+						            <td>
+						                <button type="button" name="modify" onclick="location.href=/*수정.jsp*/''">수정</button> |
+						                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
+						                <br>
+						            </td>
+						        </tr>
+						    </c:forEach>
 					        <tr>
 					            <td colspan="2">
 					                <div></div>
 					                <hr>
-					                <button onclick="window.open('/user/add_addr.do','add_user_addr', 'width=430,height=500,location=no,status=no,scrollbars=yes');">+ 배송지 추가</button>
+					                <button onclick="window.open('/user/add_addr_form.do','user_add_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">+ 배송지 추가</button>
 					            </td>
 					        </tr>
 					    </table>
