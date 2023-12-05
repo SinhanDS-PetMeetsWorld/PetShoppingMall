@@ -60,6 +60,11 @@
 		SELECT * FROM product WHERE seller_no = #{seller_no}
 	</select>
 	
+	<!-- List<ProductCategoryVO> categoryList(int no); -->
+	<select id="categoryList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductCategoryVO">
+		SELECT * FROM product_category WHERE product_no = #{product_no}
+	</select>
+	
 	
 	<select id="check_password" parameterType="sinhanDS.first.project.seller.vo.SellerVO" resultType="int">
 		SELECT count(*) FROM seller WHERE no = #{no} AND password = MD5(#{password})

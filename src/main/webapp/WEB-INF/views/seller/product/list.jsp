@@ -26,11 +26,42 @@
                 <%@ include file="/WEB-INF/views/common/quickmenu_seller.jsp"%>
             </div>
 			<div class="contentsright">
-				<table>
+				<ul>
 					<c:forEach items="${list }" var="vo">
-						${vo.name }
+						<li>
+							<table>
+								<tr>
+									<td rowspan="2">
+										그림들어감
+									</td>
+									<td>
+										제품명	
+									</td>
+									<td>
+										카테고리	
+									</td>
+									<td>
+										옵션	
+									</td>
+									<td>
+										판매가	
+									</td>
+									<td>
+										재고	
+									</td>
+								</tr>
+								<tr>
+									<td>
+										${vo.name }
+									</td>
+									<td>
+										
+									</td>
+								</tr>
+							</table>
+						</li>						
 					</c:forEach>
-				</table>
+				</ul>
 			</div>
 
         </div>

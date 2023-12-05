@@ -1,6 +1,6 @@
 package sinhanDS.first.project.seller;
 
-import java.util.List;
+import java.util.Map;
 
 import sinhanDS.first.project.product.vo.OptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
@@ -11,7 +11,7 @@ public interface SellerService {
 	public SellerVO login(SellerVO vo);
 	
 	public int regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo);
-	public List<ProductVO> getProductList(int seller_no);
+	public Map getProductList(int seller_no);
 	
 	int seller_regist(SellerVO vo);
 	boolean check_password(SellerVO vo);

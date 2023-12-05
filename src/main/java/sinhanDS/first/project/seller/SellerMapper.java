@@ -16,6 +16,7 @@ public interface SellerMapper {
 	int regist_category(ProductCategoryVO vo);
 	int regist_option(OptionVO vo);
 	List<ProductVO> productList(int no);
+	List<ProductCategoryVO> categoryList(int no);
 	
 	int seller_regist(SellerVO vo);
 	int check_password(SellerVO vo);

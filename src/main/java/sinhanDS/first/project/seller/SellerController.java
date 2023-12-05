@@ -1,6 +1,6 @@
 package sinhanDS.first.project.seller;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
@@ -66,8 +66,7 @@ public class SellerController {
 		ProductCategoryVO vo = new ProductCategoryVO();
 		model.addAttribute("vo", vo);
 		return "seller/regist/regist_form";
-	}	
-	
+	}		
 	@PostMapping("/product/regist.do")
 	public String regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo) {
 		System.out.println("vo체크: " + vo);
@@ -82,9 +81,9 @@ public class SellerController {
 	public String product_list(HttpSession sess, Model model) {
 		SellerVO vo = (SellerVO)sess.getAttribute("sellerLoginInfo");
 		
-		List<ProductVO> list = service.getProductList(vo.getNo());
-		model.addAttribute("list", list);
-		System.out.println("list체크: " + list);
+		Map map = service.getProductList(vo.getNo());
+		model.addAttribute("map", map);
+		System.out.println("map체크: " + map);
 		return "seller/product/list";
 	}
 	
