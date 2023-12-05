@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sinhanDS.first.project.user.VO.PaymentVO;
 import sinhanDS.first.project.user.VO.UserAddressVO;
-import sinhanDS.first.project.user.VO.UserPaymentVO;
 import sinhanDS.first.project.user.VO.UserVO;
 
 
@@ -117,8 +117,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<UserPaymentVO> exist_payment(UserVO vo) {
-		List<UserPaymentVO> list = mapper.exist_payment(vo.getNo());
+	public List<PaymentVO> exist_payment(UserVO vo) {
+		List<PaymentVO> list = mapper.exist_payment(vo.getNo());
 		return list;
 	}
 

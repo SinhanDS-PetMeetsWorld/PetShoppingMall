@@ -14,6 +14,7 @@ public class PaymentVO {
 	private int type;
 	private String company;
 	private String account;
+	private String valid_date;
 	
 	private List<ArrayList<String>> company_list;
 	public PaymentVO(){

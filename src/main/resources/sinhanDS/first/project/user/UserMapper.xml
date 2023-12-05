@@ -83,7 +83,7 @@
 		DELETE from address WHERE no=#{no}
 	</delete>
 	
-	<select id="exist_payment" parameterType="int" resultType="sinhanDS.first.project.user.VO.UserPaymentVO">
+	<select id="exist_payment" parameterType="int" resultType="sinhanDS.first.project.user.VO.PaymentVO">
 		SELECT * FROM payment WHERE user_no = #{user_no}
 	</select>
 	
