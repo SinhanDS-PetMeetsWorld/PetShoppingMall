@@ -52,7 +52,7 @@ public class UserController {
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession sess) {
 		sess.invalidate();
-		return "redirect:/"; //지금은 로그인 페이지로 넘겨버렸는데 나중엔 메인페이지로 보내야할듯요?
+		return "redirect:/";
 	}
 	
 	@GetMapping("/edit.do")
@@ -83,7 +83,7 @@ public class UserController {
 		if (r && addrr) { // 정상적으로 DB에 insert 
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "회원가입되었습니다.");
-			model.addAttribute("url", "/login.do");
+			model.addAttribute("url", "/user/login.do");
 		} else { // 등록안됨
 			model.addAttribute("cmd", "back");
 			model.addAttribute("msg", "회원가입실패");
@@ -116,7 +116,6 @@ public class UserController {
 	            helper.setFrom("meetsworldpet@gmail.com");
 	            helper.setTo(email);
 	            javaMailSender.send(message);
-	            System.out.println("메일 보내기 성공");
 	    }catch(Exception e) {
 	            e.printStackTrace();
 	        }
@@ -130,7 +129,7 @@ public class UserController {
 		
 		int r = service.edit(vo);
 		String msg = "";
-		String url = "edit.do";
+		String url = "/user/edit.do";
 		
 		if (r > 0) {
 			msg = "정상적으로 수정되었습니다.";

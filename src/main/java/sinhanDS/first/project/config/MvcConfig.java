@@ -107,9 +107,11 @@ public class MvcConfig implements WebMvcConfigurer{
 	public UserLoginInterceptor userLoginIntercepton() {
 		return new UserLoginInterceptor();
 	}
+	@Bean
 	public SellerLoginInterceptor sellerLoginIntercepton() {
 		return new SellerLoginInterceptor();
 	}
+	@Bean
 	public CategoryInterceptor categoryInterceptor() {
 		return new CategoryInterceptor();
 	}
@@ -121,11 +123,16 @@ public class MvcConfig implements WebMvcConfigurer{
 						.excludePathPatterns("/user/join.do")
 						.excludePathPatterns("/user/login.do")
 						.excludePathPatterns("/user/idCheck.do")
-						.excludePathPatterns("/user/emailCheck.do");
+						.excludePathPatterns("/user/emailCheck.do")
+						.excludePathPatterns("/user/regist.do");
 		
 		registry.addInterceptor(sellerLoginIntercepton())
 						.addPathPatterns("/seller/**")
-						.excludePathPatterns("/seller/login.do");
+						.excludePathPatterns("/seller/login.do")
+						.excludePathPatterns("/seller/join.do")
+						.excludePathPatterns("/seller/idCheck.do")
+						.excludePathPatterns("/seller/emailCheck.do")
+						.excludePathPatterns("/seller/regist.do");
 		
 		registry.addInterceptor(categoryInterceptor())
 						.addPathPatterns("/")

@@ -2,11 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.product.ProductMapper">
 	
+	<select id="Product_more" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * 
+		FROM product
+		where no = ${no}
+	</select>
+	
 	<select id="QNA_list" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO" resultType="sinhanDS.first.project.product.vo.ProductQnAVO">
 		SELECT *  
 		FROM product_qna 
 		ORDER BY no DESC
 	</select>
+	
+	<select id="Seller_no" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT seller_no
+		FROM product
+		where no = ${product_no}
+	</select>
+	
 	
 	<insert id="QNA_insert" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
 		INSERT INTO product_qna

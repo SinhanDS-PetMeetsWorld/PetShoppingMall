@@ -6,27 +6,27 @@ import lombok.Data;
 
 @Data
 public class UserVO {
-	int no;
-	String id;
-	String password;
-	String name;
-	String email;
-	String phone;
-	int gender;			// 0이 남성, 1은 여성
-	Date birth_date;
-	boolean advertisement;	// 0은 false. 선택하지 않은 경우 false
-	Date join_date;
+	private int no;
+	private String id;
+	private String password;
+	private String name;
+	private String email;
+	private String phone;
+	private int gender;			// 0이 남성, 1은 여성
+	private Date birth_date;
+	private boolean advertisement;	// 0은 false. 선택하지 않은 경우 false
+	private Date join_date;
 	
-	String new_password;
-	String phone0;
-	String phone1;
-	String phone2;
+	private String new_password;
+	private String phone0;
+	private String phone1;
+	private String phone2;
 	
-	String birth0;
-	String birth1;
-	String birth2;
+	private String birth0;
+	private String birth1;
+	private String birth2;
 	
-	String zipcode;
-	String addr1;
-	String addr2;
+	private String zipcode;
+	private String addr1;
+	private String addr2;
 }

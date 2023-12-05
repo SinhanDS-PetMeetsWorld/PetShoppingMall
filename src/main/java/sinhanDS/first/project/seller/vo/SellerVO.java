@@ -14,4 +14,9 @@ public class SellerVO {
 	private String zipcode;
 	private String addr1;
 	private String addr2;
+	private String phone0;
+	private String phone1;
+	private String phone2;
+	private int bank;
+	private String account;
 }

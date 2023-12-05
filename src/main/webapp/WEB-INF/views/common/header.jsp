@@ -46,7 +46,6 @@
 									<li><a href="/product/search.do?category1=2&category2=${status.index }">${category2 }</a></li>
 								</c:forEach>
 							</ul></li>
-						<li>
 					</ul>
 				</div>
 				<div class="header_search">

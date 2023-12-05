@@ -15,7 +15,13 @@ public class ProductCategoryVO {
 	private int[] category2_list;
 	
 	private List<ArrayList<String>> category;
+	private List<String> category_name;
 	public ProductCategoryVO(){
+		category_name = new ArrayList<String>();
+		category_name.add("강아지");
+		category_name.add("고양이");
+		category_name.add("기타");
+		
 		category = new ArrayList<ArrayList<String>>();
 		ArrayList<String> category0 = new ArrayList<>();
 		category0.add("사료");
