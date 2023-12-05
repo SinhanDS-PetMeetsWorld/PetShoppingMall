@@ -47,19 +47,19 @@ public class SellerServiceImpl implements SellerService {
 	}
 	public Map getProductList(int seller_no){
 		Map map = new HashMap<>();
-		List<ProductVO> productList = mapper.productList(seller_no);
+		List<ProductVO> productList = mapper.getProductList(seller_no);
 		List<List<ProductCategoryVO>> categoryList = new ArrayList<>();
 		List<List<ProductOptionVO>> optionList = new ArrayList<>();
 		for(int i = 0; i < productList.size(); i++) {
 			System.out.println("productNO: " + productList.get(i).getNo());
-			List<ProductCategoryVO> categoryVO = mapper.categoryList(productList.get(i).getNo());
+			List<ProductCategoryVO> categoryVO = mapper.getCategoriesList(productList.get(i).getNo());
 			categoryList.add(categoryVO);
 			System.out.println(categoryVO);
 		}
 		
 		for(int i = 0; i < productList.size(); i++) {
 			System.out.println("productNO: " + productList.get(i).getNo());
-			List<ProductOptionVO> optionVO = mapper.optionList(productList.get(i).getNo());
+			List<ProductOptionVO> optionVO = mapper.getOptionsList(productList.get(i).getNo());
 			optionList.add(optionVO);
 			System.out.println(optionVO);
 		}
@@ -68,6 +68,25 @@ public class SellerServiceImpl implements SellerService {
 		map.put("productList", productList);
 		map.put("categoryList", categoryList);
 		map.put("optionList", optionList);
+		return map;
+	}
+	
+	public ProductVO getProduct(int product_no) {
+		ProductVO vo = mapper.getProduct(product_no);
+		return vo;
+	}
+	
+	public Map getProductDetail(int product_no) {
+		Map map = new HashMap();
+		List<ProductCategoryVO> categoryList = new ArrayList<>();
+		List<ProductOptionVO> optionList = new ArrayList<>();
+		categoryList = mapper.getCategoriesList(product_no);
+		optionList = mapper.getOptionsList(product_no);
+		
+		map.put("pvo", mapper.getProduct(product_no));
+		map.put("categoryList", categoryList);
+		map.put("optionList", optionList);
+		
 		return map;
 	}
 	

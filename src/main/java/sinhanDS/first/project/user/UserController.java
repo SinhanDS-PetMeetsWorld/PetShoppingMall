@@ -154,6 +154,12 @@ public class UserController {
 		return "user/edit/user_add_addr_form";
 	}
 	
+	@GetMapping("/modify_addr_form.do")
+	public String modaddr(Model model, UserAddressVO vo) {
+		model.addAttribute("vo", vo);
+		return "user/edit/user_modify_addr_form";
+	}
+	
 	@GetMapping("/insert_addr.do")
 	public String insertaddr(HttpSession sess, Model model, UserAddressVO jspvo) {
 		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
@@ -173,10 +179,54 @@ public class UserController {
 		}
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
-		model.addAttribute("cmd","finish_insert");
+		model.addAttribute("cmd","finish");
 		
 		
 		return "user/edit/alert";
+	}
+	
+	@PostMapping("/modify_addr.do")
+	public String modifyaddr(UserAddressVO jspvo, Model model, HttpSession sess) {
+		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		
+		jspvo.setUser_no(vo.getNo());
+		
+		String msg = "";
+		String url = "add_addr_form.do";
+		
+		int r = service.modify_addr(jspvo);
+		if (r > 0) {
+			msg = "정상적으로 수정되었습니다.";
+		} else {
+			msg = "수정 오류";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		model.addAttribute("cmd","finish");
+		return "user/edit/alert";
+	}
+	
+	@GetMapping("/delete_addr.do")
+	public String deleteaddr(Model model, UserAddressVO jspvo) {
+		
+		int r = service.delete_addr(jspvo.getNo());
+		if(r < 1) {
+			model.addAttribute("msg", "삭제되지 않았습니다.");
+			model.addAttribute("cmd", "back");
+		} else if(r == 1) {
+			model.addAttribute("msg", "삭제 완료");
+			model.addAttribute("cmd", "move");
+			model.addAttribute("url", "/user/edit_addr.do");
+		}
+
+		return "common/alert";
+	}
+	
+	@GetMapping("/edit_payment.do")
+	public String editpayment(HttpSession sess, Model model) {
+		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		model.addAttribute("paymentvo", service.exist_payment(vo));
+		return "user/edit/user_payment";
 	}
 	
 }

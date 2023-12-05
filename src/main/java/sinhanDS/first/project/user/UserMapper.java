@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import sinhanDS.first.project.user.VO.PaymentVO;
 import sinhanDS.first.project.user.VO.UserAddressVO;
 import sinhanDS.first.project.user.VO.UserVO;
 
@@ -18,4 +19,7 @@ public interface UserMapper {
 	int dupId(String id);
 	List<UserAddressVO> exist_addr(int user_no);
 	int insert_addr(UserAddressVO vo);
+	int modify_addr(UserAddressVO vo);
+	int delete_addr(int no);
+	List<PaymentVO> exist_payment(int user_no);
 }

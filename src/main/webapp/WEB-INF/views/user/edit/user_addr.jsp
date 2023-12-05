@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/resources/css/common/template.css">
 
 	
+	
 </head>
 <body>
 	<div class="wrap">
@@ -40,29 +41,38 @@
 					        
 					        <!--주소가 존재하는만큼 td를 생성-->
 						    <c:forEach var="vo" items="${addressvo }">
+						    	
 						        <tr width="800">
 						            <td>
 						                <br>
 						                <div>${vo.addr1 }</div>
 						                <div>${vo.addr2 }</div>
 						                <div>
-						                    <span>Contact - </span>
+						                    <span>Contact : </span>
 						                    <span>${vo.phone}</span>
 						                </div>
-						                <div></div>
+						                <div>${vo.comment }</div>
 						                <br>
 						            </td>
 						            <td>
-						                <button type="button" name="modify" onclick="location.href=/*수정.jsp*/''">수정</button> |
-						                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
+										
+										
+						                <button type="button" name="modify" onclick="window.open('/user/modify_addr_form.do?no=${vo.no}&addr1=${vo.addr1 }&addr2=${vo.addr2 }&zipcode=${vo.zipcode }&name=${vo.name }&phone=${vo.phone }&comment=${vo.comment }','user_modify_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button> |
+						                <button type="button" name="delete" onclick="location.href='/user/delete_addr.do?no=${vo.no}'">삭제</button>
 						                <br>
 						            </td>
 						        </tr>
+						        <tr>
+						        	<td colspan="2">
+						        		<hr>
+						        	</td>
+						       	</tr>
+						        
 						    </c:forEach>
 					        <tr>
 					            <td colspan="2">
 					                <div></div>
-					                <hr>
+					                
 					                <button onclick="window.open('/user/add_addr_form.do','user_add_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">+ 배송지 추가</button>
 					            </td>
 					        </tr>

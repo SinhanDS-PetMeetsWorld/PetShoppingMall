@@ -1,5 +1,7 @@
 package sinhanDS.first.project.seller;
 
+//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -16,10 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
+import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.user.VO.PaymentVO;
 
 
 @Controller
@@ -65,7 +68,7 @@ public class SellerController {
 	public String regist(Model model) {
 		ProductCategoryVO vo = new ProductCategoryVO();
 		model.addAttribute("vo", vo);
-		return "seller/regist/regist_form";
+		return "seller/product/regist";
 	}		
 	@PostMapping("/product/regist.do")
 	public String regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
@@ -87,10 +90,28 @@ public class SellerController {
 		return "seller/product/list";
 	}
 	
+	@GetMapping("/product/edit.do")
+	public String product_edit(Model model, ProductVO vo) {
+		Map map = service.getProductDetail(vo.getNo());
+		model.addAttribute("map", map);
+		ProductCategoryVO category = new ProductCategoryVO();
+		model.addAttribute("category", category);
+		System.out.println("map체크: " + map);
+		return "seller/product/edit";
+	}
+	@PostMapping("/product/edit.do")
+	public String product_edit2(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
+		System.out.println("vo체크: " + vo);
+		System.out.println("cvo체크: "  +cvo);
+		System.out.println("ovo체크: " + ovo);
+		return "redirect:/";
+	}	
 	
 	
 	@GetMapping("/join.do")
-	public String selregist() {
+	public String selregist(Model model) {
+		PaymentVO vo = new PaymentVO();
+		model.addAttribute("vo", vo);
 		return "seller/login/join";
 	}
 	
@@ -101,7 +122,7 @@ public class SellerController {
 		if (r) { // 정상적으로 DB에 insert 
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "회원가입되었습니다.");
-			model.addAttribute("url", "/login.do");
+			model.addAttribute("url", "/seller/login.do");
 		} else { // 등록안됨
 			model.addAttribute("cmd", "back");
 			model.addAttribute("msg", "회원가입실패");
