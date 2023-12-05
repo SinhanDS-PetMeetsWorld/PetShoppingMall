@@ -134,7 +134,6 @@ public class SellerController {
 	            helper.setFrom("meetsworldpet@gmail.com");
 	            helper.setTo(email);
 	            javaMailSender.send(message);
-	            System.out.println("메일 보내기 성공");
 	    }catch(Exception e) {
 	            e.printStackTrace();
 	        }

@@ -23,9 +23,13 @@ public class ProductQnAVO {
 	//답변 작성일
 	private Date answer_write_date;
 	
+	
+	
 	//상태
 		//답변 대기 - 0
 		//답변 완료 - 1
 		//질문 삭제 - 2
 	private int status;
+	
+	
 }

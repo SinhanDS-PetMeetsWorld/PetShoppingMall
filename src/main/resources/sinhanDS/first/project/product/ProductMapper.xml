@@ -8,6 +8,13 @@
 		ORDER BY no DESC
 	</select>
 	
+	<select id="Seller_no" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT seller_no
+		FROM product
+		where no = ${product_no}
+	</select>
+	
+	
 	<insert id="QNA_insert" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
 		INSERT INTO product_qna
 		(seller_no, product_no, user_no, question_content, question_write_date, status)

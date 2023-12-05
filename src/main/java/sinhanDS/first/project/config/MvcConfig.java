@@ -107,9 +107,11 @@ public class MvcConfig implements WebMvcConfigurer{
 	public UserLoginInterceptor userLoginIntercepton() {
 		return new UserLoginInterceptor();
 	}
+	@Bean
 	public SellerLoginInterceptor sellerLoginIntercepton() {
 		return new SellerLoginInterceptor();
 	}
+	@Bean
 	public CategoryInterceptor categoryInterceptor() {
 		return new CategoryInterceptor();
 	}

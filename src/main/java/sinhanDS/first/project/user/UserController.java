@@ -52,7 +52,7 @@ public class UserController {
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession sess) {
 		sess.invalidate();
-		return "redirect:/"; //지금은 로그인 페이지로 넘겨버렸는데 나중엔 메인페이지로 보내야할듯요?
+		return "redirect:/";
 	}
 	
 	@GetMapping("/edit.do")
@@ -116,7 +116,6 @@ public class UserController {
 	            helper.setFrom("meetsworldpet@gmail.com");
 	            helper.setTo(email);
 	            javaMailSender.send(message);
-	            System.out.println("메일 보내기 성공");
 	    }catch(Exception e) {
 	            e.printStackTrace();
 	        }

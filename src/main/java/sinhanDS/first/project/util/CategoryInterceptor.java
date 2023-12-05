@@ -15,7 +15,6 @@ public class CategoryInterceptor implements HandlerInterceptor {
 							throws Exception {
 		
 		request.setAttribute("ProductCategoryVO", new ProductCategoryVO());
-		System.out.println("request.set 설정 완료");
 		return true;
 	}
 }
