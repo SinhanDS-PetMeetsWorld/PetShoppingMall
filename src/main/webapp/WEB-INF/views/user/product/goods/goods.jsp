@@ -126,7 +126,7 @@
 					<div class="board_contents" id = "qna">
 				
 				 		<div class="qna_write_button">
-							<a href="/product/qnawrite.do?no=${product_no}"> qna 작성하기</a>
+							<button type="button" name="go_qnawrite" onclick="location.href='/product/qnawrite.do?no=${product_no}'">qna 작성하기</button>
 						</div>
 				 
 				   		 <c:forEach var="item" items="${qna_list}">

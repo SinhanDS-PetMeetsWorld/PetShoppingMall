@@ -55,8 +55,6 @@
 						                <br>
 						            </td>
 						            <td>
-										
-										
 						                <button type="button" name="modify" onclick="window.open('/user/modify_addr_form.do?no=${vo.no}&addr1=${vo.addr1 }&addr2=${vo.addr2 }&zipcode=${vo.zipcode }&name=${vo.name }&phone=${vo.phone }&comment=${vo.comment }','user_modify_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button> |
 						                <button type="button" name="delete" onclick="location.href='/user/delete_addr.do?no=${vo.no}'">삭제</button>
 						                <br>
