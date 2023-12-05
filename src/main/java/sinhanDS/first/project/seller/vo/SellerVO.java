@@ -17,4 +17,6 @@ public class SellerVO {
 	private String phone0;
 	private String phone1;
 	private String phone2;
+	private int bank;
+	private String account;
 }

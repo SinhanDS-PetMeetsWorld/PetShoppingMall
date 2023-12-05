@@ -91,10 +91,10 @@
     			return;
     		}
     		
-    		/*if ($("#").val() == '' || $("").val() == '') {
+    		if ($("#bank").val() == '' || $("#account").val() == '') {
     			alert("정산 계좌는 필수 입력사항입니다.");
     			return;
-    		}*/
+    		}
     		
     		/*var reg = /^[A-Za-z0-9]{8,}$/;
     		var txt = $("#pw").val();
@@ -255,13 +255,12 @@
         
         <div>
             정산 계좌*<br>
-            <select name="" id="" data-no="${type.index }">
-				<c:forEach var="type" items="${vo.company[0] }"
-					varStatus="status">
-				<option value="${type.index}">${type }</option>
+            <select name="bank" id="bank">
+				<c:forEach var="bank" items="${vo.company_list[0]}" varStatus="status">
+					<option value="${status.index}">${bank}</option>
 				</c:forEach>
             </select>
-            <input type="text" name="" id="" placeholder="'-'없이 숫자만 입력하세요">
+            <input type="text" name="account" id="account" placeholder="'-'없이 숫자만 입력하세요">
         </div>
         <hr>
         
@@ -271,3 +270,10 @@
     </form>
 </body>
 </html>
+
+<!-- 
+<c:forEach var="company" items="${company_list.company0 }"
+					varStatus="status">
+				<option value="${status.index}">${company }</option>
+				</c:forEach>
+ -->

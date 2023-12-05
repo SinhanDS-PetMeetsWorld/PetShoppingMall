@@ -1,5 +1,7 @@
 package sinhanDS.first.project.seller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -16,10 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
+import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.user.VO.PaymentVO;
 
 
 @Controller
@@ -90,7 +93,9 @@ public class SellerController {
 	
 	
 	@GetMapping("/join.do")
-	public String selregist() {
+	public String selregist(Model model) {
+		PaymentVO vo = new PaymentVO();
+		model.addAttribute("vo", vo);
 		return "seller/login/join";
 	}
 	
@@ -101,7 +106,7 @@ public class SellerController {
 		if (r) { // 정상적으로 DB에 insert 
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "회원가입되었습니다.");
-			model.addAttribute("url", "/login.do");
+			model.addAttribute("url", "/seller/login.do");
 		} else { // 등록안됨
 			model.addAttribute("cmd", "back");
 			model.addAttribute("msg", "회원가입실패");
