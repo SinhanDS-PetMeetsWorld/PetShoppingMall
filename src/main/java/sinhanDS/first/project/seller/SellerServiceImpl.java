@@ -49,6 +49,7 @@ public class SellerServiceImpl implements SellerService {
 		Map map = new HashMap<>();
 		List<ProductVO> productList = mapper.productList(seller_no);
 		List<List<ProductCategoryVO>> categoryList = new ArrayList<>();
+		List<List<ProductOptionVO>> optionList = new ArrayList<>();
 		for(int i = 0; i < productList.size(); i++) {
 			System.out.println("productNO: " + productList.get(i).getNo());
 			List<ProductCategoryVO> categoryVO = mapper.categoryList(productList.get(i).getNo());
@@ -56,11 +57,17 @@ public class SellerServiceImpl implements SellerService {
 			System.out.println(categoryVO);
 		}
 		
+		for(int i = 0; i < productList.size(); i++) {
+			System.out.println("productNO: " + productList.get(i).getNo());
+			List<ProductOptionVO> optionVO = mapper.optionList(productList.get(i).getNo());
+			optionList.add(optionVO);
+			System.out.println(optionVO);
+		}
 		
 		System.out.println("productList체크: " + productList);
 		map.put("productList", productList);
 		map.put("categoryList", categoryList);
-//		map.put("optionList", mapper);
+		map.put("optionList", optionList);
 		return map;
 	}
 	

@@ -64,6 +64,9 @@
 	<select id="categoryList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductCategoryVO">
 		SELECT * FROM product_category WHERE product_no = #{product_no}
 	</select>
+	<select id="optionList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductOptionVO">
+		SELECT * FROM product_option WHERE product_no = #{product_no}
+	</select>
 	
 	
 	<select id="check_password" parameterType="sinhanDS.first.project.seller.vo.SellerVO" resultType="int">
