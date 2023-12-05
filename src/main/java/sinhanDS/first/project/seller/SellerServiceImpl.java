@@ -56,7 +56,6 @@ public class SellerServiceImpl implements SellerService {
 			System.out.println(categoryVO);
 		}
 		
-		for(int i = 0; i < )
 		
 		System.out.println("productList체크: " + productList);
 		map.put("productList", productList);
