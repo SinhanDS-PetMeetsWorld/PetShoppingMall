@@ -81,7 +81,7 @@ public class ProductController {
 		if (r > 0) {
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "정상적으로 저장되었습니다.");
-			model.addAttribute("url", "/");
+			model.addAttribute("url", "/user/login.do");
 			System.out.println(model);
 		} else {
 			model.addAttribute("cmd", "back");
