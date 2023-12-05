@@ -40,4 +40,9 @@ public class PaymentVO {
 		company0.add("우체국예금");
 		company_list.add(company0);
 	}
+	
+	/*
+	 type0은 은행, company0에 들어가는 리스트는 은행명
+	 type1이 카드사면 리스트로 카드사 목록 넣어주면 됨
+	 */
 }
