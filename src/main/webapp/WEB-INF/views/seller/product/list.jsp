@@ -32,7 +32,13 @@
 							<table border="1px">
 								<tr>
 									<td rowspan="2">
-										그림들어감
+										<c:if test="${empty vo.image_url }">
+											<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+										</c:if>
+										<c:if test="${!empty vo.image_url}">
+											<img src="${vo.image_url }" width="100" height="100">
+										</c:if>
+										
 									</td>
 									<td>
 										제품명	
@@ -81,7 +87,7 @@
 								</tr>
 							</table>
 							<br>
-								<form action="temp.do" method="post">
+								<form action="/seller/product/edit.do" method="get">
 									<input type="hidden" name="no" value="${vo.no }">
 									<input type="submit" value="수정하기">
 								</form>

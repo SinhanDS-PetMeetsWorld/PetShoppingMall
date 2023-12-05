@@ -18,9 +18,6 @@
 	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/resources/css/common/template.css">
 
-<script>
-	console.log("${sellerLoginInfo.no}");
-</script>
 </head>
 <body>
 	<div class="wrap">
@@ -34,53 +31,84 @@
 			</div>
 			<div class="contentsright">
 				<div>
-					<h2>상품 등록</h2>
-					<form action="regist.do" method="post">
-						<input type="hidden" name="seller_no"
-							value="${sellerLoginInfo.no}">
+					<h2>상품 수정</h2>
+					<form action="/seller/product/edit.do" method="post">
 						<div>
-							상품명*<br> <input type="text" name="name" required>
+							상품명*<br> <input type="text" name="name" required value="${map.pvo.name }">
 						</div>
 						<div>
-							가격*<br> <input type="number" name="price" value="0" required>
+							가격*<br> <input type="number" name="price" value="${map.pvo.price }" required>
 						</div>
 						<div>
-							재고*<br> <input type="number" name="stock" value="0" required>
+							재고*<br> <input type="number" name="stock" value="${map.pvo.stock }" required>
 						</div>
 						<div class="category_body">
-							<div class="category">
-								<hr>
-								<div>
-									카테고리 *<br> <select name="category1_list"
-										class="category1_list">
-										<option value="0">강아지</option>
-										<option value="1">고양이</option>
-										<option value="2">기타</option>
-									</select>
-
+							<c:forEach items="${map.categoryList }" var="cvo">
+								<div class="category">
+									<hr>
 									<div>
-										세부 카테고리 *<br> <select name="category2_list"
-											class="category2_list" data-no="${status.index }">
-											<c:forEach var="category" items="${vo.category[0] }"
-												varStatus="status">
-												<option value="${status.index}">${category }</option>
+										카테고리 *<br> <select name="category1_list"
+											class="category1_list">
+											<c:forEach var="category_name" items="${category.category_name }" varStatus="status_outer">
+												<option value="${status_outer.index}" <c:if test="${cvo.category1 == status_outer.index }">selected</c:if> >${category_name }</option>
 											</c:forEach>
 										</select>
+	
+										<div>
+											세부 카테고리 *<br> <select name="category2_list"
+												class="category2_list" data-no="${status.index }">
+												<c:forEach var="category" items="${category.category[0] }"
+													varStatus="status_inner">
+													<option value="${status_inner.index}" <c:if test="${cvo.category2 == status_inner.index }">selected</c:if>>${category }</option>
+												</c:forEach>
+											</select>
+										</div>
+	
 									</div>
-
 								</div>
+							</c:forEach>
+							<div class="category">
 								<a href="javascript:;" class="add_btn_category"><img
 									src="/resources/img/product/add.png" width="25" height="25" /></a>
 							</div>
 						</div>
 						<div>
-							제조사 <input type="text" name="company">
+							제조사 <input type="text" name="company" value="${map.pvo.company }">
 						</div>
 						<div>
-							브랜드명 <input type="text" name="brand">
+							브랜드명 <input type="text" name="brand" value="${map.pvo.brand }">
 						</div>
 						
 						<div class="option_body">
+							<c:forEach items="${map.optionList }" var="outer_ovo" varStatus="status">
+								<!-- 이거 이렇게하면 option_content만 추가되야하는애들은 아예 추가가 안되는구나 -->
+								<c:if test="${(status.index == 0) || (map.optionList[status.index - 1].title != outer_ovo.title)}">
+									<div class="option">
+										<div class="option_title">
+											<a href="javascript:;" class="remove_btn_option_title">
+												<img src="/resources/img/product/option_content_remove.png" width="25" height="25" />
+											</a><br>
+								</c:if>
+											<c:forEach items="${map.optionList }" var="ovo" varStatus="innerStatus">
+												<c:if test="${status.index == innerStatus.index }">
+													<div class="option_content">
+														<hr>
+														옵션1(제목) <input type="text" class="option_title_list" name="title_list" value="${ovo.title }"  required><br>
+														옵션1(내용) <input type="text" class="option_content_list" name="content_list" value="${ovo.content }" required><br>
+														가격 <input type="number" class="option_price_list" name="price_list" value="${ovo.price }" required> 	
+														<a href="javascript:;" class="add_btn_option_content"><img
+																			src="/resources/img/product/option_content_add.png" width="25" height="25" /></a>
+														<a href="javascript:;" class="remove_btn_option_content"><img
+																			src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a>
+													</div>
+												</c:if>
+											</c:forEach>
+								<c:if test="${(status.index == 0) || (map.optionList[status.index - 1].title != outer_ovo.title)}">
+										</div>
+									</div>
+								</c:if>
+								
+							</c:forEach>
 							<div>
 								<a href="javascript:;" class="add_btn_option"><img
 									src="/resources/img/product/add.png" width="25" height="25" />옵션 추가</a>
@@ -90,17 +118,17 @@
 
 						<div>상품 이미지 넣고</div>
 						<div>
-							할인 가격 <input type="number" name="discount" value="0" required>
+							할인 가격 <input type="number" name="discount" value="${map.pvo.discount }" required>
 						</div>
 
 						<div>상품 설명</div>
 
 						<div>
 							상세 설명
-							<textarea name="description" rows="10" cols="40"></textarea>
+							<textarea name="description" rows="10" cols="40">${map.pvo.description }</textarea>
 						</div>
 
-						<input type="submit" value="등록">
+						<input type="submit" value="수정">
 					</form>
 				</div>
 			</div>
@@ -115,17 +143,16 @@
 			<div class="category_original" style="display: none;">
 				<hr>
 				<div>
-					카테고리 *<br> <select name="category1_list"
-						class="category1_list">
-						<option value="0">강아지</option>
-						<option value="1">고양이</option>
-						<option value="2">기타</option>
+					카테고리 *<br> <select name="category1_list" class="category1_list">
+						<c:forEach var="category_name" items="${category.category_name }" varStatus="status">
+							<option value="${status.index}">${category_name }</option>
+						</c:forEach>
 					</select>
 
 					<div>
 						세부 카테고리 *<br> <select name="category2_list"
 							class="category2_list" data-no="${status.index }">
-							<c:forEach var="category" items="${vo.category[0] }"
+							<c:forEach var="category" items="${category.category[0] }"
 								varStatus="status">
 								<option value="${status.index}">${category }</option>
 							</c:forEach>
@@ -181,7 +208,7 @@
 			let target = this.parentNode.querySelector('.category2_list');
 			$(target).empty();
 			
-			<c:forEach items="${vo.category}" var="list" varStatus="status">
+			<c:forEach items="${category.category}" var="list" varStatus="status">
 				if(this.value == ${status.index}){
 					
 					<c:forEach items="${list}" var="item" varStatus="status">
@@ -196,6 +223,7 @@
 		$('.add_btn_option').on('click', add_option);
 		$('.add_btn_option_content').on('click', add_option_content);
 		$('.remove_btn_option_content').on('click', remove_option_content);
+		
 		
 		function add_option(){
 			console.log("gg1");
