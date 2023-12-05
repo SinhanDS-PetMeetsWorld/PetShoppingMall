@@ -39,7 +39,7 @@
 		
 	</insert>
 	
-	<insert id="regist_option" parameterType="sinhanDS.first.project.product.vo.OptionVO">
+	<insert id="regist_option" parameterType="sinhanDS.first.project.product.vo.ProductOptionVO">
 		INSERT INTO PetShoppingMall.product_option
 		(
 			product_no,

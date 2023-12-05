@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sinhanDS.first.project.product.vo.OptionVO;
+import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
@@ -68,7 +68,7 @@ public class SellerController {
 		return "seller/regist/regist_form";
 	}		
 	@PostMapping("/product/regist.do")
-	public String regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo) {
+	public String regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
 		System.out.println("vo체크: " + vo);
 		System.out.println("cvo체크: "  +cvo);
 		System.out.println("ovo체크: " + ovo);

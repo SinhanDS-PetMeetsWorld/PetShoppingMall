@@ -3,7 +3,7 @@ package sinhanDS.first.project.product.vo;
 import lombok.Data;
 
 @Data
-public class OptionVO {
+public class ProductOptionVO {
 	//번호
 	private int no;
 	//상품 번호

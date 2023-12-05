@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sinhanDS.first.project.product.vo.OptionVO;
+import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
@@ -22,7 +22,7 @@ public class SellerServiceImpl implements SellerService {
 		return mapper.login(vo);
 	}
 
-	public int regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo) {
+	public int regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
 		int result = mapper.regist(vo);
 		for(int i = 0; i < cvo.getCategory1_list().length; i++) {
 			ProductCategoryVO ncvo = new ProductCategoryVO();
@@ -34,7 +34,7 @@ public class SellerServiceImpl implements SellerService {
 		
 		if(ovo.getTitle_list() != null) {
 			for(int i = 0; i < ovo.getTitle_list().length; i++) {
-				OptionVO novo = new OptionVO();
+				ProductOptionVO novo = new ProductOptionVO();
 				novo.setProduct_no(vo.getNo());
 				novo.setTitle(ovo.getTitle_list()[i]);
 				novo.setContent(ovo.getContent_list()[i]);
