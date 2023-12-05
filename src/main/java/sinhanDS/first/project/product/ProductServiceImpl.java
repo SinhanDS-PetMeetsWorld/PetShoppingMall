@@ -34,6 +34,16 @@ public class ProductServiceImpl implements ProductService {
 		return qna_search_seller;
 	}
 	
+
+	@Override
+	public List<ProductVO> Product_more(ProductVO vo) {
+		
+		List<ProductVO> product_more = mapper.Product_more(vo);
+		
+		return product_more;
+	}
+
+	
 	
 	@Override
 	public int QNA_insert(ProductQnAVO qnavo , HttpServletRequest request) {
@@ -51,11 +61,5 @@ public class ProductServiceImpl implements ProductService {
 		return review_list;
 	}
 
-	
-
-
-
-
-	
 
 }

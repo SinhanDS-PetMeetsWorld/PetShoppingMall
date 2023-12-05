@@ -16,6 +16,7 @@ public interface ProductService {
 	
 	int Seller_no(int product_no);
 	
+	List <ProductVO> Product_more(ProductVO vo);
 	
 	public int QNA_insert(ProductQnAVO qnavo , HttpServletRequest request);
 	

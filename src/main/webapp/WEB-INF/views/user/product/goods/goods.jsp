@@ -61,46 +61,36 @@
 			</div>
 			<div class="contentsright">
 				<div>
+				<c:forEach var="item" items="${product_more}">
 					<div class="goods-container">
-
-						<div class="goods-photo">
-							<img
-								src="https://i.namu.wiki/i/guH7wBKc-HUuTjbCy8jbSkofYyRJCnRA6F-6j4r4uCfC3iuRrYpUJm8AV6vlAoGqMdQloDpUowBmA6oUgz1tnoat7aoPEJHF_2WctibFipJeTUcIKBhcAqDw3gDuPnVQk86aMhunl-g57uBjMYuPMQ.webp"
-								alt="Product Image">
-						</div>
-
-						<div class="goods-details">
-							<div id="goods_category"
-								style="width: 720px; height: 100px; border: 1px solid black">
+							<div id="goods_category" style="width: 720px; height: 100px; border: 1px solid black">
 								화살표 이미지<br> 강아지 > 사료
 							</div>
+						<div class="goods-photo">
+							<img src="${item.image_url}">
+						</div>
+						<div class="goods-details">
+							
 
 							<div id="goods_menu">
 								<div class="goods-name"
 									style="width: 720px; height: 100px; border: 1px solid black;">
-									<h1>스테이씨</h1>
-									대충 평점 이미지
+									<h1>${item.name} 대충 평점 이미지</h1>
 								</div>
 
 								<div class="goods-price"
 									style="width: 720px; height: 100px; border: 1px solid black;">
-									<h2>20000 KRW</h2>
+									<h2>${item.price} </h2>
 								</div>
 
 								<div class="goods-explain"
 									style="width: 720px; height: 100px; border: 1px solid black;">
-									세상에서 가장 이쁜 스테이씨</div>
+									${item.description}</div>
 
 								<div class="goods-option"
 									style="width: 720px; height: 100px; border: 1px solid black;">
-									<form action="다음페이지" method="get" id="select_option">
-										옵션 : <select name="order" form="myForm">
-											<option value="leg">관절영양(+ 0원)</option>
-											<option value="stance">발목(+ 1000원)</option>
-											<option value="head">머리(+ 1000원)</option>
-										</select> "하트" add to WishList
-									</form>
-
+									
+								</c:forEach>
 									수량 조절 이미지 <input type="button" style="background-color: grey;"
 										value="장바구니 담기"> <input type="button"
 										style="background-color: yellow" value="바로 구매"><br>

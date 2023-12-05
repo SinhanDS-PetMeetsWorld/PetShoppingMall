@@ -16,6 +16,7 @@ public interface ProductMapper {
 	// 리뷰 리스트
 	List<ReviewVO> Review_list (ReviewVO vo);
 	
+	List<ProductVO> Product_more (ProductVO vo);
 	
 	// 볼 수 있는 거	
 	ProductQnAVO view(ProductQnAVO vo); 

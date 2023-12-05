@@ -2,6 +2,7 @@ package sinhanDS.first.project.product;
 
 import java.util.List;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,13 +30,18 @@ public class ProductController {
 	private ProductService service;
 	
 	// 신정훈(11 / 29) QNA 페이지 , 리뷰 페이지 구현	
+	// 신정훈(12 / 05) 상품 상세 페이지 구현
 	@GetMapping("/goods.do")
-	public String QNA_Review_list(Model model, ProductVO pvo, ProductQnAVO qnavo , ReviewVO revvo) {
+	public String QNA_Review_list(Model model, HttpServletRequest request,ProductVO pvo, ProductQnAVO qnavo , ReviewVO revvo) {
 		
+				
+		List<ProductVO> product_more = service.Product_more(pvo);
 		List<ProductQnAVO> qna_list = service.QNA_list(qnavo);
 		List<ReviewVO> review_list = service.Review_list(revvo);
-			
+		String no = request.getParameter("no");
+		pvo.setNo(Integer.valueOf(no));
 		
+		model.addAttribute("product_more" , product_more);
 		model.addAttribute("qna_list", qna_list);
 		model.addAttribute("review_list", review_list);
 		return "user/product/goods/goods";
@@ -70,9 +76,6 @@ public class ProductController {
 		// 멤버 번호
 		HttpSession loginsess = request.getSession();
 		UserVO login = (UserVO)loginsess.getAttribute("loginInfo");
-		
-		// 제품 번호 , 판매자 번호
-		// HttpSession productsess = request.getSession();
 		
 		
 		System.out.println("qnavo 체크 : " + qnavo);
