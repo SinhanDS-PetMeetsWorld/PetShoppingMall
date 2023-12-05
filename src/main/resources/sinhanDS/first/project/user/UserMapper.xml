@@ -68,5 +68,24 @@
 		
 	</insert>
 	
+	<update id="modify_addr" parameterType="sinhanDS.first.project.user.VO.UserAddressVO">
+		UPDATE address SET
+			zipcode = #{zipcode},
+			addr1 = #{addr1},
+			addr2 = #{addr2},
+			name = #{name},
+			phone = #{phone},
+			comment = #{comment}
+		WHERE no = #{no}
+	</update>
+	
+	<delete id="delete_addr" parameterType="int">
+		DELETE from address WHERE no=#{no}
+	</delete>
+	
+	<select id="exist_payment" parameterType="int" resultType="sinhanDS.first.project.user.VO.UserPaymentVO">
+		SELECT * FROM payment WHERE user_no = #{user_no}
+	</select>
+	
 
 </mapper>

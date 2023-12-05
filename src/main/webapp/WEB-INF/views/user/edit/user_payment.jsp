@@ -39,26 +39,51 @@
 					
 					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
 					        
-					        <!--주소가 존재하는만큼 td를 생성-->
-						    <c:forEach var="vo" items="${addressvo }">
-						    	
+					        <!--결제수단이 존재하는만큼 td를 생성-->
+					        <c:if test="${empty paymentvo }">
+					        	<tr width="800">
+						            <td>
+						                <br>
+						                <div>아직 등록된 결제 수단(주소)이 없습니다.</div>
+						                <div>새 결제 수단(주소)을 추가해주세요.</div>
+						                <br>
+						            </td>
+						        </tr>
+						        <tr>
+						        	<td colspan="2">
+					        		<hr>
+						        	</td>
+						    	</tr>
+					        </c:if>
+					        
+					        <c:forEach var="vo" items="${paymentvo }">
+					        	
+					        	
 						        <tr width="800">
 						            <td>
 						                <br>
-						                <div>${vo.addr1 }</div>
-						                <div>${vo.addr2 }</div>
 						                <div>
-						                    <span>Contact : </span>
-						                    <span>${vo.phone}</span>
+						                    <span>결제 수단 : </span>
+						                    <span>${vo.type }</span>
 						                </div>
-						                <div>${vo.comment }</div>
+						                <div>
+						                    <span>카드 별명 : </span>
+						                    <span>${vo.name }</span>
+						                </div>
+						                <div>
+						                    <span>카드 번호 : </span>
+						                    <span>${vo.account }</span>
+						                </div>
+						                <div>
+						                    <span>유효 기간 : </span>
+						                    <span>${vo.valid_date}</span>
+						                </div>
+						                
 						                <br>
 						            </td>
 						            <td>
-										
-										
-						                <button type="button" name="modify" onclick="window.open('/user/modify_addr_form.do?no=${vo.no}&addr1=${vo.addr1 }&addr2=${vo.addr2 }&zipcode=${vo.zipcode }&name=${vo.name }&phone=${vo.phone }&comment=${vo.comment }','user_modify_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button> |
-						                <button type="button" name="delete" onclick="location.href='/user/delete_addr.do?no=${vo.no}'">삭제</button>
+						                <button type="button" name="modify" onclick="location.href=/*수정.jsp*/''">수정</button> |
+						                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
 						                <br>
 						            </td>
 						        </tr>
@@ -72,8 +97,8 @@
 					        <tr>
 					            <td colspan="2">
 					                <div></div>
-					                
-					                <button onclick="window.open('/user/add_addr_form.do','user_add_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">+ 배송지 추가</button>
+
+					                <button type="button" name="add_new_address">+ 결제 수단 추가</button>
 					            </td>
 					        </tr>
 					    </table>

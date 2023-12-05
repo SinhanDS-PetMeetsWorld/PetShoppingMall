@@ -67,11 +67,8 @@
 			alert('상세주소를 정확히 입력해주세요!')
 			return;
 		}
-		if($("#comment").val() ==''){
-			$("#comment").val("기본");
-		}
 		
-		$("#insert_addr").submit();
+		$("#modify_addr").submit();
 		
 	}
 	
@@ -82,24 +79,25 @@
 <body>
     <div>
         배송지 추가
-        <form action="insert_addr.do" id="insert_addr" method="GET">
+        <form action="modify_addr.do" id="modify_addr" method="POST">
             <div>
-                <input type="text" placeholder="받는이 성명" name="name" id="name">
+                <input type="text" placeholder="받는이 성명" name="name" id="name" value="${vo.name }">
             </div>
             <div>
-                <input type="text" placeholder="전화번호" name="phone" id="phone">
+                <input type="text" placeholder="전화번호" name="phone" id="phone" value="${vo.phone }">
             </div>
             <div>
                 주소
-                <div><input type="text" readonly placeholder="우편번호" name="zipcode" id="zipcode"> <button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button></div>
-                <div><input type="text" readonly placeholder="기본주소" name="addr1" id="addr1"></div>
-                <div><input type="text" placeholder="상세주소" name="addr2" id="addr2"></div>
+                <div><input type="text" readonly placeholder="우편번호" name="zipcode" id="zipcode" value="${vo.zipcode }"> <button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button></div>
+                <div><input type="text" readonly placeholder="기본주소" name="addr1" id="addr1" value="${vo.addr1 }"></div>
+                <div><input type="text" placeholder="상세주소" name="addr2" id="addr2" value="${vo.addr2 }"></div>
+                <input type="hidden" name="no" value="${vo.no }">
             </div>
             <div>
-                <input type="text" placeholder="별칭(ex:집)" name="comment" id="comment">
+                <input type="text" placeholder="별칭(ex:집)" name="comment" id="comment" value="${vo.comment }">
             </div>
             <div>
-                 <input type="button" onclick="doCheck();" value="추가">
+                 <input type="button" onclick="doCheck();" value="수정">
             </div>
             
         </form>

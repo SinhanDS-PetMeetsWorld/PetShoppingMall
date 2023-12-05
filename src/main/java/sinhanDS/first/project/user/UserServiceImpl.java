@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sinhanDS.first.project.user.VO.UserAddressVO;
+import sinhanDS.first.project.user.VO.UserPaymentVO;
 import sinhanDS.first.project.user.VO.UserVO;
 
 
@@ -103,7 +104,22 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int insert_addr(UserAddressVO vo) {
 		return mapper.insert_addr(vo);
-		
+	}
+	
+	@Override
+	public int modify_addr(UserAddressVO vo) {
+		return mapper.modify_addr(vo);
+	}
+	
+	@Override
+	public int delete_addr(int no) {
+		return mapper.delete_addr(no);
+	}
+	
+	@Override
+	public List<UserPaymentVO> exist_payment(UserVO vo) {
+		List<UserPaymentVO> list = mapper.exist_payment(vo.getNo());
+		return list;
 	}
 
 }
