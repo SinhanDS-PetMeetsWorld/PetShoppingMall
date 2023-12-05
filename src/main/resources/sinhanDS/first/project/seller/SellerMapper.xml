@@ -67,7 +67,7 @@
 	
 	<insert id="seller_regist" parameterType="sinhanDS.first.project.seller.vo.SellerVO">
 		INSERT INTO seller (
-			id, name, email, password, phone, business_number, zipcode, addr1, addr2
+			id, name, email, password, phone, business_number, zipcode, addr1, addr2, bank, account
 		) VALUES (
 			#{id}, #{name}, #{email}, MD5(#{password}), #{phone}, #{business_number}, #{zipcode}, #{addr1}, #{addr2}
 		)
