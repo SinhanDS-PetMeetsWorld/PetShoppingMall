@@ -4,6 +4,7 @@
 <script>
 <c:if test="${cmd eq 'move'}">
 	alert('${msg}');
+	console.log('${url}');
 	location.href='${url}';
 </c:if>
 <c:if test="${cmd == 'back'}">
