@@ -80,6 +80,15 @@
 									</td>
 								</tr>
 							</table>
+							<br>
+								<form action="temp.do" method="post">
+									<input type="hidden" name="no" value="${vo.no }">
+									<input type="submit" value="수정하기">
+								</form>
+							<br>
+							<br>
+							<hr>
+							<br>
 						</li>						
 					</c:forEach>
 				</ul>
