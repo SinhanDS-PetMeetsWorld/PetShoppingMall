@@ -65,7 +65,7 @@ public class SellerController {
 	public String regist(Model model) {
 		ProductCategoryVO vo = new ProductCategoryVO();
 		model.addAttribute("vo", vo);
-		return "seller/regist/regist_form";
+		return "seller/product/regist";
 	}		
 	@PostMapping("/product/regist.do")
 	public String regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
@@ -87,6 +87,22 @@ public class SellerController {
 		return "seller/product/list";
 	}
 	
+	@GetMapping("/product/edit.do")
+	public String product_edit(Model model, ProductVO vo) {
+		Map map = service.getProductDetail(vo.getNo());
+		model.addAttribute("map", map);
+		ProductCategoryVO category = new ProductCategoryVO();
+		model.addAttribute("category", category);
+		System.out.println("map체크: " + map);
+		return "seller/product/edit";
+	}
+	@PostMapping("/product/edit.do")
+	public String product_edit2(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
+		System.out.println("vo체크: " + vo);
+		System.out.println("cvo체크: "  +cvo);
+		System.out.println("ovo체크: " + ovo);
+		return "redirect:/";
+	}	
 	
 	
 	@GetMapping("/join.do")

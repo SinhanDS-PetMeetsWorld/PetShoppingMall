@@ -56,15 +56,18 @@
 		);
 	</insert>
 	
-	<select id="productList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
+	<select id="getProductList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT * FROM product WHERE seller_no = #{seller_no}
+	</select>
+	<select id="getProduct" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * FROM product WHERE no = #{no}
 	</select>
 	
 	<!-- List<ProductCategoryVO> categoryList(int no); -->
-	<select id="categoryList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductCategoryVO">
+	<select id="getCategoriesList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductCategoryVO">
 		SELECT * FROM product_category WHERE product_no = #{product_no}
 	</select>
-	<select id="optionList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductOptionVO">
+	<select id="getOptionsList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductOptionVO">
 		SELECT * FROM product_option WHERE product_no = #{product_no}
 	</select>
 	
