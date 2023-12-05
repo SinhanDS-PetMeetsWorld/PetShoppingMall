@@ -20,6 +20,7 @@ public class SellerLoginInterceptor  implements HandlerInterceptor {
 		HttpSession sess = request.getSession();
 		SellerVO login = (SellerVO)sess.getAttribute("sellerLoginInfo");
 		if (login == null) {
+			System.out.println("인터셉터 컷");
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
