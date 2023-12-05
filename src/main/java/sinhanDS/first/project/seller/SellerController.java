@@ -1,6 +1,6 @@
 package sinhanDS.first.project.seller;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sinhanDS.first.project.product.vo.OptionVO;
+import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
@@ -66,10 +66,9 @@ public class SellerController {
 		ProductCategoryVO vo = new ProductCategoryVO();
 		model.addAttribute("vo", vo);
 		return "seller/regist/regist_form";
-	}	
-	
+	}		
 	@PostMapping("/product/regist.do")
-	public String regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo) {
+	public String regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
 		System.out.println("vo체크: " + vo);
 		System.out.println("cvo체크: "  +cvo);
 		System.out.println("ovo체크: " + ovo);
@@ -82,9 +81,9 @@ public class SellerController {
 	public String product_list(HttpSession sess, Model model) {
 		SellerVO vo = (SellerVO)sess.getAttribute("sellerLoginInfo");
 		
-		List<ProductVO> list = service.getProductList(vo.getNo());
-		model.addAttribute("list", list);
-		System.out.println("list체크: " + list);
+		Map map = service.getProductList(vo.getNo());
+		model.addAttribute("map", map);
+		System.out.println("map체크: " + map);
 		return "seller/product/list";
 	}
 	

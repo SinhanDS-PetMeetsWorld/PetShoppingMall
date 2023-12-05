@@ -1,17 +1,16 @@
 package sinhanDS.first.project.seller;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sinhanDS.first.project.product.vo.OptionVO;
+import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
-import sinhanDS.first.project.user.VO.UserAddressVO;
-import sinhanDS.first.project.user.VO.UserVO;
 
 @Service
 public class SellerServiceImpl implements SellerService {
@@ -23,7 +22,7 @@ public class SellerServiceImpl implements SellerService {
 		return mapper.login(vo);
 	}
 
-	public int regist(ProductVO vo, ProductCategoryVO cvo, OptionVO ovo) {
+	public int regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
 		int result = mapper.regist(vo);
 		for(int i = 0; i < cvo.getCategory1_list().length; i++) {
 			ProductCategoryVO ncvo = new ProductCategoryVO();
@@ -35,7 +34,7 @@ public class SellerServiceImpl implements SellerService {
 		
 		if(ovo.getTitle_list() != null) {
 			for(int i = 0; i < ovo.getTitle_list().length; i++) {
-				OptionVO novo = new OptionVO();
+				ProductOptionVO novo = new ProductOptionVO();
 				novo.setProduct_no(vo.getNo());
 				novo.setTitle(ovo.getTitle_list()[i]);
 				novo.setContent(ovo.getContent_list()[i]);
@@ -46,8 +45,30 @@ public class SellerServiceImpl implements SellerService {
 		}
 		return result; 
 	}
-	public List<ProductVO> getProductList(int seller_no){
-		return mapper.productList(seller_no);
+	public Map getProductList(int seller_no){
+		Map map = new HashMap<>();
+		List<ProductVO> productList = mapper.productList(seller_no);
+		List<List<ProductCategoryVO>> categoryList = new ArrayList<>();
+		List<List<ProductOptionVO>> optionList = new ArrayList<>();
+		for(int i = 0; i < productList.size(); i++) {
+			System.out.println("productNO: " + productList.get(i).getNo());
+			List<ProductCategoryVO> categoryVO = mapper.categoryList(productList.get(i).getNo());
+			categoryList.add(categoryVO);
+			System.out.println(categoryVO);
+		}
+		
+		for(int i = 0; i < productList.size(); i++) {
+			System.out.println("productNO: " + productList.get(i).getNo());
+			List<ProductOptionVO> optionVO = mapper.optionList(productList.get(i).getNo());
+			optionList.add(optionVO);
+			System.out.println(optionVO);
+		}
+		
+		System.out.println("productList체크: " + productList);
+		map.put("productList", productList);
+		map.put("categoryList", categoryList);
+		map.put("optionList", optionList);
+		return map;
 	}
 	
 	@Override

@@ -26,11 +26,72 @@
                 <%@ include file="/WEB-INF/views/common/quickmenu_seller.jsp"%>
             </div>
 			<div class="contentsright">
-				<table>
-					<c:forEach items="${list }" var="vo">
-						${vo.name }
+				<ul>
+					<c:forEach items="${map.productList }" var="vo" varStatus="status">
+						<li>
+							<table border="1px">
+								<tr>
+									<td rowspan="2">
+										그림들어감
+									</td>
+									<td>
+										제품명	
+									</td>
+									<td>
+										카테고리	
+									</td>
+									<td>
+										옵션	
+									</td>
+									<td>
+										판매가	
+									</td>
+									<td>
+										재고	
+									</td>
+								</tr>
+								<tr>
+									<td>
+										${vo.name }
+									</td>
+									<td>
+										<c:forEach items="${map.categoryList }" var="cvoList" varStatus="cList_status">
+											<c:if test="${status.index == cList_status.index }">
+												<c:forEach items="${cvoList }" var="cvo" varStatus="c_status">
+													${cvo.category_name[cvo.category1] } ${cvo.category[cvo.category1][cvo.category2] } <br>
+												</c:forEach>
+											</c:if>
+										</c:forEach>
+									</td>
+									<td>
+										<c:forEach items="${map.optionList }" var="ovoList" varStatus="oList_status">
+											<c:if test="${status.index == oList_status.index }">
+												<c:forEach items="${ovoList }" var="ovo" varStatus="o_status">
+													${ovo.title } ${ovo.content } <br>
+												</c:forEach>
+											</c:if>
+										</c:forEach>
+									</td>
+									<td>
+										${vo.price }
+									</td>
+									<td>
+										${vo.stock }
+									</td>
+								</tr>
+							</table>
+							<br>
+								<form action="temp.do" method="post">
+									<input type="hidden" name="no" value="${vo.no }">
+									<input type="submit" value="수정하기">
+								</form>
+							<br>
+							<br>
+							<hr>
+							<br>
+						</li>						
 					</c:forEach>
-				</table>
+				</ul>
 			</div>
 
         </div>
