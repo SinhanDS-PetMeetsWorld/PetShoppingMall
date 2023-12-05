@@ -34,16 +34,17 @@ public class ProductController {
 	@GetMapping("/goods.do")
 	public String QNA_Review_list(Model model, HttpServletRequest request,ProductVO pvo, ProductQnAVO qnavo , ReviewVO revvo) {
 		
-				
 		List<ProductVO> product_more = service.Product_more(pvo);
 		List<ProductQnAVO> qna_list = service.QNA_list(qnavo);
 		List<ReviewVO> review_list = service.Review_list(revvo);
-		String no = request.getParameter("no");
-		pvo.setNo(Integer.valueOf(no));
+		String product_no = request.getParameter("no");
+		pvo.setNo(Integer.valueOf(product_no));
+		System.out.println("pvo 넘버가 몇으로 들어가려나?? " + pvo.getNo());
 		
 		model.addAttribute("product_more" , product_more);
 		model.addAttribute("qna_list", qna_list);
 		model.addAttribute("review_list", review_list);
+		model.addAttribute("product_no" , product_no);
 		return "user/product/goods/goods";
 	}
 	
@@ -51,19 +52,17 @@ public class ProductController {
 	// write페이지에서 등록 페이지를 누르면 insert 메소드가 동작하면서 DB에 insert 
 	@GetMapping("/qnawrite.do")
 	public String QNA_write(Model model , HttpServletRequest request , ProductVO pvo) {
+				
+		int no = pvo.getNo() ;	
 		
+		System.out.println("제품 번호 찍히나??" + no);
+		System.out.println("product_no 체크: " + request.getParameter("no"));
 		
-		String product_no = request.getParameter("product_no");
-		pvo.setNo(Integer.valueOf(product_no));
-		
-		System.out.println("product_no 체크: " + request.getParameter("product_no"));
-		
-		
-		int seller_no = service.Seller_no(Integer.valueOf(product_no));
+		int seller_no = service.Seller_no(Integer.valueOf(no));
 		System.out.println("qna_search_seller 체크: " + seller_no);
 		pvo.setSeller_no(seller_no);
 		
-		model.addAttribute("product_no", product_no);
+		model.addAttribute("product_no", no);
 		model.addAttribute("seller_no" , seller_no);
 		
 		return "user/product/goods/qnawrite";

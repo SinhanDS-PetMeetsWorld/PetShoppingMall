@@ -61,6 +61,11 @@
 			</div>
 			<div class="contentsright">
 				<div>
+				
+				<div id ="goods_no">
+					${product_no} 찐 제품 번호
+				</div>
+				
 				<c:forEach var="item" items="${product_more}">
 					<div class="goods-container">
 							<div id="goods_category" style="width: 720px; height: 100px; border: 1px solid black">
@@ -71,6 +76,9 @@
 						</div>
 						<div class="goods-details">
 							
+							<div id ="goods_no">
+								${item.no} 제품번호
+							</div>
 
 							<div id="goods_menu">
 								<div class="goods-name"
@@ -116,6 +124,11 @@
 					
 					
 					<div class="board_contents" id = "qna">
+				
+				 		<div class="qna_write_button">
+							<a href="/product/qnawrite.do?no=${product_no}"> qna 작성하기</a>
+						</div>
+				 
 				   		 <c:forEach var="item" items="${qna_list}">
 				       		 
 				       		 <div class="Q" onclick="toggleAnswer(this)" >
@@ -140,6 +153,8 @@
 		</div>
 		
 <script>
+
+
 // 질문 ,해답 하나씩 켜고 끄기
 $(".Q").click(function() {
     $(this).next(".A").stop().slideToggle(300);
@@ -163,6 +178,8 @@ function showBoard(boardId) {
         selectedTitle.classList.add('on');
     }
 }
+
+
 
 
 </script>		
