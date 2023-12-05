@@ -77,7 +77,7 @@
 		INSERT INTO seller (
 			id, name, email, password, phone, business_number, zipcode, addr1, addr2, bank, account
 		) VALUES (
-			#{id}, #{name}, #{email}, MD5(#{password}), #{phone}, #{business_number}, #{zipcode}, #{addr1}, #{addr2}
+			#{id}, #{name}, #{email}, MD5(#{password}), #{phone}, #{business_number}, #{zipcode}, #{addr1}, #{addr2}, #{bank}, #{account}
 		)
 		<selectKey keyProperty="no" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
