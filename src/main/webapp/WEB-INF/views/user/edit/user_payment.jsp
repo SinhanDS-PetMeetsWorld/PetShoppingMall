@@ -58,35 +58,63 @@
 					        
 					        <c:forEach var="vo" items="${paymentvo }">
 					        	
-					        	
-						        <tr width="800">
-						            <td>
-						                <br>
-						                <div>
-						                    <span>결제 수단 : </span>
-						                    <span>${vo.type }</span>
-						                </div>
-						                <div>
-						                    <span>카드 별명 : </span>
-						                    <span>${vo.name }</span>
-						                </div>
-						                <div>
-						                    <span>카드 번호 : </span>
-						                    <span>${vo.account }</span>
-						                </div>
-						                <div>
-						                    <span>유효 기간 : </span>
-						                    <span>${vo.valid_date}</span>
-						                </div>
-						                
-						                <br>
-						            </td>
-						            <td>
-						                <button type="button" name="modify" onclick="location.href=/*수정.jsp*/''">수정</button> |
-						                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
-						                <br>
-						            </td>
-						        </tr>
+					        	<c:if test="${vo.type eq 0 }">
+					        		<tr width="800">
+							            <td>
+							                <br>
+							                <div>
+							                    <span>결제 수단 : </span>
+							                    <span>카드</span>
+							                </div>
+							                <div>
+							                    <span>카드 별명 : </span>
+							                    <span>${vo.name }</span>
+							                </div>
+							                <div>
+							                    <span>카드 번호 : </span>
+							                    <span>${vo.account }</span>
+							                </div>
+							                <div>
+							                    <span>유효 기간 : </span>
+							                    <span>${vo.valid_date}</span>
+							                </div>
+							                
+							                <br>
+							            </td>
+							            <td>
+							                <button type="button" name="modify" onclick="location.href=/*수정.jsp*/''">수정</button> |
+							                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
+							                <br>
+							            </td>
+						        	</tr>
+					        	</c:if>
+					        	<c:if test="${vo.type eq 1 }">
+					        		<tr width="800">
+							            <td>
+							                <br>
+							                <div>
+							                    <span>결제 수단 : </span>
+							                    <span>계좌이체</span>
+							                </div>
+							                <div>
+							                    <span>계좌 별명 : </span>
+							                    <span>${vo.name }</span>
+							                </div>
+							                <div>
+							                    <span>계좌 번호 : </span>
+							                    <span>${vo.account }</span>
+							                </div>
+							                
+							                <br>
+							            </td>
+							            <td>
+							                <button type="button" name="modify" onclick="location.href=/*수정.jsp*/''">수정</button> |
+							                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
+							                <br>
+							            </td>
+						        	</tr>
+					        	</c:if>
+						        
 						        <tr>
 						        	<td colspan="2">
 						        		<hr>
