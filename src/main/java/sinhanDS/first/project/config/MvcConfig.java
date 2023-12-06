@@ -117,26 +117,26 @@ public class MvcConfig implements WebMvcConfigurer{
 	}
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(userLoginIntercepton())
-//						.addPathPatterns("/user/**")
-//						.excludePathPatterns("/user/join.do")
-//						.excludePathPatterns("/user/login.do")
-//						.excludePathPatterns("/user/idCheck.do")
-//						.excludePathPatterns("/user/emailCheck.do")
-//						.excludePathPatterns("/user/regist.do");
-//		
-//		registry.addInterceptor(sellerLoginIntercepton())
-//						.addPathPatterns("/seller/**")
-//						.excludePathPatterns("/seller/login.do")
-//						.excludePathPatterns("/seller/join.do")
-//						.excludePathPatterns("/seller/idCheck.do")
-//						.excludePathPatterns("/seller/emailCheck.do")
-//						.excludePathPatterns("/seller/regist.do");
-//		
-//		registry.addInterceptor(categoryInterceptor())
-//						.addPathPatterns("/")
-//						.addPathPatterns("/user/**")
-//						.addPathPatterns("/product/**");
+		registry.addInterceptor(userLoginIntercepton())
+						.addPathPatterns("/user/**")
+						.excludePathPatterns("/user/join.do")
+						.excludePathPatterns("/user/login.do")
+						.excludePathPatterns("/user/idCheck.do")
+						.excludePathPatterns("/user/emailCheck.do")
+						.excludePathPatterns("/user/regist.do");
+		
+		registry.addInterceptor(sellerLoginIntercepton())
+						.addPathPatterns("/seller/**")
+						.excludePathPatterns("/seller/login.do")
+						.excludePathPatterns("/seller/join.do")
+						.excludePathPatterns("/seller/idCheck.do")
+						.excludePathPatterns("/seller/emailCheck.do")
+						.excludePathPatterns("/seller/regist.do");
+		
+		registry.addInterceptor(categoryInterceptor())
+						.addPathPatterns("/")
+						.addPathPatterns("/user/**")
+						.addPathPatterns("/product/**");
 	}
 	
 	// 프로퍼티 설정
