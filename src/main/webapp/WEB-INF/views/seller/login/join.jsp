@@ -270,10 +270,3 @@
     </form>
 </body>
 </html>
-
-<!-- 
-<c:forEach var="company" items="${company_list.company0 }"
-					varStatus="status">
-				<option value="${status.index}">${company }</option>
-				</c:forEach>
- -->
