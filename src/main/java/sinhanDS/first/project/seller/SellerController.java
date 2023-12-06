@@ -1,16 +1,18 @@
 package sinhanDS.first.project.seller;
 
+import java.net.URL;
+
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -38,12 +40,13 @@ public class SellerController {
 	private SellerService service;
 	@Autowired
 	private JavaMailSender javaMailSender;
+	@Value("${realPath.registed_img_path}")
+	private String registed_img_path;
+	
+	@Autowired ServletContext servletContext;
 	
 	@GetMapping("/index.do")
-	public String index(HttpServletRequest request) {
-		 ServletContext servletContext = request.getSession().getServletContext();
-		    String realPath = servletContext.getRealPath("/");
-		    System.out.println("realpath체크: " + realPath);
+	public String index() {
 		return "seller/index";
 	}
 	@GetMapping("/login.do")
@@ -82,11 +85,10 @@ public class SellerController {
 	@PostMapping("/product/regist.do")
 	public String regist(@RequestParam MultipartFile filename, HttpServletRequest request, ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
 		Uploader uploader = new Uploader();
-		FileNameVO fvo = new FileNameVO(request.getRealPath(""));
-		fvo = uploader.upload(fvo, filename, vo.getNo());
+		FileNameVO fvo = new FileNameVO(registed_img_path);
+		fvo = uploader.upload(fvo, filename);
 		
 		vo.setImage_url(fvo.getSaved_filename());
-		System.out.println("imageurl체크: " + vo.getImage_url());
 		
 		System.out.println("vo체크: " + vo);
 		System.out.println("cvo체크: "  +cvo);
@@ -102,7 +104,7 @@ public class SellerController {
 		
 		Map map = service.getProductList(vo.getNo());
 		model.addAttribute("map", map);
-		System.out.println("map체크: " + map);
+		model.addAttribute("registed_img_path", registed_img_path);
 		return "seller/product/list";
 	}
 	

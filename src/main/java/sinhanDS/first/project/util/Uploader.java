@@ -38,17 +38,19 @@ import org.springframework.web.multipart.MultipartFile;
 	}
 */
 public class Uploader {
-	public FileNameVO upload(FileNameVO vo, MultipartFile file, int product_no) {
+	
+	public FileNameVO upload(FileNameVO vo, MultipartFile file) {
 		if(file.isEmpty()) return null;
 		
 		//업로드시의 본래 파일 명
-		vo.setSaved_filename(file.getOriginalFilename(), product_no);
+		vo.setSaved_filename(file.getOriginalFilename());
 		
 		
 		try {
 			//서버에 파일 저장
-			System.out.println("Path체크: " + vo.getPath());
-//			file.transferTo(new File(vo.getSaved_filename()));
+			File target_file = new File(vo.getRegisted_img_path() + "/" + vo.getSaved_filename());
+			System.out.println("target_file체크: " + target_file);
+			file.transferTo(target_file);
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;

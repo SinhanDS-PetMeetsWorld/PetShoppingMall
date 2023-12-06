@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri = 'http://java.sun.com/jsp/jstl/functions' %>
 <!DOCTYPE html>
 <html lang="ko">
 <head> 
@@ -35,8 +36,11 @@
 										<c:if test="${empty vo.image_url }">
 											<img src="/resources/img/product/no_image.jpg" width="100" height="100">
 										</c:if>
-										<c:if test="${!empty vo.image_url}">
+										<c:if test="${!empty vo.image_url && fn:substring(vo.image_url, 0, 1) == 'h' }">
 											<img src="${vo.image_url }" width="100" height="100">
+										</c:if>
+										<c:if test="${!empty vo.image_url && !(fn:substring(vo.image_url, 0, 1) == 'h') }">
+											<img src="/resources/img/product/registed_img/${vo.image_url }" width="100" height="100">
 										</c:if>
 										
 									</td>
@@ -107,5 +111,9 @@
 			<div class="footer-color"></div>
         </div>
     </div>
+    <script>
+		console.log("${fn:substring("abcde", 0, 1)} ");
+    	
+    </script>
 </body>
 </html>
