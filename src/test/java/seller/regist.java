@@ -44,7 +44,7 @@ public class regist {
 				.param("title_list", "사이즈").param("content_list", "middle").param("price_list", "1000")
 				.param("title_list", "사이즈").param("content_list", "large").param("price_list", "2000")
 				.param("discount", "0")
-//			.param("image_url", "")
+				.param("image_url", "https://shop-phinf.pstatic.net/20230525_293/1684973493402uS3Uh_PNG/4460383393079927_1678722971.png?type=m1000")
 				.param("description", "");
 		
 		mock.perform(req);

@@ -49,4 +49,8 @@
 
 	
 
+	<select id="product_list" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT *
+		FROM product
+	</select>
 </mapper>

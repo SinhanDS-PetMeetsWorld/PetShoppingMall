@@ -35,7 +35,7 @@
 			<div class="contentsright">
 				<div>
 					<h2>상품 등록</h2>
-					<form action="regist.do" method="post">
+					<form action="regist.do" method="post" onsubmit="return regist();" enctype="multipart/form-data">
 						<input type="hidden" name="seller_no"
 							value="${sellerLoginInfo.no}">
 						<div>
@@ -69,8 +69,10 @@
 									</div>
 
 								</div>
+								<a href="javascript:;" class="remove_btn_category"><img
+									src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a><br>
 								<a href="javascript:;" class="add_btn_category"><img
-									src="/resources/img/product/add.png" width="25" height="25" /></a>
+									src="/resources/img/product/add.png" width="25" height="25" /> 카테고리 추가</a>
 							</div>
 						</div>
 						<div>
@@ -88,7 +90,9 @@
 						</div>
 						
 
-						<div>상품 이미지 넣고</div>
+						<div>
+							상품 이미지 <input type="file" name="filename">
+						</div>
 						<div>
 							할인 가격 <input type="number" name="discount" value="0" required>
 						</div>
@@ -132,8 +136,10 @@
 					</div>
 
 				</div>
+				<a href="javascript:;" class="remove_btn_category"><img
+									src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a><br>
 				<a href="javascript:;" class="add_btn_category"><img
-					src="/resources/img/product/add.png" width="25" height="25" /></a>
+									src="/resources/img/product/add.png" width="25" height="25" /> 카테고리 추가</a>
 			</div>
 			
 			<div class="option_original" style="display: none;">
@@ -163,14 +169,23 @@
 
 	<script>
 		$('.add_btn_category').on('click', add_category);
-		$('.category1_list').on('change', change_category2)
+		$('.remove_btn_category').on('click', remove_category);
+		$('.category1_list').on('change', change_category2);
+		
+		function remove_category(){
+			let categoryBody = this.parentNode.parentNode;
+			let category_target = this.parentNode;
+			categoryBody.removeChild(category_target);
+		}
+		
 		function add_category() {
 			let newCategory = $('.category_original').clone();
 			$(newCategory).css('display', 'inline');
 			$(newCategory).removeClass('category_original');
 			$(newCategory).addClass('category');
 			console.log(newCategory);
-			$(newCategory).find('a').on('click', add_category);
+			$(newCategory).find('.add_btn_category').on('click', add_category);
+			$(newCategory).find('.remove_btn_category').on('click', remove_category);
 			$(newCategory).find('.category1_list').on('change', change_category2)
 			$(this).remove();
 			newCategory.appendTo($('.category_body'));
@@ -243,7 +258,33 @@
 			let option_content = this.parentNode;
 			let option_title = option_content.parentNode;
 			option_title.removeChild(option_content);
+			if(option_title.querySelector('.option_content') == null){
+				let option_temp = option_title.parentNode;
+				let option_body = option_temp.parentNode;
+				option_body.removeChild(option_temp);
+			}
 		}
+	</script>
+	
+	<script>
+		function regist(){
+			let cat1List = document.querySelectorAll('.category1_list');
+			let cat2List = document.querySelectorAll('.category2_list');
+			for(var i = 0; i < cat1List.length - 1; i++){
+				for(var j = i + 1; j < cat1List.length - 1; j++){
+					if((cat1List[i].value == cat1List[j].value) && (cat2List[i].value == cat2List[j].value)){
+						alert("중복 선택 된 카테고리가 존재합니다! 카테고리를 확인해주세요!");
+						return false;
+					}
+					//console.log("본래: " + cat1List[i].value + " "  + cat2List[i].value);
+					//console.log("비교: " + cat1List[j].value + " "  + cat2List[j].value);
+										
+				}
+			}
+			
+			return true;
+		}
+		
 	</script>
 </body>
 </html>

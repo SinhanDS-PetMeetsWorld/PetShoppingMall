@@ -27,9 +27,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.zaxxer.hikari.HikariDataSource;
 
-import sinhanDS.first.project.util.CategoryInterceptor;
-import sinhanDS.first.project.util.SellerLoginInterceptor;
-import sinhanDS.first.project.util.UserLoginInterceptor;
+import sinhanDS.first.project.util.interceptor.CategoryInterceptor;
+import sinhanDS.first.project.util.interceptor.SellerLoginInterceptor;
+import sinhanDS.first.project.util.interceptor.UserLoginInterceptor;
 
 
 @Configuration
@@ -143,7 +143,7 @@ public class MvcConfig implements WebMvcConfigurer{
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer property() {
 		PropertySourcesPlaceholderConfigurer property = new PropertySourcesPlaceholderConfigurer();
-		property.setLocations(new ClassPathResource("db.properties"), new ClassPathResource("mail.properties"));
+		property.setLocations(new ClassPathResource("db.properties"), new ClassPathResource("mail.properties"), new ClassPathResource("realPath.properties"));
 		return property;
 	}
 	//이메일 발송

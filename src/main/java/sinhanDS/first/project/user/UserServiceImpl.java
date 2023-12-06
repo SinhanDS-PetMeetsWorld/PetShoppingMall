@@ -121,5 +121,15 @@ public class UserServiceImpl implements UserService {
 		List<PaymentVO> list = mapper.exist_payment(vo.getNo());
 		return list;
 	}
+	
+	@Override
+	public int insert_payment(PaymentVO vo) {
+		return mapper.insert_payment(vo);
+	}
+	
+	@Override
+	public int modify_payment(PaymentVO vo) {
+		return mapper.modify_payment(vo);
+	}
 
 }

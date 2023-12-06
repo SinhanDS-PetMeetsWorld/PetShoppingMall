@@ -15,6 +15,9 @@ public interface SellerService {
 	public ProductVO getProduct(int product_no);
 	public Map getProductDetail(int product_no);
 	
+	public boolean edit_product(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo);
+	
+	
 	int seller_regist(SellerVO vo);
 	boolean check_password(SellerVO vo);
 	boolean dupId(String id);

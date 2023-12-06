@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import sinhanDS.first.project.user.VO.PaymentVO;
 import sinhanDS.first.project.user.VO.UserAddressVO;
 import sinhanDS.first.project.user.VO.UserVO;
 
@@ -229,4 +230,64 @@ public class UserController {
 		return "user/edit/user_payment";
 	}
 	
+	@GetMapping("/add_payment_form.do")
+	public String addpayment(Model model) {
+		PaymentVO vo = new PaymentVO();
+		model.addAttribute("vo", vo);
+		System.out.println(model);
+		return "user/edit/user_add_payment_form";
+	}
+	
+	@GetMapping("/insert_payment.do")
+	public String insertpayment(HttpSession sess, Model model, PaymentVO payvo) {
+		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+			
+		payvo.setUser_no(vo.getNo());
+		System.out.println(payvo);		// 현재 로그인한 유저의 no가 들어간 PaymentVO객체
+		int r = service.insert_payment(payvo);
+
+		
+		String msg = "";
+		String url = "add_payment_form.do";
+		
+		if (r > 0) {
+			msg = "정상적으로 추가되었습니다.";
+		} else {
+			msg = "결제수단 추가 실패";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		model.addAttribute("cmd","finish");
+		
+		
+		return "user/edit/alert";
+	}
+	
+	@PostMapping("/modify_payment.do")
+	public String modifypayment(PaymentVO payvo, Model model, HttpSession sess) {
+		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		
+		payvo.setUser_no(vo.getNo());
+		
+		String msg = "";
+		String url = "add_payment_form.do";
+		
+		int r = service.modify_payment(payvo);
+		System.out.println("페이페이 : " + payvo);
+		if (r > 0) {
+			msg = "정상적으로 수정되었습니다.";
+		} else {
+			msg = "수정 오류";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		model.addAttribute("cmd","finish");
+		return "user/edit/alert";
+	}
+	
+	@GetMapping("/modify_payment_form.do")
+	public String modpayment(Model model, PaymentVO vo) {
+		model.addAttribute("vo", vo);
+		return "user/edit/user_modify_payment_form";
+	}
 }

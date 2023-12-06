@@ -19,4 +19,6 @@ public interface UserService {
 	int modify_addr(UserAddressVO vo);
 	int delete_addr(int no);
 	List<PaymentVO> exist_payment(UserVO vo);
+	int insert_payment(PaymentVO vo);
+	int modify_payment(PaymentVO vo);
 }

@@ -30,5 +30,7 @@ public interface ProductMapper {
 	// QNA 등록	
 	int QNA_insert(ProductQnAVO vo);
 	
+	// 물건 리스트
+	List<ProductVO> product_list();
 
 }

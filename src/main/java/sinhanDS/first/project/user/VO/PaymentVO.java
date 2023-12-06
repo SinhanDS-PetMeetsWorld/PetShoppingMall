@@ -15,6 +15,7 @@ public class PaymentVO {
 	private String company;
 	private String account;
 	private String valid_date;
+	private String cvc;
 	
 	private List<ArrayList<String>> company_list;
 	public PaymentVO(){
@@ -40,6 +41,13 @@ public class PaymentVO {
 		company0.add("한국수출입은행");
 		company0.add("우체국예금");
 		company_list.add(company0);
+		
+		ArrayList<String> company1 = new ArrayList<>();
+		company1.add("신한카드");
+		company1.add("하나카드");
+		company1.add("우리카드");
+		company1.add("농협카드");
+		company_list.add(company1);
 	}
 	
 	/*
