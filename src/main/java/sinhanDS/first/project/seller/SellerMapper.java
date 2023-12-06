@@ -12,9 +12,14 @@ import sinhanDS.first.project.seller.vo.SellerVO;
 public interface SellerMapper {
 	SellerVO login(SellerVO vo);
 	
-	int regist(ProductVO vo);
+	int regist_product(ProductVO vo);
 	int regist_category(ProductCategoryVO vo);
 	int regist_option(ProductOptionVO vo);
+
+	int edit_product(ProductVO vo);
+	int remove_category(int no);
+	int remove_option(int no);
+	
 	
 	List<ProductVO> getProductList(int no);
 	ProductVO getProduct(int no);

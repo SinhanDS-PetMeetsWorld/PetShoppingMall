@@ -32,7 +32,9 @@
 			<div class="contentsright">
 				<div>
 					<h2>상품 수정</h2>
-					<form action="/seller/product/edit.do" method="post">
+					<form action="/seller/product/edit.do" method="post" onsubmit="return regist();">
+						<input type="hidden" name="no" value="${map.pvo.no }">
+						<input type="hidden" name="seller_no" value="${map.pvo.seller_no }">
 						<div>
 							상품명*<br> <input type="text" name="name" required value="${map.pvo.name }">
 						</div>
@@ -56,8 +58,8 @@
 	
 										<div>
 											세부 카테고리 *<br> <select name="category2_list"
-												class="category2_list" data-no="${status.index }">
-												<c:forEach var="category" items="${category.category[0] }"
+												class="category2_list" data-no="${status_outer.index }">
+												<c:forEach var="category" items="${category.category[cvo.category1] }"
 													varStatus="status_inner">
 													<option value="${status_inner.index}" <c:if test="${cvo.category2 == status_inner.index }">selected</c:if>>${category }</option>
 												</c:forEach>
@@ -65,11 +67,13 @@
 										</div>
 	
 									</div>
+									<a href="javascript:;" class="remove_btn_category"><img
+										src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a>
 								</div>
 							</c:forEach>
 							<div class="category">
 								<a href="javascript:;" class="add_btn_category"><img
-									src="/resources/img/product/add.png" width="25" height="25" /></a>
+									src="/resources/img/product/add.png" width="25" height="25" />카테고리 추가</a>
 							</div>
 						</div>
 						<div>
@@ -103,11 +107,11 @@
 													</div>
 												</c:if>
 											</c:forEach>
-								<c:if test="${(status.index == 0) || (map.optionList[status.index - 1].title != outer_ovo.title)}">
+								<%-- <c:if test="${(status.index == 0) || (map.optionList[status.index - 1].title != outer_ovo.title)}"> --%>
+								<c:if test="${(map.optionList[status.index + 1].title != outer_ovo.title)}">
 										</div>
 									</div>
 								</c:if>
-								
 							</c:forEach>
 							<div>
 								<a href="javascript:;" class="add_btn_option"><img
@@ -144,7 +148,7 @@
 				<hr>
 				<div>
 					카테고리 *<br> <select name="category1_list" class="category1_list">
-						<c:forEach var="category_name" items="${category.category_name }" varStatus="status">
+						<c:forEach var="category_name" items="${vo.category_name }" varStatus="status">
 							<option value="${status.index}">${category_name }</option>
 						</c:forEach>
 					</select>
@@ -152,7 +156,7 @@
 					<div>
 						세부 카테고리 *<br> <select name="category2_list"
 							class="category2_list" data-no="${status.index }">
-							<c:forEach var="category" items="${category.category[0] }"
+							<c:forEach var="category" items="${vo.category[0] }"
 								varStatus="status">
 								<option value="${status.index}">${category }</option>
 							</c:forEach>
@@ -160,8 +164,10 @@
 					</div>
 
 				</div>
+				<a href="javascript:;" class="remove_btn_category"><img
+									src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a><br>
 				<a href="javascript:;" class="add_btn_category"><img
-					src="/resources/img/product/add.png" width="25" height="25" /></a>
+									src="/resources/img/product/add.png" width="25" height="25" /> 카테고리 추가</a>
 			</div>
 			
 			<div class="option_original" style="display: none;">
@@ -191,7 +197,14 @@
 
 	<script>
 		$('.add_btn_category').on('click', add_category);
-		$('.category1_list').on('change', change_category2)
+		$('.remove_btn_category').on('click', remove_category);
+		$('.category1_list').on('change', change_category2);
+		
+		function remove_category(){
+			let categoryBody = this.parentNode.parentNode;
+			let category_target = this.parentNode;
+			categoryBody.removeChild(category_target);
+		}
 		function add_category() {
 			let newCategory = $('.category_original').clone();
 			$(newCategory).css('display', 'inline');
@@ -223,7 +236,7 @@
 		$('.add_btn_option').on('click', add_option);
 		$('.add_btn_option_content').on('click', add_option_content);
 		$('.remove_btn_option_content').on('click', remove_option_content);
-		
+		$('.remove_btn_option_title').on('click', remove_option_title);
 		
 		function add_option(){
 			console.log("gg1");
@@ -261,7 +274,6 @@
 		}
 		
 		function remove_option_title(){
-
 			let option_content = this.parentNode;
 			let option_title = option_content.parentNode;
 			let option_body = option_title.parentNode;
@@ -272,7 +284,33 @@
 			let option_content = this.parentNode;
 			let option_title = option_content.parentNode;
 			option_title.removeChild(option_content);
+			if(option_title.querySelector('.option_content') == null){
+				let option_temp = option_title.parentNode;
+				let option_body = option_temp.parentNode;
+				option_body.removeChild(option_temp);
+			}
 		}
+	</script>
+	
+	<script>
+		function regist(){
+			let cat1List = document.querySelectorAll('.category1_list');
+			let cat2List = document.querySelectorAll('.category2_list');
+			for(var i = 0; i < cat1List.length - 1; i++){
+				for(var j = i + 1; j < cat1List.length - 1; j++){
+					if((cat1List[i].value == cat1List[j].value) && (cat2List[i].value == cat2List[j].value)){
+						alert("중복 선택 된 카테고리가 존재합니다! 카테고리를 확인해주세요!");
+						return false;
+					}
+					//console.log("본래: " + cat1List[i].value + " "  + cat2List[i].value);
+					//console.log("비교: " + cat1List[j].value + " "  + cat2List[j].value);
+										
+				}
+			}
+			
+			return true;
+		}
+		
 	</script>
 </body>
 </html>

@@ -7,8 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
+import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
 
@@ -23,7 +23,7 @@ public class SellerServiceImpl implements SellerService {
 	}
 
 	public int regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
-		int result = mapper.regist(vo);
+		int result = mapper.regist_product(vo);
 		for(int i = 0; i < cvo.getCategory1_list().length; i++) {
 			ProductCategoryVO ncvo = new ProductCategoryVO();
 			ncvo.setProduct_no(vo.getNo());
@@ -88,6 +88,39 @@ public class SellerServiceImpl implements SellerService {
 		map.put("optionList", optionList);
 		
 		return map;
+	}
+	
+	public boolean edit_product(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
+		System.out.println("수정작업시작");
+		System.out.println("vo체크: " + vo);
+		int result = mapper.edit_product(vo);
+		System.out.println("result체크: " +  result);
+		if(result == 0) return false;
+		
+		mapper.remove_category(vo.getNo());
+		mapper.remove_option(vo.getNo());
+		System.out.println("옵션/카테고리제거체크 " );
+		for(int i = 0; i < cvo.getCategory1_list().length; i++) {
+			ProductCategoryVO ncvo = new ProductCategoryVO();
+			ncvo.setProduct_no(vo.getNo());
+			ncvo.setCategory1(cvo.getCategory1_list()[i]);
+			ncvo.setCategory2(cvo.getCategory2_list()[i]);
+			mapper.regist_category(ncvo);
+		}
+		
+		if(ovo.getTitle_list() != null) {
+			for(int i = 0; i < ovo.getTitle_list().length; i++) {
+				ProductOptionVO novo = new ProductOptionVO();
+				novo.setProduct_no(vo.getNo());
+				novo.setTitle(ovo.getTitle_list()[i]);
+				novo.setContent(ovo.getContent_list()[i]);
+				novo.setPrice(ovo.getPrice_list()[i]);
+				System.out.println("novo체크: " + novo);
+				mapper.regist_option(novo);
+			}
+		}
+		
+		return true;
 	}
 	
 	@Override

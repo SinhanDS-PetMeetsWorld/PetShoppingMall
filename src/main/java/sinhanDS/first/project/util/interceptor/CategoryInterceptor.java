@@ -1,4 +1,4 @@
-package sinhanDS.first.project.util;
+package sinhanDS.first.project.util.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
