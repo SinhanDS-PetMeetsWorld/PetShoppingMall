@@ -42,7 +42,14 @@ public class ProductServiceImpl implements ProductService {
 		
 		return product_more;
 	}
-
+	
+	@Override
+	public List<ProductCategoryVO> Product_more_category(ProductCategoryVO vo) {
+		
+		List<ProductCategoryVO> product_more_category = mapper.Product_more_category(vo);
+		
+		return product_more_category;
+	}
 	
 	
 	@Override
@@ -60,6 +67,8 @@ public class ProductServiceImpl implements ProductService {
 		List<ReviewVO> review_list = mapper.Review_list(vo);
 		return review_list;
 	}
+
+	
 
 
 }

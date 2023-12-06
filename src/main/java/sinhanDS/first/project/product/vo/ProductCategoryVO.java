@@ -16,6 +16,8 @@ public class ProductCategoryVO {
 	
 	private List<ArrayList<String>> category;
 	private List<String> category_name;
+	
+	
 	public ProductCategoryVO(){
 		category_name = new ArrayList<String>();
 		category_name.add("강아지");

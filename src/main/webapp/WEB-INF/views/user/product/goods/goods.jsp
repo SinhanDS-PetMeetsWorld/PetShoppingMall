@@ -61,52 +61,66 @@
 			</div>
 			<div class="contentsright">
 				<div>
-				
-				<div id ="goods_no">
-					${product_no} 찐 제품 번호
-				</div>
-				
-				<c:forEach var="item" items="${product_more}">
-					<div class="goods-container">
-							<div id="goods_category" style="width: 720px; height: 100px; border: 1px solid black">
-								화살표 이미지<br> 강아지 > 사료
-							</div>
-						<div class="goods-photo">
-							<img src="${item.image_url}">
-						</div>
-						<div class="goods-details">
-							
-							<div id ="goods_no">
-								${item.no} 제품번호
-							</div>
-
-							<div id="goods_menu">
-								<div class="goods-name"
-									style="width: 720px; height: 100px; border: 1px solid black;">
-									<h1>${item.name} 대충 평점 이미지</h1>
-								</div>
-
-								<div class="goods-price"
-									style="width: 720px; height: 100px; border: 1px solid black;">
-									<h2>${item.price} </h2>
-								</div>
-
-								<div class="goods-explain"
-									style="width: 720px; height: 100px; border: 1px solid black;">
-									${item.description}</div>
-
-								<div class="goods-option"
-									style="width: 720px; height: 100px; border: 1px solid black;">
+					
+						<div id="goods_category" style="width: 720px; height: 100px; border: 1px solid black">
 									
-								</c:forEach>
-									수량 조절 이미지 <input type="button" style="background-color: grey;"
-										value="장바구니 담기"> <input type="button"
-										style="background-color: yellow" value="바로 구매"><br>
-									100,000원 이상 구매시 무료배송 (배송조건 이런거 없나요?)
+									    <c:forEach var="item" items="${product_more_category}">
+									        ${catekor.category_name[item.category1]} > 
+									        ${catekor.category[item.category1][item.category2] } <br>
+									       
+									    </c:forEach>
+									
+						</div>
+						
+						
+						<c:forEach var="item" items="${product_more}">
+							
+									
+						
+								<div class="goods-photo">
+									<img src="${item.image_url}">
+								</div>
+								<div class="goods-details">
+									
+									
+		
+									<div id="goods_menu">
+									
+										<div class ="goods_no" style="width: 720px; height: 100px; border: 1px solid black;">
+											${product_no} 제품번호
+										</div>
+										
+										<div class="goods-name"
+											style="width: 720px; height: 100px; border: 1px solid black;">
+											<h2>${item.name}</h2>
+										</div>
+									
+										<div class="goods-price"
+											style="width: 720px; height: 100px; border: 1px solid black;">
+											<h2>${item.price} </h2>
+										</div>
+		
+										<div class="goods-explain"
+											style="width: 720px; height: 100px; border: 1px solid black;">
+											${item.description}
+										</div>
+		
+										<div class="goods-option"
+											style="width: 720px; height: 100px; border: 1px solid black;"> 
+										</div>
+									</div>		
+										</c:forEach>
+											수량 조절 이미지 <input type="button" style="background-color: grey;"
+												value="장바구니 담기"> <input type="button"
+												style="background-color: yellow" value="바로 구매"><br>
+											100,000원 이상 구매시 무료배송 (배송조건 이런거 없나요?)
+								
+								
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+				
 
 			<div class = "goods_review_QNA">
 					<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
@@ -153,6 +167,10 @@
 		</div>
 		
 <script>
+
+
+
+
 
 
 // 질문 ,해답 하나씩 켜고 끄기

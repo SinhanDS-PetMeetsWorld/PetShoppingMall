@@ -16,10 +16,13 @@ public interface ProductMapper {
 	// 리뷰 리스트
 	List<ReviewVO> Review_list (ReviewVO vo);
 	
+	
 	List<ProductVO> Product_more (ProductVO vo);
 	
+	List <ProductCategoryVO> Product_more_category(ProductCategoryVO vo); 
+	
 	// 볼 수 있는 거	
-	ProductQnAVO view(ProductQnAVO vo); 
+	// ProductQnAVO view(ProductQnAVO vo); 
 	
 	// (제품번호를 이용한) 판매자 검색
 	int Seller_no (int product_no);

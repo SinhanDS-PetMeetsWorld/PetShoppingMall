@@ -8,6 +8,12 @@
 		where no = ${no}
 	</select>
 	
+	<select id ="Product_more_category" parameterType="sinhanDS.first.project.product.vo.ProductCategoryVO" >
+		select * from product_category
+		where product_no = ${no}
+	</select>
+	
+	
 	<select id="QNA_list" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO" resultType="sinhanDS.first.project.product.vo.ProductQnAVO">
 		SELECT *  
 		FROM product_qna

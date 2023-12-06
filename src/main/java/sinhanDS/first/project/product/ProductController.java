@@ -32,19 +32,29 @@ public class ProductController {
 	// 신정훈(11 / 29) QNA 페이지 , 리뷰 페이지 구현	
 	// 신정훈(12 / 05) 상품 상세 페이지 구현
 	@GetMapping("/goods.do")
-	public String QNA_Review_list(Model model, HttpServletRequest request,ProductVO pvo, ProductQnAVO qnavo , ReviewVO revvo) {
+	public String QNA_Review_list(Model model, HttpServletRequest request,ProductVO pvo, ProductQnAVO qnavo , ReviewVO revvo , ProductCategoryVO pcvo) {
 		
 		List<ProductVO> product_more = service.Product_more(pvo);
 		List<ProductQnAVO> qna_list = service.QNA_list(qnavo);
 		List<ReviewVO> review_list = service.Review_list(revvo);
+		List<ProductCategoryVO> product_more_category = service.Product_more_category(pcvo);
+		ProductCategoryVO catekor = new ProductCategoryVO();
+		
 		String product_no = request.getParameter("no");
 		pvo.setNo(Integer.valueOf(product_no));
+		
+		
 		System.out.println("pvo 넘버가 몇으로 들어가려나?? " + pvo.getNo());
 		
+		model.addAttribute("catekor" , catekor);
+		model.addAttribute("product_more_category" , product_more_category);
 		model.addAttribute("product_more" , product_more);
 		model.addAttribute("qna_list", qna_list);
 		model.addAttribute("review_list", review_list);
 		model.addAttribute("product_no" , product_no);
+		
+		
+		
 		return "user/product/goods/goods";
 	}
 	
