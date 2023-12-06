@@ -30,6 +30,7 @@ public class SellerLoginInterceptor  implements HandlerInterceptor {
 			out.close();
 			return false;
 		}
+		System.out.println("인터셉터 통과");
 		return true;
 	}
 }
