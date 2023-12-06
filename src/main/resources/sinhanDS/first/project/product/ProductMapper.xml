@@ -10,8 +10,16 @@
 	
 	<select id="QNA_list" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO" resultType="sinhanDS.first.project.product.vo.ProductQnAVO">
 		SELECT *  
-		FROM product_qna 
+		FROM product_qna
+		where product_no = ${no} 
 		ORDER BY no DESC
+	</select>
+	
+	<select id ="Review_list" parameterType = "sinhanDS.first.project.product.vo.ReviewVO" resultType= "sinhanDS.first.project.product.vo.ReviewVO">
+		SELECT * 
+		FROM review
+		where product_no = ${no}
+		ORDER BY no DESC 
 	</select>
 	
 	<select id="Seller_no" parameterType="sinhanDS.first.project.product.vo.ProductVO">
@@ -32,11 +40,11 @@
     </insert>
 	
 	
-	<select id ="Review_list" parameterType = "sinhanDS.first.project.product.vo.ReviewVO" resultType= "sinhanDS.first.project.product.vo.ReviewVO">
-		SELECT * 
-		FROM review
-		ORDER BY no DESC 
-	</select>
+
 	
 
+	<select id="product_list" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT *
+		FROM product
+	</select>
 </mapper>

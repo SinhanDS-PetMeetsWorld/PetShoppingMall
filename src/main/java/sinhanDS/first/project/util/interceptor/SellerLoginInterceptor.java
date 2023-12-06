@@ -1,4 +1,4 @@
-package sinhanDS.first.project.util;
+package sinhanDS.first.project.util.interceptor;
 
 import java.io.PrintWriter;
 
@@ -30,6 +30,7 @@ public class SellerLoginInterceptor  implements HandlerInterceptor {
 			out.close();
 			return false;
 		}
+		System.out.println("인터셉터 통과");
 		return true;
 	}
 }

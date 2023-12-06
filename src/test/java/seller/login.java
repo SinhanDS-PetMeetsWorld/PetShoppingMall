@@ -27,9 +27,8 @@ public class login {
 	}
 
 	@Test
-	public void loginTest() throws Exception {
-		RequestBuilder req = MockMvcRequestBuilders.post("/seller//login.do").param("id", "kimcider").param("password",
-				"captain");
+	public void indexTest() throws Exception {
+		RequestBuilder req = MockMvcRequestBuilders.post("/seller/index.do");
 		mock.perform(req);
 
 	}

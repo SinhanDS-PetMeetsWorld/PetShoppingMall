@@ -5,6 +5,9 @@ package sinhanDS.first.project.seller;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +20,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.VO.PaymentVO;
+import sinhanDS.first.project.util.FileNameVO;
+import sinhanDS.first.project.util.Uploader;
 
 
 @Controller
@@ -34,7 +40,10 @@ public class SellerController {
 	private JavaMailSender javaMailSender;
 	
 	@GetMapping("/index.do")
-	public String index() {
+	public String index(HttpServletRequest request) {
+		 ServletContext servletContext = request.getSession().getServletContext();
+		    String realPath = servletContext.getRealPath("/");
+		    System.out.println("realpath체크: " + realPath);
 		return "seller/index";
 	}
 	@GetMapping("/login.do")
@@ -71,7 +80,14 @@ public class SellerController {
 		return "seller/product/regist";
 	}		
 	@PostMapping("/product/regist.do")
-	public String regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
+	public String regist(@RequestParam MultipartFile filename, HttpServletRequest request, ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
+		Uploader uploader = new Uploader();
+		FileNameVO fvo = new FileNameVO(request.getRealPath(""));
+		fvo = uploader.upload(fvo, filename, vo.getNo());
+		
+		vo.setImage_url(fvo.getSaved_filename());
+		System.out.println("imageurl체크: " + vo.getImage_url());
+		
 		System.out.println("vo체크: " + vo);
 		System.out.println("cvo체크: "  +cvo);
 		System.out.println("ovo체크: " + ovo);
@@ -99,12 +115,15 @@ public class SellerController {
 		System.out.println("map체크: " + map);
 		return "seller/product/edit";
 	}
+	
+	
 	@PostMapping("/product/edit.do")
 	public String product_edit2(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
 		System.out.println("vo체크: " + vo);
 		System.out.println("cvo체크: "  +cvo);
 		System.out.println("ovo체크: " + ovo);
-		return "redirect:/";
+		service.edit_product(vo, cvo, ovo);
+		return "redirect:/seller/index.do";
 	}	
 	
 	

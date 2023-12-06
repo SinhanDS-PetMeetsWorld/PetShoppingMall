@@ -7,7 +7,7 @@
 	</select>
 	
 			
-	<insert id="regist" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+	<insert id="regist_product" parameterType="sinhanDS.first.project.product.vo.ProductVO">
 		INSERT INTO PetShoppingMall.product
 		(
 			seller_no, name, price, discount, stock,
@@ -55,6 +55,39 @@
 			#{price}
 		);
 	</insert>
+	
+	<update id="edit_product" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+		UPDATE PetShoppingMall.product
+		SET
+			seller_no = #{seller_no},
+			name = #{name},
+			price = #{price},
+			discount = #{discount},
+			stock = #{stock},
+			company = #{company},
+			brand = #{brand},
+			rating = #{rating},
+			image_url = #{image_url},
+			description = #{description}
+		WHERE no = #{no};
+	</update>
+	
+	<!-- 
+	
+	 -->
+	<delete id="remove_category" parameterType="int">
+		DELETE FROM PetShoppingMall.product_category
+		WHERE product_no = #{product_no};
+		
+	</delete>
+	
+	<delete id="remove_option" parameterType="int">
+		DELETE FROM PetShoppingMall.product_option
+		WHERE product_no = #{product_no};
+		
+	</delete>
+	
+	
 	
 	<select id="getProductList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT * FROM product WHERE seller_no = #{seller_no}
