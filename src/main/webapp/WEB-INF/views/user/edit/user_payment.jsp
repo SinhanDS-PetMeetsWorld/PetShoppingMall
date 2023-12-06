@@ -82,7 +82,7 @@
 							                <br>
 							            </td>
 							            <td>
-							                <button type="button" name="modify" onclick="location.href=/*수정.jsp*/''">수정</button> |
+							                <button type="button" name="modify" onclick="window.open('/user/modify_payment_form.do?no=${vo.no}&type=${vo.type }&name=${vo.name }&account=${vo.account }&cvc=${vo.cvc }&company=${vo.company }&valid_date=${vo.valid_date }','user_modify_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>  |
 							                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
 							                <br>
 							            </td>
@@ -108,7 +108,7 @@
 							                <br>
 							            </td>
 							            <td>
-							                <button type="button" name="modify" onclick="location.href=/*수정.jsp*/''">수정</button> |
+							                <button type="button" name="modify" onclick="window.open('/user/modify_payment_form.do?no=${vo.no}&type=${vo.type }&name=${vo.name }&account=${vo.account }&company=${vo.company }','user_modify_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>  |
 							                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
 							                <br>
 							            </td>
@@ -125,8 +125,8 @@
 					        <tr>
 					            <td colspan="2">
 					                <div></div>
-
-					                <button type="button" name="add_new_address">+ 결제 수단 추가</button>
+									
+									<button onclick="window.open('/user/add_payment_form.do','user_add_payment_form', 'width=500,height=700,location=no,status=no,scrollbars=yes');">+ 결제 수단 추가</button>
 					            </td>
 					        </tr>
 					    </table>

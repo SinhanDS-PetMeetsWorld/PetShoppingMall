@@ -87,5 +87,26 @@
 		SELECT * FROM payment WHERE user_no = #{user_no}
 	</select>
 	
+	<insert id="insert_payment" parameterType="sinhanDS.first.project.user.VO.PaymentVO">
+		INSERT INTO payment (
+			user_no, name, type, company, account, valid_date, cvc
+		) VALUES (
+			#{user_no}, #{name}, #{type}, #{company}, #{account}, #{valid_date}, #{cvc}
+		)
+		
+	</insert>
+	
+	<update id="modify_payment" parameterType="sinhanDS.first.project.user.VO.PaymentVO">
+		UPDATE payment SET
+			name = #{name},
+			account = #{account},
+			type = #{type},
+			company = #{company}
+			<if test="type eq 0">
+				,valid_date = #{valid_date}
+				,cvc = #{cvc}
+			</if>
+		WHERE no = #{no}
+	</update>
 
 </mapper>
