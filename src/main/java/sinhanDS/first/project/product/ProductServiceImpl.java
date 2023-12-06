@@ -61,5 +61,11 @@ public class ProductServiceImpl implements ProductService {
 		return review_list;
 	}
 
+	@Override
+	public List<ProductVO> product_list() {
+		List<ProductVO> product_list = mapper.product_list();
+		return product_list;
+	}
+
 
 }
