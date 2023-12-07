@@ -75,15 +75,11 @@
 						
 						<c:forEach var="item" items="${product_more}">
 							
-									
-						
 								<div class="goods-photo">
 									<img src="${item.image_url}">
 								</div>
 								<div class="goods-details">
 									
-									
-		
 									<div id="goods_menu">
 									
 										<div class ="goods_no" style="width: 720px; height: 100px; border: 1px solid black;">
@@ -105,66 +101,66 @@
 											${item.description}
 										</div>
 		
-									</div>		
+									</div>	
+								</div>		
+						</c:forEach>
 									
+										<div class="goods-option"
+												style="width: 720px; height: 100px; border: 1px solid black;"> 
+																							
+											<select name="category">															
+												<c:forEach var="item" items="${product_more_option}">
+													<option value="${item.content} ${item.price}"> ${item.title} : ${item.content} 추가금액 : ${item.price}</option>
+												</c:forEach>													
+											</select>
+										
+										</div>
 									
-									<div class="goods-option"
-											style="width: 720px; height: 100px; border: 1px solid black;"> 
-																									
-											<c:forEach var="item" items="${product_more_option}">
-											  ${item.title}	> ${item.content} > ${item.price} 
-											</c:forEach>
-								
-									</div>
-									
-									
-										</c:forEach>
 											수량 조절 이미지 <input type="button" style="background-color: grey;"
 												value="장바구니 담기"> <input type="button"
 												style="background-color: yellow" value="바로 구매"><br>
 											100,000원 이상 구매시 무료배송 (배송조건 이런거 없나요?)
 								
-								
+						<div class = "goods_review_QNA">
+								<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
+								<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>
+								<div class="board_contents active" id ='review'>
+							   		 <c:forEach var="item" items="${review_list}">
+							       		 <div class="review">
+							             <img src=" ${item.image_url}">
+							             <p>평점 : ${item.rating} </p>
+							             <p>내용 : ${item.content} </p>
+							             <p>작성일 : ${item.write_date} </p>
+							        	 </div>
+							    	</c:forEach>
+								</div>
+							
+								<div class="board_contents" id = "qna">
+						
+						 		<div class="qna_write_button">
+									<button type="button" name="go_qnawrite" onclick="location.href='/product/qnawrite.do?no=${product_no}'">qna 작성하기</button>
+								</div>
+						 
+						   		 <c:forEach var="item" items="${qna_list}">
+						       		 
+						       		 <div class="Q" onclick="toggleAnswer(this)" >
+						             	<p> ${item.question_content} (질문 작성일 : ${item.question_write_date}) </p>
+						        	 </div>
+						        
+						        	 <div class="A" style="display:none;">
+						             	<p style="color : pink;"> ${item.answer_content} (답변 작성일 : ${item.answer_write_date})</p>
+						        	 </div>
+						    	
+						    	</c:forEach>
+							</div>
+					</div>
 									</div>
 								</div>
 							</div>
 						</div>
 				
 
-			<div class = "goods_review_QNA">
-					<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
-					<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>
-					<div class="board_contents active" id ='review'>
-				   		 <c:forEach var="item" items="${review_list}">
-				       		 <div class="review">
-				             <img src=" ${item.image_url}">
-				             <p>평점 : ${item.rating} </p>
-				             <p>내용 : ${item.content} </p>
-				             <p>작성일 : ${item.write_date} </p>
-				        	 </div>
-				    	</c:forEach>
-					</div>
-					
-					
-					<div class="board_contents" id = "qna">
-				
-				 		<div class="qna_write_button">
-							<button type="button" name="go_qnawrite" onclick="location.href='/product/qnawrite.do?no=${product_no}'">qna 작성하기</button>
-						</div>
-				 
-				   		 <c:forEach var="item" items="${qna_list}">
-				       		 
-				       		 <div class="Q" onclick="toggleAnswer(this)" >
-				             	<p> ${item.question_content} (질문 작성일 : ${item.question_write_date}) </p>
-				        	 </div>
-				        
-				        	 <div class="A" style="display:none;">
-				             	<p style="color : pink;"> ${item.answer_content} (답변 작성일 : ${item.answer_write_date})</p>
-				        	 </div>
-				    	
-				    	</c:forEach>
-					</div>
-			</div>
+			
 					
 					</div>
 				</div>
