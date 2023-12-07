@@ -124,4 +124,26 @@
 		SELECT COUNT(*) FROM seller WHERE id=#{id}
 	</select>
 	
+	<select id="detail" parameterType="int" resultType="sinhanDS.first.project.seller.vo.SellerVO">
+		SELECT * FROM seller WHERE no = #{no}
+	</select>
+
+	<update id="edit" parameterType="sinhanDS.first.project.seller.vo.SellerVO">
+		UPDATE seller SET
+			<if test="password != ''">
+				password = MD5(#{new_password}),
+			</if>
+			name = #{name},
+			email = #{email},
+			phone = #{phone},
+			business_number = #{business_number},
+			zipcode = #{zipcode},
+			addr1 = #{addr1},
+			addr2 = #{addr2},
+			bank = #{bank},
+			account = #{account}
+		WHERE no = #{no}
+	</update>
+
+	
 </mapper>

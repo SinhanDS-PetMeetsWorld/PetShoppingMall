@@ -6,20 +6,15 @@ import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.user.vo.UserVO;
 
 public interface SellerService {
 	public SellerVO login(SellerVO vo);
-	
-	public int regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo);
-	public Map getProductList(int seller_no);
-	public ProductVO getProduct(int product_no);
-	public Map getProductDetail(int product_no);
-	
-	public boolean edit_product(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo);
-	
-	
 	int seller_regist(SellerVO vo);
 	boolean check_password(SellerVO vo);
 	boolean dupId(String id);
+	
+	SellerVO detail(SellerVO vo);
+	int edit(SellerVO vo);
 	
 }

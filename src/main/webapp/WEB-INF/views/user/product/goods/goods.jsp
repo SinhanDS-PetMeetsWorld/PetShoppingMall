@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri = 'http://java.sun.com/jsp/jstl/functions' %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -61,87 +62,116 @@
 			</div>
 			<div class="contentsright">
 				<div>
-				
-				<div id ="goods_no">
-					${product_no} 찐 제품 번호
-				</div>
-				
-				<c:forEach var="item" items="${product_more}">
-					<div class="goods-container">
-							<div id="goods_category" style="width: 720px; height: 100px; border: 1px solid black">
-								화살표 이미지<br> 강아지 > 사료
-							</div>
-						<div class="goods-photo">
-							<img src="${item.image_url}">
-						</div>
-						<div class="goods-details">
-							
-							<div id ="goods_no">
-								${item.no} 제품번호
-							</div>
-
-							<div id="goods_menu">
-								<div class="goods-name"
-									style="width: 720px; height: 100px; border: 1px solid black;">
-									<h1>${item.name} 대충 평점 이미지</h1>
-								</div>
-
-								<div class="goods-price"
-									style="width: 720px; height: 100px; border: 1px solid black;">
-									<h2>${item.price} </h2>
-								</div>
-
-								<div class="goods-explain"
-									style="width: 720px; height: 100px; border: 1px solid black;">
-									${item.description}</div>
-
-								<div class="goods-option"
-									style="width: 720px; height: 100px; border: 1px solid black;">
+					
+						<div id="goods_category" style="width: 720px; height: 100px; border: 1px solid black">
 									
-								</c:forEach>
-									수량 조절 이미지 <input type="button" style="background-color: grey;"
-										value="장바구니 담기"> <input type="button"
-										style="background-color: yellow" value="바로 구매"><br>
-									100,000원 이상 구매시 무료배송 (배송조건 이런거 없나요?)
+							<c:forEach var="item" items="${product_more_category}">
+								${catekor.category_name[item.category1]} > 
+								${catekor.category[item.category1][item.category2] } <br>
+									       
+							</c:forEach>
+									
+						</div>
+						
+						
+						<c:forEach var="item" items="${product_more}">
+							
+								<div class="goods-photo">
+										<c:if test="${empty item.image_url }">
+											<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+										</c:if>
+										<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
+											<img src="${item.image_url }">
+										</c:if>
+										<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
+											<img src="/resources/img/product/registed_img/${item.image_url }">
+										</c:if>
+								</div>
+								<div class="goods-details">
+									
+									<div id="goods_menu">
+									
+										<div class ="goods_no" style="width: 720px; height: 100px; border: 1px solid black;">
+											${product_no} 제품번호
+										</div>
+										
+										<div class="goods-name"
+											style="width: 720px; height: 100px; border: 1px solid black;">
+											<h2>${item.name}</h2>
+										</div>
+									
+										<div class="goods-price"
+											style="width: 720px; height: 100px; border: 1px solid black;">
+											<h2>${item.price} </h2>
+										</div>
+		
+										<div class="goods-explain"
+											style="width: 720px; height: 100px; border: 1px solid black;">
+											${item.description}
+										</div>
+		
+									</div>	
+								</div>		
+						</c:forEach>
+									
+										<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
+											<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
+												<c:if test="${(status.index == 0) || (product_more_option[status.index - 1].title != ovo.title)}">
+													${ovo.title } <select name="title_list">
+												</c:if>
+														<option value=""> ${ovo.content } :  ${ovo.price }원</option>
+												<c:if test="${(product_more_option[status.index + 1].title != ovo.title)}">
+													</select><br>
+												</c:if>
+											</c:forEach>
+										</div>
+									
+											수량 <input type="number" name="choose_number" value=0>
+											
+											<input type="button" style="background-color: grey;"
+												value="장바구니 담기"> <input type="button"
+												style="background-color: yellow" value="바로 구매"><br>
+								
+						<div class = "goods_review_QNA">
+								<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
+								<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>
+								<div class="board_contents active" id ='review'>
+							   		 <c:forEach var="item" items="${review_list}">
+							       		 <div class="review">
+							             <img src=" ${item.image_url}">
+							             <p>평점 : ${item.rating} </p>
+							             <p>내용 : ${item.content} </p>
+							             <p>작성일 : ${item.write_date} </p>
+							        	 </div>
+							    	</c:forEach>
+								</div>
+							
+								<div class="board_contents" id = "qna">
+						
+						 		<div class="qna_write_button">
+									<button type="button" name="go_qnawrite" onclick="location.href='/product/qnawrite.do?no=${product_no}'">qna 작성하기</button>
+								</div>
+						 
+						   		 <c:forEach var="item" items="${qna_list}">
+						       		 
+						       		 <div class="Q" onclick="toggleAnswer(this)" >
+						             	<p> ${item.question_content} (질문 작성일 : ${item.question_write_date}) </p>
+						        	 </div>
+						        
+						        	 <div class="A" style="display:none;">
+						             	<p style="color : pink;"> ${item.answer_content} (답변 작성일 : ${item.answer_write_date})</p>
+						        	 </div>
+						    	
+						    	</c:forEach>
+							</div>
+					</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-
-			<div class = "goods_review_QNA">
-					<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
-					<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>
-					<div class="board_contents active" id ='review'>
-				   		 <c:forEach var="item" items="${review_list}">
-				       		 <div class="review">
-				             <img src=" ${item.image_url}">
-				             <p>평점 : ${item.rating} </p>
-				             <p>내용 : ${item.content} </p>
-				             <p>작성일 : ${item.write_date} </p>
-				        	 </div>
-				    	</c:forEach>
-					</div>
-					
-					
-					<div class="board_contents" id = "qna">
 				
-				 		<div class="qna_write_button">
-							<button type="button" name="go_qnawrite" onclick="location.href='/product/qnawrite.do?no=${product_no}'">qna 작성하기</button>
-						</div>
-				 
-				   		 <c:forEach var="item" items="${qna_list}">
-				       		 
-				       		 <div class="Q" onclick="toggleAnswer(this)" >
-				             	<p> ${item.question_content} (질문 작성일 : ${item.question_write_date}) </p>
-				        	 </div>
-				        
-				        	 <div class="A" style="display:none;">
-				             	<p style="color : pink;"> ${item.answer_content} (답변 작성일 : ${item.answer_write_date})</p>
-				        	 </div>
-				    	
-				    	</c:forEach>
-					</div>
-			</div>
+
+			
 					
 					</div>
 				</div>
@@ -153,6 +183,10 @@
 		</div>
 		
 <script>
+
+
+
+
 
 
 // 질문 ,해답 하나씩 켜고 끄기

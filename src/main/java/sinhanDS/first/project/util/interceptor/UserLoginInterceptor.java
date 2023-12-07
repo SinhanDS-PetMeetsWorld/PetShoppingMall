@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import sinhanDS.first.project.user.VO.UserVO;
+import sinhanDS.first.project.user.vo.UserVO;
 
 public class UserLoginInterceptor implements HandlerInterceptor {
 	@Override
@@ -16,7 +16,7 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 							HttpServletResponse response, 
 							Object handler) throws Exception {
 		HttpSession sess = request.getSession();
-		UserVO login = (UserVO)sess.getAttribute("loginInfo");
+		UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
 		if (login == null) {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();

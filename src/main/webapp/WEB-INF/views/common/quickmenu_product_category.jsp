@@ -14,7 +14,7 @@
 		<c:forEach var="category" items="${ProductCategoryVO.category}" varStatus="status">
 			<c:if test="${status.index == category1 }">
 				<c:forEach var="ct2" items="${category }" varStatus="ct2Status">
-					<li><a href="/product/search.do?category1=${category1 }&category2=${ct2Status.index}">${ct2 } </a></li>
+					<li><a href="/user/product/search.do?category1=${category1 }&category2=${ct2Status.index}">${ct2 } </a></li>
 				</c:forEach>
 			</c:if>
 		</c:forEach>

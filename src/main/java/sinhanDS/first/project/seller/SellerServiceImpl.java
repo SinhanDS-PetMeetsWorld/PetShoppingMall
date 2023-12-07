@@ -1,4 +1,6 @@
 package sinhanDS.first.project.seller;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.user.vo.UserVO;
 
 @Service
 public class SellerServiceImpl implements SellerService {
@@ -22,106 +25,7 @@ public class SellerServiceImpl implements SellerService {
 		return mapper.login(vo);
 	}
 
-	public int regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
-		int result = mapper.regist_product(vo);
-		for(int i = 0; i < cvo.getCategory1_list().length; i++) {
-			ProductCategoryVO ncvo = new ProductCategoryVO();
-			ncvo.setProduct_no(vo.getNo());
-			ncvo.setCategory1(cvo.getCategory1_list()[i]);
-			ncvo.setCategory2(cvo.getCategory2_list()[i]);
-			mapper.regist_category(ncvo);
-		}
-		
-		if(ovo.getTitle_list() != null) {
-			for(int i = 0; i < ovo.getTitle_list().length; i++) {
-				ProductOptionVO novo = new ProductOptionVO();
-				novo.setProduct_no(vo.getNo());
-				novo.setTitle(ovo.getTitle_list()[i]);
-				novo.setContent(ovo.getContent_list()[i]);
-				novo.setPrice(ovo.getPrice_list()[i]);
-				System.out.println("novo체크: " + novo);
-				mapper.regist_option(novo);
-			}
-		}
-		return result; 
-	}
-	public Map getProductList(int seller_no){
-		Map map = new HashMap<>();
-		List<ProductVO> productList = mapper.getProductList(seller_no);
-		List<List<ProductCategoryVO>> categoryList = new ArrayList<>();
-		List<List<ProductOptionVO>> optionList = new ArrayList<>();
-		for(int i = 0; i < productList.size(); i++) {
-			System.out.println("productNO: " + productList.get(i).getNo());
-			List<ProductCategoryVO> categoryVO = mapper.getCategoriesList(productList.get(i).getNo());
-			categoryList.add(categoryVO);
-			System.out.println(categoryVO);
-		}
-		
-		for(int i = 0; i < productList.size(); i++) {
-			System.out.println("productNO: " + productList.get(i).getNo());
-			List<ProductOptionVO> optionVO = mapper.getOptionsList(productList.get(i).getNo());
-			optionList.add(optionVO);
-			System.out.println(optionVO);
-		}
-		
-		System.out.println("productList체크: " + productList);
-		map.put("productList", productList);
-		map.put("categoryList", categoryList);
-		map.put("optionList", optionList);
-		return map;
-	}
 	
-	public ProductVO getProduct(int product_no) {
-		ProductVO vo = mapper.getProduct(product_no);
-		return vo;
-	}
-	
-	public Map getProductDetail(int product_no) {
-		Map map = new HashMap();
-		List<ProductCategoryVO> categoryList = new ArrayList<>();
-		List<ProductOptionVO> optionList = new ArrayList<>();
-		categoryList = mapper.getCategoriesList(product_no);
-		optionList = mapper.getOptionsList(product_no);
-		
-		map.put("pvo", mapper.getProduct(product_no));
-		map.put("categoryList", categoryList);
-		map.put("optionList", optionList);
-		
-		return map;
-	}
-	
-	public boolean edit_product(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
-		System.out.println("수정작업시작");
-		System.out.println("vo체크: " + vo);
-		int result = mapper.edit_product(vo);
-		System.out.println("result체크: " +  result);
-		if(result == 0) return false;
-		
-		mapper.remove_category(vo.getNo());
-		mapper.remove_option(vo.getNo());
-		System.out.println("옵션/카테고리제거체크 " );
-		for(int i = 0; i < cvo.getCategory1_list().length; i++) {
-			ProductCategoryVO ncvo = new ProductCategoryVO();
-			ncvo.setProduct_no(vo.getNo());
-			ncvo.setCategory1(cvo.getCategory1_list()[i]);
-			ncvo.setCategory2(cvo.getCategory2_list()[i]);
-			mapper.regist_category(ncvo);
-		}
-		
-		if(ovo.getTitle_list() != null) {
-			for(int i = 0; i < ovo.getTitle_list().length; i++) {
-				ProductOptionVO novo = new ProductOptionVO();
-				novo.setProduct_no(vo.getNo());
-				novo.setTitle(ovo.getTitle_list()[i]);
-				novo.setContent(ovo.getContent_list()[i]);
-				novo.setPrice(ovo.getPrice_list()[i]);
-				System.out.println("novo체크: " + novo);
-				mapper.regist_option(novo);
-			}
-		}
-		
-		return true;
-	}
 	
 	@Override
 	public int seller_regist(SellerVO vo) {
@@ -148,5 +52,33 @@ public class SellerServiceImpl implements SellerService {
 	@Override
 	public boolean dupId(String id) {
 		return mapper.dupId(id) > 0 ? true : false;
+	}
+	
+	@Override
+	public SellerVO detail(SellerVO vo) {
+		return mapper.detail(vo.getNo());
+	}
+	
+	@Override
+	public int edit(SellerVO vo) {
+		
+		System.out.println(vo);
+		String phone0 = vo.getPhone0();
+		String phone1 = vo.getPhone1();
+		String phone2 = vo.getPhone2();
+		String phone = phone0 + "-" + phone1 + "-" + phone2;
+		vo.setPhone(phone);
+		
+		System.out.println("vo 뭐냐 : " +  vo);
+		
+		if(vo.getPassword()=="") {
+			return mapper.edit(vo);
+		} else {
+			if(check_password(vo)) {
+				return mapper.edit(vo);
+			}
+			return 0;
+		}
+		
 	}
 }

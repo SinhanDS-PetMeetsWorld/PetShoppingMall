@@ -2,9 +2,9 @@ package sinhanDS.first.project.user;
 
 import java.util.List;
 
-import sinhanDS.first.project.user.VO.UserAddressVO;
-import sinhanDS.first.project.user.VO.PaymentVO;
-import sinhanDS.first.project.user.VO.UserVO;
+import sinhanDS.first.project.user.vo.PaymentVO;
+import sinhanDS.first.project.user.vo.UserAddressVO;
+import sinhanDS.first.project.user.vo.UserVO;
 
 public interface UserService {
 	UserVO login(UserVO vo);
@@ -21,4 +21,5 @@ public interface UserService {
 	List<PaymentVO> exist_payment(UserVO vo);
 	int insert_payment(PaymentVO vo);
 	int modify_payment(PaymentVO vo);
+	int delete_payment(int no);
 }

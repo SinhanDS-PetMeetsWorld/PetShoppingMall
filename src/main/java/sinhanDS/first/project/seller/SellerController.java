@@ -28,20 +28,20 @@ import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
-import sinhanDS.first.project.user.VO.PaymentVO;
-import sinhanDS.first.project.util.FileNameVO;
-import sinhanDS.first.project.util.Uploader;
+import sinhanDS.first.project.user.vo.PaymentVO;
+import sinhanDS.first.project.user.vo.UserVO;
+import sinhanDS.first.project.util.file.FileNameVO;
+import sinhanDS.first.project.util.file.FileController;
 
 
 @Controller
 @RequestMapping("/seller")
 public class SellerController {
 	@Autowired
-	private SellerService service;
-	@Autowired
 	private JavaMailSender javaMailSender;
-	@Value("${realPath.registed_img_path}")
-	private String registed_img_path;
+	//123123
+	@Autowired
+	private SellerService service;
 	
 	@Autowired ServletContext servletContext;
 	
@@ -64,7 +64,7 @@ public class SellerController {
 			model.addAttribute("cmd", "back");
 			return "common/alert";
 		} else { // 로그인 성공
-			sess.removeAttribute("loginInfo");
+			sess.removeAttribute("userLoginInfo");
 			sess.setAttribute("sellerLoginInfo", login);
 			return "redirect:/seller/index.do";
 		}
@@ -76,57 +76,7 @@ public class SellerController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/product/regist.do")
-	public String regist(Model model) {
-		ProductCategoryVO vo = new ProductCategoryVO();
-		model.addAttribute("vo", vo);
-		return "seller/product/regist";
-	}		
-	@PostMapping("/product/regist.do")
-	public String regist(@RequestParam MultipartFile filename, HttpServletRequest request, ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
-		Uploader uploader = new Uploader();
-		FileNameVO fvo = new FileNameVO(registed_img_path);
-		fvo = uploader.upload(fvo, filename);
-		
-		vo.setImage_url(fvo.getSaved_filename());
-		
-		System.out.println("vo체크: " + vo);
-		System.out.println("cvo체크: "  +cvo);
-		System.out.println("ovo체크: " + ovo);
-		service.regist(vo, cvo, ovo);
-		
-		return "redirect:/seller/index.do";
-	}
 	
-	@GetMapping("/product/list.do")
-	public String product_list(HttpSession sess, Model model) {
-		SellerVO vo = (SellerVO)sess.getAttribute("sellerLoginInfo");
-		
-		Map map = service.getProductList(vo.getNo());
-		model.addAttribute("map", map);
-		model.addAttribute("registed_img_path", registed_img_path);
-		return "seller/product/list";
-	}
-	
-	@GetMapping("/product/edit.do")
-	public String product_edit(Model model, ProductVO vo) {
-		Map map = service.getProductDetail(vo.getNo());
-		model.addAttribute("map", map);
-		ProductCategoryVO category = new ProductCategoryVO();
-		model.addAttribute("category", category);
-		System.out.println("map체크: " + map);
-		return "seller/product/edit";
-	}
-	
-	
-	@PostMapping("/product/edit.do")
-	public String product_edit2(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
-		System.out.println("vo체크: " + vo);
-		System.out.println("cvo체크: "  +cvo);
-		System.out.println("ovo체크: " + ovo);
-		service.edit_product(vo, cvo, ovo);
-		return "redirect:/seller/index.do";
-	}	
 	
 	
 	@GetMapping("/join.do")
@@ -180,6 +130,34 @@ public class SellerController {
 	            e.printStackTrace();
 	        }
 
-        return Integer.toString(checkNum);
+        return Integer.toString(checkNum);        
 	}
+	
+	@GetMapping("/edit.do")
+	public String edit(HttpSession sess, Model model) {
+		SellerVO vo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("vo", service.detail(vo));
+		return "seller/edit/seller_info";
+	}
+	
+	@PostMapping("/update.do")
+	public String edit(SellerVO vo, Model model) {
+		System.out.println("전송 : " + vo);
+		
+		int r = service.edit(vo);
+		String msg = "";
+		String url = "/seller/edit.do";
+		
+		if (r > 0) {
+			msg = "정상적으로 수정되었습니다.";
+		} else {
+			msg = "수정 오류";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		model.addAttribute("cmd","move");
+		return "common/alert";
+	}
+	
+	
 }

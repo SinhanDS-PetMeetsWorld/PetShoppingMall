@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sinhanDS.first.project.seller.product.SellerProductMapper">
+	<insert id="regist_product" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+		INSERT INTO PetShoppingMall.product
+		(
+			seller_no, name, price, discount, stock,
+			company, brand, rating, image_url, description
+		)
+		VALUES
+		(
+			#{seller_no }, #{name }, #{price }, #{discount }, #{stock },
+			#{company }, #{brand }, #{rating }, #{image_url }, #{description }
+		);
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<insert id="regist_category" parameterType="sinhanDS.first.project.product.vo.ProductCategoryVO">
+		INSERT INTO PetShoppingMall.product_category
+		(
+			product_no,
+			category1,
+			category2
+		)
+		VALUES
+		(
+			#{product_no},
+			#{category1},
+			#{category2}
+		);
+		
+	</insert>
+	
+	<insert id="regist_option" parameterType="sinhanDS.first.project.product.vo.ProductOptionVO">
+		INSERT INTO PetShoppingMall.product_option
+		(
+			product_no,
+			title,
+			content,
+			price
+		)
+		VALUES
+		(
+			#{product_no},
+			#{title},
+			#{content},
+			#{price}
+		);
+	</insert>
+	
+	<update id="edit" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+		UPDATE PetShoppingMall.product
+		SET
+			seller_no = #{seller_no},
+			name = #{name},
+			price = #{price},
+			discount = #{discount},
+			stock = #{stock},
+			company = #{company},
+			brand = #{brand},
+			rating = #{rating},
+			image_url = #{image_url},
+			description = #{description}
+		WHERE no = #{no};
+	</update>
+	
+	<!-- 
+	
+	 -->
+	<delete id="remove_category" parameterType="int">
+		DELETE FROM PetShoppingMall.product_category
+		WHERE product_no = #{product_no};
+		
+	</delete>
+	
+	<delete id="remove_option" parameterType="int">
+		DELETE FROM PetShoppingMall.product_option
+		WHERE product_no = #{product_no};
+	</delete>
+	
+	<delete id="remove" parameterType="int">
+		DELETE FROM PetShoppingMall.product
+		WHERE no = #{no};
+	</delete>
+	
+	
+	
+	
+	<select id="getProductList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * FROM product WHERE seller_no = #{seller_no}
+	</select>
+	<select id="getProduct" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * FROM product WHERE no = #{no}
+	</select>
+	
+	<!-- List<ProductCategoryVO> categoryList(int no); -->
+	<select id="getCategoriesList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductCategoryVO">
+		SELECT * FROM product_category WHERE product_no = #{product_no}
+	</select>
+	<select id="getOptionsList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductOptionVO">
+		SELECT * FROM product_option WHERE product_no = #{product_no}
+	</select>
+</mapper>
