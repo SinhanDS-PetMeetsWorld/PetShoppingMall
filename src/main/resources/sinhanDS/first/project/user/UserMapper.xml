@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.user.UserMapper">
 
-	<select id="check_password" parameterType="sinhanDS.first.project.user.VO.UserVO" resultType="int">
+	<select id="check_password" parameterType="sinhanDS.first.project.user.vo.UserVO" resultType="int">
 		SELECT count(*) FROM user WHERE no = #{no} AND password = MD5(#{password})
 	</select>
 	
-	<update id="edit" parameterType="sinhanDS.first.project.user.VO.UserVO">
+	<update id="edit" parameterType="sinhanDS.first.project.user.vo.UserVO">
 		UPDATE user SET
 			<if test="password != ''">
 				password = MD5(#{new_password}),
@@ -20,15 +20,15 @@
 		WHERE no = #{no}
 	</update>
 	
-	<select id="detail" parameterType="int" resultType="sinhanDS.first.project.user.VO.UserVO">
+	<select id="detail" parameterType="int" resultType="sinhanDS.first.project.user.vo.UserVO">
 		SELECT * FROM user WHERE no = #{no}
 	</select>
 	
-	<select id="login" parameterType="sinhanDS.first.project.user.VO.UserVO" resultType="sinhanDS.first.project.user.VO.UserVO">
+	<select id="login" parameterType="sinhanDS.first.project.user.vo.UserVO" resultType="sinhanDS.first.project.user.vo.UserVO">
 		SELECT * FROM user WHERE id=#{id} AND password=MD5(#{password})
 	</select>
 	
-	<insert id="user_regist" parameterType="sinhanDS.first.project.user.VO.UserVO">
+	<insert id="user_regist" parameterType="sinhanDS.first.project.user.vo.UserVO">
 		INSERT INTO user (
 			id, name, email, password, phone, birth_date, gender, advertisement , join_date
 		) VALUES (
@@ -39,7 +39,7 @@
 		</selectKey>
 	</insert>
 	
-	<insert id="initaddr_regist" parameterType="sinhanDS.first.project.user.VO.UserAddressVO">
+	<insert id="initaddr_regist" parameterType="sinhanDS.first.project.user.vo.UserAddressVO">
 		INSERT INTO address (
 			user_no, zipcode, addr1, addr2, name, phone, comment
 		) VALUES (
@@ -47,7 +47,7 @@
 		);
 	</insert>
 	
-	<insert id="user_address_regist" parameterType="sinhanDS.first.project.user.VO.UserVO">
+	<insert id="user_address_regist" parameterType="sinhanDS.first.project.user.vo.UserVO">
 		<!-- 생각해보니 저희 이거 uservo로 못받아옴........새 vo하나 파야할거같음; -->
 	</insert>
 
@@ -55,11 +55,11 @@
 		SELECT COUNT(*) FROM user WHERE id=#{id}
 	</select>
 	
-	<select id="exist_addr" parameterType="int" resultType="sinhanDS.first.project.user.VO.UserAddressVO">
+	<select id="exist_addr" parameterType="int" resultType="sinhanDS.first.project.user.vo.UserAddressVO">
 		SELECT * FROM address WHERE user_no = #{user_no}
 	</select>
 	
-	<insert id="insert_addr" parameterType="sinhanDS.first.project.user.VO.UserAddressVO">
+	<insert id="insert_addr" parameterType="sinhanDS.first.project.user.vo.UserAddressVO">
 		INSERT INTO address (
 			user_no, zipcode, addr1, addr2, name, phone, comment
 		) VALUES (
@@ -68,7 +68,7 @@
 		
 	</insert>
 	
-	<update id="modify_addr" parameterType="sinhanDS.first.project.user.VO.UserAddressVO">
+	<update id="modify_addr" parameterType="sinhanDS.first.project.user.vo.UserAddressVO">
 		UPDATE address SET
 			zipcode = #{zipcode},
 			addr1 = #{addr1},
@@ -83,11 +83,11 @@
 		DELETE from address WHERE no=#{no}
 	</delete>
 	
-	<select id="exist_payment" parameterType="int" resultType="sinhanDS.first.project.user.VO.PaymentVO">
+	<select id="exist_payment" parameterType="int" resultType="sinhanDS.first.project.user.vo.PaymentVO">
 		SELECT * FROM payment WHERE user_no = #{user_no}
 	</select>
 	
-	<insert id="insert_payment" parameterType="sinhanDS.first.project.user.VO.PaymentVO">
+	<insert id="insert_payment" parameterType="sinhanDS.first.project.user.vo.PaymentVO">
 		INSERT INTO payment (
 			user_no, name, type, company, account, valid_date, cvc
 		) VALUES (
@@ -96,7 +96,7 @@
 		
 	</insert>
 	
-	<update id="modify_payment" parameterType="sinhanDS.first.project.user.VO.PaymentVO">
+	<update id="modify_payment" parameterType="sinhanDS.first.project.user.vo.PaymentVO">
 		UPDATE payment SET
 			name = #{name},
 			account = #{account},

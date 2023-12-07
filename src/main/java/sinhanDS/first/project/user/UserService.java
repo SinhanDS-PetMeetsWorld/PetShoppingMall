@@ -2,9 +2,9 @@ package sinhanDS.first.project.user;
 
 import java.util.List;
 
-import sinhanDS.first.project.user.VO.UserAddressVO;
-import sinhanDS.first.project.user.VO.PaymentVO;
-import sinhanDS.first.project.user.VO.UserVO;
+import sinhanDS.first.project.user.vo.PaymentVO;
+import sinhanDS.first.project.user.vo.UserAddressVO;
+import sinhanDS.first.project.user.vo.UserVO;
 
 public interface UserService {
 	UserVO login(UserVO vo);

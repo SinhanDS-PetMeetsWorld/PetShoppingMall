@@ -1,4 +1,4 @@
-package sinhanDS.first.project.product;
+package sinhanDS.first.project.user.product;
 
 import java.util.List;
 

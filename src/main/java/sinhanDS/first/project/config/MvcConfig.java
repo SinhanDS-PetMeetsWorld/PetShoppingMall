@@ -120,6 +120,7 @@ public class MvcConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(userLoginIntercepton())
 						.addPathPatterns("/user/**")
+						.excludePathPatterns("/user/product/**")
 						.excludePathPatterns("/user/join.do")
 						.excludePathPatterns("/user/login.do")
 						.excludePathPatterns("/user/idCheck.do")
@@ -137,7 +138,7 @@ public class MvcConfig implements WebMvcConfigurer{
 		registry.addInterceptor(categoryInterceptor())
 						.addPathPatterns("/")
 						.addPathPatterns("/user/**")
-						.addPathPatterns("/product/**");
+						.addPathPatterns("/user/product/**");
 	}
 	
 	// 프로퍼티 설정

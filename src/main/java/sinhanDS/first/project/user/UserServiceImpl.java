@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sinhanDS.first.project.user.VO.PaymentVO;
-import sinhanDS.first.project.user.VO.UserAddressVO;
-import sinhanDS.first.project.user.VO.UserVO;
+import sinhanDS.first.project.user.vo.PaymentVO;
+import sinhanDS.first.project.user.vo.UserAddressVO;
+import sinhanDS.first.project.user.vo.UserVO;
 
 
 @Service

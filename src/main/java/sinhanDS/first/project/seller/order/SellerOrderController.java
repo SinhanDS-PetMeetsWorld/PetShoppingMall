@@ -1,4 +1,4 @@
-package sinhanDS.first.project.order;
+package sinhanDS.first.project.seller.order;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/order")
-public class OrderController {
+@RequestMapping("/seller/order")
+public class SellerOrderController {
 	@Autowired
-	private OrderService service;
+	private SellerOrderService service;
 	
 }

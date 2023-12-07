@@ -1,4 +1,4 @@
-package sinhanDS.first.project.order;
+package sinhanDS.first.project.user.order;
 
 import org.apache.ibatis.annotations.Mapper;
 

@@ -1,4 +1,4 @@
-package sinhanDS.first.project.finance_company;
+package sinhanDS.first.project.user.order;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/finance_company")
-public class FinanceCompanyController {
+@RequestMapping("/user/order")
+public class OrderController {
 	@Autowired
-	private FinanceCompanyService service;
+	private OrderService service;
 	
 }

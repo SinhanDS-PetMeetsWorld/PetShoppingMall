@@ -1,4 +1,4 @@
-package sinhanDS.first.project.product;
+package sinhanDS.first.project.user.product;
 
 import java.util.List;
 
@@ -19,12 +19,12 @@ import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
-import sinhanDS.first.project.user.VO.UserVO;
+import sinhanDS.first.project.user.vo.UserVO;
 
 
 
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/user/product")
 public class ProductController {
 	@Autowired
 	private ProductService service;
@@ -82,7 +82,7 @@ public class ProductController {
 		
 		// 멤버 번호
 		HttpSession loginsess = request.getSession();
-		UserVO login = (UserVO)loginsess.getAttribute("loginInfo");
+		UserVO login = (UserVO)loginsess.getAttribute("userLoginInfo");
 		
 		
 		System.out.println("qnavo 체크 : " + qnavo);

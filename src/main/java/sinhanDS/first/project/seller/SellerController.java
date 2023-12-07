@@ -28,7 +28,7 @@ import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
-import sinhanDS.first.project.user.VO.PaymentVO;
+import sinhanDS.first.project.user.vo.PaymentVO;
 import sinhanDS.first.project.util.file.FileNameVO;
 import sinhanDS.first.project.util.file.FileController;
 
@@ -62,7 +62,7 @@ public class SellerController {
 			model.addAttribute("cmd", "back");
 			return "common/alert";
 		} else { // 로그인 성공
-			sess.removeAttribute("loginInfo");
+			sess.removeAttribute("userLoginInfo");
 			sess.setAttribute("sellerLoginInfo", login);
 			return "redirect:/seller/index.do";
 		}
