@@ -17,7 +17,7 @@
     		margin-right : 40px;
     	}
 	    .product_preview_name{
-			width        : 170px;
+			width        : 160px;
 			text-overflow: ellipsis;
 			word-wrap : break-word;
 			overflow     : hidden;
@@ -27,7 +27,7 @@
 			white-space : nowrap;
 		}
 		.product_preview_info{
-			width : 170px;
+			width : 160px;
 			height : 28px;
 		}
 		.product_preview_price{
@@ -58,7 +58,7 @@
 				<div>
 					<c:forEach var="product" items="${list}" varStatus="status">
 						<div class="product_preview">
-							<div><img src="${product.image_url }" width="170px" height="200px"></div>
+							<div><img src="${product.image_url }" width="160px" height="190px"></div>
 							<div class="product_preview_name">${product.name}</div>
 							<div class="product_preview_info">
 								<div class="product_preview_price"><strong>${product.price}</strong>원</div>
@@ -70,7 +70,7 @@
 							<p style=clear:both;></p>
 						</div>
 						
-						<c:if test="${status.index%4 == 3}"><p style=clear:both;></p><br></c:if> 
+						<c:if test="${status.index%5 == 4}"><p style=clear:both;></p><br></c:if> 
 					</c:forEach>
 				</div>
 			</div>
