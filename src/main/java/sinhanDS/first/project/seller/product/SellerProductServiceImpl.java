@@ -143,15 +143,13 @@ public class SellerProductServiceImpl implements SellerProductService {
 	public void remove(ProductVO vo) {
 		System.out.println("삭제 체크: " + vo.getNo());
 		System.out.println("삭제 체크: " + vo.getImage_url());
-		System.out.println("첫글자 체크 : " + vo.getImage_url().indexOf(0));
-		if(vo.getImage_url() == null) {
-			System.out.println("url체크: null임 ");
-		}
-		else if(vo.getImage_url().indexOf(0) == 'h') {
-			System.out.println("url체크: h로 시작");
-		}else {
+		
+		if(!("".equals(vo.getImage_url()) || "h".equals(vo.getImage_url().substring(0, 1)))) {
 			fileController.remove(vo);
 		}
+		mapper.remove_category(vo.getNo());
+		mapper.remove_option(vo.getNo());
+		mapper.remove(vo.getNo());
 	}
 
 }

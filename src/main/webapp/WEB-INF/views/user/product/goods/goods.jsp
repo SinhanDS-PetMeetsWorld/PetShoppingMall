@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri = 'http://java.sun.com/jsp/jstl/functions' %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -64,11 +65,11 @@
 					
 						<div id="goods_category" style="width: 720px; height: 100px; border: 1px solid black">
 									
-									    <c:forEach var="item" items="${product_more_category}">
-									        ${catekor.category_name[item.category1]} > 
-									        ${catekor.category[item.category1][item.category2] } <br>
+							<c:forEach var="item" items="${product_more_category}">
+								${catekor.category_name[item.category1]} > 
+								${catekor.category[item.category1][item.category2] } <br>
 									       
-									    </c:forEach>
+							</c:forEach>
 									
 						</div>
 						
@@ -76,7 +77,15 @@
 						<c:forEach var="item" items="${product_more}">
 							
 								<div class="goods-photo">
-									<img src="${item.image_url}">
+										<c:if test="${empty item.image_url }">
+											<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+										</c:if>
+										<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
+											<img src="${item.image_url }">
+										</c:if>
+										<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
+											<img src="/resources/img/product/registed_img/${item.image_url }">
+										</c:if>
 								</div>
 								<div class="goods-details">
 									
@@ -105,21 +114,23 @@
 								</div>		
 						</c:forEach>
 									
-										<div class="goods-option"
-												style="width: 720px; height: 100px; border: 1px solid black;"> 
-																							
-											<select name="category">															
-												<c:forEach var="item" items="${product_more_option}">
-													<option value="${item.content} ${item.price}"> ${item.title} : ${item.content} 추가금액 : ${item.price}</option>
-												</c:forEach>													
-											</select>
-										
+										<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
+											<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
+												<c:if test="${(status.index == 0) || (product_more_option[status.index - 1].title != ovo.title)}">
+													${ovo.title } <select name="title_list">
+												</c:if>
+														<option value=""> ${ovo.content } :  ${ovo.price }원</option>
+												<c:if test="${(product_more_option[status.index + 1].title != ovo.title)}">
+													</select><br>
+												</c:if>
+											</c:forEach>
 										</div>
 									
-											수량 조절 이미지 <input type="button" style="background-color: grey;"
+											수량 <input type="number" name="choose_number" value=0>
+											
+											<input type="button" style="background-color: grey;"
 												value="장바구니 담기"> <input type="button"
 												style="background-color: yellow" value="바로 구매"><br>
-											100,000원 이상 구매시 무료배송 (배송조건 이런거 없나요?)
 								
 						<div class = "goods_review_QNA">
 								<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>

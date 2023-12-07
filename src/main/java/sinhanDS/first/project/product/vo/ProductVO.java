@@ -27,4 +27,7 @@ public class ProductVO {
 	
 	//상품 설명
 	private String description;
+	
+	
+	private int choose_number;
 }

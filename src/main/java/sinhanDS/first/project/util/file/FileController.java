@@ -17,6 +17,9 @@ package sinhanDS.first.project.util.file;
  */
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,5 +54,11 @@ public class FileController {
 	
 	public void remove(ProductVO vo) {
 		System.out.println("삭제 파일명 체크 : " + registed_img_path + "/" + vo.getImage_url());
+		Path filePath = Paths.get(registed_img_path + "/" + vo.getImage_url());
+		try {
+			Files.deleteIfExists(filePath);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
