@@ -49,10 +49,15 @@ public class UserServiceImpl implements UserService {
 		
 		System.out.println(vo);
 
-		if(check_password(vo)) {
+		if(vo.getPassword()=="") {
 			return mapper.edit(vo);
+		} else {
+			if(check_password(vo)) {
+				return mapper.edit(vo);
+			}
+			return 0;
 		}
-		return 0;
+		
 		
 	}
 

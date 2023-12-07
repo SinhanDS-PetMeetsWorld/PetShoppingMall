@@ -50,7 +50,7 @@
 						
 						<!-- 아이콘이 그림인데 나중에는 버튼으로 바꾸어야함 -->
 						<div class="header_user">
-							<a href="/user/edit.do"><img src="/resources/img/common/user.png" align="right"></a>
+							<a href="/seller/edit.do"><img src="/resources/img/common/user.png" align="right"></a>
 						</div>
 
 						<!-- 아이콘이 그림인데 나중에는 버튼으로 바꾸어야함 -->
