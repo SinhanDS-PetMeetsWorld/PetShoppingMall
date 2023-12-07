@@ -27,6 +27,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.zaxxer.hikari.HikariDataSource;
 
+import sinhanDS.first.project.util.file.FileController;
 import sinhanDS.first.project.util.interceptor.CategoryInterceptor;
 import sinhanDS.first.project.util.interceptor.SellerLoginInterceptor;
 import sinhanDS.first.project.util.interceptor.UserLoginInterceptor;
@@ -165,6 +166,11 @@ public class MvcConfig implements WebMvcConfigurer{
 		mailSender.setPassword(mailpassword);
 		mailSender.setDefaultEncoding("utf-8");
 		return mailSender;
+	}
+	
+	@Bean
+	public FileController fileController() {
+		return new FileController();
 	}
 }
 

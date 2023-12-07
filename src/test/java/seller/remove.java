@@ -13,10 +13,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import sinhanDS.first.project.seller.vo.SellerVO;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { sinhanDS.first.project.config.MvcConfig.class })
 @WebAppConfiguration
-public class login {
+public class remove {
 	@Autowired
 	WebApplicationContext ctx;
 	MockMvc mock;
@@ -27,10 +29,23 @@ public class login {
 	}
 
 	@Test
-	public void indexTest() throws Exception {
-		RequestBuilder req = MockMvcRequestBuilders.post("/seller/index.do");
+	public void computer_url() throws Exception {
+		System.out.println("상품제거 시작 ");
+		RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/remove.do")
+				.sessionAttr("sellerLoginInfo", new SellerVO())
+				.param("no", "80")
+				.param("image_url", "1701936121307.png");
+		
 		mock.perform(req);
-
 	}
-
+	@Test
+	public void naver_img_url() throws Exception {
+		System.out.println("상품제거 시작 ");
+		RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/remove.do")
+				.sessionAttr("sellerLoginInfo", new SellerVO())
+				.param("no", "4")
+				.param("image_url", "https://shop-phinf.pstatic.net/20221125_181/1669336673676lXvrR_JPEG/70472516390621864_1689661559.jpg?type=m510");
+		
+		mock.perform(req);
+	}
 }
