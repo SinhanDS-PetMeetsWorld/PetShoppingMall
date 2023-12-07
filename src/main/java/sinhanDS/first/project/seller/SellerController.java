@@ -29,6 +29,7 @@ import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
+import sinhanDS.first.project.user.vo.UserVO;
 import sinhanDS.first.project.util.file.FileNameVO;
 import sinhanDS.first.project.util.file.FileController;
 
@@ -129,6 +130,34 @@ public class SellerController {
 	            e.printStackTrace();
 	        }
 
-        return Integer.toString(checkNum);
+        return Integer.toString(checkNum);        
 	}
+	
+	@GetMapping("/edit.do")
+	public String edit(HttpSession sess, Model model) {
+		SellerVO vo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("vo", service.detail(vo));
+		return "seller/edit/seller_info";
+	}
+	
+	@PostMapping("/update.do")
+	public String edit(SellerVO vo, Model model) {
+		System.out.println("전송 : " + vo);
+		
+		int r = service.edit(vo);
+		String msg = "";
+		String url = "/seller/edit.do";
+		
+		if (r > 0) {
+			msg = "정상적으로 수정되었습니다.";
+		} else {
+			msg = "수정 오류";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		model.addAttribute("cmd","move");
+		return "common/alert";
+	}
+	
+	
 }

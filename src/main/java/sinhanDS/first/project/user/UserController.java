@@ -44,8 +44,8 @@ public class UserController {
 			model.addAttribute("cmd", "back");
 			return "common/alert";
 		} else { // 로그인 성공
-			sess.removeAttribute("selleruserLoginInfo");
-			sess.setAttribute("useruserLoginInfo", login);
+			sess.removeAttribute("sellerLoginInfo");
+			sess.setAttribute("userLoginInfo", login);
 			return "redirect:/";
 		}
 	}
@@ -58,7 +58,7 @@ public class UserController {
 	
 	@GetMapping("/edit.do")
 	public String edit(HttpSession sess, Model model) {
-		UserVO vo = (UserVO)sess.getAttribute("useruserLoginInfo");
+		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
 		model.addAttribute("vo", service.detail(vo));
 		return "user/edit/user_info";
 	}
