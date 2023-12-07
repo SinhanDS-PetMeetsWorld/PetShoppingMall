@@ -1,7 +1,8 @@
-package sinhanDS.first.project.util;
+package sinhanDS.first.project.util.file;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /*
  * Uploader와 Downloader를 사용하기 위한 매개 클래스
@@ -11,17 +12,14 @@ import lombok.NoArgsConstructor;
  * saved_filename는 서버에 저장된 파일명이다.
  * 
  */
-@Getter@NoArgsConstructor
+@Getter@NoArgsConstructor@Setter
 public class FileNameVO {
 	/* 서버의 실제 경로 */
 	private String registed_img_path;
 	
 	/* 클라이언트가 업로드 한 파일이 서버에 저장될 때의 이름 */
-	private String saved_filename;
+	private String saved_filename = null;
 	
-	public FileNameVO(String path) {
-		this.registed_img_path = path;
-	}
 	
 	/* 서버에서 파일을 다운로드 할 경우 모든 필드가 필요하다 */
 	public FileNameVO(String registed_img_path, String saved_filename) {

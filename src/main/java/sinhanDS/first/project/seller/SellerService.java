@@ -10,12 +10,7 @@ import sinhanDS.first.project.seller.vo.SellerVO;
 public interface SellerService {
 	public SellerVO login(SellerVO vo);
 	
-	public int regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo);
-	public Map getProductList(int seller_no);
-	public ProductVO getProduct(int product_no);
-	public Map getProductDetail(int product_no);
-	
-	public boolean edit_product(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo);
+
 	
 	
 	int seller_regist(SellerVO vo);

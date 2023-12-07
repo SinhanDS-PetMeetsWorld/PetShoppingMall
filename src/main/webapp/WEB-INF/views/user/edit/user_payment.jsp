@@ -83,7 +83,7 @@
 							            </td>
 							            <td>
 							                <button type="button" name="modify" onclick="window.open('/user/modify_payment_form.do?no=${vo.no}&type=${vo.type }&name=${vo.name }&account=${vo.account }&cvc=${vo.cvc }&company=${vo.company }&valid_date=${vo.valid_date }','user_modify_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>  |
-							                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
+							                <button type="button" name="delete" onclick="location.href='/user/delete_payment.do?no=${vo.no}'">삭제</button>
 							                <br>
 							            </td>
 						        	</tr>
@@ -109,7 +109,7 @@
 							            </td>
 							            <td>
 							                <button type="button" name="modify" onclick="window.open('/user/modify_payment_form.do?no=${vo.no}&type=${vo.type }&name=${vo.name }&account=${vo.account }&company=${vo.company }','user_modify_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>  |
-							                <button type="button" name="delete" onclick="location.href=/*삭제.jsp*/''">삭제</button>
+							                <button type="button" name="delete" onclick="location.href='/user/delete_payment.do?no=${vo.no}'">삭제</button>
 							                <br>
 							            </td>
 						        	</tr>

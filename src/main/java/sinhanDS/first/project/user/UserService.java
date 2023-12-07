@@ -21,4 +21,5 @@ public interface UserService {
 	List<PaymentVO> exist_payment(UserVO vo);
 	int insert_payment(PaymentVO vo);
 	int modify_payment(PaymentVO vo);
+	int delete_payment(int no);
 }

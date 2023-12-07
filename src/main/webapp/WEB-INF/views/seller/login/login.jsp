@@ -41,7 +41,7 @@
 									name="password">
 							</div>
 							<div>
-								<a href="">회원 가입</a> <input type="submit" value="로그인">
+								<a href="/seller/join.do">회원 가입</a> <input type="submit" value="로그인">
 							</div>
 							<div>
 								<a href="">아이디 찾기</a> / <a href="">비밀번호 찾기</a>
