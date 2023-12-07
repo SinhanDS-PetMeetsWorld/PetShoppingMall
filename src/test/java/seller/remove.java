@@ -43,8 +43,17 @@ public class remove {
 		System.out.println("상품제거 시작 ");
 		RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/remove.do")
 				.sessionAttr("sellerLoginInfo", new SellerVO())
-				.param("no", "4")
+				.param("no", "49")
 				.param("image_url", "https://shop-phinf.pstatic.net/20221125_181/1669336673676lXvrR_JPEG/70472516390621864_1689661559.jpg?type=m510");
+		
+		mock.perform(req);
+	}
+	@Test
+	public void null_img_url() throws Exception {
+		System.out.println("상품제거 시작 ");
+		RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/remove.do")
+				.sessionAttr("sellerLoginInfo", new SellerVO())
+				.param("no", "43");
 		
 		mock.perform(req);
 	}
