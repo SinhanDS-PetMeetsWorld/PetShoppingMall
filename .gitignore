@@ -2,3 +2,4 @@ target/
 src/main/resources/db.properties
 src/main/resources/mail.properties
 src/main/resources/realPath.properties
+**/*.DS_Store
