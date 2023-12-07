@@ -19,25 +19,24 @@
 	    .product_preview_name{
 			width        : 170px;
 			text-overflow: ellipsis;
-			white-space  : nowrap;
+			word-wrap : break-word;
 			overflow     : hidden;
-			display      : block;
-			max-height: 42px;
+			display      : inline-block;
+			max-height: 44px;
 			line-height: 21px;
+			white-space : nowrap;
 		}
 		.product_preview_info{
 			width : 170px;
 			height : 28px;
 		}
-		.product_preview_info > div{
-			width : 50%;
-			height : 100%;
-		}
 		.product_preview_price{
+			width : 70%;
 			float : left;
 			font-size : 120%
 		}
 		.product_preview_rating{
+			width : 30%;
 			float: right;
 			text-align: right;
 		}
@@ -63,7 +62,10 @@
 							<div class="product_preview_name">${product.name}</div>
 							<div class="product_preview_info">
 								<div class="product_preview_price"><strong>${product.price}</strong>원</div>
-								<div class="product_preview_rating">${product.rating}</div>
+								<div class="product_preview_rating">
+									<img src="/resources/img/common/star.jpg" width="15px" height="15px">
+									${product.rating}
+								</div>
 							</div>
 							<p style=clear:both;></p>
 						</div>
