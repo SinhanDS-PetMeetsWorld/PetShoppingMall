@@ -1,7 +1,5 @@
 package seller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,8 +31,7 @@ public class regist {
 	/* 왜 안되나... */
 	@Test
 	public void regist_product() throws Exception {
-		System.out.println("상품등록 시작 ");
-		RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/regist.do")
+		RequestBuilder req = MockMvcRequestBuilders.post("/seller/productregist.do")
 				.sessionAttr("sellerLoginInfo", new SellerVO())
 				.param("seller_no", "1").param("name", "테스트로만든상품")
 				.param("price", "10001").param("stock", "50").param("category1_list", "0").param("category2_list", "1")

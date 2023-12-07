@@ -146,7 +146,9 @@ public class SellerProductServiceImpl implements SellerProductService {
 		
 		if(!("".equals(vo.getImage_url()) || "h".equals(vo.getImage_url().substring(0, 1)))) {
 			fileController.remove(vo);
+			System.out.println("상품 이미지 컴퓨터에 있음");
 		}
+		System.out.println("상품삭제진행");
 		mapper.remove_category(vo.getNo());
 		mapper.remove_option(vo.getNo());
 		mapper.remove(vo.getNo());

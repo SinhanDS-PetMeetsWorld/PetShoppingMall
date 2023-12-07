@@ -33,8 +33,8 @@ public class remove {
 		System.out.println("상품제거 시작 ");
 		RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/remove.do")
 				.sessionAttr("sellerLoginInfo", new SellerVO())
-				.param("no", "80")
-				.param("image_url", "1701936121307.png");
+				.param("no", "68")
+				.param("image_url", "1701865193090.png");
 		
 		mock.perform(req);
 	}
@@ -43,9 +43,9 @@ public class remove {
 		System.out.println("상품제거 시작 ");
 		RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/remove.do")
 				.sessionAttr("sellerLoginInfo", new SellerVO())
-				.param("no", "49")
-				.param("image_url", "https://shop-phinf.pstatic.net/20221125_181/1669336673676lXvrR_JPEG/70472516390621864_1689661559.jpg?type=m510");
-		
+				.param("no", "81")
+				.param("image_url", "https://shopping-phinf.pstatic.net/main_5662090/5662090193.20220513100317.jpg?type=f640");
+				
 		mock.perform(req);
 	}
 	@Test
@@ -53,7 +53,8 @@ public class remove {
 		System.out.println("상품제거 시작 ");
 		RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/remove.do")
 				.sessionAttr("sellerLoginInfo", new SellerVO())
-				.param("no", "43");
+				.param("no", "51")
+				.param("image_url", "");
 		
 		mock.perform(req);
 	}
