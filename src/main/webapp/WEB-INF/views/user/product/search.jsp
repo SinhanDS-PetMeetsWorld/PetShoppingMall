@@ -22,6 +22,8 @@
 			white-space  : nowrap;
 			overflow     : hidden;
 			display      : block;
+			max-height: 42px;
+			line-height: 21px;
 		}
 		.product_preview_info{
 			width : 170px;
