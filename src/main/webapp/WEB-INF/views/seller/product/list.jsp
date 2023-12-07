@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri = 'http://java.sun.com/jsp/jstl/functions' %>
 <!DOCTYPE html>
 <html lang="ko">
 <head> 
@@ -35,8 +36,11 @@
 										<c:if test="${empty vo.image_url }">
 											<img src="/resources/img/product/no_image.jpg" width="100" height="100">
 										</c:if>
-										<c:if test="${!empty vo.image_url}">
+										<c:if test="${!empty vo.image_url && fn:substring(vo.image_url, 0, 1) == 'h' }">
 											<img src="${vo.image_url }" width="100" height="100">
+										</c:if>
+										<c:if test="${!empty vo.image_url && !(fn:substring(vo.image_url, 0, 1) == 'h') }">
+											<img src="/resources/img/product/registed_img/${vo.image_url }" width="100" height="100">
 										</c:if>
 										
 									</td>
@@ -91,6 +95,12 @@
 									<input type="hidden" name="no" value="${vo.no }">
 									<input type="submit" value="수정하기">
 								</form>
+								
+								<form action="/seller/product/remove.do" method="post" onsubmit="return remove();">
+									<input type="hidden" name="no" value="${vo.no }">
+									<input type="hidden" name="image_url" value="${vo.image_url }">
+									<input type="submit" value="삭제하기">
+								</form>
 							<br>
 							<br>
 							<hr>
@@ -107,5 +117,11 @@
 			<div class="footer-color"></div>
         </div>
     </div>
+    <script>
+		function remove(){
+			if(confirm("해당 제품을 정말 삭제하시겠습니까?") == true) return true;
+			else return false;
+		}
+    </script>
 </body>
 </html>
