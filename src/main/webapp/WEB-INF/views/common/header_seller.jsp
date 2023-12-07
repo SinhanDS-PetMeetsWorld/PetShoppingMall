@@ -59,7 +59,7 @@
 						</div>
 						
 						<div class="header_logout">
-							<a href="/user/logout.do">로그아웃</a>
+							<a href="/seller/logout.do">로그아웃</a>
 						</div>
 					
 					</div>

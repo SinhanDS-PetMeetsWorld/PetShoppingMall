@@ -44,10 +44,15 @@ public class SellerProductController {
 	}		
 	@PostMapping("/regist.do")
 	public String regist(@RequestParam MultipartFile filename, HttpServletRequest request, ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
-		System.out.println("vo체크: " + vo);
 		if(filename != null) {
 			vo = service.upload_file(filename, vo);
 		}
+		service.regist(vo, cvo, ovo);
+		
+		return "redirect:/seller/index.do";
+	}
+	@PostMapping("/regist_forTest.do")
+	public String regist_forTest(HttpServletRequest request, ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
 		service.regist(vo, cvo, ovo);
 		
 		return "redirect:/seller/index.do";

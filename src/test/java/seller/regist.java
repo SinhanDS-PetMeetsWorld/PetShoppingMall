@@ -15,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import sinhanDS.first.project.seller.vo.SellerVO;
 
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { sinhanDS.first.project.config.MvcConfig.class })
 @WebAppConfiguration
@@ -31,7 +32,7 @@ public class regist {
 	/* 왜 안되나... */
 	@Test
 	public void regist_product() throws Exception {
-		RequestBuilder req = MockMvcRequestBuilders.post("/seller/productregist.do")
+		RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/regist_forTest.do")
 				.sessionAttr("sellerLoginInfo", new SellerVO())
 				.param("seller_no", "1").param("name", "테스트로만든상품")
 				.param("price", "10001").param("stock", "50").param("category1_list", "0").param("category2_list", "1")
