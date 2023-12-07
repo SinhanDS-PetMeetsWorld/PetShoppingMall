@@ -42,12 +42,25 @@ public class ProductServiceImpl implements ProductService {
 		
 		return product_more;
 	}
-
+	
+	@Override
+	public List<ProductCategoryVO> Product_more_category(ProductCategoryVO vo) {
+		
+		List<ProductCategoryVO> product_more_category = mapper.Product_more_category(vo);
+		
+		return product_more_category;
+	}
 	
 	
 	@Override
+	public List<ProductOptionVO> Product_more_option(ProductOptionVO vo) {
+		List<ProductOptionVO> product_more_option = mapper.Product_more_option(vo);		
+		return product_more_option;
+	}
+
+	
+	@Override
 	public int QNA_insert(ProductQnAVO qnavo , HttpServletRequest request) {
-		
 		int r = mapper.QNA_insert(qnavo);
 		
 		return r;	
@@ -66,6 +79,8 @@ public class ProductServiceImpl implements ProductService {
 		List<ProductVO> product_list = mapper.product_list();
 		return product_list;
 	}
+
+
 
 
 }

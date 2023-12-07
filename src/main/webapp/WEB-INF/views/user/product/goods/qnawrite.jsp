@@ -75,7 +75,7 @@
             </tbody>
         </table>
         <div class="btnSet">
-            <input type="button" class="btn" value="저장" onclick="goSave();">
+            <input type="button" class="btn" value="저장" onclick="javascript:goSave();">
         </div>
         </form>		
 		
@@ -111,14 +111,12 @@ function goSave() {
         success: function(response) {
             // Ajax 성공 시 동작
             console.log(response);
-            {$cmd}
         },
         error: function(error) {
             // Ajax 실패 시 동작
             console.error('Error:', error);
         }
         
-        $('#frm').submit();
     });
 
 }
