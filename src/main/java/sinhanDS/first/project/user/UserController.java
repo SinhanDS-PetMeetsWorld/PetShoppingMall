@@ -290,4 +290,21 @@ public class UserController {
 		model.addAttribute("vo", vo);
 		return "user/edit/user_modify_payment_form";
 	}
+	
+	@GetMapping("/delete_payment.do")
+	public String deletepayment(Model model, PaymentVO payvo) {
+		
+		int r = service.delete_payment(payvo.getNo());
+		if(r < 1) {
+			model.addAttribute("msg", "삭제되지 않았습니다.");
+			model.addAttribute("cmd", "back");
+		} else if(r == 1) {
+			model.addAttribute("msg", "삭제 완료");
+			model.addAttribute("cmd", "move");
+			model.addAttribute("url", "/user/edit_payment.do");
+		}
+
+		return "common/alert";
+	}
+	
 }

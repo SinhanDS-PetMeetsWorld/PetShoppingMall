@@ -87,9 +87,9 @@
 	            <input type="hidden" name="no" value="${vo.no }">
 	            <span>카드정보 입력 </span>
 	            
-	            <select name="company" id="company" value="${vo.company }">
+	            <select name="company" id="company">
 					<c:forEach var="card" items="${vo.company_list[1]}" varStatus="status">
-						<option value="${status.index}">${card}</option>
+						<option value="${status.index}" <c:if test="${status.index eq vo.company}">selected="selected"</c:if>>${card}</option>
 					</c:forEach>
             	</select>
 	            <div>
@@ -124,9 +124,9 @@
 	            <input type="hidden" name="type" id="type" value="1">
 	            <input type="hidden" name="no" value="${vo.no }">
 	            <span>계좌이체 입력</span>
-	            <select name="company" id="company" value="${vo.company }">
+	            <select name="company" id="company">
 					<c:forEach var="bank" items="${vo.company_list[0]}" varStatus="status">
-						<option value="${status.index}">${bank}</option>
+						<option value="${status.index}" <c:if test="${status.index eq vo.company}">selected="selected"</c:if>>${bank}</option>
 					</c:forEach>
             	</select>
 	            <div>

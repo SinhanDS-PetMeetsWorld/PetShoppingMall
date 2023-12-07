@@ -131,5 +131,10 @@ public class UserServiceImpl implements UserService {
 	public int modify_payment(PaymentVO vo) {
 		return mapper.modify_payment(vo);
 	}
+	
+	@Override
+	public int delete_payment(int no) {
+		return mapper.delete_payment(no);
+	}
 
 }

@@ -24,4 +24,5 @@ public interface UserMapper {
 	List<PaymentVO> exist_payment(int user_no);
 	int insert_payment(PaymentVO vo);
 	int modify_payment(PaymentVO vo);
+	int delete_payment(int no);
 }

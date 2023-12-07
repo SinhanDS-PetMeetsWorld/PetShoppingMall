@@ -108,5 +108,10 @@
 			</if>
 		WHERE no = #{no}
 	</update>
+	
+	<delete id="delete_payment" parameterType="int">
+		DELETE from payment WHERE no=#{no}
+	</delete>
+	
 
 </mapper>
