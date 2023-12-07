@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sinhanDS.first.project.user.VO.PaymentVO;
-import sinhanDS.first.project.user.VO.UserAddressVO;
-import sinhanDS.first.project.user.VO.UserVO;
+import sinhanDS.first.project.user.vo.PaymentVO;
+import sinhanDS.first.project.user.vo.UserAddressVO;
+import sinhanDS.first.project.user.vo.UserVO;
 
 
 @Controller
@@ -44,8 +44,8 @@ public class UserController {
 			model.addAttribute("cmd", "back");
 			return "common/alert";
 		} else { // 로그인 성공
-			sess.removeAttribute("sellerLoginInfo");
-			sess.setAttribute("loginInfo", login);
+			sess.removeAttribute("selleruserLoginInfo");
+			sess.setAttribute("useruserLoginInfo", login);
 			return "redirect:/";
 		}
 	}
@@ -58,7 +58,7 @@ public class UserController {
 	
 	@GetMapping("/edit.do")
 	public String edit(HttpSession sess, Model model) {
-		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		UserVO vo = (UserVO)sess.getAttribute("useruserLoginInfo");
 		model.addAttribute("vo", service.detail(vo));
 		return "user/edit/user_info";
 	}
@@ -145,7 +145,7 @@ public class UserController {
 	
 	@GetMapping("/edit_addr.do")
 	public String editaddr(HttpSession sess, Model model) {
-		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
 		model.addAttribute("addressvo", service.exist_addr(vo));
 		return "user/edit/user_addr";
 	}
@@ -163,7 +163,7 @@ public class UserController {
 	
 	@GetMapping("/insert_addr.do")
 	public String insertaddr(HttpSession sess, Model model, UserAddressVO jspvo) {
-		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
 			
 		jspvo.setUser_no(vo.getNo());
 		System.out.println(jspvo);		// 현재 로그인한 유저의 no가 들어간 주소VO객체
@@ -188,7 +188,7 @@ public class UserController {
 	
 	@PostMapping("/modify_addr.do")
 	public String modifyaddr(UserAddressVO jspvo, Model model, HttpSession sess) {
-		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
 		
 		jspvo.setUser_no(vo.getNo());
 		
@@ -225,7 +225,7 @@ public class UserController {
 	
 	@GetMapping("/edit_payment.do")
 	public String editpayment(HttpSession sess, Model model) {
-		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
 		model.addAttribute("paymentvo", service.exist_payment(vo));
 		return "user/edit/user_payment";
 	}
@@ -240,7 +240,7 @@ public class UserController {
 	
 	@GetMapping("/insert_payment.do")
 	public String insertpayment(HttpSession sess, Model model, PaymentVO payvo) {
-		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
 			
 		payvo.setUser_no(vo.getNo());
 		System.out.println(payvo);		// 현재 로그인한 유저의 no가 들어간 PaymentVO객체
@@ -265,7 +265,7 @@ public class UserController {
 	
 	@PostMapping("/modify_payment.do")
 	public String modifypayment(PaymentVO payvo, Model model, HttpSession sess) {
-		UserVO vo = (UserVO)sess.getAttribute("loginInfo");
+		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
 		
 		payvo.setUser_no(vo.getNo());
 		
@@ -290,4 +290,21 @@ public class UserController {
 		model.addAttribute("vo", vo);
 		return "user/edit/user_modify_payment_form";
 	}
+	
+	@GetMapping("/delete_payment.do")
+	public String deletepayment(Model model, PaymentVO payvo) {
+		
+		int r = service.delete_payment(payvo.getNo());
+		if(r < 1) {
+			model.addAttribute("msg", "삭제되지 않았습니다.");
+			model.addAttribute("cmd", "back");
+		} else if(r == 1) {
+			model.addAttribute("msg", "삭제 완료");
+			model.addAttribute("cmd", "move");
+			model.addAttribute("url", "/user/edit_payment.do");
+		}
+
+		return "common/alert";
+	}
+	
 }

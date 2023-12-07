@@ -38,8 +38,8 @@
 			<div class="contentsright">
 				<div>
 					    <h2>판매자 문의 작성</h2>
-							<p>작성자: ${loginInfo.id}</p>
-							<p>회원번호: ${loginInfo.no } </p>
+							<p>작성자: ${userLoginInfo.id}</p>
+							<p>회원번호: ${userLoginInfo.no } </p>
 							<p>제품번호: ${product_no}</p>
 							<p>판매자번호: ${seller_no}</p>
 							<p>작성일: <%= formattedDate %></p>
@@ -56,7 +56,7 @@
             </td>
            		
             <td>
-            	<input type="hidden" name="user_no" value='${loginInfo.no}'>
+            	<input type="hidden" name="user_no" value='${userLoginInfo.no}'>
             </td>
             
             <td>

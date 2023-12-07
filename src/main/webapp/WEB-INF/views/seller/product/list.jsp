@@ -95,6 +95,12 @@
 									<input type="hidden" name="no" value="${vo.no }">
 									<input type="submit" value="수정하기">
 								</form>
+								
+								<form action="/seller/product/remove.do" method="post" onsubmit="return remove();">
+									<input type="hidden" name="no" value="${vo.no }">
+									<input type="hidden" name="image_url" value="${vo.image_url }">
+									<input type="submit" value="삭제하기">
+								</form>
 							<br>
 							<br>
 							<hr>
@@ -112,8 +118,10 @@
         </div>
     </div>
     <script>
-		console.log("${fn:substring("abcde", 0, 1)} ");
-    	
+		function remove(){
+			if(confirm("해당 제품을 정말 삭제하시겠습니까?") == true) return true;
+			else return false;
+		}
     </script>
 </body>
 </html>
