@@ -78,8 +78,13 @@
 	<delete id="remove_option" parameterType="int">
 		DELETE FROM PetShoppingMall.product_option
 		WHERE product_no = #{product_no};
-		
 	</delete>
+	
+	<delete id="remove" parameterType="int">
+		DELETE FROM PetShoppingMall.product
+		WHERE no = #{no};
+	</delete>
+	
 	
 	
 	
