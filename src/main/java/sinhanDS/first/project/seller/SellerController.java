@@ -38,6 +38,7 @@ import sinhanDS.first.project.util.file.FileController;
 public class SellerController {
 	@Autowired
 	private JavaMailSender javaMailSender;
+	//123123
 	@Autowired
 	private SellerService service;
 	

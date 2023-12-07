@@ -12,12 +12,33 @@
     <link rel="stylesheet" href="/resources/css/common/template.css">
     
     <style>
+    	.product_preview{
+    		float : left;
+    		margin-right : 40px;
+    	}
 	    .product_preview_name{
-		  width        : 100px;     /* 너비는 변경될수 있습니다. */
-		  text-overflow: ellipsis;  /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
-		  white-space  : nowrap;    /* 줄바꿈을 하지 않습니다. */
-		  overflow     : hidden;    /* 내용이 길면 감춤니다 */
-		  display      : block;     /* ie6이상 현재요소를 블럭처리합니다. */
+			width        : 160px;
+			text-overflow: ellipsis;
+			word-wrap : break-word;
+			overflow     : hidden;
+			display      : inline-block;
+			max-height: 44px;
+			line-height: 21px;
+			white-space : nowrap;
+		}
+		.product_preview_info{
+			width : 160px;
+			height : 28px;
+		}
+		.product_preview_price{
+			width : 70%;
+			float : left;
+			font-size : 120%
+		}
+		.product_preview_rating{
+			width : 30%;
+			float: right;
+			text-align: right;
 		}
     </style>
 </head>
@@ -37,14 +58,19 @@
 				<div>
 					<c:forEach var="product" items="${list}" varStatus="status">
 						<div class="product_preview">
-							<div><img src="${product.image_url }" width="120" height="150"></div>
+							<div><img src="${product.image_url }" width="160px" height="190px"></div>
 							<div class="product_preview_name">${product.name}</div>
 							<div class="product_preview_info">
-								<span>${product.price}</span>
-								<span>${product.rating}</span>
+								<div class="product_preview_price"><strong>${product.price}</strong>원</div>
+								<div class="product_preview_rating">
+									<img src="/resources/img/common/star.jpg" width="15px" height="15px">
+									${product.rating}
+								</div>
 							</div>
+							<p style=clear:both;></p>
 						</div>
-						<c:if test="${status.index%4 == 3}"><br></c:if> 
+						
+						<c:if test="${status.index%5 == 4}"><p style=clear:both;></p><br></c:if> 
 					</c:forEach>
 				</div>
 			</div>
