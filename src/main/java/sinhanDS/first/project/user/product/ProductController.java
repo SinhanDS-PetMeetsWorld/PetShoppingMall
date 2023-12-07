@@ -107,6 +107,9 @@ public class ProductController {
 		request.setAttribute("category1", request.getParameter("category1"));
 		request.setAttribute("category2", request.getParameter("category2"));
 		
+		ProductCategoryVO catekor = new ProductCategoryVO();
+		model.addAttribute("catekor" , catekor);
+		
 		List<ProductVO> product_list = service.product_list();
 		model.addAttribute("list", product_list);
 		return "user/product/search";

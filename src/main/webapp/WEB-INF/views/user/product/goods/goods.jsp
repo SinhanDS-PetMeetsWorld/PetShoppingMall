@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri = 'http://java.sun.com/jsp/jstl/functions' %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -76,7 +77,15 @@
 						<c:forEach var="item" items="${product_more}">
 							
 								<div class="goods-photo">
-									<img src="${item.image_url}">
+										<c:if test="${empty item.image_url }">
+											<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+										</c:if>
+										<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
+											<img src="${item.image_url }">
+										</c:if>
+										<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
+											<img src="/resources/img/product/registed_img/${item.image_url }">
+										</c:if>
 								</div>
 								<div class="goods-details">
 									
