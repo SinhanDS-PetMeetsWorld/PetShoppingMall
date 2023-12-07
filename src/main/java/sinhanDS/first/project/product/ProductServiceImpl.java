@@ -53,8 +53,14 @@ public class ProductServiceImpl implements ProductService {
 	
 	
 	@Override
+	public List<ProductOptionVO> Product_more_option(ProductOptionVO vo) {
+		List<ProductOptionVO> product_more_option = mapper.Product_more_option(vo);		
+		return product_more_option;
+	}
+
+	
+	@Override
 	public int QNA_insert(ProductQnAVO qnavo , HttpServletRequest request) {
-		
 		int r = mapper.QNA_insert(qnavo);
 		
 		return r;	
@@ -73,6 +79,8 @@ public class ProductServiceImpl implements ProductService {
 		List<ProductVO> product_list = mapper.product_list();
 		return product_list;
 	}
+
+
 
 
 }

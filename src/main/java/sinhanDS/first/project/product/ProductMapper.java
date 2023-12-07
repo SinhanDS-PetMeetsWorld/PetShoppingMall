@@ -19,10 +19,9 @@ public interface ProductMapper {
 	
 	List<ProductVO> Product_more (ProductVO vo);
 	
-	List <ProductCategoryVO> Product_more_category(ProductCategoryVO vo); 
+	List<ProductCategoryVO> Product_more_category(ProductCategoryVO vo); 
 	
-	// 볼 수 있는 거	
-	// ProductQnAVO view(ProductQnAVO vo); 
+	List<ProductOptionVO> Product_more_option(ProductOptionVO vo); 
 	
 	// (제품번호를 이용한) 판매자 검색
 	int Seller_no (int product_no);

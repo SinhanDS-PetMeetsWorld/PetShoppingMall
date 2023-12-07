@@ -105,10 +105,19 @@
 											${item.description}
 										</div>
 		
-										<div class="goods-option"
-											style="width: 720px; height: 100px; border: 1px solid black;"> 
-										</div>
 									</div>		
+									
+									
+									<div class="goods-option"
+											style="width: 720px; height: 100px; border: 1px solid black;"> 
+																									
+											<c:forEach var="item" items="${product_more_option}">
+											  ${item.title}	> ${item.content} > ${item.price} 
+											</c:forEach>
+								
+									</div>
+									
+									
 										</c:forEach>
 											수량 조절 이미지 <input type="button" style="background-color: grey;"
 												value="장바구니 담기"> <input type="button"
