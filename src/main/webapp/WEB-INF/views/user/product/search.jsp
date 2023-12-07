@@ -10,6 +10,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/css/common/template.css">
+    
+    <style>
+	    .product_preview_name{
+		  width        : 100px;     /* 너비는 변경될수 있습니다. */
+		  text-overflow: ellipsis;  /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
+		  white-space  : nowrap;    /* 줄바꿈을 하지 않습니다. */
+		  overflow     : hidden;    /* 내용이 길면 감춤니다 */
+		  display      : block;     /* ie6이상 현재요소를 블럭처리합니다. */
+		}
+    </style>
 </head>
 <body>
 	<div class="wrap">
@@ -24,15 +34,19 @@
                 <%@ include file="/WEB-INF/views/common/quickmenu_product_category.jsp"%>
             </div>
 			<div class="contentsright">
-			
 				<div>
 					<c:forEach var="product" items="${list}" varStatus="status">
-						<span> ${product.name}</span>
-						<%-- <c:if test="${status.index%4 == 3}"><br></c:if> 
-						status.index+1이 4의 배수면 br 넣어주기??--%>
+						<div class="product_preview">
+							<div><img src="${product.image_url }" width="120" height="150"></div>
+							<div class="product_preview_name">${product.name}</div>
+							<div class="product_preview_info">
+								<span>${product.price}</span>
+								<span>${product.rating}</span>
+							</div>
+						</div>
+						<c:if test="${status.index%4 == 3}"><br></c:if> 
 					</c:forEach>
 				</div>
-				
 			</div>
         </div>
         
