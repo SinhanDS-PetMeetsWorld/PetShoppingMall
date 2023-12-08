@@ -67,14 +67,20 @@
                     	상세검색
                     	<span class="">
                         	<select>
+                        		<option value="">전체</option>
                             	<option value="">상품명</option>
                                 <option value="">제조사명</option>
                                 <option value="">브랜드명</option>
-                                <option value="">가격</option>
                             </select>
                         </span>
                         <span class="searchWord">
                             <input type="text" placeholder="카테고리 내 검색어 입력">
+                            <span class="searchPrice">
+                            	가격
+	                            <input type="text" placeholder="0원">~
+	                            <input type="text" placeholder="199,999,999원">
+	                            <%-- 정규표현식으로 숫자와 , 외 문자 입력 불가로 막고 백에서 , 제거해야함 --%>
+	                        </span>
                         	<input type="button" id="" value="검색">
                         </span>
                     </form>
