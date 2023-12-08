@@ -121,6 +121,7 @@ public class MvcConfig implements WebMvcConfigurer{
 		registry.addInterceptor(userLoginIntercepton())
 						.addPathPatterns("/user/**")
 						.excludePathPatterns("/user/product/**")
+						.addPathPatterns("/user/product/qnawrite.do")
 						.excludePathPatterns("/user/join.do")
 						.excludePathPatterns("/user/login.do")
 						.excludePathPatterns("/user/idCheck.do")
