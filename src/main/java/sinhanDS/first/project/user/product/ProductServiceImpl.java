@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 
@@ -75,8 +76,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductVO> product_list() {
-		List<ProductVO> product_list = mapper.product_list();
+	public List<ProductVO> product_list(ProductSearchVO vo) {
+		List<ProductVO> product_list = mapper.product_list(vo);
 		return product_list;
 	}
 
