@@ -17,7 +17,6 @@ public interface ProductMapper {
 	// 리뷰 리스트
 	List<ReviewVO> Review_list (ReviewVO vo);
 	
-	
 	List<ProductVO> Product_more (ProductVO vo);
 	
 	List<ProductCategoryVO> Product_more_category(ProductCategoryVO vo); 
