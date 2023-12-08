@@ -120,8 +120,9 @@ public class MvcConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(userLoginIntercepton())
 						.addPathPatterns("/user/**")
-						.excludePathPatterns("/user/product/**")
-						.addPathPatterns("/user/product/qnawrite.do")
+						.addPathPatterns("/user/product/**")
+						.excludePathPatterns("/user/product/search.do")
+						.excludePathPatterns("/user/product/goods.do")
 						.excludePathPatterns("/user/join.do")
 						.excludePathPatterns("/user/login.do")
 						.excludePathPatterns("/user/idCheck.do")

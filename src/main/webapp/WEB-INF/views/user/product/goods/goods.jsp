@@ -171,7 +171,13 @@
 <script>
 
 function goQnawrite_popup(){
-	
+
+/*	userNo
+	if (userNo ==''){
+		
+		
+	}
+*/
 	/*var user = userLoginInfo.id;*/
 	var product_no = ${product_no};
 	var qnaWrite = 'qnawrite.do?no='+ product_no;
