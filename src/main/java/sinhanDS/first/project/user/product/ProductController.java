@@ -33,7 +33,11 @@ public class ProductController {
 	// 신정훈(11 / 29) QNA 페이지 , 리뷰 페이지 구현	
 	// 신정훈(12 / 05) 상품 상세 페이지 구현
 	@GetMapping("/goods.do")
-	public String QNA_Review_list(Model model, HttpServletRequest request,ProductVO pvo, ProductQnAVO qnavo , ReviewVO revvo , ProductCategoryVO pcvo , ProductOptionVO povo) {
+	public String QNA_Review_list(Model model, HttpServletRequest request, ProductVO pvo, ProductQnAVO qnavo , ReviewVO revvo , ProductCategoryVO pcvo , ProductOptionVO povo) {
+		
+		// 멤버 번호
+		HttpSession loginsess = request.getSession();
+		UserVO login = (UserVO)loginsess.getAttribute("userLoginInfo");
 		
 		List<ProductVO> product_more = service.Product_more(pvo);
 		List<ProductQnAVO> qna_list = service.QNA_list(qnavo);
@@ -44,7 +48,7 @@ public class ProductController {
 		
 		String product_no = request.getParameter("no");
 		pvo.setNo(Integer.valueOf(product_no));
-			
+		
 		model.addAttribute("product_more_option", product_more_option);
 		model.addAttribute("catekor" , catekor);
 		model.addAttribute("product_more_category" , product_more_category);
@@ -85,10 +89,10 @@ public class ProductController {
 		HttpSession loginsess = request.getSession();
 		UserVO login = (UserVO)loginsess.getAttribute("userLoginInfo");
 		
-		
 		System.out.println("qnavo 체크 : " + qnavo);
 		int r = service.QNA_insert(qnavo , request);
 		
+/*
 		if (r > 0) {
 			model.addAttribute("cmd", "move");
 			model.addAttribute("msg", "정상적으로 저장되었습니다.");
@@ -98,8 +102,8 @@ public class ProductController {
 			model.addAttribute("cmd", "back");
 			model.addAttribute("msg", "등록 오류");
 		}
-		
-		return "common/alert";
+*/		
+		return "user/product/goods/goods";
 	}
 	
 	
