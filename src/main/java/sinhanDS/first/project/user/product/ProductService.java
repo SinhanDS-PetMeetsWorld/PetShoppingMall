@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 
@@ -29,5 +30,6 @@ public interface ProductService {
 	public int QNA_insert(ProductQnAVO qnavo , HttpServletRequest request);
 	
 	List<ReviewVO> Review_list (ReviewVO vo);
-	List<ProductVO> product_list();
+	
+	List<ProductVO> product_list(ProductSearchVO vo);
 }

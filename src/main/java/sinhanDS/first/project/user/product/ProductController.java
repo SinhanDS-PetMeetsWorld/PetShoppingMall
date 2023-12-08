@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
@@ -107,10 +108,14 @@ public class ProductController {
 		request.setAttribute("category1", request.getParameter("category1"));
 		request.setAttribute("category2", request.getParameter("category2"));
 		
+		ProductSearchVO searchvo = new ProductSearchVO();
+		searchvo.setCategory1(Integer.parseInt(request.getParameter("category1")));
+		searchvo.setCategory2(Integer.parseInt(request.getParameter("category2")));
+		
 		ProductCategoryVO catekor = new ProductCategoryVO();
 		model.addAttribute("catekor" , catekor);
 		
-		List<ProductVO> product_list = service.product_list();
+		List<ProductVO> product_list = service.product_list(searchvo);
 		model.addAttribute("list", product_list);
 		return "user/product/search";
 	}

@@ -51,8 +51,10 @@
     </insert>
 	
 	
-	<select id="product_list" resultType="sinhanDS.first.project.product.vo.ProductVO">
+	<select id="product_list" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT *
-		FROM product
+		FROM product INNER JOIN product_category 
+			ON product.no = product_category.product_no
+		WHERE product_category.category1 = #{category1} AND product_category.category2 = #{category2}
 	</select>
 </mapper>

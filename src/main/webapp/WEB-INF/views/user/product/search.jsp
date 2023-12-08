@@ -65,7 +65,7 @@
 				<div class="detail_search">
                     <form method="" name="" id="" action="">
                     	상세검색
-                    	<span class="srchSelect">
+                    	<span class="">
                         	<select>
                             	<option value="">상품명</option>
                                 <option value="">제조사명</option>
@@ -83,9 +83,9 @@
 				<div class="sorting">
 
                     	정렬
-                    	<span class="srchSelect">
+                    	<span class="">
                         	<select>
-                            	<option value="">추천순</option>
+                            	<option value="">평점순</option>
                                 <option value="">제품명순</option>
                                 <option value="">최저가순</option>
                                 <option value="">최고가순</option>

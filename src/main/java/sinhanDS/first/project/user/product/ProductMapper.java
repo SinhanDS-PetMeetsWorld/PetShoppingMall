@@ -3,9 +3,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
+import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 
@@ -30,6 +31,6 @@ public interface ProductMapper {
 	int QNA_insert(ProductQnAVO vo);
 	
 	// 물건 리스트
-	List<ProductVO> product_list();
+	List<ProductVO> product_list(ProductSearchVO vo);
 
 }
