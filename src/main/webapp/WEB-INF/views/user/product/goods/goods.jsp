@@ -1,25 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri = 'http://java.sun.com/jsp/jstl/functions' %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title></title>
-<META name="viewport"
-	content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<title>Pet Meets World</title>
+<META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/resources/css/common/template.css">
-
-
-    <style>
+<style>
 
         .board_area {
             max-width: 600px;
@@ -45,9 +38,6 @@
         .board_contents.active {
             display: block;
         }
-
-
-
     </style>
 </head>
 <body>
@@ -64,16 +54,12 @@
 				<div>
 					
 						<div id="goods_category" style="width: 720px; height: 100px; border: 1px solid black">
-									
 							<c:forEach var="item" items="${product_more_category}">
 								${catekor.category_name[item.category1]} > 
 								${catekor.category[item.category1][item.category2] } <br>
-									       
 							</c:forEach>
-									
 						</div>
-						
-						
+						유저 ID : ${userLoginInfo.id}
 						<c:forEach var="item" items="${product_more}">
 							
 								<div class="goods-photo">
@@ -113,25 +99,25 @@
 									</div>	
 								</div>		
 						</c:forEach>
-									
-										<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
-											<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
-												<c:if test="${(status.index == 0) || (product_more_option[status.index - 1].title != ovo.title)}">
-													${ovo.title } <select name="title_list">
-												</c:if>
-														<option value=""> ${ovo.content } :  ${ovo.price }원</option>
-												<c:if test="${(product_more_option[status.index + 1].title != ovo.title)}">
-													</select><br>
-												</c:if>
-											</c:forEach>
-										</div>
-									
-											수량 <input type="number" name="choose_number" value=0>
-											
-											<input type="button" style="background-color: grey;"
-												value="장바구니 담기"> <input type="button"
-												style="background-color: yellow" value="바로 구매"><br>
-								
+					
+						<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
+							<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
+								<c:if test="${(status.index == 0) || (product_more_option[status.index - 1].title != ovo.title)}">
+									${ovo.title } <select name="title_list">
+								</c:if>
+										<option value=""> ${ovo.content } :  ${ovo.price }원</option>
+								<c:if test="${(product_more_option[status.index + 1].title != ovo.title)}">
+									</select><br>
+								</c:if>
+							</c:forEach>
+						</div>
+					
+							수량 <input type="number" name="choose_number" value=0>
+							
+							<input type="button" style="background-color: grey;"
+								value="장바구니 담기"> <input type="button"
+								style="background-color: yellow" value="바로 구매"><br>
+				
 						<div class = "goods_review_QNA">
 								<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
 								<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>
@@ -149,7 +135,7 @@
 								<div class="board_contents" id = "qna">
 						
 						 		<div class="qna_write_button">
-									<button type="button" name="go_qnawrite" onclick="location.href='/product/qnawrite.do?no=${product_no}'">qna 작성하기</button>
+									<button type="button" name="go_qnawrite" onclick="goQnawrite_popup()">qna 작성하기</button>
 								</div>
 						 
 						   		 <c:forEach var="item" items="${qna_list}">
@@ -184,10 +170,26 @@
 		
 <script>
 
+function goQnawrite_popup(){
 
-
-
-
+/*	userNo
+	if (userNo ==''){
+		
+		
+	}
+*/
+	/*var user = userLoginInfo.id;*/
+	var product_no = ${product_no};
+	var qnaWrite = 'qnawrite.do?no='+ product_no;
+	
+	/*
+	if (user ==''){
+		alert('로그인 후 이용 가능합니다.');
+		return 'user/login.do';
+	}
+	*/
+	window.open(qnaWrite , 'Q&A등록', 'width=500, height=600');
+}
 
 // 질문 ,해답 하나씩 켜고 끄기
 $(".Q").click(function() {

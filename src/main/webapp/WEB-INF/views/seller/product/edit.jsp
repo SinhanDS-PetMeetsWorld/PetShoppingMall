@@ -49,8 +49,7 @@
 								<div class="category">
 									<hr>
 									<div>
-										카테고리 *<br> <select name="category1_list"
-											class="category1_list">
+										카테고리 *<br> <select name="category1_list" class="category1_list">
 											<c:forEach var="category_name" items="${category.category_name }" varStatus="status_outer">
 												<option value="${status_outer.index}" <c:if test="${cvo.category1 == status_outer.index }">selected</c:if> >${category_name }</option>
 											</c:forEach>
@@ -148,7 +147,7 @@
 				<hr>
 				<div>
 					카테고리 *<br> <select name="category1_list" class="category1_list">
-						<c:forEach var="category_name" items="${vo.category_name }" varStatus="status">
+						<c:forEach var="category_name" items="${category.category_name }" varStatus="status">
 							<option value="${status.index}">${category_name }</option>
 						</c:forEach>
 					</select>
@@ -156,8 +155,7 @@
 					<div>
 						세부 카테고리 *<br> <select name="category2_list"
 							class="category2_list" data-no="${status.index }">
-							<c:forEach var="category" items="${vo.category[0] }"
-								varStatus="status">
+							<c:forEach var="category" items="${category.category[0] }" varStatus="status">
 								<option value="${status.index}">${category }</option>
 							</c:forEach>
 						</select>
@@ -203,20 +201,26 @@
 		function remove_category(){
 			let categoryBody = this.parentNode.parentNode;
 			let category_target = this.parentNode;
+			console.log(category_target);
 			categoryBody.removeChild(category_target);
+			
 		}
+
 		function add_category() {
 			let newCategory = $('.category_original').clone();
 			$(newCategory).css('display', 'inline');
 			$(newCategory).removeClass('category_original');
 			$(newCategory).addClass('category');
 			console.log(newCategory);
-			$(newCategory).find('a').on('click', add_category);
-			$(newCategory).find('.category1_list').on('change', change_category2)
+			console.log($(newCategory).find('add_btn_category'));
+			$(newCategory).find('.add_btn_category').on('click', add_category);
+			$(newCategory).find('.category1_list').on('change', change_category2);
+			$(newCategory).find('.remove_btn_category').on('click', remove_category);
 			$(this).remove();
 			newCategory.appendTo($('.category_body'));
+			
+			
 		}
-
 		function change_category2() {
 			let target = this.parentNode.querySelector('.category2_list');
 			$(target).empty();
