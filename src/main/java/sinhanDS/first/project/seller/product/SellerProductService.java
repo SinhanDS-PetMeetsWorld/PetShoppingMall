@@ -25,9 +25,10 @@ public interface SellerProductService {
 	public List<ProductOptionVO> getOptions(int product_no);
 	public List<List<ProductOptionVO>> getOptionLists(List<ProductVO> productList);
 	
-	
-	
 	public boolean edit(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo);
 	
-	public void remove(ProductVO vo);
+	public void remove_file(ProductVO vo);
+	public void removeCategory(int product_no);
+	public void removeOption(int product_no);
+	public void removeProduct(int product_no);
 }

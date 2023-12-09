@@ -144,18 +144,20 @@ public class SellerProductServiceImpl implements SellerProductService {
 		return true;
 	}
 	
-	public void remove(ProductVO vo) {
-		System.out.println("삭제 체크: " + vo.getNo());
-		System.out.println("삭제 체크: " + vo.getImage_url());
-		
+	public void remove_file(ProductVO vo) {
 		if(!("".equals(vo.getImage_url()) || "h".equals(vo.getImage_url().substring(0, 1)))) {
 			fileController.remove(vo);
-			System.out.println("상품 이미지 컴퓨터에 있음");
+			log.debug("상품 이미지 컴퓨터에 있음");
 		}
-		System.out.println("상품삭제진행");
-		mapper.remove_category(vo.getNo());
-		mapper.remove_option(vo.getNo());
-		mapper.remove(vo.getNo());
+	}
+	public void removeCategory(int product_no) {
+		mapper.remove_category(product_no);
+	}
+	public void removeOption(int product_no) {
+		mapper.remove_option(product_no);
+	}
+	public void removeProduct(int product_no) {
+		mapper.remove(product_no);
 	}
 
 }

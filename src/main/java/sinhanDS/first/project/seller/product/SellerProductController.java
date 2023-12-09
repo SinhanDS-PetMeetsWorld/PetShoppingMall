@@ -90,9 +90,6 @@ public class SellerProductController {
 	
 	@PostMapping("/edit.do")
 	public String edit2(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
-		System.out.println("vo체크: " + vo);
-		System.out.println("cvo체크: "  +cvo);
-		System.out.println("ovo체크: " + ovo);
 		service.edit(vo, cvo, ovo);
 		return "redirect:/seller/index.do";
 	}	
@@ -100,7 +97,10 @@ public class SellerProductController {
 	@PostMapping("/remove.do")
 	public String remove(ProductVO vo) {
 		System.out.println("product image_url체크  :" + vo.getImage_url());
-		service.remove(vo);
+		service.remove_file(vo);
+		service.removeCategory(vo.getNo());
+		service.removeOption(vo.getNo());
+		service.removeProduct(vo.getNo());
 		return "redirect:/seller/index.do";
 	}
 }
