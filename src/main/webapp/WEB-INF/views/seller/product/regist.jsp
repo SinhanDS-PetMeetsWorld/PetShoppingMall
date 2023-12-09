@@ -294,9 +294,6 @@
 						alert("중복 선택 된 카테고리가 존재합니다! 카테고리를 확인해주세요!");
 						return false;
 					}
-					//console.log("본래: " + cat1List[i].value + " "  + cat2List[i].value);
-					//console.log("비교: " + cat1List[j].value + " "  + cat2List[j].value);
-										
 				}
 			}
 			

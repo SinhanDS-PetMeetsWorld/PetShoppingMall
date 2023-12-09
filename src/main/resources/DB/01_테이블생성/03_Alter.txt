@@ -122,3 +122,8 @@ CHANGE COLUMN `account` `account` VARCHAR(96) NOT NULL ;
  ALTER TABLE `PetShoppingMall`.`payment` 
 ADD COLUMN `cvc` CHAR(3) NULL DEFAULT NULL AFTER `valid_date`;
  
+ ALTER TABLE `PetShoppingMall`.`product` 
+CHANGE COLUMN `name` `name` VARCHAR(255) NOT NULL ,
+CHANGE COLUMN `company` `company` VARCHAR(255) NULL DEFAULT NULL ,
+CHANGE COLUMN `brand` `brand` VARCHAR(255) NULL DEFAULT NULL ;
+ 

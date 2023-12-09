@@ -29,10 +29,8 @@ public class tempTest {
 	/* 왜 안되나... */
 	@Test
 	public void regist_product() throws Exception {
-		RequestBuilder req = MockMvcRequestBuilders.get("/seller/idCheck.do")
-				.param("id", "collagom");
-		
-		mock.perform(req);
+		String temp = "필드스타 <b>강아지사료</b> 진도10kg 1+1+랜덤간식 대용량 진돗<b>개사료</b> \n";
+		System.out.println(temp.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""));
 
 	}
 }
