@@ -1,5 +1,7 @@
 package sinhanDS.first.project.seller.product;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,15 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mysql.cj.log.Log;
-
-import lombok.extern.log4j.Log4j;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
-import sinhanDS.first.project.util.file.FileNameVO;
-import sinhanDS.first.project.util.file.FileController;
 
 @Controller
 @RequestMapping("/seller/product")
@@ -64,10 +61,14 @@ public class SellerProductController {
 	
 	@GetMapping("/list.do")
 	public String list(HttpSession sess, Model model) {
-		SellerVO vo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		SellerVO seller = (SellerVO)sess.getAttribute("sellerLoginInfo");
 		
-		Map map = service.getProductList(vo.getNo());
-		model.addAttribute("map", map);
+		List<ProductVO> productList = service.getProductList(seller.getNo());
+		List<List<ProductCategoryVO>> categoryList = service.getCategoryList(productList);
+		List<List<ProductOptionVO>> optionList = service.getOptionList(productList);
+		model.addAttribute("productList", productList);
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("optionList", optionList);
 		model.addAttribute("registed_img_path", registed_img_path);
 		return "seller/product/list";
 	}

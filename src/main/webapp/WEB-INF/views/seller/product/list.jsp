@@ -28,7 +28,7 @@
             </div>
 			<div class="contentsright">
 				<ul>
-					<c:forEach items="${map.productList }" var="vo" varStatus="status">
+					<c:forEach items="${productList }" var="vo" varStatus="status">
 						<li>
 							<table border="1px">
 								<tr>
@@ -65,7 +65,7 @@
 										${vo.name }
 									</td>
 									<td>
-										<c:forEach items="${map.categoryList }" var="cvoList" varStatus="cList_status">
+										<c:forEach items="${categoryList }" var="cvoList" varStatus="cList_status">
 											<c:if test="${status.index == cList_status.index }">
 												<c:forEach items="${cvoList }" var="cvo" varStatus="c_status">
 													${cvo.category_name[cvo.category1] } ${cvo.category[cvo.category1][cvo.category2] } <br>
@@ -74,7 +74,7 @@
 										</c:forEach>
 									</td>
 									<td>
-										<c:forEach items="${map.optionList }" var="ovoList" varStatus="oList_status">
+										<c:forEach items="${optionList }" var="ovoList" varStatus="oList_status">
 											<c:if test="${status.index == oList_status.index }">
 												<c:forEach items="${ovoList }" var="ovo" varStatus="o_status">
 													${ovo.title } ${ovo.content } <br>

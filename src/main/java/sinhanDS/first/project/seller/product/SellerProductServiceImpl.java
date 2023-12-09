@@ -74,32 +74,30 @@ public class SellerProductServiceImpl implements SellerProductService {
 	
 	
 	
-	public Map getProductList(int seller_no){
-		Map map = new HashMap<>();
-		List<ProductVO> productList = mapper.getProductList(seller_no);
+	public List<ProductVO> getProductList(int seller_no){
+		return mapper.getProductList(seller_no);
+	}
+	
+	public List<List<ProductCategoryVO>> getCategoryList(List<ProductVO> productList){
 		List<List<ProductCategoryVO>> categoryList = new ArrayList<>();
-		List<List<ProductOptionVO>> optionList = new ArrayList<>();
 		for(int i = 0; i < productList.size(); i++) {
 			System.out.println("productNO: " + productList.get(i).getNo());
 			List<ProductCategoryVO> categoryVO = mapper.getCategoriesList(productList.get(i).getNo());
 			categoryList.add(categoryVO);
 			System.out.println(categoryVO);
 		}
-		
+		return categoryList;
+	}
+	public List<List<ProductOptionVO>> getOptionList(List<ProductVO> productList){
+		List<List<ProductOptionVO>> optionList = new ArrayList<>();
 		for(int i = 0; i < productList.size(); i++) {
 			System.out.println("productNO: " + productList.get(i).getNo());
 			List<ProductOptionVO> optionVO = mapper.getOptionsList(productList.get(i).getNo());
 			optionList.add(optionVO);
 			System.out.println(optionVO);
 		}
-		
-		System.out.println("productList체크: " + productList);
-		map.put("productList", productList);
-		map.put("categoryList", categoryList);
-		map.put("optionList", optionList);
-		return map;
+		return optionList;
 	}
-	
 	
 	
 	public ProductVO getProduct(int product_no) {
