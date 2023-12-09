@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri = 'http://java.sun.com/jsp/jstl/functions' %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -32,7 +32,7 @@
 			<div class="contentsright">
 				<div>
 					<h2>상품 수정</h2>
-					<form action="/seller/product/edit.do" method="post" onsubmit="return regist();">
+					<form action="/seller/product/edit.do" method="post" onsubmit="return regist();" enctype="multipart/form-data">>
 						<input type="hidden" name="no" value="${pvo.no }">
 						<input type="hidden" name="seller_no" value="${pvo.seller_no }">
 						<div>
@@ -121,7 +121,18 @@
 						
 
 						<div>
+							<c:if test="${empty pvo.image_url }">
+								<img class="displayed_image" src="/resources/img/product/no_image.jpg" width="100" height="100">
+							</c:if>
+							<c:if test="${!empty pvo.image_url && fn:substring(pvo.image_url, 0, 1) == 'h' }">
+								<img class="displayed_image" src="${pvo.image_url }" width="100" height="100">
+							</c:if>
+							<c:if test="${!empty pvo.image_url && !(fn:substring(pvo.image_url, 0, 1) == 'h') }">
+								<img class="displayed_image" src="/resources/img/product/registed_img/${pvo.image_url }" width="100" height="100">
+							</c:if>
 							<input type="hidden" name="image_url" value="${pvo.image_url }">
+							<br>
+							상품 이미지 수정<input class="add_file_button" type="file" name="filename" onchange="readURL(this);"> 
 						</div>
 						<div>
 							할인 가격 <input type="number" name="discount" value="${pvo.discount }" required>
@@ -165,7 +176,7 @@
 	<script src="/resources/js/seller/product/category.js"></script>
 	<script src="/resources/js/seller/product/option.js"></script>
 	<script src="/resources/js/seller/product/regist.js"></script>
-	
+	<script src="/resources/js/seller/product/displayImage.js"></script>
 	
 </body>
 </html>

@@ -33,12 +33,14 @@ public class SellerProductController {
 	@Value("${realPath.registed_img_path}")
 	private String registed_img_path;
 	
+	
 	@GetMapping("/regist.do")
 	public String regist(Model model) {
 		ProductCategoryVO vo = new ProductCategoryVO();
 		model.addAttribute("category", vo);
 		return "seller/product/regist";
 	}		
+	
 	@PostMapping("/regist.do")
 	public String regist(@RequestParam MultipartFile filename, HttpServletRequest request, ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
 		if(filename != null) {
@@ -50,6 +52,7 @@ public class SellerProductController {
 		
 		return "redirect:/seller/index.do";
 	}
+	
 	@PostMapping("/regist_forTest.do")
 	public String regist_forTest(HttpServletRequest request, ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
 		vo = service.regist_product(vo);
@@ -58,6 +61,8 @@ public class SellerProductController {
 		
 		return "redirect:/seller/index.do";
 	}
+	
+	
 	
 	@GetMapping("/list.do")
 	public String list(HttpSession sess, Model model) {
@@ -74,9 +79,10 @@ public class SellerProductController {
 		return "seller/product/list";
 	}
 	
+	
+	
 	@GetMapping("/edit.do")
 	public String edit(Model model, ProductVO vo) {
-		
 		ProductVO pvo = service.getProduct(vo.getNo());
 		List<ProductCategoryVO> categoryList = service.getCategories(vo.getNo());
 		List<ProductOptionVO> optionList = service.getOptions(vo.getNo());
@@ -84,11 +90,15 @@ public class SellerProductController {
 		model.addAttribute("pvo", pvo);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("optionList", optionList);
+		model.addAttribute("registed_img_path", registed_img_path);
 		return "seller/product/edit";
 	}
 	
 	@PostMapping("/edit.do")
-	public String edit2(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
+	public String edit2(@RequestParam MultipartFile filename, ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
+		service.remove_file(vo);
+		service.upload_file(filename, vo);
+		
 		service.editProduct(vo);
 		service.removeCategory(vo.getNo());
 		service.removeOption(vo.getNo());
@@ -96,6 +106,8 @@ public class SellerProductController {
 		service.regist_option(vo, ovo);
 		return "redirect:/seller/index.do";
 	}	
+	
+	
 	
 	@PostMapping("/remove.do")
 	public String remove(ProductVO vo) {
