@@ -39,7 +39,7 @@ public class SellerProductController {
 	@GetMapping("/regist.do")
 	public String regist(Model model) {
 		ProductCategoryVO vo = new ProductCategoryVO();
-		model.addAttribute("vo", vo);
+		model.addAttribute("category", vo);
 		return "seller/product/regist";
 	}		
 	@PostMapping("/regist.do")
