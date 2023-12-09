@@ -47,13 +47,17 @@ public class SellerProductController {
 		if(filename != null) {
 			vo = service.upload_file(filename, vo);
 		}
-		service.regist(vo, cvo, ovo);
+		vo = service.regist_product(vo);
+		service.regist_category(vo, cvo);
+		service.regist_option(vo, ovo);
 		
 		return "redirect:/seller/index.do";
 	}
 	@PostMapping("/regist_forTest.do")
 	public String regist_forTest(HttpServletRequest request, ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
-		service.regist(vo, cvo, ovo);
+		vo = service.regist_product(vo);
+		service.regist_category(vo, cvo);
+		service.regist_option(vo, ovo);
 		
 		return "redirect:/seller/index.do";
 	}

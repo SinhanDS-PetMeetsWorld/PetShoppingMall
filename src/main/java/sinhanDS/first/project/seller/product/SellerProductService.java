@@ -11,7 +11,11 @@ import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 
 public interface SellerProductService {
-	public int regist(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo);
+	
+	public ProductVO regist_product(ProductVO vo);
+	public void regist_category(ProductVO vo, ProductCategoryVO cvo);
+	public void regist_option(ProductVO vo, ProductOptionVO ovo);
+	
 	public ProductVO upload_file(MultipartFile filename, ProductVO vo);
 	public Map getProductList(int seller_no);
 	public ProductVO getProduct(int product_no);
