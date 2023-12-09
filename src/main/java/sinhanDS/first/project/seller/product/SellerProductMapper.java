@@ -15,6 +15,7 @@ public interface SellerProductMapper {
 	int regist_option(ProductOptionVO vo);
 
 	int edit(ProductVO vo);
+	
 	int remove_category(int no);
 	int remove_option(int no);
 	int remove(int no);

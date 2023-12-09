@@ -35,7 +35,7 @@ public class SellerProductServiceImpl implements SellerProductService {
 		try {
 			vo.setImage_url(fvo.getSaved_filename());
 		}catch(NullPointerException e) {
-			log.debug("상품 업로드 중 에러 체크");
+			e.printStackTrace();
 		}
 		
 		return vo;
@@ -64,7 +64,6 @@ public class SellerProductServiceImpl implements SellerProductService {
 				novo.setTitle(ovo.getTitle_list()[i]);
 				novo.setContent(ovo.getContent_list()[i]);
 				novo.setPrice(ovo.getPrice_list()[i]);
-				System.out.println("novo체크: " + novo);
 				mapper.regist_option(novo);
 			}
 		}
@@ -79,15 +78,17 @@ public class SellerProductServiceImpl implements SellerProductService {
 	public void remove_file(ProductVO vo) {
 		if(!("".equals(vo.getImage_url()) || "h".equals(vo.getImage_url().substring(0, 1)))) {
 			fileController.remove(vo);
-			log.debug("상품 이미지 컴퓨터에 있음");
 		}
 	}
+	
 	public void removeCategory(int product_no) {
 		mapper.remove_category(product_no);
 	}
+	
 	public void removeOption(int product_no) {
 		mapper.remove_option(product_no);
 	}
+	
 	public void removeProduct(int product_no) {
 		mapper.remove(product_no);
 	}
