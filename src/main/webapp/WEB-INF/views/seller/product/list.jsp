@@ -77,7 +77,7 @@
 										<c:forEach items="${optionList }" var="ovoList" varStatus="oList_status">
 											<c:if test="${status.index == oList_status.index }">
 												<c:forEach items="${ovoList }" var="ovo" varStatus="o_status">
-													${ovo.title } ${ovo.content } <br>
+													${ovo.title } ${ovo.content } ${ovo.price } <br>
 												</c:forEach>
 											</c:if>
 										</c:forEach>

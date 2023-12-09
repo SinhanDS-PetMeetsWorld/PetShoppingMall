@@ -64,22 +64,26 @@ public class SellerProductController {
 		SellerVO seller = (SellerVO)sess.getAttribute("sellerLoginInfo");
 		
 		List<ProductVO> productList = service.getProductList(seller.getNo());
-		List<List<ProductCategoryVO>> categoryList = service.getCategoryList(productList);
-		List<List<ProductOptionVO>> optionList = service.getOptionList(productList);
+		List<List<ProductCategoryVO>> categoryList = service.getCategoryLists(productList);
+		List<List<ProductOptionVO>> optionList = service.getOptionLists(productList);
 		model.addAttribute("productList", productList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("registed_img_path", registed_img_path);
+		
 		return "seller/product/list";
 	}
 	
 	@GetMapping("/edit.do")
 	public String edit(Model model, ProductVO vo) {
-		Map map = service.getProductDetail(vo.getNo());
-		model.addAttribute("map", map);
-		ProductCategoryVO category = new ProductCategoryVO();
-		model.addAttribute("category", category);
-		System.out.println("map체크: " + map);
+		
+		ProductVO pvo = service.getProduct(vo.getNo());
+		List<ProductCategoryVO> categoryList = service.getCategories(vo.getNo());
+		List<ProductOptionVO> optionList = service.getOptions(vo.getNo());
+		model.addAttribute("category", new ProductCategoryVO());
+		model.addAttribute("pvo", pvo);
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("optionList", optionList);
 		return "seller/product/edit";
 	}
 	

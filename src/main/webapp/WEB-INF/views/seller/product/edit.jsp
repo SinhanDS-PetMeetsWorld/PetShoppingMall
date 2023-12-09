@@ -33,19 +33,19 @@
 				<div>
 					<h2>상품 수정</h2>
 					<form action="/seller/product/edit.do" method="post" onsubmit="return regist();">
-						<input type="hidden" name="no" value="${map.pvo.no }">
-						<input type="hidden" name="seller_no" value="${map.pvo.seller_no }">
+						<input type="hidden" name="no" value="${pvo.no }">
+						<input type="hidden" name="seller_no" value="${pvo.seller_no }">
 						<div>
-							상품명*<br> <input type="text" name="name" required value="${map.pvo.name }">
+							상품명*<br> <input type="text" name="name" required value="${pvo.name }">
 						</div>
 						<div>
-							가격*<br> <input type="number" name="price" value="${map.pvo.price }" required>
+							가격*<br> <input type="number" name="price" value="${pvo.price }" required>
 						</div>
 						<div>
-							재고*<br> <input type="number" name="stock" value="${map.pvo.stock }" required>
+							재고*<br> <input type="number" name="stock" value="${pvo.stock }" required>
 						</div>
 						<div class="category_body">
-							<c:forEach items="${map.categoryList }" var="cvo">
+							<c:forEach items="${categoryList }" var="cvo">
 								<div class="category">
 									<hr>
 									<div>
@@ -76,24 +76,24 @@
 							</div>
 						</div>
 						<div>
-							제조사 <input type="text" name="company" value="${map.pvo.company }">
+							제조사 <input type="text" name="company" value="${pvo.company }">
 						</div>
 						<div>
-							브랜드명 <input type="text" name="brand" value="${map.pvo.brand }">
+							브랜드명 <input type="text" name="brand" value="${pvo.brand }">
 						</div>
 						
 						
 						<div class="option_body">
-							<c:forEach items="${map.optionList }" var="outer_ovo" varStatus="status">
+							<c:forEach items="${optionList }" var="outer_ovo" varStatus="status">
 								<!-- 이거 이렇게하면 option_content만 추가되야하는애들은 아예 추가가 안되는구나 -->
-								<c:if test="${(status.index == 0) || (map.optionList[status.index - 1].title != outer_ovo.title)}">
+								<c:if test="${(status.index == 0) || (optionList[status.index - 1].title != outer_ovo.title)}">
 									<div class="option">
 										<div class="option_title">
 											<a href="javascript:;" class="remove_btn_option_title">
 												<img src="/resources/img/product/option_content_remove.png" width="25" height="25" />
 											</a><br>
 								</c:if>
-											<c:forEach items="${map.optionList }" var="ovo" varStatus="innerStatus">
+											<c:forEach items="${optionList }" var="ovo" varStatus="innerStatus">
 												<c:if test="${status.index == innerStatus.index }">
 													<div class="option_content">
 														<hr>
@@ -107,8 +107,8 @@
 													</div>
 												</c:if>
 											</c:forEach>
-								<%-- <c:if test="${(status.index == 0) || (map.optionList[status.index - 1].title != outer_ovo.title)}"> --%>
-								<c:if test="${(map.optionList[status.index + 1].title != outer_ovo.title)}">
+								<%-- <c:if test="${(status.index == 0) || (optionList[status.index - 1].title != outer_ovo.title)}"> --%>
+								<c:if test="${(optionList[status.index + 1].title != outer_ovo.title)}">
 										</div>
 									</div>
 								</c:if>
@@ -121,17 +121,17 @@
 						
 
 						<div>
-							<input type="hidden" name="image_url" value="${map.pvo.image_url }">
+							<input type="hidden" name="image_url" value="${pvo.image_url }">
 						</div>
 						<div>
-							할인 가격 <input type="number" name="discount" value="${map.pvo.discount }" required>
+							할인 가격 <input type="number" name="discount" value="${pvo.discount }" required>
 						</div>
 
 						<div>상품 설명</div>
 
 						<div>
 							상세 설명
-							<textarea name="description" rows="10" cols="40">${map.pvo.description }</textarea>
+							<textarea name="description" rows="10" cols="40">${pvo.description }</textarea>
 						</div>
 
 						<input type="submit" value="수정">

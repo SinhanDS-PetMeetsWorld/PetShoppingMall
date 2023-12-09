@@ -18,13 +18,14 @@ public interface SellerProductService {
 	public void regist_category(ProductVO vo, ProductCategoryVO cvo);
 	public void regist_option(ProductVO vo, ProductOptionVO ovo);
 	
-	public List<ProductVO> getProductList(int seller_no);
-	public List<List<ProductCategoryVO>> getCategoryList(List<ProductVO> productList);
-	public List<List<ProductOptionVO>> getOptionList(List<ProductVO> productList);
-	
-	
 	public ProductVO getProduct(int product_no);
-	public Map getProductDetail(int product_no);
+	public List<ProductVO> getProductList(int seller_no);
+	public List<ProductCategoryVO> getCategories(int product_no);
+	public List<List<ProductCategoryVO>> getCategoryLists(List<ProductVO> productList);
+	public List<ProductOptionVO> getOptions(int product_no);
+	public List<List<ProductOptionVO>> getOptionLists(List<ProductVO> productList);
+	
+	
 	
 	public boolean edit(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo);
 	

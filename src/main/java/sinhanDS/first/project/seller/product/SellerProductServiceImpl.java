@@ -71,14 +71,16 @@ public class SellerProductServiceImpl implements SellerProductService {
 
 	
 	
-	
-	
+	public ProductVO getProduct(int product_no) {
+		ProductVO vo = mapper.getProduct(product_no);
+		return vo;
+	}
 	
 	public List<ProductVO> getProductList(int seller_no){
 		return mapper.getProductList(seller_no);
 	}
 	
-	public List<List<ProductCategoryVO>> getCategoryList(List<ProductVO> productList){
+	public List<List<ProductCategoryVO>> getCategoryLists(List<ProductVO> productList){
 		List<List<ProductCategoryVO>> categoryList = new ArrayList<>();
 		for(int i = 0; i < productList.size(); i++) {
 			System.out.println("productNO: " + productList.get(i).getNo());
@@ -88,7 +90,12 @@ public class SellerProductServiceImpl implements SellerProductService {
 		}
 		return categoryList;
 	}
-	public List<List<ProductOptionVO>> getOptionList(List<ProductVO> productList){
+	
+	public List<ProductCategoryVO> getCategories(int product_no){
+		return mapper.getCategoriesList(product_no);
+	}
+	
+	public List<List<ProductOptionVO>> getOptionLists(List<ProductVO> productList){
 		List<List<ProductOptionVO>> optionList = new ArrayList<>();
 		for(int i = 0; i < productList.size(); i++) {
 			System.out.println("productNO: " + productList.get(i).getNo());
@@ -99,25 +106,10 @@ public class SellerProductServiceImpl implements SellerProductService {
 		return optionList;
 	}
 	
-	
-	public ProductVO getProduct(int product_no) {
-		ProductVO vo = mapper.getProduct(product_no);
-		return vo;
+	public List<ProductOptionVO> getOptions(int product_no){
+		return mapper.getOptionsList(product_no);
 	}
 	
-	public Map getProductDetail(int product_no) {
-		Map map = new HashMap();
-		List<ProductCategoryVO> categoryList = new ArrayList<>();
-		List<ProductOptionVO> optionList = new ArrayList<>();
-		categoryList = mapper.getCategoriesList(product_no);
-		optionList = mapper.getOptionsList(product_no);
-		
-		map.put("pvo", mapper.getProduct(product_no));
-		map.put("categoryList", categoryList);
-		map.put("optionList", optionList);
-		
-		return map;
-	}
 	
 	public boolean edit(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
 		System.out.println("수정작업시작");
