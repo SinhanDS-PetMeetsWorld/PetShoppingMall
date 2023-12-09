@@ -70,9 +70,9 @@
 										src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a>
 								</div>
 							</c:forEach>
-							<div class="category">
+							<div class ="category_add_button">
 								<a href="javascript:;" class="add_btn_category"><img
-									src="/resources/img/product/add.png" width="25" height="25" />카테고리 추가</a>
+													src="/resources/img/product/add.png" width="25" height="25" /> 카테고리 추가</a>
 							</div>
 						</div>
 						<div>
@@ -164,6 +164,8 @@
 				</div>
 				<a href="javascript:;" class="remove_btn_category"><img
 									src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a><br>
+			</div>
+			<div class ="category_add_button" style="display: none;">
 				<a href="javascript:;" class="add_btn_category"><img
 									src="/resources/img/product/add.png" width="25" height="25" /> 카테고리 추가</a>
 			</div>
@@ -208,18 +210,21 @@
 
 		function add_category() {
 			let newCategory = $('.category_original').clone();
+			let categoryAddButton = $('.category_add_button').eq(-1).clone();
+			
 			$(newCategory).css('display', 'inline');
 			$(newCategory).removeClass('category_original');
 			$(newCategory).addClass('category');
 			console.log(newCategory);
-			console.log($(newCategory).find('add_btn_category'));
 			$(newCategory).find('.add_btn_category').on('click', add_category);
-			$(newCategory).find('.category1_list').on('change', change_category2);
 			$(newCategory).find('.remove_btn_category').on('click', remove_category);
+			$(newCategory).find('.category1_list').on('change', change_category2)
 			$(this).remove();
 			newCategory.appendTo($('.category_body'));
 			
-			
+			$(categoryAddButton).css('display', 'inline');
+			$(categoryAddButton).on('click', add_category);
+			categoryAddButton.appendTo($('.category_body'));
 		}
 		function change_category2() {
 			let target = this.parentNode.querySelector('.category2_list');
@@ -298,6 +303,13 @@
 	
 	<script>
 		function regist(){
+			let categories = document.querySelectorAll('.category');
+			if(categories.length == 0){
+				alert("하나 이상의 카테고리를 선택해주세요");
+				return false;
+			}
+			
+			
 			let cat1List = document.querySelectorAll('.category1_list');
 			let cat2List = document.querySelectorAll('.category2_list');
 			for(var i = 0; i < cat1List.length - 1; i++){

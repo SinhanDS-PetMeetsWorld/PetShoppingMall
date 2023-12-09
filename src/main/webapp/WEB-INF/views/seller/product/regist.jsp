@@ -71,8 +71,10 @@
 								</div>
 								<a href="javascript:;" class="remove_btn_category"><img
 									src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a><br>
+							</div>
+							<div class ="category_add_button">
 								<a href="javascript:;" class="add_btn_category"><img
-									src="/resources/img/product/add.png" width="25" height="25" /> 카테고리 추가</a>
+													src="/resources/img/product/add.png" width="25" height="25" /> 카테고리 추가</a>
 							</div>
 						</div>
 						<div>
@@ -138,6 +140,8 @@
 				</div>
 				<a href="javascript:;" class="remove_btn_category"><img
 									src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a><br>
+			</div>
+			<div class ="category_add_button" style="display: none;">
 				<a href="javascript:;" class="add_btn_category"><img
 									src="/resources/img/product/add.png" width="25" height="25" /> 카테고리 추가</a>
 			</div>
@@ -180,6 +184,8 @@
 		
 		function add_category() {
 			let newCategory = $('.category_original').clone();
+			let categoryAddButton = $('.category_add_button').eq(-1).clone();
+			
 			$(newCategory).css('display', 'inline');
 			$(newCategory).removeClass('category_original');
 			$(newCategory).addClass('category');
@@ -189,6 +195,10 @@
 			$(newCategory).find('.category1_list').on('change', change_category2)
 			$(this).remove();
 			newCategory.appendTo($('.category_body'));
+			
+			$(categoryAddButton).css('display', 'inline');
+			$(categoryAddButton).on('click', add_category);
+			categoryAddButton.appendTo($('.category_body'));
 		}
 
 		function change_category2() {
@@ -268,8 +278,16 @@
 	
 	<script>
 		function regist(){
+			let categories = document.querySelectorAll('.category');
+			if(categories.length == 0){
+				alert("하나 이상의 카테고리를 선택해주세요");
+				return false;
+			}
+			
 			let cat1List = document.querySelectorAll('.category1_list');
 			let cat2List = document.querySelectorAll('.category2_list');
+			
+			
 			for(var i = 0; i < cat1List.length - 1; i++){
 				for(var j = i + 1; j < cat1List.length - 1; j++){
 					if((cat1List[i].value == cat1List[j].value) && (cat2List[i].value == cat2List[j].value)){
