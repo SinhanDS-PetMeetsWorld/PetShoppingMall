@@ -18,6 +18,13 @@ public interface SellerProductService {
 	public void regist_category(ProductVO vo, ProductCategoryVO cvo);
 	public void regist_option(ProductVO vo, ProductOptionVO ovo);
 	
+	public void editProduct(ProductVO vo);
+	
+	public void remove_file(ProductVO vo);
+	public void removeCategory(int product_no);
+	public void removeOption(int product_no);
+	public void removeProduct(int product_no);
+	
 	public ProductVO getProduct(int product_no);
 	public List<ProductVO> getProductList(int seller_no);
 	public List<ProductCategoryVO> getCategories(int product_no);
@@ -25,10 +32,5 @@ public interface SellerProductService {
 	public List<ProductOptionVO> getOptions(int product_no);
 	public List<List<ProductOptionVO>> getOptionLists(List<ProductVO> productList);
 	
-	public boolean edit(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo);
-	
-	public void remove_file(ProductVO vo);
-	public void removeCategory(int product_no);
-	public void removeOption(int product_no);
-	public void removeProduct(int product_no);
+
 }

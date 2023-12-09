@@ -87,10 +87,13 @@ public class SellerProductController {
 		return "seller/product/edit";
 	}
 	
-	
 	@PostMapping("/edit.do")
 	public String edit2(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
-		service.edit(vo, cvo, ovo);
+		service.editProduct(vo);
+		service.removeCategory(vo.getNo());
+		service.removeOption(vo.getNo());
+		service.regist_category(vo, cvo);
+		service.regist_option(vo, ovo);
 		return "redirect:/seller/index.do";
 	}	
 	

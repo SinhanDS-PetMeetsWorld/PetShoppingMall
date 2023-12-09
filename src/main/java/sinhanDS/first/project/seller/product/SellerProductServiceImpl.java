@@ -45,6 +45,7 @@ public class SellerProductServiceImpl implements SellerProductService {
 		if(mapper.regist_product(vo) > 0) return vo;
 		else return null;
 	}
+	
 	public void regist_category(ProductVO vo, ProductCategoryVO cvo) {
 		for(int i = 0; i < cvo.getCategory1_list().length; i++) {
 			ProductCategoryVO ncvo = new ProductCategoryVO();
@@ -54,6 +55,7 @@ public class SellerProductServiceImpl implements SellerProductService {
 			mapper.regist_category(ncvo);
 		}
 	}
+	
 	public void regist_option(ProductVO vo, ProductOptionVO ovo) {
 		if(ovo.getTitle_list() != null) {
 			for(int i = 0; i < ovo.getTitle_list().length; i++) {
@@ -68,6 +70,27 @@ public class SellerProductServiceImpl implements SellerProductService {
 		}
 	}
 
+	
+	public void editProduct(ProductVO vo) {
+		mapper.edit(vo);
+	}
+	
+	
+	public void remove_file(ProductVO vo) {
+		if(!("".equals(vo.getImage_url()) || "h".equals(vo.getImage_url().substring(0, 1)))) {
+			fileController.remove(vo);
+			log.debug("상품 이미지 컴퓨터에 있음");
+		}
+	}
+	public void removeCategory(int product_no) {
+		mapper.remove_category(product_no);
+	}
+	public void removeOption(int product_no) {
+		mapper.remove_option(product_no);
+	}
+	public void removeProduct(int product_no) {
+		mapper.remove(product_no);
+	}
 
 	
 	
@@ -109,55 +132,4 @@ public class SellerProductServiceImpl implements SellerProductService {
 	public List<ProductOptionVO> getOptions(int product_no){
 		return mapper.getOptionsList(product_no);
 	}
-	
-	
-	public boolean edit(ProductVO vo, ProductCategoryVO cvo, ProductOptionVO ovo) {
-		System.out.println("수정작업시작");
-		System.out.println("vo체크: " + vo);
-		int result = mapper.edit(vo);
-		System.out.println("result체크: " +  result);
-		if(result == 0) return false;
-		
-		mapper.remove_category(vo.getNo());
-		mapper.remove_option(vo.getNo());
-		System.out.println("옵션/카테고리제거체크 " );
-		for(int i = 0; i < cvo.getCategory1_list().length; i++) {
-			ProductCategoryVO ncvo = new ProductCategoryVO();
-			ncvo.setProduct_no(vo.getNo());
-			ncvo.setCategory1(cvo.getCategory1_list()[i]);
-			ncvo.setCategory2(cvo.getCategory2_list()[i]);
-			mapper.regist_category(ncvo);
-		}
-		
-		if(ovo.getTitle_list() != null) {
-			for(int i = 0; i < ovo.getTitle_list().length; i++) {
-				ProductOptionVO novo = new ProductOptionVO();
-				novo.setProduct_no(vo.getNo());
-				novo.setTitle(ovo.getTitle_list()[i]);
-				novo.setContent(ovo.getContent_list()[i]);
-				novo.setPrice(ovo.getPrice_list()[i]);
-				System.out.println("novo체크: " + novo);
-				mapper.regist_option(novo);
-			}
-		}
-		
-		return true;
-	}
-	
-	public void remove_file(ProductVO vo) {
-		if(!("".equals(vo.getImage_url()) || "h".equals(vo.getImage_url().substring(0, 1)))) {
-			fileController.remove(vo);
-			log.debug("상품 이미지 컴퓨터에 있음");
-		}
-	}
-	public void removeCategory(int product_no) {
-		mapper.remove_category(product_no);
-	}
-	public void removeOption(int product_no) {
-		mapper.remove_option(product_no);
-	}
-	public void removeProduct(int product_no) {
-		mapper.remove(product_no);
-	}
-
 }
