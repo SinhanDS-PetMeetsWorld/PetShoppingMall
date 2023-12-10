@@ -1,8 +1,6 @@
 package sinhanDS.first.project.seller.product;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
@@ -24,6 +23,7 @@ import sinhanDS.first.project.seller.vo.SellerVO;
 
 @Controller
 @RequestMapping("/seller/product")
+@Slf4j
 public class SellerProductController {
 	@Autowired
 	private SellerProductService service;
