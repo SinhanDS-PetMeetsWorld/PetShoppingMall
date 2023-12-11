@@ -56,5 +56,21 @@
 		FROM product INNER JOIN product_category 
 			ON product.no = product_category.product_no
 		WHERE product_category.category1 = #{category1} AND product_category.category2 = #{category2}
+			AND price >= #{minprice} AND #{maxprice} >= price
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					AND (name LIKE '%${searchWord}%' OR company LIKE '%${searchWord}%' OR brand LIKE '%${searchWord}%')
+				</if>
+				<if test="searchType != 'all'">
+					AND (${searchType} LIKE '%${searchWord}%')
+				</if>
+			</if>
+		ORDER BY 
+			<if test="sorttype != null and sorttype != ''">
+				<if test="sorttype == 'sortname'"> name ASC, </if>
+				<if test="sorttype == 'sortminprice'"> price ASC, </if>
+				<if test="sorttype == 'sortmaxprice'"> price DESC, </if>
+			</if>
+			rating DESC;
 	</select>
 </mapper>
