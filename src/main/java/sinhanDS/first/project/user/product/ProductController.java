@@ -91,8 +91,17 @@ public class ProductController {
 		
 		System.out.println("qnavo 체크 : " + qnavo);
 		int r = service.QNA_insert(qnavo , request);
+		System.out.println("r값 확인 :" +  r);
 		
-		return "user/product/goods/goods";
+		if (r == 1) { // 정상적으로 DB에 insert 
+			model.addAttribute("cmd", "finish");
+			model.addAttribute("msg", "문의사항이 등록되었습니다.");
+		} else { // 등록 안됨
+			model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "오류가 발생했습니다. 나중에 다시 등록해주십시오 ");
+		}
+		return "user/edit/alert";
+		
 	}
 	
 	
@@ -107,14 +116,18 @@ public class ProductController {
 		ProductSearchVO searchvo = new ProductSearchVO();
 		searchvo.setCategory1(Integer.parseInt(request.getParameter("category1")));
 		searchvo.setCategory2(Integer.parseInt(request.getParameter("category2")));
-		
-		//상세 검색(검색어)->searchtype이랑 searchword 받아와서 쿼리문 처리하면 되니까 백에서 할 일은 x
-		//searchvo에 넣어만 주면 됨(강사님 코드 참고하면 될듯)
-		//가격 검색->일단 replaceAll로 , 없애준 다음 parseInt 해서 숫자로 바꾸기
-		//null이거나 min<0 max>199999999이면 min에는 0, max에는 199999999넣어줌
-		//그럼 가격검색 쿼리문은 하나로 통일가능(어차피 백에서 강제로 넣어주면 min max값 null인 경우 없으니까)
+		searchvo.setSearchType(request.getParameter("searchType"));
+		searchvo.setSearchWord(request.getParameter("searchWord"));
+		if(request.getParameter("minprice") != null) {
+		searchvo.setMinprice(Integer.parseInt(request.getParameter("minprice")));
+		} else {searchvo.setMinprice(0);}
+		if(request.getParameter("maxprice") != null) {
+		searchvo.setMaxprice(Integer.parseInt(request.getParameter("maxprice")));
+		} else {searchvo.setMaxprice(999999999);}
+		searchvo.setSorttype(request.getParameter("sorttype"));
 		
 		List<ProductVO> product_list = service.product_list(searchvo);
+		model.addAttribute("ProductSearchVO", searchvo);
 		model.addAttribute("list", product_list);
 		return "user/product/search";
 	}

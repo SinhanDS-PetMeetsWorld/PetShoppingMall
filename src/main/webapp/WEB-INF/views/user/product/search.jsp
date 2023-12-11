@@ -43,6 +43,7 @@
 		}
 
     </style>
+    
 </head>
 <body>
 	<div class="wrap">
@@ -50,8 +51,6 @@
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
         </div>
 
-       	
-        
         <div class="contents">
         	<div class="quickmenu">
                 <%@ include file="/WEB-INF/views/common/quickmenu_product_category.jsp"%>
@@ -63,49 +62,58 @@
 				</div>
 				
 				<div class="detail_search">
-                    <form method="" name="" id="" action="">
+                    <form method="get" name="searchForm"  id="searchForm" onsubmit="return detailsearch();" action="search.do">
+                    	<input type="hidden" name="category1" value="${category1}">
+                    	<input type="hidden" name="category2" value="${category2}">
                     	상세검색
-                    	<span class="">
-                        	<select>
-                        		<option value="">전체</option>
-                            	<option value="">상품명</option>
-                                <option value="">제조사명</option>
-                                <option value="">브랜드명</option>
+                    	<span>
+                        	<select class="searchType" name="searchType">
+                        		<option value="all">전체</option>
+                            	<option value="name" <c:if test="${ProductSearchVO.searchType == 'name'}">selected</c:if>>상품명</option>
+                                <option value="company" <c:if test="${ProductSearchVO.searchType == 'company'}">selected</c:if>>제조사명</option>
+                                <option value="brand" <c:if test="${ProductSearchVO.searchType == 'brand'}">selected</c:if>>브랜드명</option>
                             </select>
                         </span>
-                        <span class="searchWord">
-                            <input type="text" placeholder="카테고리 내 검색어 입력">
+                        <span>
+                            <input type="text" name="searchWord" value="${ProductSearchVO.searchWord}">
                             <span class="searchPrice">
                             	가격
-	                            <input type="text" placeholder="0원">~
-	                            <input type="text" placeholder="199,999,999원">
-	                            <%-- 정규표현식으로 숫자와 , 외 문자 입력 불가로 막고 백에서 , 제거해야함 --%>
+	                            <input type="number" id="minprice" name="minprice" value="0">~
+	                            <input type="number" id="maxprice" name="maxprice" value="999999999">
+	                            <input type="submit" id="" value="검색">
 	                        </span>
-                        	<input type="button" id="" value="검색">
+                        	<br>
+                        	정렬
+	                    	<span class="sorttype" >
+	                        	<select name="sorttype">
+	                            	<option value="sortrating">평점순</option>
+	                                <option value="sortname">제품명순</option>
+	                                <option value="sortminprice">최저가순</option>
+	                                <option value="sortmaxprice">최고가순</option>
+	                            </select>
+	                        </span>
+	                        <span class="sortnum">
+	                        	<select>
+	                            	<option value="15">15개씩</option>
+	                                <option value="25">25개씩</option>
+	                                <option value="40">40개씩</option>
+	                            </select>
+	                        </span>
+                        	
                         </span>
                     </form>
 				</div>
 				
 				<div class="sorting">
-
-                    	정렬
-                    	<span class="">
-                        	<select>
-                            	<option value="">평점순</option>
-                                <option value="">제품명순</option>
-                                <option value="">최저가순</option>
-                                <option value="">최고가순</option>
-                            </select>
-                        </span>
-                        <select>
-                            	<option value="">15개씩</option>
-                                <option value="">25개씩</option>
-                                <option value="">40개씩</option>
-                            </select>
-
 				</div>
 				
 				<div>
+					<c:if test="${empty list }">
+						<br>
+                    	<h2>등록된 상품이 없습니다.</h2>
+					</c:if>
+					
+					<c:if test="${not empty list }">
 					<c:forEach var="product" items="${list}" varStatus="status">
 						<div class="product_preview">
 							<div>
@@ -134,9 +142,9 @@
 							</div>
 							<p style=clear:both;></p>
 						</div>
-						
 						<c:if test="${status.index%5 == 4}"><p style=clear:both;></p><br></c:if> 
 					</c:forEach>
+					</c:if>
 				</div>
 			</div>
         </div>
@@ -146,5 +154,23 @@
 			<div class="footer-color"></div>
         </div>
     </div>
+    
+    <script>
+    	function detailsearch(){
+    		var min = document.getElementById("minprice");
+    		var max = document.getElementById("maxprice");
+    		
+    		if( min.value<0 || min.value=="") {
+    			min.value = 0;
+    			console.log(min);
+    		}
+    		else if(max.value>999999999 || max.value==""){
+    			max.value = 999999999;
+    			console.log(max);
+    		}
+    		
+    		return true;
+    	}
+    </script>
 </body>
 </html>
