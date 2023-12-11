@@ -14,10 +14,12 @@ public interface UserService {
 	boolean check_password(UserVO vo);
 	boolean initaddr_regist(UserAddressVO vo);
 	boolean dupId(String id);
+	
 	List<UserAddressVO> exist_addr(UserVO vo);
 	int insert_addr(UserAddressVO vo);
 	int modify_addr(UserAddressVO vo);
 	int delete_addr(int no);
+	
 	List<PaymentVO> exist_payment(UserVO vo);
 	int insert_payment(PaymentVO vo);
 	int modify_payment(PaymentVO vo);
