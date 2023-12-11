@@ -17,9 +17,31 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 							Object handler) throws Exception {
 		HttpSession sess = request.getSession();
 		UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
+		System.out.println("url체크: " + request.getRequestURL());
+		
+		String url = ("" + request.getRequestURL());
+		System.out.println("url 변수 체크: " + url);
+		
 		if (login == null) {
+		
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
+			
+			if (url.contains("qnawrite.do")) {
+				//자식 창 닫기
+				out.print("<script>");
+				out.print("alert('로그인 후 사용가능합니다.');");
+				
+				//부모창이 이동해야되는데???
+				out.print("opener.parent.location.href='/user/login.do';");
+				out.print("window.close();");
+				out.print("</script>");
+				
+				return false;
+				
+				}
+				
+			
 			out.print("<script>");
 			out.print("alert('로그인 후 사용가능합니다.');");
 			out.print("location.href='/user/login.do';");
