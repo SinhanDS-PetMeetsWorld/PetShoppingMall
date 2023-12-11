@@ -31,22 +31,18 @@
                 <%@ include file="/WEB-INF/views/common/quickmenu.jsp"%>
             </div>
 			<div class="contentsright">
-				<div>
-					<h1>회원정보</h1>
-					    <button type="button" onclick="location.href='/user/edit.do'">기본정보 변경</button>
-					    <button type="button" onclick="location.href='/user/edit_addr.do'">주소 변경</button>
-					    <button type="button" onclick="location.href='/user/edit_payment.do'">결제 수단</button>
-					
+				<div id="cart_content" width='50%'>
+					<h1>장바구니</h1>
 					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
 					        
 					        <!--주소가 존재하는만큼 td를 생성-->
-						    <c:forEach var="vo" items="${addressvo }">
+						    <c:forEach var="vo" items="${cartvo }">
 						    	
 						        <tr width="800">
 						            <td>
 						                <br>
-						                <div>${vo.addr1 }</div>
-						                <div>${vo.addr2 }</div>
+						                <div>${vo.이미지 }</div>
+						                <div>${vo.상품명 }</div>
 						                <div>
 						                    <span>Contact : </span>
 						                    <span>${vo.phone}</span>
@@ -76,6 +72,9 @@
 					        </tr>
 					    </table>
      				</div>
+     				<div id="cart_bill" style="border: 1px solid #FFDE30; width='45%'>
+     					Cartbill
+     				</span>
 			</div>
 
         </div>
