@@ -33,9 +33,9 @@
 			<div class="contentsright">
 				<div>
 					<h1>회원정보</h1>
-					    <button type="button">기본정보 변경</button>
-					    <button type="button">주소 변경</button>
-					    <button type="button">결제 수단</button>
+					    <button type="button" onclick="location.href='/user/edit.do'">기본정보 변경</button>
+					    <button type="button" onclick="location.href='/user/edit_addr.do'">주소 변경</button>
+					    <button type="button" onclick="location.href='/user/edit_payment.do'">결제 수단</button>
 					
 					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
 					        
