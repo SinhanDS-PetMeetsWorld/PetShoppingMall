@@ -85,8 +85,8 @@ String formattedDate = dateFormat.format(currentDate);
 			
 			if (questionContent === '') {
 				alert('내용을 입력하세요');
-				questioncContent.focus();
-				return false;
+				$("#question_content").focus();
+				return;
 			}
 
 			// Ajax 호출
@@ -101,13 +101,12 @@ String formattedDate = dateFormat.format(currentDate);
 				},
 				success : function(response) {
 					alert('질문이 정상적으로 등록되었습니다.');
-					return "user/product/goods/goods";
-
+					opener.parent.location.reload();
+					window.close();
 				},
 				error : function(error) {
 					// Ajax 실패 시 동작
 					alert('입력 오류가 발생했습니다. 나중에 다시 시도해주십시오');
-					return "user/product/goods/goods";
 				}
 			});
 		}

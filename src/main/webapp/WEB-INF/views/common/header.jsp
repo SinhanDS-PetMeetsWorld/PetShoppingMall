@@ -67,7 +67,7 @@
 
 						<!-- 아이콘이 그림인데 나중에는 버튼으로 바꾸어야함 -->
 						<div class="header_cart">
-							<a href="#"><img src="/resources/img/common/cart.png" align="right"></a>
+							<a href="/user/list_user_cart.do"><img src="/resources/img/common/cart.png" align="right"></a>
 						</div>
 						
 						<div class="header_logout">
