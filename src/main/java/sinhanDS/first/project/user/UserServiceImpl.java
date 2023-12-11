@@ -2,11 +2,14 @@ package sinhanDS.first.project.user;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
 import sinhanDS.first.project.user.vo.UserAddressVO;
 import sinhanDS.first.project.user.vo.UserVO;
@@ -141,5 +144,25 @@ public class UserServiceImpl implements UserService {
 	public int delete_payment(int no) {
 		return mapper.delete_payment(no);
 	}
+	
+	@Override
+	public List<CartVO> exist_cart(UserVO vo){
+		List<CartVO> list = mapper.exist_cart(vo.getNo());
+		return list;
+	}
+	
+	@Override
+	public List<ProductVO> search_cart_product(List<CartVO> cartvo){
+		List<ProductVO> list = new ArrayList<>();
+		System.out.println("프덕0" + cartvo.get(0).getProduct_no());
+		
+		for(int i=0; i<cartvo.size();i++) {
+			ProductVO product_vo = mapper.search_cart_product(cartvo.get(i).getProduct_no());
+			list.add(product_vo);
+		}
+		System.out.println("리스트에 뭐있나 " + list);
+		return list; 
+	}
+	
 
 }

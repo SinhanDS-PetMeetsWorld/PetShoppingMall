@@ -113,5 +113,14 @@
 		DELETE from payment WHERE no=#{no}
 	</delete>
 	
+	
+	<select id="exist_cart" parameterType="int" resultType="sinhanDS.first.project.user.vo.CartVO">
+		SELECT * FROM cart WHERE user_no = #{user_no}
+	</select>
+	
+	<select id="search_cart_product" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * FROM product WHERE no = #{product_no}
+	</select>
+	
 
 </mapper>
