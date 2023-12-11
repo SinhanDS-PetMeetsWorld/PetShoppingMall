@@ -1,5 +1,7 @@
 package sinhanDS.first.project.user;
 
+import java.util.List;
+
 //import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 
 import javax.mail.internet.MimeMessage;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
 import sinhanDS.first.project.user.vo.UserAddressVO;
 import sinhanDS.first.project.user.vo.UserVO;
@@ -306,5 +310,23 @@ public class UserController {
 
 		return "common/alert";
 	}
+	
+	
+	
+	@GetMapping("/list_user_cart.do")
+	public String list_cart(Model model, HttpSession sess) {
+		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
+		List<CartVO> cartvolist = service.exist_cart(vo);
+		System.out.println("카트 받아와지나 : " + cartvolist);
+		
+		List<ProductVO> prov = service.search_cart_product(cartvolist);
+		model.addAttribute("productvolist", service.search_cart_product(cartvolist));
+		System.out.println("카트에대한 상품? : " + prov);
+		
+		
+		return "user/cart/user_cart";
+		
+	}
+	
 	
 }
