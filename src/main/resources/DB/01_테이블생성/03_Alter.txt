@@ -133,5 +133,20 @@ ALTER TABLE `PetShoppingMall`.`cart`
 DROP COLUMN `cart_option_no`,
 DROP INDEX `FK_cart_option_TO_cart_1` ;
 ;
+ALTER TABLE `PetShoppingMall`.`cart_option` 
+ADD COLUMN `cart_no` INT NULL AFTER `option_no`,
+ADD INDEX `FK_cart_TO_cart_option_1_idx` (`cart_no` ASC) VISIBLE;
+;
+ALTER TABLE `PetShoppingMall`.`cart_option` 
+ADD CONSTRAINT `FK_cart_TO_cart_option_1`
+  FOREIGN KEY (`cart_no`)
+  REFERENCES `PetShoppingMall`.`cart` (`no`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
 
+ ALTER TABLE `PetShoppingMall`.`cart` 
+DROP COLUMN `quantity`;
+ 
+ ALTER TABLE `PetShoppingMall`.`cart_option` 
+CHANGE COLUMN `cart_no` `cart_no` INT NULL DEFAULT NULL AFTER `no`;
  
