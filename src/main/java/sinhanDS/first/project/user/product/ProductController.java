@@ -92,17 +92,6 @@ public class ProductController {
 		System.out.println("qnavo 체크 : " + qnavo);
 		int r = service.QNA_insert(qnavo , request);
 		
-/*
-		if (r > 0) {
-			model.addAttribute("cmd", "move");
-			model.addAttribute("msg", "정상적으로 저장되었습니다.");
-			model.addAttribute("url", "/user/login.do");
-			System.out.println(model);
-		} else {
-			model.addAttribute("cmd", "back");
-			model.addAttribute("msg", "등록 오류");
-		}
-*/		
 		return "user/product/goods/goods";
 	}
 	
