@@ -2,6 +2,8 @@ package sinhanDS.first.project.user;
 
 import java.util.List;
 
+import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
 import sinhanDS.first.project.user.vo.UserAddressVO;
 import sinhanDS.first.project.user.vo.UserVO;
@@ -24,4 +26,7 @@ public interface UserService {
 	int insert_payment(PaymentVO vo);
 	int modify_payment(PaymentVO vo);
 	int delete_payment(int no);
+	
+	List<CartVO> exist_cart(UserVO vo);
+	List<ProductVO> search_cart_product(List<CartVO> volist);
 }
