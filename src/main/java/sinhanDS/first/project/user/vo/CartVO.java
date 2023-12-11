@@ -10,8 +10,4 @@ public class CartVO {
 	
 	
 	private int quantity;
-	
-	private int[] no_list;
-	private int[] product_no_list;
-	private int[] quantity_list;
 }

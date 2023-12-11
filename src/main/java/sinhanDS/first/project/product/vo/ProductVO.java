@@ -28,6 +28,9 @@ public class ProductVO {
 	//상품 설명
 	private String description;
 	
-	
-	private int choose_number;
+	private int[] no_list;
+	private int[] price_list;
+	private int[] discount_list;
+	private int[] seller_no_list;
+	private int[] choose_number_list;
 }
