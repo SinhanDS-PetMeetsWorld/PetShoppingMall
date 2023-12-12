@@ -91,8 +91,17 @@ public class ProductController {
 		
 		System.out.println("qnavo 체크 : " + qnavo);
 		int r = service.QNA_insert(qnavo , request);
+		System.out.println("r값 확인 :" +  r);
 		
-		return "user/product/goods/goods";
+		if (r == 1) { // 정상적으로 DB에 insert 
+			model.addAttribute("cmd", "finish");
+			model.addAttribute("msg", "문의사항이 등록되었습니다.");
+		} else { // 등록 안됨
+			model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "오류가 발생했습니다. 나중에 다시 등록해주십시오 ");
+		}
+		return "user/edit/alert";
+		
 	}
 	
 	

@@ -53,17 +53,20 @@
 										<c:if test="${!empty vo.image_url && !(fn:substring(vo.image_url, 0, 1) == 'h') }">
 											<img src="/resources/img/product/registed_img/${vo.image_url }" width="100" height="100">
 										</c:if>
-						                <div>${vo.name }</div>
+						                <div>${vo.name } <input type="hidden" name="name_list" value="${vo.name }"></div>
 						                <!-- 옵션이 존재한다면 보여주고 아니면 안보임 -->
 						                <div>옵션1</div>
 						                <div>옵션2</div>
 						                <div>${vo.price } <input type="hidden" name="price_list" value="${vo.price }"></div>
 						                <div><input type="hidden" name="discount_list" value="${vo.discount }"></div>
+						                
+						                <input type="hidden" name="company_list" value="${vo.company }">
+						                <input type="hidden" name="brand_list" value="${vo.brand }">
 						                <br>
 						            </td>
 						            <td>
 						                <button type="button" name="cart_delete" onclick="#">장바구니에서 삭제</button>
-						                <input type="number" name="choose_number_list">
+						                <input type="number" name="quantity_list" value=1>
 						                <br>
 						            </td>
 						        </tr>

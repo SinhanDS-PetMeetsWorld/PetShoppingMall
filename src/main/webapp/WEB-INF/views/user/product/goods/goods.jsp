@@ -90,10 +90,17 @@
 											style="width: 720px; height: 100px; border: 1px solid black;">
 											<h2>${item.price} </h2>
 										</div>
-		
+										
+										<div class="goods-made"
+											style="width: 720px; height: 100px; border: 1px solid black;">
+											제조사: ${item.company} <br> 
+											브랜드: ${item.brand } <br>
+											재 고: ${item.stock }
+										</div>
+										
 										<div class="goods-explain"
 											style="width: 720px; height: 100px; border: 1px solid black;">
-											${item.description}
+											설명: ${item.description}
 										</div>
 		
 									</div>	
