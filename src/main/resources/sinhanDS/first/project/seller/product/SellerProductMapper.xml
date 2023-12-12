@@ -120,11 +120,7 @@
 	 </select>
 	 
 	 <!--  테스트 -->
-	 <select id = "getQnAlist1" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
-	 	select * from product
-	 	where seller_no = #{seller_no}
-	 </select>
-	 
+
 	  <select id = "getQnAlist2" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
 	 	select * from product_qna
 	 	where seller_no = #{seller_no}
