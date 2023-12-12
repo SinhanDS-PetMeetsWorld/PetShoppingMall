@@ -128,6 +128,7 @@ public class MvcConfig implements WebMvcConfigurer{
 						.excludePathPatterns("/user/idCheck.do")
 						.excludePathPatterns("/user/emailCheck.do")
 						.excludePathPatterns("/user/regist.do")
+						.excludePathPatterns("/user/product/list.do")
 						
 						/* TODO: order에 jsp로 값을 전달해 주기 전 임시로 제외한 패턴입니다. 나중에 삭제할꼐요 ㅎㅎ..*/
 						.excludePathPatterns("/user/order/pay.do");

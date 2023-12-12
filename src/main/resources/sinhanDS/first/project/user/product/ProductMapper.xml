@@ -73,4 +73,20 @@
 			</if>
 			rating DESC;
 	</select>
+	
+	<select id="total_product_search" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT DISTINCT *
+		FROM product INNER JOIN product_category ON product.no = product_category.product_no
+		WHERE category1 = #{category1} AND 
+			(name LIKE '%${searchWord}%' OR company LIKE '%${searchWord}%' OR brand LIKE '%${searchWord}%')
+		ORDER BY rating DESC
+		LIMIT 5;
+	</select>
+	
+	<select id="total_product_searchcount" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="int">
+		SELECT COUNT(*)
+		FROM product INNER JOIN product_category ON product.no = product_category.product_no
+		WHERE category1 = #{category1} AND 
+			(name LIKE '%${searchWord}%' OR company LIKE '%${searchWord}%' OR brand LIKE '%${searchWord}%');
+	</select>
 </mapper>

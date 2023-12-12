@@ -81,6 +81,18 @@ public class ProductServiceImpl implements ProductService {
 		return product_list;
 	}
 
+	@Override
+	public List<ProductVO> total_product_search(ProductSearchVO vo) {
+		List<ProductVO> search_product_list = mapper.total_product_search(vo);
+		return search_product_list;
+	}
+
+	@Override
+	public int total_product_searchcount(ProductSearchVO vo) {
+		int searchcount = mapper.total_product_searchcount(vo);
+		return searchcount;
+	}
+
 
 
 

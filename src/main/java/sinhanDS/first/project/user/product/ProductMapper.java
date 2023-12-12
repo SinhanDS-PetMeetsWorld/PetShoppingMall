@@ -31,5 +31,10 @@ public interface ProductMapper {
 	
 	// 물건 리스트
 	List<ProductVO> product_list(ProductSearchVO vo);
+	
+	//전체 검색 물건 리스트(상위 6개)
+	List<ProductVO> total_product_search(ProductSearchVO vo);
+	//전체 검색 결과 개수
+	int total_product_searchcount(ProductSearchVO vo);
 
 }
