@@ -22,28 +22,101 @@
         <div class="contents">
 			<div class="contentsright">
 				<div>
-					Pay 페이지 입니다.
-					
-					주소 선택<br>
-					<c:forEach items="${ userAddressList}" var="vo">
-						별명: ${vo.name }  ${vo.comment }<br>
-						우편번호: ${vo.zipcode }<br>
-						주소 : ${vo.addr1 }<br>
-						상세 주소: ${vo.addr2 }<br>
-						연락처: ${vo.phone }<br>
-						<br><hr>		
-					</c:forEach>
-				
-					<hr>
-					
-					결제 수단 선택<br>
-					<c:forEach items="${ userPaymentList}" var="vo"	>
-						타입: ${vo.type }<br>
-						회사: ${vo.company }<br>
-						계좌 : ${vo.account }<br>
-						<br><hr>
-					</c:forEach>	
-				
+					<h1>구매자 ${userno }의 Pay 페이지 입니다.</h1>
+					<form method="post" action="pay_process.do">
+						<input type="hidden" name="user_no" value="${userno }">
+						<h2>주소 선택</h2>
+						<ol>
+							<c:forEach items="${ userAddressList}" var="vo" varStatus="status">
+								<li>
+									<input type="radio" class="address_selector" name="address_selector" value=${status.index }  
+										<c:if test="${status.index == 0}">checked</c:if>>
+								 
+									별명: ${vo.name }  ${vo.comment }<br>
+									우편번호: ${vo.zipcode }<br>
+									주소 : ${vo.addr1 }<br>
+									상세 주소: ${vo.addr2 }<br>
+									연락처: ${vo.phone }<br>
+									<br><hr>		
+									
+								</li>
+							</c:forEach>
+							
+							<div class="address_value_list">
+								<h2>다음 요청으로 보낼 애들임. 나중에 hidden으로 바꿔주세용</h2>
+								<input type="text" class="zipcode" name="zipcode" value="${userAddressList[0].zipcode }"><br>
+								<input type="text" class="addr1" name="addr1" value="${userAddressList[0].addr1 }"><br>
+								<input type="text" class="addr2" name="addr2" value="${userAddressList[0].addr2 }"><br>
+							</div>
+						</ol>
+						<hr>
+						
+						
+						<h2>결제 수단 선택</h2>
+						<ol>
+							<c:forEach items="${ userPaymentList}" var="vo"	varStatus="status">
+								<li>
+									<input type="radio" class="payment_selector" name="payment_selector" value=${status.index }  
+										<c:if test="${status.index == 0}">checked</c:if>>
+									타입: ${vo.type }<br>
+									회사: ${vo.company }<br>
+									계좌 : ${vo.account }<br>
+									<br><hr>
+								</li>
+							</c:forEach>
+							<div class="payment_value_list">
+								<h2>다음 요청으로 보낼 애들임. 나중에 hidden으로 바꿔주세용</h2>
+								<input type="text" class="payment_type" name="payment_type" value="${userPaymentList[0].type }"><br>
+								<input type="text" class="payment_company" name="payment_company" value="${userPaymentList[0].company }"><br>
+								<input type="text" class="payment_account" name="payment_account" value="${userPaymentList[0].account }"><br>
+							</div>	
+						</ol>
+						<hr>
+
+						
+						
+						<h2>상품 정보 출력</h2>
+						<c:forEach items="${product_list }" var="vo" varStatus="status">
+							<input type="hidden" name="cart_no_list" value="${cno_list[status.index]}">
+							장바구니 번호: ${cno_list[status.index]}<br>
+							<input type="hidden" name="order_detail_product_no_list" value="${vo.no}">
+							상품 번호: ${vo.no}<br>
+							<input type="hidden" name="order_detail_seller_no_list" value="${vo.seller_no}">
+							판매자 번호: ${vo.seller_no }<br>
+							<input type="hidden" name="order_detail_product_name_list" value="${vo.name}">
+							상품명: ${vo.name }<br>
+							<input type="hidden" name="order_detail_product_price_list" value="${vo.price}">
+							가격: ${vo.price }<br>
+							<input type="hidden" name="order_detail_product_discount_list" value="${vo.discount}">
+							할인가격: ${vo.discount }<br>
+							<input type="hidden" name="order_detail_quantity_list" value="${quantity_list[status.index]}">
+							상품 수량: ${quantity_list[status.index]}<br>
+							<input type="hidden" name="order_detail_company_list" value="${vo.company}">
+							제조사: ${vo.company }<br>
+							<input type="hidden" name="order_detail_brand_list" value="${vo.brand}">
+							브랜드: ${vo.brand }<br>
+							
+							옵션 리스트<br>
+							<c:forEach items="${option_list }" var="ovo">
+								<c:if test="${ovo.product_no == vo.no }">
+									<input type="hidden" name="order_detail_option_product_no_list" value="${vo.no }">
+									<input type="hidden" name="order_detail_option_title_list" value="${ovo.title }">
+									<input type="hidden" name="order_detail_option_content_list" value="${ovo.content }">
+									<input type="hidden" name="order_detail_option_product_price_list" value="${ovo.price }">
+									 <pre> 옵션 - ${ovo.title } ${ovo.content } ${ovo.price }<br> </pre>
+								</c:if>
+							</c:forEach>
+							<hr>
+						</c:forEach>
+						
+						<h2>가격</h2>
+						<h5>다음 요청으로 보낼 애들임. 나중에 hidden으로 바꿔주세용</h5>
+						총 가격
+						<input type="text" name="total_price" value="${orderVO.total_price }"> <br>
+						총 배송비
+						<input type="text" name="total_delivery_fee" value="${orderVO.total_delivery_fee }"> <br>
+						<input type="submit" value="구매">
+					</form>
 				</div>
 			</div>
         </div>
@@ -53,5 +126,57 @@
 			<div class="footer-color"></div>
         </div>
     </div>
+    
+    <script>
+		var category2 = new Array();
+		
+		<c:forEach items="${category.category}" var="list">
+			var tempArray = new Array();
+			<c:forEach items="${list}" var="item">
+				tempArray.push("${item}");
+			</c:forEach>
+			category2.push(tempArray);
+		</c:forEach>
+	</script>
+    <script>
+    	$('.address_selector').on('change', changeAddress);
+    	var address = new Array();
+    	<c:forEach items="${userAddressList}" var="address">
+    		var temp = new Array();
+    		temp.push("${address.zipcode}");
+    		temp.push("${address.addr1}");
+    		temp.push("${address.addr2}");
+    		address.push(temp);
+    	</c:forEach>
+    	function changeAddress(){
+			var address_value_list = document.querySelector('.address_value_list');
+			var zipcode = address_value_list.querySelector('.zipcode');
+			var addr1 = address_value_list.querySelector('.addr1');
+			var addr2 = address_value_list.querySelector('.addr2');
+			zipcode.value = address[this.value][0];
+			addr1.value = address[this.value][1];
+			addr2.value = address[this.value][2];
+    	}
+    </script>
+    <script>
+    	$('.payment_selector').on('change', changePayment);
+    	var payment = new Array();
+    	<c:forEach items="${userPaymentList}" var="payment">
+    		var temp = new Array();
+    		temp.push("${payment.type}");
+    		temp.push("${payment.company}");
+    		temp.push("${payment.account}");
+    		payment.push(temp);
+    	</c:forEach>
+    	function changePayment(){
+			var payment_value_list = document.querySelector('.payment_value_list');
+			var type = payment_value_list.querySelector('.payment_type');
+			var company = payment_value_list.querySelector('.payment_company');
+			var account = payment_value_list.querySelector('.payment_account');
+			type.value = payment[this.value][0];
+			company.value = payment[this.value][1];
+			account.value = payment[this.value][2];
+    	}
+    </script>
 </body>
 </html>

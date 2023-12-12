@@ -153,4 +153,8 @@ CHANGE COLUMN `cart_no` `cart_no` INT NULL DEFAULT NULL AFTER `no`;
  ALTER TABLE `PetShoppingMall`.`product` 
 ADD COLUMN `review_cnt` INT NOT NULL DEFAULT 0 AFTER `rating`,
 CHANGE COLUMN `brand` `brand` VARCHAR(255) NOT NULL ;
+ALTER TABLE `PetShoppingMall`.`order_main` 
+CHANGE COLUMN `name` `name` VARCHAR(255) NULL DEFAULT NULL ;
+ ALTER TABLE `PetShoppingMall`.`order_main` 
+CHANGE COLUMN `delete` `isdeleted` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '삭제 여부' ;
  
