@@ -62,7 +62,7 @@
 				</div>
 				
 				<div class="detail_search">
-                    <form method="get" name="searchForm"  id="searchForm" onsubmit="return detailsearch();" action="search.do">
+                    <form method="get" name="searchForm"  id="searchForm" onsubmit="return detailsearch();" action="list.do">
                     	<input type="hidden" name="category1" value="${category1}">
                     	<input type="hidden" name="category2" value="${category2}">
                     	상세검색
@@ -75,7 +75,7 @@
                             </select>
                         </span>
                         <span>
-                            <input type="text" name="searchWord" value="${ProductSearchVO.searchWord}">
+                            <input type="text" name="searchWord" value="${ProductSearchVO.searchWord}" placeholder="카테고리 내 검색">
                             <span class="searchPrice">
                             	가격
 	                            <input type="number" id="minprice" name="minprice" placeholder="0" value="${ProductSearchVO.minprice}">~
