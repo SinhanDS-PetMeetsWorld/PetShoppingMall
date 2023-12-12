@@ -16,7 +16,7 @@
         <a href="#">배송 관리</a><br>
         <a href="/seller/product/regist.do">상품 등록</a><br>
         <a href="/seller/product/list.do">판매 중인 상품 관리</a><br>
-        <a href="#">Q&A 관리</a><br>
+        <a href="/seller/product/qnalist.do">Q&A 관리</a><br>
         <a href="/seller/logout.do">로그아웃</a><br>
       </div>
   </div>

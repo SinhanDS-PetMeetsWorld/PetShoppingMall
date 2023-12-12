@@ -18,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.user.product.ProductService;
 
 @Controller
 @RequestMapping("/seller/product")
@@ -107,8 +109,6 @@ public class SellerProductController {
 		return "redirect:/seller/index.do";
 	}	
 	
-	
-	
 	@PostMapping("/remove.do")
 	public String remove(ProductVO vo) {
 		System.out.println("product image_url체크  :" + vo.getImage_url());
@@ -118,4 +118,39 @@ public class SellerProductController {
 		service.removeProduct(vo.getNo());
 		return "redirect:/seller/index.do";
 	}
+	
+	
+	
+	// 신정훈 qna 답변 페이지 구현 (2023 - 12 - 12)
+	@GetMapping("/qnalist.do")
+	public String QnA_list(Model model , HttpServletRequest request, ProductVO pvo , ProductQnAVO qnavo) {
+		
+		String seller_no = request.getParameter("seller_no");
+		System.out.println("값 들어가냐?" + seller_no);
+		List<ProductQnAVO> qna_list = service.getQnAList(Integer.valueOf(seller_no));
+		
+		List<ProductVO> product_list =service.getProductList(Integer.valueOf(seller_no));
+		
+		
+		model.addAttribute("qna_list",qna_list);
+		model.addAttribute("product_list",product_list);
+		
+		
+			
+		return "seller/product/qnaanswer";
+		
+	}
+	
+	@PostMapping("/qnaanswer.do")
+	public String QnA_answer(Model model , HttpServletRequest request , ProductQnAVO qnavo ) {
+		
+		int r =	service.setQnAanswer(qnavo);
+		System.out.println("값이 들어가나??? " + r);
+		
+	
+		return "seller/product/qnaanswer";
+		
+	}
+	
+	
 }

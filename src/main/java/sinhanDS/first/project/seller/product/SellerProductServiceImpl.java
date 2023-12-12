@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.util.file.FileController;
 import sinhanDS.first.project.util.file.FileNameVO;
@@ -133,4 +136,22 @@ public class SellerProductServiceImpl implements SellerProductService {
 	public List<ProductOptionVO> getOptions(int product_no){
 		return mapper.getOptionsList(product_no);
 	}
+
+	
+	// 신정훈 작업 내용 (2023 - 12 - 12 )
+	public List<ProductQnAVO> getQnAList(int no) {
+		return mapper.getQnAList(no);
+	}
+
+
+	@Override
+	public int setQnAanswer(ProductQnAVO qnavo) {
+		int r =  mapper.setQnAanswer(qnavo);
+		
+		return r;
+		
+	}
+
+
+	
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 
 @Mapper
@@ -24,4 +25,10 @@ public interface SellerProductMapper {
 	ProductVO getProduct(int no);
 	List<ProductCategoryVO> getCategoriesList(int no);
 	List<ProductOptionVO> getOptionsList(int no);
+	
+	// 신정훈 (2023 / 12 / 12)
+	List<ProductQnAVO> getQnAList(int no);
+	
+	int setQnAanswer(ProductQnAVO qnavo);
+	
 }

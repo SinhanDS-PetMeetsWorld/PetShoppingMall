@@ -86,8 +86,6 @@
 	</delete>
 	
 	
-	
-	
 	<select id="getProductList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT * FROM product WHERE seller_no = #{seller_no}
 	</select>
@@ -102,4 +100,45 @@
 	<select id="getOptionsList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductOptionVO">
 		SELECT * FROM product_option WHERE product_no = #{product_no}
 	</select>
+	
+	
+	
+	<!--   
+		신정훈 작업 내용 (2023 - 12 - 12)
+		Q&A 답변페이지 제작
+		
+		getQnAList는 qna페이지 불러오기
+		seller_no 
+	 -->
+	 
+	 <select id = "getQnAList" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
+	 	SELECT * 
+		FROM product_qna, product 
+		WHERE product.no = product_no
+		and product.seller_no = #{seller_no}
+		order by question_write_date DESC
+	 </select>
+	 
+	 <!--  테스트 -->
+	 <select id = "getQnAlist1" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
+	 	select * from product
+	 	where seller_no = #{seller_no}
+	 </select>
+	 
+	  <select id = "getQnAlist2" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
+	 	select * from product_qna
+	 	where seller_no = #{seller_no}
+	 </select>
+	 
+	 
+	 <update id="setQnAanswer" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
+		UPDATE FROM product_qna
+		SET 
+			answer_content = #{answer_content} ,
+			answer_write_date = NOW(),
+			status = 0
+		WHERE no = #{item.no};
+    </update>
+	 
+	
 </mapper>

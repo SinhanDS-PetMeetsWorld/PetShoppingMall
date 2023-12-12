@@ -32,4 +32,6 @@ public interface ProductService {
 	List<ReviewVO> Review_list (ReviewVO vo);
 	
 	List<ProductVO> product_list(ProductSearchVO vo);
+	
+	
 }
