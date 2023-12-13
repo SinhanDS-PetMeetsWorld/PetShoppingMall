@@ -1,7 +1,6 @@
 package sinhanDS.first.project.seller.product;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 
 public interface SellerProductService {
@@ -31,6 +31,12 @@ public interface SellerProductService {
 	public List<List<ProductCategoryVO>> getCategoryLists(List<ProductVO> productList);
 	public List<ProductOptionVO> getOptions(int product_no);
 	public List<List<ProductOptionVO>> getOptionLists(List<ProductVO> productList);
+	
+	// 2023 - 12 -12 (신정훈 작업)
+	public List<ProductQnAVO> getQnAList(int no);
+	
+	
+	public int setQnAanswer(ProductQnAVO qnavo);
 	
 
 }

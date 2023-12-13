@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.user.order.OrderMapper">
+	<select id="getProduct" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * FROM product WHERE no = #{no}
+	</select>
 	
+	<select id="getOption" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductOptionVO">
+		SELECT * FROM product_option WHERE no = #{no}
+	</select>
+	
+	<insert id="registOrderMain" parameterType="sinhanDS.first.project.order.vo.OrderMainVO">
+		INSERT INTO PetShoppingMall.order_main
+		( user_no, order_date,
+			payment_type, payment_company, payment_account,
+			zipcode, addr1, addr2,
+			isdeleted,
+			total_price, total_delivery_fee,
+			name)
+		VALUES
+		( #{user_no}, sysdate(),
+			#{payment_type}, #{payment_company}, #{payment_account},
+			#{zipcode}, #{addr1}, #{addr2},
+			0,
+			#{total_price}, #{total_delivery_fee},
+			#{name});
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 </mapper>

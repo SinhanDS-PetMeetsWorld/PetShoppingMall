@@ -11,12 +11,12 @@ public class OrderMainVO {
 	private int user_no;
 	//주문 일자
 	private Date order_date;
-	//은행 번호
-	private int finance_company_no;
 	//결제 수단
 	private int payment_type;
-	//결제 내용
-	private String payment_content;
+	//은행 번호
+	private int payment_company;
+	//결제 계좌, 카드번호
+	private String payment_account;
 	//우편 번호
 	private String zipcode;
 	//주소

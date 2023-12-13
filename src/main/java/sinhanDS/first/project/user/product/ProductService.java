@@ -34,5 +34,7 @@ public interface ProductService {
 	List<ProductVO> product_list(ProductSearchVO vo);
 	
 	List<ProductVO> total_product_search(ProductSearchVO vo);
+	
 	int total_product_searchcount(ProductSearchVO vo);
+
 }
