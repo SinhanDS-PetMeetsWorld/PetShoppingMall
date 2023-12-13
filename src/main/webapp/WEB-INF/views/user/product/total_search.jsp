@@ -56,7 +56,8 @@
 			<div class="contentsright">
 				
 				<div>
-					<h2>${catekor.category_name[0]} (총 ${product_count0}건)</h2> 보러가기<br>
+					<h2>${catekor.category_name[0]} (총 ${product_count0}건)</h2>
+					<a href="list.do?category1=0&totalSearchWord=${ProductSearchVO.totalSearchWord}">보러가기</a><br>
 					<c:if test="${empty list0 }">
 						<br>
                     	<h2>해당 카테고리로 등록된 상품이 없습니다.</h2>
@@ -95,7 +96,8 @@
 				</div><br>
 				
 				<div>
-					<h2>${catekor.category_name[1]} (총 ${product_count1}건)</h2> 보러가기<br>
+					<h2>${catekor.category_name[1]} (총 ${product_count1}건)</h2>
+					<a href="list.do?category1=1&totalSearchWord=${ProductSearchVO.totalSearchWord}">보러가기</a><br>
 					<c:if test="${empty list1 }">
 						<br>
                     	<h2>해당 카테고리로 등록된 상품이 없습니다.</h2>
@@ -134,7 +136,8 @@
 				</div><br>
 				
 				<div>
-					<h2>${catekor.category_name[2]} (총 ${product_count2}건)</h2> 보러가기<br>
+					<h2>${catekor.category_name[2]} (총 ${product_count2}건)</h2>
+					<a href="list.do?category1=2&totalSearchWord=${ProductSearchVO.totalSearchWord}">보러가기</a><br>
 					<c:if test="${empty list2 }">
 						<br>
                     	<h2>해당 카테고리로 등록된 상품이 없습니다.</h2>
