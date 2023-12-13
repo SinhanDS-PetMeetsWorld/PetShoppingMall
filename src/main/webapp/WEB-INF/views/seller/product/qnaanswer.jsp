@@ -35,6 +35,14 @@
 				            <input type="submit" value="등록" onclick="javascript:qnaanswer();"><br><br>
 			            </c:forEach>
 				
+				
+						병천이가 한거 
+						
+						
+						<c:forEach var = "item" items="${product_list }">
+							${item.name}
+						
+						</c:forEach>
 
 				</div>
 			</div>

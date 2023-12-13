@@ -29,28 +29,28 @@
 							<a>강아지</a>
 							<ul>
 								<c:forEach var="category2" items="${ProductCategoryVO.category[0]}" varStatus="status">
-									<li><a href="/user/product/search.do?category1=0&category2=${status.index }">${category2 }</a></li>
+									<li><a href="/user/product/list.do?category1=0&category2=${status.index }">${category2 }</a></li>
 								</c:forEach>
 							</ul></li>
 						<li>
 							<a>고양이</a>
 							<ul>
 								<c:forEach var="category2" items="${ProductCategoryVO.category[1]}" varStatus="status">
-									<li><a href="/user/product/search.do?category1=1&category2=${status.index }">${category2 }</a></li>
+									<li><a href="/user/product/list.do?category1=1&category2=${status.index }">${category2 }</a></li>
 								</c:forEach>
 							</ul></li>
 						<li>
 							<a>기타</a>
 							<ul>
 								<c:forEach var="category2" items="${ProductCategoryVO.category[2]}" varStatus="status">
-									<li><a href="/user/product/search.do?category1=2&category2=${status.index }">${category2 }</a></li>
+									<li><a href="/user/product/list.do?category1=2&category2=${status.index }">${category2 }</a></li>
 								</c:forEach>
 							</ul></li>
 					</ul>
 				</div>
 				<div class="header_search">
-					<input type="text" placeholder="     검색어 입력"
-						style="width: 300px; height: 30px; font-size: 10px; border: none;">
+					<input type="text" placeholder="     검색어 입력" name="totalsearchWord" class="totalsearchWord" value="${ProductSearchVO.searchWord}"
+						style="width: 300px; height: 30px; font-size: 10px; border: none;" onkeyup="totalsearch()">
 				</div>
 				<c:if test="${empty userLoginInfo }">
 					<div class="header_unlogin">
@@ -79,5 +79,14 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	
+	function totalsearch() {
+		var searchWord = document.querySelector(".totalsearchWord").value; 
+			if(window.event.keyCode == 13){//엔터키 눌렀을 때
+				location.href=("/user/product/search.do?searchWord="+searchWord);
+			}
+	};
+	</script>
 </body>
 </html>

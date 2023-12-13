@@ -62,7 +62,7 @@
 				</div>
 				
 				<div class="detail_search">
-                    <form method="get" name="searchForm"  id="searchForm" onsubmit="return detailsearch();" action="search.do">
+                    <form method="get" name="searchForm"  id="searchForm" onsubmit="return detailsearch();" action="list.do">
                     	<input type="hidden" name="category1" value="${category1}">
                     	<input type="hidden" name="category2" value="${category2}">
                     	상세검색
@@ -75,36 +75,36 @@
                             </select>
                         </span>
                         <span>
-                            <input type="text" name="searchWord" value="${ProductSearchVO.searchWord}">
+                            <input type="text" name="searchWord" value="${ProductSearchVO.searchWord}" placeholder="카테고리 내 검색">
                             <span class="searchPrice">
                             	가격
-	                            <input type="number" id="minprice" name="minprice" value="0">~
-	                            <input type="number" id="maxprice" name="maxprice" value="999999999">
+	                            <input type="number" id="minprice" name="minprice" placeholder="0" value="${ProductSearchVO.minprice}">~
+	                            <input type="number" id="maxprice" name="maxprice" placeholder="999,999,999" value="${ProductSearchVO.maxprice}">
 	                            <input type="submit" id="" value="검색">
 	                        </span>
-                        	<br>
-                        	정렬
-	                    	<span class="sorttype" >
-	                        	<select name="sorttype">
-	                            	<option value="sortrating">평점순</option>
-	                                <option value="sortname">제품명순</option>
-	                                <option value="sortminprice">최저가순</option>
-	                                <option value="sortmaxprice">최고가순</option>
-	                            </select>
-	                        </span>
-	                        <span class="sortnum">
-	                        	<select>
-	                            	<option value="15">15개씩</option>
-	                                <option value="25">25개씩</option>
-	                                <option value="40">40개씩</option>
-	                            </select>
-	                        </span>
-                        	
                         </span>
+                        <br>
+                        정렬
+		                <span class="sorttype">
+		                	<select name="sorttype" id="sorttype" onchange="changeSorttype();">
+		                   		<option value="sortrating">평점순</option>
+		                        <option value="sortname" <c:if test="${ProductSearchVO.sorttype == 'sortname'}">selected</c:if>>제품명순</option>
+		                        <option value="sortminprice" <c:if test="${ProductSearchVO.sorttype == 'sortminprice'}">selected</c:if>>최저가순</option>
+		                        <option value="sortmaxprice" <c:if test="${ProductSearchVO.sorttype == 'sortmaxprice'}">selected</c:if>>최고가순</option>
+		           	        </select>
+		                </span>
+		                <span class="sortnum">
+		                  	<select>
+		                      	<option value="15">15개씩</option>
+		                        <option value="25">25개씩</option>
+		                        <option value="40">40개씩</option>
+		                    </select>
+		                </span>
                     </form>
 				</div>
 				
 				<div class="sorting">
+					
 				</div>
 				
 				<div>
@@ -160,16 +160,27 @@
     		var min = document.getElementById("minprice");
     		var max = document.getElementById("maxprice");
     		
-    		if( min.value<0 || min.value=="") {
+    		if( min.value<0 || min.value=="" || min.value==null) {
     			min.value = 0;
-    			console.log(min);
     		}
-    		else if(max.value>999999999 || max.value==""){
+    		else if(max.value>999999999 || max.value=="" || max.value==null){
     			max.value = 999999999;
-    			console.log(max);
     		}
-    		
     		return true;
+    	}
+    </script>
+    <script>
+    	function changeSorttype(){
+    		var min = document.getElementById("minprice");
+    		var max = document.getElementById("maxprice");
+    		
+    		if( min.value<0 || min.value=="" || min.value==null) {
+    			min.value = 0;
+    		}
+    		else if(max.value>999999999 || max.value=="" || max.value==null){
+    			max.value = 999999999;
+    		}
+			$('#searchForm').submit();
     	}
     </script>
 </body>

@@ -10,4 +10,12 @@ public class OrderDetailOptionVO {
 	private String option;
 	private String content;
 	private int price;
+	
+	
+	
+	
+	private int[] order_detail_option_product_no_list;
+	private String[] order_detail_option_title_list;
+	private String[] order_detail_option_content_list;
+	private int[] order_detail_option_product_price_list;
 }

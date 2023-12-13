@@ -105,8 +105,9 @@ public class ProductController {
 	}
 	
 	
-	@GetMapping("/search.do")
+	@GetMapping("/list.do")
 	public String searchByCategory(HttpServletRequest request, Model model) {
+		//searhvo 받아오는걸로 수정..해보겠음
 		request.setAttribute("category1", request.getParameter("category1"));
 		request.setAttribute("category2", request.getParameter("category2"));
 		
@@ -115,6 +116,7 @@ public class ProductController {
 		
 		ProductSearchVO searchvo = new ProductSearchVO();
 		searchvo.setCategory1(Integer.parseInt(request.getParameter("category1")));
+		
 		searchvo.setCategory2(Integer.parseInt(request.getParameter("category2")));
 		searchvo.setSearchType(request.getParameter("searchType"));
 		searchvo.setSearchWord(request.getParameter("searchWord"));
@@ -130,6 +132,26 @@ public class ProductController {
 		model.addAttribute("ProductSearchVO", searchvo);
 		model.addAttribute("list", product_list);
 		return "user/product/search";
+	}
+	
+	@GetMapping("/search.do")
+	public String searchByWord(HttpServletRequest request, Model model) {
+		ProductCategoryVO catekor = new ProductCategoryVO();
+		model.addAttribute("catekor" , catekor);
+		
+		ProductSearchVO searchvo = new ProductSearchVO();
+		for(int i=0; i<3; i++) {
+			searchvo.setCategory1(i);
+			searchvo.setSearchWord(request.getParameter("searchWord"));
+			
+			List<ProductVO> product_list = service.total_product_search(searchvo);
+			int product_count = service.total_product_searchcount(searchvo);
+			
+			model.addAttribute("ProductSearchVO", searchvo);
+			model.addAttribute("list"+i, product_list);
+			model.addAttribute("product_count"+i, product_count);
+		}
+		return "user/product/total_search";
 	}
 }
 
