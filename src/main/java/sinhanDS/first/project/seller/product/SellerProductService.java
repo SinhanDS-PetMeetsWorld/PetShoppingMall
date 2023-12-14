@@ -33,7 +33,7 @@ public interface SellerProductService {
 	public List<List<ProductOptionVO>> getOptionLists(List<ProductVO> productList);
 	
 	// 2023 - 12 -12 (신정훈 작업)
-	public List<ProductQnAVO> getQnAList(int no);
+	public List<ProductQnAVO> getQnAList(int seller_no);
 	
 	
 	public int setQnAanswer(ProductQnAVO qnavo);

@@ -127,7 +127,7 @@
 	</select>
 	
 	<select id="get_product_option" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductOptionVO">
-		SELECT * FROM product_option WHERE product_no = #{no}
+		SELECT * FROM product_option WHERE no = #{option_no}
 	</select>
 	
 

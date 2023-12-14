@@ -139,8 +139,8 @@ public class SellerProductServiceImpl implements SellerProductService {
 
 	
 	// 신정훈 작업 내용 (2023 - 12 - 12 )
-	public List<ProductQnAVO> getQnAList(int no) {
-		return mapper.getQnAList(no);
+	public List<ProductQnAVO> getQnAList(int seller_no) {
+		return mapper.getQnAList(seller_no);
 	}
 
 

@@ -89,6 +89,7 @@
 	<select id="getProductList" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT * FROM product WHERE seller_no = #{seller_no}
 	</select>
+	
 	<select id="getProduct" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT * FROM product WHERE no = #{no}
 	</select>
@@ -112,28 +113,21 @@
 	 -->
 	 
 	 <select id = "getQnAList" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
-	 	SELECT * 
-		FROM product_qna, product 
-		WHERE product.no = product_no
-		and product.seller_no = #{seller_no}
-		order by question_write_date DESC
+	 	SELECT * FROM product_qna 
+		WHERE seller_no = #{sellerLoginInfo.no }
+		
 	 </select>
-	 
-	 <!--  테스트 -->
-
-	  <select id = "getQnAlist2" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
-	 	select * from product_qna
-	 	where seller_no = #{seller_no}
-	 </select>
-	 
+	 	 
 	 
 	 <update id="setQnAanswer" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
-		UPDATE FROM product_qna
+		
+		UPDATE product_qna
 		SET 
 			answer_content = #{answer_content} ,
 			answer_write_date = NOW(),
-			status = 0
-		WHERE no = #{item.no};
+			status =1
+		WHERE no = ${no};
+		
     </update>
 	 
 	
