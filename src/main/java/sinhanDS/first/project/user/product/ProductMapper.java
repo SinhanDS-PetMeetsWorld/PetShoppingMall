@@ -9,6 +9,8 @@ import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
+import sinhanDS.first.project.user.vo.CartOptionVO;
+import sinhanDS.first.project.user.vo.CartVO;
 
 @Mapper
 public interface ProductMapper {
@@ -36,5 +38,9 @@ public interface ProductMapper {
 	List<ProductVO> total_product_search(ProductSearchVO vo);
 	//전체 검색 결과 개수
 	int total_product_searchcount(ProductSearchVO vo);
+	//장바구니에 물건 추가
+	int cart_insert(CartVO vo);
+	//장바구니 물건 추가 시 옵션 저장
+	int cart_option_insert(CartOptionVO vo);
 
 }

@@ -2,7 +2,6 @@ package sinhanDS.first.project.user.product;
 
 import java.util.List;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,13 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
+import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
-import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.user.vo.CartOptionVO;
+import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.UserVO;
 
 
@@ -153,6 +153,17 @@ public class ProductController {
 			model.addAttribute("product_count"+i, product_count);
 		}
 		return "user/product/total_search";
+	}
+	
+	@PostMapping("/addcart.do")
+	public String cart_insert(Model model, HttpServletRequest request, CartVO cartvo, CartOptionVO cartoptionvo) {
+		int cart_no = service.cart_insert(cartvo);
+		System.out.println("cart_no체크: " + cart_no);
+		System.out.println("바뀐 cartvo체크: " + cartvo.getNo());
+		
+		cartoptionvo.setCart_no(cartvo.getNo());
+		boolean suc = service.cart_option_insert(cartoptionvo);
+		return String.valueOf(suc);
 	}
 }
 
