@@ -23,7 +23,7 @@
 			<div class="contentsright">
 				<div>
 					<h1>구매자 ${userno }의 Pay 페이지 입니다.</h1>
-					<form method="post" action="pay_process.do">
+					<form method="post" action="buy.do">
 						<input type="hidden" name="user_no" value="${userno }">
 						<h2>주소 선택</h2>
 						<ol>
@@ -95,6 +95,7 @@
 							제조사: ${vo.company }<br>
 							<input type="hidden" name="order_detail_brand_list" value="${vo.brand}">
 							브랜드: ${vo.brand }<br>
+							<input type="hidden" name="order_detail_cart_no_list" value="${cno_list[status.index]}">
 							
 							옵션 리스트<br>
 							<c:forEach items="${option_list }" var="ovo">
@@ -103,6 +104,7 @@
 									<input type="hidden" name="order_detail_option_title_list" value="${ovo.title }">
 									<input type="hidden" name="order_detail_option_content_list" value="${ovo.content }">
 									<input type="hidden" name="order_detail_option_product_price_list" value="${ovo.price }">
+									<input type="hidden" name="order_detail_option_cart_no_list" value="${cno_list[status.index]}">
 									 <pre> 옵션 - ${ovo.title } ${ovo.content } ${ovo.price }<br> </pre>
 								</c:if>
 							</c:forEach>

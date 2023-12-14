@@ -1,4 +1,4 @@
-package seller;
+package test.seller;
 
 import org.junit.Before;
 import org.junit.Test;

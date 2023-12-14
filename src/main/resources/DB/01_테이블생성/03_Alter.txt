@@ -157,4 +157,13 @@ ALTER TABLE `PetShoppingMall`.`order_main`
 CHANGE COLUMN `name` `name` VARCHAR(255) NULL DEFAULT NULL ;
  ALTER TABLE `PetShoppingMall`.`order_main` 
 CHANGE COLUMN `delete` `isdeleted` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '삭제 여부' ;
+ ALTER TABLE `PetShoppingMall`.`order_detail` 
+CHANGE COLUMN `product_name` `product_name` VARCHAR(255) NOT NULL ,
+CHANGE COLUMN `company` `company` VARCHAR(255) NOT NULL ,
+CHANGE COLUMN `brand` `brand` VARCHAR(255) NOT NULL ;
+ ALTER TABLE `PetShoppingMall`.`order_detail_option` 
+CHANGE COLUMN `product_no` `product_no` INT NOT NULL ,
+CHANGE COLUMN `price` `price` INT NULL DEFAULT 0 ;
+ ALTER TABLE `PetShoppingMall`.`order_detail_option` 
+CHANGE COLUMN `option` `title` VARCHAR(48) NOT NULL ;
  

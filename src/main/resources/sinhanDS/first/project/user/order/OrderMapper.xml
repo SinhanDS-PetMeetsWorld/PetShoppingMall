@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.user.order.OrderMapper">
 	<select id="getProduct" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
-		SELECT * FROM product WHERE no = #{no}
+		SELECT * FROM product 
+		WHERE no = (SELECT product_no FROM cart WHERE no=#{cart_no});
 	</select>
 	
 	<select id="getOption" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductOptionVO">
@@ -27,5 +28,32 @@
 		<selectKey keyProperty="no" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
+	</insert>
+	
+	<insert id="registOrderDetail" parameterType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		INSERT INTO PetShoppingMall.order_detail
+		(
+		order_no, user_no, seller_no, 
+		product_no, product_name, product_price,
+		charge, discount, company, brand, quantity, 
+		order_date
+		)
+		VALUES
+		(
+		#{order_no}, #{user_no}, #{seller_no},
+		#{product_no}, #{product_name}, #{product_price},
+		#{charge}, #{discount}, #{company}, #{brand}, #{quantity},
+		sysdate()
+		);
+
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	<insert id="registOrderDetailOption" parameterType="sinhanDS.first.project.order.vo.OrderDetailOptionVO">
+		INSERT INTO PetShoppingMall.order_detail_option
+		(order_dno, product_no, title, content, price)
+		VALUES
+		(#{order_dno}, #{product_no}, #{title}, #{content}, #{price});
 	</insert>
 </mapper>
