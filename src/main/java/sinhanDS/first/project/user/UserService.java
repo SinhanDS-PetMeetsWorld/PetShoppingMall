@@ -32,5 +32,5 @@ public interface UserService {
 	List<CartVO> exist_cart(UserVO vo);
 	List<ProductVO> search_cart_product(List<CartVO> volist);
 	List<List<CartOptionVO>> cart_option_number(List<CartVO> vo);
-	List<List<ProductOptionVO>> get_product_option(List<ProductVO> vo);
+	List<List<ProductOptionVO>> get_product_option(List<List<CartOptionVO>> vo);
 }
