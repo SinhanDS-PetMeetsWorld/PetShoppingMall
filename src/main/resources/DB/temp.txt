@@ -1,2 +1,0 @@
-[null, null, 
-ProductVO(no=4, seller_no=1, name=동결건조간식 asd124124, price=12, discount=0, stock=50778, company=가로세로, brand=허글허글, rating=4.5, image_url=1702126496613.png, description=하하하124, no_list=null, name_list=null, company_list=null, brand_list=null, price_list=null, discount_list=null, seller_no_list=null, quantity_list=null)]
