@@ -185,16 +185,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	// 앞에서 순서대로 받아온 카드옵션VO의 리스트를 받아와서 순서대로 그 카트에 담긴 상품의 옵션을 추출해보자 
 	public List<List<ProductOptionVO>> get_product_option(List<List<CartOptionVO>> cartoptvo){
-//		
+		
 		List<List<ProductOptionVO>> list = new ArrayList<>();
-//		
-//		for(int i=0; i<cartoptvo.size(); i++) {
-//				List<ProductOptionVO>
-//			for(int j=0; j<cartoptvo.get(i).size(); j++) {
-//				list.add(mapper.get_product_option(cartoptvo.get(i).get(j).getOption_no()));
-//			}
-//		}
-//		System.out.println("프로덕트옵션 : " + list);
+	
+		for(int i=0; i<cartoptvo.size(); i++) {
+				List<ProductOptionVO> list2 = new ArrayList<>(); 
+			for(int j=0; j<cartoptvo.get(i).size(); j++) {
+				list2.add(mapper.get_product_option(cartoptvo.get(i).get(j).getOption_no()));	
+			}
+				list.add(list2);
+		}
+		System.out.println("프로덕트옵션 : " + list);
 		return list;
 	}
 	
