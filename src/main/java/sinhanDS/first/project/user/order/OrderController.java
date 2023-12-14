@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
-import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
-import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.seller.product.SellerProductMapper;
 import sinhanDS.first.project.user.UserService;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.UserVO;
@@ -58,7 +57,7 @@ public class OrderController {
 		/*cart no는 결제가 끝나고 지울 것이기 때문에 cart_no만 넘어가도 된다.*/
 		model.addAttribute("cno_list", cvo.getCart_no_list());
 		
-		List<ProductVO> product_list = orderService.getProductList(cvo.getCart_no_list());
+		List<ProductVO> product_list = orderService.getProductListByCartNoList(cvo.getCart_no_list());
 		model.addAttribute("product_list", product_list);
 		model.addAttribute("quantity_list", cvo.getQuantity_list());
 		
@@ -69,14 +68,19 @@ public class OrderController {
 	}
 	
 	@PostMapping("buy.do")
-	public String pay_process(@RequestParam(value="order_detail_product_name_list") String[] name, Model model, OrderMainVO mvo, OrderDetailVO dvo, OrderDetailOptionVO ovo, CartVO cvo) {
-		System.out.println("name체크: " + Arrays.toString(name) + "ㅇㅇ");
-		mvo = orderService.setOrderName(mvo, dvo);
-		orderService.registOrderMain(mvo);
-		List<OrderDetailVO> order_detail_list = orderService.getOrderDetailList(mvo, dvo);
-		orderService.registOrderDetail(order_detail_list);
+	public String pay_process(Model model, @RequestParam(value="product_no") int[] product_nos, @RequestParam(value="option_no") int[] option_nos, 
+			@RequestParam(value="payment_no") int payment_no, OrderMainVO mvo) {
+		log.debug("product_nos체크: " + Arrays.toString(product_nos));
+		log.debug("option_nos체크: " + Arrays.toString(option_nos));
+		log.debug("mvo체크: " + mvo);
 		
-		orderService.registOrderDetailOption(order_detail_list, ovo);
+		List<ProductVO> p_list = orderService.getProductListByProductNoList(product_nos);
+		log.debug(p_list.toString());
+		
+		mvo = orderService.setOrderName(mvo, p_list.get(0).getName(), p_list.size());
+		
+		UserVO uvo = new UserVO();
+		uvo.setNo(22);
 		return "user/order/success";
 	}
 }
