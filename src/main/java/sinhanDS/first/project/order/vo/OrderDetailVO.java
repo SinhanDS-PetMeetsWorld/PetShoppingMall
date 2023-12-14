@@ -15,11 +15,6 @@ public class OrderDetailVO {
 	
 	
 	
-	
-	
-	
-	
-	
 	private int[] order_detail_seller_no_list;
 	private int[] order_detail_product_no_list;
 	private String[] order_detail_product_name_list;

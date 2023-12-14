@@ -40,13 +40,13 @@ public class OrderController {
 		
 		
 		ProductVO pvo = new ProductVO();
-		pvo.setNo_list(new int[] {504, 505, 506});
+		pvo.setProduct_no_list(new int[] {504, 505, 506});
 		pvo.setQuantity_list(new int[] {1, 2, 3});
 		UserVO uvo = new UserVO();
 		uvo.setNo(22);
 		
 		ProductOptionVO ovo = new ProductOptionVO();
-		ovo.setNo_list(new int[] {116, 119, 121, 122});
+		ovo.setProduct_option_no_list(new int[] {116, 119, 121, 122});
 		
 		OrderMainVO orderVO = new OrderMainVO();
 		orderVO.setTotal_price(90580);
@@ -58,10 +58,10 @@ public class OrderController {
 		List<UserAddressVO> userAddressList = userService.exist_addr(uvo);
 		List<PaymentVO> userPaymentList = userService.exist_payment(uvo);
 		int[] cno_list = cvo.getCart_no_list();
-		int[] pvo_list = pvo.getNo_list();
+		int[] pvo_list = pvo.getProduct_no_list();
 		List<ProductVO> product_list = orderService.getProductList(pvo_list);
 		int[] quantity_list = pvo.getQuantity_list();
-		int[] option_no_list = ovo.getNo_list();
+		int[] option_no_list = ovo.getProduct_option_no_list();
 		List<ProductOptionVO> option_list = orderService.getOptionList(option_no_list);
 		
 		model.addAttribute("userno", uvo.getNo());

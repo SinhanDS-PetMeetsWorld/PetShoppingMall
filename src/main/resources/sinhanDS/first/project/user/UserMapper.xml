@@ -115,11 +115,19 @@
 	
 	
 	<select id="exist_cart" parameterType="int" resultType="sinhanDS.first.project.user.vo.CartVO">
-		SELECT * FROM cart WHERE user_no = #{user_no}
+		SELECT * FROM cart WHERE user_no = #{no}
 	</select>
 	
 	<select id="search_cart_product" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT * FROM product WHERE no = #{product_no}
+	</select>
+	
+	<select id="cart_option_number" parameterType="int" resultType="sinhanDS.first.project.user.vo.CartOptionVO">
+		SELECT * FROM cart_option WHERE cart_no = #{no}
+	</select>
+	
+	<select id="get_product_option" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductOptionVO">
+		SELECT * FROM product_option WHERE product_no = #{no}
 	</select>
 	
 
