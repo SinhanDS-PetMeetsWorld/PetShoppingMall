@@ -15,4 +15,8 @@ public interface OrderService {
 	
 	public OrderMainVO setOrderName(OrderMainVO mvo, String name, int length);
 	
+	public void registOrderMain(OrderMainVO mvo);
+	public void registOrderDetail(List<OrderDetailVO> detail_list);
+	
+	public List<OrderDetailVO> getOrderDetailList(OrderMainVO mvo, List<ProductVO> p_list, int[] quantity);
 }

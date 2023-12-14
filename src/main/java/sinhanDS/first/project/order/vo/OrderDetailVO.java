@@ -30,6 +30,4 @@ public class OrderDetailVO {
 	
 	
 	int cart_no;
-	private int[] order_detail_product_no_list;
-	private int[] order_detail_cart_no_list;
 }

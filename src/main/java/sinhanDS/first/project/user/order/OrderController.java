@@ -1,6 +1,5 @@
 package sinhanDS.first.project.user.order;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
+import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
-import sinhanDS.first.project.seller.product.SellerProductMapper;
 import sinhanDS.first.project.user.UserService;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.UserVO;
@@ -69,18 +68,21 @@ public class OrderController {
 	
 	@PostMapping("buy.do")
 	public String pay_process(Model model, @RequestParam(value="product_no") int[] product_nos, @RequestParam(value="option_no") int[] option_nos, 
-			@RequestParam(value="payment_no") int payment_no, OrderMainVO mvo) {
-		log.debug("product_nos체크: " + Arrays.toString(product_nos));
-		log.debug("option_nos체크: " + Arrays.toString(option_nos));
-		log.debug("mvo체크: " + mvo);
-		
-		List<ProductVO> p_list = orderService.getProductListByProductNoList(product_nos);
-		log.debug(p_list.toString());
-		
-		mvo = orderService.setOrderName(mvo, p_list.get(0).getName(), p_list.size());
-		
+			@RequestParam int[] quantity, OrderMainVO mvo) {
+		/*TODO: 나중에 인터셉터 달면 uvo를 인터셉터에서 가져온 걸로 바꿔주기 */
 		UserVO uvo = new UserVO();
 		uvo.setNo(22);
+		mvo.setUser_no(uvo.getNo());
+		
+		List<ProductVO> p_list = orderService.getProductListByProductNoList(product_nos);
+		
+		mvo = orderService.setOrderName(mvo, p_list.get(0).getName(), p_list.size());
+		orderService.registOrderMain(mvo);
+		
+		List<OrderDetailVO> detail_list = orderService.getOrderDetailList(mvo, p_list, quantity);
+		orderService.registOrderDetail(detail_list);
+		
+		/*주문 상세 옵션 넣어주면됨 */
 		return "user/order/success";
 	}
 }

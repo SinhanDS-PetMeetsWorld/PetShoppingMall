@@ -83,6 +83,7 @@
 							상품명: ${vo.name }<br>
 							가격: ${vo.price }<br>
 							할인가격: ${vo.discount }<br>
+							<input type="hidden" name="quantity" value="${quantity_list[status.index] }">
 							상품 수량: ${quantity_list[status.index]}<br>
 							제조사: ${vo.company }<br>
 							브랜드: ${vo.brand }<br>
