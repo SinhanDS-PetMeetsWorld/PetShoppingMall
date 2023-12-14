@@ -11,4 +11,5 @@ public class CartVO {
 	
 	private int quantity;
 	private int[] cart_no_list;
+	private int[] quantity_list;
 }

@@ -1,4 +1,4 @@
-package seller;
+package dataInsertion.seller.product;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,7 +39,7 @@ import sinhanDS.first.project.seller.vo.SellerVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { sinhanDS.first.project.config.MvcConfig.class })
 @WebAppConfiguration
-public class RegistWithNaverAPI {
+public class RegistProductWithNaverAPI {
 	@Autowired
 	WebApplicationContext ctx;
 	MockMvc mock;

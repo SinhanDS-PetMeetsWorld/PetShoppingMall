@@ -29,12 +29,15 @@ public class ProductVO {
 	private String description;
 	
 	
-	private int[] product_no_list;
+	private int[] no_list;
+	
+	
+	
 	private String[] name_list;
 	private String[] company_list;
 	private String[] brand_list; 
 	private int[] price_list;
 	private int[] discount_list;
 	private int[] seller_no_list;
-	private int[] quantity_list;
+
 }

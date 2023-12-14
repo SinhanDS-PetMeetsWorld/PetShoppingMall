@@ -16,7 +16,7 @@ public class ProductOptionVO {
 	private int price;
 	
 	
-	private int[] product_option_no_list;
+	private int[] no_list;
 	private String[] title_list; //title = option명 
 	private String[] content_list;
 	private int[] price_list;
