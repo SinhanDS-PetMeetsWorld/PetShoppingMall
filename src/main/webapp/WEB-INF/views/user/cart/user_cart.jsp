@@ -37,11 +37,12 @@
 					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
 					        
 					        <!--주소가 존재하는만큼 td를 생성-->
-						    <c:forEach var="vo" items="${productvolist }">
+						    <c:forEach var="vo" items="${productvolist }" varStatus="status">
 						    	
 						        <tr width="800">
 						            <td>
 						                <br>
+						                ${optionlist }
 						                <input type="hidden" name="product_no_list" value="${vo.no }">
 						                <input type="hidden" name="seller_no_list" value="${vo.seller_no }">
 						                <c:if test="${empty vo.image_url }">
@@ -55,7 +56,12 @@
 										</c:if>
 						                <div>${vo.name } <input type="hidden" name="name_list" value="${vo.name }"></div>
 						                <!-- 옵션이 존재한다면 보여주고 아니면 안보임 -->
+						                <c:forEach var="vo2" items="${optionlist }" varStatus="status2">
 						                
+						            
+						                <span>${vo2[0].title }</span>
+ 										<span>${vo2[0].content }</span>						                
+						                </c:forEach> 
 						                <c:forEach var="cart_option" items="${cartoptionvolist }">
 							             	<c:forEach var="cart_option2" items="${cart_option }">
 							                	<c:if test="${vo.no eq cart_option2.cart_no }">

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
@@ -317,21 +318,24 @@ public class UserController {
 	@GetMapping("/list_user_cart.do")
 	public String list_cart(Model model, HttpSession sess) {
 		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
-		List<CartVO> cartvolist = service.exist_cart(vo);
+		
 		
 		//현재 세션에 로그인된 유저의 모든 장바구니를 모델에 담음
+		List<CartVO> cartvolist = service.exist_cart(vo);
 		model.addAttribute("cartvolist", cartvolist);
-		
+		System.out.println("카트VO 리스트" + cartvolist);
 		
 		List<List<CartOptionVO>> cartop = service.cart_option_number(cartvolist);
-		System.out.println("컨트롤러에서 봐" + cartop);
 		model.addAttribute("cartoptionvolist", cartop);
+		System.out.println("카트옵션VO 리스트 : " + cartop);
 		
+		List<List<ProductOptionVO>> provopt = service.get_product_option(cartop);
+		model.addAttribute("optionlist", service.get_product_option(cartop));
+		System.out.println("프로덕트옵션VO 리스트: " + provopt);
 		
 		List<ProductVO> prov = service.search_cart_product(cartvolist);
-		model.addAttribute("optionlist", service.get_product_option(prov));
 		model.addAttribute("productvolist", service.search_cart_product(cartvolist));
-		System.out.println("카트에대한 상품? : " + prov);
+		System.out.println("상품VO 리스트 : " + prov);
 		
 		
 		return "user/cart/user_cart";
