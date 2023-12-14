@@ -18,62 +18,93 @@
         <div class="header">
             <%@ include file="/WEB-INF/views/common/header_seller.jsp" %>
         </div>
-
-       	
-        
         <div class="contents">
         	<div class="quickmenu">
                 <%@ include file="/WEB-INF/views/common/quickmenu_seller.jsp"%>
             </div>
 			<div class="contentsright">
-				<div>
-					
-			            <c:forEach var="item" items="${qna_list}">
-				            질문 번호 : ${item.no} 답변 상태 : ${item.status } <br> 
-				            제품명: ${item.name} , 질문 등록일 : ${item.question_write_date} <br> 질문 내용 : ${item.question_content }  <br>
-				            <input type= text name="question_content" id="${item.no}"  style="width:400px; height:50px">
-				            <input type="submit" value="등록" onclick="javascript:qnaanswer();"><br><br>
-			            </c:forEach>
+				<div>	
+					판매자 번호 : ${sellerLoginInfo.no }
 				
-				
-						병천이가 한거 
-						
-						
-						<c:forEach var = "item" items="${product_list }">
-							${item.name}
-						
-						</c:forEach>
-
+					<c:forEach items="${qna_array }" varStatus ="status_1">	
+						<div> 
+							<c:forEach items="${qna_array }" varStatus="status_2">
+									<c:if test = "${status_2.index == 0}">
+									  제품명 : ${qna_array[status_1.index][status_2.index]}
+									</c:if>	
+									<c:if test = "${status_2.index == 1}">
+									  제품 번호 : ${qna_array[status_1.index][status_2.index]} <br>
+									</c:if>		
+									
+									<div >
+										<c:if test = "${status_2.index == 2}">
+		 									<a class="quest_no" value="${qna_array[status_1.index][status_2.index]}">
+		 									질문 번호 :
+		 								    <span>${qna_array[status_1.index][status_2.index]}</span> 
+		 								    </a> 
+										</c:if>		
+									</div>	
+									
+									
+									<c:if test = "${status_2.index == 3}">
+									  질문 등록일 : ${qna_array[status_1.index][status_2.index]} <br>
+									</c:if>		
+									<c:if test = "${status_2.index == 4}">
+									  질문 내용 : ${qna_array[status_1.index][status_2.index]} <br>
+									</c:if>		
+									<c:if test = "${status_2.index == 5}">
+									  답변 등록일 : ${qna_array[status_1.index][status_2.index]}
+									</c:if>		
+									<c:if test = "${status_2.index == 6}">
+									  답변 내용 : ${qna_array[status_1.index][status_2.index]}
+									</c:if>		
+									<c:if test = "${status_2.index == 7}">
+									  상태 : ${qna_array[status_1.index][status_2.index]} <br>
+									</c:if>		
+												           
+					         </c:forEach>   
+				         
+						   <input type= text id ="answer_content" class="answer_content" style="width:400px; height:50px">
+				           <input type="button" id="submit" name = "등록" value="등록" class="writeAnswer" ><br><br>
+				         </div>
+			      	</c:forEach>
 				</div>
 			</div>
-
         </div>
-        
         
         <div class="footer">
 			<div class="footer-color"></div>
         </div>
     </div>
 <script>
+	$('.writeAnswer').on('click', qnaanswer);
+	
 	function qnaanswer() {
-		
-		var question_content = $("#question_content").val();
-		var question_no = $("#item.no").val();
+			
+		console.log(   $(this.parentNode).find('.quest_no').find('span').text());
+
+		var answer_content = $(this.parentNode.querySelector("#answer_content")).val();
+		var no = $(this.parentNode).find('.quest_no').find('span').text();
+		console.log(answer_content);
+		console.log(no);
 		
 		$.ajax({
-			type:'post',
+			method:'GET',
 			url:'/seller/product/qnaanswer.do',
 			async: true,
+			type:'HTML',
 			data: {
-				question_content : document.querySelector('#${item.no}').value,
-				question_no : "no" 
+				answer_content : answer_content,
+							no : no
 			},
 			success : function(response){
-				alert.log("너가 이걸 한다고?")
-			}
-			
-			
-		})
+				console.log("너가 이걸 한다고?");
+				history.go(0);
+			},
+			error: function (error) {
+	            console.log("에러:", error);
+	        }
+		});
 	}
 
 </script>
