@@ -26,21 +26,21 @@
 				<div class="header_menu">
 					<ul>
 						<li>
-							<a>강아지</a>
+							<a href="/user/product/list.do?category1=0">강아지</a>
 							<ul>
 								<c:forEach var="category2" items="${ProductCategoryVO.category[0]}" varStatus="status">
 									<li><a href="/user/product/list.do?category1=0&category2=${status.index }">${category2 }</a></li>
 								</c:forEach>
 							</ul></li>
 						<li>
-							<a>고양이</a>
+							<a href="/user/product/list.do?category1=1">고양이</a>
 							<ul>
 								<c:forEach var="category2" items="${ProductCategoryVO.category[1]}" varStatus="status">
 									<li><a href="/user/product/list.do?category1=1&category2=${status.index }">${category2 }</a></li>
 								</c:forEach>
 							</ul></li>
 						<li>
-							<a>기타</a>
+							<a href="/user/product/list.do?category1=2">기타</a>
 							<ul>
 								<c:forEach var="category2" items="${ProductCategoryVO.category[2]}" varStatus="status">
 									<li><a href="/user/product/list.do?category1=2&category2=${status.index }">${category2 }</a></li>
@@ -49,8 +49,8 @@
 					</ul>
 				</div>
 				<div class="header_search">
-					<input type="text" placeholder="     검색어 입력" name="totalsearchWord" class="totalsearchWord" value="${ProductSearchVO.searchWord}"
-						style="width: 300px; height: 30px; font-size: 10px; border: none;" onkeyup="totalsearch()">
+					<input type="text" placeholder="     검색어 입력" name="totalSearchWord" class="totalSearchWord" value="${ProductSearchVO.totalSearchWord}"
+						style="width: 300px; height: 30px; font-size: 10px; border: none; text-align: right" onkeyup="totalsearch()">
 				</div>
 				<c:if test="${empty userLoginInfo }">
 					<div class="header_unlogin">
@@ -82,9 +82,9 @@
 	<script>
 	
 	function totalsearch() {
-		var searchWord = document.querySelector(".totalsearchWord").value; 
+		var totalSearchWord = document.querySelector(".totalSearchWord").value; 
 			if(window.event.keyCode == 13){//엔터키 눌렀을 때
-				location.href=("/user/product/search.do?searchWord="+searchWord);
+				location.href=("/user/product/search.do?totalSearchWord="+totalSearchWord);
 			}
 	};
 	</script>

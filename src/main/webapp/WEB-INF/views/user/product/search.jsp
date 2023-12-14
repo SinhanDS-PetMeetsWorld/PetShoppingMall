@@ -57,14 +57,17 @@
             </div>
 			<div class="contentsright">
 				<div class="category_names">
-					<h2>${catekor.category_name[category1]} > 
-					${catekor.category[category1][category2] }</h2> <br>       
+					<h2>${catekor.category_name[category1]} 
+					<c:if test="${category2 != '' && category2 != null}">
+						> ${catekor.category[category1][category2] }       
+					</c:if></h2><br>
 				</div>
 				
 				<div class="detail_search">
                     <form method="get" name="searchForm"  id="searchForm" onsubmit="return detailsearch();" action="list.do">
                     	<input type="hidden" name="category1" value="${category1}">
                     	<input type="hidden" name="category2" value="${category2}">
+                    	<input type="hidden" name="totalSearchWord" value="${ProductSearchVO.totalSearchWord}">
                     	상세검색
                     	<span>
                         	<select class="searchType" name="searchType">

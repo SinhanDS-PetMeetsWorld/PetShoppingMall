@@ -8,7 +8,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
 import sinhanDS.first.project.user.vo.UserAddressVO;
@@ -146,12 +148,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	// 현재 로그인 중인 유저의 no를 받아와 카트VO의 user_no와 일치하는 컬럼을 리스트로 전부 가져옴
 	public List<CartVO> exist_cart(UserVO vo){
 		List<CartVO> list = mapper.exist_cart(vo.getNo());
 		return list;
 	}
 	
 	@Override
+	// 받아온 카트VO 리스트를 통해서 해당하는 상품의 정보를 순서대로 가져온다.
 	public List<ProductVO> search_cart_product(List<CartVO> cartvo){
 		List<ProductVO> list = new ArrayList<>();
 		System.out.println("프덕0" + cartvo.get(0).getProduct_no());
@@ -162,6 +166,36 @@ public class UserServiceImpl implements UserService {
 		}
 		System.out.println("리스트에 뭐있나 " + list);
 		return list; 
+	}
+	
+	@Override
+	// 받아온 카트VO 리스트를 통해서 해당하는 카트 상품의 옵션들을 받아온다.
+	public List<List<CartOptionVO>> cart_option_number(List<CartVO> cartvo) {
+		System.out.println("서비스 카트vo" + cartvo);
+		List<List<CartOptionVO>> cart_op_vo = new ArrayList<>();
+		
+		for(int i=0; i<cartvo.size();i++) {
+			cart_op_vo.add(mapper.cart_option_number(cartvo.get(i).getNo()));
+
+			System.out.println("카트vo 2차원보자 : " + cart_op_vo);
+		}
+		
+		return cart_op_vo;
+	}
+	
+	@Override
+	// 앞에서 순서대로 받아온 프로덕트VO의 리스트를 받아와서 순서대로 그 상품의 옵션을 추출해보자 
+	public List<List<ProductOptionVO>> get_product_option(List<ProductVO> productvo){
+		
+		List<List<ProductOptionVO>> list = new ArrayList<>();
+		
+		for(int i=0; i<productvo.size(); i++) {
+		
+			List<ProductOptionVO> product_option_vo = mapper.get_product_option(productvo.get(i).getNo());
+			list.add(product_option_vo);
+		}
+		
+		return list;
 	}
 	
 

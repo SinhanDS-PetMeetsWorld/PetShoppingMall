@@ -116,10 +116,11 @@ public class ProductController {
 		
 		ProductSearchVO searchvo = new ProductSearchVO();
 		searchvo.setCategory1(Integer.parseInt(request.getParameter("category1")));
-		
-		searchvo.setCategory2(Integer.parseInt(request.getParameter("category2")));
+		if((request.getParameter("category2") != null) && (request.getParameter("category2") != "")) 
+			{searchvo.setCategory2(Integer.parseInt(request.getParameter("category2")));}
 		searchvo.setSearchType(request.getParameter("searchType"));
 		searchvo.setSearchWord(request.getParameter("searchWord"));
+		searchvo.setTotalSearchWord(request.getParameter("totalSearchWord"));
 		if(request.getParameter("minprice") != null) {
 		searchvo.setMinprice(Integer.parseInt(request.getParameter("minprice")));
 		} else {searchvo.setMinprice(0);}
@@ -142,7 +143,7 @@ public class ProductController {
 		ProductSearchVO searchvo = new ProductSearchVO();
 		for(int i=0; i<3; i++) {
 			searchvo.setCategory1(i);
-			searchvo.setSearchWord(request.getParameter("searchWord"));
+			searchvo.setTotalSearchWord(request.getParameter("totalSearchWord"));
 			
 			List<ProductVO> product_list = service.total_product_search(searchvo);
 			int product_count = service.total_product_searchcount(searchvo);

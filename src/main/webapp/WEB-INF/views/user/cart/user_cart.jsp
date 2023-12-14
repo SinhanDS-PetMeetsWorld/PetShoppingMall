@@ -42,7 +42,7 @@
 						        <tr width="800">
 						            <td>
 						                <br>
-						                <input type="hidden" name="no_list" value="${vo.no }">
+						                <input type="hidden" name="product_no_list" value="${vo.no }">
 						                <input type="hidden" name="seller_no_list" value="${vo.seller_no }">
 						                <c:if test="${empty vo.image_url }">
 											<img src="/resources/img/product/no_image.jpg" width="100" height="100">
@@ -55,8 +55,14 @@
 										</c:if>
 						                <div>${vo.name } <input type="hidden" name="name_list" value="${vo.name }"></div>
 						                <!-- 옵션이 존재한다면 보여주고 아니면 안보임 -->
-						                <div>옵션1</div>
-						                <div>옵션2</div>
+						                
+						                <c:forEach var="cart_option" items="${cartoptionvolist }">
+							             	<c:forEach var="cart_option2" items="${cart_option }">
+							                	<c:if test="${vo.no eq cart_option2.cart_no }">
+							                		<div>${cart_option2.option_no }</div>
+							                	</c:if>
+						             		</c:forEach>
+						                </c:forEach>
 						                <div>${vo.price } <input type="hidden" name="price_list" value="${vo.price }"></div>
 						                <div><input type="hidden" name="discount_list" value="${vo.discount }"></div>
 						                

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
 import sinhanDS.first.project.user.vo.UserAddressVO;
@@ -317,9 +318,18 @@ public class UserController {
 	public String list_cart(Model model, HttpSession sess) {
 		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
 		List<CartVO> cartvolist = service.exist_cart(vo);
-		System.out.println("카트 받아와지나 : " + cartvolist);
+		
+		//현재 세션에 로그인된 유저의 모든 장바구니를 모델에 담음
+		model.addAttribute("cartvolist", cartvolist);
+		
+		
+		List<List<CartOptionVO>> cartop = service.cart_option_number(cartvolist);
+		System.out.println("컨트롤러에서 봐" + cartop);
+		model.addAttribute("cartoptionvolist", cartop);
+		
 		
 		List<ProductVO> prov = service.search_cart_product(cartvolist);
+		model.addAttribute("optionlist", service.get_product_option(prov));
 		model.addAttribute("productvolist", service.search_cart_product(cartvolist));
 		System.out.println("카트에대한 상품? : " + prov);
 		
@@ -327,6 +337,7 @@ public class UserController {
 		return "user/cart/user_cart";
 		
 	}
+	
 	
 	
 }
