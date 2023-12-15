@@ -1,6 +1,5 @@
 package sinhanDS.first.project.user.order;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,16 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	SellerProductMapper sellerProductMapper;
 	
-	public List<ProductVO> getProductList(int[] cno_list){
+	public List<ProductVO> getProductListByProductNoList(int[] product_list){
+		List<ProductVO> list = new ArrayList<>();
+		for(int i = 0; i < product_list.length; i++) {
+			log.debug("product_list[i] test: " + product_list[i]);
+			list.add(sellerProductMapper.getProduct(product_list[i]));
+		}
+		return list;
+	}
+	
+	public List<ProductVO> getProductListByCartNoList(int[] cno_list){
 		System.out.println("cno_list.length체크: " + cno_list.length);
 		List<ProductVO> list = new ArrayList<>();
 		log.debug("cno_list.length체크: " + cno_list.length);
@@ -35,94 +43,78 @@ public class OrderServiceImpl implements OrderService {
 	
 	public List<ProductOptionVO> getOptionList(int[] option_no_list){
 		List<ProductOptionVO> list = new ArrayList<>();
+
+		if(option_no_list.length == 0) return list;
+		
 		for(int i = 0; i < option_no_list.length; i++) {
 			list.add(mapper.getOption(option_no_list[i]));
 		}
 		return list;
 	}
 	
-	public OrderMainVO setOrderName(OrderMainVO mvo, OrderDetailVO dvo) {
-		String first_product_name = checkFirstProductName(dvo);
-		int product_number = checkProductNumber(dvo);
-		mvo.setName(first_product_name + " 외 " + (product_number - 1) + "개 상품 주문");
+	public OrderMainVO setOrderName(OrderMainVO mvo, String name, int length) {
+		mvo.setName(name + " 외 " + (length - 1) + "개 상품 주문"); 
 		return mvo;
 	}
-	public int registOrderMain(OrderMainVO mvo) {
-		return mapper.registOrderMain(mvo);
-	}
 	
-	public List<OrderDetailVO> getOrderDetailList(OrderMainVO mvo, OrderDetailVO dvo){
-		List<OrderDetailVO> list = fillOrderDetailVO(mvo, dvo);
-		return list;
+	public void registOrderMain(OrderMainVO mvo) {
+		mapper.registOrderMain(mvo);
 	}
-	
-	public List<OrderDetailVO> registOrderDetail(List<OrderDetailVO> list) {
-		for(int i = 0; i < list.size(); i++) {
-			mapper.registOrderDetail(list.get(i));
-		}
-		return list;
-	}
-	
-	public List<OrderDetailVO> fillOrderDetailVO(OrderMainVO mvo, OrderDetailVO dvo) {
-		List<OrderDetailVO> list = new ArrayList<>();
-		
-		int[] product_list = dvo.getOrder_detail_product_no_list();
-		for(int i = 0; i < product_list.length; i++) {
-			OrderDetailVO vo = new OrderDetailVO();
-			
-			vo.setOrder_no(mvo.getNo());
-			vo.setUser_no(mvo.getUser_no());
-			vo.setSeller_no(dvo.getOrder_detail_seller_no_list()[i]);
-			vo.setProduct_no(dvo.getOrder_detail_product_no_list()[i]);
-			vo.setProduct_name(dvo.getOrder_detail_product_name_list()[i]);
-			vo.setProduct_price(0);
-			//TODO: charge비율을 정하지 않아서 일단 0으로 해둠
-			vo.setCharge(0);
-			vo.setDiscount(dvo.getOrder_detail_product_discount_list()[i]);
-			vo.setCompany(dvo.getOrder_detail_company_list()[i]);
-			vo.setBrand(dvo.getOrder_detail_brand_list()[i]);
-			vo.setQuantity(dvo.getOrder_detail_quantity_list()[i]);
-			vo.setCart_no(dvo.getOrder_detail_cart_no_list()[i]);
-			list.add(vo);
-		}
-		
-		return list;
-	}
-	
-	public void registOrderDetailOption(List<OrderDetailVO> order_detail_list, OrderDetailOptionVO ovo) {
-		List<OrderDetailOptionVO> list = fillOrderDetailOptionVO(order_detail_list, ovo);
-		for(int i = 0; i < list.size(); i++) {
-			mapper.registOrderDetailOption(list.get(i));
+	public void registOrderDetail(List<OrderDetailVO> detail_list) {
+		for(int i = 0; i < detail_list.size(); i++) {
+			mapper.registOrderDetail(detail_list.get(i));
 		}
 	}
-	
-	public List<OrderDetailOptionVO> fillOrderDetailOptionVO(List<OrderDetailVO> order_detail_list, OrderDetailOptionVO ovo) {
-		List<OrderDetailOptionVO> list = new ArrayList<>();
-		
-		for(int i = 0; i < ovo.getOrder_detail_option_cart_no_list().length; i++) {
-			OrderDetailOptionVO target = new OrderDetailOptionVO();
-			int cart_no = ovo.getOrder_detail_option_cart_no_list()[i];
-			for(int j = 0; j < order_detail_list.size(); j++) {
-				if(cart_no == order_detail_list.get(j).getCart_no()) {
-					OrderDetailVO dvo = order_detail_list.get(j);
-					target.setOrder_dno(dvo.getNo());
-					target.setProduct_no(dvo.getProduct_no());
-					target.setTitle(ovo.getOrder_detail_option_title_list()[i]);
-					target.setContent(ovo.getOrder_detail_option_content_list()[i]);
-					target.setPrice(ovo.getOrder_detail_option_product_price_list()[i]);
-					
-					list.add(target);
-					log.debug("odovo 생성테스트: " + target);
+	public void registOrderDetailOption(List<ProductOptionVO> option_list, List<OrderDetailVO> detail_list, int[] cart_no, int[] option_cart_no) {
+		if(option_list.size() == 0) return;
+		for(int i = 0; i < option_cart_no.length; i++) {
+			for(int j = 0; j < cart_no.length; j++) {
+				if(option_cart_no[i] == cart_no[j]) {
+					OrderDetailOptionVO vo = fillOrderDetailOptionVO(option_list.get(i), detail_list.get(j), detail_list.get(j).getNo());
+					mapper.registOrderDetailOption(vo);
 				}
 			}
 		}
-		return list;
 	}
 	
-	public String checkFirstProductName(OrderDetailVO dvo) {
-		return dvo.getOrder_detail_product_name_list()[0];
+	
+	
+	public List<OrderDetailVO> getOrderDetailList(OrderMainVO mvo, List<ProductVO> p_list, int[] quantity){
+		List<OrderDetailVO> detail_list = new ArrayList<>();
+		for(int i = 0; i < p_list.size(); i++) {
+			detail_list.add(fillOrderDetailVO(mvo, p_list.get(i), quantity[i]));
+		}
+		return detail_list;
 	}
-	public int checkProductNumber(OrderDetailVO dvo) {
-		return dvo.getOrder_detail_product_no_list().length;
+	
+	public OrderDetailVO fillOrderDetailVO(OrderMainVO mvo, ProductVO pvo, int quantity) {
+		OrderDetailVO vo = new OrderDetailVO();
+		vo.setOrder_no(mvo.getNo());
+		vo.setUser_no(mvo.getUser_no());
+		vo.setProduct_no(pvo.getNo());
+		vo.setProduct_name(pvo.getName());
+		vo.setProduct_price(pvo.getPrice());
+		/*TODO: 현재 수수요율이 책정되어있지 않아 그냥 0으로 해뒀습니다. 나중에 수정합시다 ㅎㅎ*/
+		vo.setCharge(0);
+		vo.setDiscount(pvo.getDiscount());
+		vo.setCompany(pvo.getCompany());
+		vo.setBrand(pvo.getBrand());
+		vo.setQuantity(quantity);
+		
+		return vo;
+	}
+	
+	public OrderDetailOptionVO fillOrderDetailOptionVO(ProductOptionVO ovo, OrderDetailVO detail_list, int orderDetail_no) {
+		OrderDetailOptionVO vo = new OrderDetailOptionVO();
+		vo.setOrder_dno(detail_list.getNo());
+		vo.setProduct_no(detail_list.getProduct_no());
+		vo.setTitle(ovo.getTitle());
+		vo.setContent(ovo.getContent());
+		vo.setPrice(ovo.getPrice());
+		
+		return vo;
+	}
+	public List<OrderMainVO> getOrderListNotDeleted(int user_no){
+		return	mapper.getOrderListNotDeleted(user_no);
 	}
 }

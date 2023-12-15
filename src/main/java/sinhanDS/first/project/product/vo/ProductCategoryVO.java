@@ -11,6 +11,8 @@ public class ProductCategoryVO {
 	private int product_no;
 	private int category1;
 	private int category2;
+	
+	
 	private int[] category1_list;
 	private int[] category2_list;
 	

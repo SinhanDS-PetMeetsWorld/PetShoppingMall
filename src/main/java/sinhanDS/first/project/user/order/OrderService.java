@@ -9,20 +9,17 @@ import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 
 public interface OrderService {
-	
-	
-	
-	public List<ProductVO> getProductList(int[] cno_list);
+	public List<ProductVO> getProductListByProductNoList(int[] product_list);
+	public List<ProductVO> getProductListByCartNoList(int[] cno_list);
 	public List<ProductOptionVO> getOptionList(int[] option_no_list);
 	
-	public OrderMainVO setOrderName(OrderMainVO mvo, OrderDetailVO dvo);
-	public int registOrderMain(OrderMainVO mvo);
-	public List<OrderDetailVO> getOrderDetailList(OrderMainVO mvo, OrderDetailVO dvo);
-	public List<OrderDetailVO> registOrderDetail(List<OrderDetailVO> list);
-	public void registOrderDetailOption(List<OrderDetailVO> order_detail_list, OrderDetailOptionVO ovo);
+	public OrderMainVO setOrderName(OrderMainVO mvo, String name, int length);
 	
-	public String checkFirstProductName(OrderDetailVO dvo);
-	public int checkProductNumber(OrderDetailVO dvo);
+	public void registOrderMain(OrderMainVO mvo);
+	public void registOrderDetail(List<OrderDetailVO> detail_list);
+	public void registOrderDetailOption(List<ProductOptionVO> option_list, List<OrderDetailVO> detail_list, int[]cart_no, int[] option_cart_no);
+	public List<OrderDetailVO> getOrderDetailList(OrderMainVO mvo, List<ProductVO> p_list, int[] quantity);
 	
 	
+	public List<OrderMainVO> getOrderListNotDeleted(int user_no);
 }

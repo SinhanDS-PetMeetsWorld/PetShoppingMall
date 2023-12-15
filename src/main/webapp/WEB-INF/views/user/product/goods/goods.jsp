@@ -108,6 +108,7 @@
 						</c:forEach>
 					
 						<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
+							<form name="option_form" id="option_form">
 							<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
 								<c:if test="${(status.index == 0) || (product_more_option[status.index - 1].title != ovo.title)}">
 									${ovo.title } <select name="option_no" id="option_no">
@@ -117,6 +118,9 @@
 									</select><br>
 								</c:if>
 							</c:forEach>
+							<input type="hidden" name="user_no" value="${userLoginInfo.no}">
+							<input type="hidden" name="product_no" value="${product_no}">
+							</form>
 						</div>
 					
 							수량 <input type="number" name="choose_number" value=0>
@@ -226,16 +230,19 @@ function showBoard(boardId) {
 </script>
 <script>
 	function addcart(){
-		var userno = ${userLoginInfo.no};
-		var productno = ${product_no};
-		var optionno = document.getElementById('option_no').value;
+		var cart_form = $('#option_form').serialize();
+		var login = "${userLoginInfo}";
+		
+		if(login == null || login == ""){
+			alert("로그인 후 사용 가능합니다");
+			return;
+		}
 		
 		$.ajax({
 			type: "POST",
 			url:'addcart.do',
-			data:{user_no : userno,
-				product_no : productno,
-				option_no : optionno},
+			data: cart_form,
+			async: false,
 			success:function(res) {
 				if (res == 'true') {
 					alert('장바구니에 추가되었습니다');
