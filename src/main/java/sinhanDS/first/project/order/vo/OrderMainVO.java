@@ -29,6 +29,7 @@ public class OrderMainVO {
 	private int total_price;
 	//총 배송비
 	private int total_delivery_fee;
+	private int total_cancle_price;
 	//주문명
 	private String name;
 }

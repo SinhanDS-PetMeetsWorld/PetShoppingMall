@@ -1,6 +1,5 @@
 package sinhanDS.first.project.user.order;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -86,7 +85,7 @@ public class OrderController {
 		mvo = orderService.setOrderName(mvo, productList.get(0).getName(), productList.size());
 		orderService.registOrderMain(mvo);
 		
-		List<OrderDetailVO> detailList = orderService.getOrderDetailList(mvo, productList, quantity);
+		List<OrderDetailVO> detailList = orderService.makeOrderDetailList(mvo, productList, quantity);
 		orderService.registOrderDetail(detailList);
 		log.debug("detailList: " + detailList);
 		
@@ -107,8 +106,13 @@ public class OrderController {
 	}
 	
 	@GetMapping("removeThisOrder")
-	public String removeThisOrder() {
-		return null;
+	public String removeThisOrder(OrderMainVO mvo) {
+		log.debug("mvo:체크: " + mvo);
+		//orderno로 orderdetaillist받아오고
+		List<OrderDetailVO> detail_list = orderService.getOrderDetailList(mvo);
+		//orderdetail로 orderdetailoption삭제하고 orderdetail삭제하고
+		//orderdetail다삭제되면 order삭제. 
+		return "user/order/list";
 	}
 	
 	@GetMapping("purchaseConfirmByOrderMainNo")

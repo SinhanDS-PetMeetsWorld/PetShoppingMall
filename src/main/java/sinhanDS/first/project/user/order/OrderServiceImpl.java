@@ -79,7 +79,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	
-	public List<OrderDetailVO> getOrderDetailList(OrderMainVO mvo, List<ProductVO> p_list, int[] quantity){
+	public List<OrderDetailVO> makeOrderDetailList(OrderMainVO mvo, List<ProductVO> p_list, int[] quantity){
 		List<OrderDetailVO> detail_list = new ArrayList<>();
 		for(int i = 0; i < p_list.size(); i++) {
 			detail_list.add(fillOrderDetailVO(mvo, p_list.get(i), quantity[i]));
@@ -116,5 +116,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 	public List<OrderMainVO> getOrderListNotDeleted(int user_no){
 		return	mapper.getOrderListNotDeleted(user_no);
+	}
+	
+	public List<OrderDetailVO> getOrderDetailList(OrderMainVO mvo){
+		return null;
 	}
 }
