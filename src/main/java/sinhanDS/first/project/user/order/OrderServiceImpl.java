@@ -43,6 +43,9 @@ public class OrderServiceImpl implements OrderService {
 	
 	public List<ProductOptionVO> getOptionList(int[] option_no_list){
 		List<ProductOptionVO> list = new ArrayList<>();
+
+		if(option_no_list.length == 0) return list;
+		
 		for(int i = 0; i < option_no_list.length; i++) {
 			list.add(mapper.getOption(option_no_list[i]));
 		}
@@ -63,6 +66,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 	}
 	public void registOrderDetailOption(List<ProductOptionVO> option_list, List<OrderDetailVO> detail_list, int[] cart_no, int[] option_cart_no) {
+		if(option_list.size() == 0) return;
 		for(int i = 0; i < option_cart_no.length; i++) {
 			for(int j = 0; j < cart_no.length; j++) {
 				if(option_cart_no[i] == cart_no[j]) {
@@ -109,5 +113,8 @@ public class OrderServiceImpl implements OrderService {
 		vo.setPrice(ovo.getPrice());
 		
 		return vo;
+	}
+	public List<OrderMainVO> getOrderListNotDeleted(int user_no){
+		return	mapper.getOrderListNotDeleted(user_no);
 	}
 }

@@ -92,8 +92,8 @@
 							옵션 리스트<br>
 							<c:forEach items="${option_list }" var="ovo">
 								<c:if test="${ovo.product_no == vo.no }">
-									<input type="hidden" name="option_no" value="${ovo.no }">
-									<input type="hidden" name="option_cart_no" value="${cno_list[status.index] }">
+									<input type="text" name="option_no" value="${ovo.no }">
+									<input type="text" name="option_cart_no" value="${cno_list[status.index] }">
 									 <pre> 옵션 - ${ovo.title } ${ovo.content } ${ovo.price }<br> </pre>
 								</c:if>
 							</c:forEach>
