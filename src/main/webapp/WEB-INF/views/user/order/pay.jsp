@@ -78,6 +78,7 @@
 						<c:forEach items="${product_list }" var="vo" varStatus="status">
 							<input type="hidden" name="product_no" value="${vo.no }">
 							장바구니 번호: ${cno_list[status.index]}<br>
+							<input type="hidden" name="cart_no" value="${cno_list[status.index] }">
 							상품 번호: ${vo.no}<br>
 							판매자 번호: ${vo.seller_no }<br>
 							상품명: ${vo.name }<br>
@@ -92,6 +93,7 @@
 							<c:forEach items="${option_list }" var="ovo">
 								<c:if test="${ovo.product_no == vo.no }">
 									<input type="hidden" name="option_no" value="${ovo.no }">
+									<input type="hidden" name="option_cart_no" value="${cno_list[status.index] }">
 									 <pre> 옵션 - ${ovo.title } ${ovo.content } ${ovo.price }<br> </pre>
 								</c:if>
 							</c:forEach>

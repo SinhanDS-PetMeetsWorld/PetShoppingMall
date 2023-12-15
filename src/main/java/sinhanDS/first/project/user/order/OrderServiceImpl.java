@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
@@ -61,6 +62,16 @@ public class OrderServiceImpl implements OrderService {
 			mapper.registOrderDetail(detail_list.get(i));
 		}
 	}
+	public void registOrderDetailOption(List<ProductOptionVO> option_list, List<OrderDetailVO> detail_list, int[] cart_no, int[] option_cart_no) {
+		for(int i = 0; i < option_cart_no.length; i++) {
+			for(int j = 0; j < cart_no.length; j++) {
+				if(option_cart_no[i] == cart_no[j]) {
+					OrderDetailOptionVO vo = fillOrderDetailOptionVO(option_list.get(i), detail_list.get(j), detail_list.get(j).getNo());
+					mapper.registOrderDetailOption(vo);
+				}
+			}
+		}
+	}
 	
 	
 	
@@ -85,6 +96,18 @@ public class OrderServiceImpl implements OrderService {
 		vo.setCompany(pvo.getCompany());
 		vo.setBrand(pvo.getBrand());
 		vo.setQuantity(quantity);
+		
+		return vo;
+	}
+	
+	public OrderDetailOptionVO fillOrderDetailOptionVO(ProductOptionVO ovo, OrderDetailVO detail_list, int orderDetail_no) {
+		OrderDetailOptionVO vo = new OrderDetailOptionVO();
+		vo.setOrder_dno(detail_list.getNo());
+		vo.setProduct_no(detail_list.getProduct_no());
+		vo.setTitle(ovo.getTitle());
+		vo.setContent(ovo.getContent());
+		vo.setPrice(ovo.getPrice());
+		
 		return vo;
 	}
 }

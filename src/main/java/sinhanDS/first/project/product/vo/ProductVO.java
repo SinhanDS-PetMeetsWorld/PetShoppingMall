@@ -30,9 +30,6 @@ public class ProductVO {
 	
 	
 	private int[] no_list;
-	
-	
-	
 	private String[] name_list;
 	private String[] company_list;
 	private String[] brand_list; 
