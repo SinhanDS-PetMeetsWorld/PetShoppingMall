@@ -12,12 +12,15 @@ import sinhanDS.first.project.product.vo.ProductVO;
 
 @Mapper
 public interface OrderMapper {
-	ProductVO getProduct(int cart_no);
-	ProductOptionVO getOption(int option_no);
-	int registOrderMain(OrderMainVO mvo);
-	int registOrderDetail(OrderDetailVO dvo);
-	int registOrderDetailOption(OrderDetailOptionVO ovo);
+	public ProductVO getProduct(int cart_no);
+	public ProductOptionVO getOption(int option_no);
+	public int registOrderMain(OrderMainVO mvo);
+	public int registOrderDetail(OrderDetailVO dvo);
+	public int registOrderDetailOption(OrderDetailOptionVO ovo);
 	
-	List<OrderMainVO> getOrderListNotDeleted(int user_no); 
-	List<OrderMainVO> getOrderDetailList();
+	public List<OrderMainVO> getOrderListNotDeleted(int user_no); 
+	public List<OrderDetailVO> getOrderDetailList(int order_no);
+	public List<OrderDetailOptionVO> getOrderDetailOptionList(int order_detail_no);
+	public void updateOrderMainToDeleted(int order_no);
+	public void purchaseConfirm(OrderDetailVO vo);
 }

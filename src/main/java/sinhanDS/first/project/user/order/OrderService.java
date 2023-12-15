@@ -22,4 +22,8 @@ public interface OrderService {
 	
 	public List<OrderMainVO> getOrderListNotDeleted(int user_no);
 	public List<OrderDetailVO> getOrderDetailList(OrderMainVO mvo);
+	public List<List<OrderDetailOptionVO>> getOrderDetailOptionList(List<OrderDetailVO> list);
+	
+	public void updateOrderMainToDeleted(OrderMainVO mvo);
+	public void purchaseConfirm(OrderDetailVO vo);
 }

@@ -60,4 +60,17 @@
 	<select id="getOrderListNotDeleted" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
 		SELECT * FROM order_main WHERE (user_no = #{user_no} and isdeleted=0)
 	</select>
+	
+	<select id="getOrderDetailList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail WHERE order_no=#{order_no}
+	</select>
+	<select id="getOrderDetailOptionList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailOptionVO">
+		SELECT * FROM order_detail_option WHERE order_dno=#{order_dno}
+	</select>
+	<select id="updateOrderMainToDeleted" parameterType="int">
+		UPDATE order_main SET isdeleted=1 WHERE no=#{no}
+	</select>
+	<select id="purchaseConfirm" parameterType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		UPDATE order_detail SET purchase_confirmation_date=#{purchase_confirmation_date} WHERE no=#{no}
+	</select>
 </mapper>

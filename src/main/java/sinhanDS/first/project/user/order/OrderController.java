@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
+import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
@@ -102,21 +103,36 @@ public class OrderController {
 		List<OrderMainVO> orderList = orderService.getOrderListNotDeleted(vo.getNo());
 		log.debug("orderList: " + orderList);
 		model.addAttribute("orderList", orderList);
-		return "user/order/list";
+		return "user/order/orderMainList";
 	}
 	
-	@GetMapping("removeThisOrder")
+	@GetMapping("removeThisOrder.do")
 	public String removeThisOrder(OrderMainVO mvo) {
 		log.debug("mvo:체크: " + mvo);
-		//orderno로 orderdetaillist받아오고
-		List<OrderDetailVO> detail_list = orderService.getOrderDetailList(mvo);
-		//orderdetail로 orderdetailoption삭제하고 orderdetail삭제하고
-		//orderdetail다삭제되면 order삭제. 
-		return "user/order/list";
+		orderService.updateOrderMainToDeleted(mvo);
+		return "redirect:/user/order/orderMainList.do";
 	}
 	
-	@GetMapping("purchaseConfirmByOrderMainNo")
-	public String purchaseConfirmByOrderMainNo() {
-		return null;
+	@GetMapping("purchaseConfirmByOrderMainNo.do")
+	public String purchaseConfirmByOrderMainNo(OrderMainVO mvo) {
+		List<OrderDetailVO> detailList = orderService.getOrderDetailList(mvo);
+		for(OrderDetailVO vo : detailList) {
+			orderService.purchaseConfirm(vo);
+		}
+		/* TODO 마지막으로 해야할게 일괄구매를 하면 일괄구매 확정을 또 못누르게한느거 */
+		return "redirect:/user/order/orderMainList.do";
+	}
+	
+	@GetMapping("seeOrderDetail.do")
+	public String seeOrderDetail(Model model, OrderMainVO mvo) {
+		List<OrderDetailVO> dvo_list = orderService.getOrderDetailList(mvo);
+		log.debug("dvo_list: " + dvo_list);
+		List<List<OrderDetailOptionVO>> ovo_list = orderService.getOrderDetailOptionList(dvo_list);
+		log.debug("ovo_list: " + ovo_list);
+		
+		model.addAttribute("dvo_list", dvo_list);
+		model.addAttribute("ovo_list", ovo_list);
+		
+		return "/user/order/detail";
 	}
 }

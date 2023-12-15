@@ -43,19 +43,13 @@
 								<div>
 									<div>주문 상태:</div> 
 									<div><input type="button" class="seeOrderDetailButton" value="상세 보기"></div>
-									<div><input type="button" class="purchaseConfirm" value="일괄 구매 확정"></div>
+									<%-- <div><input type="button" class="purchaseConfirm" value="일괄 구매 확정"></div>--%>
 								</div>
 								<hr><br>
 							</div>
 						</c:forEach>
 					
 					</form>
-				
-				
-				
-				
-				
-				
 				</div>
 			</div>
         </div>
@@ -68,7 +62,7 @@
 </body>
 <script>
 	$('.removeThisOrder').on('click', removeThisOrder);
-	$('.seeOrderDetailButton').on('click', function(){location.href = "/";});
+	$('.seeOrderDetailButton').on('click', seeOrderDetailButton);
 	$('.purchaseConfirm').on('click', purchaseConfirm);
 	
 	//<input type="hidden" name="no" value="${vo.no }">
@@ -90,6 +84,19 @@
 		var no = this.parentNode.parentNode.parentNode.querySelector('#orderNo').innerText
 		console.log(no);
 		$(form).attr('action', "purchaseConfirmByOrderMainNo.do");
+		
+		let newObj = $('<input type="hidden" name="no">');
+		console.log(newObj);
+		
+		$(newObj).attr('value', no);
+		newObj.appendTo(form);
+		form.submit();
+	}
+	function seeOrderDetailButton(){
+		let form = document.querySelector('form');
+		var no = this.parentNode.parentNode.parentNode.querySelector('#orderNo').innerText
+		console.log(no);
+		$(form).attr('action', "seeOrderDetail.do");
 		
 		let newObj = $('<input type="hidden" name="no">');
 		console.log(newObj);

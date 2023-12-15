@@ -1,4 +1,5 @@
 package sinhanDS.first.project.user.order;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,6 +120,43 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	public List<OrderDetailVO> getOrderDetailList(OrderMainVO mvo){
+		return mapper.getOrderDetailList(mvo.getNo());
+	}
+	public List<List<OrderDetailOptionVO>> getOrderDetailOptionList(List<OrderDetailVO> list){
+		List<List<OrderDetailOptionVO>> result_list = new ArrayList<>();
+		for(int i = 0; i < list.size(); i++) {
+			log.debug("dvo: " + list.get(i));
+			List<OrderDetailOptionVO> temp = mapper.getOrderDetailOptionList(list.get(i).getNo());
+			result_list.add(temp);
+		}
+		return result_list;
+	}
+	
+	public void updateOrderMainToDeleted(OrderMainVO mvo) {
+		mapper.updateOrderMainToDeleted(mvo.getNo());
+	}
+	public java.sql.Date createDate(String date) {
+		if("sysdate".equals(date)) {
+			return new java.sql.Date(System.currentTimeMillis());
+		}
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			java.util.Date parseDate = format.parse(date);
+			java.sql.Date sqlDate = new java.sql.Date(parseDate.getTime());
+			return sqlDate;
+		}catch(Exception e) {e.printStackTrace();}
 		return null;
+	}
+	
+	/* 날짜를 지정해 주려면 "2022-08-09" 이런식으로 date를주면됨*/
+	public void purchaseConfirm(OrderDetailVO vo, String date) {
+		vo.setPurchase_confirmation_date(createDate(date));
+		mapper.purchaseConfirm(vo);
+	}
+	public void purchaseConfirm(OrderDetailVO vo) {
+		String date = "sysdate";
+		vo.setPurchase_confirmation_date(createDate(date));
+		mapper.purchaseConfirm(vo);
 	}
 }
