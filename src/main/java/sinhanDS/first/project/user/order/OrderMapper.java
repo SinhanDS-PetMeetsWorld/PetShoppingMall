@@ -19,4 +19,5 @@ public interface OrderMapper {
 	int registOrderDetailOption(OrderDetailOptionVO ovo);
 	
 	List<OrderMainVO> getOrderListNotDeleted(int user_no); 
+	List<OrderMainVO> getOrderDetailList();
 }

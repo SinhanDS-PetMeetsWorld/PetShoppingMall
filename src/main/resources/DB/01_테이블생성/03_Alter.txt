@@ -166,4 +166,8 @@ CHANGE COLUMN `product_no` `product_no` INT NOT NULL ,
 CHANGE COLUMN `price` `price` INT NULL DEFAULT 0 ;
  ALTER TABLE `PetShoppingMall`.`order_detail_option` 
 CHANGE COLUMN `option` `title` VARCHAR(48) NOT NULL ;
+ ALTER TABLE `PetShoppingMall`.`order_detail` 
+CHANGE COLUMN `cancle_status` `cancle_status` INT NOT NULL DEFAULT '0' ;
+ ALTER TABLE `PetShoppingMall`.`order_main` 
+ADD COLUMN `total_cancle_price` INT NOT NULL DEFAULT 0 AFTER `total_delivery_fee`;
  
