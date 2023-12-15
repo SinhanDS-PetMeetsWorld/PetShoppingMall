@@ -1,5 +1,7 @@
 package sinhanDS.first.project.user.order;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
@@ -15,4 +17,6 @@ public interface OrderMapper {
 	int registOrderMain(OrderMainVO mvo);
 	int registOrderDetail(OrderDetailVO dvo);
 	int registOrderDetailOption(OrderDetailOptionVO ovo);
+	
+	List<OrderMainVO> getOrderListNotDeleted(int user_no); 
 }

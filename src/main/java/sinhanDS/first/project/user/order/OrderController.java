@@ -3,6 +3,8 @@ package sinhanDS.first.project.user.order;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
-import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
@@ -58,7 +59,7 @@ public class OrderController {
 		/*cart no는 결제가 끝나고 지울 것이기 때문에 cart_no만 넘어가도 된다.*/
 		model.addAttribute("cno_list", cvo.getCart_no_list());
 		
-		List<ProductVO> product_list = orderService.getProductList(cvo.getCart_no_list());
+		List<ProductVO> product_list = orderService.getProductListByCartNoList(cvo.getCart_no_list());
 		model.addAttribute("product_list", product_list);
 		model.addAttribute("quantity_list", cvo.getQuantity_list());
 		
@@ -69,14 +70,49 @@ public class OrderController {
 	}
 	
 	@PostMapping("buy.do")
-	public String pay_process(@RequestParam(value="order_detail_product_name_list") String[] name, Model model, OrderMainVO mvo, OrderDetailVO dvo, OrderDetailOptionVO ovo, CartVO cvo) {
-		System.out.println("name체크: " + Arrays.toString(name) + "ㅇㅇ");
-		mvo = orderService.setOrderName(mvo, dvo);
-		orderService.registOrderMain(mvo);
-		List<OrderDetailVO> order_detail_list = orderService.getOrderDetailList(mvo, dvo);
-		orderService.registOrderDetail(order_detail_list);
+	public String pay_process(Model model, 
+			@RequestParam int[] product_no, 
+			@RequestParam int[] cart_no,
+			@RequestParam(required=false) int[] option_no,
+			@RequestParam(required=false) int[] option_cart_no,
+			@RequestParam int[] quantity, OrderMainVO mvo) {
+		/*TODO: 나중에 인터셉터 달면 uvo를 인터셉터에서 가져온 걸로 바꿔주기 */
+		UserVO uvo = new UserVO();
+		uvo.setNo(22);
+		mvo.setUser_no(uvo.getNo());
 		
-		orderService.registOrderDetailOption(order_detail_list, ovo);
+		List<ProductVO> productList = orderService.getProductListByProductNoList(product_no);
+		
+		mvo = orderService.setOrderName(mvo, productList.get(0).getName(), productList.size());
+		orderService.registOrderMain(mvo);
+		
+		List<OrderDetailVO> detailList = orderService.getOrderDetailList(mvo, productList, quantity);
+		orderService.registOrderDetail(detailList);
+		log.debug("detailList: " + detailList);
+		
+		List<ProductOptionVO> option_list = orderService.getOptionList(option_no);
+		log.debug("optionList체크: " + option_list);
+		orderService.registOrderDetailOption(option_list, detailList, cart_no, option_cart_no);
+		/*주문 상세 옵션 넣어주면됨 */
 		return "user/order/success";
+	}
+	
+	@GetMapping("list.do")
+	public String list(Model model, HttpSession sess) {
+		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
+		List<OrderMainVO> orderList = orderService.getOrderListNotDeleted(vo.getNo());
+		log.debug("orderList: " + orderList);
+		model.addAttribute("orderList", orderList);
+		return "user/order/list";
+	}
+	
+	@GetMapping("removeThisOrder")
+	public String removeThisOrder() {
+		return null;
+	}
+	
+	@GetMapping("purchaseConfirmByOrderMainNo")
+	public String purchaseConfirmByOrderMainNo() {
+		return null;
 	}
 }

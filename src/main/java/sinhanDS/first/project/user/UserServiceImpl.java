@@ -159,7 +159,6 @@ public class UserServiceImpl implements UserService {
 	// 받아온 카트VO 리스트를 통해서 해당하는 상품의 정보를 순서대로 가져온다.
 	public List<ProductVO> search_cart_product(List<CartVO> cartvo){
 		List<ProductVO> list = new ArrayList<>();
-		System.out.println("프덕0" + cartvo.get(0).getProduct_no());
 		
 		for(int i=0; i<cartvo.size();i++) {
 			ProductVO product_vo = mapper.search_cart_product(cartvo.get(i).getProduct_no());

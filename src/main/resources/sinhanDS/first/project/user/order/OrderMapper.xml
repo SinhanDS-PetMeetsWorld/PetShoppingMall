@@ -56,4 +56,8 @@
 		VALUES
 		(#{order_dno}, #{product_no}, #{title}, #{content}, #{price});
 	</insert>
+	
+	<select id="getOrderListNotDeleted" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
+		SELECT * FROM order_main WHERE (user_no = #{user_no} and isdeleted=0)
+	</select>
 </mapper>

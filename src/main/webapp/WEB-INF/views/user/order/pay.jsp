@@ -24,7 +24,6 @@
 				<div>
 					<h1>구매자 ${userno }의 Pay 페이지 입니다.</h1>
 					<form method="post" action="buy.do">
-						<input type="hidden" name="user_no" value="${userno }">
 						<h2>주소 선택</h2>
 						<ol>
 							<c:forEach items="${ userAddressList}" var="vo" varStatus="status">
@@ -77,34 +76,24 @@
 						
 						<h2>상품 정보 출력</h2>
 						<c:forEach items="${product_list }" var="vo" varStatus="status">
-							<input type="hidden" name="cart_no_list" value="${cno_list[status.index]}">
+							<input type="hidden" name="product_no" value="${vo.no }">
 							장바구니 번호: ${cno_list[status.index]}<br>
-							<input type="hidden" name="order_detail_product_no_list" value="${vo.no}">
+							<input type="hidden" name="cart_no" value="${cno_list[status.index] }">
 							상품 번호: ${vo.no}<br>
-							<input type="hidden" name="order_detail_seller_no_list" value="${vo.seller_no}">
 							판매자 번호: ${vo.seller_no }<br>
-							<input type="hidden" name="order_detail_product_name_list" value="${vo.name}">
 							상품명: ${vo.name }<br>
-							<input type="hidden" name="order_detail_product_price_list" value="${vo.price}">
 							가격: ${vo.price }<br>
-							<input type="hidden" name="order_detail_product_discount_list" value="${vo.discount}">
 							할인가격: ${vo.discount }<br>
-							<input type="hidden" name="order_detail_quantity_list" value="${quantity_list[status.index]}">
+							<input type="hidden" name="quantity" value="${quantity_list[status.index] }">
 							상품 수량: ${quantity_list[status.index]}<br>
-							<input type="hidden" name="order_detail_company_list" value="${vo.company}">
 							제조사: ${vo.company }<br>
-							<input type="hidden" name="order_detail_brand_list" value="${vo.brand}">
 							브랜드: ${vo.brand }<br>
-							<input type="hidden" name="order_detail_cart_no_list" value="${cno_list[status.index]}">
 							
 							옵션 리스트<br>
 							<c:forEach items="${option_list }" var="ovo">
 								<c:if test="${ovo.product_no == vo.no }">
-									<input type="hidden" name="order_detail_option_product_no_list" value="${vo.no }">
-									<input type="hidden" name="order_detail_option_title_list" value="${ovo.title }">
-									<input type="hidden" name="order_detail_option_content_list" value="${ovo.content }">
-									<input type="hidden" name="order_detail_option_product_price_list" value="${ovo.price }">
-									<input type="hidden" name="order_detail_option_cart_no_list" value="${cno_list[status.index]}">
+									<input type="text" name="option_no" value="${ovo.no }">
+									<input type="text" name="option_cart_no" value="${cno_list[status.index] }">
 									 <pre> 옵션 - ${ovo.title } ${ovo.content } ${ovo.price }<br> </pre>
 								</c:if>
 							</c:forEach>
