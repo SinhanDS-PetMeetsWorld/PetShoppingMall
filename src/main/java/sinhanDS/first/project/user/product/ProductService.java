@@ -10,6 +10,8 @@ import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
+import sinhanDS.first.project.user.vo.CartOptionVO;
+import sinhanDS.first.project.user.vo.CartVO;
 
 public interface ProductService {
 
@@ -36,5 +38,9 @@ public interface ProductService {
 	List<ProductVO> total_product_search(ProductSearchVO vo);
 	
 	int total_product_searchcount(ProductSearchVO vo);
+	
+	int cart_insert(CartVO vo);
+
+	boolean cart_option_insert(CartOptionVO vo);
 
 }

@@ -33,5 +33,5 @@ public interface UserMapper {
 	List<CartVO> exist_cart(int no);
 	ProductVO search_cart_product(int product_no);
 	List<CartOptionVO> cart_option_number(int no);
-	List<ProductOptionVO> get_product_option(int no);
+	ProductOptionVO get_product_option(int no);
 }

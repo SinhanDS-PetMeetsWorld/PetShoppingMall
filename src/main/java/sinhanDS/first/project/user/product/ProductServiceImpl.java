@@ -13,6 +13,8 @@ import sinhanDS.first.project.product.vo.ProductQnAVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
+import sinhanDS.first.project.user.vo.CartOptionVO;
+import sinhanDS.first.project.user.vo.CartVO;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -91,6 +93,17 @@ public class ProductServiceImpl implements ProductService {
 	public int total_product_searchcount(ProductSearchVO vo) {
 		int searchcount = mapper.total_product_searchcount(vo);
 		return searchcount;
+	}
+
+	@Override
+	public int cart_insert(CartVO vo) {
+		int cart_no = mapper.cart_insert(vo);
+		return cart_no;
+	}
+
+	@Override
+	public boolean cart_option_insert(CartOptionVO vo) {
+		return mapper.cart_option_insert(vo) > 0 ? true : false;
 	}
 
 

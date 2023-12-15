@@ -110,9 +110,9 @@
 						<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
 							<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
 								<c:if test="${(status.index == 0) || (product_more_option[status.index - 1].title != ovo.title)}">
-									${ovo.title } <select name="title_list">
+									${ovo.title } <select name="option_no" id="option_no">
 								</c:if>
-										<option value=""> ${ovo.content } :  ${ovo.price }원</option>
+										<option value="${ovo.no}"> ${ovo.content } :  ${ovo.price }원</option>
 								<c:if test="${(product_more_option[status.index + 1].title != ovo.title)}">
 									</select><br>
 								</c:if>
@@ -122,7 +122,7 @@
 							수량 <input type="number" name="choose_number" value=0>
 							
 							<input type="button" style="background-color: grey;"
-								value="장바구니 담기"> <input type="button"
+								value="장바구니 담기" onclick="addcart()"> <input type="button"
 								style="background-color: yellow" value="바로 구매"><br>
 				
 						<div class = "goods_review_QNA">
@@ -223,8 +223,28 @@ function showBoard(boardId) {
 }
 
 
-
-
+</script>
+<script>
+	function addcart(){
+		var userno = ${userLoginInfo.no};
+		var productno = ${product_no};
+		var optionno = document.getElementById('option_no').value;
+		
+		$.ajax({
+			type: "POST",
+			url:'addcart.do',
+			data:{user_no : userno,
+				product_no : productno,
+				option_no : optionno},
+			success:function(res) {
+				if (res == 'true') {
+					alert('장바구니에 추가되었습니다');
+				} else {
+					alert('장바구니 추가에 실패했습니다.');
+				}
+			}
+		})
+	}
 </script>		
 </body>
 </html>

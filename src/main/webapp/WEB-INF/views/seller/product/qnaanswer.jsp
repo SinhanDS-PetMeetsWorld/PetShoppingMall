@@ -45,7 +45,6 @@
 										</c:if>		
 									</div>	
 									
-									
 									<c:if test = "${status_2.index == 3}">
 									  질문 등록일 : ${qna_array[status_1.index][status_2.index]} <br>
 									</c:if>		
@@ -56,16 +55,24 @@
 									  답변 등록일 : ${qna_array[status_1.index][status_2.index]}
 									</c:if>		
 									<c:if test = "${status_2.index == 6}">
-									  답변 내용 : ${qna_array[status_1.index][status_2.index]}
-									</c:if>		
+									 	 답변 내용 : 
+									 	 <c:if test="${'null' == qna_array[status_1.index][status_2.index]}">
+									 	 	<input type= text id ="answer_content" class="answer_content" style="width:400px; height:50px"> 		  
+							  				<input type="button" id="submit" name = "등록" value="등록" class="writeAnswer" ><br><br>	
+										 	 <br><br>
+									 	 </c:if>
+									 	 <c:if test="${'null' != qna_array[status_1.index][status_2.index]}">
+									 	 		${qna_array[status_1.index][status_2.index]}
+										 	 <br><br>
+									 	 </c:if>
+									 	 
+						  			</c:if>	
+										
 									<c:if test = "${status_2.index == 7}">
-									  상태 : ${qna_array[status_1.index][status_2.index]} <br>
-									</c:if>		
-												           
+									  상태 : ${qna_array[status_1.index][status_2.index]} <br><br>
+									</c:if>
 					         </c:forEach>   
-				         
-						   <input type= text id ="answer_content" class="answer_content" style="width:400px; height:50px">
-				           <input type="button" id="submit" name = "등록" value="등록" class="writeAnswer" ><br><br>
+					         				
 				         </div>
 			      	</c:forEach>
 				</div>
@@ -77,6 +84,7 @@
         </div>
     </div>
 <script>
+	
 	$('.writeAnswer').on('click', qnaanswer);
 	
 	function qnaanswer() {
@@ -98,11 +106,9 @@
 							no : no
 			},
 			success : function(response){
-				console.log("너가 이걸 한다고?");
 				history.go(0);
 			},
 			error: function (error) {
-	            console.log("에러:", error);
 	        }
 		});
 	}

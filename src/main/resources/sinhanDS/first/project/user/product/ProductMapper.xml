@@ -94,4 +94,23 @@
 		WHERE category1 = #{category1} AND 
 			(name LIKE '%${totalSearchWord}%' OR company LIKE '%${totalSearchWord}%' OR brand LIKE '%${totalSearchWord}%');
 	</select>
+	
+	<insert id="cart_insert" parameterType="sinhanDS.first.project.user.vo.CartVO">
+		INSERT INTO cart (
+			user_no, product_no
+		) VALUES (
+			#{user_no}, #{product_no}
+		)
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<insert id="cart_option_insert" parameterType="sinhanDS.first.project.user.vo.CartOptionVO">
+		INSERT INTO cart_option (
+			cart_no, option_no
+		) VALUES (
+			#{cart_no}, #{option_no}
+		)
+	</insert>
 </mapper>
