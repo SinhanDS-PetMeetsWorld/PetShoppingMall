@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
@@ -155,14 +157,20 @@ public class ProductController {
 		return "user/product/total_search";
 	}
 	
+	@ResponseBody
 	@PostMapping("/addcart.do")
-	public String cart_insert(Model model, HttpServletRequest request, CartVO cartvo, CartOptionVO cartoptionvo) {
+	public String cart_insert(Model model, HttpServletRequest request, @RequestParam(value="option_no",required=true) List<String> optionno_list,
+			CartVO cartvo, CartOptionVO cartoptionvo) {
+		boolean suc = false;
 		int cart_no = service.cart_insert(cartvo);
-		System.out.println("cart_no체크: " + cart_no);
-		System.out.println("바뀐 cartvo체크: " + cartvo.getNo());
-		
 		cartoptionvo.setCart_no(cartvo.getNo());
-		boolean suc = service.cart_option_insert(cartoptionvo);
+
+		if(cart_no>0) {
+			for(int i=0; i<optionno_list.size(); i++){
+				cartoptionvo.setOption_no(Integer.parseInt(optionno_list.get(i)));
+				suc = service.cart_option_insert(cartoptionvo);
+			}
+		}
 		return String.valueOf(suc);
 	}
 }
