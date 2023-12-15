@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head> 
@@ -24,57 +24,50 @@
             </div>
 			<div class="contentsright">
 				<div>	
-					판매자 번호 : ${sellerLoginInfo.no }
-				
-					<c:forEach items="${qna_array }" varStatus ="status_1">	
-						<div> 
-							<c:forEach items="${qna_array }" varStatus="status_2">
-									<c:if test = "${status_2.index == 0}">
-									  제품명 : ${qna_array[status_1.index][status_2.index]}
-									</c:if>	
-									<c:if test = "${status_2.index == 1}">
-									  제품 번호 : ${qna_array[status_1.index][status_2.index]} <br>
-									</c:if>		
-									
-									<div >
-										<c:if test = "${status_2.index == 2}">
-		 									<a class="quest_no" value="${qna_array[status_1.index][status_2.index]}">
-		 									질문 번호 :
-		 								    <span>${qna_array[status_1.index][status_2.index]}</span> 
-		 								    </a> 
-										</c:if>		
-									</div>	
-									
-									<c:if test = "${status_2.index == 3}">
-									  질문 등록일 : ${qna_array[status_1.index][status_2.index]} <br>
-									</c:if>		
-									<c:if test = "${status_2.index == 4}">
-									  질문 내용 : ${qna_array[status_1.index][status_2.index]} <br>
-									</c:if>		
-									<c:if test = "${status_2.index == 5}">
-									  답변 등록일 : ${qna_array[status_1.index][status_2.index]}
-									</c:if>		
-									<c:if test = "${status_2.index == 6}">
-									 	 답변 내용 : 
-									 	 <c:if test="${'null' == qna_array[status_1.index][status_2.index]}">
-									 	 	<input type= text id ="answer_content" class="answer_content" style="width:400px; height:50px"> 		  
-							  				<input type="button" id="submit" name = "등록" value="등록" class="writeAnswer" ><br><br>	
-										 	 <br><br>
-									 	 </c:if>
-									 	 <c:if test="${'null' != qna_array[status_1.index][status_2.index]}">
-									 	 		${qna_array[status_1.index][status_2.index]}
-										 	 <br><br>
-									 	 </c:if>
-									 	 
-						  			</c:if>	
-										
-									<c:if test = "${status_2.index == 7}">
-									  상태 : ${qna_array[status_1.index][status_2.index]} <br><br>
-									</c:if>
-					         </c:forEach>   
-					         				
-				         </div>
-			      	</c:forEach>
+					판매자 번호 : ${sellerLoginInfo.no } <br>
+					<c:forEach items="${qna_array}" varStatus = "qna_quant">
+						<div>	
+							<c:if test = "${not empty qna_array[qna_quant.index][0]}">
+							  제품명 : ${qna_array[qna_quant.index][0]} <br>
+							</c:if>	
+							
+							<c:if test = "${not empty qna_array[qna_quant.index][1]}">
+							  상태 : ${qna_array[qna_quant.index][1]} <br>
+							</c:if>
+																
+							<c:if test = "${not empty qna_array[qna_quant.index][2]}">
+							  제품 번호 : ${qna_array[qna_quant.index][2]} <br>
+							</c:if>	
+						    <div>
+								<c:if test = "${not empty qna_array[qna_quant.index][3]}">
+										<a class="quest_no" value="${qna_array[qna_quant.index][3]}">
+										질문 번호 :
+									    <span>${qna_array[qna_quant.index][3]}</span> 
+									    </a> 
+								</c:if>		
+							</div>	
+							<c:if test = "${not empty qna_array[qna_quant.index][4]}">
+							  질문 등록일 : ${qna_array[qna_quant.index][4]} <br>
+							</c:if>		
+							<c:if test = "${not empty qna_array[qna_quant.index][5]}">
+							   질문 내용 : ${qna_array[qna_quant.index][5]} <br>
+							</c:if>		
+							<c:if test = "${not empty qna_array[qna_quant.index][6]}">
+							  답변 등록일 : ${qna_array[qna_quant.index][6]} <br>
+							</c:if>		
+							<c:if test = "${not empty qna_array[qna_quant.index][7]}">
+							 	 답변 내용 : 
+							 	 <c:if test="${'null' == qna_array[qna_quant.index][7]}">
+							 	 	<input type= text id ="answer_content" class="answer_content"  style="width:400px; height:50px"> 		  
+					  				<input type="button" id="submit" name = "등록" value="등록" class="writeAnswer" >
+					  				<br><br>	
+							 	 </c:if>
+							 	 <c:if test="${'null' != qna_array[qna_quant.index][7]}">
+							 	 		${ qna_array[qna_quant.index][7]} <br><br>
+							 	 </c:if>
+							</c:if>		     	
+					   </div>	
+				   </c:forEach>			
 				</div>
 			</div>
         </div>
@@ -111,6 +104,7 @@
 			error: function (error) {
 	        }
 		});
+
 	}
 
 </script>
