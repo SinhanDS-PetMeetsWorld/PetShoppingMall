@@ -1,9 +1,10 @@
 package sinhanDS.first.project.seller.product;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
 
@@ -70,10 +72,39 @@ public class SellerProductController {
 	}
 
 	@GetMapping("/list.do")
-	public String list(HttpSession sess, Model model) {
+	public String list(HttpSession sess, Model model, ProductSearchVO svo) {
 		SellerVO seller = (SellerVO) sess.getAttribute("sellerLoginInfo");
-
-		List<ProductVO> productList = service.getProductList(seller.getNo());
+		svo.setSeller_no(seller.getNo());
+		log.debug("svo: " + svo);
+		int count = service.getNumberOfPage(svo);
+		log.debug("count: " + count);
+		int totalPage = count / svo.getNumberOfProductInPage();
+        if (count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
+        map.put("totalPage", totalPage);
+        
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfProductInPage())*svo.getNumberOfProductInPage());
+        log.debug("endPage: " + endPage);
+        int startPage = endPage - (svo.getNumberOfProductInPage() - 1);
+        if(endPage > totalPage) endPage = totalPage;
+        boolean prev = startPage > 1;
+        boolean next = endPage < totalPage;
+        map.put("endPage", endPage);
+        map.put("startPage", startPage);
+        map.put("prev", prev);
+        map.put("next", next);
+        
+        model.addAttribute("paging", map);
+        
+        
+        
+        svo.setSeller_no(seller.getNo());
+		List<ProductVO> productList = service.getProductList(svo);
+		
+		log.debug("productList: " + productList);
+		
 		List<List<ProductCategoryVO>> categoryList = service.getCategoryLists(productList);
 		List<List<ProductOptionVO>> optionList = service.getOptionLists(productList);
 		model.addAttribute("productList", productList);

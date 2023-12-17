@@ -50,17 +50,17 @@ public class RegistProductWithNaverAPI {
 	}
 
 	@Test
-	public void regist_product() throws Exception {
+	public void check_product()throws Exception {
 		String clientId = "MJqrvmZMyfFRJ7Fdtvdw"; //애플리케이션 클라이언트 아이디
         String clientSecret = "LuXGTra8U2"; //애플리케이션 클라이언트 시크릿
         String text = null;
         int number = 10;
         try {
         	/* 검색어 */
-            text = URLEncoder.encode("강아지 사료", "UTF-8");
+            text = URLEncoder.encode("고양이 사료", "UTF-8");
             
             /* 검색 갯수 */
-            number = 30;
+            number = 50;
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
@@ -83,7 +83,71 @@ public class RegistProductWithNaverAPI {
         	JSONObject obj = (JSONObject)jsonArray.get(i);
         	
         	String seller_no = "2";
-        	String stock = "500";
+        	String stock = String.valueOf((int)(Math.random() * 500));
+        	String discount = "0";
+        	String description = "";
+        	String category1_list = "1";
+        	String category2_list = "0";
+        	
+        	String name = (String)obj.get("title");
+        	name = name.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+        	String price = (String)obj.get("lprice");
+        	String company = (String)obj.get("maker");
+        	String brand = (String)obj.get("brand");
+        	String image_url = (String)obj.get("image");
+        	
+        	System.out.println("seller_no: " + seller_no);
+        	System.out.println("stock: " + stock);
+        	System.out.println("discount: " + discount);
+        	System.out.println("description: " + description);
+        	
+        	System.out.println("category1_list: " + pvo.getCategory_name().get(Integer.valueOf(category1_list)));
+        	System.out.println("category2_list: " + pvo.getCategory().get(Integer.valueOf(category1_list)).get(Integer.valueOf(category2_list)));
+        	
+        	System.out.println("name: " + name);
+        	System.out.println("price: " + price);
+        	System.out.println("company: " + company);
+        	System.out.println("brand: " + brand);
+        	System.out.println("image_url: " + image_url);
+        	System.out.println("----------------");
+        }
+	}
+		
+	@Test
+	public void regist_product() throws Exception {
+		String clientId = "MJqrvmZMyfFRJ7Fdtvdw"; //애플리케이션 클라이언트 아이디
+        String clientSecret = "LuXGTra8U2"; //애플리케이션 클라이언트 시크릿
+        String text = null;
+        int number = 10;
+        try {
+        	/* 검색어 */
+            text = URLEncoder.encode("고양이 사료", "UTF-8");
+            
+            /* 검색 갯수 */
+            number = 50;
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("검색어 인코딩 실패",e);
+        }
+
+
+        String apiURL = "https://openapi.naver.com/v1/search/shop?query=" + text +"&display=" + number;    // JSON 결과
+
+
+        Map<String, String> requestHeaders = new HashMap<>();
+        requestHeaders.put("X-Naver-Client-Id", clientId);
+        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+        String responseBody = get(apiURL,requestHeaders);
+        System.out.println(responseBody);
+        
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject)jsonParser.parse(responseBody);
+        JSONArray jsonArray = (JSONArray)jsonObject.get("items");
+        ProductCategoryVO pvo = new ProductCategoryVO();
+        for(int i = 0 ; i < jsonArray.size(); i++) {
+        	JSONObject obj = (JSONObject)jsonArray.get(i);
+        	
+        	String seller_no = "2";
+        	String stock = String.valueOf((int)(Math.random() * 500));
         	String discount = "0";
         	String description = "";
         	String category1_list = "0";
@@ -96,6 +160,11 @@ public class RegistProductWithNaverAPI {
         	String company = (String)obj.get("maker");
         	String brand = (String)obj.get("brand");
         	String image_url = (String)obj.get("image");
+        	
+        	/* 옵션 가격 계산 */
+        	int optionPrice = Integer.valueOf(price);
+        	optionPrice = (int)(optionPrice * 0.1);
+
         	RequestBuilder req = MockMvcRequestBuilders.post("/seller/product/regist_forTest.do")
         			.sessionAttr("sellerLoginInfo", new SellerVO())
         			.param("seller_no", seller_no)
@@ -116,9 +185,9 @@ public class RegistProductWithNaverAPI {
         			.param("category2_list", category2_list)
         			
         			/* 옵션을 더 추가하고 싶을실 경우 추가하시면 됩니다. */
-//    				.param("title_list", "사이즈").param("content_list", "small").param("price_list", "500")
-//    				.param("title_list", "사이즈").param("content_list", "middle").param("price_list", "1000")
-//    				.param("title_list", "사이즈").param("content_list", "large").param("price_list", "2000")
+//    				.param("title_list", "사이즈").param("content_list", "small").param("price_list", "0")
+//    				.param("title_list", "사이즈").param("content_list", "middle").param("price_list", "" + optionPrice)
+//    				.param("title_list", "사이즈").param("content_list", "large").param("price_list", "" + (2 * optionPrice))
         			
         			;
         	
