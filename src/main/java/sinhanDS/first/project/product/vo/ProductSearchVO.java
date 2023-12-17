@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class ProductSearchVO {
+	private int order_no;
+	private int user_no;
 	private int seller_no;
 	
 	private int category1;

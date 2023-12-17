@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.user.order.OrderMapper">
+	<sql id="whereSql">
+		<where>
+			(user_no = #{user_no} and isdeleted=0)
+			<if test="searchWord != null and searchWord != ''">
+				AND 
+				<if test="searchType == 'all'">
+					name LIKE '%${searchWord}%'
+				</if>
+				<if test="searchType != 'all'">
+					${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
 	<select id="getProduct" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT * FROM product 
 		WHERE no = (SELECT product_no FROM cart WHERE no=#{cart_no});
@@ -57,8 +72,12 @@
 		(#{order_dno}, #{product_no}, #{title}, #{content}, #{price});
 	</insert>
 	
-	<select id="getOrderListNotDeleted" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
-		SELECT * FROM order_main WHERE (user_no = #{user_no} and isdeleted=0)
+	<select id="getOrderListNotDeleted" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
+		SELECT * 
+		FROM order_main  
+		<include refid="whereSql"/>
+		ORDER BY no
+		LIMIT #{startIdx}, #{numberOfProductInPage}
 	</select>
 	
 	<select id="getOrderDetailList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
@@ -67,6 +86,16 @@
 	<select id="getOrderDetailOptionList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailOptionVO">
 		SELECT * FROM order_detail_option WHERE order_dno=#{order_dno}
 	</select>
+
+	
+	<select id="getNumberOfPage" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="int">
+		SELECT count(*) 
+		FROM order_main 
+		<include refid="whereSql"/>
+	</select>
+	
+	
+	
 	<select id="updateOrderMainToDeleted" parameterType="int">
 		UPDATE order_main SET isdeleted=1 WHERE no=#{no}
 	</select>

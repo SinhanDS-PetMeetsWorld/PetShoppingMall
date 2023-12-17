@@ -13,7 +13,7 @@
         <a href="/user/edit.do">회원 정보 수정</a><br>
         <a href="#">찜 박스</a><br>
         <a href="/user/list_user_cart.do">장바구니</a><br>
-        <a href="/user/order/list.do">구매 이력</a><br>
+        <a href="/user/order/list.do?searchWord=&searchType=">구매 이력</a><br>
         <a href="#">작성한 리뷰</a><br>
         <a href="#">작성 가능한 리뷰</a><br>
         <a href="#">로그아웃</a><br>

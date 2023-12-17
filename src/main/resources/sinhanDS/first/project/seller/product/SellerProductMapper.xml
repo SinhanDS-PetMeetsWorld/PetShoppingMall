@@ -15,6 +15,7 @@
 			</if>
 		</where>
 	</sql>
+	
 	<sql id="orderSql">
 		<if test="sorttype == 'regist' || sorttype == null">
 			order by no

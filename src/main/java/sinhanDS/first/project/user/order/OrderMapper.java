@@ -8,6 +8,7 @@ import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 
 @Mapper
@@ -18,9 +19,12 @@ public interface OrderMapper {
 	public int registOrderDetail(OrderDetailVO dvo);
 	public int registOrderDetailOption(OrderDetailOptionVO ovo);
 	
-	public List<OrderMainVO> getOrderListNotDeleted(int user_no); 
+	public List<OrderMainVO> getOrderListNotDeleted(ProductSearchVO svo); 
 	public List<OrderDetailVO> getOrderDetailList(int order_no);
 	public List<OrderDetailOptionVO> getOrderDetailOptionList(int order_detail_no);
+	
+	public int getNumberOfPage(ProductSearchVO svo);
+	
 	public void updateOrderMainToDeleted(int order_no);
 	public void purchaseConfirm(OrderDetailVO vo);
 }

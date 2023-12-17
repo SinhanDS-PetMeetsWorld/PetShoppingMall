@@ -6,6 +6,7 @@ import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 
 public interface OrderService {
@@ -20,9 +21,11 @@ public interface OrderService {
 	public void registOrderDetailOption(List<ProductOptionVO> option_list, List<OrderDetailVO> detail_list, int[]cart_no, int[] option_cart_no);
 	public List<OrderDetailVO> makeOrderDetailList(OrderMainVO mvo, List<ProductVO> p_list, int[] quantity);
 	
-	public List<OrderMainVO> getOrderListNotDeleted(int user_no);
+	public List<OrderMainVO> getOrderListNotDeleted(ProductSearchVO svo);
 	public List<OrderDetailVO> getOrderDetailList(OrderMainVO mvo);
 	public List<List<OrderDetailOptionVO>> getOrderDetailOptionList(List<OrderDetailVO> list);
+	
+	public int getNumberOfPage(ProductSearchVO svo);
 	
 	public void updateOrderMainToDeleted(OrderMainVO mvo);
 	public void purchaseConfirm(OrderDetailVO vo);

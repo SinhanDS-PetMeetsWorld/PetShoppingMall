@@ -1,6 +1,8 @@
 package sinhanDS.first.project.user.order;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +19,7 @@ import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.user.UserService;
 import sinhanDS.first.project.user.vo.CartVO;
@@ -98,9 +101,33 @@ public class OrderController {
 	}
 	
 	@GetMapping("list.do")
-	public String list(Model model, HttpSession sess) {
+	public String list(Model model, HttpSession sess, ProductSearchVO svo) {
 		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
-		List<OrderMainVO> orderList = orderService.getOrderListNotDeleted(vo.getNo());
+		svo.setUser_no(vo.getNo());
+		
+		int count = orderService.getNumberOfPage(svo);
+		log.debug("count: " + count);
+		int totalPage = count / svo.getNumberOfProductInPage();
+        if (count % svo.getNumberOfProductInPage() > 0) totalPage++;
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
+        map.put("totalPage", totalPage);
+        
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfProductInPage())*svo.getNumberOfProductInPage());
+        log.debug("endPage: " + endPage);
+        int startPage = endPage - (svo.getNumberOfProductInPage() - 1);
+        if(endPage > totalPage) endPage = totalPage;
+        boolean prev = startPage > 1;
+        boolean next = endPage < totalPage;
+        map.put("endPage", endPage);
+        map.put("startPage", startPage);
+        map.put("prev", prev);
+        map.put("next", next);
+        
+        model.addAttribute("paging", map);
+        
+
+		List<OrderMainVO> orderList = orderService.getOrderListNotDeleted(svo);
 		log.debug("orderList: " + orderList);
 		model.addAttribute("orderList", orderList);
 		return "user/order/orderMainList";

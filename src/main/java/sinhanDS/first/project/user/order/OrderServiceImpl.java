@@ -11,6 +11,7 @@ import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.product.SellerProductMapper;
 
@@ -115,8 +116,9 @@ public class OrderServiceImpl implements OrderService {
 		
 		return vo;
 	}
-	public List<OrderMainVO> getOrderListNotDeleted(int user_no){
-		return	mapper.getOrderListNotDeleted(user_no);
+	
+	public List<OrderMainVO> getOrderListNotDeleted(ProductSearchVO svo){
+		return	mapper.getOrderListNotDeleted(svo);
 	}
 	
 	public List<OrderDetailVO> getOrderDetailList(OrderMainVO mvo){
@@ -130,6 +132,10 @@ public class OrderServiceImpl implements OrderService {
 			result_list.add(temp);
 		}
 		return result_list;
+	}
+	
+	public int getNumberOfPage(ProductSearchVO svo) {
+		return mapper.getNumberOfPage(svo);
 	}
 	
 	public void updateOrderMainToDeleted(OrderMainVO mvo) {
