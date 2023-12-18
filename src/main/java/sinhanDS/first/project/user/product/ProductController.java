@@ -109,7 +109,6 @@ public class ProductController {
 	
 	@GetMapping("/list.do")
 	public String searchByCategory(HttpServletRequest request, Model model, ProductSearchVO searchvo) {
-		System.out.println(request.getParameter("category2"));
 		request.setAttribute("category1", request.getParameter("category1"));
 		request.setAttribute("category2", request.getParameter("category2"));
 		

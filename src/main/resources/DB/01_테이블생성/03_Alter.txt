@@ -170,4 +170,7 @@ CHANGE COLUMN `option` `title` VARCHAR(48) NOT NULL ;
 CHANGE COLUMN `cancle_status` `cancle_status` INT NOT NULL DEFAULT '0' ;
  ALTER TABLE `PetShoppingMall`.`order_main` 
 ADD COLUMN `total_cancle_price` INT NOT NULL DEFAULT 0 AFTER `total_delivery_fee`;
+
+ALTER TABLE `PetShoppingMall`.`user` 
+ADD COLUMN `restricted` TINYINT(1) NULL DEFAULT '0' AFTER `join_date`;
  
