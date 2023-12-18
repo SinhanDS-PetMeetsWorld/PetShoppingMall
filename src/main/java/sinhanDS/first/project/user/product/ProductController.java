@@ -49,11 +49,11 @@ public class ProductController {
 		
 		
 		
-		if (login != null) {
+	/*	if (login != null) {
 		
-		/* (신정훈) 12 - 16 찜박스 구현 
+		 (신정훈) 12 - 16 찜박스 구현 
 		 * 로그인 필요 여부에 따라서 적용
-		 */
+		 
 			int user_no = login.getNo();
 			System.out.println("생명의 전화 번호 : " + user_no);
 			
@@ -67,8 +67,7 @@ public class ProductController {
 			System.out.println("찜 리스트 나오냐?? "+ zzim_list);
 			model.addAttribute("zzim_list" , zzim_list);
 			
-		}
-		
+		}*/
 		List<ProductVO> product_more = service.Product_more(pvo);
 		List<ProductQnAVO> qna_list = service.QNA_list(qnavo);
 		List<ReviewVO> review_list = service.Review_list(revvo);
