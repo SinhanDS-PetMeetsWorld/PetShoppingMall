@@ -22,6 +22,8 @@ public class ProductVO {
 	private String brand;
 	//평점
 	private float rating;
+	private int review_cnt;
+	
 	//이미지url
 	private String image_url;
 	

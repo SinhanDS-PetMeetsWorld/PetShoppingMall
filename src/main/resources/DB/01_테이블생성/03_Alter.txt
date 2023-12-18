@@ -191,4 +191,6 @@ ALTER TABLE `PetShoppingMall`.`report`
 CHANGE COLUMN `no` `no` INT NOT NULL AUTO_INCREMENT ;
  ALTER TABLE `PetShoppingMall`.`order_detail` 
 CHANGE COLUMN `reason` `reason` TEXT NULL DEFAULT NULL ;
+ ALTER TABLE `PetShoppingMall`.`review` 
+CHANGE COLUMN `no` `no` INT NOT NULL AUTO_INCREMENT ;
  
