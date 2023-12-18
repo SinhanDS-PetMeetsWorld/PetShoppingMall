@@ -129,7 +129,8 @@
     	}
     	function write_review(e){
     		e.preventDefault();
-    		
+    		let no = $(this).data('no');
+    		window.open('/user/order/write_review.do?no=' + no,'write_review', 'width=430,height=500,location=no,status=no,scrollbars=yes');
     	}
     	function read_review(e){
     		e.preventDefault();

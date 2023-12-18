@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -221,12 +222,19 @@ public class OrderController {
 	@GetMapping("refound_info.do")
 	public String request_info(Model model, OrderDetailVO dvo) {
 		log.debug("dvo :" + dvo);
-		/* dvo를 가져올 때 reason을 못가져온다. reason을 get으로 넘겨주기는 좀 그러니까 dvo를 새로 받아오자, reason만 ㅇㅇ*/
 		String reason = orderService.getReason(dvo);
 		
 		SellerVO svo = orderService.getSellerInfo(dvo);
 		model.addAttribute("reason", reason);
 		model.addAttribute("svo", svo);
 		return "/user/order/refound_info";
+	}
+	
+	@GetMapping("write_review.do")
+	public String write_review(HttpServletRequest request, OrderDetailVO dvo) {
+		UserVO uvo = (UserVO)request.getSession().getAttribute("userLoginInfo");
+		log.debug("userNO: " + uvo.getNo());
+		
+		return "/user/order/write_review";
 	}
 }
