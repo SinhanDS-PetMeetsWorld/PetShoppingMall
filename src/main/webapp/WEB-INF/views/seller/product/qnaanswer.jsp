@@ -82,7 +82,7 @@
 	
 	function qnaanswer() {
 			
-		console.log(   $(this.parentNode).find('.quest_no').find('span').text());
+		console.log($(this.parentNode).find('.quest_no').find('span').text());
 
 		var answer_content = $(this.parentNode.querySelector("#answer_content")).val();
 		var no = $(this.parentNode).find('.quest_no').find('span').text();

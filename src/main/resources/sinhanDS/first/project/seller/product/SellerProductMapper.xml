@@ -102,16 +102,6 @@
 		SELECT * FROM product_option WHERE product_no = #{product_no}
 	</select>
 	
-	
-	
-	<!--   
-		신정훈 작업 내용 (2023 - 12 - 12)
-		Q&A 답변페이지 제작
-		
-		getQnAList는 qna페이지 불러오기
-		seller_no 
-	 -->
-	 
 	 <select id = "getQnAList" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
 	 	SELECT * FROM product_qna 
 		WHERE seller_no = #{sellerLoginInfo.no }
@@ -128,7 +118,7 @@
 			status =1
 		WHERE no = ${no};
 		
-    </update>
-	 
+     </update>
+     
 	
 </mapper>

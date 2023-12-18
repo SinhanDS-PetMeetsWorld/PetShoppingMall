@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.util.descriptor.web.LoginConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
+import sinhanDS.first.project.user.vo.SaveBoxVO;
+import sinhanDS.first.project.user.vo.UserVO;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -105,6 +108,29 @@ public class ProductServiceImpl implements ProductService {
 	public boolean cart_option_insert(CartOptionVO vo) {
 		return mapper.cart_option_insert(vo) > 0 ? true : false;
 	}
+	
+	
+	@Override
+	public int zzim_insert(SaveBoxVO vo) {
+		int zzim_no = mapper.zzim_insert(vo);
+		return zzim_no;
+	}
+
+	@Override
+	public int zzim_cancel(SaveBoxVO vo) {
+		int zzim_cancelNo = mapper.zzim_cancel(vo);
+		return zzim_cancelNo;
+	}
+
+
+	@Override
+	public List<SaveBoxVO> zzim_list(SaveBoxVO vo) {
+		List<SaveBoxVO> zzim_list = mapper.zzim_list(vo);
+		return zzim_list;
+	}
+
+
+
 
 
 
