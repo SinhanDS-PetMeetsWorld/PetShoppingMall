@@ -161,7 +161,7 @@
 		seller_no 
 	 -->
 	 
->>>>>>> branch 'master' of https://github.com/kimcider/PetShoppingMall.git
+
 	 <select id = "getQnAList" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
 	 	SELECT * FROM product_qna 
 		WHERE seller_no = #{sellerLoginInfo.no }
