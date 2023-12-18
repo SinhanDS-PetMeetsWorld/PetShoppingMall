@@ -173,4 +173,27 @@ ADD COLUMN `total_cancle_price` INT NOT NULL DEFAULT 0 AFTER `total_delivery_fee
 
 ALTER TABLE `PetShoppingMall`.`user` 
 ADD COLUMN `restricted` TINYINT(1) NULL DEFAULT '0' AFTER `join_date`;
+
+ CREATE TABLE `report` (
+	`no`	int	NOT NULL,
+	`seller_no`	int	NOT NULL,
+	`user_no`	int	NOT NULL,
+	`product_no`	int	NOT NULL,
+	`reaason`	varchar(255)	NOT NULL,
+	`regist_date`	date	NOT NULL
+);
+ALTER TABLE `report` ADD CONSTRAINT `PK_REPORT` PRIMARY KEY (
+	`no`
+);
+ALTER TABLE `report` ADD CONSTRAINT `FK_seller_TO_report_1` FOREIGN KEY (
+	`seller_no`
+)
+REFERENCES `seller` (
+	`no`
+);
+ALTER TABLE `PetShoppingMall`.`report` 
+CHANGE COLUMN `no` `no` INT NOT NULL AUTO_INCREMENT ;
+ ALTER TABLE `PetShoppingMall`.`order_detail` 
+CHANGE COLUMN `reason` `reason` TEXT NULL DEFAULT NULL ;
+
  

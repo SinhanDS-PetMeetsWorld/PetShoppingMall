@@ -27,29 +27,25 @@
             </div>
 			<div class="contentsright">
 				<div>
-					<form>
-						<h1>구매 이력</h1>
-						<c:forEach items="${orderList }" var="vo">
+					<h1>구매 이력</h1>
+					<c:forEach items="${orderList }" var="vo">
+						<div>
 							<div>
 								<div>
-									<div>
-										주문번호 : <span id="orderNo">${vo.no }</span> <input type="button" class="removeThisOrder" value="구매이력 삭제">
-									</div>
-									<div>
-										${vo.name } 총 결제금액: ${vo.total_price }원
-									</div>
+									주문번호 : <span id="orderNo">${vo.no }</span> <input type="button" class="removeThisOrder" value="구매이력 삭제" data-no="${vo.no }">
 								</div>
-								
 								<div>
-									<div>주문 상태:</div> 
-									<div><input type="button" class="seeOrderDetailButton" value="상세 보기"></div>
-									<%-- <div><input type="button" class="purchaseConfirm" value="일괄 구매 확정"></div>--%>
+									${vo.name } 총 결제금액: ${vo.total_price }원
 								</div>
-								<hr><br>
 							</div>
-						</c:forEach>
-					
-					</form>
+							
+							<div>
+								<div>주문 상태:</div> 
+								<div><input type="button" class="seeOrderDetailButton" value="상세 보기" data-no="${vo.no }"></div>
+							</div>
+							<hr><br>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 			
@@ -107,47 +103,16 @@
 <script>
 	$('.removeThisOrder').on('click', removeThisOrder);
 	$('.seeOrderDetailButton').on('click', seeOrderDetailButton);
-	$('.purchaseConfirm').on('click', purchaseConfirm);
-	
-	//<input type="hidden" name="no" value="${vo.no }">
-	function removeThisOrder(){
-		let form = document.querySelector('form');
-		console.log();
-		var no = this.parentNode.parentNode.parentNode.querySelector('#orderNo').innerText
-		$(form).attr('action', "removeThisOrder.do");
-		
-		let newObj = $('<input type="hidden" name="no">');
-		console.log(newObj);
-		
-		$(newObj).attr('value', no);
-		newObj.appendTo(form);
-		form.submit();
+	function removeThisOrder(e){
+		e.preventDefault();
+		let no = $(this).data('no');
+		location.href='removeThisOrder.do?no='+no;
 	}
-	function purchaseConfirm(){
-		let form = document.querySelector('form');
-		var no = this.parentNode.parentNode.parentNode.querySelector('#orderNo').innerText
-		console.log(no);
-		$(form).attr('action', "purchaseConfirmByOrderMainNo.do");
-		
-		let newObj = $('<input type="hidden" name="no">');
-		console.log(newObj);
-		
-		$(newObj).attr('value', no);
-		newObj.appendTo(form);
-		form.submit();
+	function seeOrderDetailButton(e){
+		e.preventDefault();
+		let no = $(this).data('no');
+		location.href='seeOrderDetail.do?no='+no;
 	}
-	function seeOrderDetailButton(){
-		let form = document.querySelector('form');
-		var no = this.parentNode.parentNode.parentNode.querySelector('#orderNo').innerText
-		console.log(no);
-		$(form).attr('action', "seeOrderDetail.do");
-		
-		let newObj = $('<input type="hidden" name="no">');
-		console.log(newObj);
-		
-		$(newObj).attr('value', no);
-		newObj.appendTo(form);
-		form.submit();
-	}
+
 </script>
 </html>

@@ -192,7 +192,7 @@ public class SellerProductController {
 					System.out.println("체크: " + putName);
 					qna_array.add(putName);
 				}
-				System.out.println("붐 뜨냐?        "  + qna_array);
+				System.out.println(" QnA리스트 확인 : "  + qna_array);
 			} 
 			 
 
