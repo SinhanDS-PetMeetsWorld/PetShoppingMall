@@ -23,6 +23,7 @@ import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
+import sinhanDS.first.project.user.vo.SaveBoxVO;
 import sinhanDS.first.project.user.vo.UserAddressVO;
 import sinhanDS.first.project.user.vo.UserVO;
 
@@ -343,5 +344,18 @@ public class UserController {
 	}
 	
 	
-	
+	@GetMapping("/list_user_zzim.do")
+	public String list_zzim(Model model , HttpSession sess , UserVO uvo , ProductVO pvo , SaveBoxVO savo){
+		
+		UserVO vo= (UserVO)sess.getAttribute("userLoginInfo");
+		List<SaveBoxVO> zzim_list = service.zzim_list(savo);
+		System.out.println("여기에도 찜 리스트 나오나 ? " + zzim_list);
+		
+		
+		
+		
+		return "user/zzim/zzim_box";
+		
+		
+	}
 }

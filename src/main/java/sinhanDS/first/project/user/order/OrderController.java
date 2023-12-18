@@ -1,7 +1,11 @@
 package sinhanDS.first.project.user.order;
 
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +21,9 @@ import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.UserService;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.UserVO;
@@ -61,6 +67,7 @@ public class OrderController {
 		
 		List<ProductVO> product_list = orderService.getProductListByCartNoList(cvo.getCart_no_list());
 		model.addAttribute("product_list", product_list);
+		log.debug("product_list: " + product_list);
 		model.addAttribute("quantity_list", cvo.getQuantity_list());
 		
 		List<ProductOptionVO> option_list = orderService.getOptionList(ovo.getNo_list());
@@ -82,7 +89,7 @@ public class OrderController {
 		mvo.setUser_no(uvo.getNo());
 		
 		List<ProductVO> productList = orderService.getProductListByProductNoList(product_no);
-		
+		log.debug("productList: " + productList);
 		mvo = orderService.setOrderName(mvo, productList.get(0).getName(), productList.size());
 		orderService.registOrderMain(mvo);
 		
@@ -98,9 +105,33 @@ public class OrderController {
 	}
 	
 	@GetMapping("list.do")
-	public String list(Model model, HttpSession sess) {
+	public String list(Model model, HttpSession sess, ProductSearchVO svo) {
 		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
-		List<OrderMainVO> orderList = orderService.getOrderListNotDeleted(vo.getNo());
+		svo.setUser_no(vo.getNo());
+		
+		int count = orderService.getNumberOfPage(svo);
+		log.debug("count: " + count);
+		int totalPage = count / svo.getNumberOfProductInPage();
+        if (count % svo.getNumberOfProductInPage() > 0) totalPage++;
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
+        map.put("totalPage", totalPage);
+        
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfProductInPage())*svo.getNumberOfProductInPage());
+        log.debug("endPage: " + endPage);
+        int startPage = endPage - (svo.getNumberOfProductInPage() - 1);
+        if(endPage > totalPage) endPage = totalPage;
+        boolean prev = startPage > 1;
+        boolean next = endPage < totalPage;
+        map.put("endPage", endPage);
+        map.put("startPage", startPage);
+        map.put("prev", prev);
+        map.put("next", next);
+        
+        model.addAttribute("paging", map);
+        
+
+		List<OrderMainVO> orderList = orderService.getOrderListNotDeleted(svo);
 		log.debug("orderList: " + orderList);
 		model.addAttribute("orderList", orderList);
 		return "user/order/orderMainList";
@@ -110,7 +141,7 @@ public class OrderController {
 	public String removeThisOrder(OrderMainVO mvo) {
 		log.debug("mvo:체크: " + mvo);
 		orderService.updateOrderMainToDeleted(mvo);
-		return "redirect:/user/order/orderMainList.do";
+		return "redirect:/user/order/list.do";
 	}
 	
 	@GetMapping("purchaseConfirmByOrderMainNo.do")
@@ -125,14 +156,77 @@ public class OrderController {
 	
 	@GetMapping("seeOrderDetail.do")
 	public String seeOrderDetail(Model model, OrderMainVO mvo) {
+		log.debug("mvo: " + mvo);
 		List<OrderDetailVO> dvo_list = orderService.getOrderDetailList(mvo);
 		log.debug("dvo_list: " + dvo_list);
 		List<List<OrderDetailOptionVO>> ovo_list = orderService.getOrderDetailOptionList(dvo_list);
 		log.debug("ovo_list: " + ovo_list);
-		
+		List<String> img_list = orderService.getImageList(dvo_list);
+		log.debug("img_list: " + img_list);
+		List<Integer> review_list = orderService.getReviewStatus(dvo_list);
+		log.debug("review_list", review_list);
 		model.addAttribute("dvo_list", dvo_list);
 		model.addAttribute("ovo_list", ovo_list);
+		model.addAttribute("img_list", img_list);
+		model.addAttribute("review_list", review_list);
 		
 		return "/user/order/detail";
+	}
+	
+	@GetMapping("purchase_confirm.do")
+	public String purchaseConfirm(OrderDetailVO dvo) {
+		log.debug("구매확정 dvo:" + dvo);
+		orderService.purchaseConfirm(dvo);
+		return "redirect:/user/order/seeOrderDetail.do?no="+dvo.getOrder_no();
+	}
+	
+	@GetMapping("request_cancle.do")
+	public String request_cancle(OrderDetailVO dvo) {
+		return "/user/order/cancle_format";
+	}
+	@PostMapping("request_cancle.do")
+	public String do_request_cancle(OrderDetailVO dvo, HttpServletResponse response) {
+		orderService.cancle(dvo);
+		try {
+			PrintWriter pw = response.getWriter();
+			pw.write("<script>");
+			pw.write("opener.parent.location.reload();");
+			pw.write("window.close();");
+			pw.write("</script>");
+		}catch(Exception e) {e.printStackTrace();}
+		return null;
+	}
+	
+	@GetMapping("request_refound.do")
+	public String request_refound(Model model, OrderDetailVO dvo) {
+		//판매자 주소
+		SellerVO svo = orderService.getSellerInfo(dvo);
+		log.debug("svo체크: " + svo);
+		model.addAttribute("svo", svo);
+		return "/user/order/refound_format";
+	}
+	@PostMapping("request_refound.do")
+	public String do_request_refound(OrderDetailVO dvo, HttpServletResponse response) {
+		orderService.refound(dvo);
+		try {
+			PrintWriter pw = response.getWriter();
+			pw.write("<script>");
+			pw.write("opener.parent.location.reload();");
+			pw.write("window.close();");
+			pw.write("</script>");
+		}catch(Exception e) {e.printStackTrace();}
+		return null;
+	}
+	
+	@GetMapping("refound_info.do")
+	public String request_info(Model model, OrderDetailVO dvo) {
+		log.debug("dvo :" + dvo);
+		/* dvo를 가져올 때 reason을 못가져온다. reason을 get으로 넘겨주기는 좀 그러니까 dvo를 새로 받아오자, reason만 ㅇㅇ*/
+		String reason = orderService.getReason(dvo);
+		
+		SellerVO svo = orderService.getSellerInfo(dvo);
+		model.addAttribute("reason", reason);
+		model.addAttribute("svo", svo);
+		return "/user/order/refound_info";
 	}
 }

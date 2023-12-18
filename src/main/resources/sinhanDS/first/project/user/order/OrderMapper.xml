@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.user.order.OrderMapper">
+	<sql id="whereSql">
+		<where>
+			(user_no = #{user_no} and isdeleted=0)
+			<if test="searchWord != null and searchWord != ''">
+				AND 
+				<if test="searchType == 'all'">
+					name LIKE '%${searchWord}%'
+				</if>
+				<if test="searchType != 'all'">
+					${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
 	<select id="getProduct" parameterType="int" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT * FROM product 
 		WHERE no = (SELECT product_no FROM cart WHERE no=#{cart_no});
@@ -57,8 +72,12 @@
 		(#{order_dno}, #{product_no}, #{title}, #{content}, #{price});
 	</insert>
 	
-	<select id="getOrderListNotDeleted" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
-		SELECT * FROM order_main WHERE (user_no = #{user_no} and isdeleted=0)
+	<select id="getOrderListNotDeleted" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
+		SELECT * 
+		FROM order_main  
+		<include refid="whereSql"/>
+		ORDER BY no
+		LIMIT #{startIdx}, #{numberOfProductInPage}
 	</select>
 	
 	<select id="getOrderDetailList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
@@ -67,10 +86,42 @@
 	<select id="getOrderDetailOptionList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailOptionVO">
 		SELECT * FROM order_detail_option WHERE order_dno=#{order_dno}
 	</select>
-	<select id="updateOrderMainToDeleted" parameterType="int">
-		UPDATE order_main SET isdeleted=1 WHERE no=#{no}
+	
+	
+	<select id="getImageUrl" parameterType="int" resultType="string">
+		SELECT image_url FROM product WHERE no=#{int}  
 	</select>
-	<select id="purchaseConfirm" parameterType="sinhanDS.first.project.order.vo.OrderDetailVO">
+	
+	<select id="getReviewStatus" parameterType="int" resultType="int">
+		SELECT count(*) FROM review WHERE order_dno=#{int}  
+	</select>
+
+	
+	<select id="getNumberOfPage" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="int">
+		SELECT count(*) 
+		FROM order_main 
+		<include refid="whereSql"/>
+	</select>
+	
+	
+	
+	<update id="updateOrderMainToDeleted" parameterType="int">
+		UPDATE order_main SET isdeleted=1 WHERE no=#{no}
+	</update>
+	<update id="purchaseConfirm" parameterType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		UPDATE order_detail SET purchase_confirmation_date=#{purchase_confirmation_date} WHERE no=#{no}
+	</update>
+	<update id="cancle" parameterType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		UPDATE order_detail SET cancle_status=1, reason=#{reason} WHERE no=#{no}
+	</update>
+	<update id="refound" parameterType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		UPDATE order_detail SET refound_status=1, reason=#{reason} WHERE no=#{no}
+	</update>
+	<select id="getReason" parameterType="sinhanDS.first.project.order.vo.OrderDetailVO" resultType="string">
+		SELECT reason FROM order_detail WHERE no=#{no}  
+	</select>
+	
+	<select id="getSellerInfo" parameterType="int" resultType="sinhanDS.first.project.seller.vo.SellerVO">
+		SELECT no, zipcode, addr1, addr2 FROM seller WHERE no = #{no}  
 	</select>
 </mapper>
