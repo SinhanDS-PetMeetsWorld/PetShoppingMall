@@ -66,7 +66,7 @@
 				<div class="detail_search">
                     <form method="get" name="searchForm"  id="searchForm" onsubmit="return detailsearch();" action="list.do">
                     	<input type="hidden" name="category1" value="${category1}">
-                    	<input type="hidden" name="category2" value="${category2}">
+                    	<input type="hidden" id="category2" name="category2" value="${category2}">
                     	<input type="hidden" name="totalSearchWord" value="${ProductSearchVO.totalSearchWord}">
                     	상세검색
                     	<span>
@@ -162,6 +162,11 @@
     	function detailsearch(){
     		var min = document.getElementById("minprice");
     		var max = document.getElementById("maxprice");
+    		var category2 = document.getElementById("category2");
+    		
+    		if( category2.value<0 || category2.value=="" || category2.value==null){
+    			category2.value = 9999;
+    		}
     		
     		if( min.value<0 || min.value=="" || min.value==null) {
     			min.value = 0;
@@ -169,6 +174,7 @@
     		else if(max.value>999999999 || max.value=="" || max.value==null){
     			max.value = 999999999;
     		}
+    		
     		return true;
     	}
     </script>
@@ -176,7 +182,11 @@
     	function changeSorttype(){
     		var min = document.getElementById("minprice");
     		var max = document.getElementById("maxprice");
+			var category2 = document.getElementById("category2");
     		
+    		if( category2.value<0 || category2.value=="" || category2.value==null){
+    			category2.value = 9999;
+    		}
     		if( min.value<0 || min.value=="" || min.value==null) {
     			min.value = 0;
     		}

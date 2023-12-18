@@ -108,28 +108,13 @@ public class ProductController {
 	
 	
 	@GetMapping("/list.do")
-	public String searchByCategory(HttpServletRequest request, Model model) {
-		//searhvo 받아오는걸로 수정..해보겠음
+	public String searchByCategory(HttpServletRequest request, Model model, ProductSearchVO searchvo) {
+		System.out.println(request.getParameter("category2"));
 		request.setAttribute("category1", request.getParameter("category1"));
 		request.setAttribute("category2", request.getParameter("category2"));
 		
 		ProductCategoryVO catekor = new ProductCategoryVO();
 		model.addAttribute("catekor" , catekor);
-		
-		ProductSearchVO searchvo = new ProductSearchVO();
-		searchvo.setCategory1(Integer.parseInt(request.getParameter("category1")));
-		if((request.getParameter("category2") != null) && (request.getParameter("category2") != "")) 
-			{searchvo.setCategory2(Integer.parseInt(request.getParameter("category2")));}
-		searchvo.setSearchType(request.getParameter("searchType"));
-		searchvo.setSearchWord(request.getParameter("searchWord"));
-		searchvo.setTotalSearchWord(request.getParameter("totalSearchWord"));
-		if(request.getParameter("minprice") != null) {
-		searchvo.setMinprice(Integer.parseInt(request.getParameter("minprice")));
-		} else {searchvo.setMinprice(0);}
-		if(request.getParameter("maxprice") != null) {
-		searchvo.setMaxprice(Integer.parseInt(request.getParameter("maxprice")));
-		} else {searchvo.setMaxprice(999999999);}
-		searchvo.setSorttype(request.getParameter("sorttype"));
 		
 		List<ProductVO> product_list = service.product_list(searchvo);
 		model.addAttribute("ProductSearchVO", searchvo);
