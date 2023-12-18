@@ -237,4 +237,9 @@ public class OrderController {
 		
 		return "/user/order/write_review";
 	}
+	@PostMapping("write_review.do")
+	public String tt() {
+		return null;
+	}
+	
 }
