@@ -174,6 +174,9 @@ ADD COLUMN `total_cancle_price` INT NOT NULL DEFAULT 0 AFTER `total_delivery_fee
 ALTER TABLE `PetShoppingMall`.`user` 
 ADD COLUMN `restricted` TINYINT(1) NULL DEFAULT '0' AFTER `join_date`;
 
+ALTER TABLE `PetShoppingMall`.`seller` 
+ADD COLUMN `restricted` TINYINT NULL DEFAULT '0' AFTER `account`;
+
  CREATE TABLE `report` (
 	`no`	int	NOT NULL,
 	`seller_no`	int	NOT NULL,

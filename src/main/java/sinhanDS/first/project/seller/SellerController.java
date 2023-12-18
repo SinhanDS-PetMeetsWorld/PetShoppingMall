@@ -56,11 +56,13 @@ public class SellerController {
 	
 	@PostMapping("/login.do")
 	public String loginProcess(SellerVO vo, HttpSession sess, Model model) {
-//		System.out.println("vo체크: " + vo);
 		SellerVO login = service.login(vo);
-		System.out.println("login체크: " + login);
 		if (login == null) { // 로그인 실패
 			model.addAttribute("msg", "아이디 비밀번호가 올바르지 않습니다.");
+			model.addAttribute("cmd", "back");
+			return "common/alert";
+		} else if (login.isRestricted() == true) { // 로그인 실패
+			model.addAttribute("msg", "사용이 제한된 계정입니다. 관리자에게 문의하세요.");
 			model.addAttribute("cmd", "back");
 			return "common/alert";
 		} else { // 로그인 성공
