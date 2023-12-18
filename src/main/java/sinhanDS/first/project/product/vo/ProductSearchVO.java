@@ -18,8 +18,8 @@ public class ProductSearchVO {
 	private String searchWord;
 	private String searchType;
 	
-	private int minprice;
-	private int maxprice;
+	private int minprice = 0;
+	private int maxprice = 999999999;
 	
 	private String sorttype;
 	private String totalSearchWord;
