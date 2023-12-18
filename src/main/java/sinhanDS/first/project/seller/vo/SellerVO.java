@@ -23,6 +23,7 @@ public class SellerVO {
 	private int bank;
 	private String account;
 	private String new_password;
+	private boolean restricted;
 	
 	private List<ArrayList<String>> company_list;
 	public SellerVO(){

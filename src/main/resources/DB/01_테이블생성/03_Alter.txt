@@ -170,6 +170,13 @@ CHANGE COLUMN `option` `title` VARCHAR(48) NOT NULL ;
 CHANGE COLUMN `cancle_status` `cancle_status` INT NOT NULL DEFAULT '0' ;
  ALTER TABLE `PetShoppingMall`.`order_main` 
 ADD COLUMN `total_cancle_price` INT NOT NULL DEFAULT 0 AFTER `total_delivery_fee`;
+
+ALTER TABLE `PetShoppingMall`.`user` 
+ADD COLUMN `restricted` TINYINT(1) NULL DEFAULT '0' AFTER `join_date`;
+
+ALTER TABLE `PetShoppingMall`.`seller` 
+ADD COLUMN `restricted` TINYINT NULL DEFAULT '0' AFTER `account`;
+
  CREATE TABLE `report` (
 	`no`	int	NOT NULL,
 	`seller_no`	int	NOT NULL,
@@ -193,4 +200,3 @@ CHANGE COLUMN `no` `no` INT NOT NULL AUTO_INCREMENT ;
 CHANGE COLUMN `reason` `reason` TEXT NULL DEFAULT NULL ;
  ALTER TABLE `PetShoppingMall`.`review` 
 CHANGE COLUMN `no` `no` INT NOT NULL AUTO_INCREMENT ;
- 

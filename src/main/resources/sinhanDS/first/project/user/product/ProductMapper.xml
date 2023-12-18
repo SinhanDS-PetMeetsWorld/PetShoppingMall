@@ -113,6 +113,24 @@
 		)
 	</insert>
 	
+	<insert id="zzim_insert" parameterType="sinhanDS.first.project.user.vo.SaveBoxVO">
+		INSERT INTO save_box
+		(user_no , product_no ) VALUES
+		(#{user_no} , #{product_no})
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>	
+	</insert>
 	
+	<delete id="zzim_cancel" parameterType="sinhanDS.first.project.user.vo.SaveBoxVO">
+		DELETE FROM save_box
+		WHERE
+		user_no = #{user_no} AND product_no = #{product_no}	
+	</delete>
 	
+	<select id = "zzim_list" parameterType="sinhanDS.first.project.user.vo.SaveBoxVO" resultType ="sinhanDS.first.project.user.vo.SaveBoxVO">
+		SELECT * 
+		FROM save_box 
+		WHERE user_no = ${user_no} AND product_no = ${product_no}
+	</select>
 </mapper>
