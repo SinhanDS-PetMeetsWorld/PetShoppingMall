@@ -13,6 +13,7 @@ import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
+import sinhanDS.first.project.user.vo.SaveBoxVO;
 import sinhanDS.first.project.user.vo.UserAddressVO;
 import sinhanDS.first.project.user.vo.UserVO;
 
@@ -196,6 +197,14 @@ public class UserServiceImpl implements UserService {
 		}
 		System.out.println("프로덕트옵션 : " + list);
 		return list;
+	}
+
+	@Override
+	public List<SaveBoxVO> zzim_list(SaveBoxVO savo) {
+		// TODO Auto-generated method stub
+		List<SaveBoxVO> zzim_list = mapper.zzim_list(savo);
+	
+		return zzim_list;
 	}
 	
 

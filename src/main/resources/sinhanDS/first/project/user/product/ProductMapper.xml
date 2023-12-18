@@ -50,7 +50,6 @@
 			</selectKey>
     </insert>
 	
-	
 	<select id="product_list" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT *
 		FROM product INNER JOIN product_category 
@@ -113,4 +112,6 @@
 			#{cart_no}, #{option_no}
 		)
 	</insert>
+	
+	
 </mapper>

@@ -141,6 +141,7 @@
 		SELECT * FROM product_option WHERE product_no = #{product_no}
 	</select>
 	
+
 	
 	<select id="getNumberOfPage" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="int">
 		SELECT count(*) FROM product 
@@ -160,6 +161,7 @@
 		seller_no 
 	 -->
 	 
+
 	 <select id = "getQnAList" parameterType="sinhanDS.first.project.product.vo.ProductQnAVO">
 	 	SELECT * FROM product_qna 
 		WHERE seller_no = #{sellerLoginInfo.no }
@@ -176,7 +178,7 @@
 			status =1
 		WHERE no = ${no};
 		
-    </update>
-	 
+     </update>
+     
 	
 </mapper>
