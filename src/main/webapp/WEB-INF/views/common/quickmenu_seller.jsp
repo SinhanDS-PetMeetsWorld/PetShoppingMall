@@ -12,8 +12,7 @@
       <div class = "quick_menu_category">
         <a href="#">회원 정보</a><br>
         <a href="#">정산 관리</a><br>
-        <a href="#">주문 확인</a><br>
-        <a href="#">배송 관리</a><br>
+        <a href="/seller/order/orderlist.do">주문 확인</a><br>
         <a href="/seller/product/regist.do">상품 등록</a><br>
         <a href="/seller/product/list.do">판매 중인 상품 관리</a><br>
         <a href="/seller/product/qnalist.do">Q&A 관리</a><br>
