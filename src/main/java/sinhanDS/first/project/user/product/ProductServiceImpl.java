@@ -74,12 +74,16 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ReviewVO> Review_list(ReviewVO vo) {
-		
-		List<ReviewVO> review_list = mapper.Review_list(vo);
+	public List<ReviewVO> Review_list(ProductSearchVO svo) {
+		List<ReviewVO> review_list = mapper.Review_list(svo);
 		return review_list;
 	}
 
+	@Override
+	public int getNumberOfReviewPage(int pno) {
+		return mapper.getNumberOfReviewPage(pno);
+	}
+	
 	@Override
 	public List<ProductVO> product_list(ProductSearchVO vo) {
 		List<ProductVO> product_list = mapper.product_list(vo);

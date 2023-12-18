@@ -7,6 +7,7 @@ public class ProductSearchVO {
 	private int order_no;
 	private int user_no;
 	private int seller_no;
+	private int product_no;
 	
 	private int category1;
 	private int category2 = 9999;
@@ -14,6 +15,7 @@ public class ProductSearchVO {
 	private int page = 1;
 	/* 한 페이지에 보여줄 상품의 개수 */
 	private int numberOfProductInPage = 5;
+	private int numberOfPageInIndexList = 5;
 	private int startIdx;
 	private String searchWord;
 	private String searchType;

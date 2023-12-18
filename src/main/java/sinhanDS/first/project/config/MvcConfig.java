@@ -120,15 +120,15 @@ public class MvcConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(userLoginIntercepton())
 						.addPathPatterns("/user/**")
-						.addPathPatterns("/user/product/**")
-						.excludePathPatterns("/user/product/search.do")
-						.excludePathPatterns("/user/product/goods.do")
+						.excludePathPatterns("/user/product/**")
+						.addPathPatterns("/user/product/addcart.do")
+						/*TODO: 바로구매 완성되면 바로구매도 제외해주세요*/
+						.addPathPatterns("/user/product/zziminsert.do")
 						.excludePathPatterns("/user/join.do")
 						.excludePathPatterns("/user/login.do")
 						.excludePathPatterns("/user/idCheck.do")
 						.excludePathPatterns("/user/emailCheck.do")
 						.excludePathPatterns("/user/regist.do")
-						.excludePathPatterns("/user/product/list.do")
 						
 						/* TODO: order에 jsp로 값을 전달해 주기 전 임시로 제외한 패턴입니다. 나중에 삭제할꼐요 ㅎㅎ..*/
 						.excludePathPatterns("/user/order/buy.do")

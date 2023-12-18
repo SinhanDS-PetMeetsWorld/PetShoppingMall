@@ -1,6 +1,8 @@
 package sinhanDS.first.project.user.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
@@ -29,6 +32,7 @@ import sinhanDS.first.project.user.vo.UserVO;
 
 @Controller
 @RequestMapping("/user/product")
+@Slf4j
 public class ProductController {
 	@Autowired
 	private ProductService service;
@@ -39,15 +43,9 @@ public class ProductController {
  	@GetMapping("/goods.do")
 	public String QNA_Review_list(Model model, UserVO uvo, HttpServletRequest request, ProductVO pvo, ProductQnAVO qnavo 
 			, ReviewVO revvo , ProductCategoryVO pcvo ,ProductOptionVO povo, SaveBoxVO savo) {
-		
-		// 멤버 번호
 		HttpSession loginsess = request.getSession();
-		System.out.println("로긴 세스 :" + loginsess);
 		UserVO login = (UserVO)loginsess.getAttribute("userLoginInfo");
-		System.out.println("로그인 정보 : 제발 좀 니ㅏ와라 " + login);
 		String product_no = request.getParameter("no");
-		
-		
 		
 		if (login != null) {
 		
@@ -69,8 +67,43 @@ public class ProductController {
 			
 		}
 		List<ProductVO> product_more = service.Product_more(pvo);
+		
+		/* review paging 처리 */
+		
+		ProductSearchVO review_svo = new ProductSearchVO();
+		review_svo.setNumberOfProductInPage(1);
+		review_svo.setProduct_no(pvo.getNo());
+		List<ReviewVO> review_list = service.Review_list(review_svo);
+		log.debug("review_list: " + review_list);
+		int reviewCount = service.getNumberOfReviewPage(pvo.getNo());
+		int reviewTotalPage = reviewCount / review_svo.getNumberOfProductInPage();
+		if(reviewCount % review_svo.getNumberOfProductInPage() > 0) reviewTotalPage++;
+		Map<String, Object> reviewMap = new HashMap<>();
+		reviewMap.put("count", reviewCount);
+		reviewMap.put("totalPage", reviewTotalPage);
+		
+		int review_endPage = (int)(Math.ceil(review_svo.getPage()/(float)review_svo.getNumberOfPageInIndexList()) * review_svo.getNumberOfPageInIndexList());
+		int review_startPage = review_endPage - (review_svo.getNumberOfPageInIndexList() - 1);
+		if( review_endPage > reviewTotalPage) review_endPage = reviewTotalPage;
+		boolean review_prev = review_startPage > 1;
+		boolean review_next = review_endPage < reviewTotalPage;
+		reviewMap.put("endPage", review_endPage);
+		reviewMap.put("startPage", review_startPage);
+		reviewMap.put("prev", review_prev);
+		reviewMap.put("next", review_next);
+        
+		log.debug("reviewPaging: " + reviewMap);
+        model.addAttribute("reviewPaging", reviewMap);
+        model.addAttribute("review_svo", review_svo);
+		
+		
+		
 		List<ProductQnAVO> qna_list = service.QNA_list(qnavo);
-		List<ReviewVO> review_list = service.Review_list(revvo);
+		
+		
+		
+		
+		
 		List<ProductCategoryVO> product_more_category = service.Product_more_category(pcvo);
 		List<ProductOptionVO> product_more_option = service.Product_more_option(povo);
 		ProductCategoryVO catekor = new ProductCategoryVO();
@@ -85,6 +118,7 @@ public class ProductController {
 		
 		return "user/product/goods/goods";
 	}
+ 	
  	
 	@PostMapping("/zziminsert.do")
 	public String zzim_insert(Model model, HttpServletRequest request, SaveBoxVO savo) {

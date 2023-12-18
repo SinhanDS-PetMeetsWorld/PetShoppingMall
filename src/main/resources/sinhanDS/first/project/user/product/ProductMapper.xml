@@ -26,11 +26,18 @@
 		ORDER BY no DESC
 	</select>
 	
-	<select id ="Review_list" parameterType = "sinhanDS.first.project.product.vo.ReviewVO" resultType= "sinhanDS.first.project.product.vo.ReviewVO">
+	<select id ="Review_list" parameterType = "sinhanDS.first.project.product.vo.ProductSearchVO" resultType= "sinhanDS.first.project.product.vo.ReviewVO">
 		SELECT * 
 		FROM review
-		where product_no = ${no}
-		ORDER BY no DESC 
+		where product_no = #{product_no}
+		ORDER BY rating desc
+		LIMIT #{startIdx}, #{numberOfProductInPage}
+	</select>
+	
+	<select id="getNumberOfReviewPage" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM review
+		where product_no = ${product_no}
 	</select>
 	
 	<select id="Seller_no" parameterType="sinhanDS.first.project.product.vo.ProductVO">
