@@ -14,6 +14,7 @@ import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.product.SellerProductMapper;
+import sinhanDS.first.project.seller.vo.SellerVO;
 
 @Service
 @Slf4j
@@ -93,6 +94,7 @@ public class OrderServiceImpl implements OrderService {
 		OrderDetailVO vo = new OrderDetailVO();
 		vo.setOrder_no(mvo.getNo());
 		vo.setUser_no(mvo.getUser_no());
+		vo.setSeller_no(pvo.getSeller_no());
 		vo.setProduct_no(pvo.getNo());
 		vo.setProduct_name(pvo.getName());
 		vo.setProduct_price(pvo.getPrice());
@@ -128,10 +130,31 @@ public class OrderServiceImpl implements OrderService {
 		List<List<OrderDetailOptionVO>> result_list = new ArrayList<>();
 		for(int i = 0; i < list.size(); i++) {
 			log.debug("dvo: " + list.get(i));
+			log.debug("order_dno: " + list.get(i).getNo());
 			List<OrderDetailOptionVO> temp = mapper.getOrderDetailOptionList(list.get(i).getNo());
+			log.debug("temp: " + temp);
 			result_list.add(temp);
 		}
 		return result_list;
+	}
+	
+	public List<String> getImageList(List<OrderDetailVO> dvo_list){
+		List<String> list = new ArrayList<>();
+		
+		for(int i = 0; i < dvo_list.size(); i++) {
+			list.add(mapper.getImageUrl(dvo_list.get(i).getProduct_no()));
+		}
+		
+		return list;
+	}
+	public List<Integer> getReviewStatus(List<OrderDetailVO> dvo_list){
+		List<Integer> list = new ArrayList<>();
+		
+		for(int i = 0; i < dvo_list.size(); i++) {
+			list.add(mapper.getReviewStatus(dvo_list.get(i).getProduct_no()));
+		}
+		
+		return list;
 	}
 	
 	public int getNumberOfPage(ProductSearchVO svo) {
@@ -164,5 +187,22 @@ public class OrderServiceImpl implements OrderService {
 		String date = "sysdate";
 		vo.setPurchase_confirmation_date(createDate(date));
 		mapper.purchaseConfirm(vo);
+	}
+	public void cancle(OrderDetailVO vo) {
+		mapper.cancle(vo);
+	}
+	public void refound(OrderDetailVO vo) {
+		mapper.refound(vo);
+	}
+	
+	public String getReason(OrderDetailVO vo) {
+		return mapper.getReason(vo);
+	}
+	
+	
+	public SellerVO getSellerInfo(OrderDetailVO dvo) {
+		log.debug("dvo.getSeller_no(): " + dvo.getSeller_no());
+		log.debug("getSellerInfo체크: " + mapper.getSellerInfo(dvo.getSeller_no()));
+		return mapper.getSellerInfo(dvo.getSeller_no());
 	}
 }
