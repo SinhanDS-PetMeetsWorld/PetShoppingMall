@@ -68,8 +68,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	public List<ProductOptionVO> getOptionList(int[] option_no_list){
 		List<ProductOptionVO> list = new ArrayList<>();
-
-		if(option_no_list.length == 0) return list;
+		if(option_no_list == null || option_no_list.length == 0) return list;
 		
 		for(int i = 0; i < option_no_list.length; i++) {
 			list.add(mapper.getOption(option_no_list[i]));

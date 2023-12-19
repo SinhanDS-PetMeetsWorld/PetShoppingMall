@@ -45,17 +45,17 @@ public class OrderController {
 	private SellerProductService sellerProductService;
 	/* TODO: 리스트가 들어온 후에는 갯수가 얼마나 길어질지 모르니 POSTMAPPING으로 바꿔야한다*/
 	@PostMapping("pay.do")
-	public String pay(Model model, @RequestParam int[] cart_no_list, @RequestParam int[] quantity_list ,@RequestParam int delivery_price, @RequestParam int total_price, @RequestParam int[] cart_user_no, @RequestParam int[] option_no) {
+	public String pay(Model model, @RequestParam int[] cart_no, @RequestParam int[] quantity_list ,@RequestParam int delivery_price, @RequestParam int total_price, @RequestParam int[] cart_user_no, @RequestParam(required=false) int[] option_no, @RequestParam(required=false) int[]option_cart_no) {
 		/* 리스트 들어오기 전 임시 */
 		/* 리스트로 들어오면 얘들은 테스트로 넘겨주세용 ㅎㅎ */
 		
-		log.debug("cart_no2: " + cart_no_list);
+		log.debug("cart_no2: " + cart_no);
 		log.debug("delfee: " + delivery_price);
-		System.out.println("cart_no2: " + Arrays.toString(cart_no_list));
+		System.out.println("cart_no2: " + Arrays.toString(cart_no));
 		
 		CartVO cvo = new CartVO();
 		
-		cvo.setCart_no_list(cart_no_list);
+		cvo.setCart_no_list(cart_no);
 		log.debug("cvo: " + cvo);
 		//		cvo.setCart_no_list(new int[] {2, 3, 4});
 //		cvo.setQuantity_list(new int[] {1, 2, 3});
@@ -66,11 +66,8 @@ public class OrderController {
 		uvo.setNo(cart_user_no[0]);
 		
 		ProductOptionVO ovo = new ProductOptionVO();
-		log.debug("option_no: " + Arrays.toString(option_no));
 		ovo.setNo_list(option_no);
-		log.debug("ovo.getNo_list: " + Arrays.toString(ovo.getNo_list()));
-		
-		System.out.println("옵션 no;" + Arrays.toString(cart_no_list));
+		log.debug("option_no: " + Arrays.toString(option_no));
 		
 		OrderMainVO orderVO = new OrderMainVO();
 		orderVO.setTotal_price(total_price);
@@ -84,6 +81,8 @@ public class OrderController {
 		/*cart no는 결제가 끝나고 지울 것이기 때문에 cart_no만 넘어가도 된다.*/
 		model.addAttribute("cno_list", cvo.getCart_no_list());
 		
+		log.debug("cno_list: " + Arrays.toString(cvo.getCart_no_list()) );
+		
 		List<ProductVO> product_list = orderService.getProductListByCartNoList(cvo.getCart_no_list());
 		model.addAttribute("product_list", product_list);
 		log.debug("product_list: " + product_list);
@@ -91,7 +90,11 @@ public class OrderController {
 		
 		List<ProductOptionVO> option_list = orderService.getOptionList(ovo.getNo_list());
 		model.addAttribute("option_list", option_list);
+		log.debug("option_list: " + option_list);
 		
+		log.debug("cart_no: " + cart_no);
+		log.debug("option_cart_no: " + option_cart_no);
+		log.debug("option_no: " + option_no);
 		return "user/order/pay";
 	}
 	
@@ -123,7 +126,7 @@ public class OrderController {
 		log.debug("optionList체크: " + option_list);
 		orderService.registOrderDetailOption(option_list, detailList, cart_no, option_cart_no);
 		/*주문 상세 옵션 넣어주면됨 */
-		return "user/order/success";
+		return "redirect:/user/order/success.do";
 	}
 	
 	@GetMapping("list.do")

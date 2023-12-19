@@ -93,7 +93,7 @@
 		SELECT * 
 		FROM order_main  
 		<include refid="whereSql"/>
-		ORDER BY no
+		ORDER BY no desc
 		LIMIT #{startIdx}, #{numberOfProductInPage}
 	</select>
 	

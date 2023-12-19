@@ -52,12 +52,10 @@
 						                <br>
 						                
 						                <div id="product_info">
-						                	${status.index }
-						                	${cartvolist[status.index].no }
 							                <input type='checkbox' class="check_product" id='chekbox[${status.index }]' name='check_cart' >
 							               
 					        				<input type="hidden" class="cart_user_no" name="cart_user_no" value="${cartvolist[status.index].user_no }">
-							                <input type="hidden" class="cart_no_list" name="cart_no_list" value="${cartvolist[status.index].no }">
+							                <input type="hidden" class="cart_no" name="cart_no" value="${cartvolist[status.index].no }">
 							                
 							               
 							                <input type="hidden" class="seller_no" value="${vo.seller_no }">
@@ -291,7 +289,7 @@
     		$('.check_product').each(function(i,e) {		
                 if(!($('.check_product').eq(i).prop('checked'))){	
                 	$('.cart_user_no').eq(i).attr("disabled", true);
-                	$('.cart_no_list').eq(i).attr("disabled", true);
+                	$('.cart_no').eq(i).attr("disabled", true);
                 	$('.seller_no').eq(i).attr("disabled", true);
                 	$('.option_area').eq(i).children('.option_price').each(function(j,e){
                 		$('.option_area').eq(i).children('.option_cart_no').eq(j).attr("disabled", true);
@@ -312,7 +310,7 @@
     		
     		$('.check_product').each(function(i,e) {		
                	$('.cart_user_no').eq(i).attr("disabled", false);
-               	$('.cart_no_list').eq(i).attr("disabled", false);
+               	$('.cart_no').eq(i).attr("disabled", false);
                	$('.seller_no').eq(i).attr("disabled", false);
                	$('.option_area').eq(i).children('.option_price').each(function(j,e){
                		$('.option_area').eq(i).children('.option_cart_no').eq(j).attr("disabled", false);
