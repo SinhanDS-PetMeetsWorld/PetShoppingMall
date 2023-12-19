@@ -1,8 +1,10 @@
 package sinhanDS.first.project.delivery.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
+import sinhanDS.first.project.order.vo.OrderDetailVO;
 
 @Data
 public class DeliveryVO {
@@ -27,4 +29,6 @@ public class DeliveryVO {
 		//배송중 false
 		//배송 완료 true
 	private boolean status;
+	
+	private List<OrderDetailVO> order_detail_list;
 }

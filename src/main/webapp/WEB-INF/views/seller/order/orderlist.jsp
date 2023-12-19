@@ -28,12 +28,12 @@
 					
 					
 					<c:if test="${not empty orderMainList}">
-						<c:forEach var="orders" items="${orderMainList}" varStatus="status">
+						<c:forEach var="orders" items="${orderMainList}" varStatus="mainstatus">
 							<c:set var="deliverStatus" value="배송준비"/>
 							<c:set var="deliverNo" value=""/>
 							주문번호: ${orders.no }<br>
 							<c:if test="${not empty orderDetailList}">
-								<c:forEach var="orderdetails" items="${orderDetailList[status.index]}" varStatus="status">
+								<c:forEach var="orderdetails" items="${orderDetailList[mainstatus.index]}" varStatus="status">
 									<c:if test="${orderdetails.delivery_status == 1}"><c:set var="deliverStatus" value="배송시작"/></c:if>
 									<c:if test="${orderdetails.delivery_status == 2}"><c:set var="deliverStatus" value="배송완료"/></c:if>
 									<table border="1">
@@ -59,9 +59,10 @@
 								우편번호: ${orders.zipcode } 주소: ${orders.addr1 } 상세주소: ${orders.addr2 } <br><br>
 								주문일시: ${orders.order_date } 배송상태: ${deliverStatus}<br>
 								<c:if test='${deliverStatus == "배송준비"}'>
-									<form method="post" name="deliverForm"  id="deliverForm" onsubmit="return deliverno_check();" action="regist_deliver.do">
+									<form method="post" name="deliveryForm"  id="deliveryForm" action="regist_deliver.do">
 									<%-- 운송장 번호: <input type="number" name="delivery_no" id="delivery_no" value="" placeholder="운송장 등록"> --%>
-									<input type="submit" id="" value="배송시작">
+									<input type="submit" id="regist_del" value="배송시작">
+									
 									<input type="hidden" name="receiver_name" value="${orders.user_name}">
 									<input type="hidden" name="receiver_phone" value="${orders.user_phone}">
 									<input type="hidden" name="receiver_zipcode" value="${orders.zipcode}">
@@ -72,8 +73,11 @@
 									<input type="hidden" name="sender_zipcode" value="${svo.zipcode}">
 									<input type="hidden" name="sender_addr1" value="${svo.addr1}">
 									<input type="hidden" name="sender_addr2" value="${svo.addr2}">
+									<input type="hidden" name="order_no" value="${orders.no}">
+									<input type="hidden" name="seller_no" value="${svo.no}">
 									</form>	
 								</c:if> 
+								<h1>${orders.no} ${svo.no}</h1>
 								<c:if test='${deliverNo != null && deliverNo != ""}'>
 									운송장 번호: ${deliverNo}
 									<c:if test='${deliverStatus == "배송시작"}'>도착예정일:</c:if>
@@ -94,18 +98,6 @@
 			<div class="footer-color"></div>
         </div>
     </div>
-    
-    <script>
-    	function deliverno_check(){
-    		var delivery_no = document.getElementById("delivery_no");
-    		
-    		if(delivery_no.value<0 || delivery_no.value=="" || delivery_no.value==null){
-    			alert("운송장 번호를 제대로 기입해주세요");
-    			return false;
-    		}
-    		return true;
-    	}
-    </script>
-    
+
 </body>
 </html>
