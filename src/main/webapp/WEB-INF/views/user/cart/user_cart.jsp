@@ -31,24 +31,31 @@
         	<div class="quickmenu">
                 <%@ include file="/WEB-INF/views/common/quickmenu_user_info.jsp"%>
             </div>
+            
+            <form name="cart_list" action="/user/order/pay.do" method="get">
 			<div class="contentsright">
 				<div id="cart_content" width='50%'>
 					<h1>장바구니</h1>
-					<form name="cart_list" action="#" method="get">
+					
 					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
-					        
 					        <!--카트에 상품이 존재하는만큼 td를 생성-->
 						    <c:forEach var="vo" items="${productvolist }" varStatus="status">
 						    	
-						    	${catrvolist[status.index].no }
+						    	
 						        <tr width="800">
 						            <td>
 						                <br>
 						                
 						                <div id="product_info">
 						                	${status.index }
-							                <input type='checkbox' class="check_product" id='chekbox[${status.index }]' name='check_cart' checked>
-							                <input type="hidden" value="${cartoptionvolist[status.index][tt.index].cart_no}" checked>
+						                	${cartvolist[status.index].no }
+							                <input type='checkbox' class="check_product" id='chekbox[${status.index }]' name='check_cart' >
+							               
+					        				<input type="hidden" name="cart_user_no" value="${cartvolist[status.index].user_no }" >
+							                <input type="hidden" name="cart_no_list" value="${cartvolist[status.index].no }" >
+							                
+							               
+							                <input type="hidden" class="seller_no" value="${vo.seller_no }" >
 							                <div>
 								                <c:if test="${empty vo.image_url }">
 													<img src="/resources/img/product/no_image.jpg" width="100" height="100">
@@ -62,22 +69,22 @@
 								                <div>${vo.name } </div>
 								                <!-- 옵션이 존재한다면 보여주고 아니면 안보임 -->
 								                <c:forEach var="vo2" items="${optionlist[status.index] }" varStatus="tt">
-								                	<input type="hidden" class="checkbox" value="${cartoptionvolist[status.index][tt.index].cart_no}" checked>
-								                	<input type="hidden" class="checkbox" value="${cartoptionvolist[status.index][tt.index].option_no}" checked>
+								                	<input type="hidden" class="option_cart_no" value="${cartoptionvolist[status.index][tt.index].cart_no}" >
+								                	<input type="hidden" class="option_no" name="option_no" value="${cartoptionvolist[status.index][tt.index].option_no}" >
 								                	<input type="hidden" class="option_price" name="option_price[${status.index }]" value="${vo2.price }">
 									                <span>${vo2.title}</span>
 									                <span>${vo2.content}</span>
 									                <br>
 								                </c:forEach> 
-								                <div>${vo.price } <input type="hidden" class="checkbox" name="price_list" value="${vo.price }" checked></div>
-								                <div><input type="hidden" class="checkbox" name="discount_list" value="${vo.discount }" checked></div>
+								                <div>${vo.price } <input type="hidden" class="price_list" name="price_list" value="${vo.price }" ></div>
+								                <div><input type="hidden" class="discount_list" name="discount_list" value="${vo.discount }" ></div>
 											</div>
 										</div>
 						                <br>
 						            </td>
 						            <td>
 						                <button type="button" name="cart_delete" onclick="#" >장바구니에서 삭제</button>
-						                <input type="number" name="quantity_list" id="quantity_list[${status.index }]" value=1>
+						                <input type="number" class="quantity_list" name="quantity_list" id="quantity_list[${status.index }]" value=1>
 						                
 						               
 						                
@@ -91,35 +98,42 @@
 						       	</tr>
 						        
 						    </c:forEach>
+						    
 					        
 					    </table>
-					    </form>
+					    
+					    
      				</div>
      				<div>
+     					
      					<div>결제 금액</div>
      					<div>
-	     					<span>총 주문 가격</span>
-	     					<span>[총금액계산식] 각 상품에서 수량 곱하기 가격 더하기 </span>
+	     					<span>총 주문 가격 : </span>
+	     					<span id="totalprice">0</span>
+	     					<input type="hidden" id="total_price" name="total_price" value="" >
      					</div>
 						<div>
-							<span>할인 금액</span>
-							<span>[총 할인 금액] 각 상품에서 디스카운터 다 더하기</span>
+							<span>할인 금액 : </span>
+							<span id="discountprice">0</span>
+							<input type="hidden" id="discount_price" name="discount_price" value="" >
 						</div>     					
-							<span>총 배송비</span>
-							<span>[총 배송비] 각 상품에 배송비 다 더하기</span>
-						<div> 
+							<span>총 배송비 : </span>
+							<span id="deliveryprice">0</span>
+							<input type="hidden" id="delivery_price" name="delivery_price" value="" >
 						<div>
-							<div>최종 결제액</div>
-							<div>[총 결제액] span 태그에 아이디를 줘서 총금액에서 -할인 + 배송비</div>
+							<span>최종 결제액 : </span>
+							<span id="finalprice">0</span>
+							<input type="hidden" id="final_price" name="final_price" value="" >
 						</div>
-
-     					
-     					
+						
+						<input type="submit" value="결제하러 가기">
      				</div>
      			</div>
+     			
+     			</form>
+     			
 			</div>
 
-        </div>
         
         
         <div class="footer">
@@ -134,63 +148,114 @@
     		console.log(this.parentNode);
     		console.log(this.parentNode.querySelector('input'));
     		*/
-    		window.onload = function(){
     		
-    			
-    			console.log(document.getElementsByName('option_price[0]')[1].value);
-    			console.log(document.getElementsByName('option_price[0]')[1]);
-    			console.log(document.getElementsByName('option_price[0]').length);
-    			console.log(document.getElementsByName('option_price[0]'));
-    			var sum = 0;
-    			
-    			
-    			
-    			
-    				
-       		}
+    		/*
     		
+    		//판매자 no를 받아올 배열 선언
+    		var sellers = new Array();
+    		//각 상품의 판매자가 누구인지 받아오는 부분, 중복을 제거해야 배송비 계산시 쓸 수 있다.
+    		for(var i=0; i < $('.seller_no').length; i++){	// 판매자 no를 받아올 배열 초기화
+				sellers[i] = $('.seller_no')[i].value;
+    		}	
     		
-    		// 체크박스 JS
-    		$('.check_product').on('click', function(){
-                if($(this).prop('checked')){
-/*
-					console.log(this.parentNode.querySelector('div').querySelectorAll('input'));
-                    var aa = this.parentNode.querySelector('div').getElementsByClassName('checkbox');	//getElementsByClassName은 HTMLCollection으로 리턴됨
-                    console.log(aa);
-*/
-					// 체크 시 넘겨줄 값들에 checked 설정하는 부분
-	                var bb = this.parentNode.querySelector('div').querySelectorAll(".checkbox");
-                	console.log(bb);
+    		// 각 상품의 판매자 no가 담겨있는 배열에서 중복 제거하는 코드 new Set
+    		const sellers_no = Array.from(new Set(sellers));
+    		console.log(sellers_no);
+    		
+    		*/
+    		
+    		// 가격 계산 부분
+    		$('.check_product').on('click', function(){		// 체크박스 클릭시 이벤트 추가
+    			var sellers = new Array();
+    			var totalPrice = 0;
+    			var discountPrice = 0;
+    			var deliveryPrice = 0;
+    			var finalPrice = 0;
+    			var totalOptionPrice = 0;
+    			$('.check_product').each(function(i,e) {		// 클래스가 check_product인 태그들을 배열로 가져오고, each로 반복문 / e는 각 체크박스 요소들임.(즉, 각 상품)
+	                if($('.check_product').eq(i).prop('checked')){	// check_product로 가져온 태그 중 i번째인 태그의 checked 속성을 검사
+	                	$('.option_price').each(function(j,e){
+	             			totalOptionPrice += Number($(".option_price").eq(j).val()) 	
+	                	})
+	             
+	                	totalPrice += (Number($(".price_list").eq(i).val()) + totalOptionPrice/*Number($(".option_price").eq(i).val())*/ - Number($(".discount_list").eq(i).val()) ) * Number($(".quantity_list").eq(i).val())
+	                	discountPrice += Number($(".discount_list").eq(i).val()) * Number($(".quantity_list").eq(i).val())
+	                	
+	                	
+	                	// 판매자 no를 받아와 배열에 저장, 이후 중복제거 할 것임
+	                	sellers.push($(".seller_no").eq(i).val())
+	                }
+	                
+    			});
+    			// 중복제거한 판매자 no 리스트 sellers_no, 이 배열의 길이를 사용해 배송비를 계산한다.
+    			const sellers_no = Array.from(new Set(sellers));
+    			deliveryPrice = sellers_no.length * 2500;
+    			finalPrice = totalPrice + deliveryPrice;
+    			
+    			
+    			console.log('총주문가격:'+totalPrice);
+    			console.log('할인금액:'+discountPrice);
+    			console.log('배송비:'+deliveryPrice);
+    			console.log('최종결제액(배송비포함):'+finalPrice);
+    			
+    			
+    			document.getElementById('totalprice').innerHTML=totalPrice;
+    			document.getElementById('discountprice').innerHTML=discountPrice;
+    			document.getElementById('deliveryprice').innerHTML=deliveryPrice;
+    			document.getElementById('finalprice').innerHTML=finalPrice;
 
-                    bb.forEach(function(bbs){
-                    	bbs.setAttribute("checked", "true");		// 체크했을 때 그 체크박스에 연관된 input 태그들에 checked=true 속성 추가
-                    	console.log(bbs);
-                   	});
-                    
-                    // 체크 된 상품의 가격 가져오자
-                    
-                    
-                    
-                    
-                }
-                else{
-               		 	
-                	// 체크해제 시 값들에 checked=false 설정하는 부분
-                	 var bb = this.parentNode.querySelector('div').querySelectorAll(".checkbox");
-
-                     bb.forEach(function(bbs){
-                     	bbs.setAttribute("checked", "false");		// 체크했을 때 그 체크박스에 연관된 input 태그들에 checked=true 속성 추가
-                     	console.log(bbs);
-                	 });
-                }
-                
-                
+    			$('#total_price').val(totalPrice);
+    			$('#discount_price').val(discountPrice);
+    			$('#delivery_price').val(deliveryPrice);
+    			$('#final_price').val(finalPrice);
+    		});	
+   			
+    		$('.quantity_list').on('keyup', function(){	// 무조건 처음부터 다 다시 검사해야 하므로 totalPrice를 0으로 초기화해도 괜찮음
+    			var sellers = new Array();
+    			var totalPrice = 0;
+    			var discountPrice = 0;
+    			var deliveryPrice = 0;
+    			var finalPrice = 0;
+    			var totalOptionPrice = 0;
+    			$('.check_product').each(function(i,e) {		// 클래스가 check_product인 태그들을 배열로 가져오고, each로 반복문 / e는 각 체크박스 요소들임.(즉, 각 상품)
+	                if($('.check_product').eq(i).prop('checked')){	// check_product로 가져온 태그 중 i번째인 태그의 checked 속성을 검사
+	                	$('.option_price').each(function(j,e){
+	             			totalOptionPrice += Number($(".option_price").eq(j).val()) 	
+	                	})
+	             
+	                	totalPrice += (Number($(".price_list").eq(i).val()) + totalOptionPrice - Number($(".discount_list").eq(i).val()) ) * Number($(".quantity_list").eq(i).val())
+	                	discountPrice += Number($(".discount_list").eq(i).val()) * Number($(".quantity_list").eq(i).val())
+	                	
+	                	// 판매자 no를 받아와 배열에 저장, 이후 중복제거 할 것임
+	                	sellers.push($(".seller_no").eq(i).val())
+	                }
+	                
+    			});
+    			// 중복제거한 판매자 no 리스트 sellers_no, 이 배열의 길이를 사용해 배송비를 계산한다.
+    			const sellers_no = Array.from(new Set(sellers));
+    			deliveryPrice = sellers_no.length * 2500;
+    			finalPrice = totalPrice + deliveryPrice;
+    			
+    			
+    			console.log('총주문가격:'+totalPrice);
+    			console.log('할인금액:'+discountPrice);
+    			console.log('배송비:'+deliveryPrice);
+    			console.log('최종결제액(배송비포함):'+finalPrice);
+    			
+    			
+    			document.getElementById('totalprice').innerHTML=totalPrice;
+    			document.getElementById('discountprice').innerHTML=discountPrice;
+    			document.getElementById('deliveryprice').innerHTML=deliveryPrice;
+    			document.getElementById('finalprice').innerHTML=finalPrice;
+    			
+    			$('#total_price').val(totalPrice);
+    			$('#discount_price').val(discountPrice);
+    			$('#delivery_price').val(deliveryPrice);
+    			$('#final_price').val(finalPrice);
             });	
     		
-    		console.log(document.querySelectorAll('input[name="price_list"]')[0].value);
-    		console.log(document.querySelectorAll('input[name="price_list"]')[0].checked);
     		
-    		
+   
     		
     </script>
 </body>

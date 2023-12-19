@@ -1,6 +1,6 @@
 package sinhanDS.first.project.user.order;
 
-import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +29,7 @@ import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.seller.product.SellerProductService;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.UserService;
+import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.UserVO;
 
@@ -45,22 +46,30 @@ public class OrderController {
 	private SellerProductService sellerProductService;
 	/* TODO: 리스트가 들어온 후에는 갯수가 얼마나 길어질지 모르니 POSTMAPPING으로 바꿔야한다*/
 	@GetMapping("pay.do")
-	public String pay(Model model) {
+	public String pay(Model model, @RequestParam int[] cart_no_list, @RequestParam int[] quantity_list ,@RequestParam int delivery_price, @RequestParam int total_price, @RequestParam int[] cart_user_no, @RequestParam int[] option_no) {
 		/* 리스트 들어오기 전 임시 */
 		/* 리스트로 들어오면 얘들은 테스트로 넘겨주세용 ㅎㅎ */
+		
+		log.debug("cart_no2: " + cart_no_list);
+		log.debug("delfee: " + delivery_price);
+		System.out.println("cart_no2: " + Arrays.toString(cart_no_list));
+		
 		CartVO cvo = new CartVO();
-		cvo.setCart_no_list(new int[] {2, 3, 4});
-		cvo.setQuantity_list(new int[] {1, 2, 3});
+		
+		cvo.setCart_no_list(cart_no_list);
+		//		cvo.setCart_no_list(new int[] {2, 3, 4});
+//		cvo.setQuantity_list(new int[] {1, 2, 3});
+		cvo.setQuantity_list(quantity_list);
 		
 		UserVO uvo = new UserVO();
-		uvo.setNo(22);
+		uvo.setNo(cart_user_no[0]);
 		
 		ProductOptionVO ovo = new ProductOptionVO();
-		ovo.setNo_list(new int[] {116, 119, 121, 122});
+		ovo.setNo_list(option_no);
 		
 		OrderMainVO orderVO = new OrderMainVO();
-		orderVO.setTotal_price(90580);
-		orderVO.setTotal_delivery_fee(2500);
+		orderVO.setTotal_price(total_price);
+		orderVO.setTotal_delivery_fee(delivery_price);
 		/* 리스트 들어오기 전 임시 끝*/
 		
 		model.addAttribute("userno", uvo.getNo());
