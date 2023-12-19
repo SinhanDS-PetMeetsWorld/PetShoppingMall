@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head> 
@@ -26,11 +26,15 @@
 			<div class="contentsright">
 				<div>
 					
+					
 					<c:if test="${not empty orderMainList}">
 						<c:forEach var="orders" items="${orderMainList}" varStatus="status">
+							<c:set var="deliverStatus" value="배송준비"/>
 							주문번호: ${orders.no }<br>
 							<c:if test="${not empty orderDetailList}">
 								<c:forEach var="orderdetails" items="${orderDetailList[status.index]}" varStatus="status">
+									<c:if test="${orderdetails.delivery_status  == 1}"><c:set var="deliverStatus" value="배송시작"/></c:if>
+									<c:if test="${orderdetails.delivery_status == 2}"><c:set var="deliverStatus" value="배송완료"/></c:if>
 									<table border="1">
 										<thead><tr> <th>제품명</th><th>옵션</th><th>판매가</th><th>수량</th> </tr></thead>
 										<tr <c:if test="${orderdetails.cancle_status != 0}">style="color:red"</c:if>>
@@ -51,8 +55,8 @@
 								수취인정보<br>
 								이름: ${orders.user_name } 연락처: ${orders.user_phone } <br>
 								우편번호: ${orders.zipcode } 주소: ${orders.addr1 } ${orders.addr2 } <br><br>
-								주문일시: ${orders.order_date } 배송상태:(주문상세마다 있는데 어떡하죠)<br>
-								운송장 번호:판매자입력 도착예정일:배송 시작한 뒤에만<br><br><hr><br>
+								주문일시: ${orders.order_date } 배송상태: ${deliverStatus}<br>
+								운송장 번호: 판매자입력 도착예정일: 배송 시작한 뒤에만<br><br><hr><br>
 							</c:if>
 						</c:forEach>
 					</c:if>
