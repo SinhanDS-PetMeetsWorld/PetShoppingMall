@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/resources/css/common/template.css">
 <style>
-
         .board_area {
             max-width: 600px;
             margin: 0 auto;
@@ -61,15 +60,15 @@
 						<c:forEach var="item" items="${product_more}">
 							
 								<div class="goods-photo">
-										<c:if test="${empty item.image_url }">
-											<img src="/resources/img/product/no_image.jpg" width="100" height="100">
-										</c:if>
-										<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
-											<img src="${item.image_url }">
-										</c:if>
-										<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
-											<img src="/resources/img/product/registed_img/${item.image_url }">
-										</c:if>
+									<c:if test="${empty item.image_url }">
+										<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+									</c:if>
+									<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
+										<img src="${item.image_url }">
+									</c:if>
+									<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
+										<img src="/resources/img/product/registed_img/${item.image_url }">
+									</c:if>
 								</div>
 								<div class="goods-details">
 									
@@ -101,17 +100,19 @@
 											style="width: 720px; height: 100px; border: 1px solid black;">
 											설명: ${item.description} <br>
 										
-									</div>	
-								</div>		
+										</div>	
+									</div>		
+								</div>
 						</c:forEach>									
 						<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
 							<form name="option_form" id="option_form">
 							<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
 								<c:if test="${(status.index == 0) || (product_more_option[status.index - 1].title != ovo.title)}">
-									${ovo.title } <select name="option_no" id="option_no">
-								</c:if>
-										<option value="${ovo.no}"> ${ovo.content } :  ${ovo.price }원</option>
-								<c:if test="${(product_more_option[status.index + 1].title != ovo.title)}">
+									${ovo.title } 
+									<select name="option_no" id="option_no">
+										</c:if>
+												<option value="${ovo.no}"> ${ovo.content } :  ${ovo.price }원</option>
+										<c:if test="${(product_more_option[status.index + 1].title != ovo.title)}">
 									</select><br>
 								</c:if>
 							</c:forEach>
@@ -141,7 +142,9 @@
 								<div class="board_contents active" id ='review'>
 							   		 <c:forEach var="item" items="${review_list}">
 							       		 <div class="review">
-							             <img src=" ${item.image_url}">
+							       		 <c:if test="${!empty item.image_url }">
+								             <img src="/resources/img/product/review_img/${item.image_url}" width="100" height="100">
+							       		 </c:if>
 							             <p>평점 : ${item.rating} </p>
 							             <p>내용 : ${item.content} </p>
 							             <p>작성일 : ${item.write_date} </p>
@@ -156,7 +159,6 @@
 								</div>
 						 
 						   		 <c:forEach var="item" items="${qna_list}">
-						       		 
 						       		 <div class="Q" onclick="toggleAnswer(this)" >
 						             	<p> ${item.question_content} (질문 작성일 : ${item.question_write_date}) </p>
 						        	 </div>
@@ -164,7 +166,6 @@
 						        	 <div class="A" style="display:none;">
 						             	<p style="color : red;"> ${item.answer_content} (답변 작성일 : ${item.answer_write_date})</p>
 						        	 </div>
-						    	
 						    	</c:forEach>
 							</div>
 					</div>
@@ -186,23 +187,8 @@
 <script>
 
 function goQnawrite_popup(){
-
-/*	userNo
-	if (userNo ==''){
-		
-		
-	}
-*/
-	/*var user = userLoginInfo.id;*/
 	var product_no = ${product_no};
 	var qnaWrite = 'qnawrite.do?no='+ product_no;
-	
-	/*
-	if (user ==''){
-		alert('로그인 후 이용 가능합니다.');
-		return 'user/login.do';
-	}
-	*/
 	window.open(qnaWrite , 'Q&A등록', 'width=500, height=600');
 }
 

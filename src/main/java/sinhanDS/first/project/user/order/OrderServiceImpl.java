@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
@@ -13,8 +15,11 @@ import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.seller.product.SellerProductMapper;
 import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.util.file.FileController;
+import sinhanDS.first.project.util.file.FileNameVO;
 
 @Service
 @Slf4j
@@ -23,6 +28,23 @@ public class OrderServiceImpl implements OrderService {
 	OrderMapper mapper;
 	@Autowired
 	SellerProductMapper sellerProductMapper;
+	@Autowired
+	private FileController fileController;
+	@Value("${realPath.review_img_path}")
+	private String review_img_path;
+	
+	
+	public ReviewVO upload_file(MultipartFile filename, ReviewVO vo) {
+		FileNameVO fvo = fileController.upload(filename, review_img_path);
+
+		try {
+			vo.setImage_url(fvo.getSaved_filename());
+		}catch(NullPointerException e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
 	
 	public List<ProductVO> getProductListByProductNoList(int[] product_list){
 		List<ProductVO> list = new ArrayList<>();
@@ -119,6 +141,10 @@ public class OrderServiceImpl implements OrderService {
 		return vo;
 	}
 	
+	public void registReview(ReviewVO vo) {
+		mapper.registReview(vo);
+	}
+	
 	public List<OrderMainVO> getOrderListNotDeleted(ProductSearchVO svo){
 		return	mapper.getOrderListNotDeleted(svo);
 	}
@@ -137,7 +163,9 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return result_list;
 	}
-	
+	public OrderDetailVO getFullOrderDetailVO(OrderDetailVO dvo) {
+		return mapper.getOrderDetailVO(dvo.getNo());
+	}
 	public List<String> getImageList(List<OrderDetailVO> dvo_list){
 		List<String> list = new ArrayList<>();
 		
@@ -151,7 +179,7 @@ public class OrderServiceImpl implements OrderService {
 		List<Integer> list = new ArrayList<>();
 		
 		for(int i = 0; i < dvo_list.size(); i++) {
-			list.add(mapper.getReviewStatus(dvo_list.get(i).getProduct_no()));
+			list.add(mapper.getReviewStatus(dvo_list.get(i).getNo()));
 		}
 		
 		return list;
@@ -204,5 +232,18 @@ public class OrderServiceImpl implements OrderService {
 		log.debug("dvo.getSeller_no(): " + dvo.getSeller_no());
 		log.debug("getSellerInfo체크: " + mapper.getSellerInfo(dvo.getSeller_no()));
 		return mapper.getSellerInfo(dvo.getSeller_no());
+	}
+	
+	public ReviewVO getReview(int order_dno) {
+		return mapper.getReview(order_dno);
+	}
+	
+	public void updateProductRating(ReviewVO rvo) {
+		ProductVO pvo = sellerProductMapper.getProduct(rvo.getProduct_no());
+		float total = pvo.getRating() * pvo.getReview_cnt();
+		total += rvo.getRating();
+		pvo.setReview_cnt(pvo.getReview_cnt() + 1);
+		pvo.setRating((total/pvo.getReview_cnt()));
+		mapper.updateProductRating(pvo);
 	}
 }

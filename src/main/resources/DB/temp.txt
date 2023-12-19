@@ -1,0 +1,9 @@
+INSERT INTO PetShoppingMall.review
+(
+user_no, product_no, order_no, order_dno,
+rating, content, image_url, write_date)
+VALUES
+(
+#{user_no}, #{product_no}, #{order_no}, #{order_dno},
+#{rating}, #{content}, #{image_url}, sysdate()
+);
