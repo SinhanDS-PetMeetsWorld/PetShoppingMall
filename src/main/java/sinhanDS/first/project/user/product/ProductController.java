@@ -176,7 +176,7 @@ public class ProductController {
 	
 	@GetMapping("/list.do")
 	public String searchByCategory(HttpServletRequest request, Model model, ProductSearchVO svo) {
-		if(svo.getNumberOfProductInPage() == 5) svo.setNumberOfProductInPage(15);
+//		if(svo.getNumberOfProductInPage() == 5) svo.setNumberOfProductInPage(15);
 		log.debug("svo: " + svo);
 		int count = service.getNumberOfProduct(svo);
 		log.debug("count: " + count);

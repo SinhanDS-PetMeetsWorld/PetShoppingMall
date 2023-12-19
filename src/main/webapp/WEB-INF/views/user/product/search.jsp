@@ -152,7 +152,7 @@
 				<div>
 					<ul class='paging'>
                         <c:if test="${paging.prev }">
-                        	<li><a href="list.do?page=${paging.startPage-1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> << </a></li>
+                        	<li><a href="list.do?category1=${category1}&category2=${category2 }&page=${paging.startPage-1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> << </a></li>
                         </c:if>
                         <c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
                         	<c:if test="${p == productSearchVO.page}">
@@ -163,7 +163,7 @@
                             </c:if>
                         </c:forEach>
                         <c:if test="${paging.next }">
-                        	<li><a href="list.do?page=${paging.endPage+1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> >> </a></li>
+                        	<li><a href="list.do?category1=${category1}&category2=${category2 }&page=${paging.endPage+1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> >> </a></li>
                         </c:if>
 					</ul> 
 				</div>

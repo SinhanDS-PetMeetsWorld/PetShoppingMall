@@ -83,7 +83,6 @@
 			ON product.no = product_category.product_no
 		<include refid="whereSql"/>
 		<include refid="orderSql"/>
-		
 	</select>
 	
 	<select id="product_list" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
@@ -92,6 +91,7 @@
 			ON product.no = product_category.product_no
 		<include refid="whereSql"/>
 		<include refid="orderSql"/>
+		<include refid="limitSql"/>
 	</select>
 	
 	<select id="total_product_search" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
