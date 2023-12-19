@@ -29,7 +29,6 @@ import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.seller.product.SellerProductService;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.UserService;
-import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.UserVO;
 
@@ -45,7 +44,7 @@ public class OrderController {
 	@Autowired
 	private SellerProductService sellerProductService;
 	/* TODO: 리스트가 들어온 후에는 갯수가 얼마나 길어질지 모르니 POSTMAPPING으로 바꿔야한다*/
-	@GetMapping("pay.do")
+	@PostMapping("pay.do")
 	public String pay(Model model, @RequestParam int[] cart_no_list, @RequestParam int[] quantity_list ,@RequestParam int delivery_price, @RequestParam int total_price, @RequestParam int[] cart_user_no, @RequestParam int[] option_no) {
 		/* 리스트 들어오기 전 임시 */
 		/* 리스트로 들어오면 얘들은 테스트로 넘겨주세용 ㅎㅎ */
@@ -57,15 +56,21 @@ public class OrderController {
 		CartVO cvo = new CartVO();
 		
 		cvo.setCart_no_list(cart_no_list);
+		log.debug("cvo: " + cvo);
 		//		cvo.setCart_no_list(new int[] {2, 3, 4});
 //		cvo.setQuantity_list(new int[] {1, 2, 3});
 		cvo.setQuantity_list(quantity_list);
+		log.debug("quantity: " + Arrays.toString(quantity_list) );
 		
 		UserVO uvo = new UserVO();
 		uvo.setNo(cart_user_no[0]);
 		
 		ProductOptionVO ovo = new ProductOptionVO();
+		log.debug("option_no: " + Arrays.toString(option_no));
 		ovo.setNo_list(option_no);
+		log.debug("ovo.getNo_list: " + Arrays.toString(ovo.getNo_list()));
+		
+		System.out.println("옵션 no;" + Arrays.toString(cart_no_list));
 		
 		OrderMainVO orderVO = new OrderMainVO();
 		orderVO.setTotal_price(total_price);
@@ -92,6 +97,7 @@ public class OrderController {
 	
 	@PostMapping("buy.do")
 	public String pay_process(Model model, 
+			@RequestParam int user_no,
 			@RequestParam int[] product_no, 
 			@RequestParam int[] cart_no,
 			@RequestParam(required=false) int[] option_no,
@@ -99,8 +105,10 @@ public class OrderController {
 			@RequestParam int[] quantity, OrderMainVO mvo) {
 		/*TODO: 나중에 인터셉터 달면 uvo를 인터셉터에서 가져온 걸로 바꿔주기 */
 		UserVO uvo = new UserVO();
-		uvo.setNo(22);
+		uvo.setNo(user_no);
 		mvo.setUser_no(uvo.getNo());
+		mvo.setUser_name(userService.detail(uvo).getName());
+		mvo.setUser_phone(userService.detail(uvo).getPhone());
 		
 		List<ProductVO> productList = orderService.getProductListByProductNoList(product_no);
 		log.debug("productList: " + productList);
