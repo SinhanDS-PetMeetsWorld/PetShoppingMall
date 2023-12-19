@@ -397,57 +397,104 @@ public class UserController {
 		return "user/zzim/zzim_box";
 	}
 	
-	// (신정훈) 리뷰 리스트 구현 12 - 19
-		@GetMapping("/list_user_review.do")
-		public String list_review(Model model , HttpSession sess , UserVO uvo , ReviewVO revo , ProductOptionVO povo , OrderDetailVO odvo , OrderDetailOptionVO odovo){
+	// (신정훈) 작성 가능 리뷰 리스트 구현 12 - 19
+	@GetMapping("/list_user_review.do")
+	public String possible_write_review(Model model , HttpSession sess , UserVO uvo , ReviewVO revo , ProductOptionVO povo , OrderDetailVO odvo , OrderDetailOptionVO odovo){
+			
+		UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
+		int user_no = login.getNo();
+		 
+		List<ReviewVO> review_list = service.review_list(user_no);
+		System.out.println("리뷰 리스트 " +  review_list);	
+		
+	    List<OrderDetailVO> order_detail = service.order_detail(odvo);
+	    System.out.println("오더 디테일" + order_detail);
+
+		List<List<String>> review_list2 = new ArrayList<List<String>>();	
+		
+		if (review_list.size() != 0) {
+			
+			// 테이블 매핑
+			for (int i = 0; i < review_list.size(); i++ ) {
+			List<String> review_list1 = new ArrayList<String>();
+			
+			
+				review_list1.add(String.valueOf(review_list.get(i).getImage_url())); // 이미지 0
+			
+			
+				// 상품 이름 매핑
+				for (int k = 0; k < order_detail.size(); k++) {
+					if ( review_list.get(i).getProduct_no() == order_detail.get(k).getProduct_no() &&
+						 review_list.get(i).getOrder_no() == order_detail.get(k).getOrder_no()){
+						review_list1.add(String.valueOf(order_detail.get(k).getProduct_name())); // 상품 명 1
+						review_list1.add(String.valueOf(order_detail.get(k).getProduct_price())); // 상품 가격 2 
+					}
+				}
+				
+				
+				review_list1.add(String.valueOf(review_list.get(i).getContent())); // 내용 3 
+				review_list1.add(String.valueOf(review_list.get(i).getProduct_no())); // 제품 번호 4					
+				review_list1.add(String.valueOf(review_list.get(i).getWrite_date())); // 작성일 5
+				review_list1.add(String.valueOf(review_list.get(i).getRating())); // 평점 6
+				
+				review_list2.add(review_list1);
+				}
+				
+				System.out.println("오늘 폼 미쳤다 2" + review_list2);
+		
+		}
+		model.addAttribute("review_list2" , review_list2);	
+		return "user/review/review_list";
+}
+
+		// (신정훈) 리뷰 리스트 구현 12 - 19
+	@GetMapping("/possible_write_review.do")
+	public String list_review(Model model , HttpSession sess , UserVO uvo , ReviewVO revo , ProductOptionVO povo , OrderDetailVO odvo , OrderDetailOptionVO odovo){
 			
 			UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
 			int user_no = login.getNo();
-			 
-			List<ReviewVO> review_list = service.review_list(user_no);
+			
+			List<OrderDetailVO> possible_write_review = service.possible_write_review(user_no);
+		    System.out.println("오더 디테일" + possible_write_review); 
+			
+		    List<ReviewVO> review_list = service.review_list(user_no);
 			System.out.println("리뷰 리스트 " +  review_list);	
 			
-		    List<OrderDetailVO> order_detail = service.order_detail(odvo);
-		    System.out.println("오더 디테일" + order_detail);
-		    
-			List<OrderDetailOptionVO> order_detail_option = service.order_detail_option(odovo);
-			System.out.println("옵션 리스트" + order_detail_option);
+			List<ProductVO> product_list = service.product_list(user_no);
 			
-			List<List<String>> review_list2 = new ArrayList<List<String>>();	
 			
-			if (review_list.size() != 0) {
+			
+			List<List<String>> possible_write_review2 = new ArrayList<List<String>>();	
+			
+			
+			if (possible_write_review.size() != 0) {
 				
-				// 테이블 매핑
-				for (int i = 0; i < review_list.size(); i++ ) {
-				List<String> review_list1 = new ArrayList<String>();
-				
-				
-					review_list1.add(String.valueOf(review_list.get(i).getImage_url())); // 이미지 0
-				
-				
-				
-					// 상품 이름 매핑
-					for (int k = 0; k < order_detail.size(); k++) {
-						if ( review_list.get(i).getProduct_no() == order_detail.get(k).getProduct_no() &&
-							 review_list.get(i).getOrder_no() == order_detail.get(k).getOrder_no()){
-							review_list1.add(String.valueOf(order_detail.get(k).getProduct_name())); // 상품 명 1
-							review_list1.add(String.valueOf(order_detail.get(k).getProduct_price())); // 상품 가격 2 
+				// 테이블 매핑 : 정수 형으로 나온다 
+				for (int i = 0; i < possible_write_review.size(); i++ ) {
+				List<String> possible_write_review1 = new ArrayList<String>();
+					
+					for(int k = 0; k < product_list.size(); k++) {
+						if (possible_write_review.get(i).getProduct_no() == product_list.get(k).getNo() ) {
+							possible_write_review1.add(String.valueOf(product_list.get(i).getImage_url())); // 상품 이미지 0 
 						}
 					}
 					
-					
-					review_list1.add(String.valueOf(review_list.get(i).getContent())); // 내용 3 
-					review_list1.add(String.valueOf(review_list.get(i).getProduct_no())); // 제품 번호 4					
-					review_list1.add(String.valueOf(review_list.get(i).getWrite_date())); // 작성일 5
-					review_list1.add(String.valueOf(review_list.get(i).getRating())); // 평점 6
-					
-					review_list2.add(review_list1);
+					for(int j = 0; j < review_list.size(); j++ ) {
+						if(possible_write_review.get(i).getOrder_no() != review_list.get(j).getOrder_no()) {
+							possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_name())); // 상품명 1
+							possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_price())); // 상품 가격 2 
+							possible_write_review1.add(String.valueOf(possible_write_review.get(i).getPurchase_confirmation_date())); // 구매 확정 일자 3
+							possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_no())); // 상품 번호 4 
+						}
+				
 					}
+					possible_write_review2.add(possible_write_review1);
 					
-					System.out.println("오늘 폼 미쳤다 2" + review_list2);
+				}
+				System.out.println("오늘 폼 미쳤다 3" + possible_write_review2);
+			}model.addAttribute("possible_write_review2" , possible_write_review2);	
 			
-			}
-			model.addAttribute("review_list2" , review_list2);	
-			return "user/review/review_list";
-	}
+			return "user/review/possible_write_review";
+		}
+	
 }

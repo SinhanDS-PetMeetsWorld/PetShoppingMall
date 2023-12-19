@@ -242,6 +242,12 @@ public class UserServiceImpl implements UserService {
 		return order_detail;
 	}
 
+	@Override
+	public List<OrderDetailVO> possible_write_review(int user_no) {
+		List<OrderDetailVO> possible_write_review = mapper.possible_write_review(user_no);
+		return possible_write_review;
+	}
+
 
 	
 
