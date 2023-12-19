@@ -58,14 +58,4 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 		return optionList;
 	}
 
-	@Override
-	public List<List<List<OrderDetailOptionVO>>> getOrderDetailOptionsLists(List<List<OrderDetailVO>> orderDetailList) {
-		List<List<List<OrderDetailOptionVO>>> optionsLists = new ArrayList<>();
-		for(int i=0; i<orderDetailList.size(); i++) {
-			List<List<OrderDetailOptionVO>> orderOptionvo = getOrderDetailOptions(orderDetailList.get(i));
-			optionsLists.add(orderOptionvo);
-		}
-		return optionsLists;
-	}
-
 }

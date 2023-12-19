@@ -12,5 +12,4 @@ public interface SellerOrderService {
 	List<OrderDetailVO> getOrderDetails(int no);
 	List<OrderMainVO> getOrderMainList(List<OrderDetailVO> vo);
 	List<List<OrderDetailOptionVO>> getOrderDetailOptions(List<OrderDetailVO> vo);
-	List<List<List<OrderDetailOptionVO>>> getOrderDetailOptionsLists(List<List<OrderDetailVO>> orderDetailList);
 }

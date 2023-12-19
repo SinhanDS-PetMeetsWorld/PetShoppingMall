@@ -3,7 +3,7 @@
 <mapper namespace="sinhanDS.first.project.seller.order.SellerOrderMapper">
 
 	<select id="getOrderNoList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
-		SELECT DISTINCT(order_no) FROM order_detail WHERE seller_no = #{no}
+		SELECT DISTINCT(order_no) FROM order_detail WHERE seller_no = #{no} ORDER BY order_no DESC;
 	</select>
 	
 	<select id="getOrderDetails" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
