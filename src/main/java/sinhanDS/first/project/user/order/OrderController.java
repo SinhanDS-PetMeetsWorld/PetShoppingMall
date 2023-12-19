@@ -131,9 +131,9 @@ public class OrderController {
         map.put("count", count);
         map.put("totalPage", totalPage);
         
-        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfProductInPage())*svo.getNumberOfProductInPage());
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList())*svo.getNumberOfPageInIndexList());
         log.debug("endPage: " + endPage);
-        int startPage = endPage - (svo.getNumberOfProductInPage() - 1);
+        int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
         if(endPage > totalPage) endPage = totalPage;
         boolean prev = startPage > 1;
         boolean next = endPage < totalPage;

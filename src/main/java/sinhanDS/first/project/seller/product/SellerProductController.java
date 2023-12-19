@@ -75,9 +75,9 @@ public class SellerProductController {
 	public String list(HttpSession sess, Model model, ProductSearchVO svo) {
 		SellerVO seller = (SellerVO) sess.getAttribute("sellerLoginInfo");
 		svo.setSeller_no(seller.getNo());
-		log.debug("svo: " + svo);
+		
+		
 		int count = service.getNumberOfPage(svo);
-		log.debug("count: " + count);
 		int totalPage = count / svo.getNumberOfProductInPage();
         if (count % svo.getNumberOfProductInPage() > 0) totalPage++;
 		
@@ -85,9 +85,9 @@ public class SellerProductController {
         map.put("count", count);
         map.put("totalPage", totalPage);
         
-        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfProductInPage())*svo.getNumberOfProductInPage());
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList())*svo.getNumberOfPageInIndexList());
         log.debug("endPage: " + endPage);
-        int startPage = endPage - (svo.getNumberOfProductInPage() - 1);
+        int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
         if(endPage > totalPage) endPage = totalPage;
         boolean prev = startPage > 1;
         boolean next = endPage < totalPage;

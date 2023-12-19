@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.seller.order.SellerOrderMapper">
+
+	<select id="getOrderNoList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT DISTINCT(order_no) FROM order_detail WHERE seller_no = #{no} ORDER BY order_no DESC;
+	</select>
 	
+	<select id="getOrderDetails" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail WHERE order_no = #{no}
+	</select>
+	
+	<select id="getOrderMainList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
+		SELECT * FROM order_main WHERE no = #{no}
+	</select>
+	
+	<select id="getOrderDetailOptionList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailOptionVO">
+		SELECT * FROM order_detail_option WHERE order_dno = #{order_detail_no}
+	</select>
 </mapper>

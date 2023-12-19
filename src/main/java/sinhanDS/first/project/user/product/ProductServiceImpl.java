@@ -72,14 +72,31 @@ public class ProductServiceImpl implements ProductService {
 		return r;	
 		    
 	}
-
 	@Override
-	public List<ReviewVO> Review_list(ReviewVO vo) {
-		
-		List<ReviewVO> review_list = mapper.Review_list(vo);
+	public List<ReviewVO> Review_list(ProductSearchVO svo) {
+		List<ReviewVO> review_list = mapper.Review_list(svo);
 		return review_list;
 	}
+	@Override
+	public List<ProductQnAVO> getQna_list (ProductSearchVO svo){
+		return mapper.QNA_listBySearchVO(svo);
+	}
 
+	@Override
+	public int getNumberOfProduct(ProductSearchVO vo) {
+		return mapper.getNumberOfProduct(vo);
+	}
+	
+	@Override
+	public int getNumberOfReviewPage(int pno) {
+		return mapper.getNumberOfReviewPage(pno);
+	}
+	
+	@Override
+	public int getNumberOfQnA(int pno) {
+		return mapper.getNumberOfQnA(pno);
+	}
+	
 	@Override
 	public List<ProductVO> product_list(ProductSearchVO vo) {
 		List<ProductVO> product_list = mapper.product_list(vo);
@@ -124,9 +141,9 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public List<SaveBoxVO> zzim_list(SaveBoxVO vo) {
-		List<SaveBoxVO> zzim_list = mapper.zzim_list(vo);
-		return zzim_list;
+	public List<SaveBoxVO> zzim_check(SaveBoxVO vo) {
+		List<SaveBoxVO> zzim_check = mapper.zzim_check(vo);
+		return zzim_check;
 	}
 
 

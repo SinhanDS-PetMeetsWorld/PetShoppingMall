@@ -32,4 +32,8 @@ public class OrderMainVO {
 	private int total_cancle_price;
 	//주문명
 	private String name;
+	//받는이 성명
+	private String user_name;
+	//받는이 연락처
+	private String user_phone;
 }

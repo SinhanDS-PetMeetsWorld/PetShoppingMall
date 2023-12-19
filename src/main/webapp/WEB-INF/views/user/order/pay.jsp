@@ -46,6 +46,8 @@
 								<input type="text" class="zipcode" name="zipcode" value="${userAddressList[0].zipcode }"><br>
 								<input type="text" class="addr1" name="addr1" value="${userAddressList[0].addr1 }"><br>
 								<input type="text" class="addr2" name="addr2" value="${userAddressList[0].addr2 }"><br>
+								<input type="text" class="" name="user_name" value="${userAddressList[0].name }"><br>
+								<input type="text" class="" name="user_phone" value="${userAddressList[0].phone }"><br>
 							</div>
 						</ol>
 						<hr>

@@ -198,5 +198,11 @@ ALTER TABLE `PetShoppingMall`.`report`
 CHANGE COLUMN `no` `no` INT NOT NULL AUTO_INCREMENT ;
  ALTER TABLE `PetShoppingMall`.`order_detail` 
 CHANGE COLUMN `reason` `reason` TEXT NULL DEFAULT NULL ;
+
+ ALTER TABLE `PetShoppingMall`.`order_main` 
+ADD COLUMN `user_name` VARCHAR(24) NOT NULL AFTER `name`,
+ADD COLUMN `user_phone` VARCHAR(13) NOT NULL AFTER `user_name`;
+
  ALTER TABLE `PetShoppingMall`.`review` 
 CHANGE COLUMN `no` `no` INT NOT NULL AUTO_INCREMENT ;
+

@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
+import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
@@ -35,5 +38,12 @@ public interface UserMapper {
 	ProductVO search_cart_product(int product_no);
 	List<CartOptionVO> cart_option_number(int no);
 	ProductOptionVO get_product_option(int no);
-	List<SaveBoxVO> zzim_list(SaveBoxVO savo);
+	List<SaveBoxVO> zzim_list(int user_no);
+	List<UserVO> user_list(int user_no);
+	List<ProductVO> product_list(int product_no);
+	
+	List<ReviewVO> review_list(int user_no);
+	List<OrderDetailVO> order_detail(OrderDetailVO odvo);
+	List<OrderDetailOptionVO> order_detail_option (OrderDetailOptionVO odovo);
+	
 }

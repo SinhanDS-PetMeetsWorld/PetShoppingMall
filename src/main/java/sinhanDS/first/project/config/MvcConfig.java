@@ -28,6 +28,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.zaxxer.hikari.HikariDataSource;
 
 import sinhanDS.first.project.util.file.FileController;
+import sinhanDS.first.project.util.interceptor.AmdinLoginInterceptor;
 import sinhanDS.first.project.util.interceptor.CategoryInterceptor;
 import sinhanDS.first.project.util.interceptor.SellerLoginInterceptor;
 import sinhanDS.first.project.util.interceptor.UserLoginInterceptor;
@@ -113,6 +114,10 @@ public class MvcConfig implements WebMvcConfigurer{
 		return new SellerLoginInterceptor();
 	}
 	@Bean
+	public AmdinLoginInterceptor adminLoginIntercepton() {
+		return new AmdinLoginInterceptor();
+	}
+	@Bean
 	public CategoryInterceptor categoryInterceptor() {
 		return new CategoryInterceptor();
 	}
@@ -120,15 +125,15 @@ public class MvcConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(userLoginIntercepton())
 						.addPathPatterns("/user/**")
-						.addPathPatterns("/user/product/**")
-						.excludePathPatterns("/user/product/search.do")
-						.excludePathPatterns("/user/product/goods.do")
+						.excludePathPatterns("/user/product/**")
+						.addPathPatterns("/user/product/addcart.do")
+						/*TODO: 바로구매 완성되면 바로구매도 제외해주세요*/
+						.addPathPatterns("/user/product/zziminsert.do")
 						.excludePathPatterns("/user/join.do")
 						.excludePathPatterns("/user/login.do")
 						.excludePathPatterns("/user/idCheck.do")
 						.excludePathPatterns("/user/emailCheck.do")
 						.excludePathPatterns("/user/regist.do")
-						.excludePathPatterns("/user/product/list.do")
 						
 						/* TODO: order에 jsp로 값을 전달해 주기 전 임시로 제외한 패턴입니다. 나중에 삭제할꼐요 ㅎㅎ..*/
 						.excludePathPatterns("/user/order/buy.do")
@@ -146,6 +151,13 @@ public class MvcConfig implements WebMvcConfigurer{
 						.addPathPatterns("/")
 						.addPathPatterns("/user/**")
 						.addPathPatterns("/user/product/**");
+		
+		registry.addInterceptor(adminLoginIntercepton())
+						.addPathPatterns("/admin/**")
+						.excludePathPatterns("/admin")
+						.excludePathPatterns("/admin/")
+						.excludePathPatterns("/admin/index.do");
+						
 	}
 	
 	// 프로퍼티 설정

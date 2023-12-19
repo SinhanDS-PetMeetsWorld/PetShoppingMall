@@ -56,10 +56,10 @@
                         <li><a href="list.do?page=${paging.startPage-1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> << </a></li>
                     </c:if>
                     <c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
-                     	<c:if test="${p == replyVO.page}">
+                     	<c:if test="${p == productSearchVO.page}">
                     	    <li><a href='#;' class='current'>${p}</a></li>
                         </c:if>
-                        <c:if test="${p != replyVO.page}">
+                        <c:if test="${p != productSearchVO.page}">
                             <li><a href='list.do?page=${p}&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }'>${p}</a></li>
                         </c:if>
                     </c:forEach>

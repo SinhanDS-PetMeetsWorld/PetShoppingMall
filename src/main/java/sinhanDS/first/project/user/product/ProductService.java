@@ -33,7 +33,15 @@ public interface ProductService {
 	
 	public int QNA_insert(ProductQnAVO qnavo , HttpServletRequest request );
 	
-	List<ReviewVO> Review_list (ReviewVO vo);
+	List<ReviewVO> Review_list (ProductSearchVO svo);
+	
+	List<ProductQnAVO> getQna_list (ProductSearchVO svo);
+	
+	int getNumberOfReviewPage(int pno);
+	
+	int getNumberOfQnA(int pno);
+	
+	int getNumberOfProduct(ProductSearchVO vo);
 	
 	List<ProductVO> product_list(ProductSearchVO vo);
 	
@@ -53,7 +61,7 @@ public interface ProductService {
 	
 	int zzim_cancel (SaveBoxVO vo);
 
-	List<SaveBoxVO> zzim_list(SaveBoxVO vo);
+	List<SaveBoxVO> zzim_check(SaveBoxVO vo);
 	
 	
 }
