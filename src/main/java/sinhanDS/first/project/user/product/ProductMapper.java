@@ -29,6 +29,10 @@ public interface ProductMapper {
 	
 	List<ProductOptionVO> Product_more_option(ProductOptionVO vo); 
 	
+	List<ProductQnAVO> QNA_listBySearchVO(ProductSearchVO svo);
+	
+	public int getNumberOfQnA(int pno);
+	
 	// (제품번호를 이용한) 판매자 검색
 	int Seller_no (int product_no);
 	

@@ -35,7 +35,11 @@ public interface ProductService {
 	
 	List<ReviewVO> Review_list (ProductSearchVO svo);
 	
+	List<ProductQnAVO> getQna_list (ProductSearchVO svo);
+	
 	int getNumberOfReviewPage(int pno);
+	
+	int getNumberOfQnA(int pno);
 	
 	int getNumberOfProduct(ProductSearchVO vo);
 	

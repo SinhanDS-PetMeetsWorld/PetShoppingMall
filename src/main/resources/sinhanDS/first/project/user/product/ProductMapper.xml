@@ -53,6 +53,20 @@
 		ORDER BY no DESC
 	</select>
 	
+	<select id="QNA_listBySearchVO" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductQnAVO">
+		SELECT *  
+		FROM product_qna
+		where product_no = ${product_no} 
+		ORDER BY no DESC
+		LIMIT #{startIdx}, #{numberOfProductInPage}
+	</select>
+	
+	<select id="getNumberOfQnA" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM product_qna
+		where product_no = ${product_no}
+	</select>
+	
 	<select id ="Review_list" parameterType = "sinhanDS.first.project.product.vo.ProductSearchVO" resultType= "sinhanDS.first.project.product.vo.ReviewVO">
 		SELECT * 
 		FROM review

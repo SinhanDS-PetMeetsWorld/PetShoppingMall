@@ -47,33 +47,6 @@ public class ProductController {
 		UserVO login = (UserVO)loginsess.getAttribute("userLoginInfo");
 		String product_no = request.getParameter("no");
 		
-		ProductSearchVO review_svo = new ProductSearchVO();
-		review_svo.setNumberOfProductInPage(1);
-		review_svo.setProduct_no(pvo.getNo());
-		List<ReviewVO> review_list = service.Review_list(review_svo);
-		log.debug("review_list: " + review_list);
-		int reviewCount = service.getNumberOfReviewPage(pvo.getNo());
-		int reviewTotalPage = reviewCount / review_svo.getNumberOfProductInPage();
-		if(reviewCount % review_svo.getNumberOfProductInPage() > 0) reviewTotalPage++;
-		Map<String, Object> reviewMap = new HashMap<>();
-		reviewMap.put("count", reviewCount);
-		reviewMap.put("totalPage", reviewTotalPage);
-		
-		int review_endPage = (int)(Math.ceil(review_svo.getPage()/(float)review_svo.getNumberOfPageInIndexList()) * review_svo.getNumberOfPageInIndexList());
-		int review_startPage = review_endPage - (review_svo.getNumberOfPageInIndexList() - 1);
-		if( review_endPage > reviewTotalPage) review_endPage = reviewTotalPage;
-		boolean review_prev = review_startPage > 1;
-		boolean review_next = review_endPage < reviewTotalPage;
-		reviewMap.put("endPage", review_endPage);
-		reviewMap.put("startPage", review_startPage);
-		reviewMap.put("prev", review_prev);
-		reviewMap.put("next", review_next);
-        
-		log.debug("reviewPaging: " + reviewMap);
-        model.addAttribute("reviewPaging", reviewMap);
-        model.addAttribute("review_svo", review_svo);
-        model.addAttribute("review_list", review_list);
-		
 		if (login != null) {
 		
 	/*	 (신정훈) 12 - 16 찜박스 구현 
@@ -102,10 +75,6 @@ public class ProductController {
 		
 		List<ProductQnAVO> qna_list = service.QNA_list(qnavo);
 		
-		
-		
-		
-		
 		List<ProductCategoryVO> product_more_category = service.Product_more_category(pcvo);
 		List<ProductOptionVO> product_more_option = service.Product_more_option(povo);
 		ProductCategoryVO catekor = new ProductCategoryVO();
@@ -121,37 +90,66 @@ public class ProductController {
 		return "user/product/goods/goods";
 	}
  	
-// 	@ResponseBody
  	@GetMapping("getReview.do")
- 	public String getReview(Model model, ProductVO pvo, ProductSearchVO review_svo) {
-		review_svo.setNumberOfProductInPage(3);
-		review_svo.setProduct_no(pvo.getNo());
-		log.debug("review_svo: " + review_svo);
-		List<ReviewVO> review_list = service.Review_list(review_svo);
-		log.debug("review_list: " + review_list);
-		int reviewCount = service.getNumberOfReviewPage(pvo.getNo());
-		int reviewTotalPage = reviewCount / review_svo.getNumberOfProductInPage();
-		if(reviewCount % review_svo.getNumberOfProductInPage() > 0) reviewTotalPage++;
-		Map<String, Object> reviewMap = new HashMap<>();
-		reviewMap.put("count", reviewCount);
-		reviewMap.put("totalPage", reviewTotalPage);
+ 	public String getReview(Model model, ProductVO pvo, ProductSearchVO svo) {
+		svo.setNumberOfProductInPage(svo.getNumberInPage_review());
+		svo.setProduct_no(pvo.getNo());
+		log.debug("review_svo: " + svo);
+		List<ReviewVO> list = service.Review_list(svo);
+		log.debug("review_list: " + list);
+		int count = service.getNumberOfReviewPage(pvo.getNo());
+		int totalPage = count / svo.getNumberOfProductInPage();
+		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		Map<String, Object> map = new HashMap<>();
+		map.put("count", count);
+		map.put("totalPage", totalPage);
 		
-		int review_endPage = (int)(Math.ceil(review_svo.getPage()/(float)review_svo.getNumberOfPageInIndexList()) * review_svo.getNumberOfPageInIndexList());
-		int review_startPage = review_endPage - (review_svo.getNumberOfPageInIndexList() - 1);
-		if( review_endPage > reviewTotalPage) review_endPage = reviewTotalPage;
-		boolean review_prev = review_startPage > 1;
-		boolean review_next = review_endPage < reviewTotalPage;
-		reviewMap.put("endPage", review_endPage);
-		reviewMap.put("startPage", review_startPage);
-		reviewMap.put("prev", review_prev);
-		reviewMap.put("next", review_next);
+		int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList()) * svo.getNumberOfPageInIndexList());
+		int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+		if( endPage > totalPage) endPage = totalPage;
+		boolean prev = startPage > 1;
+		boolean next = endPage < totalPage;
+		map.put("endPage", endPage);
+		map.put("startPage", startPage);
+		map.put("prev", prev);
+		map.put("next", next);
         
-		log.debug("reviewPaging: " + reviewMap);
-        model.addAttribute("reviewPaging", reviewMap);
-        model.addAttribute("review_svo", review_svo);
-        model.addAttribute("review_list", review_list);
+        model.addAttribute("reviewPaging", map);
+        model.addAttribute("review_svo", svo);
+        model.addAttribute("review_list", list);
         
         return "/user/product/goods/reviewList";
+ 	}
+ 	
+ 	@GetMapping("getQnA.do")
+ 	public String getQnA(Model model, ProductVO pvo, ProductSearchVO svo) {
+ 		svo.setNumberOfProductInPage(svo.getNumberInPage_qna());
+		svo.setProduct_no(pvo.getNo());
+		log.debug("svo: " + svo);
+		List<ProductQnAVO> list = service.getQna_list(svo);
+		log.debug("list: " + list);
+		int count = service.getNumberOfQnA(pvo.getNo());
+		int totalPage = count / svo.getNumberOfProductInPage();
+		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		Map<String, Object> map = new HashMap<>();
+		map.put("count", count);
+		map.put("totalPage", totalPage);
+		
+		int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList()) * svo.getNumberOfPageInIndexList());
+		int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+		if( endPage > totalPage) endPage = totalPage;
+		boolean prev = startPage > 1;
+		boolean next = endPage < totalPage;
+		map.put("endPage", endPage);
+		map.put("startPage", startPage);
+		map.put("prev", prev);
+		map.put("next", next);
+        
+        model.addAttribute("qnaPaging", map);
+        model.addAttribute("qna_svo", svo);
+        model.addAttribute("qna_list", list);
+        
+        return "/user/product/goods/QnAList";
  	}
  	
  	
@@ -241,7 +239,7 @@ public class ProductController {
 	
 	@GetMapping("/list.do")
 	public String searchByCategory(HttpServletRequest request, Model model, ProductSearchVO svo) {
-		if(svo.getNumberOfProductInPage() == 5) svo.setNumberOfProductInPage(15);
+		if(svo.getNumberOfProductInPage() == 5) svo.setNumberOfProductInPage(svo.getNumberInPage_search());
 		log.debug("svo: " + svo);
 		int count = service.getNumberOfProduct(svo);
 		log.debug("count: " + count);

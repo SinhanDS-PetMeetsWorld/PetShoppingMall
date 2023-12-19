@@ -142,18 +142,12 @@
 							
 						</div>
 						<div class="board_contents" id = "qna">
-					 		<div class="qna_write_button">
+							<div class="qna_write_button">
 								<button type="button" name="go_qnawrite" onclick="goQnawrite_popup()">qna 작성하기</button>
 							</div>
-					   		 <c:forEach var="item" items="${qna_list}">
-					       		 <div class="Q" onclick="toggleAnswer(this)" >
-					             	<p> ${item.question_content} (질문 작성일 : ${item.question_write_date}) </p>
-					        	 </div>
-					        
-					        	 <div class="A" style="display:none;">
-					             	<p style="color : red;"> ${item.answer_content} (답변 작성일 : ${item.answer_write_date})</p>
-					        	 </div>
-					    	</c:forEach>
+							<div id="qna_container">
+								
+							</div>
 						</div>
 					</div>
 				</div>
@@ -334,8 +328,42 @@ function zzim(){
 	}
 </script>
 <script>
-//숫자 눌렀을 때 리뷰 가져오는 ajax
+//페이지 로딩시 qna 가져오는 ajax
+	var htmlData;
+	$.ajax({
+		type: "GET",
+		url:'getQnA.do?no=${product_no}',
+		async: false,
+		dataType: "HTML",
+		success:function(data) {
+			htmlData = data;
+		}
+	})
+	console.log(htmlData);
+	$('#qna_container').append(htmlData);
 	
+	$.each($('.qnaPageButton'), function(i, e){
+		$(e).on('click', getQnA);
+	});
+	
+	function getQnA(){
+		var htmlData;
+		var page = $(this).data('page');
+		$.ajax({
+			type: "GET",
+			url:'getQnA.do?no=${product_no}&page=' + page,
+			async: false,
+			dataType: "HTML",
+			success:function(data) {
+				htmlData = data;
+			}
+		})
+		$('#qna_container').empty();
+		$('#qna_container').append(htmlData);
+		$.each($('.qnaPageButton'), function(i, e){
+			$(e).on('click', getQnA);
+		});
+	}
 </script>
 </body>
 </html>

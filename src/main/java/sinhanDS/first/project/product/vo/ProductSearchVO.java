@@ -29,6 +29,12 @@ public class ProductSearchVO {
 	public int getStartIdx() {
 		return (page-1) * numberOfProductInPage;
 	}
+	
+	
+	/* 한 페이지당 표기할 수 있는 품목의 갯수를 설정할 수 있습니다. */
+	private int numberInPage_search = 15;
+	private int numberInPage_review = 3;
+	private int numberInPage_qna = 5;
 }
 /* 상품 리스트, 검색 결과 띄워줄 때 조건 여러개 한 번에 넣으려고 만든 vo입니다
  * search type이나 검색어string 등등 자유롭게 추가해서 사용하셔도 됩니다
