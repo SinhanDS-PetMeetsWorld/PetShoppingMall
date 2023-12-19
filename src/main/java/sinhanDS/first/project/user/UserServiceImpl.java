@@ -8,8 +8,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
+import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
@@ -200,12 +203,46 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<SaveBoxVO> zzim_list(SaveBoxVO savo) {
+	public List<SaveBoxVO> zzim_list(int user_no) {
 		// TODO Auto-generated method stub
-		List<SaveBoxVO> zzim_list = mapper.zzim_list(savo);
+		List<SaveBoxVO> zzim_list = mapper.zzim_list(user_no);
 	
 		return zzim_list;
 	}
+
+	@Override
+	public List<UserVO> user_list (int user_no) {
+		List<UserVO> user_list = mapper.user_list(user_no);
+		return user_list;
+	}
+	
+	/* (신정훈) 리뷰 구현 */ 
+	
+	@Override
+	public List<ReviewVO> review_list(int user_no) {
+		List<ReviewVO> review_list = mapper.review_list(user_no);
+		return review_list;
+	}
+
+	@Override
+	public List<ProductVO> product_list(int product_no) {
+		List<ProductVO> product_list = mapper.product_list(product_no);
+		return product_list;
+	}
+
+	@Override
+	public List<OrderDetailOptionVO> order_detail_option(OrderDetailOptionVO odovo) {
+		List<OrderDetailOptionVO> order_detail_option = mapper.order_detail_option(odovo);
+		return order_detail_option;
+	}
+
+	@Override
+	public List<OrderDetailVO> order_detail(OrderDetailVO odvo) {
+		List<OrderDetailVO> order_detail = mapper.order_detail(odvo);
+		return order_detail;
+	}
+
+
 	
 
 }

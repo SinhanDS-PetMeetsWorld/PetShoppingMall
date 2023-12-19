@@ -16,7 +16,6 @@ import sinhanDS.first.project.user.vo.UserVO;
 
 @Mapper
 public interface ProductMapper {
-	// QNA 리스트	
 	List<ProductQnAVO> QNA_list (ProductQnAVO vo);
 	// 리뷰 리스트
 	List<ReviewVO> Review_list (ProductSearchVO svo);
@@ -25,13 +24,13 @@ public interface ProductMapper {
 	
 	List<ProductVO> Product_more (ProductVO vo);
 	
+	List<ProductQnAVO> QNA_listBySearchVO(ProductSearchVO svo);
+	public int getNumberOfQnA(int pno);
+	
 	List<ProductCategoryVO> Product_more_category(ProductCategoryVO vo); 
 	
 	List<ProductOptionVO> Product_more_option(ProductOptionVO vo); 
 	
-	List<ProductQnAVO> QNA_listBySearchVO(ProductSearchVO svo);
-	
-	public int getNumberOfQnA(int pno);
 	
 	// (제품번호를 이용한) 판매자 검색
 	int Seller_no (int product_no);
@@ -59,7 +58,7 @@ public interface ProductMapper {
 	
 	int zzim_cancel(SaveBoxVO vo);
 	
-	List<SaveBoxVO> zzim_list(SaveBoxVO vo);
+	List<SaveBoxVO> zzim_check(SaveBoxVO vo);
 	
 
 }

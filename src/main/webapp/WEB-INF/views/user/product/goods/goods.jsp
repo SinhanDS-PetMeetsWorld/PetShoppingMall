@@ -101,8 +101,55 @@
 									
 									</div>	
 								</div>		
+						</c:forEach>									
+						<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
+							<form name="option_form" id="option_form">
+							<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
+								<c:if test="${(status.index == 0) || (product_more_option[status.index - 1].title != ovo.title)}">
+									${ovo.title } <select name="option_no" id="option_no">
+								</c:if>
+										<option value="${ovo.no}"> ${ovo.content } :  ${ovo.price }원</option>
+								<c:if test="${(product_more_option[status.index + 1].title != ovo.title)}">
+									</select><br>
+								</c:if>
+							</c:forEach>
+							<input type="hidden" name="user_no" value="${userLoginInfo.no}">
+							<input type="hidden" name="product_no" value="${product_no}">
+							</form>
+						</div>
+					
+							수량 <input type="number" name="choose_number" value=0>
+							
+							<input type="button" style="background-color: grey;"
+								value="장바구니 담기" onclick="addcart()"> <input type="button"
+								style="background-color: yellow" value="바로 구매">
+								
+								<c:if test ="${empty zzim_check}">	
+									찜: <img id="zzim_Off" onclick="zzim();" src="${pageContext.request.contextPath}/resources/img/product/empty_heart.png"/>
+								</c:if>
+								<c:if test ="${!empty zzim_check}">	
+									찜: <img id="zzim_On" onclick="zzim();" src="${pageContext.request.contextPath}/resources/img/product/fill_heart.png"/>
+								</c:if>
+											
+								<br>	
+
+					<div class = "goods_review_QNA">
+						<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
+						<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>
+						
+						<div class="board_contents active" id ='review'>
+							
+						</div>
+						<div class="board_contents" id = "qna">
+							<div class="qna_write_button">
+								<button type="button" name="go_qnawrite" onclick="goQnawrite_popup()">qna 작성하기</button>
 							</div>
-					</c:forEach>									
+							<div id="qna_container">
+								
+							</div>
+						</div>
+					</div>
+					<%--
 					<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
 						<form name="option_form" id="option_form">
 						<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
@@ -150,6 +197,7 @@
 							</div>
 						</div>
 					</div>
+					 --%>
 				</div>
 			</div>
 		</div>
@@ -225,7 +273,7 @@ function zzim(){
 				   user_no : user_no
 			},
 			success : function(response){
-				alert("찜등록이 되었습니다.");
+				alert("찜 등록이 되었습니다.");
 				$('#zzim_off').attr('src' ,'/resources/img/product/fill_heart.png');
 				history.go(0);
 			},
