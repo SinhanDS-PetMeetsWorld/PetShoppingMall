@@ -37,46 +37,46 @@
 					<form name="cart_list" action="#" method="get">
 					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
 					        
-					        <!--주소가 존재하는만큼 td를 생성-->
+					        <!--카트에 상품이 존재하는만큼 td를 생성-->
 						    <c:forEach var="vo" items="${productvolist }" varStatus="status">
 						    	
+						    	${catrvolist[status.index].no }
 						        <tr width="800">
 						            <td>
 						                <br>
-						                <input type="hidden" name="product_no_list" value="${vo.no }">
-						                <input type="hidden" name="seller_no_list" value="${vo.seller_no }">
-						                <c:if test="${empty vo.image_url }">
-											<img src="/resources/img/product/no_image.jpg" width="100" height="100">
-										</c:if>
-										<c:if test="${!empty vo.image_url && fn:substring(vo.image_url, 0, 1) == 'h' }">
-											<img src="${vo.image_url }" width="100" height="100">
-										</c:if>
-										<c:if test="${!empty vo.image_url && !(fn:substring(vo.image_url, 0, 1) == 'h') }">
-											<img src="/resources/img/product/registed_img/${vo.image_url }" width="100" height="100">
-										</c:if>
-						                <div>${vo.name } <input type="hidden" name="name_list" value="${vo.name }"></div>
-						                <!-- 옵션이 존재한다면 보여주고 아니면 안보임 -->
-						                <c:forEach var="vo2" items="${optionlist[status.index] }">
-							                <span>${vo2.title} <input type="hidden" name="option_title" value="${vo2.title }"></span>
-							                <span>${vo2.content} <input type="hidden" name="option_content" value="${vo2.content }"></span>
-							                <br>
-						                </c:forEach> 
-						                <c:forEach var="cart_option" items="${cartoptionvolist }">
-							             	<c:forEach var="cart_option2" items="${cart_option }">
-							                	<c:if test="${vo.no eq cart_option2.cart_no }">
-							                		<div>${cart_option2.option_no }</div>
-							                	</c:if>
-						             		</c:forEach>
-						                </c:forEach>
-						                <div>${vo.price } <input type="hidden" name="price_list" value="${vo.price }"></div>
-						                <div><input type="hidden" name="discount_list" value="${vo.discount }"></div>
-					
-						                <input type="hidden" name="company_list" value="${vo.company }">
-						                <input type="hidden" name="brand_list" value="${vo.brand }">
+						                
+						                <div id="product_info">
+						                	${status.index }
+							                <input type='checkbox' class="check_product" id='chekbox[${status.index }]' name='check_cart' checked>
+							                <input type="hidden" value="${cartoptionvolist[status.index][tt.index].cart_no}" checked>
+							                <div>
+								                <c:if test="${empty vo.image_url }">
+													<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+												</c:if>
+												<c:if test="${!empty vo.image_url && fn:substring(vo.image_url, 0, 1) == 'h' }">
+													<img src="${vo.image_url }" width="100" height="100">
+												</c:if>
+												<c:if test="${!empty vo.image_url && !(fn:substring(vo.image_url, 0, 1) == 'h') }">
+													<img src="/resources/img/product/registed_img/${vo.image_url }" width="100" height="100">
+												</c:if>
+								                <div>${vo.name } </div>
+								                <!-- 옵션이 존재한다면 보여주고 아니면 안보임 -->
+								                <c:forEach var="vo2" items="${optionlist[status.index] }" varStatus="tt">
+								                	<input type="hidden" class="checkbox" value="${cartoptionvolist[status.index][tt.index].cart_no}" checked>
+								                	<input type="hidden" class="checkbox" value="${cartoptionvolist[status.index][tt.index].option_no}" checked>
+								                	<input type="hidden" class="option_price" name="option_price[${status.index }]" value="${vo2.price }">
+									                <span>${vo2.title}</span>
+									                <span>${vo2.content}</span>
+									                <br>
+								                </c:forEach> 
+								                <div>${vo.price } <input type="hidden" class="checkbox" name="price_list" value="${vo.price }" checked></div>
+								                <div><input type="hidden" class="checkbox" name="discount_list" value="${vo.discount }" checked></div>
+											</div>
+										</div>
 						                <br>
 						            </td>
 						            <td>
-						                <button type="button" name="cart_delete" onclick="#">장바구니에서 삭제</button>
+						                <button type="button" name="cart_delete" onclick="#" >장바구니에서 삭제</button>
 						                <input type="number" name="quantity_list" id="quantity_list[${status.index }]" value=1>
 						                
 						               
@@ -126,5 +126,72 @@
 			<div class="footer-color"></div>
         </div>
     </div>
+    <script>
+    	/*
+    	$('.temp_temp').on('change', change);
+    	function change(){
+    		console.log(this);
+    		console.log(this.parentNode);
+    		console.log(this.parentNode.querySelector('input'));
+    		*/
+    		window.onload = function(){
+    		
+    			
+    			console.log(document.getElementsByName('option_price[0]')[1].value);
+    			console.log(document.getElementsByName('option_price[0]')[1]);
+    			console.log(document.getElementsByName('option_price[0]').length);
+    			console.log(document.getElementsByName('option_price[0]'));
+    			var sum = 0;
+    			
+    			
+    			
+    			
+    				
+       		}
+    		
+    		
+    		// 체크박스 JS
+    		$('.check_product').on('click', function(){
+                if($(this).prop('checked')){
+/*
+					console.log(this.parentNode.querySelector('div').querySelectorAll('input'));
+                    var aa = this.parentNode.querySelector('div').getElementsByClassName('checkbox');	//getElementsByClassName은 HTMLCollection으로 리턴됨
+                    console.log(aa);
+*/
+					// 체크 시 넘겨줄 값들에 checked 설정하는 부분
+	                var bb = this.parentNode.querySelector('div').querySelectorAll(".checkbox");
+                	console.log(bb);
+
+                    bb.forEach(function(bbs){
+                    	bbs.setAttribute("checked", "true");		// 체크했을 때 그 체크박스에 연관된 input 태그들에 checked=true 속성 추가
+                    	console.log(bbs);
+                   	});
+                    
+                    // 체크 된 상품의 가격 가져오자
+                    
+                    
+                    
+                    
+                }
+                else{
+               		 	
+                	// 체크해제 시 값들에 checked=false 설정하는 부분
+                	 var bb = this.parentNode.querySelector('div').querySelectorAll(".checkbox");
+
+                     bb.forEach(function(bbs){
+                     	bbs.setAttribute("checked", "false");		// 체크했을 때 그 체크박스에 연관된 input 태그들에 checked=true 속성 추가
+                     	console.log(bbs);
+                	 });
+                }
+                
+                
+            });	
+    		
+    		console.log(document.querySelectorAll('input[name="price_list"]')[0].value);
+    		console.log(document.querySelectorAll('input[name="price_list"]')[0].checked);
+    		
+    		
+    		
+    </script>
 </body>
 </html>
