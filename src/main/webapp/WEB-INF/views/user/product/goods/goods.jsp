@@ -158,7 +158,7 @@
 			                            <li><a href='#'>${p}</a></li>
 			                            </c:if>
 			                            <c:if test="${p != review_svo.page}">
-			                            	<li><a href='goods.do?no=${product_no }&page=${p}'>${p}</a></li>
+			                            	<li><a href='getReview.do?no=${product_no }&page=${p}'>${p}</a></li>
 			                            </c:if>
 			                        </c:forEach>
 			                        <c:if test="${reviewPaging.next }">

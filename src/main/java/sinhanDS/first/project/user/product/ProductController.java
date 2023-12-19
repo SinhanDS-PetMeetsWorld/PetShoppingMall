@@ -119,6 +119,11 @@ public class ProductController {
 		return "user/product/goods/goods";
 	}
  	
+ 	@GetMapping("getReview.do")
+ 	public String getReview() {
+ 		
+ 	}
+ 	
  	
 	@PostMapping("/zziminsert.do")
 	public String zzim_insert(Model model, HttpServletRequest request, SaveBoxVO savo) {
