@@ -52,7 +52,6 @@
 		where product_no = ${no} 
 		ORDER BY no DESC
 	</select>
-	
 	<select id="QNA_listBySearchVO" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductQnAVO">
 		SELECT *  
 		FROM product_qna
@@ -66,7 +65,6 @@
 		FROM product_qna
 		where product_no = ${product_no}
 	</select>
-	
 	<select id ="Review_list" parameterType = "sinhanDS.first.project.product.vo.ProductSearchVO" resultType= "sinhanDS.first.project.product.vo.ReviewVO">
 		SELECT * 
 		FROM review
@@ -74,13 +72,11 @@
 		ORDER BY rating desc
 		LIMIT #{startIdx}, #{numberOfProductInPage}
 	</select>
-	
 	<select id="getNumberOfReviewPage" parameterType="int" resultType="int">
 		SELECT count(*)
 		FROM review
 		where product_no = ${product_no}
 	</select>
-	
 	<select id="Seller_no" parameterType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT seller_no
 		FROM product
@@ -166,7 +162,7 @@
 		user_no = #{user_no} AND product_no = #{product_no}	
 	</delete>
 	
-	<select id = "zzim_list" parameterType="sinhanDS.first.project.user.vo.SaveBoxVO" resultType ="sinhanDS.first.project.user.vo.SaveBoxVO">
+	<select id = "zzim_check" parameterType="sinhanDS.first.project.user.vo.SaveBoxVO" resultType ="sinhanDS.first.project.user.vo.SaveBoxVO">
 		SELECT * 
 		FROM save_box 
 		WHERE user_no = ${user_no} AND product_no = ${product_no}

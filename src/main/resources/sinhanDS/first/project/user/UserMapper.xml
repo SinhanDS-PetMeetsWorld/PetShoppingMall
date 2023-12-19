@@ -130,5 +130,43 @@
 		SELECT * FROM product_option WHERE no = #{option_no}
 	</select>
 	
+	
+	
+	<!-- (신정훈) 12 / 18 찜 리스트 구현 -->
+	<select id = "zzim_list" parameterType="sinhanDS.first.project.user.vo.SaveBoxVO">
+		SELECT * 
+		FROM  save_box  
+		where user_no = ${user_no}
+	</select>
+	
+	<select id = "user_list" parameterType="sinhanDS.first.project.user.vo.UserVO">
+		SELECT * FROM  user
+		where no = ${user_no}
+	</select>
+	
+	<select id = "product_list" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * FROM  product
+	</select>
+	
+	
+	<!-- (신정훈) 12 / 18 리뷰 리스트 구현 -->
+	<select id = "review_list" parameterType = "sinhanDS.first.project.product.vo.ReviewVO">
+		SELECT * FROM review
+		where user_no = ${user_no}
+	</select>
+	
+	<select id = "order_detail" parameterType = "sinhanDS.first.project.order.vo.OrderDetailOptionVO">
+		SELECT * FROM order_detail
+	</select>
+	
+	<select id = "order_detail_option" parameterType = "sinhanDS.first.project.order.vo.OrderDetailOptionVO">
+		SELECT * FROM order_detail_option
+	</select>
+	
 
+	
+	
+	
+	
+	
 </mapper>

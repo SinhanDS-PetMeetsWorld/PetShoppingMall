@@ -33,22 +33,26 @@
 								<c:forEach var="orderdetails" items="${orderDetailList[status.index]}" varStatus="status">
 									<table border="1">
 										<thead><tr> <th>제품명</th><th>옵션</th><th>판매가</th><th>수량</th> </tr></thead>
-										<tr>
-											<td>${orderdtails.product_name}</td>
-											<<td>
-												<c:if test="${not empty optionList[status.index]}">
-													<c:forEach var="orderoptions" items="${optionList}" varStatus="status">
-														${orderoptions[status.index].title} : ${orderoptions[status.index].content} <br>
+										<tr <c:if test="${orderdetails.cancle_status != 0}">style="color:red"</c:if>>
+											<td>${orderdetails.product_name} <c:if test="${orderdetails.cancle_status != 0}">(취소)</c:if></td>
+											<td>
+												<c:if test="${not empty orderdetails.options}">
+													<c:forEach var="orderoptions" items="${orderdetails.options}" varStatus="status">
+														${orderoptions.title} : ${orderoptions.content} <br>
 													</c:forEach>
 												</c:if>
-												<c:if test="${empty orderDetailList}">옵션없음</c:if>
-											</td>
-											<td>${orderdtails.product_price}</td><td>${orderdtails.quantity}</td>
+												<c:if test="${empty orderdetails.options}">옵션없음</c:if>
+											
+											<td>${orderdetails.product_price}</td><td>${orderdetails.quantity}</td>
 										</tr>
-									</table>
+									</table><br>
 									
 								</c:forEach>
 								수취인정보<br>
+								이름: ${orders.user_name } 연락처: ${orders.user_phone } <br>
+								우편번호: ${orders.zipcode } 주소: ${orders.addr1 } ${orders.addr2 } <br><br>
+								주문일시: ${orders.order_date } 배송상태:(주문상세마다 있는데 어떡하죠)<br>
+								운송장 번호:판매자입력 도착예정일:배송 시작한 뒤에만<br><br><hr><br>
 							</c:if>
 						</c:forEach>
 					</c:if>

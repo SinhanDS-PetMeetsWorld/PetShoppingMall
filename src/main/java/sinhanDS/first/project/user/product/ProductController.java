@@ -49,7 +49,7 @@ public class ProductController {
 		
 		if (login != null) {
 		
-	/*	 (신정훈) 12 - 16 찜박스 구현 
+		/*	 (신정훈) 12 - 16 찜박스 구현 
 		 * 로그인 필요 여부에 따라서 적용*/
 		 
 			int user_no = login.getNo();
@@ -60,21 +60,13 @@ public class ProductController {
 			savo.setProduct_no(Integer.valueOf(product_no));
 			System.out.println("원피스 사보의 모험 : " + savo );
 			
-			List<SaveBoxVO> zzim_list = service.zzim_list(savo);
+			List<SaveBoxVO> zzim_check = service.zzim_check(savo);
 			
-			System.out.println("찜 리스트 나오냐?? "+ zzim_list);
-			model.addAttribute("zzim_list" , zzim_list);
+			System.out.println("찜 리스트 나오냐?? "+ zzim_check);
+			model.addAttribute("zzim_check" , zzim_check);
 			
 		}
 		List<ProductVO> product_more = service.Product_more(pvo);
-		
-		/* review paging 처리 */
-		
-		
-		
-		
-		List<ProductQnAVO> qna_list = service.QNA_list(qnavo);
-		
 		List<ProductCategoryVO> product_more_category = service.Product_more_category(pcvo);
 		List<ProductOptionVO> product_more_option = service.Product_more_option(povo);
 		ProductCategoryVO catekor = new ProductCategoryVO();
@@ -83,13 +75,10 @@ public class ProductController {
 		model.addAttribute("catekor" , catekor);
 		model.addAttribute("product_more_category" , product_more_category);
 		model.addAttribute("product_more" , product_more);
-		model.addAttribute("qna_list", qna_list);
-		
 		model.addAttribute("product_no" , product_no);
 		
 		return "user/product/goods/goods";
 	}
- 	
  	@GetMapping("getReview.do")
  	public String getReview(Model model, ProductVO pvo, ProductSearchVO svo) {
 		svo.setNumberOfProductInPage(svo.getNumberInPage_review());

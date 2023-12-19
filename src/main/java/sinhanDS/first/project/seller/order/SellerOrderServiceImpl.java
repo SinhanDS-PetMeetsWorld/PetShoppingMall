@@ -24,6 +24,10 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 		List<List<OrderDetailVO>> orderDetailList = new ArrayList<>();
 		for(int i=0; i<orderNoList.size(); i++) {
 			List<OrderDetailVO> orderDetailvo = mapper.getOrderDetails(orderNoList.get(i).getOrder_no());
+			for(int j=0; j<orderDetailvo.size(); j++) {
+				orderDetailvo.get(j).setOptions(mapper.getOrderDetailOptionList(orderDetailvo.get(j).getNo()));
+				System.out.println("확인 "+orderDetailvo.get(j).getNo());
+			}
 			orderDetailList.add(orderDetailvo);
 		}
 		return orderDetailList;
