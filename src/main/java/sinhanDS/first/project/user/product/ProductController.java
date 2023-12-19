@@ -47,29 +47,6 @@ public class ProductController {
 		UserVO login = (UserVO)loginsess.getAttribute("userLoginInfo");
 		String product_no = request.getParameter("no");
 		
-		if (login != null) {
-		
-	/*	 (신정훈) 12 - 16 찜박스 구현 
-		 * 로그인 필요 여부에 따라서 적용*/
-		 
-			int user_no = login.getNo();
-			System.out.println("생명의 전화 번호 : " + user_no);
-			
-			
-			savo.setUser_no(user_no);
-			savo.setProduct_no(Integer.valueOf(product_no));
-			System.out.println("원피스 사보의 모험 : " + savo );
-			
-			List<SaveBoxVO> zzim_list = service.zzim_list(savo);
-			
-			System.out.println("찜 리스트 나오냐?? "+ zzim_list);
-			model.addAttribute("zzim_list" , zzim_list);
-			
-		}
-		List<ProductVO> product_more = service.Product_more(pvo);
-		
-		/* review paging 처리 */
-		
 		ProductSearchVO review_svo = new ProductSearchVO();
 		review_svo.setNumberOfProductInPage(1);
 		review_svo.setProduct_no(pvo.getNo());
@@ -95,6 +72,31 @@ public class ProductController {
 		log.debug("reviewPaging: " + reviewMap);
         model.addAttribute("reviewPaging", reviewMap);
         model.addAttribute("review_svo", review_svo);
+        model.addAttribute("review_list", review_list);
+		
+		if (login != null) {
+		
+	/*	 (신정훈) 12 - 16 찜박스 구현 
+		 * 로그인 필요 여부에 따라서 적용*/
+		 
+			int user_no = login.getNo();
+			System.out.println("생명의 전화 번호 : " + user_no);
+			
+			
+			savo.setUser_no(user_no);
+			savo.setProduct_no(Integer.valueOf(product_no));
+			System.out.println("원피스 사보의 모험 : " + savo );
+			
+			List<SaveBoxVO> zzim_list = service.zzim_list(savo);
+			
+			System.out.println("찜 리스트 나오냐?? "+ zzim_list);
+			model.addAttribute("zzim_list" , zzim_list);
+			
+		}
+		List<ProductVO> product_more = service.Product_more(pvo);
+		
+		/* review paging 처리 */
+		
 		
 		
 		
@@ -113,15 +115,43 @@ public class ProductController {
 		model.addAttribute("product_more_category" , product_more_category);
 		model.addAttribute("product_more" , product_more);
 		model.addAttribute("qna_list", qna_list);
-		model.addAttribute("review_list", review_list);
+		
 		model.addAttribute("product_no" , product_no);
 		
 		return "user/product/goods/goods";
 	}
  	
+// 	@ResponseBody
  	@GetMapping("getReview.do")
- 	public String getReview() {
- 		
+ 	public String getReview(Model model, ProductVO pvo, ProductSearchVO review_svo) {
+		review_svo.setNumberOfProductInPage(1);
+		review_svo.setProduct_no(pvo.getNo());
+		log.debug("review_svo: " + review_svo);
+		List<ReviewVO> review_list = service.Review_list(review_svo);
+		log.debug("review_list: " + review_list);
+		int reviewCount = service.getNumberOfReviewPage(pvo.getNo());
+		int reviewTotalPage = reviewCount / review_svo.getNumberOfProductInPage();
+		if(reviewCount % review_svo.getNumberOfProductInPage() > 0) reviewTotalPage++;
+		Map<String, Object> reviewMap = new HashMap<>();
+		reviewMap.put("count", reviewCount);
+		reviewMap.put("totalPage", reviewTotalPage);
+		
+		int review_endPage = (int)(Math.ceil(review_svo.getPage()/(float)review_svo.getNumberOfPageInIndexList()) * review_svo.getNumberOfPageInIndexList());
+		int review_startPage = review_endPage - (review_svo.getNumberOfPageInIndexList() - 1);
+		if( review_endPage > reviewTotalPage) review_endPage = reviewTotalPage;
+		boolean review_prev = review_startPage > 1;
+		boolean review_next = review_endPage < reviewTotalPage;
+		reviewMap.put("endPage", review_endPage);
+		reviewMap.put("startPage", review_startPage);
+		reviewMap.put("prev", review_prev);
+		reviewMap.put("next", review_next);
+        
+		log.debug("reviewPaging: " + reviewMap);
+        model.addAttribute("reviewPaging", reviewMap);
+        model.addAttribute("review_svo", review_svo);
+        model.addAttribute("review_list", review_list);
+        
+        return "/user/product/goods/reviewList";
  	}
  	
  	

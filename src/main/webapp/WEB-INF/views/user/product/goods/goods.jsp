@@ -137,42 +137,14 @@
 					<div class = "goods_review_QNA">
 						<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
 						<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>
-						<div class="board_contents active" id ='review'>
-					   		 <c:forEach var="item" items="${review_list}">
-					       		 <div class="review">
-						       		 <c:if test="${!empty item.image_url }">
-							             <img src="/resources/img/product/review_img/${item.image_url}" width="100" height="100">
-						       		 </c:if>
-						             <p>평점 : ${item.rating} </p>
-						             <p>내용 : ${item.content} </p>
-						             <p>작성일 : ${item.write_date} </p>
-					        	 </div>
-					    	</c:forEach>
-					    	<div>
-					    		<ul class='paging'>
-			                        <c:if test="${reviewPaging.prev }">
-			                        	<li><a href="list.do?page=${reviewPaging.startPage-1 }"> << </a></li>
-			                        </c:if>
-			                        <c:forEach var="p" begin="${reviewPaging.startPage}" end="${reviewPaging.endPage}">
-			                        	<c:if test="${p == review_svo.page}">
-			                            <li><a href='#'>${p}</a></li>
-			                            </c:if>
-			                            <c:if test="${p != review_svo.page}">
-			                            	<li><a href='getReview.do?no=${product_no }&page=${p}'>${p}</a></li>
-			                            </c:if>
-			                        </c:forEach>
-			                        <c:if test="${reviewPaging.next }">
-			                        	<li><a href="list.do?page=${reviewPaging.endPage+1 }"> >> </a></li>
-			                        </c:if>
-								</ul> 
-					    	</div>
-						</div>
 						
+						<div class="board_contents active" id ='review'>
+							
+						</div>
 						<div class="board_contents" id = "qna">
 					 		<div class="qna_write_button">
 								<button type="button" name="go_qnawrite" onclick="goQnawrite_popup()">qna 작성하기</button>
 							</div>
-					 
 					   		 <c:forEach var="item" items="${qna_list}">
 					       		 <div class="Q" onclick="toggleAnswer(this)" >
 					             	<p> ${item.question_content} (질문 작성일 : ${item.question_write_date}) </p>
@@ -320,5 +292,50 @@ function zzim(){
 		})
 	}
 </script>	
+
+<script>
+//페이지 로딩시 리뷰 가져오는 ajax
+	var htmlData;
+	$.ajax({
+		type: "GET",
+		url:'getReview.do?no=${product_no}',
+		async: false,
+		dataType: "HTML",
+		success:function(data) {
+			htmlData = data;
+		}
+	})
+	
+	let target = $(htmlData);
+	$('#review').append(htmlData);
+	
+	$.each($('.reviewPageButton'), function(i, e){
+		$(e).on('click', getReview);
+	});
+	
+	function getReview(){
+		var htmlData;
+		console.log($(this).data('page'));
+		var page = $(this).data('page');
+		$.ajax({
+			type: "GET",
+			url:'getReview.do?no=${product_no}&page=' + page,
+			async: false,
+			dataType: "HTML",
+			success:function(data) {
+				htmlData = data;
+			}
+		})
+		$('#review').empty();
+		$('#review').append(htmlData);
+		$.each($('.reviewPageButton'), function(i, e){
+			$(e).on('click', getReview);
+		});
+	}
+</script>
+<script>
+//숫자 눌렀을 때 리뷰 가져오는 ajax
+	
+</script>
 </body>
 </html>
