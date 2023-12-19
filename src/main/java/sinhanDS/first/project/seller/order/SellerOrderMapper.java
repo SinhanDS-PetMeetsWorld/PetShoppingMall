@@ -21,4 +21,6 @@ public interface SellerOrderMapper {
 	
 	int delivery_regist(DeliveryVO vo);
 	int update_deliveryNo(OrderDetailVO vo);
+	
+	DeliveryVO getDeliveryVO(int no);
 }

@@ -78,6 +78,18 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 		return true;
 	}
 
+	@Override
+	public List<DeliveryVO> getDeliveryList(List<List<OrderDetailVO>> orderDetailList) {
+		List<DeliveryVO> deliveryList = new ArrayList<>();
+		
+			for(int i=0; i<orderDetailList.size(); i++) {
+				DeliveryVO dvo = mapper.getDeliveryVO(orderDetailList.get(i).get(0).getDelivery_no());
+				deliveryList.add(dvo);
+			
+		}
+		return deliveryList;
+	}
+
 	
 
 }
