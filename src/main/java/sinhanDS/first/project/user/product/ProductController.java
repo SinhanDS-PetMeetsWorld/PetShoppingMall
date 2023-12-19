@@ -124,7 +124,7 @@ public class ProductController {
 // 	@ResponseBody
  	@GetMapping("getReview.do")
  	public String getReview(Model model, ProductVO pvo, ProductSearchVO review_svo) {
-		review_svo.setNumberOfProductInPage(1);
+		review_svo.setNumberOfProductInPage(3);
 		review_svo.setProduct_no(pvo.getNo());
 		log.debug("review_svo: " + review_svo);
 		List<ReviewVO> review_list = service.Review_list(review_svo);
@@ -241,7 +241,7 @@ public class ProductController {
 	
 	@GetMapping("/list.do")
 	public String searchByCategory(HttpServletRequest request, Model model, ProductSearchVO svo) {
-//		if(svo.getNumberOfProductInPage() == 5) svo.setNumberOfProductInPage(15);
+		if(svo.getNumberOfProductInPage() == 5) svo.setNumberOfProductInPage(15);
 		log.debug("svo: " + svo);
 		int count = service.getNumberOfProduct(svo);
 		log.debug("count: " + count);
