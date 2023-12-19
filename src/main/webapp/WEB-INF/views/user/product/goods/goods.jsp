@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/resources/css/common/template.css">
 <style>
-
         .board_area {
             max-width: 600px;
             margin: 0 auto;
@@ -49,58 +48,57 @@
 		<div class="contents">
 			<div class="contentsright">
 				<div>
-					
-						<div id="goods_category" style="width: 720px; height: 100px; border: 1px solid black">
-							<c:forEach var="item" items="${product_more_category}">
-								${catekor.category_name[item.category1]} > 
-								${catekor.category[item.category1][item.category2] } <br>
-							</c:forEach>
-						</div>
-						유저 ID : ${userLoginInfo.id} <br>
-						유저 번호 : ${userLoginInfo.no } 
-						<c:forEach var="item" items="${product_more}">
-							
-								<div class="goods-photo">
-										<c:if test="${empty item.image_url }">
-											<img src="/resources/img/product/no_image.jpg" width="100" height="100">
-										</c:if>
-										<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
-											<img src="${item.image_url }">
-										</c:if>
-										<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
-											<img src="/resources/img/product/registed_img/${item.image_url }">
-										</c:if>
-								</div>
-								<div class="goods-details">
+					<div id="goods_category" style="width: 720px; height: 100px; border: 1px solid black">
+						<c:forEach var="item" items="${product_more_category}">
+							${catekor.category_name[item.category1]} > 
+							${catekor.category[item.category1][item.category2] } <br>
+						</c:forEach>
+					</div>
+					유저 ID : ${userLoginInfo.id} <br>
+					유저 번호 : ${userLoginInfo.no } 
+					<c:forEach var="item" items="${product_more}">
+						
+							<div class="goods-photo">
+								<c:if test="${empty item.image_url }">
+									<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+								</c:if>
+								<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
+									<img src="${item.image_url }">
+								</c:if>
+								<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
+									<img src="/resources/img/product/registed_img/${item.image_url }">
+								</c:if>
+							</div>
+							<div class="goods-details">
+								
+								<div id="goods_menu">
+								
+									<div class ="goods_no" style="width: 720px; height: 100px; border: 1px solid black;">
+										제품번호: ${product_no} 
+									</div>
 									
-									<div id="goods_menu">
+									<div class="goods-name"
+										style="width: 720px; height: 100px; border: 1px solid black;">
+										<h2>${item.name}</h2>
+									</div>
+								
+									<div class="goods-price"
+										style="width: 720px; height: 100px; border: 1px solid black;">
+										가격 : ${item.price}
+									</div>
 									
-										<div class ="goods_no" style="width: 720px; height: 100px; border: 1px solid black;">
-											제품번호: ${product_no} 
-										</div>
-										
-										<div class="goods-name"
-											style="width: 720px; height: 100px; border: 1px solid black;">
-											<h2>${item.name}</h2>
-										</div>
+									<div class="goods-made"
+										style="width: 720px; height: 100px; border: 1px solid black;">
+										제조사: ${item.company} <br> 
+										브랜드: ${item.brand } <br>
+										재 고: ${item.stock } <br>
+						
+									</div>
 									
-										<div class="goods-price"
-											style="width: 720px; height: 100px; border: 1px solid black;">
-											가격 : ${item.price}
-										</div>
-										
-										<div class="goods-made"
-											style="width: 720px; height: 100px; border: 1px solid black;">
-											제조사: ${item.company} <br> 
-											브랜드: ${item.brand } <br>
-											재 고: ${item.stock } <br>
-							
-										</div>
-										
-										<div class="goods-explain"
-											style="width: 720px; height: 100px; border: 1px solid black;">
-											설명: ${item.description} <br>
-										
+									<div class="goods-explain"
+										style="width: 720px; height: 100px; border: 1px solid black;">
+										설명: ${item.description} <br>
+									
 									</div>	
 								</div>		
 						</c:forEach>									
@@ -135,74 +133,85 @@
 											
 								<br>	
 
-						<div class = "goods_review_QNA">
-								<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
-								<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>
-								<div class="board_contents active" id ='review'>
-							   		 <c:forEach var="item" items="${review_list}">
-							       		 <div class="review">
-							             <img src=" ${item.image_url}">
-							             <p>평점 : ${item.rating} </p>
-							             <p>내용 : ${item.content} </p>
-							             <p>작성일 : ${item.write_date} </p>
-							        	 </div>
-							    	</c:forEach>
-								</div>
-							
-								<div class="board_contents" id = "qna">
+					<div class = "goods_review_QNA">
+						<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
+						<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>
 						
-						 		<div class="qna_write_button">
-									<button type="button" name="go_qnawrite" onclick="goQnawrite_popup()">qna 작성하기</button>
-								</div>
-						 
-						   		 <c:forEach var="item" items="${qna_list}">
-						       		 
-						       		 <div class="Q" onclick="toggleAnswer(this)" >
-						             	<p> ${item.question_content} (질문 작성일 : ${item.question_write_date}) </p>
-						        	 </div>
-						        
-						        	 <div class="A" style="display:none;">
-						             	<p style="color : red;"> ${item.answer_content} (답변 작성일 : ${item.answer_write_date})</p>
-						        	 </div>
-						    	
-						    	</c:forEach>
+						<div class="board_contents active" id ='review'>
+							
+						</div>
+						<div class="board_contents" id = "qna">
+							<div class="qna_write_button">
+								<button type="button" name="go_qnawrite" onclick="goQnawrite_popup()">qna 작성하기</button>
 							</div>
-					</div>
-									</div>
-								</div>
+							<div id="qna_container">
+								
 							</div>
 						</div>
-						
-						
 					</div>
+					<%--
+					<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
+						<form name="option_form" id="option_form">
+						<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
+							<c:if test="${(status.index == 0) || (product_more_option[status.index - 1].title != ovo.title)}">
+								${ovo.title } 
+								<select name="option_no" id="option_no">
+									</c:if>
+											<option value="${ovo.no}"> ${ovo.content } :  ${ovo.price }원</option>
+									<c:if test="${(product_more_option[status.index + 1].title != ovo.title)}">
+								</select><br>
+							</c:if>
+						</c:forEach>
+						<input type="hidden" name="user_no" value="${userLoginInfo.no}">
+						<input type="hidden" name="product_no" value="${product_no}">
+						</form>
+					</div>
+					
+					수량 <input type="number" name="choose_number" value=0>
+					
+					<input type="button" style="background-color: grey;" value="장바구니 담기" onclick="addcart()"> 
+					<input type="button" style="background-color: yellow" value="바로 구매" >
+						
+					<c:if test ="${empty zzim_list}">	
+						찜: <img id="zzim_Off" onclick="zzim();" src="${pageContext.request.contextPath}/resources/img/product/empty_heart.png"/>
+					</c:if>
+					<c:if test ="${!empty zzim_list}">	
+						찜: <img id="zzim_On" onclick="zzim();" src="${pageContext.request.contextPath}/resources/img/product/fill_heart.png"/>
+					</c:if>
+								
+					<br>	
+
+					<div class = "goods_review_QNA">
+						<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
+						<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>
+						
+						<div class="board_contents active" id ='review'>
+							
+						</div>
+						<div class="board_contents" id = "qna">
+							<div class="qna_write_button">
+								<button type="button" name="go_qnawrite" onclick="goQnawrite_popup()">qna 작성하기</button>
+							</div>
+							<div id="qna_container">
+								
+							</div>
+						</div>
+					</div>
+					 --%>
 				</div>
 			</div>
-
-			<div class="footer">
-				<div class="footer-color"></div>
-			</div>
 		</div>
+
+		<div class="footer">
+			<div class="footer-color"></div>
+		</div>
+	</div>
 		
 <script>
 
 function goQnawrite_popup(){
-
-/*	userNo
-	if (userNo ==''){
-		
-		
-	}
-*/
-	/*var user = userLoginInfo.id;*/
 	var product_no = ${product_no};
 	var qnaWrite = 'qnawrite.do?no='+ product_no;
-	
-	/*
-	if (user ==''){
-		alert('로그인 후 이용 가능합니다.');
-		return 'user/login.do';
-	}
-	*/
 	window.open(qnaWrite , 'Q&A등록', 'width=500, height=600');
 }
 
@@ -324,6 +333,85 @@ function zzim(){
 			}
 		})
 	}
-</script>		
+</script>	
+
+<script>
+//페이지 로딩시 리뷰 가져오는 ajax
+	var htmlData;
+	$.ajax({
+		type: "GET",
+		url:'getReview.do?no=${product_no}',
+		async: false,
+		dataType: "HTML",
+		success:function(data) {
+			htmlData = data;
+		}
+	})
+	
+	let target = $(htmlData);
+	$('#review').append(htmlData);
+	
+	$.each($('.reviewPageButton'), function(i, e){
+		$(e).on('click', getReview);
+	});
+	
+	function getReview(){
+		var htmlData;
+		console.log($(this).data('page'));
+		var page = $(this).data('page');
+		$.ajax({
+			type: "GET",
+			url:'getReview.do?no=${product_no}&page=' + page,
+			async: false,
+			dataType: "HTML",
+			success:function(data) {
+				htmlData = data;
+			}
+		})
+		$('#review').empty();
+		$('#review').append(htmlData);
+		$.each($('.reviewPageButton'), function(i, e){
+			$(e).on('click', getReview);
+		});
+	}
+</script>
+<script>
+//페이지 로딩시 qna 가져오는 ajax
+	var htmlData;
+	$.ajax({
+		type: "GET",
+		url:'getQnA.do?no=${product_no}',
+		async: false,
+		dataType: "HTML",
+		success:function(data) {
+			htmlData = data;
+		}
+	})
+	console.log(htmlData);
+	$('#qna_container').append(htmlData);
+	
+	$.each($('.qnaPageButton'), function(i, e){
+		$(e).on('click', getQnA);
+	});
+	
+	function getQnA(){
+		var htmlData;
+		var page = $(this).data('page');
+		$.ajax({
+			type: "GET",
+			url:'getQnA.do?no=${product_no}&page=' + page,
+			async: false,
+			dataType: "HTML",
+			success:function(data) {
+				htmlData = data;
+			}
+		})
+		$('#qna_container').empty();
+		$('#qna_container').append(htmlData);
+		$.each($('.qnaPageButton'), function(i, e){
+			$(e).on('click', getQnA);
+		});
+	}
+</script>
 </body>
 </html>

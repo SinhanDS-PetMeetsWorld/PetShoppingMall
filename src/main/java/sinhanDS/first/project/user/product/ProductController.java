@@ -1,6 +1,8 @@
 package sinhanDS.first.project.user.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
@@ -29,6 +32,7 @@ import sinhanDS.first.project.user.vo.UserVO;
 
 @Controller
 @RequestMapping("/user/product")
+@Slf4j
 public class ProductController {
 	@Autowired
 	private ProductService service;
@@ -69,8 +73,6 @@ public class ProductController {
 			
 		}
 		List<ProductVO> product_more = service.Product_more(pvo);
-		List<ProductQnAVO> qna_list = service.QNA_list(qnavo);
-		List<ReviewVO> review_list = service.Review_list(revvo);
 		List<ProductCategoryVO> product_more_category = service.Product_more_category(pcvo);
 		List<ProductOptionVO> product_more_option = service.Product_more_option(povo);
 		ProductCategoryVO catekor = new ProductCategoryVO();
@@ -79,13 +81,71 @@ public class ProductController {
 		model.addAttribute("catekor" , catekor);
 		model.addAttribute("product_more_category" , product_more_category);
 		model.addAttribute("product_more" , product_more);
-		model.addAttribute("qna_list", qna_list);
-		model.addAttribute("review_list", review_list);
 		model.addAttribute("product_no" , product_no);
 		
 		return "user/product/goods/goods";
 	}
+ 	@GetMapping("getReview.do")
+ 	public String getReview(Model model, ProductVO pvo, ProductSearchVO svo) {
+		svo.setNumberOfProductInPage(svo.getNumberInPage_review());
+		svo.setProduct_no(pvo.getNo());
+		log.debug("review_svo: " + svo);
+		List<ReviewVO> list = service.Review_list(svo);
+		log.debug("review_list: " + list);
+		int count = service.getNumberOfReviewPage(pvo.getNo());
+		int totalPage = count / svo.getNumberOfProductInPage();
+		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		Map<String, Object> map = new HashMap<>();
+		map.put("count", count);
+		map.put("totalPage", totalPage);
+		
+		int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList()) * svo.getNumberOfPageInIndexList());
+		int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+		if( endPage > totalPage) endPage = totalPage;
+		boolean prev = startPage > 1;
+		boolean next = endPage < totalPage;
+		map.put("endPage", endPage);
+		map.put("startPage", startPage);
+		map.put("prev", prev);
+		map.put("next", next);
+        
+        model.addAttribute("reviewPaging", map);
+        model.addAttribute("review_svo", svo);
+        model.addAttribute("review_list", list);
+        
+        return "/user/product/goods/reviewList";
+ 	}
  	
+ 	@GetMapping("getQnA.do")
+ 	public String getQnA(Model model, ProductVO pvo, ProductSearchVO svo) {
+ 		svo.setNumberOfProductInPage(svo.getNumberInPage_qna());
+		svo.setProduct_no(pvo.getNo());
+		log.debug("svo: " + svo);
+		List<ProductQnAVO> list = service.getQna_list(svo);
+		log.debug("list: " + list);
+		int count = service.getNumberOfQnA(pvo.getNo());
+		int totalPage = count / svo.getNumberOfProductInPage();
+		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		Map<String, Object> map = new HashMap<>();
+		map.put("count", count);
+		map.put("totalPage", totalPage);
+		
+		int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList()) * svo.getNumberOfPageInIndexList());
+		int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+		if( endPage > totalPage) endPage = totalPage;
+		boolean prev = startPage > 1;
+		boolean next = endPage < totalPage;
+		map.put("endPage", endPage);
+		map.put("startPage", startPage);
+		map.put("prev", prev);
+		map.put("next", next);
+        
+        model.addAttribute("qnaPaging", map);
+        model.addAttribute("qna_svo", svo);
+        model.addAttribute("qna_list", list);
+        
+        return "/user/product/goods/QnAList";
+ 	}
 	@PostMapping("/zziminsert.do")
 	public String zzim_insert(Model model, HttpServletRequest request, SaveBoxVO savo) {
 		

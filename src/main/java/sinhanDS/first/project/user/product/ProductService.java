@@ -33,7 +33,14 @@ public interface ProductService {
 	
 	public int QNA_insert(ProductQnAVO qnavo , HttpServletRequest request );
 	
-	List<ReviewVO> Review_list (ReviewVO vo);
+	List<ReviewVO> Review_list (ProductSearchVO svo);
+	
+	List<ProductQnAVO> getQna_list (ProductSearchVO svo);
+	
+	int getNumberOfReviewPage(int pno);
+	
+	int getNumberOfQnA(int pno);
+	
 	
 	List<ProductVO> product_list(ProductSearchVO vo);
 	

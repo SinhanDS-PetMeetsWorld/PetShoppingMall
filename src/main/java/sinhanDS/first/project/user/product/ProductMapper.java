@@ -16,12 +16,19 @@ import sinhanDS.first.project.user.vo.UserVO;
 
 @Mapper
 public interface ProductMapper {
-	// QNA 리스트	
 	List<ProductQnAVO> QNA_list (ProductQnAVO vo);
-	// 리뷰 리스트
-	List<ReviewVO> Review_list (ReviewVO vo);
+	
+	//얘
+	List<ReviewVO> Review_list (ProductSearchVO svo);
+	//얘
+	int getNumberOfReviewPage(int pno);
 	
 	List<ProductVO> Product_more (ProductVO vo);
+	
+	//얘
+	List<ProductQnAVO> QNA_listBySearchVO(ProductSearchVO svo);
+	//얘
+	public int getNumberOfQnA(int pno);
 	
 	List<ProductCategoryVO> Product_more_category(ProductCategoryVO vo); 
 	
