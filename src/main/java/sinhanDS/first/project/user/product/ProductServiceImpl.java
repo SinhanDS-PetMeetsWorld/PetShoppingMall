@@ -124,9 +124,9 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public List<SaveBoxVO> zzim_list(SaveBoxVO vo) {
-		List<SaveBoxVO> zzim_list = mapper.zzim_list(vo);
-		return zzim_list;
+	public List<SaveBoxVO> zzim_check(SaveBoxVO vo) {
+		List<SaveBoxVO> zzim_check = mapper.zzim_check(vo);
+		return zzim_check;
 	}
 
 

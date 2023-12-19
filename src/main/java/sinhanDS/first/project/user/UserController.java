@@ -1,5 +1,6 @@
 package sinhanDS.first.project.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
+import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
@@ -343,19 +347,104 @@ public class UserController {
 		
 	}
 	
-	
+	// (신정훈) 찜 리스트 구현 12 - 18
 	@GetMapping("/list_user_zzim.do")
-	public String list_zzim(Model model , HttpSession sess , UserVO uvo , ProductVO pvo , SaveBoxVO savo){
+	public String list_zzim(Model model , HttpSession sess , UserVO uvo , ProductVO prvo , SaveBoxVO savo){
 		
-		UserVO vo= (UserVO)sess.getAttribute("userLoginInfo");
-		List<SaveBoxVO> zzim_list = service.zzim_list(savo);
-		System.out.println("여기에도 찜 리스트 나오나 ? " + zzim_list);
+		UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
+		int user_no = login.getNo();
 		
+		List<SaveBoxVO> zzim_list = service.zzim_list(user_no);
+		List<UserVO> user_list = service.user_list(user_no);
+		List<ProductVO> product_list = service.product_list(savo.getProduct_no());
 		
+		List<List<String>> save_list2 = new ArrayList<List<String>>();	
 		
+		if (zzim_list.size() != 0) {
+			
+			// 테이블 매핑
+			for (int i = 0; i < zzim_list.size(); i++ ) {
+			List<String> save_list = new ArrayList<String>();
+			
+				// 상품 정보 구하기
+				for (int k = 0; k < product_list.size(); k++) {
+					if (zzim_list.get(i).getProduct_no() == product_list.get(k).getNo()) {
+						save_list.add(String.valueOf(product_list.get(k).getImage_url())); // 상품 이미지 1
+						save_list.add(String.valueOf(product_list.get(k).getName())); // 상품 명 2
+						save_list.add(String.valueOf(product_list.get(k).getDescription())); // 상품 설명 3
+						save_list.add(String.valueOf(product_list.get(k).getPrice())); // 상품 가격 4
+						save_list.add(String.valueOf(product_list.get(k).getNo())); // 싱품 번호 5
+					}
+				}
+				// 유저 번호 구하기
+				for(int j = 0; j < user_list.size(); j++) {
+					if(zzim_list.get(i).getUser_no() == user_list.get(j).getNo()) {
+						save_list.add(String.valueOf(user_list.get(j).getNo())); // 유저 번호 6 
+					}
+				}
+				
+				save_list2.add(save_list);
+				System.out.println("세이블 2" + save_list2);
+				
+				}
+		}
+			
+		model.addAttribute("save_list2" , save_list2);
 		
 		return "user/zzim/zzim_box";
-		
-		
+	}
+	
+	// (신정훈) 리뷰 리스트 구현 12 - 19
+		@GetMapping("/list_user_review.do")
+		public String list_review(Model model , HttpSession sess , UserVO uvo , ReviewVO revo , ProductOptionVO povo , OrderDetailVO odvo , OrderDetailOptionVO odovo){
+			
+			UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
+			int user_no = login.getNo();
+			 
+			List<ReviewVO> review_list = service.review_list(user_no);
+			System.out.println("리뷰 리스트 " +  review_list);	
+			
+		    List<OrderDetailVO> order_detail = service.order_detail(odvo);
+		    System.out.println("오더 디테일" + order_detail);
+		    
+			List<OrderDetailOptionVO> order_detail_option = service.order_detail_option(odovo);
+			System.out.println("옵션 리스트" + order_detail_option);
+			
+			List<List<String>> review_list2 = new ArrayList<List<String>>();	
+			
+			if (review_list.size() != 0) {
+				
+				// 테이블 매핑
+				for (int i = 0; i < review_list.size(); i++ ) {
+				List<String> review_list1 = new ArrayList<String>();
+				
+				
+					review_list1.add(String.valueOf(review_list.get(i).getImage_url())); // 이미지 0
+				
+				
+				
+					// 상품 이름 매핑
+					for (int k = 0; k < order_detail.size(); k++) {
+						if ( review_list.get(i).getProduct_no() == order_detail.get(k).getProduct_no() &&
+							 review_list.get(i).getOrder_no() == order_detail.get(k).getOrder_no()){
+							review_list1.add(String.valueOf(order_detail.get(k).getProduct_name())); // 상품 명 1
+							review_list1.add(String.valueOf(order_detail.get(k).getProduct_price())); // 상품 가격 2 
+						}
+					}
+					
+					
+					review_list1.add(String.valueOf(review_list.get(i).getContent())); // 내용 3 
+					review_list1.add(String.valueOf(review_list.get(i).getProduct_no())); // 제품 번호 4					
+					review_list1.add(String.valueOf(review_list.get(i).getWrite_date())); // 작성일 5
+					review_list1.add(String.valueOf(review_list.get(i).getRating())); // 평점 6
+					
+					review_list2.add(review_list1);
+					}
+					
+					System.out.println("오늘 폼 미쳤다 2" + review_list2);
+			
+			}
+			model.addAttribute("review_list2" , review_list2);	
+			return "user/review/review_list";
 	}
 }

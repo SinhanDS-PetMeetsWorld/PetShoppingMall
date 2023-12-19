@@ -126,10 +126,10 @@
 								value="장바구니 담기" onclick="addcart()"> <input type="button"
 								style="background-color: yellow" value="바로 구매">
 								
-								<c:if test ="${empty zzim_list}">	
+								<c:if test ="${empty zzim_check}">	
 									찜: <img id="zzim_Off" onclick="zzim();" src="${pageContext.request.contextPath}/resources/img/product/empty_heart.png"/>
 								</c:if>
-								<c:if test ="${!empty zzim_list}">	
+								<c:if test ="${!empty zzim_check}">	
 									찜: <img id="zzim_On" onclick="zzim();" src="${pageContext.request.contextPath}/resources/img/product/fill_heart.png"/>
 								</c:if>
 											
@@ -264,7 +264,7 @@ function zzim(){
 				   user_no : user_no
 			},
 			success : function(response){
-				alert("찜등록이 되었습니다.");
+				alert("찜 등록이 되었습니다.");
 				$('#zzim_off').attr('src' ,'/resources/img/product/fill_heart.png');
 				history.go(0);
 			},

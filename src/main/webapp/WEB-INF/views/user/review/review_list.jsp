@@ -27,47 +27,50 @@
 					<div>	
 						회원 번호 : ${userLoginInfo.no } <br>
 						
-					<h1>찜 박스</h1>
-				<c:forEach items="${save_list2}" varStatus = "zzim_quant" >
+					<h1>작성한 리뷰</h1>
+					
+					
+				<c:forEach items="${review_list2}" varStatus = "review_quant" >
 					<div>
+					
 						<div>	
-							<c:if test="${empty save_list2[zzim_quant.index][0] }">
-								<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+							<c:if test="${review_list2[review_quant.index][0] eq null}">
+								<img src="C:/Users/User/git/PetShoppingMall/src/main/webapp/resources/img/product/review_img/" width="100" height="100">
 							</c:if>
 							
-							<c:if test="${!empty save_list2[zzim_quant.index][0] && fn:substring(save_list2[zzim_quant.index][0], 0, 1) == 'h' }">
-								<img src="${save_list2[zzim_quant.index][0] }" width="100" height="100">
+							<c:if test="${!empty review_list2[review_quant.index][0] && fn:substring(review_list2[review_quant.index][0], 0, 1) == 'h' }">
+								<img src="${review_list2[review_quant.index][0] }" width="100" height="100">
 							</c:if>
 							
-							<c:if test="${!empty save_list2[zzim_quant.index][0] && !(fn:substring(save_list2[zzim_quant.index][0], 0, 1) == 'h') }">
-								<img src="/resources/img/product/registed_img/${save_list2[zzim_quant.index][0]}" width="100" height="100"><br>
+							<c:if test="${!empty review_list2[review_quant.index][0] && !(fn:substring(review_list2[review_quant.index][0], 0, 1) == 'h') }">
+								<img src="C:/Users/User/git/PetShoppingMall/src/main/webapp/resources/img/product/review_img/"${review_list2[review_quant.index][0]}" width="100" height="100"><br>
 							</c:if>
 						</div>	
-							
-						<div>
-							<a href= "/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}">
-										<button type ="button">상세 보기 </button></a>
-							
-							<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
-							<button class="zzim_On" data-no="${save_list2[zzim_quant.index][4]}"> 찜 목록 해제 </button> <br>
-							
-							제품 번호 : ${save_list2[zzim_quant.index][4]} <br>
+						
+							<c:if test="${!empty review_list2[review_quant.index][1] }">
+								상품명: ${review_list2[review_quant.index][1] } <br>
 							</c:if>
-							<c:if test = "${not empty save_list2[zzim_quant.index][1]}">
-						   	상품명 : ${save_list2[zzim_quant.index][1]} <br>
+							<c:if test="${!empty review_list2[review_quant.index][2] }">
+								가 격: ${review_list2[review_quant.index][2] } <br>
 							</c:if>
-							<c:if test = "${not empty save_list2[zzim_quant.index][2]}">
-							설명 : ${save_list2[zzim_quant.index][2]} <br>
+							<c:if test="${!empty review_list2[review_quant.index][3] }">
+							 리뷰 내용: ${review_list2[review_quant.index][3] } <br>
 							</c:if>
-							<c:if test = "${not empty save_list2[zzim_quant.index][3]}">
-							가격 : ${save_list2[zzim_quant.index][3]} <br>
+							<c:if test="${!empty review_list2[review_quant.index][4] }">
+							상품 번호:	 ${review_list2[review_quant.index][4] } <br>
 							</c:if>
-							<c:if test = "${not empty save_list2[zzim_quant.index][5]}">
-							유저 번호 : ${save_list2[zzim_quant.index][5]} <br>
+							<c:if test="${!empty review_list2[review_quant.index][5] }">
+							리뷰 작성일: ${review_list2[review_quant.index][5] } <br>
 							</c:if>
-						</div>
-					 </div>  
-				   </c:forEach>			
+							<c:if test="${!empty review_list2[review_quant.index][6] }">
+							평점: ${review_list2[review_quant.index][6] } <br>
+							</c:if>
+							<br>
+						
+				
+			
+					</div>
+			   </c:forEach>			
 				</div>
 			</div>
         </div>

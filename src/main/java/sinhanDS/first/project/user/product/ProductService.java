@@ -53,7 +53,7 @@ public interface ProductService {
 	
 	int zzim_cancel (SaveBoxVO vo);
 
-	List<SaveBoxVO> zzim_list(SaveBoxVO vo);
+	List<SaveBoxVO> zzim_check(SaveBoxVO vo);
 	
 	
 }
