@@ -41,6 +41,7 @@ public interface ProductService {
 	
 	int getNumberOfQnA(int pno);
 	
+	int getNumberOfProduct(ProductSearchVO vo);
 	
 	List<ProductVO> product_list(ProductSearchVO vo);
 	

@@ -71,6 +71,17 @@
 		VALUES
 		(#{order_dno}, #{product_no}, #{title}, #{content}, #{price});
 	</insert>
+	<insert id="registReview" parameterType="sinhanDS.first.project.product.vo.ReviewVO">
+		INSERT INTO PetShoppingMall.review
+		(
+			user_no, product_no, order_no, order_dno,
+			rating, content, image_url, write_date)
+		VALUES
+		(
+			#{user_no}, #{product_no}, #{order_no}, #{order_dno},
+			#{rating}, #{content}, #{image_url}, sysdate()
+		);
+	</insert>
 	
 	<select id="getOrderListNotDeleted" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
 		SELECT * 
@@ -85,6 +96,9 @@
 	</select>
 	<select id="getOrderDetailOptionList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailOptionVO">
 		SELECT * FROM order_detail_option WHERE order_dno=#{order_dno}
+	</select>
+	<select id="getOrderDetailVO" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail WHERE no=#{no}
 	</select>
 	
 	
@@ -124,4 +138,11 @@
 	<select id="getSellerInfo" parameterType="int" resultType="sinhanDS.first.project.seller.vo.SellerVO">
 		SELECT no, zipcode, addr1, addr2 FROM seller WHERE no = #{no}  
 	</select>
+	<select id="getReview" parameterType="int" resultType="sinhanDS.first.project.product.vo.ReviewVO">
+		SELECT * FROM review WHERE order_dno = #{order_dno}  
+	</select>
+	
+	<update id="updateProductRating" parameterType="sinhanDS.first.project.product.vo.ProductVO">
+		UPDATE product SET rating=#{rating}, review_cnt=#{review_cnt} WHERE no=#{no}
+	</update>
 </mapper>

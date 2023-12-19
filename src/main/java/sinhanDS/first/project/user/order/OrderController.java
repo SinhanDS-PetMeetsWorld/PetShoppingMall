@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
@@ -24,6 +25,8 @@ import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.product.vo.ReviewVO;
+import sinhanDS.first.project.seller.product.SellerProductService;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.UserService;
 import sinhanDS.first.project.user.vo.CartVO;
@@ -38,7 +41,8 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private SellerProductService sellerProductService;
 	/* TODO: 리스트가 들어온 후에는 갯수가 얼마나 길어질지 모르니 POSTMAPPING으로 바꿔야한다*/
 	@GetMapping("pay.do")
 	public String pay(Model model) {
@@ -118,9 +122,9 @@ public class OrderController {
         map.put("count", count);
         map.put("totalPage", totalPage);
         
-        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfProductInPage())*svo.getNumberOfProductInPage());
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList())*svo.getNumberOfPageInIndexList());
         log.debug("endPage: " + endPage);
-        int startPage = endPage - (svo.getNumberOfProductInPage() - 1);
+        int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
         if(endPage > totalPage) endPage = totalPage;
         boolean prev = startPage > 1;
         boolean next = endPage < totalPage;
@@ -165,7 +169,7 @@ public class OrderController {
 		List<String> img_list = orderService.getImageList(dvo_list);
 		log.debug("img_list: " + img_list);
 		List<Integer> review_list = orderService.getReviewStatus(dvo_list);
-		log.debug("review_list", review_list);
+		log.debug("review_list: ", review_list);
 		model.addAttribute("dvo_list", dvo_list);
 		model.addAttribute("ovo_list", ovo_list);
 		model.addAttribute("img_list", img_list);
@@ -188,14 +192,7 @@ public class OrderController {
 	@PostMapping("request_cancle.do")
 	public String do_request_cancle(OrderDetailVO dvo, HttpServletResponse response) {
 		orderService.cancle(dvo);
-		try {
-			PrintWriter pw = response.getWriter();
-			pw.write("<script>");
-			pw.write("opener.parent.location.reload();");
-			pw.write("window.close();");
-			pw.write("</script>");
-		}catch(Exception e) {e.printStackTrace();}
-		return null;
+		return "common/reloadParent";
 	}
 	
 	@GetMapping("request_refound.do")
@@ -209,14 +206,7 @@ public class OrderController {
 	@PostMapping("request_refound.do")
 	public String do_request_refound(OrderDetailVO dvo, HttpServletResponse response) {
 		orderService.refound(dvo);
-		try {
-			PrintWriter pw = response.getWriter();
-			pw.write("<script>");
-			pw.write("opener.parent.location.reload();");
-			pw.write("window.close();");
-			pw.write("</script>");
-		}catch(Exception e) {e.printStackTrace();}
-		return null;
+		return "common/reloadParent";
 	}
 	
 	@GetMapping("refound_info.do")
@@ -231,15 +221,31 @@ public class OrderController {
 	}
 	
 	@GetMapping("write_review.do")
-	public String write_review(HttpServletRequest request, OrderDetailVO dvo) {
-		UserVO uvo = (UserVO)request.getSession().getAttribute("userLoginInfo");
-		log.debug("userNO: " + uvo.getNo());
-		
+	public String write_review(Model model, HttpServletRequest request, OrderDetailVO dvo) {
+		log.debug("dvo: " + dvo);
+		dvo = orderService.getFullOrderDetailVO(dvo);
+		model.addAttribute("dvo", dvo);
 		return "/user/order/write_review";
 	}
+	
 	@PostMapping("write_review.do")
-	public String tt() {
-		return null;
+	public String do_write_review(HttpServletRequest request, @RequestParam MultipartFile filename, ReviewVO rvo, OrderDetailVO dvo) {
+		log.debug(filename.getName());
+		if (filename != null) {
+			rvo = orderService.upload_file(filename, rvo);
+		}
+		UserVO uvo = (UserVO)request.getSession().getAttribute("userLoginInfo");
+		rvo.setUser_no(uvo.getNo());
+		orderService.updateProductRating(rvo);
+		orderService.registReview(rvo);
+		return "common/reloadParent";
 	}
 	
+	@GetMapping("read_review.do")
+	public String read_review(Model model, OrderDetailVO dvo) {
+		ReviewVO rvo = orderService.getReview(dvo.getNo());
+		model.addAttribute("rvo", rvo);
+		log.debug("출력 rvo: " + rvo);
+		return "/user/order/read_review";
+	}
 }

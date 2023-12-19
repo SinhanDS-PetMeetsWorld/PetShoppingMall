@@ -97,10 +97,10 @@
 		           	        </select>
 		                </span>
 		                <span class="sortnum">
-		                  	<select>
-		                      	<option value="15">15개씩</option>
-		                        <option value="25">25개씩</option>
-		                        <option value="40">40개씩</option>
+		                  	<select name="numberOfProductInPage">
+		                      	<option value="15"  <c:if test="${productSearchVO.numberOfProductInPage==15 }">selected</c:if>>15개씩</option>
+		                        <option value="25"  <c:if test="${productSearchVO.numberOfProductInPage==25 }">selected</c:if>>25개씩</option>
+		                        <option value="40"  <c:if test="${productSearchVO.numberOfProductInPage==40 }">selected</c:if>>40개씩</option>
 		                    </select>
 		                </span>
                     </form>
@@ -148,6 +148,24 @@
 						<c:if test="${status.index%5 == 4}"><p style=clear:both;></p><br></c:if> 
 					</c:forEach>
 					</c:if>
+				</div>
+				<div>
+					<ul class='paging'>
+                        <c:if test="${paging.prev }">
+                        	<li><a href="list.do?category1=${category1}&category2=${category2 }&page=${paging.startPage-1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> << </a></li>
+                        </c:if>
+                        <c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
+                        	<c:if test="${p == productSearchVO.page}">
+                            <li><a href='#;' class='current'>${p}</a></li>
+                            </c:if>
+                            <c:if test="${p != productSearchVO.page}">
+                            <li><a href='list.do?category1=${category1}&category2=${category2 }&page=${p}&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype}'>${p}</a></li>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${paging.next }">
+                        	<li><a href="list.do?category1=${category1}&category2=${category2 }&page=${paging.endPage+1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> >> </a></li>
+                        </c:if>
+					</ul> 
 				</div>
 			</div>
         </div>

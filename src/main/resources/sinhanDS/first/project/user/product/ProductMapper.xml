@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.user.product.ProductMapper">
-	
+	<sql id="whereSql">
+		WHERE product_category.category1 = #{category1} 
+		<if test="category2 != 9999">AND product_category.category2 = #{category2} </if>
+		AND price >= #{minprice} AND #{maxprice} >= price
+		<if test="totalSearchWord != null and totalSearchWord != ''">
+			AND (name LIKE '%${totalSearchWord}%' OR company LIKE '%${totalSearchWord}%' OR brand LIKE '%${totalSearchWord}%')
+		</if>
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchType == 'all'">
+				AND (name LIKE '%${searchWord}%' OR company LIKE '%${searchWord}%' OR brand LIKE '%${searchWord}%')
+			</if>
+			<if test="searchType != 'all' and searchType != null">
+				AND (${searchType} LIKE '%${searchWord}%')
+			</if>
+		</if>
+	</sql>
+	<sql id="orderSql">
+		ORDER BY 
+		<if test="sorttype != null and sorttype != ''">
+			<if test="sorttype == 'sortname'"> name ASC, </if>
+			<if test="sorttype == 'sortminprice'"> price ASC, </if>
+			<if test="sorttype == 'sortmaxprice'"> price DESC, </if>
+		</if>
+		rating DESC
+	</sql>
+	<sql id="limitSql">
+		LIMIT #{startIdx}, #{numberOfProductInPage}
+	</sql>
 	<select id="Product_more" parameterType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT * 
 		FROM product
@@ -67,31 +94,21 @@
 			</selectKey>
     </insert>
 	
+	<select id="getNumberOfProduct" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="int">
+		SELECT count(*)
+		FROM product INNER JOIN product_category 
+			ON product.no = product_category.product_no
+		<include refid="whereSql"/>
+		<include refid="orderSql"/>
+	</select>
+	
 	<select id="product_list" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT *
 		FROM product INNER JOIN product_category 
 			ON product.no = product_category.product_no
-		WHERE product_category.category1 = #{category1} 
-			<if test="category2 != 9999">AND product_category.category2 = #{category2} </if>
-			AND price >= #{minprice} AND #{maxprice} >= price
-			<if test="totalSearchWord != null and totalSearchWord != ''">
-				AND (name LIKE '%${totalSearchWord}%' OR company LIKE '%${totalSearchWord}%' OR brand LIKE '%${totalSearchWord}%')
-			</if>
-			<if test="searchWord != null and searchWord != ''">
-				<if test="searchType == 'all'">
-					AND (name LIKE '%${searchWord}%' OR company LIKE '%${searchWord}%' OR brand LIKE '%${searchWord}%')
-				</if>
-				<if test="searchType != 'all' and searchType != null">
-					AND (${searchType} LIKE '%${searchWord}%')
-				</if>
-			</if>
-		ORDER BY 
-			<if test="sorttype != null and sorttype != ''">
-				<if test="sorttype == 'sortname'"> name ASC, </if>
-				<if test="sorttype == 'sortminprice'"> price ASC, </if>
-				<if test="sorttype == 'sortmaxprice'"> price DESC, </if>
-			</if>
-			rating DESC;
+		<include refid="whereSql"/>
+		<include refid="orderSql"/>
+		<include refid="limitSql"/>
 	</select>
 	
 	<select id="total_product_search" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
