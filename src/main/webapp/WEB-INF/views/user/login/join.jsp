@@ -198,7 +198,7 @@
     <h2>회원 가입</h2>
     <hr>
     <div>
-        <a href="">판매자로 가입하기</a>
+        <a href="/seller/join.do">판매자로 가입하기</a>
     </div>
     <hr>
     <form name="regist_form" id="frm" action="regist.do" method="post">

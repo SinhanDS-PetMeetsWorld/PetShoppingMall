@@ -28,6 +28,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.zaxxer.hikari.HikariDataSource;
 
 import sinhanDS.first.project.util.file.FileController;
+import sinhanDS.first.project.util.interceptor.AmdinLoginInterceptor;
 import sinhanDS.first.project.util.interceptor.CategoryInterceptor;
 import sinhanDS.first.project.util.interceptor.SellerLoginInterceptor;
 import sinhanDS.first.project.util.interceptor.UserLoginInterceptor;
@@ -113,6 +114,10 @@ public class MvcConfig implements WebMvcConfigurer{
 		return new SellerLoginInterceptor();
 	}
 	@Bean
+	public AmdinLoginInterceptor adminLoginIntercepton() {
+		return new AmdinLoginInterceptor();
+	}
+	@Bean
 	public CategoryInterceptor categoryInterceptor() {
 		return new CategoryInterceptor();
 	}
@@ -146,6 +151,13 @@ public class MvcConfig implements WebMvcConfigurer{
 						.addPathPatterns("/")
 						.addPathPatterns("/user/**")
 						.addPathPatterns("/user/product/**");
+		
+		registry.addInterceptor(adminLoginIntercepton())
+						.addPathPatterns("/admin/**")
+						.excludePathPatterns("/admin")
+						.excludePathPatterns("/admin/")
+						.excludePathPatterns("/admin/index.do");
+						
 	}
 	
 	// 프로퍼티 설정
