@@ -19,13 +19,19 @@ public interface ProductMapper {
 	// QNA 리스트	
 	List<ProductQnAVO> QNA_list (ProductQnAVO vo);
 	// 리뷰 리스트
-	List<ReviewVO> Review_list (ReviewVO vo);
+	List<ReviewVO> Review_list (ProductSearchVO svo);
+	
+	int getNumberOfReviewPage(int pno);
 	
 	List<ProductVO> Product_more (ProductVO vo);
 	
 	List<ProductCategoryVO> Product_more_category(ProductCategoryVO vo); 
 	
 	List<ProductOptionVO> Product_more_option(ProductOptionVO vo); 
+	
+	List<ProductQnAVO> QNA_listBySearchVO(ProductSearchVO svo);
+	
+	public int getNumberOfQnA(int pno);
 	
 	// (제품번호를 이용한) 판매자 검색
 	int Seller_no (int product_no);
