@@ -14,9 +14,7 @@
 </head>
 <body>
 	<div class="header_wrap">
-		<div id="header_frame">
-			<div class="shape1"></div>
-		</div>
+		<div id="header_frame"></div>
 		<div class="header_wrapbar">
 			<div class="header_title">
 				<!-- 헤더타이틀로 다바꾸기 -->

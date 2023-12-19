@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.admin.AdminMapper">
-
+	<select id="getUserList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.user.vo.UserVO">
+		SELECT * FROM user WHERE id != 'admin'
+		ORDER BY no 
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	<select id="getSellerList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.seller.vo.SellerVO">
+		SELECT * FROM seller WHERE id != 'admin'
+		ORDER BY no
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	<select id="getNumberOfUser" resultType="int">
+		SELECT count(*) FROM user WHERE id != 'admin'
+	</select>
+	<select id="getNumberOfSeller" resultType="int">
+		SELECT count(*) FROM seller WHERE id != 'admin'
+	</select>
 </mapper>
