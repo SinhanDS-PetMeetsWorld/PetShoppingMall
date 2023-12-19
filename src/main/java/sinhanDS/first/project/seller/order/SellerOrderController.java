@@ -30,12 +30,11 @@ public class SellerOrderController {
 		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
 		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
 		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
-		List<List<List<OrderDetailOptionVO>>> optionList = service.getOrderDetailOptionsLists(orderDetailList);
+//		List<List<List<OrderDetailOptionVO>>> optionList = service.getOrderDetailOptionsLists(orderDetailList);
 		
 		model.addAttribute("orderNoList", orderNoList);
 		model.addAttribute("orderDetailList", orderDetailList);
 		model.addAttribute("orderMainList", orderMainList);
-		model.addAttribute("optionList", optionList);
 		
 		return "seller/order/orderlist";
 	}

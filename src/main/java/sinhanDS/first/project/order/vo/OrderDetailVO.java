@@ -1,9 +1,9 @@
 package sinhanDS.first.project.order.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
-import sinhanDS.first.project.product.vo.ProductVO;
 
 @Data
 public class OrderDetailVO {
@@ -30,4 +30,5 @@ public class OrderDetailVO {
 	
 	
 	int cart_no;
+	private List<OrderDetailOptionVO> options;
 }
