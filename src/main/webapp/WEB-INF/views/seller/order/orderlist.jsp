@@ -25,7 +25,34 @@
             </div>
 			<div class="contentsright">
 				<div>
-					order list
+					
+					<c:if test="${not empty orderMainList}">
+						<c:forEach var="orders" items="${orderMainList}" varStatus="status">
+							주문번호: ${orders.no }<br>
+							<c:if test="${not empty orderDetailList}">
+								<c:forEach var="orderdetails" items="${orderDetailList[status.index]}" varStatus="status">
+									<table border="1">
+										<thead><tr> <th>제품명</th><th>옵션</th><th>판매가</th><th>수량</th> </tr></thead>
+										<tr>
+											<td>${orderdtails.product_name}</td>
+											<<td>
+												<c:if test="${not empty optionList[status.index]}">
+													<c:forEach var="orderoptions" items="${optionList}" varStatus="status">
+														${orderoptions[status.index].title} : ${orderoptions[status.index].content} <br>
+													</c:forEach>
+												</c:if>
+												<c:if test="${empty orderDetailList}">옵션없음</c:if>
+											</td>
+											<td>${orderdtails.product_price}</td><td>${orderdtails.quantity}</td>
+										</tr>
+									</table>
+									
+								</c:forEach>
+								수취인정보<br>
+							</c:if>
+						</c:forEach>
+					</c:if>
+					
 				</div>
 			</div>
 
