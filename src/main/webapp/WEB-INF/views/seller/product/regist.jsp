@@ -95,7 +95,7 @@
 						<div>
 							<img class="displayed_image" width="100" height="100">
 							<br>
-							상품 이미지 <input class="add_file_button" type="file" name="filename" onchange="readURL(this);"> 
+							상품 이미지 <input class="add_file_button" type="file" name="filename" onchange="readURL(this);" required> 
 						</div>
 						<div>
 							할인 가격 <input type="number" name="discount" value="0" required>

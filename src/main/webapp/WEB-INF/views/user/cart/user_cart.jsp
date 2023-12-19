@@ -37,7 +37,7 @@
                 <%@ include file="/WEB-INF/views/common/quickmenu_user_info.jsp"%>
             </div>
             
-            <form name="cart_list" action="/user/order/pay.do" method="get">
+            <form name="cart_list" action="/user/order/pay.do" method="post" onsubmit="return emptyCheck();">
 			<div class="contentsright">
 				<div id="cart_content" width='50%'>
 					<h1>장바구니</h1>
@@ -56,12 +56,12 @@
 						                	${cartvolist[status.index].no }
 							                <input type='checkbox' class="check_product" id='chekbox[${status.index }]' name='check_cart' >
 							               
-					        				<input type="hidden" name="cart_user_no" value="${cartvolist[status.index].user_no }" >
-							                <input type="hidden" name="cart_no_list" value="${cartvolist[status.index].no }" >
+					        				<input type="hidden" class="cart_user_no" name="cart_user_no" value="${cartvolist[status.index].user_no }">
+							                <input type="hidden" class="cart_no_list" name="cart_no_list" value="${cartvolist[status.index].no }">
 							                
 							               
-							                <input type="hidden" class="seller_no" value="${vo.seller_no }" >
-							                <div>
+							                <input type="hidden" class="seller_no" value="${vo.seller_no }">
+							                <div class='option_area'>
 								                <c:if test="${empty vo.image_url }">
 													<img src="/resources/img/product/no_image.jpg" width="100" height="100">
 												</c:if>
@@ -74,15 +74,16 @@
 								                <div>${vo.name } </div>
 								                <!-- 옵션이 존재한다면 보여주고 아니면 안보임 -->
 								                <c:forEach var="vo2" items="${optionlist[status.index] }" varStatus="tt">
-								                	<input type="hidden" class="option_cart_no" value="${cartoptionvolist[status.index][tt.index].cart_no}" >
-								                	<input type="hidden" class="option_no" name="option_no" value="${cartoptionvolist[status.index][tt.index].option_no}" >
+								                	<input type="hidden" class="option_cart_no" name="option_cart_no" value="${cartoptionvolist[status.index][tt.index].cart_no}">
+								                	<input type="hidden" class="option_no" name="option_no" value="${cartoptionvolist[status.index][tt.index].option_no}">
+								                	<div></div>
 								                	<input type="hidden" class="option_price" name="option_price[${status.index }]" value="${vo2.price }">
 									                <span>${vo2.title}</span>
 									                <span>${vo2.content}</span>
 									                <br>
 								                </c:forEach> 
-								                <div>${vo.price } <input type="hidden" class="price_list" name="price_list" value="${vo.price }" ></div>
-								                <div><input type="hidden" class="discount_list" name="discount_list" value="${vo.discount }" ></div>
+								                <div>${vo.price } <input type="hidden" class="price_list" name="price_list" value="${vo.price }"></div>
+								                <div><input type="hidden" class="discount_list" name="discount_list" value="${vo.discount }"></div>
 											</div>
 										</div>
 						                <br>
@@ -131,7 +132,7 @@
 							<input type="hidden" id="final_price" name="final_price" value="" >
 						</div>
 						
-						<input type="submit" value="결제하러 가기">
+						<input type="submit" value="결제하러 가기" onclick="beforeSubmit()">
      				</div>
      			</div>
      			
@@ -176,11 +177,14 @@
     			var discountPrice = 0;
     			var deliveryPrice = 0;
     			var finalPrice = 0;
-    			var totalOptionPrice = 0;
+    			
     			$('.check_product').each(function(i,e) {		// 클래스가 check_product인 태그들을 배열로 가져오고, each로 반복문 / e는 각 체크박스 요소들임.(즉, 각 상품)
 	                if($('.check_product').eq(i).prop('checked')){	// check_product로 가져온 태그 중 i번째인 태그의 checked 속성을 검사
-	                	$('.option_price').each(function(j,e){
-	             			totalOptionPrice += Number($(".option_price").eq(j).val()) 	
+	                	
+	                	var totalOptionPrice = 0;
+	                	$('.option_area').eq(i).children('.option_price').each(function(j,e){
+	                		console.log(e);
+	             			totalOptionPrice += Number($(e).val());
 	                	})
 	             
 	                	totalPrice += (Number($(".price_list").eq(i).val()) + totalOptionPrice/*Number($(".option_price").eq(i).val())*/ - Number($(".discount_list").eq(i).val()) ) * Number($(".quantity_list").eq(i).val())
@@ -189,7 +193,18 @@
 	                	
 	                	// 판매자 no를 받아와 배열에 저장, 이후 중복제거 할 것임
 	                	sellers.push($(".seller_no").eq(i).val())
-	                }
+	                } 
+	                /*else{
+	                	$('.cart_user_no').eq(i).attr("disabled", true);
+	                	$('.cart_no_list').eq(i).attr("disabled", true);
+	                	$('.seller_no').eq(i).attr("disabled", true);
+	                	$('.option_cart_no').eq(i).attr("disabled", true);
+	                	$('.option_no').eq(i).attr("disabled", true);
+	                	$('.option_price').eq(i).attr("disabled", true);
+	                	$('.price_list').eq(i).attr("disabled", true);
+	                	$('.discount_list').eq(i).attr("disabled", true);
+	                	$('.quantity_list').eq(i).attr("disabled", true);
+	                }*/
 	                
     			});
     			// 중복제거한 판매자 no 리스트 sellers_no, 이 배열의 길이를 사용해 배송비를 계산한다.
@@ -221,12 +236,14 @@
     			var discountPrice = 0;
     			var deliveryPrice = 0;
     			var finalPrice = 0;
-    			var totalOptionPrice = 0;
     			$('.check_product').each(function(i,e) {		// 클래스가 check_product인 태그들을 배열로 가져오고, each로 반복문 / e는 각 체크박스 요소들임.(즉, 각 상품)
 	                if($('.check_product').eq(i).prop('checked')){	// check_product로 가져온 태그 중 i번째인 태그의 checked 속성을 검사
-	                	$('.option_price').each(function(j,e){
-	             			totalOptionPrice += Number($(".option_price").eq(j).val()) 	
+	                	var totalOptionPrice = 0;
+	                	$('.option_area').eq(i).children('.option_price').each(function(j,e){
+	                		console.log(e);
+	             			totalOptionPrice += Number($(e).val());
 	                	})
+	             
 	             
 	                	totalPrice += (Number($(".price_list").eq(i).val()) + totalOptionPrice - Number($(".discount_list").eq(i).val()) ) * Number($(".quantity_list").eq(i).val())
 	                	discountPrice += Number($(".discount_list").eq(i).val()) * Number($(".quantity_list").eq(i).val())
@@ -259,7 +276,55 @@
     			$('#final_price').val(finalPrice);
             });	
     		
+    	function emptyCheck(){
+    		if($("#total_price").val() == 0){
+    			alert('상품을 하나 이상 선택해주세요!')
+    			return false;
+    		}
+    	}
     		
+    		
+    		
+    		
+    	function beforeSubmit(){
+    		
+    		$('.check_product').each(function(i,e) {		
+                if(!($('.check_product').eq(i).prop('checked'))){	
+                	$('.cart_user_no').eq(i).attr("disabled", true);
+                	$('.cart_no_list').eq(i).attr("disabled", true);
+                	$('.seller_no').eq(i).attr("disabled", true);
+                	$('.option_area').eq(i).children('.option_price').each(function(j,e){
+                		$('.option_area').eq(i).children('.option_cart_no').eq(j).attr("disabled", true);
+                		$('.option_area').eq(i).children('.option_no').eq(j).attr("disabled", true);
+                		$('.option_area').eq(i).children('.option_price').eq(j).attr("disabled", true);
+                	});
+                	$('.price_list').eq(i).attr("disabled", true);
+                	$('.discount_list').eq(i).attr("disabled", true);
+                	$('.quantity_list').eq(i).attr("disabled", true);
+                }
+                
+			});
+    	}
+    	
+    	// 사용자가 뒤로가기했을 경우 대비
+    	$('.check_product').on('change', function(){
+    		
+    		
+    		$('.check_product').each(function(i,e) {		
+               	$('.cart_user_no').eq(i).attr("disabled", false);
+               	$('.cart_no_list').eq(i).attr("disabled", false);
+               	$('.seller_no').eq(i).attr("disabled", false);
+               	$('.option_area').eq(i).children('.option_price').each(function(j,e){
+               		$('.option_area').eq(i).children('.option_cart_no').eq(j).attr("disabled", false);
+               		$('.option_area').eq(i).children('.option_no').eq(j).attr("disabled", false);
+               		$('.option_area').eq(i).children('.option_price').eq(j).attr("disabled", false);
+               	});
+               	$('.price_list').eq(i).attr("disabled", false);
+               	$('.discount_list').eq(i).attr("disabled", false);
+               	$('.quantity_list').eq(i).attr("disabled", false);
+			});
+    	});
+    	
    
     		
     </script>

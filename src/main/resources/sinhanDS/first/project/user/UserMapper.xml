@@ -155,7 +155,7 @@
 		where user_no = ${user_no}
 	</select>
 	
-	<select id = "order_detail" parameterType = "sinhanDS.first.project.order.vo.OrderDetailOptionVO">
+	<select id = "order_detail" parameterType = "sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT * FROM order_detail
 	</select>
 	
@@ -163,10 +163,10 @@
 		SELECT * FROM order_detail_option
 	</select>
 	
-
-	
-	
-	
+	<select id = "possible_write_review" parameterType = "sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT  * FROM order_detail 
+		where purchase_confirmation_date is not null AND user_no = ${user_no}
+	</select>
 	
 	
 </mapper>

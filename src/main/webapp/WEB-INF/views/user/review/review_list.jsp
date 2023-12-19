@@ -32,18 +32,9 @@
 					
 				<c:forEach items="${review_list2}" varStatus = "review_quant" >
 					<div>
-					
 						<div>	
-							<c:if test="${review_list2[review_quant.index][0] eq null}">
-								<img src="C:/Users/User/git/PetShoppingMall/src/main/webapp/resources/img/product/review_img/" width="100" height="100">
-							</c:if>
-							
-							<c:if test="${!empty review_list2[review_quant.index][0] && fn:substring(review_list2[review_quant.index][0], 0, 1) == 'h' }">
-								<img src="${review_list2[review_quant.index][0] }" width="100" height="100">
-							</c:if>
-							
-							<c:if test="${!empty review_list2[review_quant.index][0] && !(fn:substring(review_list2[review_quant.index][0], 0, 1) == 'h') }">
-								<img src="C:/Users/User/git/PetShoppingMall/src/main/webapp/resources/img/product/review_img/"${review_list2[review_quant.index][0]}" width="100" height="100"><br>
+							<c:if test="${review_list2[review_quant.index][0] != 'null' && !(fn:substring(review_list2[review_quant.index][0], 0, 1) == 'h') }">
+								<img src="/resources/img/product/review_img/${review_list2[review_quant.index][0] }" width="100" height="100">
 							</c:if>
 						</div>	
 						
