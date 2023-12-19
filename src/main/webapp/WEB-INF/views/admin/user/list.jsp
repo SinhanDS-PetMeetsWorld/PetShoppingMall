@@ -35,21 +35,23 @@
         		</tr>
         	
 	        	<c:forEach items="${list }" var="vo">
-					<tr>
-	        			<td>${vo.no }</td>
-	        			<td>${vo.id }</td>
-	        			<td>${vo.name }</td>
-	        			<td>${vo.email }</td>
-	        			<td>${vo.phone }</td>
-	        			<td>
-							<c:if test="${vo.gender==0 }">남자</c:if>
-							<c:if test="${vo.gender==1 }">여자</c:if>
-						</td>
-	        			<td>${vo.birth_date }</td>
-	        			<td>${vo.advertisement }</td>
-	        			<td>${vo.join_date }</td>
-	        			<td>${vo.restricted }</td>
-	        		</tr>
+	        		
+						<tr class="userInfo" data-no=${vo.no }>
+		        			<td>${vo.no }</td>
+		        			<td>${vo.id }</td>
+		        			<td>${vo.name }</td>
+		        			<td>${vo.email }</td>
+		        			<td>${vo.phone }</td>
+		        			<td>
+								<c:if test="${vo.gender==0 }">남자</c:if>
+								<c:if test="${vo.gender==1 }">여자</c:if>
+							</td>
+		        			<td>${vo.birth_date }</td>
+		        			<td>${vo.advertisement }</td>
+		        			<td>${vo.join_date }</td>
+		        			<td>${vo.restricted }</td>
+		        		</tr>
+	        		
 	        	</c:forEach>
         	</table>
         	
@@ -82,6 +84,11 @@
 <script>
 	$('.pageButton').on('click', function(){
 		location.href="/admin/userList.do?page=" + $(this).data('page');
+	})
+</script>
+<script>
+	$('.userInfo').on('click', function(){
+		location.href="/admin/goUser.do?no="+$(this).data('no');
 	})
 </script>
 </body>

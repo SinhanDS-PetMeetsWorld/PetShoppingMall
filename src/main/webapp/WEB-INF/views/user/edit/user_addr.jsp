@@ -21,9 +21,13 @@
 <body>
 	<div class="wrap">
         <div class="header">
-            <%@ include file="/WEB-INF/views/common/header.jsp" %>
+        	<c:if test="${empty adminLoginInfo}">
+	            <%@ include file="/WEB-INF/views/common/header.jsp" %>
+        	</c:if>
+        	<c:if test="${!empty adminLoginInfo}">
+	            <%@ include file="/WEB-INF/views/common/header_admin.jsp" %>
+        	</c:if>
         </div>
-
        	
         
         <div class="contents">

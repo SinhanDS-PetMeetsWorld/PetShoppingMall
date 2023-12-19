@@ -59,6 +59,7 @@ public class UserController {
 			return "common/alert";
 		} else { // 로그인 성공
 			sess.removeAttribute("sellerLoginInfo");
+			sess.removeAttribute("adminLoginInfo");
 			sess.setAttribute("userLoginInfo", login);
 			return "redirect:/";
 		}

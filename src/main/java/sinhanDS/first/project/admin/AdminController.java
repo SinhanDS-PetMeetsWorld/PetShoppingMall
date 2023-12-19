@@ -56,7 +56,8 @@ public class AdminController {
 	
 	@GetMapping("/logout.do")
 	public String logout(HttpSession sess) {
-		sess.invalidate();
+		sess.removeAttribute("userLoginInfo");
+		sess.removeAttribute("sellerLoginInfo");
 		return "redirect:/admin/";
 	}
 	@GetMapping("userList.do")
@@ -117,5 +118,12 @@ public class AdminController {
         model.addAttribute("paging", map);
         model.addAttribute("svo", svo);
 		return "/admin/seller/list";
+	}
+	
+	@GetMapping("goUser.do")
+	public String goUser(HttpSession sess, UserVO vo) {
+		sess.setAttribute("userLoginInfo", vo);
+		log.debug("로그인세션체크: " + (UserVO)sess.getAttribute("userLoginInfo"));
+		return "redirect:/user/edit.do";
 	}
 }
