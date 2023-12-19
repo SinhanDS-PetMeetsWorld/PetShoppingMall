@@ -21,22 +21,22 @@
 			<div class="header_title">
 				<!-- 헤더타이틀로 다바꾸기 -->
 				<h1 id="header_shopname";>
-					<a href="/seller/index.do"><b> Pet Meets World </b></a>
+					<a href="#"><b> Pet Meets World </b></a>
 				</h1>
 				<div class="header_menu">
 					<ul>
 						<li>
-							<a href="#">구매자 회원 관리</a>
+							<a href="/admin/userList.do">구매자 회원 관리</a>
 						</li>
 						<li>
-							<a href="#">판매자 회원 관리</a>
+							<a href="/admin/sellerList.do">판매자 회원 관리</a>
 						</li>
 						<li>
 							<a href="#">통계</a>
 						</li>
 					</ul>
 				</div>
-				<c:if test="${!empty sellerLoginInfo }">
+				<c:if test="${!empty adminLoginInfo }">
 					<div class="header_login">
 						<div class="header_logout">
 							<a href="/admin/logout.do">로그아웃</a>

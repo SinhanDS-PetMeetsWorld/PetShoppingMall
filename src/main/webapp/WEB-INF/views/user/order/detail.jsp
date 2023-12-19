@@ -39,8 +39,10 @@
 									<li>
 										<div>
 											<c:if test="${empty img_list[status.index] }">
-												<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+												<br><h3>삭제된 상품입니다</h3>
 											</c:if>
+
+											
 											<c:if test="${!empty img_list[status.index] && fn:substring(img_list[status.index], 0, 1) == 'h' }">
 												<img src="${img_list[status.index] }" width="100" height="100">
 											</c:if>
@@ -73,13 +75,14 @@
 											<c:if test="${dvo.refound_status != false }">
 												<input type="button" class="refound_info" value="반품정보" data-no="${dvo.no }">
 											</c:if>
-											
-											<c:if test="${dvo.purchase_confirmation_date != null }">
-												<c:if test="${review_list[status.index] == 0 }">
-													<input type="button" class="write_review" value="리뷰작성" data-no="${dvo.no }">
-												</c:if>
-												<c:if test="${review_list[status.index] != 0 }">
-													<input type="button" class="read_review" value="리뷰보기" data-no="${dvo.no }">
+											<c:if test="${!empty img_list[status.index] }">
+												<c:if test="${dvo.purchase_confirmation_date != null }">
+													<c:if test="${review_list[status.index] == 0 }">
+														<input type="button" class="write_review" value="리뷰작성" data-no="${dvo.no }">
+													</c:if>
+													<c:if test="${review_list[status.index] != 0 }">
+														<input type="button" class="read_review" value="리뷰보기" data-no="${dvo.no }">
+													</c:if>
 												</c:if>
 											</c:if>
 										</div>

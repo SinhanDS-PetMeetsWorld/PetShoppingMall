@@ -15,7 +15,7 @@
         <a href="/user/list_user_cart.do">장바구니</a><br>
         <a href="/user/order/list.do?searchWord=&searchType=">구매 이력</a><br>
         <a href="/user/list_user_review.do">작성한 리뷰</a><br>
-        <a href="#">작성 가능한 리뷰</a><br>
+        <a href="/user/possible_write_review.do">작성 가능한 리뷰</a><br>
         <a href="#">로그아웃</a><br>
       </div>
   </div>
