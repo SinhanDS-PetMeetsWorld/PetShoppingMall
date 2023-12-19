@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.util.file.FileController;
 import sinhanDS.first.project.util.file.FileNameVO;
@@ -106,6 +107,9 @@ public class SellerProductServiceImpl implements SellerProductService {
 	public List<ProductVO> getProductList(int seller_no){
 		return mapper.getProductList(seller_no);
 	}
+	public List<ProductVO> getProductList(ProductSearchVO svo){
+		return mapper.getProductListBySearchVO(svo);
+	}
 	
 	public List<List<ProductCategoryVO>> getCategoryLists(List<ProductVO> productList){
 		List<List<ProductCategoryVO>> categoryList = new ArrayList<>();
@@ -137,6 +141,9 @@ public class SellerProductServiceImpl implements SellerProductService {
 		return mapper.getOptionsList(product_no);
 	}
 
+	public int getNumberOfPage(ProductSearchVO svo) {
+		return mapper.getNumberOfPage(svo);
+	}
 	
 	// 신정훈 작업 내용 (2023 - 12 - 12 )
 	public List<ProductQnAVO> getQnAList(int seller_no) {

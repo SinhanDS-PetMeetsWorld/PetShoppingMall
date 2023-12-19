@@ -12,6 +12,8 @@ import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
+import sinhanDS.first.project.user.vo.SaveBoxVO;
+import sinhanDS.first.project.user.vo.UserVO;
 
 public interface ProductService {
 
@@ -29,7 +31,7 @@ public interface ProductService {
 	
 	List <ProductOptionVO> Product_more_option(ProductOptionVO povo);
 	
-	public int QNA_insert(ProductQnAVO qnavo , HttpServletRequest request);
+	public int QNA_insert(ProductQnAVO qnavo , HttpServletRequest request );
 	
 	List<ReviewVO> Review_list (ReviewVO vo);
 	
@@ -39,8 +41,19 @@ public interface ProductService {
 	
 	int total_product_searchcount(ProductSearchVO vo);
 	
-	int cart_insert(CartVO vo);
-
+	int cart_insert(CartVO vo); 
+	
 	boolean cart_option_insert(CartOptionVO vo);
+	
+	
+	// 12 - 16 신정훈 작업 : 찜 기능
+	
+	
+	int zzim_insert (SaveBoxVO vo);
+	
+	int zzim_cancel (SaveBoxVO vo);
 
+	List<SaveBoxVO> zzim_list(SaveBoxVO vo);
+	
+	
 }

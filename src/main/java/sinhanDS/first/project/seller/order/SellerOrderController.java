@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import sinhanDS.first.project.seller.vo.SellerVO;
+
 
 @Controller
 @RequestMapping("/seller/order")
@@ -16,5 +18,11 @@ public class SellerOrderController {
 	@Autowired
 	private SellerOrderService service;
 	
+	@GetMapping("/orderlist.do")
+	public String edit(HttpSession sess, Model model) {
+		SellerVO vo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("vo", vo);
+		return "seller/order/orderlist";
+	}
 
 }

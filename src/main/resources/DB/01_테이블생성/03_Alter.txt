@@ -166,4 +166,37 @@ CHANGE COLUMN `product_no` `product_no` INT NOT NULL ,
 CHANGE COLUMN `price` `price` INT NULL DEFAULT 0 ;
  ALTER TABLE `PetShoppingMall`.`order_detail_option` 
 CHANGE COLUMN `option` `title` VARCHAR(48) NOT NULL ;
- 
+ ALTER TABLE `PetShoppingMall`.`order_detail` 
+CHANGE COLUMN `cancle_status` `cancle_status` INT NOT NULL DEFAULT '0' ;
+ ALTER TABLE `PetShoppingMall`.`order_main` 
+ADD COLUMN `total_cancle_price` INT NOT NULL DEFAULT 0 AFTER `total_delivery_fee`;
+
+ALTER TABLE `PetShoppingMall`.`user` 
+ADD COLUMN `restricted` TINYINT(1) NULL DEFAULT '0' AFTER `join_date`;
+
+ALTER TABLE `PetShoppingMall`.`seller` 
+ADD COLUMN `restricted` TINYINT NULL DEFAULT '0' AFTER `account`;
+
+ CREATE TABLE `report` (
+	`no`	int	NOT NULL,
+	`seller_no`	int	NOT NULL,
+	`user_no`	int	NOT NULL,
+	`product_no`	int	NOT NULL,
+	`reaason`	varchar(255)	NOT NULL,
+	`regist_date`	date	NOT NULL
+);
+ALTER TABLE `report` ADD CONSTRAINT `PK_REPORT` PRIMARY KEY (
+	`no`
+);
+ALTER TABLE `report` ADD CONSTRAINT `FK_seller_TO_report_1` FOREIGN KEY (
+	`seller_no`
+)
+REFERENCES `seller` (
+	`no`
+);
+ALTER TABLE `PetShoppingMall`.`report` 
+CHANGE COLUMN `no` `no` INT NOT NULL AUTO_INCREMENT ;
+ ALTER TABLE `PetShoppingMall`.`order_detail` 
+CHANGE COLUMN `reason` `reason` TEXT NULL DEFAULT NULL ;
+ ALTER TABLE `PetShoppingMall`.`review` 
+CHANGE COLUMN `no` `no` INT NOT NULL AUTO_INCREMENT ;

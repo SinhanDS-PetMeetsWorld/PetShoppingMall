@@ -23,6 +23,7 @@ import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
+import sinhanDS.first.project.user.vo.SaveBoxVO;
 import sinhanDS.first.project.user.vo.UserAddressVO;
 import sinhanDS.first.project.user.vo.UserVO;
 
@@ -42,11 +43,14 @@ public class UserController {
 	
 	@PostMapping("/login.do")
 	public String loginProcess(UserVO vo, HttpSession sess, Model model) {
-		System.out.println("vo체크: " + vo);
 		UserVO login = service.login(vo);
-		System.out.println("login: " + login);
+		
 		if (login == null) { // 로그인 실패
 			model.addAttribute("msg", "아이디 비밀번호가 올바르지 않습니다.");
+			model.addAttribute("cmd", "back");
+			return "common/alert";
+		} else if (login.isRestricted() == true) { // 로그인 실패
+			model.addAttribute("msg", "사용이 제한된 계정입니다. 사용하시려면 관리자에게 문의하십시오.");
 			model.addAttribute("cmd", "back");
 			return "common/alert";
 		} else { // 로그인 성공
@@ -343,5 +347,18 @@ public class UserController {
 	}
 	
 	
-	
+	@GetMapping("/list_user_zzim.do")
+	public String list_zzim(Model model , HttpSession sess , UserVO uvo , ProductVO pvo , SaveBoxVO savo){
+		
+		UserVO vo= (UserVO)sess.getAttribute("userLoginInfo");
+		List<SaveBoxVO> zzim_list = service.zzim_list(savo);
+		System.out.println("여기에도 찜 리스트 나오나 ? " + zzim_list);
+		
+		
+		
+		
+		return "user/zzim/zzim_box";
+		
+		
+	}
 }

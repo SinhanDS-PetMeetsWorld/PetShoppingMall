@@ -11,6 +11,8 @@ import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
+import sinhanDS.first.project.user.vo.SaveBoxVO;
+import sinhanDS.first.project.user.vo.UserVO;
 
 @Mapper
 public interface ProductMapper {
@@ -42,5 +44,14 @@ public interface ProductMapper {
 	int cart_insert(CartVO vo);
 	//장바구니 물건 추가 시 옵션 저장
 	int cart_option_insert(CartOptionVO vo);
+	
+	
+	//(신정훈) 12 - 16 작업 내용 : 찜 기능 구현
+	int zzim_insert(SaveBoxVO vo);
+	
+	int zzim_cancel(SaveBoxVO vo);
+	
+	List<SaveBoxVO> zzim_list(SaveBoxVO vo);
+	
 
 }

@@ -16,6 +16,7 @@ public class UserVO {
 	private Date birth_date;
 	private boolean advertisement;	// 0은 false. 선택하지 않은 경우 false
 	private Date join_date;
+	private boolean restricted;
 	
 	private String new_password;
 	private String phone0;

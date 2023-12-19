@@ -39,19 +39,6 @@ public class pay {
 	}
 	@Test
 	public void temp() throws Exception{
-//		RequestBuilder req = MockMvcRequestBuilders.post("/user/order/buy.do");
-//		UserVO uvo = new UserVO();
-//		uvo.setNo(22);
-//		
-//		CartVO cvo = new CartVO(); //결제 완료 후에 장바구니 삭제를 위해 필요
-//		cvo.setCart_no_list(new int[] {2, 3, 4});
-//		List<ProductVO> product_list = orderService.getProductList(cvo.getCart_no_list());
-//		
-//		
-//		ProductOptionVO ovo = new ProductOptionVO();
-//		ovo.setNo_list(new int[] {116, 119, 121, 122});
-//		List<ProductOptionVO> option_list = orderService.getOptionList(ovo.getNo_list());
-//		
-//		mock.perform(req);
+		
 	}
 }

@@ -1,9 +1,13 @@
 package sinhanDS.first.project.seller.product;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductQnAVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
 
@@ -67,10 +72,39 @@ public class SellerProductController {
 	}
 
 	@GetMapping("/list.do")
-	public String list(HttpSession sess, Model model) {
+	public String list(HttpSession sess, Model model, ProductSearchVO svo) {
 		SellerVO seller = (SellerVO) sess.getAttribute("sellerLoginInfo");
-
-		List<ProductVO> productList = service.getProductList(seller.getNo());
+		svo.setSeller_no(seller.getNo());
+		log.debug("svo: " + svo);
+		int count = service.getNumberOfPage(svo);
+		log.debug("count: " + count);
+		int totalPage = count / svo.getNumberOfProductInPage();
+        if (count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
+        map.put("totalPage", totalPage);
+        
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfProductInPage())*svo.getNumberOfProductInPage());
+        log.debug("endPage: " + endPage);
+        int startPage = endPage - (svo.getNumberOfProductInPage() - 1);
+        if(endPage > totalPage) endPage = totalPage;
+        boolean prev = startPage > 1;
+        boolean next = endPage < totalPage;
+        map.put("endPage", endPage);
+        map.put("startPage", startPage);
+        map.put("prev", prev);
+        map.put("next", next);
+        
+        model.addAttribute("paging", map);
+        
+        
+        
+        svo.setSeller_no(seller.getNo());
+		List<ProductVO> productList = service.getProductList(svo);
+		
+		log.debug("productList: " + productList);
+		
 		List<List<ProductCategoryVO>> categoryList = service.getCategoryLists(productList);
 		List<List<ProductOptionVO>> optionList = service.getOptionLists(productList);
 		model.addAttribute("productList", productList);
@@ -118,45 +152,52 @@ public class SellerProductController {
 		return "redirect:/seller/index.do";
 	}
 
+	
 	// 신정훈 qna 답변 페이지 구현 (2023 - 12 - 12)
 	@RequestMapping(value = "/qnalist.do", method = RequestMethod.GET)
-	public String QnA_list(Model model, HttpSession sess, HttpServletRequest request, ProductVO pvo,
-			ProductQnAVO qnavo) {
+	public String QnA_list(Model model, HttpSession sess, HttpServletRequest request, HttpServletResponse response,  ProductVO pvo,
+			ProductQnAVO qnavo) throws IOException {
 		System.out.println("체크체크");
 		SellerVO seller = (SellerVO) sess.getAttribute("sellerLoginInfo");
 
 		int seller_no = seller.getNo();
 
 		List<ProductQnAVO> qna_list = service.getQnAList(seller_no);
-		System.out.println("qna_list 다나올거임!! " + qna_list);
 
 		List<ProductVO> product_list = service.getProductList(seller_no);
 
 			List<List<String>> qna_array = new ArrayList<List<String>>();
-			 for(int i = 0; i < product_list.size(); i++) {
-				 List<String> putName = new ArrayList<String>();
-				
-				for(int j = 0; j < product_list.size(); j++) {
-					if (qna_list.get(i).getProduct_no() == product_list.get(j).getNo()) {  
-						putName.add(product_list.get(j).getName()); //동결 건조 간식
-					}
-				}
-						
-				putName.add(String.valueOf(qna_list.get(i).getProduct_no())); // 제품 번호 4
-				putName.add(String.valueOf(qna_list.get(i).getNo())); // 질문 번호 6 
-				putName.add(String.valueOf(qna_list.get(i).getQuestion_write_date())); // 질문 등록일 2023-11-29
-				putName.add(qna_list.get(i).getQuestion_content()); // 질문 내용 동결?
-				
-				putName.add(String.valueOf(qna_list.get(i).getAnswer_write_date())); //답변 등록일 11 - 29
-				putName.add(String.valueOf(qna_list.get(i).getAnswer_content())); // 답변 내용
-				putName.add(String.valueOf(qna_list.get(i).getStatus())); // 상태 표시
-				qna_array.add(putName);
-			}
 			 
-			 System.out.println(qna_array);
+			if (qna_list.size() != 0) {
+				
+				for(int i = 0; i < qna_list.size(); i++) {
+				
+					List<String> putName = new ArrayList<String>();
+					
+					// 제품명 : 1번
+					for(int j = 0; j < product_list.size(); j++) { // product_list 만큼 돌아야지;;
+						if (product_list.get(j).getNo() == qna_list.get(i).getProduct_no()) {  
+							putName.add(product_list.get(j).getName()); 
+							
+						}
+					}
+					
+					putName.add(String.valueOf(qna_list.get(i).getStatus())); // 상태 표시	 : 2번	
+					putName.add(String.valueOf(qna_list.get(i).getProduct_no())); // 제품 번호 :3번
+					putName.add(String.valueOf(qna_list.get(i).getNo())); // 질문 번호: 4번
+					putName.add(String.valueOf(qna_list.get(i).getQuestion_write_date())); // 질문 등록 날짜: 5번
+					putName.add(qna_list.get(i).getQuestion_content()); // 질문 내용 동결? // 질문 내용: 6번
+					putName.add(String.valueOf(qna_list.get(i).getAnswer_write_date())); //답변 등록 날짜 7번 
+					putName.add(String.valueOf(qna_list.get(i).getAnswer_content())); // 답변 내용 8번
+					System.out.println("체크: " + putName);
+					qna_array.add(putName);
+				}
+				System.out.println(" QnA리스트 확인 : "  + qna_array);
+			} 
+			 
 
+		model.addAttribute("qna_list",qna_list);
 		model.addAttribute("qna_array",qna_array);
-		model.addAttribute("qna_list", qna_list);
 		model.addAttribute("product_list", product_list);
 
 		return "seller/product/qnaanswer";

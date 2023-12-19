@@ -9,6 +9,7 @@ import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
+import sinhanDS.first.project.user.vo.SaveBoxVO;
 import sinhanDS.first.project.user.vo.UserAddressVO;
 import sinhanDS.first.project.user.vo.UserVO;
 
@@ -34,4 +35,5 @@ public interface UserMapper {
 	ProductVO search_cart_product(int product_no);
 	List<CartOptionVO> cart_option_number(int no);
 	ProductOptionVO get_product_option(int no);
+	List<SaveBoxVO> zzim_list(SaveBoxVO savo);
 }
