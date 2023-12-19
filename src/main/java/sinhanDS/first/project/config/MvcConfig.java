@@ -156,7 +156,8 @@ public class MvcConfig implements WebMvcConfigurer{
 						.addPathPatterns("/admin/**")
 						.excludePathPatterns("/admin")
 						.excludePathPatterns("/admin/")
-						.excludePathPatterns("/admin/index.do");
+						.excludePathPatterns("/admin/index.do")
+						.excludePathPatterns("/admin/login.do");
 						
 	}
 	

@@ -18,11 +18,61 @@
         <div class="header">
             <%@ include file="/WEB-INF/views/common/header_admin.jsp" %>
         </div>
-
-       	
         
         <div class="contents">
-			
+        	<table border='1'>
+        		<tr>
+        			<td>회원 번호</td>
+        			<td>아이디</td>
+        			<td>이름</td>
+        			<td>이메일</td>
+        			<td>연락처</td>
+        			<td>성별</td>
+        			<td>생년월일</td>
+        			<td>광고수신동의여부</td>
+        			<td>가입일</td>
+        			<td>제재여부</td>
+        		</tr>
+        	
+	        	<c:forEach items="${list }" var="vo">
+	        		
+						<tr class="userInfo" data-no=${vo.no }>
+		        			<td>${vo.no }</td>
+		        			<td>${vo.id }</td>
+		        			<td>${vo.name }</td>
+		        			<td>${vo.email }</td>
+		        			<td>${vo.phone }</td>
+		        			<td>
+								<c:if test="${vo.gender==0 }">남자</c:if>
+								<c:if test="${vo.gender==1 }">여자</c:if>
+							</td>
+		        			<td>${vo.birth_date }</td>
+		        			<td>${vo.advertisement }</td>
+		        			<td>${vo.join_date }</td>
+		        			<td>${vo.restricted }</td>
+		        		</tr>
+	        		
+	        	</c:forEach>
+        	</table>
+        	
+        	<div>
+		   		<ul class='paging'>
+		            <c:if test="${paging.prev }">
+		            	<li><button class="pageButton" data-page="${paging.startPage-1 }"> << </button></li>
+		            </c:if>
+		            <c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
+		            	<c:if test="${p == svo.page}">
+			            	<li> <button data-page=${p }>${p }</button></li>
+		                </c:if>
+		                <c:if test="${p != svo.page}">
+		                	<li> <button class="pageButton" data-page=${p }>${p }</button></li>
+		                </c:if>
+		            </c:forEach>
+		            <c:if test="${paging.next }">
+		            	<li><button class="pageButton" data-page="${paging.endPage+1 }"> >> </button></li>
+		            </c:if>
+				</ul> 
+		   	</div>
         </div>
         
         
@@ -30,5 +80,16 @@
 			<div class="footer-color"></div>
         </div>
     </div>
+   
+<script>
+	$('.pageButton').on('click', function(){
+		location.href="/admin/userList.do?page=" + $(this).data('page');
+	})
+</script>
+<script>
+	$('.userInfo').on('click', function(){
+		location.href="/admin/goUser.do?no="+$(this).data('no');
+	})
+</script>
 </body>
 </html>

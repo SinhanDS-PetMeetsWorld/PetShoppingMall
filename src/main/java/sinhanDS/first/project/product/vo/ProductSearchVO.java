@@ -35,6 +35,7 @@ public class ProductSearchVO {
 	private int numberInPage_search = 15;
 	private int numberInPage_review = 3;
 	private int numberInPage_qna = 5;
+	private int numberInPage_UserVO = 10;
 }
 /* 상품 리스트, 검색 결과 띄워줄 때 조건 여러개 한 번에 넣으려고 만든 vo입니다
  * search type이나 검색어string 등등 자유롭게 추가해서 사용하셔도 됩니다

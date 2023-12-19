@@ -24,6 +24,7 @@
 				<div>
 					<h1>구매자 ${userno }의 Pay 페이지 입니다.</h1>
 					<form method="post" action="buy.do">
+						<input type="hidden" class="user_no" name="user_no" value="${userno }">
 						<h2>주소 선택</h2>
 						<ol>
 							<c:forEach items="${ userAddressList}" var="vo" varStatus="status">
@@ -93,6 +94,7 @@
 							
 							옵션 리스트<br>
 							<c:forEach items="${option_list }" var="ovo">
+								
 								<c:if test="${ovo.product_no == vo.no }">
 									<input type="text" name="option_no" value="${ovo.no }">
 									<input type="text" name="option_cart_no" value="${cno_list[status.index] }">

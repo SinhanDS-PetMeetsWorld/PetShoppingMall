@@ -67,6 +67,7 @@ public class SellerController {
 			return "common/alert";
 		} else { // 로그인 성공
 			sess.removeAttribute("userLoginInfo");
+			sess.removeAttribute("adminLoginInfo");
 			sess.setAttribute("sellerLoginInfo", login);
 			return "redirect:/seller/index.do";
 		}
