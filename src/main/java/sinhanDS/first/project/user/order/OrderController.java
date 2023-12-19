@@ -110,6 +110,7 @@ public class OrderController {
 		mvo.setUser_name(userService.detail(uvo).getName());
 		mvo.setUser_phone(userService.detail(uvo).getPhone());
 		
+		
 		List<ProductVO> productList = orderService.getProductListByProductNoList(product_no);
 		log.debug("productList: " + productList);
 		mvo = orderService.setOrderName(mvo, productList.get(0).getName(), productList.size());
@@ -123,6 +124,12 @@ public class OrderController {
 		log.debug("optionList체크: " + option_list);
 		orderService.registOrderDetailOption(option_list, detailList, cart_no, option_cart_no);
 		/*주문 상세 옵션 넣어주면됨 */
+		
+		
+
+		System.out.println("카트에노" + Arrays.toString(cart_no)); // 내가 체크한 상품의 cart_no 정보가 들어있음
+		
+		
 		return "user/order/success";
 	}
 	
