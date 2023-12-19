@@ -149,7 +149,7 @@
 							</div>
 						</div>
 					</div>
-					<%--
+					
 					<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
 						<form name="option_form" id="option_form">
 						<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
@@ -197,7 +197,7 @@
 							</div>
 						</div>
 					</div>
-					 --%>
+					 
 				</div>
 			</div>
 		</div>
