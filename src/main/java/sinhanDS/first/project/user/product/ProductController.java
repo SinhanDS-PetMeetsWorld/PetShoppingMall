@@ -289,14 +289,16 @@ public class ProductController {
 	@PostMapping("/addcart.do")
 	public String cart_insert(Model model, HttpServletRequest request, @RequestParam(value="option_no",required=false) List<String> optionno_list,
 			CartVO cartvo, CartOptionVO cartoptionvo) {
-		boolean suc = false;
+		boolean suc = optionno_list != null ? false : true;
 		int cart_no = service.cart_insert(cartvo);
-		cartoptionvo.setCart_no(cartvo.getNo());
+		if(optionno_list != null) {
+			cartoptionvo.setCart_no(cartvo.getNo());
 
-		if(cart_no>0) {
-			for(int i=0; i<optionno_list.size(); i++){
-				cartoptionvo.setOption_no(Integer.parseInt(optionno_list.get(i)));
-				suc = service.cart_option_insert(cartoptionvo);
+			if(cart_no>0) {
+				for(int i=0; i<optionno_list.size(); i++){
+					cartoptionvo.setOption_no(Integer.parseInt(optionno_list.get(i)));
+					suc = service.cart_option_insert(cartoptionvo);
+				}
 			}
 		}
 		return String.valueOf(suc);

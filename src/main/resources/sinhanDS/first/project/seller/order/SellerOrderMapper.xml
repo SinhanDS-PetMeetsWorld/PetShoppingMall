@@ -10,6 +10,10 @@
 		SELECT * FROM order_detail WHERE order_no = #{no}
 	</select>
 	
+	<select id="getOrderDetails2" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail WHERE order_no = #{order_no} AND seller_no = #{seller_no}
+	</select>
+	
 	<select id="getOrderMainList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
 		SELECT * FROM order_main WHERE no = #{no}
 	</select>
@@ -17,4 +21,26 @@
 	<select id="getOrderDetailOptionList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailOptionVO">
 		SELECT * FROM order_detail_option WHERE order_dno = #{order_detail_no}
 	</select>
+	
+	<insert id="delivery_regist" parameterType="sinhanDS.first.project.delivery.vo.DeliveryVO">
+		INSERT INTO delivery (
+			due_date, start_date, receiver_name, receiver_phone, receiver_zipcode, receiver_addr1, receiver_addr2, 
+				sender_name, sender_phone, sender_zipcode, sender_addr1, sender_addr2, status
+		) VALUES (
+			DATE_ADD(NOW(), INTERVAL 3 DAY), NOW(), #{receiver_name}, #{receiver_phone}, #{receiver_zipcode}, #{receiver_addr1}, #{receiver_addr2}, 
+			#{sender_name} , #{sender_phone}, #{sender_zipcode}, #{sender_addr1}, #{sender_addr2}, 0
+		)
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="update_deliveryNo" parameterType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		UPDATE order_detail SET delivery_no = #{delivery_no}, delivery_status = 1 WHERE no = #{no}
+	</update>
+	
+	<select id="getDeliveryVO" parameterType="int" resultType="sinhanDS.first.project.delivery.vo.DeliveryVO">
+		SELECT * FROM delivery WHERE no = #{no}
+	</select>
+	
 </mapper>

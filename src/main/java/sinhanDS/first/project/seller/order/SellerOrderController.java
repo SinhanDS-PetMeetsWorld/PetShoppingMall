@@ -1,7 +1,10 @@
 package sinhanDS.first.project.seller.order;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,19 +33,33 @@ public class SellerOrderController {
 		
 		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
 		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
+		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
 		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
 		
-		model.addAttribute("orderNoList", orderNoList);
 		model.addAttribute("orderDetailList", orderDetailList);
 		model.addAttribute("orderMainList", orderMainList);
+		model.addAttribute("deliveryList", deliveryList);
 		
 		return "seller/order/orderlist";
 	}
 	
 	@PostMapping("/regist_deliver.do")
-	public String regist_deliverNo(HttpSession sess, Model model, DeliveryVO dvo) {
+	public String regist_deliverNo(HttpSession sess, Model model, HttpServletRequest request, DeliveryVO dvo) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("order_no", request.getParameter("order_no"));
+		map.put("seller_no", request.getParameter("seller_no"));
+		dvo.setOrder_detail_list(service.getOrderDetails2(map));
 		
-		return "seller/order/orderlist";
+		boolean r = service.regist_delivery(dvo);
+		if (r) { 
+			model.addAttribute("cmd", "move");
+			model.addAttribute("url", "/seller/order/orderlist.do");
+			model.addAttribute("msg", "배송이 시작되었습니다.");
+		} else {
+			model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "배송 신청 실패");
+		}
+		return "common/alert";
 	}
 
 }
