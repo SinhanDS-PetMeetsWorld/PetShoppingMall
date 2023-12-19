@@ -78,7 +78,12 @@ public class ProductServiceImpl implements ProductService {
 		List<ReviewVO> review_list = mapper.Review_list(svo);
 		return review_list;
 	}
-
+	
+	@Override
+	public int getNumberOfProduct(ProductSearchVO vo) {
+		return mapper.getNumberOfProduct(vo);
+	}
+	
 	@Override
 	public int getNumberOfReviewPage(int pno) {
 		return mapper.getNumberOfReviewPage(pno);

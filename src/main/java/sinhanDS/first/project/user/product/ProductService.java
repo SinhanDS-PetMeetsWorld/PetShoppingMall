@@ -37,6 +37,8 @@ public interface ProductService {
 	
 	int getNumberOfReviewPage(int pno);
 	
+	int getNumberOfProduct(ProductSearchVO vo);
+	
 	List<ProductVO> product_list(ProductSearchVO vo);
 	
 	List<ProductVO> total_product_search(ProductSearchVO vo);

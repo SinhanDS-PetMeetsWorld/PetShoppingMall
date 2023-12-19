@@ -210,15 +210,40 @@ public class ProductController {
 	
 	
 	@GetMapping("/list.do")
-	public String searchByCategory(HttpServletRequest request, Model model, ProductSearchVO searchvo) {
+	public String searchByCategory(HttpServletRequest request, Model model, ProductSearchVO svo) {
+//		if(svo.getNumberOfProductInPage() == 5) svo.setNumberOfProductInPage(15);
+		log.debug("svo: " + svo);
+		int count = service.getNumberOfProduct(svo);
+		log.debug("count: " + count);
+		int totalPage = count / svo.getNumberOfProductInPage();
+        if (count % svo.getNumberOfProductInPage() > 0) totalPage++;
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
+        map.put("totalPage", totalPage);
+        
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfProductInPage())*svo.getNumberOfProductInPage());
+        log.debug("endPage: " + endPage);
+        int startPage = endPage - (svo.getNumberOfProductInPage() - 1);
+        if(endPage > totalPage) endPage = totalPage;
+        boolean prev = startPage > 1;
+        boolean next = endPage < totalPage;
+        map.put("endPage", endPage);
+        map.put("startPage", startPage);
+        map.put("prev", prev);
+        map.put("next", next);
+        
+        model.addAttribute("paging", map);
+        
+        
 		request.setAttribute("category1", request.getParameter("category1"));
 		request.setAttribute("category2", request.getParameter("category2"));
 		
 		ProductCategoryVO catekor = new ProductCategoryVO();
 		model.addAttribute("catekor" , catekor);
 		
-		List<ProductVO> product_list = service.product_list(searchvo);
-		model.addAttribute("ProductSearchVO", searchvo);
+		List<ProductVO> product_list = service.product_list(svo);
+		
+		model.addAttribute("ProductSearchVO", svo);
 		model.addAttribute("list", product_list);
 		return "user/product/search";
 	}
