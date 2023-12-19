@@ -10,10 +10,13 @@ import sinhanDS.first.project.order.vo.OrderMainVO;
 
 public interface SellerOrderService {
 	List<OrderDetailVO> getOrderNoList(int no);
-	List<List<OrderDetailVO>> getOrderDetailList(List<OrderDetailVO> vo);
 	List<OrderDetailVO> getOrderDetails(int no);
-	public List<OrderDetailVO> getOrderDetails2(Map map);
+	List<OrderDetailVO> getOrderDetails2(Map map);
+	
+	List<List<OrderDetailVO>> getOrderDetailList(List<OrderDetailVO> vo);
 	List<OrderMainVO> getOrderMainList(List<OrderDetailVO> vo);
 	List<List<OrderDetailOptionVO>> getOrderDetailOptions(List<OrderDetailVO> vo);
-	public boolean regist_delivery(DeliveryVO vo);
+	
+	boolean regist_delivery(DeliveryVO vo);
+	List<DeliveryVO> getDeliveryList(List<List<OrderDetailVO>> vo);
 }

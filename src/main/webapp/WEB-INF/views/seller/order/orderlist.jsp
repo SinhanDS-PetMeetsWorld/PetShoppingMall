@@ -76,12 +76,11 @@
 									<input type="hidden" name="order_no" value="${orders.no}">
 									<input type="hidden" name="seller_no" value="${svo.no}">
 									</form>	
-								</c:if> 
-								<h1>${orders.no} ${svo.no}</h1>
+								</c:if>
 								<c:if test='${deliverNo != null && deliverNo != ""}'>
 									운송장 번호: ${deliverNo}
-									<c:if test='${deliverStatus == "배송시작"}'>도착예정일:</c:if>
-									<c:if test='${deliverStatus == "배송완료"}'>도착일:</c:if>
+									<c:if test='${deliverStatus == "배송시작"}'>도착예정일: ${deliveryList[mainstatus.index].due_date}</c:if>
+									<c:if test='${deliverStatus == "배송완료"}'>도착일: ${deliveryList[mainstatus.index].arrival_date}</c:if>
 								</c:if>
 								<br><br><hr><br>
 							</c:if>
