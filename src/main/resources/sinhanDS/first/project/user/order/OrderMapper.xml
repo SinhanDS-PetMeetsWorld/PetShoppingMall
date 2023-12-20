@@ -32,14 +32,20 @@
 			zipcode, addr1, addr2,
 			isdeleted,
 			total_price, total_delivery_fee,
-			name)
+			name,
+			user_name,
+			user_phone
+			)
 		VALUES
 		( #{user_no}, sysdate(),
 			#{payment_type}, #{payment_company}, #{payment_account},
 			#{zipcode}, #{addr1}, #{addr2},
 			0,
 			#{total_price}, #{total_delivery_fee},
-			#{name});
+			#{name},
+			#{user_name},
+			#{user_phone}
+			);
 		<selectKey keyProperty="no" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -87,7 +93,7 @@
 		SELECT * 
 		FROM order_main  
 		<include refid="whereSql"/>
-		ORDER BY no
+		ORDER BY no desc
 		LIMIT #{startIdx}, #{numberOfProductInPage}
 	</select>
 	
