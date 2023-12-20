@@ -32,9 +32,9 @@ public class SellerOrderController {
 		model.addAttribute("svo", svo);
 		
 		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
+		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
 		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
 		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
-		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
 		
 		model.addAttribute("orderDetailList", orderDetailList);
 		model.addAttribute("orderMainList", orderMainList);
@@ -60,6 +60,23 @@ public class SellerOrderController {
 			model.addAttribute("msg", "배송 신청 실패");
 		}
 		return "common/alert";
+	}
+	
+	@GetMapping("/od_orderlist.do")
+	public String od_orderlist(HttpSession sess, Model model) {
+		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("svo", svo);
+		
+//		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
+//		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
+//		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
+//		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
+//		
+//		model.addAttribute("orderDetailList", orderDetailList);
+//		model.addAttribute("orderMainList", orderMainList);
+//		model.addAttribute("deliveryList", deliveryList);
+		
+		return "seller/order/odorderlist";
 	}
 	
 	@GetMapping("/ad_orderlist.do")
