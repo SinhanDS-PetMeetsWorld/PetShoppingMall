@@ -206,3 +206,48 @@ ADD COLUMN `user_phone` VARCHAR(13) NOT NULL AFTER `user_name`;
  ALTER TABLE `PetShoppingMall`.`review` 
 CHANGE COLUMN `no` `no` INT NOT NULL AUTO_INCREMENT ;
 
+ALTER TABLE `PetShoppingMall`.`product_category` 
+DROP FOREIGN KEY `FK_product_TO_product_category_1`;
+ALTER TABLE `PetShoppingMall`.`product_category` 
+ADD CONSTRAINT `FK_product_TO_product_category_1`
+  FOREIGN KEY (`product_no`)
+  REFERENCES `PetShoppingMall`.`product` (`no`)
+  ON DELETE CASCADE;
+ALTER TABLE `PetShoppingMall`.`product_option` 
+DROP FOREIGN KEY `FK_product_TO_option_1`;
+ALTER TABLE `PetShoppingMall`.`product_option` 
+ADD CONSTRAINT `FK_product_TO_option_1`
+  FOREIGN KEY (`product_no`)
+  REFERENCES `PetShoppingMall`.`product` (`no`)
+  ON DELETE CASCADE;
+  ALTER TABLE `PetShoppingMall`.`product_qna` 
+DROP FOREIGN KEY `FK_product_TO_product_qna_1`;
+ALTER TABLE `PetShoppingMall`.`product_qna` 
+ADD CONSTRAINT `FK_product_TO_product_qna_1`
+  FOREIGN KEY (`product_no`)
+  REFERENCES `PetShoppingMall`.`product` (`no`)
+  ON DELETE CASCADE;
+  ALTER TABLE `PetShoppingMall`.`save_box` 
+DROP FOREIGN KEY `FK_product_TO_save_box_1`;
+ALTER TABLE `PetShoppingMall`.`save_box` 
+ADD CONSTRAINT `FK_product_TO_save_box_1`
+  FOREIGN KEY (`product_no`)
+  REFERENCES `PetShoppingMall`.`product` (`no`)
+  ON DELETE CASCADE;
+  ALTER TABLE `PetShoppingMall`.`cart` 
+DROP FOREIGN KEY `FK_product_TO_cart_1`;
+ALTER TABLE `PetShoppingMall`.`cart` 
+ADD CONSTRAINT `FK_product_TO_cart_1`
+  FOREIGN KEY (`product_no`)
+  REFERENCES `PetShoppingMall`.`product` (`no`)
+  ON DELETE CASCADE;
+  ALTER TABLE `PetShoppingMall`.`cart_option` 
+DROP FOREIGN KEY `FK_cart_TO_cart_option_1`;
+ALTER TABLE `PetShoppingMall`.`cart_option` 
+ADD CONSTRAINT `FK_cart_TO_cart_option_1`
+  FOREIGN KEY (`cart_no`)
+  REFERENCES `PetShoppingMall`.`cart` (`no`)
+  ON DELETE CASCADE;
+  ALTER TABLE `PetShoppingMall`.`cart` 
+ADD COLUMN `quantity` INT NOT NULL DEFAULT 1 AFTER `product_no`;
+  
