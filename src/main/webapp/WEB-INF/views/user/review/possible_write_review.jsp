@@ -13,6 +13,77 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
+    
+<style>
+ 
+.zzim_On {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  width: 150px;
+  height: 35px;
+  font-size: 15px;
+  background-color: #fd0;
+  font-weight: 500;
+  color: #222;
+  margin-top:5px;
+  
+ }
+ 
+ .price{
+ text-align: center;
+ margin_top : 80px;
+ margin-left: 40px;
+ font-size: 20px;
+ }
+ 
+.goods_container {
+display : flex;
+
+}
+
+.menu_name {
+margin-bottom: 30px;	
+}
+
+.goods_image {
+width : 100px;
+hegiht : 100px;
+}
+
+.goods_name {
+position:relative;
+margin-left : 30px;
+margin-top : 20px;
+width: 1000px;
+height: 100px;
+}
+
+.go_more {
+width :150px;
+height : 100px;
+margin-top: 20px;
+margin-left: 20px;	
+}
+
+.goods_info {
+width: 200px;
+height : 100px;
+}
+
+.zzimcancel_button {
+text-align: center;
+width: 200px;
+height : 100px;
+margin-right : 30px;
+margin-top : 5px; 
+}
+
+</style>       
+    
 </head>
 <body>
 	<div class="wrap">
@@ -92,7 +163,7 @@ function goReviewwrite_popup(){
 	
 	var dno = $(this).data('dno');
 	var url = '/user/order/write_review.do?no='+ dno;
-	window.open(url, 'Q&A등록', 'width=500, height=600');
+	window.open(url, '리뷰 등록', 'width=300px, height=355px');
 }
 
 </script>      

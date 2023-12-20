@@ -323,8 +323,6 @@ public class UserController {
 		return "common/alert";
 	}
 	
-	
-	
 	@GetMapping("/list_user_cart.do")
 	public String list_cart(Model model, HttpSession sess) {
 		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
@@ -374,11 +372,11 @@ public class UserController {
 				// 상품 정보 구하기
 				for (int k = 0; k < product_list.size(); k++) {
 					if (zzim_list.get(i).getProduct_no() == product_list.get(k).getNo()) {
-						save_list.add(String.valueOf(product_list.get(k).getImage_url())); // 상품 이미지 1
-						save_list.add(String.valueOf(product_list.get(k).getName())); // 상품 명 2
-						save_list.add(String.valueOf(product_list.get(k).getDescription())); // 상품 설명 3
-						save_list.add(String.valueOf(product_list.get(k).getPrice())); // 상품 가격 4
-						save_list.add(String.valueOf(product_list.get(k).getNo())); // 싱품 번호 5
+						save_list.add(String.valueOf(product_list.get(k).getImage_url())); // 상품 이미지 0
+						save_list.add(String.valueOf(product_list.get(k).getName())); // 상품 명 1
+						save_list.add(String.valueOf(product_list.get(k).getDescription())); // 상품 설명 2
+						save_list.add(String.valueOf(product_list.get(k).getPrice())); // 상품 가격 3
+						save_list.add(String.valueOf(product_list.get(k).getNo())); // 싱품 번호 4
 					}
 				}
 				// 유저 번호 구하기
