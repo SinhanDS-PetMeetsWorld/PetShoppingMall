@@ -12,6 +12,7 @@ import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.user.vo.CartVO;
 
 @Mapper
 public interface OrderMapper {
@@ -41,4 +42,11 @@ public interface OrderMapper {
 	public SellerVO getSellerInfo(int no);
 	public ReviewVO getReview(int order_dno);
 	public void updateProductRating(ProductVO pvo);
+	
+	public int delete_buyed_cart(int no);
+	public int delete_buyed_option(int option_no);
+	public int update_cart_quantity(CartVO vo);
+	public int delete_cart_product(int no);
+	public int delete_cart_option(int cart_no);
+	
 }

@@ -18,6 +18,7 @@ import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.seller.product.SellerProductMapper;
 import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.util.file.FileController;
 import sinhanDS.first.project.util.file.FileNameVO;
 
@@ -245,4 +246,46 @@ public class OrderServiceImpl implements OrderService {
 		pvo.setRating((total/pvo.getReview_cnt()));
 		mapper.updateProductRating(pvo);
 	}
+	
+	public int delete_buyed_cart(int[] cart_no) {
+		
+		for(int i=0; i<cart_no.length; i++) {
+			int r = 0;
+			r = mapper.delete_buyed_cart(cart_no[i]);
+			if(r != 1) {
+				return 0;	// 실패하면 바로 리턴
+			}
+		}
+		return 1;	// 전부 삭제 성공
+	}
+	public int delete_buyed_option(int[] option_no) {
+		
+		for(int i=0; i<option_no.length; i++) {
+			int r = 0;
+			r = mapper.delete_buyed_option(option_no[i]);
+			if(r != 1) {
+				return 0;	// 실패하면 바로 리턴
+			}
+		}
+		return 1;	// 전부 삭제 성공
+	}
+	public int update_cart_quantity(CartVO vo) {
+		return mapper.update_cart_quantity(vo);
+	}
+	
+	
+	public int delete_cart_product(int no) {
+		return mapper.delete_cart_product(no);
+		
+	}
+	public int delete_cart_option(int cart_no) {
+		int r = mapper.delete_cart_option(cart_no);
+		if(r != 1) {
+			return 0;
+		}	
+		return 1;
+		
+	}
+	
+	
 }

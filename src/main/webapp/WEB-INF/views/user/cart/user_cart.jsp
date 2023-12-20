@@ -87,8 +87,8 @@
 						                <br>
 						            </td>
 						            <td>
-						                <button type="button" name="cart_delete" onclick="#" >장바구니에서 삭제</button>
-						                <input type="number" class="quantity_list" name="quantity_list" id="quantity_list[${status.index }]" value=1>
+						                <button type="button" class="delete_cart" name="cart_delete">장바구니에서 삭제</button>
+						                <input type="number" class="quantity_list" name="quantity_list" id="quantity_list[${status.index }]" value="${cartvolist[status.index].quantity}" data-cart_table_no="${cartvolist[status.index].no }">
 						                
 						               
 						                
@@ -228,7 +228,32 @@
     			$('#final_price').val(finalPrice);
     		});	
    			
-    		$('.quantity_list').on('keyup', function(){	// 무조건 처음부터 다 다시 검사해야 하므로 totalPrice를 0으로 초기화해도 괜찮음
+    		
+    		$('.quantity_list').on('change', function(){	// 무조건 처음부터 다 다시 검사해야 하므로 totalPrice를 0으로 초기화해도 괜찮음
+    			
+    			//var full_url = '/user/order/modify_quantity.do?cartno=' + $(this).data("cartno") + '&quantity=' + $(this).val();
+    			//console.log(full_url);
+    			var cart_table_no = $(this).data("cart_table_no");
+    			console.log(cart_table_no);
+    			var quantity = $(this).val();
+    			console.log(quantity);
+    			   
+    			$.ajax({
+    				type:"GET",
+    				url: '/user/order/modify_quantity.do',
+    				data: {  
+    					cart_no_table : cart_table_no,
+    					quantity : quantity
+    				},
+    				
+    				async: false,
+    				//dataType:'HTML',
+    				
+    	  			success: function(res){
+						console.log("ㅎㅎㅎ");
+    	  			}
+    			});
+    		
     			var sellers = new Array();
     			var totalPrice = 0;
     			var discountPrice = 0;
@@ -238,7 +263,6 @@
 	                if($('.check_product').eq(i).prop('checked')){	// check_product로 가져온 태그 중 i번째인 태그의 checked 속성을 검사
 	                	var totalOptionPrice = 0;
 	                	$('.option_area').eq(i).children('.option_price').each(function(j,e){
-	                		console.log(e);
 	             			totalOptionPrice += Number($(e).val());
 	                	})
 	             
@@ -257,10 +281,10 @@
     			finalPrice = totalPrice + deliveryPrice;
     			
     			
-    			console.log('총주문가격:'+totalPrice);
-    			console.log('할인금액:'+discountPrice);
-    			console.log('배송비:'+deliveryPrice);
-    			console.log('최종결제액(배송비포함):'+finalPrice);
+    			//console.log('총주문가격:'+totalPrice);
+    			//console.log('할인금액:'+discountPrice);
+    			//console.log('배송비:'+deliveryPrice);
+    			//console.log('최종결제액(배송비포함):'+finalPrice);
     			
     			
     			document.getElementById('totalprice').innerHTML=totalPrice;
@@ -322,6 +346,19 @@
                	$('.quantity_list').eq(i).attr("disabled", false);
 			});
     	});
+    
+    	$('.delete_cart').click( function(){
+    		
+//    		var num = $(this).index();
+	  		var num = $('.delete_cart').index(this);
+			var no = $('.cart_no').eq(num).val();
+    		
+			console.log(num);
+			console.log(no);
+			
+    		location.href="/user/order/delete_cart.do?no=" + no ;    	
+    	});
+    	
     	
    
     		

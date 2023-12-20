@@ -13,29 +13,87 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
+    
+ <style>
+ 
+.zzim_On {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  width: 150px;
+  height: 35px;
+  font-size: 15px;
+  background-color: #fd0;
+  font-weight: 500;
+  color: #222;
+  margin-top:5px;
+  
+ }
+ 
+ .price{
+ text-align: center;
+ margin_top : 80px;
+ margin-left: 40px;
+ font-size: 20px;
+ }
+ 
+.goods_container {
+display : flex;
+
+}
+
+.menu_name {
+margin-bottom: 30px;	
+}
+
+.goods_image {
+width : 100px;
+hegiht : 100px;
+}
+
+.goods_name {
+position:relative;
+margin-left : 30px;
+margin-top : 20px;
+width: 1000px;
+height: 100px;
+}
+
+.go_more {
+width :150px;
+height : 100px;
+margin-top: 20px;
+margin-left: 20px;	
+}
+
+.goods_info {
+width: 200px;
+height : 100px;
+}
+
+</style>      
+
 </head>
 <body>
 	<div class="wrap">
         <div class="header">
-        	<c:if test="${empty adminLoginInfo}">
-	            <%@ include file="/WEB-INF/views/common/header.jsp" %>
-        	</c:if>
-        	<c:if test="${!empty adminLoginInfo}">
-	            <%@ include file="/WEB-INF/views/common/header_admin.jsp" %>
-        	</c:if>
+            <%@ include file="/WEB-INF/views/common/header.jsp" %>
         </div>
         <div class="contents">
         	<div class="quickmenu">
                 <%@ include file="/WEB-INF/views/common/quickmenu_user_info.jsp"%>
             </div>
 			<div class="contentsright">
-					<div>	
-						회원 번호 : ${userLoginInfo.no } <br>
-						
-					<h1>찜 박스</h1>
+			
+			<input type ="hidden"  value = "${userLoginInfo.no }">
+				
+				<h1 class= "menu_name">찜 박스</h1>
 				<c:forEach items="${save_list2}" varStatus = "zzim_quant" >
-					<div>
-						<div>	
+					<div class="goods_container">
+						<div class="goods_image">	
 							<c:if test="${empty save_list2[zzim_quant.index][0] }">
 								<img src="/resources/img/product/no_image.jpg" width="100" height="100">
 							</c:if>
@@ -45,35 +103,43 @@
 							</c:if>
 							
 							<c:if test="${!empty save_list2[zzim_quant.index][0] && !(fn:substring(save_list2[zzim_quant.index][0], 0, 1) == 'h') }">
-								<img src="/resources/img/product/registed_img/${save_list2[zzim_quant.index][0]}" width="100" height="100"><br>
+								<img src="/resources/img/product/registed_img/${save_list2[zzim_quant.index][0]}" width="100" height="100">
 							</c:if>
 						</div>	
-							
-						<div>
-							<a href= "/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}">
-										<button type ="button">상세 보기 </button></a>
-							
-							<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
-							<button class="zzim_On" data-no="${save_list2[zzim_quant.index][4]}"> 찜 목록 해제 </button> <br>
-							
-							제품 번호 : ${save_list2[zzim_quant.index][4]} <br>
-							</c:if>
+						
+						<div class="goods_name">
 							<c:if test = "${not empty save_list2[zzim_quant.index][1]}">
-						   	상품명 : ${save_list2[zzim_quant.index][1]} <br>
-							</c:if>
+						   	<h4> <a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}">${save_list2[zzim_quant.index][1]}</a></h4>
+						   	</c:if>
+						</div>
+
+						<div class="goods_info">	
 							<c:if test = "${not empty save_list2[zzim_quant.index][2]}">
-							설명 : ${save_list2[zzim_quant.index][2]} <br>
-							</c:if>
-							<c:if test = "${not empty save_list2[zzim_quant.index][3]}">
-							가격 : ${save_list2[zzim_quant.index][3]} <br>
-							</c:if>
-							<c:if test = "${not empty save_list2[zzim_quant.index][5]}">
-							유저 번호 : ${save_list2[zzim_quant.index][5]} <br>
+							${save_list2[zzim_quant.index][2]} <br>
 							</c:if>
 						</div>
+							
+							<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
+							<input type = "hidden" value ="${save_list2[zzim_quant.index][4]}"> <br>
+							</c:if>
+							<c:if test = "${not empty save_list2[zzim_quant.index][5]}">
+							<input type="hidden" value="${save_list2[zzim_quant.index][5]}">	
+							</c:if>
+						
+						<div class = "button">
+							<c:if test = "${not empty save_list2[zzim_quant.index][3]}">
+							<a class = "price">${save_list2[zzim_quant.index][3]}원 </a><br>
+							</c:if>
+						
+							<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
+							<button class="zzim_On" data-no="${save_list2[zzim_quant.index][4]}"> 찜 목록 해제 </button> <br>
+							</c:if>
+						</div>
+							
 					 </div>  
 				   </c:forEach>			
-				</div>
+				
+				<h1> 병천이 부탁 " 페이징 처리 5개씩 요청 "</h1>
 			</div>
         </div>
         

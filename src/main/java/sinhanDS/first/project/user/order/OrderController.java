@@ -133,6 +133,21 @@ public class OrderController {
 
 		
 		
+		int k = orderService.delete_buyed_option(option_no);
+		if(k==1) {
+			System.out.println("카트옵션 삭제됨");
+		} else {
+			System.out.println("옵션삭제안됨");
+		}
+		
+		int r = orderService.delete_buyed_cart(cart_no);
+		
+		if(r==1) {
+			System.out.println("카트상품 삭제됨");
+		} else {
+			alert("카트상품 삭제안됨");
+		}
+		
 
 		System.out.println("카트에노" + Arrays.toString(cart_no)); // 내가 체크한 상품의 cart_no 정보가 들어있음
 		
@@ -140,6 +155,11 @@ public class OrderController {
 
 		return "redirect:/user/order/success.do";
 	}
+	private void alert(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@GetMapping("success.do")
 	public String payementSuccess() {
 		return "user/order/success";
@@ -286,5 +306,35 @@ public class OrderController {
 		model.addAttribute("rvo", rvo);
 		log.debug("출력 rvo: " + rvo);
 		return "/user/order/read_review";
+	}
+	
+	@GetMapping("modify_quantity.do")
+	public String modify_quantity(Model model, @RequestParam int cart_no_table, @RequestParam int quantity) {
+		
+		System.out.println("수량수정 카트" + cart_no_table);
+		System.out.println("수량수정 양" + quantity);
+		
+		CartVO vo = new CartVO();
+		vo.setNo(cart_no_table);
+		vo.setQuantity(quantity);
+		
+		int r = orderService.update_cart_quantity(vo);
+		
+		if (r == 1) {
+			System.out.println("수정완");
+		} else {
+			System.out.println("수정안댐");
+		}
+		
+		
+		return "/user/cart/user_cart";
+	}
+	
+	@GetMapping("delete_cart.do")
+	public String delete_cart(Model model, int no/* 카트 no 넘겨받고, 옵션no 리스트 넘겨받음*/){
+		orderService.delete_cart_option(no);
+		orderService.delete_cart_product(no);
+		
+		return "redirect:/user/list_user_cart.do";
 	}
 }

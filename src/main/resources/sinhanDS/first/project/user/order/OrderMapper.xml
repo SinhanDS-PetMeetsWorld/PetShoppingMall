@@ -151,4 +151,22 @@
 	<update id="updateProductRating" parameterType="sinhanDS.first.project.product.vo.ProductVO">
 		UPDATE product SET rating=#{rating}, review_cnt=#{review_cnt} WHERE no=#{no}
 	</update>
+	
+	
+	<delete id="delete_buyed_cart" parameterType = "int">
+		DELETE FROM cart WHERE no = #{no}
+	</delete>
+	<delete id="delete_buyed_option" parameterType = "int">
+		DELETE FROM cart_option WHERE option_no = #{option_no}
+	</delete>
+	<update id="update_cart_quantity" parameterType = "sinhanDS.first.project.user.vo.CartVO">
+		UPDATE cart SET quantity = #{quantity} WHERE no = #{no}
+	</update>
+	<delete id="delete_cart_product" parameterType = "int">
+		DELETE FROM cart WHERE no = #{no}
+	</delete>
+	<delete id="delete_cart_option" parameterType = "int">
+		DELETE FROM cart_option WHERE cart_no = #{cart_no}
+	</delete>
+	
 </mapper>
