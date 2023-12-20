@@ -151,4 +151,10 @@
 	<update id="updateProductRating" parameterType="sinhanDS.first.project.product.vo.ProductVO">
 		UPDATE product SET rating=#{rating}, review_cnt=#{review_cnt} WHERE no=#{no}
 	</update>
+	
+	
+	<delete id = "delete_buyed_cart" parameterType = "int">
+		DELETE * FROM cart WHERE no = #{no}
+	</delete>
+	
 </mapper>

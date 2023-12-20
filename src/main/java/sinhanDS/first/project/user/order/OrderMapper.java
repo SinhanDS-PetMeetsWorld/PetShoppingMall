@@ -41,4 +41,6 @@ public interface OrderMapper {
 	public SellerVO getSellerInfo(int no);
 	public ReviewVO getReview(int order_dno);
 	public void updateProductRating(ProductVO pvo);
+	
+	public int delete_buyed_cart(int no);
 }

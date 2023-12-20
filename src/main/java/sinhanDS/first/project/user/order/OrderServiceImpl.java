@@ -245,4 +245,11 @@ public class OrderServiceImpl implements OrderService {
 		pvo.setRating((total/pvo.getReview_cnt()));
 		mapper.updateProductRating(pvo);
 	}
+	
+	public int delete_buyed_cart(int no) {
+		
+		return 1;
+	}
+	
+	
 }

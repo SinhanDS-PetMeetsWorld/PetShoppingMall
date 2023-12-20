@@ -46,4 +46,6 @@ public interface OrderService {
 	public SellerVO getSellerInfo(OrderDetailVO dvo);
 	public ReviewVO getReview(int order_dno);
 	public void updateProductRating(ReviewVO rvo);
+	
+	public int delete_buyed_cart(int no);
 }

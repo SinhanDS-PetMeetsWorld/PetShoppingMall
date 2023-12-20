@@ -130,9 +130,7 @@
 		SELECT * FROM product_option WHERE no = #{option_no}
 	</select>
 	
-	<delete id = "delete_buyed_cart" parameterType = "int">
-		DELETE * FROM cart WHERE no = #{no}
-	</delete>
+	
 	
 	
 	

@@ -92,9 +92,9 @@ public class OrderController {
 		model.addAttribute("option_list", option_list);
 		log.debug("option_list: " + option_list);
 		
-		log.debug("cart_no: " + cart_no);
-		log.debug("option_cart_no: " + option_cart_no);
-		log.debug("option_no: " + option_no);
+		log.debug("cart_no: " + Arrays.toString(cart_no));
+		log.debug("option_cart_no: " + Arrays.toString(option_cart_no));
+		log.debug("option_no: " + Arrays.toString(option_no));
 		return "user/order/pay";
 	}
 	
