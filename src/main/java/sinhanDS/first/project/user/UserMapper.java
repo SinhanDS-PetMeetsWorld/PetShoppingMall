@@ -41,6 +41,7 @@ public interface UserMapper {
 	List<SaveBoxVO> zzim_list(int user_no);
 	List<UserVO> user_list(int user_no);
 	List<ProductVO> product_list(int product_no);
+	int delete_buyed_cart(int no);
 	
 	List<ReviewVO> review_list(int user_no);
 	List<OrderDetailVO> order_detail(OrderDetailVO odvo);
