@@ -92,6 +92,13 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 		return deliveryList;
 	}
 
+	@Override
+	public boolean cancleOrder_seller(int no) {
+		int r = mapper.cancleOrder_seller(no);
+		if(r>0) return true;
+		else return false;
+	}
+
 	
 
 }

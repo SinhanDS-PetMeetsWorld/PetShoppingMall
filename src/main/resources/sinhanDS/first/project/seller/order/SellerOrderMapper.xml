@@ -4,7 +4,7 @@
 
 	<select id="getOrderNoList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT DISTINCT(order_no), seller_no FROM order_detail 
-		WHERE seller_no = #{no} AND delivery_no IS NULL
+		WHERE seller_no = #{no} AND delivery_no IS NULL AND cancle_status = 0
 		ORDER BY order_no DESC;
 	</select>
 	
@@ -45,5 +45,9 @@
 	<select id="getDeliveryVO" parameterType="int" resultType="sinhanDS.first.project.delivery.vo.DeliveryVO">
 		SELECT * FROM delivery WHERE no = #{no}
 	</select>
+	
+	<update id="cancleOrder_seller" parameterType="int">
+		UPDATE order_detail SET cancle_status = 2, reason = "판매자 취소" WHERE no = #{no}
+	</update>
 	
 </mapper>
