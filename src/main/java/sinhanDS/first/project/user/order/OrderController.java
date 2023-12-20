@@ -331,7 +331,10 @@ public class OrderController {
 	}
 	
 	@GetMapping("delete_cart.do")
-	public String delete_cart(Model model /* 카트 no 넘겨받고, 옵션no 리스트 넘겨받음*/){
-		return "/user/cart/user_cart";
+	public String delete_cart(Model model, int no/* 카트 no 넘겨받고, 옵션no 리스트 넘겨받음*/){
+		orderService.delete_cart_option(no);
+		orderService.delete_cart_product(no);
+		
+		return "redirect:/user/list_user_cart.do";
 	}
 }

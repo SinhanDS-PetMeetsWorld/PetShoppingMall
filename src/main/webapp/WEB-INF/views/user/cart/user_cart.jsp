@@ -87,7 +87,7 @@
 						                <br>
 						            </td>
 						            <td>
-						                <button type="button" class="delete_cart" name="cart_delete" onclick="goDelete()" >장바구니에서 삭제</button>
+						                <button type="button" class="delete_cart" name="cart_delete">장바구니에서 삭제</button>
 						                <input type="number" class="quantity_list" name="quantity_list" id="quantity_list[${status.index }]" value="${cartvolist[status.index].quantity}" data-cart_table_no="${cartvolist[status.index].no }">
 						                
 						               
@@ -347,9 +347,17 @@
 			});
     	});
     
-    	function goDelete(){
-			    		
-    	}
+    	$('.delete_cart').click( function(){
+    		
+//    		var num = $(this).index();
+	  		var num = $('.delete_cart').index(this);
+			var no = $('.cart_no').eq(num).val();
+    		
+			console.log(num);
+			console.log(no);
+			
+    		location.href="/user/order/delete_cart.do?no=" + no ;    	
+    	});
     	
     	
    
