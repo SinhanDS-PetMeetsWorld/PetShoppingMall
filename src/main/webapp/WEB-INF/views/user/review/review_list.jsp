@@ -39,27 +39,28 @@
 						</div>	
 						
 							<c:if test="${!empty review_list2[review_quant.index][1] }">
-								상품명: ${review_list2[review_quant.index][1] } <br>
+								주문 번호: ${review_list2[review_quant.index][1] } <br>
 							</c:if>
 							<c:if test="${!empty review_list2[review_quant.index][2] }">
-								가 격: ${review_list2[review_quant.index][2] } <br>
+								상품명: ${review_list2[review_quant.index][2] } <br>
 							</c:if>
 							<c:if test="${!empty review_list2[review_quant.index][3] }">
-							 리뷰 내용: ${review_list2[review_quant.index][3] } <br>
+							    가격: ${review_list2[review_quant.index][3] } <br>
 							</c:if>
 							<c:if test="${!empty review_list2[review_quant.index][4] }">
-							상품 번호:	 ${review_list2[review_quant.index][4] } <br>
+							리뷰 내용:	 ${review_list2[review_quant.index][4] } <br>
 							</c:if>
 							<c:if test="${!empty review_list2[review_quant.index][5] }">
-							리뷰 작성일: ${review_list2[review_quant.index][5] } <br>
+						    상품 번호: ${review_list2[review_quant.index][5] } <br>
 							</c:if>
 							<c:if test="${!empty review_list2[review_quant.index][6] }">
-							평점: ${review_list2[review_quant.index][6] } <br>
+							리뷰 작성일: ${review_list2[review_quant.index][6] } <br>
+							</c:if>
+							<c:if test="${!empty review_list2[review_quant.index][7] }">
+							평점: ${review_list2[review_quant.index][7] } <br>
 							</c:if>
 							<br>
 						
-				
-			
 					</div>
 			   </c:forEach>			
 				</div>

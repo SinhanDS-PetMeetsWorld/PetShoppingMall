@@ -47,4 +47,5 @@ public interface UserService {
 	List<OrderDetailOptionVO> order_detail_option(OrderDetailOptionVO odovo);
 	
 	List<OrderDetailVO> possible_write_review(int user_no);
+	List<String> product_image_list(List<OrderDetailVO> review_list);
 }
