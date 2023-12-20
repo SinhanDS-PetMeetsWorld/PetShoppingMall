@@ -25,8 +25,7 @@
             </div>
 			<div class="contentsright">
 				<div>
-					
-					
+				
 					<c:if test="${not empty orderMainList}">
 						<c:forEach var="orders" items="${orderMainList}" varStatus="mainstatus">
 							<c:set var="deliverStatus" value="배송준비"/>
@@ -60,7 +59,6 @@
 								주문일시: ${orders.order_date } 배송상태: ${deliverStatus}<br>
 								<c:if test='${deliverStatus == "배송준비"}'>
 									<form method="post" name="deliveryForm"  id="deliveryForm" action="regist_deliver.do">
-									<%-- 운송장 번호: <input type="number" name="delivery_no" id="delivery_no" value="" placeholder="운송장 등록"> --%>
 									<input type="submit" id="regist_del" value="배송시작">
 									
 									<input type="hidden" name="receiver_name" value="${orders.user_name}">
@@ -97,6 +95,6 @@
 			<div class="footer-color"></div>
         </div>
     </div>
-
+    
 </body>
 </html>

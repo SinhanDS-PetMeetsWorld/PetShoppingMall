@@ -106,10 +106,6 @@
                     </form>
 				</div>
 				
-				<div class="sorting">
-					
-				</div>
-				
 				<div>
 					<c:if test="${empty list }">
 						<br>

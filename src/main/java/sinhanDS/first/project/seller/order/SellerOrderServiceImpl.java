@@ -22,6 +22,16 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 	}
 	
 	@Override
+	public List<OrderDetailVO> getOrderDetails(int no) {
+		return mapper.getOrderDetails(no);
+	}
+	
+	@Override
+	public List<OrderDetailVO> getOrderDetails2(Map map) {
+		return mapper.getOrderDetails2(map);
+	}
+	
+	@Override
 	public List<List<OrderDetailVO>> getOrderDetailList(List<OrderDetailVO> orderNoList) {
 		List<List<OrderDetailVO>> orderDetailList = new ArrayList<>();
 		for(int i=0; i<orderNoList.size(); i++) {
@@ -34,16 +44,6 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 		return orderDetailList;
 	}
 	
-	@Override
-	public List<OrderDetailVO> getOrderDetails(int no) {
-		return mapper.getOrderDetails(no);
-	}
-	
-	@Override
-	public List<OrderDetailVO> getOrderDetails2(Map map) {
-		return mapper.getOrderDetails2(map);
-	}
-
 	@Override
 	public List<OrderMainVO> getOrderMainList(List<OrderDetailVO> orderNoList) {
 		List<OrderMainVO> orderMainList = new ArrayList<>();
@@ -85,7 +85,6 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 			for(int i=0; i<orderDetailList.size(); i++) {
 				DeliveryVO dvo = mapper.getDeliveryVO(orderDetailList.get(i).get(0).getDelivery_no());
 				deliveryList.add(dvo);
-			
 		}
 		return deliveryList;
 	}
