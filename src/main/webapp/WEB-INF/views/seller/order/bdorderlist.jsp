@@ -16,8 +16,6 @@
         <div class="header">
             <%@ include file="/WEB-INF/views/common/header_seller.jsp" %>
         </div>
-
-       	
         
         <div class="contents">
         	<div class="quickmenu">
@@ -25,17 +23,15 @@
             </div>
 			<div class="contentsright">
 				<div>
-					
-					
+				<h2>배송전 목록</h2><br>
 					<c:if test="${not empty orderMainList}">
 						<c:forEach var="orders" items="${orderMainList}" varStatus="mainstatus">
-							<c:set var="deliverStatus" value="배송준비"/>
-							<c:set var="deliverNo" value=""/>
 							주문번호: ${orders.no }<br>
+							<c:set var="allcanclecheck" value="true"/>
+							
 							<c:if test="${not empty orderDetailList}">
 								<c:forEach var="orderdetails" items="${orderDetailList[mainstatus.index]}" varStatus="status">
-									<c:if test="${orderdetails.delivery_status == 1}"><c:set var="deliverStatus" value="배송시작"/></c:if>
-									<c:if test="${orderdetails.delivery_status == 2}"><c:set var="deliverStatus" value="배송완료"/></c:if>
+									${orderdetails.no}
 									<table border="1">
 										<thead><tr> <th>제품명</th><th>옵션</th><th>판매가</th><th>수량</th> </tr></thead>
 										<tr <c:if test="${orderdetails.cancle_status != 0}">style="color:red"</c:if>>
@@ -47,21 +43,24 @@
 													</c:forEach>
 												</c:if>
 												<c:if test="${empty orderdetails.options}">옵션없음</c:if>
+												<td>${orderdetails.product_price}</td><td>${orderdetails.quantity}</td>
 											
-											<td>${orderdetails.product_price}</td><td>${orderdetails.quantity}</td>
+											<c:if test='${orderdetails.cancle_status == 0}'><c:set var="allcanclecheck" value="false"/></c:if>
 										</tr>
-									</table><br>
-									<c:if test='${orderdetails.delivery_no != null && orderdetails.delivery_no != ""}'>
-										<c:set var="deliverNo" value="${orderdetails.delivery_no}"/></c:if>
+									</table>
+									<c:if test="${orderdetails.cancle_status == 0}">
+										<button type="button" value="${orderdetails.no}" class="canclebutton">주문취소</button>
+									</c:if>
+									<br><br>
+									
 								</c:forEach>
 								수취인정보<br>
 								이름: ${orders.user_name } 연락처: ${orders.user_phone } <br>
 								우편번호: ${orders.zipcode } 주소: ${orders.addr1 } 상세주소: ${orders.addr2 } <br><br>
-								주문일시: ${orders.order_date } 배송상태: ${deliverStatus}<br>
-								<c:if test='${deliverStatus == "배송준비"}'>
+								주문일시: ${orders.order_date } 배송상태: 배송준비<br>
 									<form method="post" name="deliveryForm"  id="deliveryForm" action="regist_deliver.do">
-									<%-- 운송장 번호: <input type="number" name="delivery_no" id="delivery_no" value="" placeholder="운송장 등록"> --%>
-									<input type="submit" id="regist_del" value="배송시작">
+									
+									<input type="submit" id="regist_del" value="배송시작" <c:if test='${allcanclecheck == "true"}'> disabled="disabled" </c:if>>
 									
 									<input type="hidden" name="receiver_name" value="${orders.user_name}">
 									<input type="hidden" name="receiver_phone" value="${orders.user_phone}">
@@ -76,12 +75,7 @@
 									<input type="hidden" name="order_no" value="${orders.no}">
 									<input type="hidden" name="seller_no" value="${svo.no}">
 									</form>	
-								</c:if>
-								<c:if test='${deliverNo != null && deliverNo != ""}'>
-									운송장 번호: ${deliverNo}
-									<c:if test='${deliverStatus == "배송시작"}'>도착예정일: ${deliveryList[mainstatus.index].due_date}</c:if>
-									<c:if test='${deliverStatus == "배송완료"}'>도착일: ${deliveryList[mainstatus.index].arrival_date}</c:if>
-								</c:if>
+								
 								<br><br><hr><br>
 							</c:if>
 						</c:forEach>
@@ -97,6 +91,26 @@
 			<div class="footer-color"></div>
         </div>
     </div>
-
+    
+	<script>
+		$('.canclebutton').click(function() {
+			var order_detail_no = $(this).val();
+			$.ajax({
+				type: "GET",
+				url:'order_cancle.do',
+				data: {"order_detail_no" : order_detail_no},
+				async: false,
+				success:function(res) {
+					if (res == 'true') {
+						alert('주문을 취소했습니다.');
+						location.href="/seller/order/bd_orderlist.do";
+					} else {
+						alert('주문 취소에 실패했습니다.');
+					}
+				}
+			})
+		})
+	</script>	
+	
 </body>
 </html>

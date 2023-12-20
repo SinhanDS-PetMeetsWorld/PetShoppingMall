@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import sinhanDS.first.project.delivery.vo.DeliveryVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
@@ -26,21 +27,19 @@ public class SellerOrderController {
 	@Autowired
 	private SellerOrderService service;
 	
-	@GetMapping("/orderlist.do")
-	public String edit(HttpSession sess, Model model) {
+	@GetMapping("/bd_orderlist.do")
+	public String bd_orderlist(HttpSession sess, Model model) {
 		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
 		model.addAttribute("svo", svo);
 		
 		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
-		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
-		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
 		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
+		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
 		
 		model.addAttribute("orderDetailList", orderDetailList);
 		model.addAttribute("orderMainList", orderMainList);
-		model.addAttribute("deliveryList", deliveryList);
 		
-		return "seller/order/orderlist";
+		return "seller/order/bdorderlist";
 	}
 	
 	@PostMapping("/regist_deliver.do")
@@ -53,13 +52,75 @@ public class SellerOrderController {
 		boolean r = service.regist_delivery(dvo);
 		if (r) { 
 			model.addAttribute("cmd", "move");
-			model.addAttribute("url", "/seller/order/orderlist.do");
+			model.addAttribute("url", "/seller/order/bd_orderlist.do");
 			model.addAttribute("msg", "배송이 시작되었습니다.");
 		} else {
 			model.addAttribute("cmd", "back");
 			model.addAttribute("msg", "배송 신청 실패");
 		}
 		return "common/alert";
+	}
+	
+	@GetMapping("/od_orderlist.do")
+	public String od_orderlist(HttpSession sess, Model model) {
+		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("svo", svo);
+		
+//		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
+//		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
+//		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
+//		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
+//		
+//		model.addAttribute("orderDetailList", orderDetailList);
+//		model.addAttribute("orderMainList", orderMainList);
+//		model.addAttribute("deliveryList", deliveryList);
+		
+		return "seller/order/odorderlist";
+	}
+	
+	@GetMapping("/ad_orderlist.do")
+	public String ad_orderlist(HttpSession sess, Model model) {
+		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("svo", svo);
+		
+//		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
+//		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
+//		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
+//		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
+//		
+//		model.addAttribute("orderDetailList", orderDetailList);
+//		model.addAttribute("orderMainList", orderMainList);
+//		model.addAttribute("deliveryList", deliveryList);
+		
+		return "seller/order/adorderlist";
+	}
+	
+	@GetMapping("/refundlist.do")
+	public String refundlist(HttpSession sess, Model model) {
+		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("svo", svo);
+		
+//		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
+//		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
+//		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
+//		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
+//		
+//		model.addAttribute("orderDetailList", orderDetailList);
+//		model.addAttribute("orderMainList", orderMainList);
+//		model.addAttribute("deliveryList", deliveryList);
+		
+		return "seller/order/refundlist";
+	}
+	
+	@ResponseBody
+	@GetMapping("/order_cancle.do")
+	public String order_cancle(HttpSession sess, Model model, HttpServletRequest request) {
+		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("svo", svo);
+		
+		boolean res = service.cancleOrder_seller(Integer.parseInt(request.getParameter("order_detail_no")));
+		
+		return String.valueOf(res);
 	}
 
 }

@@ -205,7 +205,6 @@ ADD COLUMN `user_phone` VARCHAR(13) NOT NULL AFTER `user_name`;
 
  ALTER TABLE `PetShoppingMall`.`review` 
 CHANGE COLUMN `no` `no` INT NOT NULL AUTO_INCREMENT ;
-
 ALTER TABLE `PetShoppingMall`.`product_category` 
 DROP FOREIGN KEY `FK_product_TO_product_category_1`;
 ALTER TABLE `PetShoppingMall`.`product_category` 
@@ -250,4 +249,15 @@ ADD CONSTRAINT `FK_cart_TO_cart_option_1`
   ON DELETE CASCADE;
   ALTER TABLE `PetShoppingMall`.`cart` 
 ADD COLUMN `quantity` INT NOT NULL DEFAULT 1 AFTER `product_no`;
-  
+ALTER TABLE `PetShoppingMall`.`review` 
+DROP FOREIGN KEY `FK_product_TO_review_1`;
+ALTER TABLE `PetShoppingMall`.`review` 
+DROP INDEX `FK_product_TO_review_1` ;
+ALTER TABLE `PetShoppingMall`.`review` 
+ADD CONSTRAINT `FK_product_TO_review_1`
+  FOREIGN KEY ()
+  REFERENCES `PetShoppingMall`.`product` ();
+;
+
+ALTER TABLE `PetShoppingMall`.`order_detail` 
+CHANGE COLUMN `refound_status` `refound_status` INT NOT NULL DEFAULT '0' ;
