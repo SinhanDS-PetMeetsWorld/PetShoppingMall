@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
+import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
+import sinhanDS.first.project.order.vo.OrderDetailVO;
+import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
+import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.user.order.OrderService;
 import sinhanDS.first.project.user.vo.UserVO;
 
 
@@ -26,6 +31,7 @@ import sinhanDS.first.project.user.vo.UserVO;
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	@Autowired OrderService orderService;
 	
 	@GetMapping("")
 	public String index() {
@@ -58,6 +64,7 @@ public class AdminController {
 	public String logout(HttpSession sess) {
 		sess.removeAttribute("userLoginInfo");
 		sess.removeAttribute("sellerLoginInfo");
+		sess.removeAttribute("adminLoginInfo");
 		return "redirect:/admin/";
 	}
 	@GetMapping("userList.do")
@@ -87,13 +94,12 @@ public class AdminController {
 		model.addAttribute("list", userlist);
         model.addAttribute("paging", map);
         model.addAttribute("svo", svo);
-		return "/admin/user/list";
+		return "/admin/page/userList";
 	}
 	
 	@GetMapping("sellerList.do")
 	public String sellerList(Model model, ProductSearchVO svo) {
 		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
-		log.debug("review_svo: " + svo);
 		int count = service.getNumberOfSeller();
 		int totalPage = count / svo.getNumberOfProductInPage();
 		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
@@ -117,13 +123,134 @@ public class AdminController {
 		model.addAttribute("list", sellerlist);
         model.addAttribute("paging", map);
         model.addAttribute("svo", svo);
-		return "/admin/seller/list";
+		return "/admin/page/sellerList";
 	}
 	
-	@GetMapping("goUser.do")
-	public String goUser(HttpSession sess, UserVO vo) {
-		sess.setAttribute("userLoginInfo", vo);
-		log.debug("로그인세션체크: " + (UserVO)sess.getAttribute("userLoginInfo"));
-		return "redirect:/user/edit.do";
+	
+	@GetMapping("productList.do")
+	public String productList(Model model, ProductSearchVO svo) {
+		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
+		int count = service.getNumberOfProduct();
+		int totalPage = count / svo.getNumberOfProductInPage();
+		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		Map<String, Object> map = new HashMap<>();
+		map.put("count", count);
+		map.put("totalPage", totalPage);
+		
+		int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList()) * svo.getNumberOfPageInIndexList());
+		int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+		if( endPage > totalPage) endPage = totalPage;
+		boolean prev = startPage > 1;
+		boolean next = endPage < totalPage;
+		map.put("endPage", endPage);
+		map.put("startPage", startPage);
+		map.put("prev", prev);
+		map.put("next", next);
+        
+		List<ProductVO> vo_list = service.getProductList(svo);
+		log.debug("list: " + vo_list);
+		
+		model.addAttribute("list", vo_list);
+        model.addAttribute("paging", map);
+        model.addAttribute("svo", svo);
+		return "/admin/page/productList";
+	}
+	@GetMapping("orderMainList.do")
+	public String orderMainList(Model model, ProductSearchVO svo) {
+		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
+		//개수 구하기
+		int count = service.getNumberOfOrderMain();
+		int totalPage = count / svo.getNumberOfProductInPage();
+		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		Map<String, Object> map = new HashMap<>();
+		map.put("count", count);
+		map.put("totalPage", totalPage);
+		
+		int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList()) * svo.getNumberOfPageInIndexList());
+		int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+		if( endPage > totalPage) endPage = totalPage;
+		boolean prev = startPage > 1;
+		boolean next = endPage < totalPage;
+		map.put("endPage", endPage);
+		map.put("startPage", startPage);
+		map.put("prev", prev);
+		map.put("next", next);
+		
+		//리스트 구하기 
+		List<OrderMainVO> vo_list = service.getOrderMainList(svo);
+		log.debug("list: " + vo_list);
+		
+		model.addAttribute("list", vo_list);
+		model.addAttribute("paging", map);
+		model.addAttribute("svo", svo);
+		return "/admin/page/orderMainList";
+	}
+	
+	@GetMapping("orderDetailList.do")
+	public String orderDetailList(Model model, ProductSearchVO svo) {
+		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
+		//개수 구하기
+		int count = service.getNumberOfOrderDetail();
+		int totalPage = count / svo.getNumberOfProductInPage();
+		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		Map<String, Object> map = new HashMap<>();
+		map.put("count", count);
+		map.put("totalPage", totalPage);
+		
+		int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList()) * svo.getNumberOfPageInIndexList());
+		int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+		if( endPage > totalPage) endPage = totalPage;
+		boolean prev = startPage > 1;
+		boolean next = endPage < totalPage;
+		map.put("endPage", endPage);
+		map.put("startPage", startPage);
+		map.put("prev", prev);
+		map.put("next", next);
+		
+		//리스트 구하기 
+		List<OrderDetailVO> vo_list = service.getOrderDetailList(svo);
+		log.debug("list: " + vo_list);
+		
+		List<List<OrderDetailOptionVO>> ovo_list = orderService.getOrderDetailOptionList(vo_list);
+		
+		model.addAttribute("list", vo_list);
+		model.addAttribute("ovo_list", ovo_list);
+		model.addAttribute("paging", map);
+		model.addAttribute("svo", svo);
+		return "/admin/page/orderDetailList";
+	}
+	
+	@GetMapping("cancleAndRefoundList.do")
+	public String cancleAndRefoundList(Model model, ProductSearchVO svo) {
+		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
+		//개수 구하기
+		int count = service.getNumberOfCancleAndRefound();
+		int totalPage = count / svo.getNumberOfProductInPage();
+		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		Map<String, Object> map = new HashMap<>();
+		map.put("count", count);
+		map.put("totalPage", totalPage);
+		
+		int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList()) * svo.getNumberOfPageInIndexList());
+		int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+		if( endPage > totalPage) endPage = totalPage;
+		boolean prev = startPage > 1;
+		boolean next = endPage < totalPage;
+		map.put("endPage", endPage);
+		map.put("startPage", startPage);
+		map.put("prev", prev);
+		map.put("next", next);
+		
+		//리스트 구하기 
+		List<OrderDetailVO> vo_list = service.getCancleAndRefound(svo);
+		log.debug("list: " + vo_list);
+		
+		List<List<OrderDetailOptionVO>> ovo_list = orderService.getOrderDetailOptionList(vo_list);
+		
+		model.addAttribute("list", vo_list);
+		model.addAttribute("ovo_list", ovo_list);
+		model.addAttribute("paging", map);
+		model.addAttribute("svo", svo);
+		return "/admin/page/cancleAndRefoundList";
 	}
 }

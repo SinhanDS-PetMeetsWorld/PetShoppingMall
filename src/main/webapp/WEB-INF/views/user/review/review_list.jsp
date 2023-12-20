@@ -13,6 +13,80 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
+    
+<style>
+
+.review_container {
+display : flex;
+}
+ 
+.Review_more {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  width: 150px;
+  height: 35px;
+  font-size: 15px;
+  background-color: #fd0;
+  font-weight: 500;
+  color: #222;
+  margin-top:5px;
+  
+ }
+ 
+.menu_name {
+margin-bottom: 30px;	
+}
+
+.goods_image {
+width : 100px;
+hegiht : 100px;
+}
+
+.detail_container{
+height : 100px;
+width : 700px;
+
+}
+.goods_name {
+position:relative;
+margin-left : 30px;
+width: 700px;
+height: 30pxx;
+}
+
+.review_info {
+width: 150px;
+height : 50px;
+font-size : 13px;
+margin-left : 30px;
+}
+
+ .price{
+ margin-left: 30px;
+ width : 200px;
+ font-size: 20px;
+ }
+
+
+.go_more {
+width :900px;
+height : 10px;
+margin-left: 20px;	
+}
+
+.rating{
+margin-left: 30px
+}
+
+
+</style>      
+  
+    
+    
 </head>
 <body>
 	<div class="wrap">
@@ -24,87 +98,84 @@
                 <%@ include file="/WEB-INF/views/common/quickmenu_user_info.jsp"%>
             </div>
 			<div class="contentsright">
-					<div>	
-						회원 번호 : ${userLoginInfo.no } <br>
+			<input type ="hidden" value = "${userLoginInfo.no } ">
 						
-					<h1>작성한 리뷰</h1>
-					
-					
+				<h1 class="menu_name" >작성한 리뷰</h1>
 				<c:forEach items="${review_list2}" varStatus = "review_quant" >
-					<div>
-						<div>	
+					<div class= "review_container">
+						<div class = "goods_image">	
 							<c:if test="${review_list2[review_quant.index][0] != 'null' && !(fn:substring(review_list2[review_quant.index][0], 0, 1) == 'h') }">
 								<img src="/resources/img/product/review_img/${review_list2[review_quant.index][0] }" width="100" height="100">
 							</c:if>
 						</div>	
-						
 							<c:if test="${!empty review_list2[review_quant.index][1] }">
-								상품명: ${review_list2[review_quant.index][1] } <br>
+							<input type="hidden" value= "${review_list2[review_quant.index][1] }">
 							</c:if>
-							<c:if test="${!empty review_list2[review_quant.index][2] }">
-								가 격: ${review_list2[review_quant.index][2] } <br>
-							</c:if>
-							<c:if test="${!empty review_list2[review_quant.index][3] }">
-							 리뷰 내용: ${review_list2[review_quant.index][3] } <br>
-							</c:if>
-							<c:if test="${!empty review_list2[review_quant.index][4] }">
-							상품 번호:	 ${review_list2[review_quant.index][4] } <br>
-							</c:if>
-							<c:if test="${!empty review_list2[review_quant.index][5] }">
-							리뷰 작성일: ${review_list2[review_quant.index][5] } <br>
-							</c:if>
-							<c:if test="${!empty review_list2[review_quant.index][6] }">
-							평점: ${review_list2[review_quant.index][6] } <br>
-							</c:if>
-							<br>
 						
-				
-			
+						
+						<div class = "detail_container">
+								<div class = "goods_name">
+									<c:if test="${!empty review_list2[review_quant.index][2] }">
+										<h4> <a href="/user/product/goods.do?no=${review_list2[review_quant.index][5] }" > ${review_list2[review_quant.index][2] }</a></h4> 
+									</c:if>
+								</div>	
+									
+								<div class = "price">
+									<c:if test="${!empty review_list2[review_quant.index][3] }">
+										<a> ${review_list2[review_quant.index][3] }원</a><br>
+									</c:if>
+								</div>	
+															
+								<div class = "review_info">
+									<c:if test="${!empty review_list2[review_quant.index][6] }">
+									리뷰 작성일: ${review_list2[review_quant.index][6] } <br>
+									</c:if>
+									<c:if test="${!empty review_list2[review_quant.index][4] }">
+									리뷰 내용:	 ${review_list2[review_quant.index][4] } <br>
+									</c:if>
+									<c:if test="${!empty review_list2[review_quant.index][5] }">
+								    <input type="hidden" value="${review_list2[review_quant.index][5] }">
+									</c:if>
+								</div>	
+								
+						</div>
+						
+						
+						<div class = "button">
+							<div class = "rating">
+								<c:if test="${!empty review_list2[review_quant.index][7] }">
+										평점: ${review_list2[review_quant.index][7] } <br>
+								</c:if>
+							</div>
+							<c:if test="${!empty review_list2[review_quant.index][1] }">
+							<button class ="Review_more" data-dno="${review_list2[review_quant.index][1]}"> 리뷰 상세 </button>	<br>
+							</c:if>
+						</div>
+							
 					</div>
-			   </c:forEach>			
-				</div>
+			   </c:forEach>	
+			   		
+				<h1> 병천이 부탁 " 페이징 처리 5개씩 요청 "</h1>
 			</div>
         </div>
         
         <div class="footer">
 			<div class="footer-color"></div>
         </div>
-    </div>    
-<script>
+    </div> 
+     
+ <script>
+$(".Review_more").on('click', goReviewmore_popup);
 
-$(".zzim_On").on('click', zzim);
-
-function zzim(){
-	console.log($(this).data('no'));
+function goReviewmore_popup(){
 	
-	var user_no = ${userLoginInfo.no };
-	var product_no = $(this).data('no');
+	console.log($(this).data('dno'));
 	
-	var result = confirm("찜 목록에서 삭제 하시겠습니까?");
-	 if(result){
-			$.ajax({
-				method: "POST",
-				url:'/user/product/zzimcancel.do',
-				async: true,
-				type:'HTML',
-				data: {
-					product_no : product_no,
-					   user_no : user_no
-				},
-				success : function(response){
-					alert("찜 등록이 삭제 되었습니다.");
-					history.go(0);
-				},
-				error: function (error) {
-					alert("오류가 발생했습니다. 잠시 후 다시 이용해주세요");
-		        }
-			});
-		}else{
-			return;
-		}
-	
+	var dno = $(this).data('dno');
+	var url = '/user/order/read_review.do?no='+ dno;
+	window.open(url, '리뷰 상세 보기', 'width=300px, height=355px');
 }
 
-</script>
+</script> 
 </body>
 </html>

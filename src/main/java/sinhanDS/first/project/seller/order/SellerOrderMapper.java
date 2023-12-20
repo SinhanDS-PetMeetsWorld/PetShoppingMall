@@ -23,4 +23,6 @@ public interface SellerOrderMapper {
 	int update_deliveryNo(OrderDetailVO vo);
 	
 	DeliveryVO getDeliveryVO(int no);
+	
+	int cancleOrder_seller(int no);
 }

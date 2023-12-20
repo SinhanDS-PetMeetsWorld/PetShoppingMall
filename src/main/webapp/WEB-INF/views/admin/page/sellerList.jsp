@@ -18,8 +18,11 @@
         <div class="header">
             <%@ include file="/WEB-INF/views/common/header_admin.jsp" %>
         </div>
-        
+        <div>
+        	<%@ include file="/WEB-INF/views/common/admin_menu.jsp" %>
+        </div>
         <div class="contents">
+        	<h1>판매자 목록 조회</h1>
         	<table border='1'>
         		<tr>
         			<td>회원 번호</td>
@@ -27,31 +30,18 @@
         			<td>이름</td>
         			<td>이메일</td>
         			<td>연락처</td>
-        			<td>성별</td>
-        			<td>생년월일</td>
-        			<td>광고수신동의여부</td>
-        			<td>가입일</td>
         			<td>제재여부</td>
         		</tr>
         	
 	        	<c:forEach items="${list }" var="vo">
-	        		
-						<tr class="userInfo" data-no=${vo.no }>
-		        			<td>${vo.no }</td>
-		        			<td>${vo.id }</td>
-		        			<td>${vo.name }</td>
-		        			<td>${vo.email }</td>
-		        			<td>${vo.phone }</td>
-		        			<td>
-								<c:if test="${vo.gender==0 }">남자</c:if>
-								<c:if test="${vo.gender==1 }">여자</c:if>
-							</td>
-		        			<td>${vo.birth_date }</td>
-		        			<td>${vo.advertisement }</td>
-		        			<td>${vo.join_date }</td>
-		        			<td>${vo.restricted }</td>
-		        		</tr>
-	        		
+					<tr>
+	        			<td>${vo.no }</td>
+	        			<td>${vo.id }</td>
+	        			<td>${vo.name }</td>
+	        			<td>${vo.email }</td>
+	        			<td>${vo.phone }</td>
+	        			<td>${vo.restricted }</td>
+	        		</tr>
 	        	</c:forEach>
         	</table>
         	
@@ -80,15 +70,9 @@
 			<div class="footer-color"></div>
         </div>
     </div>
-   
 <script>
 	$('.pageButton').on('click', function(){
-		location.href="/admin/userList.do?page=" + $(this).data('page');
-	})
-</script>
-<script>
-	$('.userInfo').on('click', function(){
-		location.href="/admin/goUser.do?no="+$(this).data('no');
+		location.href="/admin/sellerList.do?page=" + $(this).data('page');
 	})
 </script>
 </body>

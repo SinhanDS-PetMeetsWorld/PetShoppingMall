@@ -11,10 +11,45 @@
 		ORDER BY no
 		LIMIT #{startIdx}, #{numberOfProductInPage};
 	</select>
+	<select id="getProductList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * FROM product
+		ORDER BY no
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	<select id="getOrderMainList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
+		SELECT * FROM order_main
+		ORDER BY no
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	<select id="getOrderDetailList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail
+		ORDER BY no
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	<select id="getCancleAndRefound" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail
+		WHERE cancle_status != 0 or refound_status != 0
+		ORDER BY no
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	
 	<select id="getNumberOfUser" resultType="int">
 		SELECT count(*) FROM user WHERE id != 'admin'
 	</select>
 	<select id="getNumberOfSeller" resultType="int">
 		SELECT count(*) FROM seller WHERE id != 'admin'
+	</select>
+	<select id="getNumberOfProduct" resultType="int">
+		SELECT count(*) FROM product
+	</select>
+	<select id="getNumberOfOrderMain" resultType="int">
+		SELECT count(*) FROM order_main
+	</select>
+	<select id="getNumberOfOrderDetail" resultType="int">
+		SELECT count(*) FROM order_detail
+	</select>
+	<select id="getNumberOfCancleAndRefound" resultType="int">
+		SELECT count(*) FROM order_detail
+		WHERE cancle_status != 0 or refound_status != 0
 	</select>
 </mapper>

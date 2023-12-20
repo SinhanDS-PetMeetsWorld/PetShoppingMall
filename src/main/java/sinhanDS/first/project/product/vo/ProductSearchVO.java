@@ -9,6 +9,9 @@ public class ProductSearchVO {
 	private int seller_no;
 	private int product_no;
 	
+	private String company;
+	private String brand;
+	
 	private int category1;
 	private int category2 = 9999;
 	
@@ -16,6 +19,7 @@ public class ProductSearchVO {
 	/* 한 페이지에 보여줄 상품의 개수 */
 	private int numberOfProductInPage = 5;
 	private int numberOfPageInIndexList = 5;
+	
 	private int startIdx;
 	private String searchWord;
 	private String searchType;
@@ -35,7 +39,9 @@ public class ProductSearchVO {
 	private int numberInPage_search = 15;
 	private int numberInPage_review = 3;
 	private int numberInPage_qna = 5;
-	private int numberInPage_UserVO = 10;
+	
+	/* 관리자 페이지에서 애들 볼 떄 */
+	private int numberInPage_UserVO = 30;
 }
 /* 상품 리스트, 검색 결과 띄워줄 때 조건 여러개 한 번에 넣으려고 만든 vo입니다
  * search type이나 검색어string 등등 자유롭게 추가해서 사용하셔도 됩니다

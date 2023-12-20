@@ -18,26 +18,41 @@
         <div class="header">
             <%@ include file="/WEB-INF/views/common/header_admin.jsp" %>
         </div>
-        
+        <div>
+        	<%@ include file="/WEB-INF/views/common/admin_menu.jsp" %>
+        </div>
         <div class="contents">
+        	<h1>주문 상세 목록 조회</h1>
         	<table border='1'>
         		<tr>
-        			<td>회원 번호</td>
-        			<td>아이디</td>
-        			<td>이름</td>
-        			<td>이메일</td>
-        			<td>연락처</td>
-        			<td>제재여부</td>
+					<td>주문 상세 번호</td>
+					<td>주문 번호</td>
+					<td>구매자 번호</td>
+					<td>판매자 번호</td>
+					<td>상품 번호</td>
+					<td>제조사</td>
+					<td>브랜드</td>
+					<td>가격</td>
+					<td>할인 가격</td>
+					<td>옵션 가격</td>
+					<td>수량</td>
+					<td>결제 가격</td>
         		</tr>
         	
-	        	<c:forEach items="${list }" var="vo">
+	        	<c:forEach items="${list }" var="vo" varStatus="status">
 					<tr>
-	        			<td>${vo.no }</td>
-	        			<td>${vo.id }</td>
-	        			<td>${vo.name }</td>
-	        			<td>${vo.email }</td>
-	        			<td>${vo.phone }</td>
-	        			<td>${vo.restricted }</td>
+						<td>${vo.no }</td>
+						<td>${vo.order_no }</td>
+						<td>${vo.user_no}</td>
+						<td>${vo.seller_no}</td>
+						<td>${vo.product_no}</td>
+						<td>${vo.company}</td>
+						<td>${vo.brand}</td>
+						<td class="price_td" data-no="${status.index }">${vo.product_price}</td>
+						<td class="discount_td" data-no="${status.index }">${vo.discount}</td>
+						<td class="option_price_td" data-no="${status.index }"></td>
+						<td class="quantity_td">${vo.quantity}</td>
+						<td class="payment_price_td" data-no="${status.index }"></td>
 	        		</tr>
 	        	</c:forEach>
         	</table>
@@ -69,7 +84,28 @@
     </div>
 <script>
 	$('.pageButton').on('click', function(){
-		location.href="/admin/sellerList.do?page=" + $(this).data('page');
+		location.href="/admin/orderDetailList.do?page=" + $(this).data('page');
+	})
+</script>
+<script>
+	<c:forEach items="${list }" var="vo" varStatus="status">
+		var total = 0;
+		<c:forEach items="${ovo_list[status.index] }" var="ovo" varStatus="ovoStatus">
+			total += ${ovo.price}
+		</c:forEach>
+		var target = $('.option_price_td').eq(${status.index});
+		$(target).text(total);
+	</c:forEach>
+</script>
+<script>
+	$('.payment_price_td').each(function(i, e){
+		var index = i;
+		var value = Number(0);
+		value += Number($('.price_td').eq(i).text());
+		value -= Number($('.discount_td').eq(i).text());
+		value += Number($('.option_price_td').eq(i).text());
+		value *= Number($('.quantity_td').eq(i).text());
+		$('.payment_price_td').eq(i).text(value);
 	})
 </script>
 </body>
