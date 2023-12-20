@@ -166,6 +166,11 @@
 	<select id = "possible_write_review" parameterType = "sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT  * FROM order_detail 
 		where purchase_confirmation_date is not null AND user_no = ${user_no}
+		AND no not in (select order_dno from review where user_no=${user_no})
+	</select>
+	
+	<select id = "product_image_list" parameterType = "sinhanDS.first.project.order.vo.OrderDetailVO" resultType="string">
+		select image_url from product where no=${product_no}
 	</select>
 	
 	
