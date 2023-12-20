@@ -84,14 +84,14 @@ public class SellerOrderController {
 		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
 		model.addAttribute("svo", svo);
 		
-		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
-		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
-		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
-		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
-		
-		model.addAttribute("orderDetailList", orderDetailList);
-		model.addAttribute("orderMainList", orderMainList);
-		model.addAttribute("deliveryList", deliveryList);
+//		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
+//		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
+//		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
+//		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
+//		
+//		model.addAttribute("orderDetailList", orderDetailList);
+//		model.addAttribute("orderMainList", orderMainList);
+//		model.addAttribute("deliveryList", deliveryList);
 		
 		return "seller/order/refundlist";
 	}
