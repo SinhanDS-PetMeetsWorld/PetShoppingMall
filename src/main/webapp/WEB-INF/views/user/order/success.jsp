@@ -22,9 +22,7 @@
         <div class="contents">
 			<div class="contentsright">
 				<div>
-					Pay 페이지 입니다.
-				
-				
+					
 				</div>
 			</div>
         </div>
@@ -34,5 +32,7 @@
 			<div class="footer-color"></div>
         </div>
     </div>
+    <script>
+    </script>
 </body>
 </html>

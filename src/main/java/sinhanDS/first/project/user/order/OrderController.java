@@ -92,9 +92,12 @@ public class OrderController {
 		model.addAttribute("option_list", option_list);
 		log.debug("option_list: " + option_list);
 		
-		log.debug("cart_no: " + cart_no);
-		log.debug("option_cart_no: " + option_cart_no);
-		log.debug("option_no: " + option_no);
+		model.addAttribute("cart_no", cart_no);
+		model.addAttribute("option_cart_no", option_cart_no);
+		model.addAttribute("option_no", option_no);
+		log.debug("cart_no: " + Arrays.toString(cart_no));
+		log.debug("option_cart_no: " + Arrays.toString(option_cart_no));
+		log.debug("option_no: " + Arrays.toString(option_no));
 		return "user/order/pay";
 	}
 	
@@ -128,7 +131,10 @@ public class OrderController {
 		/*주문 상세 옵션 넣어주면됨 */
 		return "redirect:/user/order/success.do";
 	}
-	
+	@GetMapping("success.do")
+	public String payementSuccess() {
+		return "user/order/success";
+	}
 	@GetMapping("list.do")
 	public String list(Model model, HttpSession sess, ProductSearchVO svo) {
 		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
