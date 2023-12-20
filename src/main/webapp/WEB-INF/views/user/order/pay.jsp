@@ -43,12 +43,11 @@
 							</c:forEach>
 							
 							<div class="address_value_list">
-								<h2>다음 요청으로 보낼 애들임. 나중에 hidden으로 바꿔주세용</h2>
-								<input type="text" class="zipcode" name="zipcode" value="${userAddressList[0].zipcode }"><br>
-								<input type="text" class="addr1" name="addr1" value="${userAddressList[0].addr1 }"><br>
-								<input type="text" class="addr2" name="addr2" value="${userAddressList[0].addr2 }"><br>
-								<input type="text" class="" name="user_name" value="${userAddressList[0].name }"><br>
-								<input type="text" class="" name="user_phone" value="${userAddressList[0].phone }"><br>
+								<input type="hidden" class="zipcode" name="zipcode" value="${userAddressList[0].zipcode }"><br>
+								<input type="hidden" class="addr1" name="addr1" value="${userAddressList[0].addr1 }"><br>
+								<input type="hidden" class="addr2" name="addr2" value="${userAddressList[0].addr2 }"><br>
+								<input type="hidden" class="" name="user_name" value="${userAddressList[0].name }"><br>
+								<input type="hidden" class="" name="user_phone" value="${userAddressList[0].phone }"><br>
 							</div>
 						</ol>
 						<hr>
@@ -67,10 +66,9 @@
 								</li>
 							</c:forEach>
 							<div class="payment_value_list">
-								<h2>다음 요청으로 보낼 애들임. 나중에 hidden으로 바꿔주세용</h2>
-								<input type="text" class="payment_type" name="payment_type" value="${userPaymentList[0].type }"><br>
-								<input type="text" class="payment_company" name="payment_company" value="${userPaymentList[0].company }"><br>
-								<input type="text" class="payment_account" name="payment_account" value="${userPaymentList[0].account }"><br>
+								<input type="hidden" class="payment_type" name="payment_type" value="${userPaymentList[0].type }"><br>
+								<input type="hidden" class="payment_company" name="payment_company" value="${userPaymentList[0].company }"><br>
+								<input type="hidden" class="payment_account" name="payment_account" value="${userPaymentList[0].account }"><br>
 							</div>	
 						</ol>
 						<hr>
@@ -93,11 +91,10 @@
 							브랜드: ${vo.brand }<br>
 							
 							옵션 리스트<br>
-							<c:forEach items="${option_list }" var="ovo">
-								
-								<c:if test="${ovo.product_no == vo.no }">
-									<input type="text" name="option_no" value="${ovo.no }">
-									<input type="text" name="option_cart_no" value="${cno_list[status.index] }">
+							<c:forEach items="${option_list }" var="ovo" varStatus="ovoStatus">
+								<c:if test="${cart_no[status.index] == option_cart_no[ovoStatus.index] }">
+									<input type="hidden" name="option_no" value="${ovo.no }">
+									<input type="hidden" name="option_cart_no" value="${cno_list[status.index] }">
 									 <pre> 옵션 - ${ovo.title } ${ovo.content } ${ovo.price }<br> </pre>
 								</c:if>
 							</c:forEach>
@@ -105,11 +102,10 @@
 						</c:forEach>
 						
 						<h2>가격</h2>
-						<h5>다음 요청으로 보낼 애들임. 나중에 hidden으로 바꿔주세용</h5>
-						총 가격
-						<input type="text" name="total_price" value="${orderVO.total_price }"> <br>
-						총 배송비
-						<input type="text" name="total_delivery_fee" value="${orderVO.total_delivery_fee }"> <br>
+						총 가격: ${orderVO.total_price }
+						<input type="hidden" name="total_price" value="${orderVO.total_price }"> <br>
+						총 배송비: ${orderVO.total_delivery_fee }
+						<input type="hidden" name="total_delivery_fee" value="${orderVO.total_delivery_fee }"> <br>
 						<input type="submit" value="구매">
 					</form>
 				</div>
