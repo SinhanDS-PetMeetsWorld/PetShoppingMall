@@ -249,6 +249,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-	
+	public List<String> product_image_list(List<OrderDetailVO> review_list){
+		List<String> list = new ArrayList<>();
+		for(int i = 0; i < review_list.size(); i++) {
+			list.add(mapper.product_image_list(review_list.get(i)));
+		}
+		return list;
+	}
 
 }

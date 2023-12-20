@@ -259,6 +259,10 @@ public class OrderController {
 	public String write_review(Model model, HttpServletRequest request, OrderDetailVO dvo) {
 		log.debug("dvo: " + dvo);
 		dvo = orderService.getFullOrderDetailVO(dvo);
+		
+		
+		System.out.println("이게 뭐지?? " + dvo);
+		
 		model.addAttribute("dvo", dvo);
 		return "/user/order/write_review";
 	}

@@ -48,5 +48,5 @@ public interface UserMapper {
 	List<OrderDetailOptionVO> order_detail_option (OrderDetailOptionVO odovo);
 	
 	List<OrderDetailVO> possible_write_review(int user_no);
-	
+	String product_image_list(OrderDetailVO review_list);
 }
