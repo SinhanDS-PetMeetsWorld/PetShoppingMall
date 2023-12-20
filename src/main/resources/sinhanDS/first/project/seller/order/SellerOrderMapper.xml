@@ -2,9 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.seller.order.SellerOrderMapper">
 
-	<select id="getOrderNoList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+	<select id="getOrderNoList_bd" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT DISTINCT(order_no), seller_no FROM order_detail 
-		WHERE seller_no = #{no} AND delivery_no IS NULL AND cancle_status = 0
+		WHERE  seller_no = #{no} AND delivery_no IS NULL AND cancle_status = 0
+		ORDER BY order_no DESC;
+	</select>
+	
+	<select id="getOrderNoList_od" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT DISTINCT(order_no), seller_no FROM order_detail 
+		WHERE  seller_no = #{no} AND delivery_status = 1
+		ORDER BY order_no DESC;
+	</select>
+	
+	<select id="getOrderNoList_ad" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT DISTINCT(order_no), seller_no FROM order_detail 
+		WHERE seller_no = #{no} AND delivery_status = 2 AND refound_status = 0
 		ORDER BY order_no DESC;
 	</select>
 	
@@ -12,9 +24,19 @@
 		SELECT * FROM order_detail WHERE order_no = #{no}
 	</select>
 	
-	<select id="getOrderDetails2" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+	<select id="getOrderDetails_bd" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT * FROM order_detail 
 		WHERE order_no = #{order_no} AND seller_no = #{seller_no} AND delivery_no IS NULL
+	</select>
+	
+	<select id="getOrderDetails_od" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail 
+		WHERE order_no = #{order_no} AND seller_no = #{seller_no} AND delivery_status = 1
+	</select>
+	
+	<select id="getOrderDetails_ad" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail 
+		WHERE order_no = #{order_no} AND seller_no = #{seller_no} AND delivery_status = 2
 	</select>
 	
 	<select id="getOrderMainList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderMainVO">

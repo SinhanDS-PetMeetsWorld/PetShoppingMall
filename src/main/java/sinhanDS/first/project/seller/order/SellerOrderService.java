@@ -9,11 +9,19 @@ import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 
 public interface SellerOrderService {
-	List<OrderDetailVO> getOrderNoList(int no);
-	List<OrderDetailVO> getOrderDetails(int no);
-	List<OrderDetailVO> getOrderDetails2(Map map);
+	List<OrderDetailVO> getOrderNoList_bd(int no);
+	List<OrderDetailVO> getOrderNoList_od(int no);
+	List<OrderDetailVO> getOrderNoList_ad(int no);
 	
-	List<List<OrderDetailVO>> getOrderDetailList(List<OrderDetailVO> vo);
+	List<OrderDetailVO> getOrderDetails(int no);
+	List<OrderDetailVO> getOrderDetails_bd(Map map);
+	List<OrderDetailVO> getOrderDetails_od(Map map);
+	List<OrderDetailVO> getOrderDetails_ad(Map map);
+	
+	List<List<OrderDetailVO>> getOrderDetailList_bd(List<OrderDetailVO> vo);
+	List<List<OrderDetailVO>> getOrderDetailList_od(List<OrderDetailVO> vo);
+	List<List<OrderDetailVO>> getOrderDetailList_ad(List<OrderDetailVO> vo);
+	
 	List<OrderMainVO> getOrderMainList(List<OrderDetailVO> vo);
 //	List<List<OrderDetailOptionVO>> getOrderDetailOptions(List<OrderDetailVO> vo);
 	

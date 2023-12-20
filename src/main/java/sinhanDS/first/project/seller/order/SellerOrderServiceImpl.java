@@ -18,8 +18,18 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 	SellerOrderMapper mapper;
 	
 	@Override
-	public List<OrderDetailVO> getOrderNoList(int seller_no) {
-		return mapper.getOrderNoList(seller_no);
+	public List<OrderDetailVO> getOrderNoList_bd(int seller_no) {
+		return mapper.getOrderNoList_bd(seller_no);
+	}
+	
+	@Override
+	public List<OrderDetailVO> getOrderNoList_od(int no) {
+		return mapper.getOrderNoList_od(no);
+	}
+
+	@Override
+	public List<OrderDetailVO> getOrderNoList_ad(int no) {
+		return mapper.getOrderNoList_ad(no);
 	}
 	
 	@Override
@@ -28,18 +38,60 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 	}
 	
 	@Override
-	public List<OrderDetailVO> getOrderDetails2(Map map) {
-		return mapper.getOrderDetails2(map);
+	public List<OrderDetailVO> getOrderDetails_bd(Map map) {
+		return mapper.getOrderDetails_bd(map);
 	}
 	
 	@Override
-	public List<List<OrderDetailVO>> getOrderDetailList(List<OrderDetailVO> orderNoList) {
+	public List<OrderDetailVO> getOrderDetails_od(Map map) {
+		return mapper.getOrderDetails_od(map);
+	}
+
+	@Override
+	public List<OrderDetailVO> getOrderDetails_ad(Map map) {
+		return mapper.getOrderDetails_ad(map);
+	}
+	
+	@Override
+	public List<List<OrderDetailVO>> getOrderDetailList_bd(List<OrderDetailVO> orderNoList) {
 		List<List<OrderDetailVO>> orderDetailList = new ArrayList<>();
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
 		for(int i=0; i<orderNoList.size(); i++) {
 			map.put("order_no", String.valueOf(orderNoList.get(i).getOrder_no()));
-			List<OrderDetailVO> orderDetailvo = mapper.getOrderDetails2(map);
+			List<OrderDetailVO> orderDetailvo = mapper.getOrderDetails_bd(map);
+			for(int j=0; j<orderDetailvo.size(); j++) {
+				orderDetailvo.get(j).setOptions(mapper.getOrderDetailOptionList(orderDetailvo.get(j).getNo()));
+			}
+			orderDetailList.add(orderDetailvo);
+		}
+		return orderDetailList;
+	}
+	
+	@Override
+	public List<List<OrderDetailVO>> getOrderDetailList_od(List<OrderDetailVO> orderNoList) {
+		List<List<OrderDetailVO>> orderDetailList = new ArrayList<>();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
+		for(int i=0; i<orderNoList.size(); i++) {
+			map.put("order_no", String.valueOf(orderNoList.get(i).getOrder_no()));
+			List<OrderDetailVO> orderDetailvo = mapper.getOrderDetails_od(map);
+			for(int j=0; j<orderDetailvo.size(); j++) {
+				orderDetailvo.get(j).setOptions(mapper.getOrderDetailOptionList(orderDetailvo.get(j).getNo()));
+			}
+			orderDetailList.add(orderDetailvo);
+		}
+		return orderDetailList;
+	}
+	
+	@Override
+	public List<List<OrderDetailVO>> getOrderDetailList_ad(List<OrderDetailVO> orderNoList) {
+		List<List<OrderDetailVO>> orderDetailList = new ArrayList<>();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
+		for(int i=0; i<orderNoList.size(); i++) {
+			map.put("order_no", String.valueOf(orderNoList.get(i).getOrder_no()));
+			List<OrderDetailVO> orderDetailvo = mapper.getOrderDetails_ad(map);
 			for(int j=0; j<orderDetailvo.size(); j++) {
 				orderDetailvo.get(j).setOptions(mapper.getOrderDetailOptionList(orderDetailvo.get(j).getNo()));
 			}
@@ -98,7 +150,5 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 		if(r>0) return true;
 		else return false;
 	}
-
-	
 
 }

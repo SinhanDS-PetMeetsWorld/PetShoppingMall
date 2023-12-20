@@ -23,7 +23,7 @@ public class OrderDetailVO {
 	private Date order_date;
 	private int delivery_status;
 	private int cancle_status; //0 : 취소 x , 1: 구매자 취소, 2: 판매자 취소 
-	private boolean refound_status;
+	private int refound_status;
 	private String reason;
 	private int settlement_no;
 	private Date purchase_confirmation_date;
