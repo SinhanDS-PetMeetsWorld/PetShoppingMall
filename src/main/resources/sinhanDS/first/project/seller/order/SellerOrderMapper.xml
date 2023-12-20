@@ -20,6 +20,12 @@
 		ORDER BY order_no DESC;
 	</select>
 	
+	<select id="getOrderNoList_rf" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT DISTINCT(order_no), seller_no FROM order_detail 
+		WHERE seller_no = #{no} AND delivery_status != 0 AND refound_status != 0
+		ORDER BY order_no DESC;
+	</select>
+	
 	<select id="getOrderDetails" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT * FROM order_detail WHERE order_no = #{no}
 	</select>
@@ -37,6 +43,11 @@
 	<select id="getOrderDetails_ad" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT * FROM order_detail 
 		WHERE order_no = #{order_no} AND seller_no = #{seller_no} AND delivery_status = 2
+	</select>
+	
+	<select id="getOrderDetails_rf" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail 
+		WHERE order_no = #{order_no} AND seller_no = #{seller_no} AND refound_status != 0
 	</select>
 	
 	<select id="getOrderMainList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
