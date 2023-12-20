@@ -25,7 +25,7 @@
             </div>
 			<div class="contentsright">
 				<div>
-				
+				배송완료 목록
 					<c:if test="${not empty orderMainList}">
 						<c:forEach var="orders" items="${orderMainList}" varStatus="mainstatus">
 							<c:set var="deliverStatus" value="배송준비"/>

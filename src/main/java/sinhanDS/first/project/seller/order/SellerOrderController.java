@@ -26,8 +26,8 @@ public class SellerOrderController {
 	@Autowired
 	private SellerOrderService service;
 	
-	@GetMapping("/orderlist.do")
-	public String edit(HttpSession sess, Model model) {
+	@GetMapping("/bd_orderlist.do")
+	public String bd_orderlist(HttpSession sess, Model model) {
 		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
 		model.addAttribute("svo", svo);
 		
@@ -40,7 +40,7 @@ public class SellerOrderController {
 		model.addAttribute("orderMainList", orderMainList);
 		model.addAttribute("deliveryList", deliveryList);
 		
-		return "seller/order/orderlist";
+		return "seller/order/bdorderlist";
 	}
 	
 	@PostMapping("/regist_deliver.do")
@@ -60,6 +60,40 @@ public class SellerOrderController {
 			model.addAttribute("msg", "배송 신청 실패");
 		}
 		return "common/alert";
+	}
+	
+	@GetMapping("/ad_orderlist.do")
+	public String ad_orderlist(HttpSession sess, Model model) {
+		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("svo", svo);
+		
+//		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
+//		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
+//		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
+//		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
+//		
+//		model.addAttribute("orderDetailList", orderDetailList);
+//		model.addAttribute("orderMainList", orderMainList);
+//		model.addAttribute("deliveryList", deliveryList);
+		
+		return "seller/order/adorderlist";
+	}
+	
+	@GetMapping("/refundlist.do")
+	public String refundlist(HttpSession sess, Model model) {
+		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("svo", svo);
+		
+		List<OrderDetailVO> orderNoList = service.getOrderNoList(svo.getNo());
+		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList(orderNoList);
+		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
+		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
+		
+		model.addAttribute("orderDetailList", orderDetailList);
+		model.addAttribute("orderMainList", orderMainList);
+		model.addAttribute("deliveryList", deliveryList);
+		
+		return "seller/order/refundlist";
 	}
 
 }
