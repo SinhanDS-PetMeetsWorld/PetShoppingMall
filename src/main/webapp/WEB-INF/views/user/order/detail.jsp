@@ -23,7 +23,7 @@
         	<c:if test="${!empty adminLoginInfo}">
 	            <%@ include file="/WEB-INF/views/common/header_admin.jsp" %>
         	</c:if>
-        </div>/div>
+        </div>
 
        	
         
@@ -71,7 +71,7 @@
 													<input type="button" class="request_cancle" value="취소신청" data-no="${dvo.no }">
 												</c:if>
 												<c:if test="${dvo.delivery_status != 0 }">
-													<input type="button" class="request_refound" value="반품신청" data-no="${dvo.no }">
+													<input type="button" class="request_refound" value="환불신청" data-no="${dvo.no }">
 												</c:if>
 											</c:if>
 											<c:if test="${dvo.cancle_status != 0 }">

@@ -24,17 +24,6 @@
 					<a href="#"><b> Pet Meets World </b></a>
 				</h1>
 				<div class="header_menu">
-					<ul>
-						<li>
-							<a href="/admin/userList.do">구매자 회원 관리</a>
-						</li>
-						<li>
-							<a href="/admin/sellerList.do">판매자 회원 관리</a>
-						</li>
-						<li>
-							<a href="#">통계</a>
-						</li>
-					</ul>
 				</div>
 				<c:if test="${!empty adminLoginInfo }">
 					<div class="header_login">

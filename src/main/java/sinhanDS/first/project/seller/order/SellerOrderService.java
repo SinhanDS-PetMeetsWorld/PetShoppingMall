@@ -15,8 +15,10 @@ public interface SellerOrderService {
 	
 	List<List<OrderDetailVO>> getOrderDetailList(List<OrderDetailVO> vo);
 	List<OrderMainVO> getOrderMainList(List<OrderDetailVO> vo);
-	List<List<OrderDetailOptionVO>> getOrderDetailOptions(List<OrderDetailVO> vo);
+//	List<List<OrderDetailOptionVO>> getOrderDetailOptions(List<OrderDetailVO> vo);
 	
 	boolean regist_delivery(DeliveryVO vo);
 	List<DeliveryVO> getDeliveryList(List<List<OrderDetailVO>> vo);
+	
+	boolean cancleOrder_seller(int no);
 }
