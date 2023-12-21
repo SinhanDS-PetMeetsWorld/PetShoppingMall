@@ -59,9 +59,12 @@
 					정산 가능액 ${settlement_price - charge}원
 					<form method="post" name="deliveryForm"  id="deliveryForm" action="settlement_get.do">
 						<input type="submit" id="settlement_btn" value="정산받기" 
-							<c:if test='${settlement_list == 0}'> disabled="disabled" </c:if>>
-                        <input type="hidden" name="settlement_price" value="${settlement_price}">
-                        <input type="hidden" name="charge" value="${charge}">
+							<c:if test='${settlement_list_count == 0}'> disabled="disabled" </c:if>>
+							
+						<input type="hidden" name="seller_no" value="${svo.no}">
+                        <input type="hidden" name="total_settlement" value="${settlement_price}">
+                        <input type="hidden" name="total_charge" value="${charge}">
+                        <input type="hidden" name="account" value="${svo.account}">
 					</form>	
 					<br><hr><br>
 					정산 예정액 ${unsettlement_price}원<br><br><hr><br>
@@ -80,7 +83,7 @@
                             	<option value="yes" <c:if test='${settlementType == "yes"}'>selected</c:if>>정산 받음</option>
                                 <option value="no" <c:if test='${settlementType == "no"}'>selected</c:if>>정산 안받음</option>
                             </select>
-                            <input type="hidden" name="settlement_list" value="${settlement_list}">
+                            <input type="hidden" name="settlement_list_count" value="${settlement_list_count}">
                             <input type="hidden" name="settlement_price" value="${settlement_price}">
                             <input type="hidden" name="unsettlement_price" value="${unsettlement_price}">
                             <input type="submit" id="" value="목록 보기">

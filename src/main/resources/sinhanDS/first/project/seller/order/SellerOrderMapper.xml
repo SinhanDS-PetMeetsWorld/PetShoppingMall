@@ -91,20 +91,26 @@
 		UPDATE order_detail SET cancle_status = 2, reason = "판매자 취소" WHERE no = #{no}
 	</update>
 	
-	<select id="settlement_list" parameterType="int" resultType="Integer">
+	<select id="settlement_list" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail 
+		WHERE seller_no = #{no} AND LAST_DAY(NOW() - interval 1 month) >= purchase_confirmation_date
+			AND purchase_confirmation_date IS NOT NULL AND settlement_no IS NULL;
+	</select>
+	
+	<select id="settlement_list_count" parameterType="int" resultType="Integer">
 		SELECT COUNT(no) FROM order_detail 
 		WHERE seller_no = #{no} AND LAST_DAY(NOW() - interval 1 month) >= purchase_confirmation_date
 			AND purchase_confirmation_date IS NOT NULL AND settlement_no IS NULL;
 	</select>
 	
 	<select id="settlement_price" parameterType="int" resultType="Integer">
-		SELECT SUM(product_price - discount) FROM order_detail 
+		SELECT SUM((product_price - discount) * quantity) FROM order_detail 
 		WHERE seller_no = #{no} AND LAST_DAY(NOW() - interval 1 month) >= purchase_confirmation_date
 			AND purchase_confirmation_date IS NOT NULL AND settlement_no IS NULL;
 	</select>
 	
 	<select id="unsettlement_price" parameterType="int" resultType="Integer">
-		SELECT SUM(product_price - discount) FROM order_detail 
+		SELECT SUM((product_price - discount) * quantity) FROM order_detail 
 		WHERE seller_no = #{no} AND LAST_DAY(NOW() - interval 1 month) >= purchase_confirmation_date
 			AND purchase_confirmation_date IS NULL AND settlement_no IS NULL;
 	</select>
@@ -119,10 +125,19 @@
 		<include refid="whereSql"/>
 	</select>
 	
-	<select id="settlement_get" parameterType="int" resultType="Integer">
-		UPDATE order_detail SET  
-		WHERE seller_no = #{no} AND LAST_DAY(NOW() - interval 1 month) >= purchase_confirmation_date
-			AND purchase_confirmation_date IS NOT NULL AND settlement_no IS NULL;
-	</select>
+	<insert id="settlement_regist" parameterType="sinhanDS.first.project.admin.vo.SettlementVO">
+		INSERT INTO settlement (
+			seller_no, request_date, settlement_date, total_sales, total_charge, total_settlement, account
+		) VALUES (
+			#{seller_no}, NOW(), NOW(), #{total_charge} + #{total_settlement} , #{total_charge}, #{total_settlement}, #{account}
+		)
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="settlementNo_update" parameterType="map">
+		UPDATE order_detail SET settlement_no = #{settlement_no} WHERE no = #{no};
+	</update>
 	
 </mapper>

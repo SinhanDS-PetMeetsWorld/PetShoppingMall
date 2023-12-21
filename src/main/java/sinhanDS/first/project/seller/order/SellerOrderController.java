@@ -130,12 +130,12 @@ public class SellerOrderController {
 		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
 		model.addAttribute("svo", svo);
 		
-		int settlement_list = service.settlement_list(svo.getNo());
+		int settlement_list_count = service.settlement_list_count(svo.getNo());
 		int settlement_price = service.settlement_price(svo.getNo());
 		int unsettlement_price = service.unsettlement_price(svo.getNo());
 		int charge = (int)(settlement_price * 0.03);
 		
-		model.addAttribute("settlement_list", settlement_list);
+		model.addAttribute("settlement_list_count", settlement_list_count);
 		model.addAttribute("settlement_price", settlement_price);
 		model.addAttribute("unsettlement_price", unsettlement_price);
 		model.addAttribute("charge", charge);
@@ -157,7 +157,7 @@ public class SellerOrderController {
 		List<OrderDetailVO> settlement_search_list = service.settlement_search_list(map);
 		int settlement_search_price = service.settlement_search_price(map);
 		
-		model.addAttribute("settlement_list", request.getParameter("settlement_list"));
+		model.addAttribute("settlement_list_count", request.getParameter("settlement_list_count"));
 		model.addAttribute("settlement_price", request.getParameter("settlement_price"));
 		model.addAttribute("unsettlement_price", request.getParameter("unsettlement_price"));
 		model.addAttribute("charge", request.getParameter("charge"));
@@ -176,15 +176,9 @@ public class SellerOrderController {
 	public String settlement_get(HttpSession sess, Model model, HttpServletRequest request, SettlementVO stvo) {
 		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
 		model.addAttribute("svo", svo);
-		Map<String, String> map = new HashMap<String, String>();
 		
-		map.put("seller_no", String.valueOf(svo.getNo()));
-		map.put("total_settlement", request.getParameter("settlement_price"));
-		map.put("total_charge", request.getParameter("charge"));
-		map.put("account", svo.getAccount());
-		
-		boolean r = service.settlement_get(map);
-		if (false) { 
+		boolean r = service.settlement_get(stvo);
+		if (r) { 
 			model.addAttribute("cmd", "move");
 			model.addAttribute("url", "/seller/order/settlement.do");
 			model.addAttribute("msg", "정산 완료되었습니다.");
