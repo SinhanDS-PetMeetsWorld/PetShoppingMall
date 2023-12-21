@@ -15,11 +15,13 @@ public interface SellerOrderMapper {
 	List<OrderDetailVO> getOrderNoList_bd(int no);
 	List<OrderDetailVO> getOrderNoList_od(int no);
 	List<OrderDetailVO> getOrderNoList_ad(int no);
+	List<OrderDetailVO> getOrderNoList_rf(int no);
 	
 	List<OrderDetailVO> getOrderDetails(int no);
 	List<OrderDetailVO> getOrderDetails_bd(Map map);
 	List<OrderDetailVO> getOrderDetails_od(Map map);
 	List<OrderDetailVO> getOrderDetails_ad(Map map);
+	List<OrderDetailVO> getOrderDetails_rf(Map map);
 	
 	OrderMainVO getOrderMainList(int no);
 	List<OrderDetailOptionVO> getOrderDetailOptionList(int no);

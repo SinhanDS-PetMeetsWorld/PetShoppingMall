@@ -12,15 +12,18 @@ public interface SellerOrderService {
 	List<OrderDetailVO> getOrderNoList_bd(int no);
 	List<OrderDetailVO> getOrderNoList_od(int no);
 	List<OrderDetailVO> getOrderNoList_ad(int no);
+	List<OrderDetailVO> getOrderNoList_rf(int no);
 	
 	List<OrderDetailVO> getOrderDetails(int no);
 	List<OrderDetailVO> getOrderDetails_bd(Map map);
 	List<OrderDetailVO> getOrderDetails_od(Map map);
 	List<OrderDetailVO> getOrderDetails_ad(Map map);
+	List<OrderDetailVO> getOrderDetails_rf(Map map);
 	
 	List<List<OrderDetailVO>> getOrderDetailList_bd(List<OrderDetailVO> vo);
 	List<List<OrderDetailVO>> getOrderDetailList_od(List<OrderDetailVO> vo);
 	List<List<OrderDetailVO>> getOrderDetailList_ad(List<OrderDetailVO> vo);
+	List<List<OrderDetailVO>> getOrderDetailList_rf(List<OrderDetailVO> vo);
 	
 	List<OrderMainVO> getOrderMainList(List<OrderDetailVO> vo);
 //	List<List<OrderDetailOptionVO>> getOrderDetailOptions(List<OrderDetailVO> vo);

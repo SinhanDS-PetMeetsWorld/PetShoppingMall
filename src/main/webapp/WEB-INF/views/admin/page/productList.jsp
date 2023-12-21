@@ -71,13 +71,19 @@
 				<form method="get" name="searchForm" id="searchForm" action="/seller/product/list.do">
 	            	<span class="sortSelect">
 						<select name="sorttype">
-							<option value="minstock" <c:if test="${productSearchVO.sorttype == 'minstock'}">selected</c:if>>재고 적은 순</option>
-					</select>
+							<option value="minprice" <c:if test="${productSearchVO.sorttype == 'price'}">selected</c:if>>가격 순</option>
+							<option value="maxprice" <c:if test="${productSearchVO.sorttype == 'price'}">selected</c:if>>가격 순</option>
+							<option value="minrating" <c:if test="${productSearchVO.sorttype == 'rating'}">selected</c:if>>재고 적은 순</option>
+							<option value="maxrating" <c:if test="${productSearchVO.sorttype == 'rating'}">selected</c:if>>재고 적은 순</option>
+							<option value="review_cnt" <c:if test="${productSearchVO.sorttype == 'review_cnt'}">selected</c:if>>재고 적은 순</option>
+						</select>	
 	            	</span>
 					<span class="srchSelect">
 						<select name="searchType">
 							<option value="all">전체</option>
+							<option value="seller_no" <c:if test="${productSearchVO.searchType == 'company'}">selected</c:if>>판매자</option>
 							<option value="company" <c:if test="${productSearchVO.searchType == 'company'}">selected</c:if>>제조사</option>
+							<option value="brand" <c:if test="${productSearchVO.searchType == 'company'}">selected</c:if>>브랜드</option>
 						</select>
 					</span>
 					<span class="searchWord">
