@@ -5,9 +5,12 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/resources/css/common/template.css">
     <title>회원가입</title>
     <script>
     var dupCheck = false;
@@ -192,83 +195,108 @@
 	        }).open();
 	    }
 	</script>
+	
 </head>
+
+
 <body>
-    <hr>
-    <h2>회원 가입</h2>
-    <hr>
-    <div>
-        <a href="/seller/join.do">판매자로 가입하기</a>
+	<div class="wrap">
+        <div class="header">
+            <%@ include file="/WEB-INF/views/common/header.jsp" %>
+        </div>
+
+       	
+        
+        <div class="contents">
+        	
+			<div class="contentsright">
+				<div class="login_all">
+				
+				    <h1>회원 가입</h1>
+				    
+				    <div class="signin_seller">
+				        <a href="/seller/join.do">판매자로 가입하기</a>
+				   		<br>
+				    </div>
+			
+				    <form name="regist_form" id="frm" action="regist.do" method="post">
+				        <div>
+				            아이디*<br>
+				            <input type="text" name="id" id="id">
+				            <button type="button" id="idCheck">아이디 중복 확인</button>
+				        </div>
+				        <hr>
+				        <div>
+				            성명*<br>
+				            <input type="text" name="name" id="name">
+				        </div>
+				        <hr>
+				        <div>
+				            이메일*<br>
+				            <input type="text" name="email" id="email">
+				            <button type="button" id="emailchecknum_btn">이메일 인증 번호 발송</button><br>
+				            <input type="text" name="emailcheck_num" id="emailcheck_num">
+				            <button type="button" id="emailcheck_btn" disabled="disabled">이메일 인증하기</button>
+				        </div>
+				        <hr>
+				        
+				        <div>
+				            주소
+				            <div>
+				            	<input type="text" name="zipcode" id="zipcode" readonly placeholder="우편번호">
+				            	<button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button>
+				            </div>
+				            <div><input type="text" name="addr1" id="addr1" readonly placeholder="기본주소"></div>
+				            <div><input type="text" name="addr2" id="addr2" placeholder="상세주소"></div>
+				        </div>
+				        <hr>
+				        
+				        <div>
+				            비밀번호*<br>
+				            <input type="password" name="password" id="password">
+				        </div>
+				        <div>
+				            비밀번호 확인*<br>
+				            <input type="password" id="password_check">
+				        </div>
+				        <hr>
+				        <div>
+				            연락처*<br>
+				            <input type="text" maxlength="3" value="010" name="phone0" id="phone0"> 
+				            - <input type="text" maxlength="4" placeholder="XXXX" name="phone1" id="phone1"> 
+				            - <input type="text" maxlength="4" placeholder="XXXX" name="phone2" id="phone2">
+				        </div>
+				        <hr>
+				        <div>
+				            생년월일*<br>
+				            <input type="text" maxlength="4" placeholder="YYYY" name="birth0" id="birth0">
+				             <input type="text" maxlength="2" placeholder="MM" name="birth1" id="birth1"> 
+				             <input type="text" maxlength="2" placeholder="DD" name="birth2" id="birth2">
+				        </div>
+				        <hr>
+				        <div>
+				            성별 * 
+				            <input type="radio" name="gender" value="0" checked>남자
+				            <input type="radio" name="gender" value="1">여자
+				        </div>
+				        <hr>
+				        <div>
+				            <input type="checkbox" name="advertisement" checked> 광고성 마케팅 수신 동의(선택사항)
+				        </div>
+				        <hr>
+				        <div class="sign_in_btn">
+				            <input type="button" value="가입하기" onclick="goSave();">
+				        </div>
+				    </form>
+				
+				</div>
+			</div>
+        </div>
+        
+        
+        <div class="footer">
+			<div class="footer-color"></div>
+        </div>
     </div>
-    <hr>
-    <form name="regist_form" id="frm" action="regist.do" method="post">
-        <div>
-            아이디*<br>
-            <input type="text" name="id" id="id">
-            <button type="button" id="idCheck">아이디 중복 확인</button>
-        </div>
-        <hr>
-        <div>
-            성명*<br>
-            <input type="text" name="name" id="name">
-        </div>
-        <hr>
-        <div>
-            이메일*<br>
-            <input type="text" name="email" id="email">
-            <button type="button" id="emailchecknum_btn">이메일 인증 번호 발송</button><br>
-            <input type="text" name="emailcheck_num" id="emailcheck_num">
-            <button type="button" id="emailcheck_btn" disabled="disabled">이메일 인증하기</button>
-        </div>
-        <hr>
-        
-        <div>
-            주소
-            <div>
-            	<input type="text" name="zipcode" id="zipcode" readonly placeholder="우편번호">
-            	<button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button>
-            </div>
-            <div><input type="text" name="addr1" id="addr1" readonly placeholder="기본주소"></div>
-            <div><input type="text" name="addr2" id="addr2" placeholder="상세주소"></div>
-        </div>
-        <hr>
-        
-        <div>
-            비밀번호*<br>
-            <input type="password" name="password" id="password">
-        </div>
-        <div>
-            비밀번호 확인*<br>
-            <input type="password" id="password_check">
-        </div>
-        <hr>
-        <div>
-            연락처*<br>
-            <input type="text" maxlength="3" value="010" name="phone0" id="phone0"> 
-            - <input type="text" maxlength="4" placeholder="XXXX" name="phone1" id="phone1"> 
-            - <input type="text" maxlength="4" placeholder="XXXX" name="phone2" id="phone2">
-        </div>
-        <hr>
-        <div>
-            생년월일*<br>
-            <input type="text" maxlength="4" placeholder="YYYY" name="birth0" id="birth0">
-             <input type="text" maxlength="2" placeholder="MM" name="birth1" id="birth1"> 
-             <input type="text" maxlength="2" placeholder="DD" name="birth2" id="birth2">
-        </div>
-        <hr>
-        <div>
-            성별 * 
-            <input type="radio" name="gender" value="0" checked>남자
-            <input type="radio" name="gender" value="1">여자
-        </div>
-        <hr>
-        <div>
-            <input type="checkbox" name="advertisement" checked> 광고성 마케팅 수신 동의(선택사항)
-        </div>
-        <hr>
-        <div>
-            <input type="button" value="가입하기" onclick="goSave();">
-        </div>
-    </form>
 </body>
 </html>
