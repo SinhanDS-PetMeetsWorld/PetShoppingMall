@@ -11,6 +11,87 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
+
+<style>
+	.contents{
+		width: 1200px;
+		padding: 0;
+	}
+	
+	
+	.login_form_all{
+		width:500px;
+		height:500px;
+		margin: 0 auto;
+		margin-top: 50px;
+		margin-bottom: 50px;
+		text-align: center;
+	}
+	
+	.login_form_all h1{
+		margin: 20px 0 30px 0;
+	}
+	
+	.login_form{
+		border: 1px solid gray;
+		border-radius: 5%;
+		height: 400px;
+	}
+	
+	.id{
+		margin: 40px 0 20px 100px;
+		font-size: 20px;
+		text-align: left;
+	}
+	.id input{
+		width: 300px;
+		height: 50px;
+		border-radius: 30px;
+		margin-top: 10px;
+		padding: 0px 20px;
+		border: 1px solid lightgray;
+		outline: none;
+	}
+	
+	.pwd{
+		margin: 20px 0 20px 100px;
+		font-size: 20px;
+		text-align: left;
+	}
+	.pwd input{
+		width: 300px;
+		height: 50px;
+		border-radius: 30px;
+		margin-top: 10px;
+		padding: 0px 20px;
+		border: 1px solid lightgray;
+		outline: none;
+	}
+	
+	
+	.submit{
+		margin: 0 auto;
+  		width: 80%;
+  		height: 150px;
+	}	
+	
+	.submit input {
+		width: 80%;
+		height: 50px;
+		border: 0;
+		outline: none;
+		border-radius: 40px;
+		background: linear-gradient(to left, #FFDE30, #ffe76b);
+		color: black;
+		font-size: 1.2em;
+		font-weight: bolder;
+		letter-spacing: 2px;
+		margin-top:50px;
+	}
+	
+	
+</style>
+
 </head>
 <body>
 	<div class="wrap">
@@ -21,15 +102,27 @@
        	
         
         <div class="contents">
+	        <div class="login_form_all">
+	        <h1>관리자 로그인</h1>
+	        <div class="login_form">
         	<form method="post" action="/admin/login.do">
-				<h2>관리자 로그인</h2>
+				
 				<div>
-					아이디 <input type="text" name="id">
-					비밀번호 <input type="password" name="pwd">
-					
-					<input type="submit" value="로그인">
+					<div class="id">
+						아이디<br>
+						<input type="text" name="id">
+					</div>
+					<div class="pwd">
+						비밀번호<br>
+						<input type="password" name="pwd">
+					</div>
+					<div class="submit">
+						<input type="submit" value="로그인">
+					</div>
 				</div>
         	</form>
+        	</div>
+        	</div>
         </div>
         
         

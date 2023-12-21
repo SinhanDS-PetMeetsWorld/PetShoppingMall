@@ -84,7 +84,7 @@
 						<select name="searchType">
 							<option value="all">전체</option>
 							<option value="name" <c:if test="${productSearchVO.searchType == 'name'}">selected</c:if>>상품명</option>
-							<option value="seller_no" <c:if test="${productSearchVO.searchType == 'company'}">selected</c:if>>판매자</option>
+							<option value="seller_no" <c:if test="${productSearchVO.searchType == 'company'}">selected</c:if>>판매자 번호</option>
 							<option value="company" <c:if test="${productSearchVO.searchType == 'company'}">selected</c:if>>제조사</option>
 							<option value="brand" <c:if test="${productSearchVO.searchType == 'company'}">selected</c:if>>브랜드</option>
 						</select>
