@@ -264,3 +264,6 @@ CHANGE COLUMN `refound_status` `refound_status` INT NOT NULL DEFAULT '0' ;
 
 ALTER TABLE `PetShoppingMall`.`order_detail` 
 DROP COLUMN `charge`;
+
+ALTER TABLE `PetShoppingMall`.`order_detail` 
+ADD COLUMN `settlement_status` INT NULL DEFAULT '0' AFTER `purchase_confirmation_date`;

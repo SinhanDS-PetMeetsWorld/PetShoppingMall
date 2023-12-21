@@ -54,9 +54,7 @@
 										</tr>
 									</table>
 									환불 사유: ${orderdetails.reason}<br>
-									<c:if test="${orderdetails.cancle_status == 0}">
-										<button type="button" value="${orderdetails.no}" class="acceptbutton">환불승인</button>
-									</c:if>
+									
 								</c:forEach>
 								<br>환불자정보<br>
 								이름: ${orders.user_name } 연락처: ${orders.user_phone } <br>
@@ -83,26 +81,6 @@
 			<div class="footer-color"></div>
         </div>
     </div>
-    
-    <script>
-		$('.acceptbutton').click(function() {
-			var order_detail_no = $(this).val();
-			$.ajax({
-				type: "GET",
-				url:'refund_accept.do',
-				data: {"order_detail_no" : order_detail_no},
-				async: false,
-				success:function(res) {
-					if (res == 'true') {
-						alert('환불을 완료했습니다.');
-						location.href="/seller/order/refundlist.do";
-					} else {
-						alert('환불에 실패했습니다.');
-					}
-				}
-			})
-		})
-	</script>
-	
+   	
 </body>
 </html>

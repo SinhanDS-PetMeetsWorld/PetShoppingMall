@@ -27,6 +27,7 @@ public class OrderDetailVO {
 	private String reason;
 	private int settlement_no;
 	private Date purchase_confirmation_date;
+	private int settlement_status;
 	
 	
 	int cart_no;
