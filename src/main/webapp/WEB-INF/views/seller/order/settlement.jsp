@@ -56,14 +56,14 @@
 					
 					정산 계좌 <input type="text" placeholder="${svo.bank}" disabled>
 							<input type="text" placeholder="${svo.account}" disabled><br><br><hr><br>
-					정산 가능액 ${settlement_price - charge}원
-					<form method="post" name="deliveryForm"  id="deliveryForm" action="settlement_get.do">
+					정산 가능액 ${settlement_price - total_charge}원
+					<form method="post" name="deliveryForm"  id="deliveryForm" onsubmit="return get_set();" action="settlement_get.do">
 						<input type="submit" id="settlement_btn" value="정산받기" 
 							<c:if test='${settlement_list_count == 0}'> disabled="disabled" </c:if>>
 							
 						<input type="hidden" name="seller_no" value="${svo.no}">
                         <input type="hidden" name="total_settlement" value="${settlement_price}">
-                        <input type="hidden" name="total_charge" value="${charge}">
+                        <input type="hidden" name="total_charge" value="${total_charge}">
                         <input type="hidden" name="account" value="${svo.account}">
 					</form>	
 					<br><hr><br>
@@ -80,12 +80,14 @@
 						정산 상태
                         	<select class="settlementType" name="settlementType">
                         		<option value="all">전체</option>
-                            	<option value="yes" <c:if test='${settlementType == "yes"}'>selected</c:if>>정산 받음</option>
-                                <option value="no" <c:if test='${settlementType == "no"}'>selected</c:if>>정산 안받음</option>
+                            	<option value="completed" <c:if test='${settlementType == "comleted"}'>selected</c:if>>정산 완료</option>
+                                <option value="requseted" <c:if test='${settlementType == "requseted"}'>selected</c:if>>정산 신청</option>
+                                <option value="none" <c:if test='${settlementType == "none"}'>selected</c:if>>정산 미신청</option>
                             </select>
                             <input type="hidden" name="settlement_list_count" value="${settlement_list_count}">
                             <input type="hidden" name="settlement_price" value="${settlement_price}">
                             <input type="hidden" name="unsettlement_price" value="${unsettlement_price}">
+                            <input type="hidden" name="total_charge" value="${total_charge}">
                             <input type="submit" id="" value="목록 보기">
 					</form><br>
 					
@@ -106,8 +108,9 @@
 										<td>${orderdetails.product_price - orderdetails.discount}</td>
 										<td>${orderdetails.charge}</td>
 										<td>
-											<c:if test='${orderdetails.settlement_no != null && orderdetails.settlement_no != ""}'>정산받음</c:if>
-											<c:if test='${orderdetails.settlement_no == null || orderdetails.settlement_no == ""}'>정산안받음</c:if>
+											<c:if test='${orderdetails.settlement_status == 0}'>정산 미신청</c:if>
+											<c:if test='${orderdetails.settlement_status == 1}'>정산 요청</c:if>
+											<c:if test='${orderdetails.settlement_status == 2}'>정산 완료</c:if>
 										</td>
 									</tr>
 								</c:forEach>
@@ -139,6 +142,17 @@
     		}
     		console.log(startDate.value);
     		console.log(endDate.value);
+    		return true;
+    	}
+    </script>
+    
+    <script>
+    	function get_set(){
+    		var total_charge = document.getElementById("total_charge");
+    		
+    		if( total_charge.value=="" || total_charge.value==null){
+    			total_charge.value = 0;
+    		}
     		return true;
     	}
     </script>

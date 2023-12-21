@@ -16,6 +16,7 @@
         <a href="/seller/order/od_orderlist.do">배송중 주문 확인</a><br>
         <a href="/seller/order/ad_orderlist.do">배송 완료 확인</a><br>
         <a href="/seller/order/refundlist.do">환불 요청 확인</a><br>
+        <a href="/seller/order/refundendlist.do">환불 완료 목록</a><br>
         <a href="/seller/product/regist.do">상품 등록</a><br>
         <a href="/seller/product/list.do">판매 중인 상품 관리</a><br>
         <a href="/seller/product/qnalist.do">Q&A 관리</a><br>

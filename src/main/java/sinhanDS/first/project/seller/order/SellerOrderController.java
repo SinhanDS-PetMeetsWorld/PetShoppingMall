@@ -133,12 +133,12 @@ public class SellerOrderController {
 		int settlement_list_count = service.settlement_list_count(svo.getNo());
 		int settlement_price = service.settlement_price(svo.getNo());
 		int unsettlement_price = service.unsettlement_price(svo.getNo());
-		int charge = (int)(settlement_price * 0.03);
+		int total_charge = (int)(settlement_price * 0.03);
 		
 		model.addAttribute("settlement_list_count", settlement_list_count);
 		model.addAttribute("settlement_price", settlement_price);
 		model.addAttribute("unsettlement_price", unsettlement_price);
-		model.addAttribute("charge", charge);
+		model.addAttribute("total_charge", total_charge);
 		
 		return "seller/order/settlement";
 	}
@@ -160,11 +160,11 @@ public class SellerOrderController {
 		model.addAttribute("settlement_list_count", request.getParameter("settlement_list_count"));
 		model.addAttribute("settlement_price", request.getParameter("settlement_price"));
 		model.addAttribute("unsettlement_price", request.getParameter("unsettlement_price"));
-		model.addAttribute("charge", request.getParameter("charge"));
+		model.addAttribute("total_charge", request.getParameter("total_charge"));
 		
 		model.addAttribute("settlement_search_list", settlement_search_list);
 		model.addAttribute("settlement_search_price", settlement_search_price);
-		model.addAttribute("charge_search_price", settlement_search_price * 0.03);
+		model.addAttribute("charge_search_price", (int)(settlement_search_price * 0.03));
 		model.addAttribute("startDate", request.getParameter("startDate"));
 		model.addAttribute("endDate", request.getParameter("endDate"));
 		model.addAttribute("settlementType", request.getParameter("settlementType"));
@@ -188,6 +188,34 @@ public class SellerOrderController {
 			model.addAttribute("msg", "정산 실패");
 		}
 		return "common/alert";
+	}
+	
+	@ResponseBody
+	@GetMapping("/refund_accept.do")
+	public String refund_accept(HttpSession sess, Model model, HttpServletRequest request) {
+		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("svo", svo);
+		
+		boolean res = service.refoundAccept_seller(Integer.parseInt(request.getParameter("order_detail_no")));
+		
+		return String.valueOf(res);
+	}
+	
+	@GetMapping("/refundendlist.do")
+	public String refundendlist(HttpSession sess, Model model) {
+		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("svo", svo);
+		
+		List<OrderDetailVO> orderNoList = service.getOrderNoList_rfend(svo.getNo());
+		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList_rfend(orderNoList);
+		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
+		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
+		
+		model.addAttribute("orderDetailList", orderDetailList);
+		model.addAttribute("orderMainList", orderMainList);
+		model.addAttribute("deliveryList", deliveryList);
+		
+		return "seller/order/refundendlist";
 	}
 
 }

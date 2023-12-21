@@ -39,6 +39,11 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 	}
 	
 	@Override
+	public List<OrderDetailVO> getOrderNoList_rfend(int no) {
+		return mapper.getOrderNoList_rfend(no);
+	}
+	
+	@Override
 	public List<OrderDetailVO> getOrderDetails(int no) {
 		return mapper.getOrderDetails(no);
 	}
@@ -64,11 +69,16 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 	}
 	
 	@Override
+	public List<OrderDetailVO> getOrderDetails_rfend(Map map) {
+		return mapper.getOrderDetails_rfend(map);
+	}
+	
+	@Override
 	public List<List<OrderDetailVO>> getOrderDetailList_bd(List<OrderDetailVO> orderNoList) {
 		List<List<OrderDetailVO>> orderDetailList = new ArrayList<>();
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
 		for(int i=0; i<orderNoList.size(); i++) {
+			map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
 			map.put("order_no", String.valueOf(orderNoList.get(i).getOrder_no()));
 			List<OrderDetailVO> orderDetailvo = mapper.getOrderDetails_bd(map);
 			for(int j=0; j<orderDetailvo.size(); j++) {
@@ -83,8 +93,8 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 	public List<List<OrderDetailVO>> getOrderDetailList_od(List<OrderDetailVO> orderNoList) {
 		List<List<OrderDetailVO>> orderDetailList = new ArrayList<>();
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
 		for(int i=0; i<orderNoList.size(); i++) {
+			map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
 			map.put("order_no", String.valueOf(orderNoList.get(i).getOrder_no()));
 			List<OrderDetailVO> orderDetailvo = mapper.getOrderDetails_od(map);
 			for(int j=0; j<orderDetailvo.size(); j++) {
@@ -99,8 +109,8 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 	public List<List<OrderDetailVO>> getOrderDetailList_ad(List<OrderDetailVO> orderNoList) {
 		List<List<OrderDetailVO>> orderDetailList = new ArrayList<>();
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
 		for(int i=0; i<orderNoList.size(); i++) {
+			map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
 			map.put("order_no", String.valueOf(orderNoList.get(i).getOrder_no()));
 			List<OrderDetailVO> orderDetailvo = mapper.getOrderDetails_ad(map);
 			for(int j=0; j<orderDetailvo.size(); j++) {
@@ -115,10 +125,26 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 	public List<List<OrderDetailVO>> getOrderDetailList_rf(List<OrderDetailVO> orderNoList) {
 		List<List<OrderDetailVO>> orderDetailList = new ArrayList<>();
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
 		for(int i=0; i<orderNoList.size(); i++) {
+			map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
 			map.put("order_no", String.valueOf(orderNoList.get(i).getOrder_no()));
 			List<OrderDetailVO> orderDetailvo = mapper.getOrderDetails_rf(map);
+			for(int j=0; j<orderDetailvo.size(); j++) {
+				orderDetailvo.get(j).setOptions(mapper.getOrderDetailOptionList(orderDetailvo.get(j).getNo()));
+			}
+			orderDetailList.add(orderDetailvo);
+		}
+		return orderDetailList;
+	}
+	
+	@Override
+	public List<List<OrderDetailVO>> getOrderDetailList_rfend(List<OrderDetailVO> orderNoList) {
+		List<List<OrderDetailVO>> orderDetailList = new ArrayList<>();
+		Map<String, String> map = new HashMap<String, String>();
+		for(int i=0; i<orderNoList.size(); i++) {
+			map.put("seller_no", String.valueOf(orderNoList.get(0).getSeller_no()));
+			map.put("order_no", String.valueOf(orderNoList.get(i).getOrder_no()));
+			List<OrderDetailVO> orderDetailvo = mapper.getOrderDetails_rfend(map);
 			for(int j=0; j<orderDetailvo.size(); j++) {
 				orderDetailvo.get(j).setOptions(mapper.getOrderDetailOptionList(orderDetailvo.get(j).getNo()));
 			}
@@ -226,7 +252,7 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 		int settlement_no = stvo.getNo();
 		
 		Map<String, Integer> map = new HashMap<>();
-		map.put("settlement_no", stvo.getNo());
+		map.put("settlement_no", settlement_no);
 		int suc= 0;
 		
 		List<OrderDetailVO> list = mapper.settlement_list(stvo.getSeller_no());
@@ -238,6 +264,13 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 			}
 		}
 		return suc>0 ? true : false;
+	}
+	
+	@Override
+	public boolean refoundAccept_seller(int no) {
+		int r = mapper.refoundAccept_seller(no);
+		if(r>0) return true;
+		else return false;
 	}
 
 }

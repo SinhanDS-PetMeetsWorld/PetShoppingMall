@@ -5,8 +5,9 @@
 		WHERE seller_no = #{seller_no} AND purchase_confirmation_date BETWEEN
 		<if test='startDate == "0"'>LAST_DAY(NOW() - interval 3 month)</if><if test='startDate != "0"'> STR_TO_DATE(#{startDate}, '%Y-%m-%d')</if> 
 		AND <if test='endDate == "9999"'>NOW()</if><if test='endDate != "9999"'>STR_TO_DATE(#{endDate}, '%Y-%m-%d')</if> 
-			<if test='settlementType == "yes"'> AND settlement_no IS NOT NULL </if>
-			<if test='settlementType == "no"'> AND settlement_no IS NULL </if>
+			<if test='settlementType == "completed"'> AND settlement_status = 2 </if>
+			<if test='settlementType == "requseted"'> AND settlement_status = 1 </if>
+			<if test='settlementType == "none"'> AND settlement_no IS NULL </if>
 		AND purchase_confirmation_date IS NOT NULL;
 	</sql>
 
@@ -30,7 +31,13 @@
 	
 	<select id="getOrderNoList_rf" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT DISTINCT(order_no), seller_no FROM order_detail 
-		WHERE seller_no = #{no} AND delivery_status != 0 AND refound_status != 0
+		WHERE seller_no = #{no} AND delivery_status != 0 AND refound_status = 1
+		ORDER BY order_no DESC;
+	</select>
+	
+	<select id="getOrderNoList_rfend" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT DISTINCT(order_no), seller_no FROM order_detail 
+		WHERE seller_no = #{no} AND delivery_status != 0 AND refound_status = 2
 		ORDER BY order_no DESC;
 	</select>
 	
@@ -55,7 +62,12 @@
 	
 	<select id="getOrderDetails_rf" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT * FROM order_detail 
-		WHERE order_no = #{order_no} AND seller_no = #{seller_no} AND refound_status != 0
+		WHERE order_no = #{order_no} AND seller_no = #{seller_no} AND refound_status = 1
+	</select>
+	
+	<select id="getOrderDetails_rfend" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail 
+		WHERE order_no = #{order_no} AND seller_no = #{seller_no} AND refound_status = 2
 	</select>
 	
 	<select id="getOrderMainList" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
@@ -127,9 +139,9 @@
 	
 	<insert id="settlement_regist" parameterType="sinhanDS.first.project.admin.vo.SettlementVO">
 		INSERT INTO settlement (
-			seller_no, request_date, settlement_date, total_sales, total_charge, total_settlement, account
+			seller_no, request_date, total_sales, total_charge, total_settlement, account
 		) VALUES (
-			#{seller_no}, NOW(), NOW(), #{total_charge} + #{total_settlement} , #{total_charge}, #{total_settlement}, #{account}
+			#{seller_no}, NOW(), #{total_charge} + #{total_settlement} , #{total_charge}, #{total_settlement}, #{account}
 		)
 		<selectKey keyProperty="no" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
@@ -137,7 +149,12 @@
 	</insert>
 	
 	<update id="settlementNo_update" parameterType="map">
-		UPDATE order_detail SET settlement_no = #{settlement_no} WHERE no = #{no};
+		UPDATE order_detail SET settlement_no = #{settlement_no}, settlement_status = 1 
+		WHERE no = #{no};
+	</update>
+	
+	<update id="refoundAccept_seller" parameterType="int">
+		UPDATE order_detail SET refound_status = 2 WHERE no = #{no}
 	</update>
 	
 </mapper>
