@@ -147,10 +147,10 @@
 						                <a href="">아이디 찾기</a>	&nbsp&nbsp&nbsp&nbsp/&nbsp&nbsp&nbsp&nbsp <a href="">비밀번호 찾기</a>
 									</div>
 						            <div class="submit">
+						                <input type="submit" value="로그인">
 							            <div class="sign_in">
 						         	       <a href="/user/join.do">회원 가입</a>
 						            	</div>
-						                <input type="submit" value="로그인">
 						            </div>
 						        </div>
 						        <a href="/seller/login.do">판매자로 로그인하기</a>

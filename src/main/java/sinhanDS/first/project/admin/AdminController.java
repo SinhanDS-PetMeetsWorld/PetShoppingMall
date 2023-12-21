@@ -270,6 +270,7 @@ public class AdminController {
 		model.addAttribute("count", count);
 		return "/admin/page/needConfirmationList";
 	}
+	
 	@PostMapping("confirmOrderDetail.do")
 	public String confirmOrderDetail(@RequestParam int[] no) {
 		log.debug("no: " + Arrays.toString(no));
