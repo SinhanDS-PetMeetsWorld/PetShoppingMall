@@ -37,6 +37,13 @@
 		#goods_category{
 			margin: 50px 0 50px 0;
 		}
+		.big_category{
+			color: gray;
+		}
+		.small_category{
+			color: black;
+			font-weight: bold;
+		}
 		
 		.goods-name{
 			margin-bottom:30px;
@@ -52,6 +59,11 @@
 		.goods-price{
 			margin-bottom:10px;
 			font-weight: bold;
+		}
+		.before_price{
+			text-decoration:line-through;
+			font-weight: normal;
+			color:gray;
 		}
 		.goods-made{
 			margin-bottom:10px;
@@ -192,8 +204,8 @@
 				<div class="left_side">
 					<div id="goods_category">
 						<c:forEach var="item" items="${product_more_category}">
-							${catekor.category_name[item.category1]} > 
-							${catekor.category[item.category1][item.category2] } <br>
+							<span class="big_category">${catekor.category_name[item.category1]} > </span> 
+							<span class="small_category">${catekor.category[item.category1][item.category2] }</span> <br>
 						</c:forEach>
 					</div>
 					<c:forEach var="item" items="${product_more}">
@@ -207,12 +219,24 @@
 									</div>
 								
 									<div class="goods-score">
-										<img src="/resources/img/product/star.png"> ${item.rating} / 5.0  	
+										<img src="/resources/img/common/star.jpg"> ${item.rating} / 5.0  	
 									</div>
 								
-									<div class="goods-price">
-										가격 : ${item.price} 원
-									</div>
+									<c:if test="${item.discount eq 0 }">
+										<div class="goods-price">
+											가격 : ${item.price} 원
+										</div>
+									</c:if>
+									<c:if test="${item.discount ne 0 }">
+										<div class="goods-price">
+										
+											<c:set var="after_price" value="${item.price - item.discount }"></c:set>
+											가격 : <span class="before_price">${item.price} 원</span>
+											<span class="after_price"><c:out value="${after_price }"/> 원 </span>
+											<span>(${item.discount }원 할인)</span>
+										</div>
+									</c:if>
+									
 									
 									<div class="goods-made">
 										제조사: ${item.company} <br> 
@@ -266,10 +290,10 @@
 								<img src="/resources/img/product/no_image.jpg" width="100" height="100">
 							</c:if>
 							<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
-								<img src="${item.image_url }">
+								<img src="${item.image_url }"  width="590">
 							</c:if>
 							<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
-								<img src="/resources/img/product/registed_img/${item.image_url }">
+								<img src="/resources/img/product/registed_img/${item.image_url }" width="590">
 							</c:if>
 						</div>
 					</c:forEach>

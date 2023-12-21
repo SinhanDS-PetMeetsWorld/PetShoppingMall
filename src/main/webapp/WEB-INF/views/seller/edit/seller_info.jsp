@@ -120,7 +120,7 @@
 <!-- 						        <input type="hidden" name="vo_password" id="vo_password" value="${vo.password }">   -->
 					        </div>
 					        <span>이름</span>
-					        <input type="text" name="name" placeholder="홍길동" value="${vo.name }">
+					        <input type="text" name="name" placeholder="홍길동" value="${vo.name }" readonly>
 					        <span>아이디</span>
 					        <!-- <input type="text" name="id" placeholder="hong" disabled>  -->
 					        ${vo.id }
@@ -134,7 +134,7 @@
 					        <input type="password" id="check_password" name="check_password">
 					        <br>
 					        <span>이메일</span>
-					        <input type="email" name="email" placeholder="hong@email.com" value="${vo.email }">
+					        <input type="email" name="email" placeholder="hong@email.com" value="${vo.email }" readonly>
 					        <br>
 					        <span>연락처</span>
 					        <span>
@@ -145,12 +145,12 @@
 					       	<br>
 					       	<span>사업자 등록번호</span>
 					       	<span>
-					       		<input type="text" name="business_number" id="business_number" value="${vo.business_number }">
+					       		<input type="text" name="business_number" id="business_number" value="${vo.business_number }" readonly>
 					       	</span>
 					       	<br>
 					       	<div>주소
-					       		<div><input type="text" readonly placeholder="우편번호" name="zipcode" id="zipcode"  value="${vo.zipcode }"> <button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button></div>
-					       		<div><input type="text" readonly placeholder="기본주소" name="addr1" id="addr1" value="${vo.addr1 }"></div>
+					       		<div><input type="text" readonly placeholder="우편번호" name="zipcode" id="zipcode"  value="${vo.zipcode }" readonly> <button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button></div>
+					       		<div><input type="text" readonly placeholder="기본주소" name="addr1" id="addr1" value="${vo.addr1 }" readonly></div>
                 				<div><input type="text" placeholder="상세주소" name="addr2" id="addr2" value="${vo.addr2 }"></div>
 					        </div>
 					        <div>
