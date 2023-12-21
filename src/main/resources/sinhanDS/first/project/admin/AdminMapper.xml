@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.admin.AdminMapper">
+	<sql id="productWhere">
+		<where>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					seller_no LIKE '%${searchWord}%' 
+					OR name LIKE '%${searchWord}%' 
+					OR company LIKE '%${searchWord}%' 
+					OR brand LIKE '%${searchWord}%'
+				</if>
+				<if test="searchType != 'all'">
+					${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	<sql id="orderSql">
+		<if test="sorttype == null">
+			order by no
+		</if>
+		<if test="sorttype == 'maxprice'">
+			order by price desc, no asc
+		</if>
+		<if test="sorttype == 'minprice'">
+			order by price asc, no asc
+		</if>
+		<if test="sorttype == 'maxrating'">
+			order by rating desc, no asc
+		</if>
+		<if test="sorttype == 'minrating'">
+			order by rating asc, no asc
+		</if>
+		<if test="sorttype == 'review_cnt'">
+			order by review_cnt desc, no asc
+		</if>
+	</sql>
+	
 	<select id="getUserList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.user.vo.UserVO">
 		SELECT * FROM user WHERE id != 'admin'
 		ORDER BY no 
@@ -13,7 +49,8 @@
 	</select>
 	<select id="getProductList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT * FROM product
-		ORDER BY no
+		<include refid="productWhere"/>
+		<include refid="orderSql"/>
 		LIMIT #{startIdx}, #{numberOfProductInPage};
 	</select>
 	<select id="getOrderMainList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
@@ -33,22 +70,23 @@
 		LIMIT #{startIdx}, #{numberOfProductInPage};
 	</select>
 	
-	<select id="getNumberOfUser" resultType="int">
+	<select id="getNumberOfUser" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM user WHERE id != 'admin'
 	</select>
-	<select id="getNumberOfSeller" resultType="int">
+	<select id="getNumberOfSeller" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM seller WHERE id != 'admin'
 	</select>
-	<select id="getNumberOfProduct" resultType="int">
+	<select id="getNumberOfProduct" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM product
+		<include refid="productWhere"/>
 	</select>
-	<select id="getNumberOfOrderMain" resultType="int">
+	<select id="getNumberOfOrderMain" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM order_main
 	</select>
-	<select id="getNumberOfOrderDetail" resultType="int">
+	<select id="getNumberOfOrderDetail" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM order_detail
 	</select>
-	<select id="getNumberOfCancleAndRefound" resultType="int">
+	<select id="getNumberOfCancleAndRefound" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM order_detail
 		WHERE cancle_status != 0 or refound_status != 0
 	</select>

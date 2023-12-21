@@ -86,12 +86,6 @@ public class RegistProductWithNaverAPI {
         for(int i = 0 ; i < jsonArray.size(); i++) {
         	JSONObject obj = (JSONObject)jsonArray.get(i);
         	
-        	String seller_no = "2";
-        	String stock = String.valueOf((int)(Math.random() * 500));
-        	String discount = "0";
-        	String description = "";
-        	String category1_list = "1";
-        	String category2_list = "5";
         	
         	String name = (String)obj.get("title");
         	name = name.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
@@ -99,6 +93,16 @@ public class RegistProductWithNaverAPI {
         	String company = (String)obj.get("maker");
         	String brand = (String)obj.get("brand");
         	String image_url = (String)obj.get("image");
+        	
+        	String seller_no = "2";
+        	String stock = String.valueOf((int)(Math.random() * 500));
+        	
+        	int discount_rate = (int)(Math.random() * 5 + 10);
+        	int dis = (Integer.valueOf(price)/discount_rate) / 100 * 100;
+        	String discount = String.valueOf(dis);
+        	String description = "";
+        	String category1_list = "1";
+        	String category2_list = "5";
         	
         	System.out.println("seller_no: " + seller_no);
         	System.out.println("stock: " + stock);
@@ -119,13 +123,11 @@ public class RegistProductWithNaverAPI {
 		
 	@Test
 	public void regist_product() throws Exception {
-		String clientId = "MJqrvmZMyfFRJ7Fdtvdw"; //애플리케이션 클라이언트 아이디
-        String clientSecret = "LuXGTra8U2"; //애플리케이션 클라이언트 시크릿
         String text = null;
         int number = 10;
         try {
         	/* 검색어 */
-            text = URLEncoder.encode("고양이 사료", "UTF-8");
+            text = URLEncoder.encode("캣타워", "UTF-8");
             
             /* 검색 갯수 */
             number = 50;
@@ -150,12 +152,6 @@ public class RegistProductWithNaverAPI {
         for(int i = 0 ; i < jsonArray.size(); i++) {
         	JSONObject obj = (JSONObject)jsonArray.get(i);
         	
-        	String seller_no = "2";
-        	String stock = String.valueOf((int)(Math.random() * 500));
-        	String discount = "0";
-        	String description = "";
-        	String category1_list = "0";
-        	String category2_list = "0";
         	
         	System.out.println((String)obj.get("title"));
         	String name = (String)obj.get("title");
@@ -164,6 +160,17 @@ public class RegistProductWithNaverAPI {
         	String company = (String)obj.get("maker");
         	String brand = (String)obj.get("brand");
         	String image_url = (String)obj.get("image");
+        	
+        	
+        	String seller_no = "2";
+        	String stock = String.valueOf((int)(Math.random() * 500));
+        	
+        	int discount_rate = (int)(Math.random() * 5 + 10);
+        	int dis = (Integer.valueOf(price)/discount_rate) / 100 * 100;
+        	String discount = String.valueOf(dis);
+        	String description = "";
+        	String category1_list = "1";
+        	String category2_list = "5";
         	
         	/* 옵션 가격 계산 */
         	int optionPrice = Integer.valueOf(price);
@@ -180,8 +187,6 @@ public class RegistProductWithNaverAPI {
         			.param("image_url", image_url)
         			.param("discount", discount)
         			.param("description", description)
-        			.param("category1_list", category1_list)
-        			.param("category2_list", category2_list)
         			
         			
         			/* 카테고리를 더 추가하고 싶으실 경우 추가하시면 됩니다.  */

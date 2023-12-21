@@ -104,15 +104,15 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	
-	public List<OrderDetailVO> makeOrderDetailList(OrderMainVO mvo, List<ProductVO> p_list, int[] quantity){
+	public List<OrderDetailVO> makeOrderDetailList(OrderMainVO mvo, List<ProductVO> p_list, int[] quantity, int[] cart_no, int[] option_cart_no, List<ProductOptionVO> option_list){
 		List<OrderDetailVO> detail_list = new ArrayList<>();
 		for(int i = 0; i < p_list.size(); i++) {
-			detail_list.add(fillOrderDetailVO(mvo, p_list.get(i), quantity[i]));
+			detail_list.add(fillOrderDetailVO(mvo, p_list.get(i), quantity[i], cart_no[i], option_cart_no, option_list));
 		}
 		return detail_list;
 	}
 	
-	public OrderDetailVO fillOrderDetailVO(OrderMainVO mvo, ProductVO pvo, int quantity) {
+	public OrderDetailVO fillOrderDetailVO(OrderMainVO mvo, ProductVO pvo, int quantity, int cart_no, int[] option_cart_no, List<ProductOptionVO> option_list) {
 		OrderDetailVO vo = new OrderDetailVO();
 		vo.setOrder_no(mvo.getNo());
 		vo.setUser_no(mvo.getUser_no());
@@ -126,6 +126,12 @@ public class OrderServiceImpl implements OrderService {
 		vo.setCompany(pvo.getCompany());
 		vo.setBrand(pvo.getBrand());
 		vo.setQuantity(quantity);
+		
+		for(int i = 0; i < option_cart_no.length; i++) {
+			if(cart_no == option_cart_no[i]) {
+				vo.setProduct_price(vo.getProduct_price() + option_list.get(i).getPrice());
+			}
+		}
 		
 		return vo;
 	}

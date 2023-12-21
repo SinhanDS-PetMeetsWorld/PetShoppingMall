@@ -69,7 +69,7 @@
 												<c:if test="${!empty vo.image_url && !(fn:substring(vo.image_url, 0, 1) == 'h') }">
 													<img src="/resources/img/product/registed_img/${vo.image_url }" width="100" height="100">
 												</c:if>
-								                <div>${vo.name } </div>
+								                <div><a href="/user/product/goods.do?no=${vo.no }"> ${vo.name }</a> </div>
 								                <!-- 옵션이 존재한다면 보여주고 아니면 안보임 -->
 								                <c:forEach var="vo2" items="${optionlist[status.index] }" varStatus="tt">
 								                	<input type="hidden" class="option_cart_no" name="option_cart_no" value="${cartoptionvolist[status.index][tt.index].cart_no}">
@@ -78,9 +78,10 @@
 								                	<input type="hidden" class="option_price" name="option_price[${status.index }]" value="${vo2.price }">
 									                <span>${vo2.title}</span>
 									                <span>${vo2.content}</span>
+									                <span>${vo2.price}원</span>
 									                <br>
 								                </c:forEach> 
-								                <div>${vo.price } <input type="hidden" class="price_list" name="price_list" value="${vo.price }"></div>
+								                <div>${vo.price }원 <input type="hidden" class="price_list" name="price_list" value="${vo.price }"></div>
 								                <div><input type="hidden" class="discount_list" name="discount_list" value="${vo.discount }"></div>
 											</div>
 										</div>
@@ -113,20 +114,20 @@
      					<div>결제 금액</div>
      					<div>
 	     					<span>총 주문 가격 : </span>
-	     					<span id="totalprice">0</span>
+	     					<span id="totalprice">0</span>원
 	     					<input type="hidden" id="total_price" name="total_price" value="" >
      					</div>
 						<div>
 							<span>할인 금액 : </span>
-							<span id="discountprice">0</span>
+							<span id="discountprice">0</span>원
 							<input type="hidden" id="discount_price" name="discount_price" value="" >
 						</div>     					
 							<span>총 배송비 : </span>
-							<span id="deliveryprice">0</span>
+							<span id="deliveryprice">0</span>원
 							<input type="hidden" id="delivery_price" name="delivery_price" value="" >
 						<div>
 							<span>최종 결제액 : </span>
-							<span id="finalprice">0</span>
+							<span id="finalprice">0</span>원
 							<input type="hidden" id="final_price" name="final_price" value="" >
 						</div>
 						

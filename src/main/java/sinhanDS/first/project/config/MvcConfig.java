@@ -161,7 +161,7 @@ public class MvcConfig implements WebMvcConfigurer{
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer property() {
 		PropertySourcesPlaceholderConfigurer property = new PropertySourcesPlaceholderConfigurer();
-		property.setLocations(new ClassPathResource("db.properties"), new ClassPathResource("mail.properties"), new ClassPathResource("realPath.properties"));
+		property.setLocations(new ClassPathResource("db.properties"), new ClassPathResource("mail.properties"), new ClassPathResource("realPath.properties"), new ClassPathResource("test.properties"));
 		return property;
 	}
 	//이메일 발송

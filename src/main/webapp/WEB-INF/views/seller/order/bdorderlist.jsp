@@ -33,7 +33,7 @@
 								<c:forEach var="orderdetails" items="${orderDetailList[mainstatus.index]}" varStatus="status">
 									${orderdetails.no}
 									<table border="1">
-										<thead><tr> <th>제품명</th><th>옵션</th><th>판매가</th><th>수량</th> </tr></thead>
+										<thead><tr> <th>제품명</th><th>옵션</th><th>판매가</th><th>할인가</th><th>수량</th> </tr></thead>
 										<tr <c:if test="${orderdetails.cancle_status != 0}">style="color:red"</c:if>>
 											<td><c:if test="${orderdetails.cancle_status != 0}">(취소)</c:if>${orderdetails.product_name}</td>
 											<td>
@@ -43,17 +43,18 @@
 													</c:forEach>
 												</c:if>
 												<c:if test="${empty orderdetails.options}">옵션없음</c:if>
-												<td>${orderdetails.product_price}</td><td>${orderdetails.quantity}</td>
+												<td>${orderdetails.product_price}</td><td>${orderdetails.discount}</td><td>${orderdetails.quantity}</td>
 											
 											<c:if test='${orderdetails.cancle_status == 0}'><c:set var="allcanclecheck" value="false"/></c:if>
 										</tr>
 									</table>
+									<c:if test="${orderdetails.cancle_status != 0}">취소 사유: ${orderdetails.reason}</c:if>
 									<c:if test="${orderdetails.cancle_status == 0}">
 										<button type="button" value="${orderdetails.no}" class="canclebutton">주문취소</button>
 									</c:if>
 									<br><br>
-									
 								</c:forEach>
+								
 								수취인정보<br>
 								이름: ${orders.user_name } 연락처: ${orders.user_phone } <br>
 								우편번호: ${orders.zipcode } 주소: ${orders.addr1 } 상세주소: ${orders.addr2 } <br><br>
