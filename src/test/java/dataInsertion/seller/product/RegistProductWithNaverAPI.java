@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -40,6 +41,11 @@ import sinhanDS.first.project.seller.vo.SellerVO;
 @ContextConfiguration(classes = { sinhanDS.first.project.config.MvcConfig.class })
 @WebAppConfiguration
 public class RegistProductWithNaverAPI {
+	@Value("${api.clientId}")
+	private String clientId;
+	@Value("${api.clientSecret}")
+	private String clientSecret;
+	
 	@Autowired
 	WebApplicationContext ctx;
 	MockMvc mock;
@@ -51,8 +57,6 @@ public class RegistProductWithNaverAPI {
 
 	@Test
 	public void check_product()throws Exception {
-		String clientId = "MJqrvmZMyfFRJ7Fdtvdw"; //애플리케이션 클라이언트 아이디
-        String clientSecret = "LuXGTra8U2"; //애플리케이션 클라이언트 시크릿
         String text = null;
         int number = 10;
         try {
