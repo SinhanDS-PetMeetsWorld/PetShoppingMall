@@ -56,14 +56,14 @@
 		(
 		order_no, user_no, seller_no, 
 		product_no, product_name, product_price,
-		charge, discount, company, brand, quantity, 
+		discount, company, brand, quantity, 
 		order_date
 		)
 		VALUES
 		(
 		#{order_no}, #{user_no}, #{seller_no},
 		#{product_no}, #{product_name}, #{product_price},
-		#{charge}, #{discount}, #{company}, #{brand}, #{quantity},
+		#{discount}, #{company}, #{brand}, #{quantity},
 		sysdate()
 		);
 
