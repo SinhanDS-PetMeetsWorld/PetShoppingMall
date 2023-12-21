@@ -4,8 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>리뷰 작성</title>
 <style>
+
+#confirmWrite {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  width: 100%;
+  height: 35px;
+  font-size: 15px;
+  background-color: #fd0;
+  font-weight: 500;
+  color: #222;
+  margin-top:5px;
+ }
+
+
 #starForm fieldset{
     display: inline-block;
     direction: rtl;
@@ -52,9 +70,10 @@
 			사진 첨부
 			<input type="file" name="filename">
 		</div>
+		<br>
+		<span class="text-bold">별점을 선택해주세요</span>
 		<fieldset>
 			<%--https://velog.io/@hellocdpa/220305-%EB%A6%AC%EB%B7%B0-%EB%B3%84%EC%A0%90-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0 --%>
-			<span class="text-bold">별점을 선택해주세요</span> 
 			<input type="radio" name="rating" value="5" id="rate1"><label for="rate1">★</label>
 			<input type="radio" name="rating" value="4" id="rate2"><label for="rate2">★</label> 
 			<input type="radio" name="rating" value="3" id="rate3"><label for="rate3">★</label> 
@@ -66,7 +85,7 @@
 				id="reviewContents"
 				placeholder="리뷰를 남겨주세요!"></textarea>
 		</div>
-		<input type="submit" value="제출">
+		<input id="confirmWrite" type="submit" value="제출">
 	</form>
 </body>
 </html>
