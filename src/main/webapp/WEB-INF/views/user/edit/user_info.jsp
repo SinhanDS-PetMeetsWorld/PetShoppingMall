@@ -13,6 +13,44 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
+    
+ <style>
+  
+ .aaa{
+ 		background-color: #fff;
+         height: 31px;
+         padding: 3px 7px;
+         line-height: normal;
+         border: 1px solid #a6a6a6;
+         border-top-color: #949494;
+         border-radius: 3px;
+         box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+         outline: 0;
+         color: #111;
+         font-size: 13px;
+         :focus{
+             border-color: #e77600;
+             box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+         }
+ 
+ }
+ 
+ 
+ .line {
+ 		margin-top : 10px;
+ 		margin-bottom : 10px;
+        border: 1px solid #ccc;
+     }
+ 
+ 
+ .info_tag {
+ 		height : 50px;
+ 		width : 50px;
+}
+</style>
+    
+    
+    
     <script>
     window.onload = function(){
 		var phone = document.getElementById("phone").value;
@@ -89,6 +127,7 @@
 					    <button type="button" onclick="location.href='/user/edit_addr.do'">주소 변경</button>
 					    <button type="button" onclick="location.href='/user/edit_payment.do'">결제 수단</button>
 					
+						<hr class = "line">
 					    <form id="user_info_modify" name="user_info_modify" action="update.do" method="POST">
 					    	<div class="hidden" style="display:none">
 						        <input type="hidden" name="temp" id="phone" value="${vo.phone }">
@@ -96,43 +135,58 @@
 						        <input type="hidden" name="no" id="no" value="${vo.no }">
 <!-- 						        <input type="hidden" name="vo_password" id="vo_password" value="${vo.password }">   -->
 					        </div>
-					        <span>이름</span>
-					        <input type="text" name="name" placeholder="홍길동" value="${vo.name }">
-					        <span>아이디</span>
-					        <!-- <input type="text" name="id" placeholder="hong" disabled>  -->
-					        ${vo.id }
-					        <br>
-					        <span>기존 비밀번호</span>
-					        <input type="password" id="password" name="password" placeholder="비밀번호 변경 시에만 입력하시면 됩니다">
-					        <br>
-					        <span>새 비밀번호</span>
-					        <input type="password" id="new_password" name="new_password">
-					        <span>새 비밀번호 확인</span>
-					        <input type="password" id="check_password" name="check_password">
-					        <br>
-					        <span>이메일</span>
-					        <input type="email" name="email" placeholder="hong@email.com" value="${vo.email }">
-					        <br>
-					        <span>연락처</span>
+					        
+					        <div class = "info_tag">
+						        <span>이름</span>
+						        <input class ="aaa" type="text" name="name" placeholder="홍길동" value="${vo.name }">
+						        <span>아이디</span>
+						        <!-- <input type="text" name="id" placeholder="hong" disabled>  -->
+						        ${vo.id }
+					        </div>
+					        
+					        <hr class = "line">
+					        
+					    
+					        <span class = "info_tag">기존 비밀번호</span>
+					        <input class ="aaa" type="password" id="password" name="password" placeholder="비밀번호 변경 시에만 입력하시면 됩니다">
+					        <hr class = "line">
+					        
+					       
+					        <span class ="info_tag">새 비밀번호</span>
+					        <input class ="aaa" type="password" id="new_password" name="new_password">
+					        <span class = "info_tag">새 비밀번호 확인</span>
+					        <input class ="aaa" type="password" id="check_password" name="check_password">
+					        <hr class = "line">
+					        
+					       
+					        <span class = "info_tag">이메일</span>
+					        <input class ="aaa" type="email" name="email" placeholder="hong@email.com" value="${vo.email }">
+					        <hr class = "line">
+					        
+					        
+					        <span class = "info_tag">연락처</span>
 					        <span>
-					            <input type="tel" id="phone0" name="phone0" maxlength="3"/> -
-					            <input type="tel" id="phone1" name="phone1" maxlength="4"/> -
-					            <input type="tel" id="phone2" name="phone2" maxlength="4"/>
+					            <input class ="aaa" type="tel" id="phone0" name="phone0" maxlength="3"/> -
+					            <input class ="aaa" type="tel" id="phone1" name="phone1" maxlength="4"/> -
+					            <input class ="aaa" type="tel" id="phone2" name="phone2" maxlength="4"/>
 					        </span>
-					        <span>성별</span>
+					        <span class = "info_tag">성별</span>
 					        <input type="radio" name="gender" value="0" <c:if test="${vo.gender == 0}">checked</c:if>> 남성
 					        <input type="radio" name="gender" value="1" <c:if test="${vo.gender == 1}">checked</c:if>> 여성
-					        <br>
-					        <span>생년월일</span>
-					        <input type="text" id="birth0" name="birth0" placeholder="YYYY" maxlength="4"/> -
-					        <input type="text" id="birth1" name="birth1" placeholder="MM" maxlength="2"/> -
-					        <input type="text" id="birth2" name="birth2" placeholder="DD" maxlength="2"/>
+					        <hr class = "line">
+					        
+					        
+					        <span class = "info_tag">생년월일</span>
+					        <input class ="aaa" type="text" id="birth0" name="birth0" placeholder="YYYY" maxlength="4"/> -
+					        <input class ="aaa" type="text" id="birth1" name="birth1" placeholder="MM" maxlength="2"/> -
+					        <input class ="aaa" type="text" id="birth2" name="birth2" placeholder="DD" maxlength="2"/>
 					        <br>
 					        <input type="radio" name="agreement" value="agreement" <c:if test="${vo.advertisement == true}">checked</c:if>> 광고성 마케팅 수신에 동의(선택사항)
 					        <span>동의 시 등록된 이메일로 할인 정보를 전달해 드립니다.</span>
-					    
 					        <button type="button">회원 탈퇴</button>
-					        <br>
+					        <hr class = "line">
+					        
+					        
 					        <input type="button" onclick="doEdit();" value="수정">
 					    </form> 
 				</div>
