@@ -154,6 +154,8 @@
 	 		}
 	    }
 
+
+
         .board_contents {
             display: none;
         }
