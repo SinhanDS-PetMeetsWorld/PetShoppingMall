@@ -83,57 +83,125 @@
 					<if test="!(searchType == 'no' || searchType == 'seller_no' || searchType == 'user_no' || searchType == 'payment_type' || searchType == 'order_no' || searchType == 'product_no')">
 						${searchType} LIKE '%${searchWord}%'
 					</if>
-					
 				</if>
 			</if>
 		</where>
 	</sql>
 	
+	
 	<sql id="productWhere">
+		<where>
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
-					seller_no='${searchWord}' 
+					seller_no LIKE '%${searchWord}%' 
 					OR name LIKE '%${searchWord}%' 
 					OR company LIKE '%${searchWord}%' 
 					OR brand LIKE '%${searchWord}%'
 				</if>
 			</if>
+		</where>
+	</sql>
+	
+	<sql id="userWhere">
+		<where> 
+			id != 'admin'
+			
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType != 'all'">
+					<if test="searchType == 'no' || searchType == 'seller_no' || searchType == 'user_no' || searchType == 'payment_type' || searchType == 'order_no' || searchType == 'product_no'">
+						AND ${searchType}='${searchWord}'
+					</if>
+					<if test="!(searchType == 'no' || searchType == 'seller_no' || searchType == 'user_no' || searchType == 'payment_type' || searchType == 'order_no' || searchType == 'product_no')">
+						AND ${searchType} LIKE '%${searchWord}%'
+					</if>
+				</if>
+			</if>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					AND (no LIKE '%${searchWord}%' 
+					OR id LIKE '%${searchWord}%' 
+					OR name LIKE '%${searchWord}%')
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="sellerWhere">
+		<where> 
+			id != 'admin'
+			
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType != 'all'">
+					<if test="searchType == 'no' || searchType == 'seller_no' || searchType == 'user_no' || searchType == 'payment_type' || searchType == 'order_no' || searchType == 'product_no'">
+						AND ${searchType}='${searchWord}'
+					</if>
+					<if test="!(searchType == 'no' || searchType == 'seller_no' || searchType == 'user_no' || searchType == 'payment_type' || searchType == 'order_no' || searchType == 'product_no')">
+						AND ${searchType} LIKE '%${searchWord}%'
+					</if>
+				</if>
+			</if>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					AND (no LIKE '%${searchWord}%' 
+					OR id LIKE '%${searchWord}%' 
+					OR name LIKE '%${searchWord}%')
+				</if>
+			</if>
+		</where>
 	</sql>
 	
 	<sql id="orderMainWhere">
+		<where>
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
-					user_no='${searchWord}' 
+					user_no LIKE '%${searchWord}%' 
 				</if>
 			</if>
+		</where>
 	</sql>
 	
 	<sql id="orderDetailWhere">
+		<where>
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
-					user_no=${searchWord}'
-					OR order_no=${searchWord}'
-					OR seller_no=${searchWord}
+					user_no LIKE '%${searchWord}%' 
+					OR order_no LIKE '%${searchWord}%' 
+					OR seller_no LIKE '%${searchWord}%' 
 					OR company LIKE '%${searchWord}%'
 					OR brand LIKE '%${searchWord}%'
 				</if>
 			</if>
+		</where>
 	</sql>
 	<sql id="cancleAndRefoundWhere">
+		<where> 
+			(cancle_status != 0 or refound_status != 0)
+			
 			<if test="searchWord != null and searchWord != ''">
-				<if test="searchType == 'all'">
-					user_no LIKE '%${searchWord}%' 
-					OR seller_no LIKE '%${searchWord}%' 
-					OR company LIKE '%${searchWord}%' 
-					OR brand LIKE '%${searchWord}%'
+				<if test="searchType != 'all'">
+					<if test="searchType == 'no' || searchType == 'seller_no' || searchType == 'user_no' || searchType == 'payment_type' || searchType == 'order_no' || searchType == 'product_no'">
+						AND ${searchType}='${searchWord}'
+					</if>
+					<if test="!(searchType == 'no' || searchType == 'seller_no' || searchType == 'user_no' || searchType == 'payment_type' || searchType == 'order_no' || searchType == 'product_no')">
+						AND ${searchType} LIKE '%${searchWord}%'
+					</if>
 				</if>
 			</if>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					AND (user_no LIKE '%${searchWord}%' 
+					OR seller_no LIKE '%${searchWord}%' 
+					OR company LIKE '%${searchWord}%' 
+					OR brand LIKE '%${searchWord}%')
+				</if>
+			</if>
+		</where>
 	</sql>
 	
 	
 	<select id="getUserList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.user.vo.UserVO">
 		SELECT * FROM user 
-		WHERE id != 'admin'
+		<include refid="userWhere"/>
 		
 		<include refid="sorttype_null"/>
 		LIMIT #{startIdx}, #{numberOfProductInPage};
@@ -141,7 +209,7 @@
 	
 	<select id="getSellerList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.seller.vo.SellerVO">
 		SELECT * FROM seller 
-		WHERE id != 'admin'
+		<include refid="userWhere"/>
 		
 		<include refid="sorttype_null"/>
 		LIMIT #{startIdx}, #{numberOfProductInPage};
@@ -195,12 +263,7 @@
 	
 	<select id="getCancleAndRefound" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT * FROM order_detail
-		WHERE (cancle_status != 0 or refound_status != 0) and( 
-				<if test="searchType != 'all'">
-					${searchType} LIKE '%${searchWord}%'
-				</if>
 		<include refid="cancleAndRefoundWhere"/>
-		)
 		
 		<include refid="sorttype_null"/>
 		<include refid="sorttype_max_productprice"/>
@@ -221,10 +284,12 @@
 	
 	
 	<select id="getNumberOfUser" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
-		SELECT count(*) FROM user WHERE id != 'admin'
+		SELECT count(*) FROM user
+		<include refid="userWhere"/>
 	</select>
 	<select id="getNumberOfSeller" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
-		SELECT count(*) FROM seller WHERE id != 'admin'
+		SELECT count(*) FROM seller
+		<include refid="sellerWhere"/>
 	</select>
 	<select id="getNumberOfProduct" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM product
@@ -243,12 +308,7 @@
 	</select>
 	<select id="getNumberOfCancleAndRefound" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM order_detail
-		WHERE (cancle_status != 0 or refound_status != 0) and( 
-				<if test="searchType != 'all'">
-					${searchType} LIKE '%${searchWord}%'
-				</if>
 		<include refid="cancleAndRefoundWhere"/>
-		)
 	</select>
 	
 	<update id="confirmOrderDetail" parameterType="int">
