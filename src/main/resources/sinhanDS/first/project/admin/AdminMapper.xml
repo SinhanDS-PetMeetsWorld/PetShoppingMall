@@ -77,7 +77,13 @@
 		<where>
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType != 'all'">
-					${searchType} LIKE '%${searchWord}%'
+					<if test="searchType == 'no' || searchType == 'seller_no' || searchType == 'user_no' || searchType == 'payment_type' || searchType == 'order_no' || searchType == 'product_no'">
+						${searchType}='${searchWord}'
+					</if>
+					<if test="!(searchType == 'no' || searchType == 'seller_no' || searchType == 'user_no' || searchType == 'payment_type' || searchType == 'order_no' || searchType == 'product_no')">
+						${searchType} LIKE '%${searchWord}%'
+					</if>
+					
 				</if>
 			</if>
 		</where>
@@ -105,9 +111,9 @@
 	<sql id="orderDetailWhere">
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
-					user_no='${searchWord}' 
-					OR order_no='${searchWord}' 
-					OR seller_no='${searchWord}'
+					user_no=${searchWord}'
+					OR order_no=${searchWord}'
+					OR seller_no=${searchWord}
 					OR company LIKE '%${searchWord}%'
 					OR brand LIKE '%${searchWord}%'
 				</if>

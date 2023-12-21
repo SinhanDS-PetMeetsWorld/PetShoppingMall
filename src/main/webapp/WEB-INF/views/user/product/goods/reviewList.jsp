@@ -22,6 +22,9 @@
 	       		<c:if test="${!empty item.image_url }">
 		        	<img src="/resources/img/product/review_img/${item.image_url}" width="100" height="100">
 	       		</c:if>
+	       		<c:if test="${empty item.image_url}">
+					<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+				</c:if>
 	            <p>평점 : ${item.rating} </p>
 	            <p>내용 : ${item.content} </p>
 	            <p>작성일 : ${item.write_date} </p>
