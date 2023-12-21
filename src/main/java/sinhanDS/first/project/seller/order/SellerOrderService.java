@@ -3,6 +3,7 @@ package sinhanDS.first.project.seller.order;
 import java.util.List;
 import java.util.Map;
 
+import sinhanDS.first.project.admin.vo.SettlementVO;
 import sinhanDS.first.project.delivery.vo.DeliveryVO;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
@@ -32,4 +33,13 @@ public interface SellerOrderService {
 	List<DeliveryVO> getDeliveryList(List<List<OrderDetailVO>> vo);
 	
 	boolean cancleOrder_seller(int no);
+	
+	int settlement_list_count(int no);
+	int settlement_price(int no);
+	int unsettlement_price(int no);
+	
+	List<OrderDetailVO> settlement_search_list(Map map);
+	int settlement_search_price(Map map);
+	
+	boolean settlement_get(SettlementVO stvo);
 }

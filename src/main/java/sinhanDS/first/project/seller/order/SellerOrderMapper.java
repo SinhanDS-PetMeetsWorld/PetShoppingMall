@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import sinhanDS.first.project.admin.vo.SettlementVO;
 import sinhanDS.first.project.delivery.vo.DeliveryVO;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
@@ -32,4 +33,15 @@ public interface SellerOrderMapper {
 	DeliveryVO getDeliveryVO(int no);
 	
 	int cancleOrder_seller(int no);
+	
+	List<OrderDetailVO> settlement_list(int no);
+	Integer settlement_list_count(int no);
+	Integer settlement_price(int no);
+	Integer unsettlement_price(int no);
+	
+	List<OrderDetailVO> settlement_search_list(Map map);
+	Integer settlement_search_price(Map map);
+	
+	int settlement_regist(SettlementVO stvo);
+	int settlementNo_update(Map map);
 }

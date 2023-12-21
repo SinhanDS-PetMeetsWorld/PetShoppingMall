@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sinhanDS.first.project.admin.vo.SettlementVO;
 import sinhanDS.first.project.delivery.vo.DeliveryVO;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
@@ -175,6 +176,68 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 		int r = mapper.cancleOrder_seller(no);
 		if(r>0) return true;
 		else return false;
+	}
+
+	@Override
+	public int settlement_list_count(int no) {
+		Integer counts = mapper.settlement_list_count(no);
+		if(counts != null) {
+			return (int)counts;
+		}
+		return 0;
+	}
+
+	@Override
+	public int settlement_price(int no) {
+		Integer price = mapper.settlement_price(no);
+		if(price != null) {
+			return (int)price;
+		}
+		return 0;
+	}
+
+	@Override
+	public int unsettlement_price(int no) {
+		Integer price = mapper.unsettlement_price(no);
+		if(price != null) {
+			return (int)price;
+		}
+		return 0;
+	}
+	
+	@Override
+	public List<OrderDetailVO> settlement_search_list(Map map) {
+		List<OrderDetailVO> list = mapper.settlement_search_list(map);
+		return list;
+	}
+
+	@Override
+	public int settlement_search_price(Map map) {
+		Integer price = mapper.settlement_search_price(map);
+		if(price != null) {
+			return (int)price;
+		}
+		return 0;
+	}
+
+	@Override
+	public boolean settlement_get(SettlementVO stvo) {
+		int r = mapper.settlement_regist(stvo);
+		int settlement_no = stvo.getNo();
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("settlement_no", stvo.getNo());
+		int suc= 0;
+		
+		List<OrderDetailVO> list = mapper.settlement_list(stvo.getSeller_no());
+		if(r > 0) {
+			for(int i=0; i<list.size(); i++) {
+				map.put("no", list.get(i).getNo());
+				suc = mapper.settlementNo_update(map);
+				if(suc <= 0) return false;
+			}
+		}
+		return suc>0 ? true : false;
 	}
 
 }
