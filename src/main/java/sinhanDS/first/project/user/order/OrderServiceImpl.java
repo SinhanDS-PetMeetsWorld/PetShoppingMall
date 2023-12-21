@@ -49,6 +49,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	public List<ProductVO> getProductListByProductNoList(int[] product_list){
 		List<ProductVO> list = new ArrayList<>();
+		if(product_list == null) return list;
 		for(int i = 0; i < product_list.length; i++) {
 			log.debug("product_list[i] test: " + product_list[i]);
 			list.add(sellerProductMapper.getProduct(product_list[i]));
@@ -57,8 +58,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	public List<ProductVO> getProductListByCartNoList(int[] cno_list){
-		System.out.println("cno_list.length체크: " + cno_list.length);
 		List<ProductVO> list = new ArrayList<>();
+		if(cno_list == null) return list;
 		log.debug("cno_list.length체크: " + cno_list.length);
 		for(int i = 0; i < cno_list.length; i++) {
 			log.debug("cno_list[i] test: " + cno_list[i]);
@@ -127,12 +128,13 @@ public class OrderServiceImpl implements OrderService {
 		vo.setBrand(pvo.getBrand());
 		vo.setQuantity(quantity);
 		
-		for(int i = 0; i < option_cart_no.length; i++) {
-			if(cart_no == option_cart_no[i]) {
-				vo.setProduct_price(vo.getProduct_price() + option_list.get(i).getPrice());
-			}
+		if(option_cart_no != null) {
+				for(int i = 0; i < option_cart_no.length; i++) {
+					if(cart_no == option_cart_no[i]) {
+						vo.setProduct_price(vo.getProduct_price() + option_list.get(i).getPrice());
+					}
+				}
 		}
-		
 		return vo;
 	}
 	
@@ -254,7 +256,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	public int delete_buyed_cart(int[] cart_no) {
-		
+		if(cart_no == null) return 1;
 		for(int i=0; i<cart_no.length; i++) {
 			int r = 0;
 			r = mapper.delete_buyed_cart(cart_no[i]);
@@ -265,7 +267,7 @@ public class OrderServiceImpl implements OrderService {
 		return 1;	// 전부 삭제 성공
 	}
 	public int delete_buyed_option(int[] option_no) {
-		
+		if(option_no == null) return 0;
 		for(int i=0; i<option_no.length; i++) {
 			int r = 0;
 			r = mapper.delete_buyed_option(option_no[i]);

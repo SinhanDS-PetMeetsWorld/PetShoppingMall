@@ -103,7 +103,6 @@
 		var value = Number(0);
 		value += Number($('.price_td').eq(i).text());
 		value -= Number($('.discount_td').eq(i).text());
-		value += Number($('.option_price_td').eq(i).text());
 		value *= Number($('.quantity_td').eq(i).text());
 		$('.payment_price_td').eq(i).text(value);
 	})

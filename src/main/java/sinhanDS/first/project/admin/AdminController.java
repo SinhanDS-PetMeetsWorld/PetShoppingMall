@@ -158,7 +158,8 @@ public class AdminController {
 	}
 	@GetMapping("orderMainList.do")
 	public String orderMainList(Model model, ProductSearchVO svo) {
-		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
+//		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
+		svo.setNumberOfProductInPage(1);
 		//개수 구하기
 		int count = service.getNumberOfOrderMain(svo);
 		int totalPage = count / svo.getNumberOfProductInPage();
