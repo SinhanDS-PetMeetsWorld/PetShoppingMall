@@ -25,7 +25,7 @@ public interface OrderService {
 	public void registOrderMain(OrderMainVO mvo);
 	public void registOrderDetail(List<OrderDetailVO> detail_list);
 	public void registOrderDetailOption(List<ProductOptionVO> option_list, List<OrderDetailVO> detail_list, int[]cart_no, int[] option_cart_no);
-	public List<OrderDetailVO> makeOrderDetailList(OrderMainVO mvo, List<ProductVO> p_list, int[] quantity);
+	public List<OrderDetailVO> makeOrderDetailList(OrderMainVO mvo, List<ProductVO> p_list, int[] quantity, int[] cart_no, int[] option_cart_no, List<ProductOptionVO> option_list);
 	
 	public void registReview(ReviewVO vo);
 	

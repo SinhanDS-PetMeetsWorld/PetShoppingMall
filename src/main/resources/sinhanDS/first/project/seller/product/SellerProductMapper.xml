@@ -18,7 +18,7 @@
 	
 	<sql id="orderSql">
 		<if test="sorttype == 'regist' || sorttype == null">
-			order by no
+			order by no desc
 		</if>
 		<if test="sorttype == 'maxprice'">
 			order by price desc, no asc

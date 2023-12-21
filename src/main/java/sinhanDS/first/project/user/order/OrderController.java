@@ -118,20 +118,20 @@ public class OrderController {
 		
 		
 		List<ProductVO> productList = orderService.getProductListByProductNoList(product_no);
-		log.debug("productList: " + productList);
 		mvo = orderService.setOrderName(mvo, productList.get(0).getName(), productList.size());
 		orderService.registOrderMain(mvo);
 		
-		List<OrderDetailVO> detailList = orderService.makeOrderDetailList(mvo, productList, quantity);
-		orderService.registOrderDetail(detailList);
-		log.debug("detailList: " + detailList);
-		
 		List<ProductOptionVO> option_list = orderService.getOptionList(option_no);
-		log.debug("optionList체크: " + option_list);
+		List<OrderDetailVO> detailList = orderService.makeOrderDetailList(mvo, productList, quantity, cart_no, option_cart_no, option_list);
+		orderService.registOrderDetail(detailList);
 		orderService.registOrderDetailOption(option_list, detailList, cart_no, option_cart_no);
-		/*주문 상세 옵션 넣어주면됨 */
 
 		
+		log.debug("cart_no: " + Arrays.toString(cart_no));
+		log.debug("option_cart_no: " + Arrays.toString(option_cart_no));
+		log.debug("productList: " + productList);
+		log.debug("optionList체크: " + option_list);
+		log.debug("detailList: " + detailList);
 		
 		int k = orderService.delete_buyed_option(option_no);
 		if(k==1) {
@@ -149,7 +149,6 @@ public class OrderController {
 		}
 		
 
-		System.out.println("카트에노" + Arrays.toString(cart_no)); // 내가 체크한 상품의 cart_no 정보가 들어있음
 		
 		
 
