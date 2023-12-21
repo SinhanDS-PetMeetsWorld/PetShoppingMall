@@ -16,7 +16,7 @@
 			</if>
 		</where>
 	</sql>
-	<sql id="orderSql">
+	<sql id="productOrder">
 		<if test="sorttype == null">
 			order by no
 		</if>
@@ -37,6 +37,30 @@
 		</if>
 	</sql>
 	
+	<sql id="orderMainWhere">
+		<where>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					user_no LIKE '%${searchWord}%' 
+				</if>
+				<if test="searchType != 'all'">
+					${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	<sql id="orderMainOrder">
+		<if test="sorttype == null">
+			order by no
+		</if>
+		<if test="sorttype == 'maxprice'">
+			order by price desc, no asc
+		</if>
+		<if test="sorttype == 'minprice'">
+			order by price asc, no asc
+		</if>
+	</sql>
+	
 	<select id="getUserList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.user.vo.UserVO">
 		SELECT * FROM user WHERE id != 'admin'
 		ORDER BY no 
@@ -50,7 +74,7 @@
 	<select id="getProductList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT * FROM product
 		<include refid="productWhere"/>
-		<include refid="orderSql"/>
+		<include refid="productOrder"/>
 		LIMIT #{startIdx}, #{numberOfProductInPage};
 	</select>
 	<select id="getOrderMainList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderMainVO">

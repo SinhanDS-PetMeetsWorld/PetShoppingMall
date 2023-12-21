@@ -81,8 +81,10 @@
 									                <span>${vo2.price}원</span>
 									                <br>
 								                </c:forEach> 
-								                <div>${vo.price }원 <input type="hidden" class="price_list" name="price_list" value="${vo.price }"></div>
-								                <div><input type="hidden" class="discount_list" name="discount_list" value="${vo.discount }"></div>
+								                <div>${vo.price - vo.discount }원 </div>
+								                <div><c:if test="${vo.discount != 0 }">(${vo.price}원 - ${vo.discount }원)</c:if></div>
+								                <input type="hidden" class="price_list" name="price_list" value="${vo.price }">
+								                <input type="hidden" class="discount_list" name="discount_list" value="${vo.discount }">
 											</div>
 										</div>
 						                <br>
