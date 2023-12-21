@@ -65,7 +65,7 @@
 										<div>
 											${dvo.product_price }원  / ${dvo.quantity }개<br>
 											
-											<c:if test="${dvo.purchase_confirmation_date == null && dvo.cancle_status == 0 && dvo.refound_status == false}">
+											<c:if test="${dvo.purchase_confirmation_date == null && dvo.cancle_status == 0 && dvo.refound_status == 0}">
 												<input type="button" class="purchase_confirm" value="구매확정" data-no="${dvo.no }">
 												<c:if test="${dvo.delivery_status == 0 }">
 													<input type="button" class="request_cancle" value="취소신청" data-no="${dvo.no }">
@@ -77,7 +77,7 @@
 											<c:if test="${dvo.cancle_status != 0 }">
 												주문 취소됨
 											</c:if>
-											<c:if test="${dvo.refound_status != false }">
+											<c:if test="${dvo.refound_status != 0 }">
 												<input type="button" class="refound_info" value="반품정보" data-no="${dvo.no }">
 											</c:if>
 											<c:if test="${!empty img_list[status.index] }">
