@@ -98,17 +98,61 @@
 		
 		
 
+
         .board_title {
-            cursor: pointer;
             padding: 10px;
             background-color: #f0f0f0;
             display: inline-block;
             margin-right: 10px;
+            display: inline-block;
+			outline: 0;
+			cursor: pointer;
+			border-radius: 7px;
+			border:1px solid grey;
+			font-size: 18px;
+			height: 40px;
+			padding: 0 11px;
+			text-align: center;
+			width: 20%;
+			min-width: 200px;
+			font-weight: 500;
+			color: #0F1111;
+			margin-right: -4px;
+			margin-top: -1px;
+			line-height:40px;
+			margin: 0 10px 0 0;
+			:hover{
+			     background: #F7CA00;
+			     border-color: #F2C200;
+			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+ 			}
+ 			
         }
 
         .board_title.on {
             background-color: #ddd;
-        }
+            display: inline-block;
+		 	outline: 0;
+			cursor: pointer;
+			border-radius: 7px;
+			border:2px solid grey;
+			font-size: 18px;
+			height: 40px;
+			padding: 0 11px;
+			text-align: center;
+			width: 20%;
+			min-width: 200px;
+			font-weight: 500;
+			color: #0F1111;
+			margin-right: -4px;
+			line-height:40px;
+			margin: 0 10px 0 0;
+			:hover{
+			    background: #F7CA00;
+			    border-color: #F2C200;
+			    box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+	 		}
+	    }
 
         .board_contents {
             display: none;
