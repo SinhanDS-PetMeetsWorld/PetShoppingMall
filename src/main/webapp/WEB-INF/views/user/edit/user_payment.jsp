@@ -15,7 +15,64 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
 
-	
+<style>
+
+.menu_name {
+margin-bottom: 10px;	
+}
+ 
+ .selected_tab_button {
+ display: inline-block;
+ outline: 0;
+ cursor: pointer;
+ border-radius: 7px;
+ background: #FFDE30;
+ border:none;
+ font-size: 18px;
+ height: 40px;
+ padding: 0 11px;
+ text-align: center;
+ width: 20%;
+ min-width: 200px;
+ font-weight: 500;
+ color: #0F1111;
+ margin-right: -4px;
+ border-bottom-left-radius: 0%;
+ border-bottom-right-radius: 0%;
+ :hover{
+     background: #F7CA00;
+     border-color: #F2C200;
+     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+ 	}
+ }
+
+ .tab_button {
+ display: inline-block;
+ outline: 0;
+ cursor: pointer;
+ border-radius: 7px;
+ background: #F9FAFB;
+ border:1px solid #FFDE30;
+ font-size: 18px;
+ height: 40px;
+ padding: 0 11px;
+ text-align: center;
+ width: 20%;
+ min-width: 200px;
+ font-weight: 500;
+ color: #0F1111;
+ margin-right: -4px;
+ border-bottom-left-radius: 0%;
+ border-bottom-right-radius: 0%;
+ :hover{
+     background: #F7CA00;
+     border-color: #F2C200;
+     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+ 	}
+ }
+
+
+</style>	
 	
 </head>
 <body>
@@ -37,10 +94,10 @@
             </div>
 			<div class="contentsright">
 				<div>
-					<h1>회원정보</h1>
-					    <button type="button" onclick="location.href='/user/edit.do'">기본정보 변경</button>
-					    <button type="button" onclick="location.href='/user/edit_addr.do'">주소 변경</button>
-					    <button type="button" onclick="location.href='/user/edit_payment.do'">결제 수단</button>
+					<h1 class = "menu_name">회원정보</h1>
+					    <button class ="tab_button" type="button" onclick="location.href='/user/edit.do'">기본정보 변경</button>
+					    <button class ="tab_button" type="button" onclick="location.href='/user/edit_addr.do'">주소 변경</button>
+					    <button class ="selected_tab_button" type="button" onclick="location.href='/user/edit_payment.do'">결제 수단</button>
 					
 					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
 					        
