@@ -86,7 +86,7 @@
 	<sql id="productWhere">
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
-					seller_no LIKE '%${searchWord}%' 
+					seller_no='${searchWord}' 
 					OR name LIKE '%${searchWord}%' 
 					OR company LIKE '%${searchWord}%' 
 					OR brand LIKE '%${searchWord}%'
@@ -97,7 +97,7 @@
 	<sql id="orderMainWhere">
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
-					user_no LIKE '%${searchWord}%' 
+					user_no='${searchWord}' 
 				</if>
 			</if>
 	</sql>
@@ -105,10 +105,9 @@
 	<sql id="orderDetailWhere">
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
-					user_no LIKE '%${searchWord}%' 
-					OR order_no LIKE '%${searchWord}%' 
-					OR user_no LIKE '%${searchWord}%' 
-					OR seller_no LIKE '%${searchWord}%'
+					user_no='${searchWord}' 
+					OR order_no='${searchWord}' 
+					OR seller_no='${searchWord}'
 					OR company LIKE '%${searchWord}%'
 					OR brand LIKE '%${searchWord}%'
 				</if>

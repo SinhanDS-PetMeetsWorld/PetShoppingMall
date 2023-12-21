@@ -153,10 +153,10 @@
 							</div>
 							
 							<div class="submit">
+								<input type="submit" value="로그인">
 								<div class="sign_in">
 									<a href="/seller/join.do">회원 가입</a> <br>
 								</div>
-								<input type="submit" value="로그인">
 							</div>
 							
 						</div>
