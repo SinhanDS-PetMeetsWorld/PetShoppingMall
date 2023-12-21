@@ -25,7 +25,10 @@
             </div>
 			<div class="contentsright">
 				<div>
-				배송중 목록
+				배송완료 목록
+					<c:if test="${empty orderMainList}">
+						<h1>배송 완료된 상품이 없습니다(나중에 예쁜 이미지같은거 하나 넣어줄게욤~)</h1>
+					</c:if>
 					<c:if test="${not empty orderMainList}">
 						<c:forEach var="orders" items="${orderMainList}" varStatus="mainstatus">
 							주문번호: ${orders.no }<br>

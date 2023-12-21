@@ -26,6 +26,9 @@
 			<div class="contentsright">
 				<div>
 				환불목록
+					<c:if test="${empty orderMainList}">
+						<h1>환불 요청된 상품이 없습니다(나중에 예쁜 이미지같은거 하나 넣어줄게욤~)</h1>
+					</c:if>
 					<c:if test="${not empty orderMainList}">
 						<c:forEach var="orders" items="${orderMainList}" varStatus="mainstatus">
 							<c:set var="deliverStatus" value="배송시작"/>
