@@ -16,7 +16,11 @@
     
 <style>
  
-.zzim_On {
+.review_container {
+display : flex;
+}
+ 
+.goWriteReview {
   display: inline-block;
   outline: 0;
   border: none;
@@ -33,18 +37,6 @@
   
  }
  
- .price{
- text-align: center;
- margin_top : 80px;
- margin-left: 40px;
- font-size: 20px;
- }
- 
-.goods_container {
-display : flex;
-
-}
-
 .menu_name {
 margin-bottom: 30px;	
 }
@@ -54,36 +46,64 @@ width : 100px;
 hegiht : 100px;
 }
 
+.goods_name_container{
+display : flex;
+flex-direction : column; 
+height : 20px;
+width : 200px;
+
+}
+
 .goods_name {
-position:relative;
 margin-left : 30px;
-margin-top : 20px;
-width: 1000px;
-height: 100px;
+width: 700px;
+height: 30px;
+
 }
 
-.go_more {
-width :150px;
-height : 100px;
-margin-top: 20px;
-margin-left: 20px;	
+.price_container{
+display : flex;
+flex-direction : column;
+height :80px;
+width : 500px;
+
 }
 
-.goods_info {
-width: 200px;
-height : 100px;
+.price {
+    float: left;
+    margin-left: 45px;
+    margin-top: 20px;
+    font-size: 25px;
 }
 
-.zzimcancel_button {
-text-align: center;
-width: 200px;
-height : 100px;
-margin-right : 30px;
-margin-top : 5px; 
+.review_info_container {
+display : flex;
+flex-direction : column;
+height :80px;
+width : 500px;
+
 }
 
-</style>       
-    
+.review_info {
+    float: left;
+    font-size: 13px;
+    margin-top: 40px;
+ }
+
+.buy_date{
+text-align:center;
+}
+
+a:visited {
+    color: purple; 
+}
+a:active {
+    color: red; 
+}
+
+
+</style>      
+
 </head>
 <body>
 	<div class="wrap">
@@ -95,58 +115,77 @@ margin-top : 5px;
                 <%@ include file="/WEB-INF/views/common/quickmenu_user_info.jsp"%>
             </div>
 			<div class="contentsright">
-					<div>	
-						회원 번호 : ${userLoginInfo.no } <br>
+				
+						<input type = "hidden"  value = "${userLoginInfo.no }"> 
 						
-					<h1>작성 가능한 리뷰</h1>
-					
-					
+				<h1 class= "menu_name">작성 가능한 리뷰</h1>	
 				<c:forEach items="${possible_write_review2}" varStatus = "possible_write_review" >
-					<c:if test="${!empty possible_write_review2[possible_write_review.index] }">
-						<div>
-							<div class="goods-photo">
-								<c:if test="${possible_write_review2[possible_write_review.index][0] }">
-									<img src="/resources/img/product/no_image.jpg" width="100" height="100">
-								</c:if>
-								<c:if test="${!empty possible_write_review2[possible_write_review.index][0] && fn:substring(possible_write_review2[possible_write_review.index][0], 0, 1) == 'h' }">
-									<img src="${possible_write_review2[possible_write_review.index][0] }" width="100" height="100">
-								</c:if>
-								<c:if test="${!empty possible_write_review2[possible_write_review.index][0] && !(fn:substring(possible_write_review2[possible_write_review.index][0], 0, 1) == 'h') }">
-									<img src="/resources/img/product/registed_img/${possible_write_review2[possible_write_review.index][0] }" width="100" height="100">
-								</c:if>
-							</div>
+					<div>
+						<c:if test="${!empty possible_write_review2[possible_write_review.index] }">
+							<div class = "review_container">
+								<div class="goods_image">
+									<c:if test="${possible_write_review2[possible_write_review.index][0] }">
+										<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+									</c:if>
+									<c:if test="${!empty possible_write_review2[possible_write_review.index][0] && fn:substring(possible_write_review2[possible_write_review.index][0], 0, 1) == 'h' }">
+										<img src="${possible_write_review2[possible_write_review.index][0] }" width="100" height="100">
+									</c:if>
+									<c:if test="${!empty possible_write_review2[possible_write_review.index][0] && !(fn:substring(possible_write_review2[possible_write_review.index][0], 0, 1) == 'h') }">
+										<img src="/resources/img/product/registed_img/${possible_write_review2[possible_write_review.index][0] }" width="100" height="100">
+									</c:if>
+								</div>
 								
-							<div>	
-								<c:if test="${!empty possible_write_review2[possible_write_review.index][1] }">
-								<button class ="goWriteReview" data-dno="${possible_write_review2[possible_write_review.index][1]}">리뷰 작성 </button>	<br>
-								</c:if>
-		
-								<c:if test="${!empty possible_write_review2[possible_write_review.index][1] }">
-									주문 번호: ${possible_write_review2[possible_write_review.index][1]} <br>
-								</c:if>
+								<div class = "goods_name_container">
+									<div class = "goods_name">
+										<c:if test="${!empty possible_write_review2[possible_write_review.index][2] }">
+										<h4><a href="/user/product/goods.do?no=${possible_write_review2[possible_write_review.index][5]}" > ${possible_write_review2[possible_write_review.index][2]}</a></h4>
+										</c:if>
+									</div>
+									
+									<div class = "price">
+										<c:if test="${!empty possible_write_review2[possible_write_review.index][3] }">
+												${possible_write_review2[possible_write_review.index][3]}원 <br>
+										</c:if>
+									</div>
+
+								</div>	
+								<div class = "review_info_container">
 								
-								<c:if test="${!empty possible_write_review2[possible_write_review.index][2] }">
-									제품명:	${possible_write_review2[possible_write_review.index][2]} <br>
-								</c:if>
+									<div class= "review_info">
+										
+												<c:if test="${!empty possible_write_review2[possible_write_review.index][5] }">
+												<input type = "hidden" value = "${possible_write_review2[possible_write_review.index][5]}">
+												</c:if>
+												
+													
+												<c:if test="${!empty possible_write_review2[possible_write_review.index][1] }">
+												<input type = "hidden" value ="${possible_write_review2[possible_write_review.index][1]}">
+												</c:if>
+									
+									</div>
+								</div>
+
+
 								
-								<c:if test="${!empty possible_write_review2[possible_write_review.index][3] }">
-									가격:	${possible_write_review2[possible_write_review.index][3]} <br>
-								</c:if>
-								
-								<c:if test="${!empty possible_write_review2[possible_write_review.index][4] }">
-									구매일자:	${possible_write_review2[possible_write_review.index][4]} <br>
-								</c:if>
-								
-								<c:if test="${!empty possible_write_review2[possible_write_review.index][5] }">
-									상품번호:	${possible_write_review2[possible_write_review.index][5]} <br>
-								</c:if>
-								<br>
-							</div>
+									
 							
-						</div>
-					</c:if>
+								
+													
+								<div class = "button">	
+									<div class = "buy_date">	
+										<c:if test="${!empty possible_write_review2[possible_write_review.index][4] }">
+											구매일자:	${possible_write_review2[possible_write_review.index][4]} <br>
+										</c:if>
+									</div>
+										<c:if test="${!empty possible_write_review2[possible_write_review.index][1] }">
+										<button class ="goWriteReview" data-dno="${possible_write_review2[possible_write_review.index][1]}">리뷰 작성 </button>	<br>
+										</c:if>
+								</div>
+							</div>
+						</c:if>
+					</div>	
 			   </c:forEach>			
-				</div>
+				
 			</div>
         </div>
         
