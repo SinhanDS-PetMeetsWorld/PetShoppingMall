@@ -27,6 +27,7 @@
         		<tr>
 					<td>상품번호</td>
 					<td>판매자 번호</td>
+					<td>상품 명</td>
 					<td>가격</td>
 					<td>재고</td>
 					<td>제조사</td>
@@ -39,6 +40,7 @@
 					<tr>
 						<td>${vo.no }</td>
 						<td>${vo.seller_no }</td>
+						<td>${vo.name }</td>
 						<td>${vo.price }</td>
 						<td>${vo.stock }</td>
 						<td>${vo.company }</td>
@@ -68,22 +70,23 @@
 				</ul> 
 		   	</div>
 			<div class="bbsSearch">
-				<form method="get" name="searchForm" id="searchForm" action="/seller/product/list.do">
+				<form method="get" name="searchForm" id="searchForm" action="/admin/productList.do">
 	            	<span class="sortSelect">
 						<select name="sorttype">
-							<option value="minprice" <c:if test="${productSearchVO.sorttype == 'price'}">selected</c:if>>가격 순</option>
-							<option value="maxprice" <c:if test="${productSearchVO.sorttype == 'price'}">selected</c:if>>가격 순</option>
-							<option value="minrating" <c:if test="${productSearchVO.sorttype == 'rating'}">selected</c:if>>재고 적은 순</option>
-							<option value="maxrating" <c:if test="${productSearchVO.sorttype == 'rating'}">selected</c:if>>재고 적은 순</option>
-							<option value="review_cnt" <c:if test="${productSearchVO.sorttype == 'review_cnt'}">selected</c:if>>재고 적은 순</option>
+							<option value="maxprice" <c:if test="${productSearchVO.sorttype == 'maxprice'}">selected</c:if>>높은 가격 순</option>
+							<option value="minprice" <c:if test="${productSearchVO.sorttype == 'minprice'}">selected</c:if>>낮은 가격 순</option>
+							<option value="maxrating" <c:if test="${productSearchVO.sorttype == 'maxrating'}">selected</c:if>>높은 평점 순</option>
+							<option value="minrating" <c:if test="${productSearchVO.sorttype == 'minrating'}">selected</c:if>>낮은 평점 순</option>
+							<option value="review_cnt" <c:if test="${productSearchVO.sorttype == 'review_cnt'}">selected</c:if>>리뷰 개수 순</option>
 						</select>	
 	            	</span>
 					<span class="srchSelect">
 						<select name="searchType">
 							<option value="all">전체</option>
-							<option value="seller_no" <c:if test="${productSearchVO.searchType == 'company'}">selected</c:if>>판매자</option>
+							<option value="name" <c:if test="${productSearchVO.searchType == 'name'}">selected</c:if>>상품명</option>
+							<option value="seller_no" <c:if test="${productSearchVO.searchType == 'seller_no'}">selected</c:if>>판매자 번호</option>
 							<option value="company" <c:if test="${productSearchVO.searchType == 'company'}">selected</c:if>>제조사</option>
-							<option value="brand" <c:if test="${productSearchVO.searchType == 'company'}">selected</c:if>>브랜드</option>
+							<option value="brand" <c:if test="${productSearchVO.searchType == 'brand'}">selected</c:if>>브랜드</option>
 						</select>
 					</span>
 					<span class="searchWord">
@@ -101,7 +104,7 @@
     </div>
 <script>
 	$('.pageButton').on('click', function(){
-		location.href="/admin/productList.do?page=" + $(this).data('page');
+		location.href="/admin/productList.do?page=" + $(this).data('page') + "&sorttype=${productSearchVO.sorttype}&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}";
 	})
 </script>
 </body>

@@ -16,10 +16,14 @@ public interface AdminService {
 	public List<OrderMainVO> getOrderMainList(ProductSearchVO svo);
 	public List<OrderDetailVO> getOrderDetailList(ProductSearchVO svo);
 	public List<OrderDetailVO> getCancleAndRefound(ProductSearchVO svo);
-	public int getNumberOfUser();
-	public int getNumberOfSeller();
-	public int getNumberOfProduct();
-	public int getNumberOfOrderMain();
-	public int getNumberOfOrderDetail();
-	public int getNumberOfCancleAndRefound();
+	public List<OrderDetailVO> getNeedConfirmationList();
+	public int getNumberOfUser(ProductSearchVO svo);
+	public int getNumberOfSeller(ProductSearchVO svo);
+	public int getNumberOfProduct(ProductSearchVO svo);
+	public int getNumberOfOrderMain(ProductSearchVO svo);
+	public int getNumberOfOrderDetail(ProductSearchVO svo);
+	public int getNumberOfCancleAndRefound(ProductSearchVO svo);
+	
+	
+	public void confirmOrderDetail(int[] no);
 }

@@ -75,6 +75,34 @@
 		            </c:if>
 				</ul> 
 		   	</div>
+		   	<div class="bbsSearch">
+				<form method="get" name="searchForm" id="searchForm" action="/admin/orderDetailList.do">
+	            	<span class="sortSelect">
+						<select name="sorttype">
+							<option value="maxprice" <c:if test="${productSearchVO.sorttype == 'maxprice'}">selected</c:if>>높은 가격 순</option>
+							<option value="minprice" <c:if test="${productSearchVO.sorttype == 'minprice'}">selected</c:if>>낮은 가격 순</option>
+							<option value="maxdiscount" <c:if test="${productSearchVO.sorttype == 'maxdiscount'}">selected</c:if>>높은 할인액 순</option>
+							<option value="mindiscount" <c:if test="${productSearchVO.sorttype == 'mindiscount'}">selected</c:if>>낮은 할인액 순</option>
+							<option value="maxpaymentprice" <c:if test="${productSearchVO.sorttype == 'maxpaymentprice'}">selected</c:if>>높은 결제 가격 순</option>
+							<option value="minpaymentprice" <c:if test="${productSearchVO.sorttype == 'minpaymentprice'}">selected</c:if>>낮은 결제 가격 순</option>
+						</select>	
+	            	</span>
+					<span class="srchSelect">
+						<select name="searchType">
+							<option value="all">전체</option>
+							<option value="order_no" <c:if test="${productSearchVO.searchType == 'order_no'}">selected</c:if>>주문 번호</option>
+							<option value="user_no" <c:if test="${productSearchVO.searchType == 'user_no'}">selected</c:if>>구매자 번호</option>
+							<option value="seller_no" <c:if test="${productSearchVO.searchType == 'seller_no'}">selected</c:if>>판매자 번호</option>
+							<option value="company" <c:if test="${productSearchVO.searchType == 'company'}">selected</c:if>>제조사</option>
+							<option value="brand" <c:if test="${productSearchVO.searchType == 'brand'}">selected</c:if>>브랜드</option>
+						</select>
+					</span>
+					<span class="searchWord">
+						<input type="text" id="sval" name="searchWord" value="${productSearchVO.searchWord}"  title="검색어 입력">
+						<input type="submit" value="검색">
+					</span>
+				</form>
+			</div>	
         </div>
         
         
@@ -84,7 +112,7 @@
     </div>
 <script>
 	$('.pageButton').on('click', function(){
-		location.href="/admin/orderDetailList.do?page=" + $(this).data('page');
+		location.href="/admin/orderDetailList.do?page=" + $(this).data('page') + "&sorttype=${productSearchVO.sorttype}&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}";
 	})
 </script>
 <script>
@@ -99,11 +127,9 @@
 </script>
 <script>
 	$('.payment_price_td').each(function(i, e){
-		var index = i;
 		var value = Number(0);
 		value += Number($('.price_td').eq(i).text());
 		value -= Number($('.discount_td').eq(i).text());
-		value += Number($('.option_price_td').eq(i).text());
 		value *= Number($('.quantity_td').eq(i).text());
 		$('.payment_price_td').eq(i).text(value);
 	})

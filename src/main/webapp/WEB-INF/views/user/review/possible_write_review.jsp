@@ -44,35 +44,43 @@ margin-bottom: 30px;
 .goods_image {
 width : 100px;
 hegiht : 100px;
+
 }
 
+ 
 .goods_name_container{
-display : flex;
-flex-direction : column; 
 height : 20px;
-width : 200px;
-
+width : 400px;
+white-space: nowrap;
 }
 
 .goods_name {
-margin-left : 30px;
-width: 700px;
+margin-left : 20px;
+margin-top : 10px;
+width: 400px;
 height: 30px;
+overflow:hidden;
+
+
+
+			text-overflow: ellipsis;
+			word-wrap : break-word;
+			display      : inline-block;
+			white-space : nowrap;
+
 
 }
-
-.price_container{
-display : flex;
-flex-direction : column;
-height :80px;
-width : 500px;
-
+  
+  
+.goods_price_container{
+width : 450px;
+height : 80px;
 }
 
 .price {
     float: left;
-    margin-left: 45px;
     margin-top: 20px;
+    margin-left : 200px;
     font-size: 25px;
 }
 
@@ -80,7 +88,7 @@ width : 500px;
 display : flex;
 flex-direction : column;
 height :80px;
-width : 500px;
+width : 300px;
 
 }
 
@@ -90,6 +98,12 @@ width : 500px;
     margin-top: 40px;
  }
 
+.button{
+float:left;
+width:200px;
+height:80px;
+
+}
 .buy_date{
 text-align:center;
 }
@@ -141,15 +155,17 @@ a:active {
 										<h4><a href="/user/product/goods.do?no=${possible_write_review2[possible_write_review.index][5]}" > ${possible_write_review2[possible_write_review.index][2]}</a></h4>
 										</c:if>
 									</div>
-									
+
+								</div>	
+								
+								<div class = "goods_price_container">
 									<div class = "price">
 										<c:if test="${!empty possible_write_review2[possible_write_review.index][3] }">
 												${possible_write_review2[possible_write_review.index][3]}원 <br>
 										</c:if>
 									</div>
+								</div>			
 
-								</div>	
-								<div class = "review_info_container">
 								
 									<div class= "review_info">
 										
@@ -163,13 +179,8 @@ a:active {
 												</c:if>
 									
 									</div>
-								</div>
-
-
-								
-									
 							
-								
+
 													
 								<div class = "button">	
 									<div class = "buy_date">	

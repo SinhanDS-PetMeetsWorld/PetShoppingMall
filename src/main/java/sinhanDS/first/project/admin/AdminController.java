@@ -1,5 +1,6 @@
 package sinhanDS.first.project.admin;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +72,7 @@ public class AdminController {
 	public String userList(Model model, ProductSearchVO svo) {
 		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
 		log.debug("review_svo: " + svo);
-		int count = service.getNumberOfUser();
+		int count = service.getNumberOfUser(svo);
 		int totalPage = count / svo.getNumberOfProductInPage();
 		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
 		Map<String, Object> map = new HashMap<>();
@@ -100,7 +101,7 @@ public class AdminController {
 	@GetMapping("sellerList.do")
 	public String sellerList(Model model, ProductSearchVO svo) {
 		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
-		int count = service.getNumberOfSeller();
+		int count = service.getNumberOfSeller(svo);
 		int totalPage = count / svo.getNumberOfProductInPage();
 		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
 		Map<String, Object> map = new HashMap<>();
@@ -130,7 +131,8 @@ public class AdminController {
 	@GetMapping("productList.do")
 	public String productList(Model model, ProductSearchVO svo) {
 		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
-		int count = service.getNumberOfProduct();
+		int count = service.getNumberOfProduct(svo);
+		log.debug("count: " + count);
 		int totalPage = count / svo.getNumberOfProductInPage();
 		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
 		Map<String, Object> map = new HashMap<>();
@@ -158,8 +160,9 @@ public class AdminController {
 	@GetMapping("orderMainList.do")
 	public String orderMainList(Model model, ProductSearchVO svo) {
 		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
+		
 		//개수 구하기
-		int count = service.getNumberOfOrderMain();
+		int count = service.getNumberOfOrderMain(svo);
 		int totalPage = count / svo.getNumberOfProductInPage();
 		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
 		Map<String, Object> map = new HashMap<>();
@@ -190,7 +193,7 @@ public class AdminController {
 	public String orderDetailList(Model model, ProductSearchVO svo) {
 		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
 		//개수 구하기
-		int count = service.getNumberOfOrderDetail();
+		int count = service.getNumberOfOrderDetail(svo);
 		int totalPage = count / svo.getNumberOfProductInPage();
 		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
 		Map<String, Object> map = new HashMap<>();
@@ -224,7 +227,7 @@ public class AdminController {
 	public String cancleAndRefoundList(Model model, ProductSearchVO svo) {
 		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
 		//개수 구하기
-		int count = service.getNumberOfCancleAndRefound();
+		int count = service.getNumberOfCancleAndRefound(svo);
 		int totalPage = count / svo.getNumberOfProductInPage();
 		if(count % svo.getNumberOfProductInPage() > 0) totalPage++;
 		Map<String, Object> map = new HashMap<>();
@@ -252,5 +255,26 @@ public class AdminController {
 		model.addAttribute("paging", map);
 		model.addAttribute("svo", svo);
 		return "/admin/page/cancleAndRefoundList";
+	}
+	
+	@GetMapping("needConfirmationList.do")
+	public String needConfirmationList(Model model) {
+		//리스트 구하기 
+		List<OrderDetailVO> vo_list = service.getNeedConfirmationList();
+		log.debug("list: " + vo_list);
+
+		//개수 구하기
+		int count = vo_list.size();
+		
+		model.addAttribute("list", vo_list);
+		model.addAttribute("count", count);
+		return "/admin/page/needConfirmationList";
+	}
+	
+	@PostMapping("confirmOrderDetail.do")
+	public String confirmOrderDetail(@RequestParam int[] no) {
+		log.debug("no: " + Arrays.toString(no));
+		service.confirmOrderDetail(no);
+		return "redirect:/admin/needConfirmationList.do";
 	}
 }

@@ -63,6 +63,22 @@
 		            </c:if>
 				</ul> 
 		   	</div>
+		   	<div class="bbsSearch">
+				<form method="get" name="searchForm" id="searchForm" action="/admin/sellerList.do">
+					<span class="srchSelect">
+						<select name="searchType">
+							<option value="all">전체</option>
+							<option value="no" <c:if test="${productSearchVO.searchType == 'no'}">selected</c:if>>판매자 번호</option>
+							<option value="id" <c:if test="${productSearchVO.searchType == 'id'}">selected</c:if>>아이디</option>
+							<option value="name" <c:if test="${productSearchVO.searchType == 'name'}">selected</c:if>>이름</option>
+						</select>
+					</span>
+					<span class="searchWord">
+						<input type="text" id="sval" name="searchWord" value="${productSearchVO.searchWord}"  title="검색어 입력">
+						<input type="submit" value="검색">
+					</span>
+				</form>
+			</div>	
         </div>
         
         

@@ -47,32 +47,48 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public int getNumberOfUser() {
-		return mapper.getNumberOfUser();
+	public List<OrderDetailVO> getNeedConfirmationList(){
+		return mapper.getNeedConfirmationList();
+	}
+	
+	
+	
+	@Override
+	public int getNumberOfUser(ProductSearchVO svo) {
+		return mapper.getNumberOfUser(svo);
 	}
 	
 	@Override
-	public int getNumberOfSeller() {
-		return mapper.getNumberOfSeller();
+	public int getNumberOfSeller(ProductSearchVO svo) {
+		return mapper.getNumberOfSeller(svo);
 	}
 	
 	@Override
-	public int getNumberOfProduct() {
-		return mapper.getNumberOfProduct();
+	public int getNumberOfProduct(ProductSearchVO svo) {
+		return mapper.getNumberOfProduct(svo);
 	}
 	
 	@Override
-	public int getNumberOfOrderMain() {
-		return mapper.getNumberOfOrderMain();
+	public int getNumberOfOrderMain(ProductSearchVO svo) {
+		return mapper.getNumberOfOrderMain(svo);
 	}
 	
 	@Override
-	public int getNumberOfOrderDetail() {
-		return mapper.getNumberOfOrderDetail();
+	public int getNumberOfOrderDetail(ProductSearchVO svo) {
+		return mapper.getNumberOfOrderDetail(svo);
 	}
 	
 	@Override
-	public int getNumberOfCancleAndRefound() {
-		return mapper.getNumberOfCancleAndRefound();
+	public int getNumberOfCancleAndRefound(ProductSearchVO svo) {
+		return mapper.getNumberOfCancleAndRefound(svo);
+	}
+	
+	
+	
+	@Override
+	public void confirmOrderDetail(int[] no) {
+		for(int i = 0; i < no.length; i++) {
+			mapper.confirmOrderDetail(no[i]);
+		}
 	}
 }
