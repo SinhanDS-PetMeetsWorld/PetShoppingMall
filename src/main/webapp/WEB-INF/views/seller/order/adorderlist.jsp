@@ -32,7 +32,7 @@
 							<c:if test="${not empty orderDetailList}">
 								<c:forEach var="orderdetails" items="${orderDetailList[mainstatus.index]}" varStatus="status">									
 									<table border="1">
-										<thead><tr> <th>제품명</th><th>옵션</th><th>판매가</th><th>수량</th> </tr></thead>
+										<thead><tr> <th>제품명</th><th>옵션</th><th>판매가</th><th>할인가</th><th>수량</th> </tr></thead>
 										<tr <c:if test="${orderdetails.cancle_status != 0 || orderdetails.refound_status != 0}">style="color:red"</c:if>>
 											<td><c:if test="${orderdetails.cancle_status != 0}">(취소)</c:if>
 												<c:if test="${orderdetails.refound_status != 0}">(환불)</c:if>
@@ -45,11 +45,12 @@
 												</c:if>
 												<c:if test="${empty orderdetails.options}">옵션없음</c:if>
 											
-											<td>${orderdetails.product_price}</td><td>${orderdetails.quantity}</td>
+											<td>${orderdetails.product_price}</td><td>${orderdetails.discount}</td><td>${orderdetails.quantity}</td>
 										</tr>
-									</table><br>
+									</table>
+									<c:if test="${orderdetails.refound_status != 0}">환불 사유: ${orderdetails.reason}<br></c:if>
 									<c:if test='${orderdetails.delivery_no != null && orderdetails.delivery_no != ""}'>
-										<c:set var="deliverNo" value="${orderdetails.delivery_no}"/></c:if>
+										<c:set var="deliverNo" value="${orderdetails.delivery_no}"/></c:if><br>
 								</c:forEach>
 							</c:if>
 								수취인정보<br>

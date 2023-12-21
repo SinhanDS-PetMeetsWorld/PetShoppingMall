@@ -28,17 +28,16 @@
 				환불목록
 					<c:if test="${not empty orderMainList}">
 						<c:forEach var="orders" items="${orderMainList}" varStatus="mainstatus">
-							<c:set var="deliverStatus" value="배송준비"/>
-							<c:set var="deliverNo" value=""/>
+							<c:set var="deliverStatus" value="배송시작"/>
 							주문번호: ${orders.no }<br>
 							<c:if test="${not empty orderDetailList}">
 								<c:forEach var="orderdetails" items="${orderDetailList[mainstatus.index]}" varStatus="status">
-									<c:if test="${orderdetails.delivery_status == 1}"><c:set var="deliverStatus" value="배송시작"/></c:if>
 									<c:if test="${orderdetails.delivery_status == 2}"><c:set var="deliverStatus" value="배송완료"/></c:if>
 									<table border="1">
-										<thead><tr> <th>제품명</th><th>옵션</th><th>판매가</th><th>수량</th><td>환불상태</td> </tr></thead>
+										<thead><tr> <th>제품명</th><th>옵션</th><th>판매가</th><th>할인가</th>
+													<th>수량</th><td>환불상태</td> </tr></thead>
 										<tr <c:if test="${orderdetails.refound_status == 1}">style="color:red"</c:if>>
-											<td>(환불) ${orderdetails.product_name}</td>
+											<td>${orderdetails.product_name}</td>
 											<td>
 												<c:if test="${not empty orderdetails.options}">
 													<c:forEach var="orderoptions" items="${orderdetails.options}" varStatus="status">
@@ -47,23 +46,21 @@
 												</c:if>
 												<c:if test="${empty orderdetails.options}">옵션없음</c:if>
 											
-											<td>${orderdetails.product_price}</td><td>${orderdetails.quantity}</td>
+											<td>${orderdetails.product_price}</td><td>${orderdetails.discount}</td><td>${orderdetails.quantity}</td>
 											<td>
 												<c:if test='${orderdetails.refound_status == 1}'>환불요청</c:if>
 												<c:if test='${orderdetails.refound_status == 2}'>환불완료</c:if>
 											</td>
 										</tr>
-									</table><br>
-									<c:if test='${orderdetails.delivery_no != null && orderdetails.delivery_no != ""}'>
-										<c:set var="deliverNo" value="${orderdetails.delivery_no}"/></c:if>
+									</table>
+									환불 사유: ${orderdetails.reason}<br>
 								</c:forEach>
-								환불자정보<br>
+								<br>환불자정보<br>
 								이름: ${orders.user_name } 연락처: ${orders.user_phone } <br>
-								우편번호: ${orders.zipcode } 주소: ${orders.addr1 } 상세주소: ${orders.addr2 } <br><br>
 								주문일시: ${orders.order_date } 배송상태: ${deliverStatus}<br>
 								
 								<c:if test='${deliverNo != null && deliverNo != ""}'>
-									운송장 번호: ${deliverNo}
+									운송장 번호: ${orderdetails.delivery_no}
 									<c:if test='${deliverStatus == "배송시작"}'>도착예정일: ${deliveryList[mainstatus.index].due_date}</c:if>
 									<c:if test='${deliverStatus == "배송완료"}'>도착일: ${deliveryList[mainstatus.index].arrival_date}</c:if>
 								</c:if>
