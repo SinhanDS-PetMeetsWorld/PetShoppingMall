@@ -219,7 +219,7 @@
 									</div>
 								
 									<div class="goods-score">
-										<img src="/resources/img/product/star.png"> ${item.rating} / 5.0  	
+										<img src="/resources/img/common/star.jpg"> ${item.rating} / 5.0  	
 									</div>
 								
 									<c:if test="${item.discount eq 0 }">
@@ -231,9 +231,9 @@
 										<div class="goods-price">
 										
 											<c:set var="after_price" value="${item.price - item.discount }"></c:set>
-											가격 : <span class="before_price">${item.price} 원 </span>
+											가격 : <span class="before_price">${item.price} 원</span>
 											<span class="after_price"><c:out value="${after_price }"/> 원 </span>
-											<span>(${item.discount } 할인)</span>
+											<span>(${item.discount }원 할인)</span>
 										</div>
 									</c:if>
 									
