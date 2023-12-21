@@ -177,4 +177,60 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 		else return false;
 	}
 
+	@Override
+	public int settlement_list(int no) {
+		Integer counts = mapper.settlement_list(no);
+		if(counts != null) {
+			return (int)counts;
+		}
+		return 0;
+	}
+
+	@Override
+	public int settlement_price(int no) {
+		Integer price = mapper.settlement_price(no);
+		if(price != null) {
+			return (int)price;
+		}
+		return 0;
+	}
+
+	@Override
+	public int unsettlement_price(int no) {
+		Integer price = mapper.unsettlement_price(no);
+		if(price != null) {
+			return (int)price;
+		}
+		return 0;
+	}
+	
+	@Override
+	public List<OrderDetailVO> settlement_search_list(Map map) {
+		List<OrderDetailVO> list = mapper.settlement_search_list(map);
+		return list;
+	}
+
+	@Override
+	public int settlement_search_price(Map map) {
+		Integer price = mapper.settlement_search_price(map);
+		if(price != null) {
+			return (int)price;
+		}
+		return 0;
+	}
+
+	@Override
+	public boolean settlement_get(Map map) {
+//		int r = mapper.settlement_regist(map);
+//		int delivery_no = .getNo();
+//		if(r > 0) {
+//			for(int i=0; i<dvo.getOrder_detail_list().size(); i++) {
+//				dvo.getOrder_detail_list().get(i).setDelivery_no(delivery_no);
+//				int success = mapper.update_deliveryNo(dvo.getOrder_detail_list().get(i));
+//				if(success <= 0) return false;
+//			}
+//		}
+		return true;
+	}
+
 }

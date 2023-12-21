@@ -11,7 +11,7 @@
     Category
       <div class = "quick_menu_category">
         <a href="#">회원 정보</a><br>
-        <a href="#">정산 관리</a><br>
+        <a href="/seller/order/settlement.do">정산 관리</a><br>
         <a href="/seller/order/bd_orderlist.do">배송전 주문 확인</a><br>
         <a href="/seller/order/od_orderlist.do">배송중 주문 확인</a><br>
         <a href="/seller/order/ad_orderlist.do">배송 완료 확인</a><br>

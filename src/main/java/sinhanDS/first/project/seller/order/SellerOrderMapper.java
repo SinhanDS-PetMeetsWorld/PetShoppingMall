@@ -32,4 +32,11 @@ public interface SellerOrderMapper {
 	DeliveryVO getDeliveryVO(int no);
 	
 	int cancleOrder_seller(int no);
+	
+	Integer settlement_list(int no);
+	Integer settlement_price(int no);
+	Integer unsettlement_price(int no);
+	
+	List<OrderDetailVO> settlement_search_list(Map map);
+	Integer settlement_search_price(Map map);
 }

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.seller.order.SellerOrderMapper">
+	<sql id="whereSql">
+		WHERE seller_no = #{seller_no} AND purchase_confirmation_date BETWEEN
+		<if test='startDate == "0"'>LAST_DAY(NOW() - interval 3 month)</if><if test='startDate != "0"'> STR_TO_DATE(#{startDate}, '%Y-%m-%d')</if> 
+		AND <if test='endDate == "9999"'>NOW()</if><if test='endDate != "9999"'>STR_TO_DATE(#{endDate}, '%Y-%m-%d')</if> 
+			<if test='settlementType == "yes"'> AND settlement_no IS NOT NULL </if>
+			<if test='settlementType == "no"'> AND settlement_no IS NULL </if>
+		AND purchase_confirmation_date IS NOT NULL;
+	</sql>
 
 	<select id="getOrderNoList_bd" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT DISTINCT(order_no), seller_no FROM order_detail 
@@ -82,5 +90,39 @@
 	<update id="cancleOrder_seller" parameterType="int">
 		UPDATE order_detail SET cancle_status = 2, reason = "판매자 취소" WHERE no = #{no}
 	</update>
+	
+	<select id="settlement_list" parameterType="int" resultType="Integer">
+		SELECT COUNT(no) FROM order_detail 
+		WHERE seller_no = #{no} AND LAST_DAY(NOW() - interval 1 month) >= purchase_confirmation_date
+			AND purchase_confirmation_date IS NOT NULL AND settlement_no IS NULL;
+	</select>
+	
+	<select id="settlement_price" parameterType="int" resultType="Integer">
+		SELECT SUM(product_price - discount) FROM order_detail 
+		WHERE seller_no = #{no} AND LAST_DAY(NOW() - interval 1 month) >= purchase_confirmation_date
+			AND purchase_confirmation_date IS NOT NULL AND settlement_no IS NULL;
+	</select>
+	
+	<select id="unsettlement_price" parameterType="int" resultType="Integer">
+		SELECT SUM(product_price - discount) FROM order_detail 
+		WHERE seller_no = #{no} AND LAST_DAY(NOW() - interval 1 month) >= purchase_confirmation_date
+			AND purchase_confirmation_date IS NULL AND settlement_no IS NULL;
+	</select>
+	
+	<select id="settlement_search_list" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail 
+		<include refid="whereSql"/>
+	</select>
+	
+	<select id="settlement_search_price" parameterType="map" resultType="Integer">
+		SELECT SUM((product_price - discount) * quantity) FROM order_detail 
+		<include refid="whereSql"/>
+	</select>
+	
+	<select id="settlement_get" parameterType="int" resultType="Integer">
+		UPDATE order_detail SET  
+		WHERE seller_no = #{no} AND LAST_DAY(NOW() - interval 1 month) >= purchase_confirmation_date
+			AND purchase_confirmation_date IS NOT NULL AND settlement_no IS NULL;
+	</select>
 	
 </mapper>
