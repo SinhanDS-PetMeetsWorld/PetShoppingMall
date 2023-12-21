@@ -61,7 +61,7 @@ public class RegistProductWithNaverAPI {
         int number = 10;
         try {
         	/* 검색어 */
-            text = URLEncoder.encode("고양이 사료", "UTF-8");
+            text = URLEncoder.encode("캣타워", "UTF-8");
             
             /* 검색 갯수 */
             number = 50;
@@ -91,7 +91,7 @@ public class RegistProductWithNaverAPI {
         	String discount = "0";
         	String description = "";
         	String category1_list = "1";
-        	String category2_list = "0";
+        	String category2_list = "5";
         	
         	String name = (String)obj.get("title");
         	name = name.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
