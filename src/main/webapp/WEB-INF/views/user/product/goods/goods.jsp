@@ -163,6 +163,20 @@
         .board_contents.active {
             display: block;
         }
+        
+        .qna_write_button button{
+        	margin-top:20px;
+        	
+        	width: 150px;
+			height: 30px;
+			border: 1px solid black;
+			background: linear-gradient(to left, #FFDE30, #ffe76b);
+			color: black;
+			font-size: 11px;
+			font-weight: bolder;
+        	
+        }
+        
     </style>
 </head>
 <body>
@@ -274,7 +288,7 @@
 						</div>
 						<div class="board_contents" id = "qna">
 							<div class="qna_write_button">
-								<button type="button" name="go_qnawrite" onclick="goQnawrite_popup()">qna 작성하기</button>
+								<button type="button" name="go_qnawrite" onclick="goQnawrite_popup()">질문 작성하기</button>
 							</div>
 							<div id="qna_container">
 								
