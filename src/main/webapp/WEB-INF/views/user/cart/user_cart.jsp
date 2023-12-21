@@ -112,28 +112,31 @@
 					    
      				</div>
      				<div>
+     					<c:if test="${empty productvolist }"><h2>장바구니에 상품이 존재하지 않습니다.</h2></c:if>
+     					<c:if test="${!empty productvolist }">
+	     					<div>결제 금액</div>
+	     					<div>
+		     					<span>총 주문 가격 : </span>
+		     					<span id="totalprice">0</span>원
+		     					<input type="hidden" id="total_price" name="total_price" value="" >
+	     					</div>
+							<div>
+								<span>할인 금액 : </span>
+								<span id="discountprice">0</span>원
+								<input type="hidden" id="discount_price" name="discount_price" value="" >
+							</div>     					
+								<span>총 배송비 : </span>
+								<span id="deliveryprice">0</span>원
+								<input type="hidden" id="delivery_price" name="delivery_price" value="" >
+							<div>
+								<span>최종 결제액 : </span>
+								<span id="finalprice">0</span>원
+								<input type="hidden" id="final_price" name="final_price" value="" >
+							</div>
+							
+							<input type="submit" value="결제하러 가기" onclick="beforeSubmit()">
      					
-     					<div>결제 금액</div>
-     					<div>
-	     					<span>총 주문 가격 : </span>
-	     					<span id="totalprice">0</span>원
-	     					<input type="hidden" id="total_price" name="total_price" value="" >
-     					</div>
-						<div>
-							<span>할인 금액 : </span>
-							<span id="discountprice">0</span>원
-							<input type="hidden" id="discount_price" name="discount_price" value="" >
-						</div>     					
-							<span>총 배송비 : </span>
-							<span id="deliveryprice">0</span>원
-							<input type="hidden" id="delivery_price" name="delivery_price" value="" >
-						<div>
-							<span>최종 결제액 : </span>
-							<span id="finalprice">0</span>원
-							<input type="hidden" id="final_price" name="final_price" value="" >
-						</div>
-						
-						<input type="submit" value="결제하러 가기" onclick="beforeSubmit()">
+     					</c:if>
      				</div>
      			</div>
      			

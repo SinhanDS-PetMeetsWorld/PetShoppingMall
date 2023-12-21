@@ -35,7 +35,7 @@
 					<tr>
 						<td>${vo.no }</td>
 						<td>${vo.user_no }</td>
-						<td>${vo.payment_type }</td>
+						<td>${paymentVO.type_list[vo.payment_type] }</td>
 						<td>${vo.total_price }</td>
 	        		</tr>
 	        	</c:forEach>

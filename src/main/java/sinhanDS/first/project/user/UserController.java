@@ -246,6 +246,10 @@ public class UserController {
 		return "user/edit/user_payment";
 	}
 	
+	
+	
+	
+	
 	@GetMapping("/add_payment_form.do")
 	public String addpayment(Model model) {
 		PaymentVO vo = new PaymentVO();
@@ -306,6 +310,11 @@ public class UserController {
 		model.addAttribute("vo", vo);
 		return "user/edit/user_modify_payment_form";
 	}
+	
+	
+	
+	
+	
 	
 	@GetMapping("/delete_payment.do")
 	public String deletepayment(Model model, PaymentVO payvo) {

@@ -23,7 +23,7 @@
 			<div class="contentsright">
 				<div>
 					<h1>구매자 ${userno }의 Pay 페이지 입니다.</h1>
-					<form method="post" action="buy.do">
+					<form method="post" action="buy.do" onsubmit='return checkAddress();'>
 						<input type="hidden" class="user_no" name="user_no" value="${userno }">
 						<h2>주소 선택</h2>
 						<ol>
@@ -59,9 +59,9 @@
 								<li>
 									<input type="radio" class="payment_selector" name="payment_selector" value=${status.index }  
 										<c:if test="${status.index == 0}">checked</c:if>>
-									타입: ${vo.type }<br>
-									회사: ${vo.company }<br>
-									계좌 : ${vo.account }<br>
+									타입: ${paymentVO.type_list[vo.type] } <br>
+									${paymentVO.company_list[vo.type][vo.company]}<br>
+									${paymentVO.account_list[vo.type] } : ${vo.account }<br>
 									<br><hr>
 								</li>
 							</c:forEach>
@@ -168,6 +168,22 @@
 			company.value = payment[this.value][1];
 			account.value = payment[this.value][2];
     	}
+    </script>
+    
+    <script>
+    	/* 주소 없으면 구매하지 못하도록 */
+    	function checkAddress(){
+    		if($('.address_selector').length == 0){
+        		alert("주소가 존재하지 않습니다.");
+        		return false;
+        	}
+    		if($('.payment_selector').length == 0){
+        		alert("결제 수단이 존재하지 않습니다.");
+        		return false;
+        	}
+    		return true;
+    	}
+    	
     </script>
 </body>
 </html>

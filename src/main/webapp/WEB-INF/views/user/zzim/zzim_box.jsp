@@ -138,7 +138,7 @@ height : 100px;
 							
 					 </div>  
 				   </c:forEach>			
-				
+				<c:if test="${empty save_list2[zzim_quant.index] }"><br><h2>찜 박스에 상품이 존재하지 않습니다.</h2></c:if>
 				<h1> 병천이 부탁 " 페이징 처리 5개씩 요청 "</h1>
 			</div>
         </div>

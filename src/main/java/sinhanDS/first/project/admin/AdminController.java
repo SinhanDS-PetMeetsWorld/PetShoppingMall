@@ -23,6 +23,7 @@ import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.order.OrderService;
+import sinhanDS.first.project.user.vo.PaymentVO;
 import sinhanDS.first.project.user.vo.UserVO;
 
 
@@ -186,6 +187,7 @@ public class AdminController {
 		model.addAttribute("list", vo_list);
 		model.addAttribute("paging", map);
 		model.addAttribute("svo", svo);
+		model.addAttribute("paymentVO", new PaymentVO());
 		return "/admin/page/orderMainList";
 	}
 	

@@ -30,6 +30,7 @@ import sinhanDS.first.project.seller.product.SellerProductService;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.UserService;
 import sinhanDS.first.project.user.vo.CartVO;
+import sinhanDS.first.project.user.vo.PaymentVO;
 import sinhanDS.first.project.user.vo.UserVO;
 
 
@@ -98,6 +99,8 @@ public class OrderController {
 		log.debug("cart_no: " + Arrays.toString(cart_no));
 		log.debug("option_cart_no: " + Arrays.toString(option_cart_no));
 		log.debug("option_no: " + Arrays.toString(option_no));
+		
+		model.addAttribute("paymentVO", new PaymentVO());
 		return "user/order/pay";
 	}
 	

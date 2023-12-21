@@ -33,6 +33,8 @@
 			<div class="contentsright">
 				<div>
 					<h1>구매 이력</h1>
+					<c:if test="${empty orderList }"><br><h2>구매이력이 존재하지 않습니다.</h2></c:if>
+
 					<c:forEach items="${orderList }" var="vo">
 						<div>
 							<div>
@@ -55,6 +57,7 @@
 			</div>
 			
 			
+			
 			<div>
 				<ul class='paging'>
 					<c:if test="${paging.prev }">
@@ -73,33 +76,23 @@
                     </c:if>
 				</ul> 
 			</div>
+	        <c:if test="${!empty orderList }">
+		        <div class="bbsSearch">
+		            <form method="get" name="searchForm" id="searchForm" action="list.do">
+			            <span class="srchSelect">
+							<select name="searchType">
+								<option value="all">전체</option>
+						        <option value="name" <c:if test="${productSearchVO.searchType == 'name'}">selected</c:if>>상품명</option>
+							</select>
+						</span>
+				        <span class="searchWord">
+				            <input type="text" id="sval" name="searchWord" value="${productSearchVO.searchWord}"  title="검색어 입력">
+		                    <input type="submit" value="검색">
+						</span>
+		        	</form>
+		        </div>		
+			</c:if>
         </div>
-        
-        <div class="bbsSearch">
-            <form method="get" name="searchForm" id="searchForm" action="list.do">
-            	<%--
-            	<span class="sortSelect">
-	                <select name="sorttype">
-			            <option value="regist" <c:if test="${productSearchVO.sorttype == 'regist'}">selected</c:if>>등록일 순</option>
-						<option value="maxprice" <c:if test="${productSearchVO.sorttype == 'maxprice'}">selected</c:if>>최고 가격 순</option>
-				        <option value="minprice" <c:if test="${productSearchVO.sorttype == 'minprice'}">selected</c:if>>최저 가격 순</option>
-		                <option value="maxstock" <c:if test="${productSearchVO.sorttype == 'maxstock'}">selected</c:if>>재고 많은 순</option>
-                        <option value="minstock" <c:if test="${productSearchVO.sorttype == 'minstock'}">selected</c:if>>재고 적은 순</option>
-					</select>
-				</span>
-				 --%>
-	            <span class="srchSelect">
-					<select name="searchType">
-						<option value="all">전체</option>
-				        <option value="name" <c:if test="${productSearchVO.searchType == 'name'}">selected</c:if>>상품명</option>
-					</select>
-				</span>
-		        <span class="searchWord">
-		            <input type="text" id="sval" name="searchWord" value="${productSearchVO.searchWord}"  title="검색어 입력">
-                    <input type="submit" value="검색">
-				</span>
-        	</form>
-        </div>		
         <div class="footer">
 			<div class="footer-color"></div>
         </div>

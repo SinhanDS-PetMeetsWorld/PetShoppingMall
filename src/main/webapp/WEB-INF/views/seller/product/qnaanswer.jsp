@@ -24,7 +24,6 @@
             </div>
 			<div class="contentsright">
 				<div>	
-					판매자 번호 : ${sellerLoginInfo.no } <br>
 					<c:forEach items="${qna_array}" varStatus = "qna_quant">
 						<div>	
 							<c:if test = "${not empty qna_array[qna_quant.index][0]}">
