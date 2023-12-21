@@ -1,5 +1,6 @@
 package sinhanDS.first.project.admin;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -158,8 +159,8 @@ public class AdminController {
 	}
 	@GetMapping("orderMainList.do")
 	public String orderMainList(Model model, ProductSearchVO svo) {
-//		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
-		svo.setNumberOfProductInPage(1);
+		svo.setNumberOfProductInPage(svo.getNumberInPage_UserVO());
+		
 		//개수 구하기
 		int count = service.getNumberOfOrderMain(svo);
 		int totalPage = count / svo.getNumberOfProductInPage();
@@ -254,5 +255,25 @@ public class AdminController {
 		model.addAttribute("paging", map);
 		model.addAttribute("svo", svo);
 		return "/admin/page/cancleAndRefoundList";
+	}
+	
+	@GetMapping("needConfirmationList.do")
+	public String needConfirmationList(Model model) {
+		//리스트 구하기 
+		List<OrderDetailVO> vo_list = service.getNeedConfirmationList();
+		log.debug("list: " + vo_list);
+
+		//개수 구하기
+		int count = vo_list.size();
+		
+		model.addAttribute("list", vo_list);
+		model.addAttribute("count", count);
+		return "/admin/page/needConfirmationList";
+	}
+	@PostMapping("confirmOrderDetail.do")
+	public String confirmOrderDetail(@RequestParam int[] no) {
+		log.debug("no: " + Arrays.toString(no));
+		service.confirmOrderDetail(no);
+		return "redirect:/admin/needConfirmationList.do";
 	}
 }

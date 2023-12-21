@@ -13,6 +13,8 @@
 	<button class="admin_menu_button" data-href="/admin/orderMainList.do">주문 목록 조회</button>
 	<button class="admin_menu_button" data-href="/admin/orderDetailList.do">주문 상세 목록 조회</button>
 	<button class="admin_menu_button" data-href="/admin/cancleAndRefoundList.do">취소/환불 목록 조회</button>
+	<br>
+	<button class="admin_menu_button" data-href="/admin/needConfirmationList.do">구매 확정될 목록 조회</button>
 </body>
 
 <script>

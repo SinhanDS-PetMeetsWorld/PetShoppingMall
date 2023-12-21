@@ -1,8 +1,89 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.admin.AdminMapper">
-	<sql id="productWhere">
+	<sql id="sorttype_null">
+		<if test="sorttype == null">
+			order by no asc
+		</if>
+	</sql>
+	<sql id="sorttype_maxprice">
+		<if test="sorttype == 'maxprice'">
+			order by price desc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_minprice">
+		<if test="sorttype == 'minprice'">
+			order by price asc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_maxrating">
+		<if test="sorttype == 'maxrating'">
+			order by rating desc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_minrating">
+		<if test="sorttype == 'minrating'">
+			order by rating asc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_review_cnt">
+		<if test="sorttype == 'review_cnt'">
+			order by review_cnt desc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_max_totalprice">
+		<if test="sorttype == 'max_totalprice'">
+			order by total_price desc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_min_totalprice">
+		<if test="sorttype == 'min_totalprice'">
+			order by total_price asc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_max_productprice">
+		<if test="sorttype == 'maxprice'">
+			order by product_price desc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_min_productprice">
+		<if test="sorttype == 'minprice'">
+			order by product_price asc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_max_discount">
+		<if test="sorttype == 'maxdiscount'">
+			order by discount desc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_min_discount">
+		<if test="sorttype == 'mindiscount'">
+			order by discount asc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_max_paymentprice">
+		<if test="sorttype == 'maxpaymentprice'">
+			order by ((product_price - discount) * quantity) desc, no asc
+		</if>
+	</sql>
+	<sql id="sorttype_min_paymentprice">
+		<if test="sorttype == 'minpaymentprice'">
+			order by ((product_price - discount) * quantity) asc, no asc
+		</if>
+	</sql>
+	
+	
+	<sql id="searchType_not_all">
 		<where>
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType != 'all'">
+					${searchType} LIKE '%${searchWord}%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="productWhere">
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
 					seller_no LIKE '%${searchWord}%' 
@@ -10,89 +91,129 @@
 					OR company LIKE '%${searchWord}%' 
 					OR brand LIKE '%${searchWord}%'
 				</if>
-				<if test="searchType != 'all'">
-					${searchType} LIKE '%${searchWord}%'
-				</if>
 			</if>
-		</where>
-	</sql>
-	<sql id="productOrder">
-		<if test="sorttype == null">
-			order by no
-		</if>
-		<if test="sorttype == 'maxprice'">
-			order by price desc, no asc
-		</if>
-		<if test="sorttype == 'minprice'">
-			order by price asc, no asc
-		</if>
-		<if test="sorttype == 'maxrating'">
-			order by rating desc, no asc
-		</if>
-		<if test="sorttype == 'minrating'">
-			order by rating asc, no asc
-		</if>
-		<if test="sorttype == 'review_cnt'">
-			order by review_cnt desc, no asc
-		</if>
 	</sql>
 	
 	<sql id="orderMainWhere">
-		<where>
 			<if test="searchWord != null and searchWord != ''">
 				<if test="searchType == 'all'">
 					user_no LIKE '%${searchWord}%' 
 				</if>
+			</if>
+	</sql>
+	
+	<sql id="orderDetailWhere">
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					user_no LIKE '%${searchWord}%' 
+					OR order_no LIKE '%${searchWord}%' 
+					OR user_no LIKE '%${searchWord}%' 
+					OR seller_no LIKE '%${searchWord}%'
+					OR company LIKE '%${searchWord}%'
+					OR brand LIKE '%${searchWord}%'
+				</if>
+			</if>
+	</sql>
+	<sql id="cancleAndRefoundWhere">
+			<if test="searchWord != null and searchWord != ''">
+				<if test="searchType == 'all'">
+					user_no LIKE '%${searchWord}%' 
+					OR seller_no LIKE '%${searchWord}%' 
+					OR company LIKE '%${searchWord}%' 
+					OR brand LIKE '%${searchWord}%'
+				</if>
+			</if>
+	</sql>
+	
+	
+	<select id="getUserList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.user.vo.UserVO">
+		SELECT * FROM user 
+		WHERE id != 'admin'
+		
+		<include refid="sorttype_null"/>
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	
+	<select id="getSellerList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.seller.vo.SellerVO">
+		SELECT * FROM seller 
+		WHERE id != 'admin'
+		
+		<include refid="sorttype_null"/>
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	
+	<select id="getProductList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * FROM product
+		<include refid="searchType_not_all"/>
+		<include refid="productWhere"/>
+		
+		
+		<include refid="sorttype_null"/>
+		<include refid="sorttype_maxprice"/>
+		<include refid="sorttype_minprice"/>
+		<include refid="sorttype_maxrating"/>
+		<include refid="sorttype_minrating"/>
+		<include refid="sorttype_review_cnt"/>
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	
+	<select id="getOrderMainList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
+		SELECT * FROM order_main
+		<include refid="searchType_not_all"/>
+		<include refid="orderMainWhere"/>
+		
+		
+		<include refid="sorttype_null"/>
+		<include refid="sorttype_max_totalprice"/>
+		<include refid="sorttype_min_totalprice"/>
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	
+	<select id="getOrderDetailList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail
+		<include refid="searchType_not_all"/>
+		<include refid="orderDetailWhere"/>
+		
+		
+		<include refid="sorttype_null"/>
+		<include refid="sorttype_max_productprice"/>
+		<include refid="sorttype_min_productprice"/>
+		<include refid="sorttype_max_discount"/>
+		<include refid="sorttype_min_discount"/>
+		<include refid="sorttype_max_paymentprice"/>
+		<include refid="sorttype_min_paymentprice"/>
+
+
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	
+	
+	<select id="getCancleAndRefound" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * FROM order_detail
+		WHERE (cancle_status != 0 or refound_status != 0) and( 
 				<if test="searchType != 'all'">
 					${searchType} LIKE '%${searchWord}%'
 				</if>
-			</if>
-		</where>
-	</sql>
-	<sql id="orderMainOrder">
-		<if test="sorttype == null">
-			order by no
-		</if>
-		<if test="sorttype == 'maxprice'">
-			order by price desc, no asc
-		</if>
-		<if test="sorttype == 'minprice'">
-			order by price asc, no asc
-		</if>
-	</sql>
+		<include refid="cancleAndRefoundWhere"/>
+		)
+		
+		<include refid="sorttype_null"/>
+		<include refid="sorttype_max_productprice"/>
+		<include refid="sorttype_min_productprice"/>
+		<include refid="sorttype_max_paymentprice"/>
+		<include refid="sorttype_min_paymentprice"/>
+		LIMIT #{startIdx}, #{numberOfProductInPage};
+	</select>
+	<select id="getNeedConfirmationList" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT * 
+		FROM order_detail 
+		WHERE (datediff(sysdate(), order_date) > 14) 
+			AND (cancle_status=0 AND refound_status=0 AND purchase_confirmation_date IS NULL);
+	</select>
 	
-	<select id="getUserList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.user.vo.UserVO">
-		SELECT * FROM user WHERE id != 'admin'
-		ORDER BY no 
-		LIMIT #{startIdx}, #{numberOfProductInPage};
-	</select>
-	<select id="getSellerList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.seller.vo.SellerVO">
-		SELECT * FROM seller WHERE id != 'admin'
-		ORDER BY no
-		LIMIT #{startIdx}, #{numberOfProductInPage};
-	</select>
-	<select id="getProductList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
-		SELECT * FROM product
-		<include refid="productWhere"/>
-		<include refid="productOrder"/>
-		LIMIT #{startIdx}, #{numberOfProductInPage};
-	</select>
-	<select id="getOrderMainList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderMainVO">
-		SELECT * FROM order_main
-		ORDER BY no
-		LIMIT #{startIdx}, #{numberOfProductInPage};
-	</select>
-	<select id="getOrderDetailList" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
-		SELECT * FROM order_detail
-		ORDER BY no
-		LIMIT #{startIdx}, #{numberOfProductInPage};
-	</select>
-	<select id="getCancleAndRefound" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
-		SELECT * FROM order_detail
-		WHERE cancle_status != 0 or refound_status != 0
-		ORDER BY no
-		LIMIT #{startIdx}, #{numberOfProductInPage};
-	</select>
+	
+	
+	
 	
 	<select id="getNumberOfUser" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM user WHERE id != 'admin'
@@ -102,16 +223,31 @@
 	</select>
 	<select id="getNumberOfProduct" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM product
+		<include refid="searchType_not_all"/>
 		<include refid="productWhere"/>
 	</select>
 	<select id="getNumberOfOrderMain" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM order_main
+		<include refid="searchType_not_all"/>
+		<include refid="orderMainWhere"/>
 	</select>
 	<select id="getNumberOfOrderDetail" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM order_detail
+		<include refid="searchType_not_all"/>
+		<include refid="orderDetailWhere"/>
 	</select>
 	<select id="getNumberOfCancleAndRefound" resultType="int" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT count(*) FROM order_detail
-		WHERE cancle_status != 0 or refound_status != 0
+		WHERE (cancle_status != 0 or refound_status != 0) and( 
+				<if test="searchType != 'all'">
+					${searchType} LIKE '%${searchWord}%'
+				</if>
+		<include refid="cancleAndRefoundWhere"/>
+		)
 	</select>
+	
+	<update id="confirmOrderDetail" parameterType="int">
+		UPDATE order_detail SET purchase_confirmation_date=SYSDATE() WHERE no=#{no}
+	</update>
+	
 </mapper>
