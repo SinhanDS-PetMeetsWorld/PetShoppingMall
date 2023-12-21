@@ -13,22 +13,146 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/resources/css/common/template.css">
 <style>
-        .board_area {
-            max-width: 600px;
-            margin: 0 auto;
-        }
+		.contentsright{
+			width: 100%;
+			height: 1000px;
+		}
+		
+		.left_side{
+			width: 50%;
+			height: 650px;
+			float:left;
+		}
+		
+		.right_side{
+			width:50%;
+			height:650px;
+			float:right;
+			display:flex;
+			justify-content: center;
+			align-items:center;	
+		}
+		
+		
+		#goods_category{
+			margin: 50px 0 50px 0;
+		}
+		
+		.goods-name{
+			margin-bottom:30px;
+		}
+		.goods-score{
+			font-size:20px;
+			margin-bottom:10px;
+		}
+		.goods-score img{
+			width:19px;
+			height:19px;
+		}
+		.goods-price{
+			margin-bottom:10px;
+			font-weight: bold;
+		}
+		.goods-made{
+			margin-bottom:10px;
+		}
+		.goods-explain{
+			margin-bottom:20px;
+		}
+		.goods-option{
+			margin-bottom:20px;
+		}
+		.quantity{
+			width:110px;
+			margin-bottom:30px;
+			margin-right: 10px;
+		}
+		.push_cart{
+			width: 150px;
+			height: 50px;
+			border: none;
+			background: grey;
+			color: white;
+			font-size: 17px;
+			font-weight: bolder;
+		}
+		.now_get{
+			margin-left: 10px;
+			width: 150px;
+			height: 50px;
+			border: none;
+			background: linear-gradient(to left, #FFDE30, #ffe76b);
+			color: black;
+			font-size: 17px;
+			font-weight: bolder;
+		}
+		
+		
+		
+		.goods_review_QNA{
+			width:100%;
+			height:300px;
+			clear:both;
+		}
+		
+		
+		
+
 
         .board_title {
-            cursor: pointer;
             padding: 10px;
             background-color: #f0f0f0;
             display: inline-block;
             margin-right: 10px;
+            display: inline-block;
+			outline: 0;
+			cursor: pointer;
+			border-radius: 7px;
+			border:1px solid grey;
+			font-size: 18px;
+			height: 40px;
+			padding: 0 11px;
+			text-align: center;
+			width: 20%;
+			min-width: 200px;
+			font-weight: 500;
+			color: #0F1111;
+			margin-right: -4px;
+			margin-top: -1px;
+			line-height:40px;
+			margin: 0 10px 0 0;
+			:hover{
+			     background: #F7CA00;
+			     border-color: #F2C200;
+			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+ 			}
+ 			
         }
 
         .board_title.on {
             background-color: #ddd;
-        }
+            display: inline-block;
+		 	outline: 0;
+			cursor: pointer;
+			border-radius: 7px;
+			border:2px solid grey;
+			font-size: 18px;
+			height: 40px;
+			padding: 0 11px;
+			text-align: center;
+			width: 20%;
+			min-width: 200px;
+			font-weight: 500;
+			color: #0F1111;
+			margin-right: -4px;
+			line-height:40px;
+			margin: 0 10px 0 0;
+			:hover{
+			    background: #F7CA00;
+			    border-color: #F2C200;
+			    box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+	 		}
+	    }
 
         .board_contents {
             display: none;
@@ -40,6 +164,8 @@
     </style>
 </head>
 <body>
+	
+
 	<div class="wrap">
 		<div class="header">
 			<%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -47,66 +173,50 @@
 
 		<div class="contents">
 			<div class="contentsright">
-				<div>
-					<div id="goods_category" style="width: 720px; height: 100px; border: 1px solid black">
+				<div class="left_side">
+					<div id="goods_category">
 						<c:forEach var="item" items="${product_more_category}">
 							${catekor.category_name[item.category1]} > 
 							${catekor.category[item.category1][item.category2] } <br>
 						</c:forEach>
 					</div>
-					유저 ID : ${userLoginInfo.id} <br>
-					유저 번호 : ${userLoginInfo.no } 
 					<c:forEach var="item" items="${product_more}">
-						
-							<div class="goods-photo">
-								<c:if test="${empty item.image_url }">
-									<img src="/resources/img/product/no_image.jpg" width="100" height="100">
-								</c:if>
-								<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
-									<img src="${item.image_url }">
-								</c:if>
-								<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
-									<img src="/resources/img/product/registed_img/${item.image_url }">
-								</c:if>
-							</div>
+							
 							<div class="goods-details">
 								
 								<div id="goods_menu">
 								
-									<div class ="goods_no" style="width: 720px; height: 100px; border: 1px solid black;">
-										제품번호: ${product_no} 
-									</div>
-									
-									<div class="goods-name"
-										style="width: 720px; height: 100px; border: 1px solid black;">
+									<div class="goods-name">
 										<h2>${item.name}</h2>
 									</div>
 								
-									<div class="goods-price"
-										style="width: 720px; height: 100px; border: 1px solid black;">
-										가격 : ${item.price}
+									<div class="goods-score">
+										<img src="/resources/img/product/star.png"> ${item.rating} / 5.0  	
+									</div>
+								
+									<div class="goods-price">
+										가격 : ${item.price} 원
 									</div>
 									
-									<div class="goods-made"
-										style="width: 720px; height: 100px; border: 1px solid black;">
+									<div class="goods-made">
 										제조사: ${item.company} <br> 
 										브랜드: ${item.brand } <br>
 										재 고: ${item.stock } <br>
 						
 									</div>
 									
-									<div class="goods-explain"
-										style="width: 720px; height: 100px; border: 1px solid black;">
-										설명: ${item.description} <br>
+									<div class="goods-explain">
+										설명: <c:if test="${item.description eq ''}"> 없음 </c:if>${item.description} <br>
 									
 									</div>	
-								</div>		
+								</div>
+							</div>	
 						</c:forEach>									
-						<div class="goods-option" style="width: 720px; height: 100px; border: 1px solid black;"> 
+						<div class="goods-option"> 
 							<form name="option_form" id="option_form">
 							<c:forEach var="ovo" items="${product_more_option }" varStatus="status">
 								<c:if test="${(status.index == 0) || (product_more_option[status.index - 1].title != ovo.title)}">
-									${ovo.title } <select name="option_no" id="option_no">
+									${ovo.title } : <select name="option_no" id="option_no">
 								</c:if>
 										<option value="${ovo.no}"> ${ovo.content } :  ${ovo.price }원</option>
 								<c:if test="${(product_more_option[status.index + 1].title != ovo.title)}">
@@ -117,12 +227,8 @@
 							<input type="hidden" name="product_no" value="${product_no}">
 							</form>
 						</div>
-					
-							수량 <input type="number" name="choose_number" value=0>
-							
-							<input type="button" style="background-color: grey;"
-								value="장바구니 담기" onclick="addcart()"> <input type="button"
-								style="background-color: yellow" value="바로 구매">
+						<div>
+							수량 : <input class="quantity" type="number" name="choose_number" value=0>
 								
 								<c:if test ="${empty zzim_check}">	
 									찜: <img id="zzim_Off" onclick="zzim();" src="${pageContext.request.contextPath}/resources/img/product/empty_heart.png"/>
@@ -130,9 +236,33 @@
 								<c:if test ="${!empty zzim_check}">	
 									찜: <img id="zzim_On" onclick="zzim();" src="${pageContext.request.contextPath}/resources/img/product/fill_heart.png"/>
 								</c:if>
-											
-								<br>	
-
+						</div>
+						<div>
+							<input type="button" class="push_cart" style="background-color: grey;" value="장바구니 담기" onclick="addcart()"> 
+							<input type="button" class="now_get" style="background-color: yellow" value="바로 구매">
+						</div>	
+					</div>
+					
+					<div class="right_side">
+					<c:forEach var="item" items="${product_more}">
+						<div class="goods-photo">
+							<c:if test="${empty item.image_url }">
+								<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+							</c:if>
+							<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
+								<img src="${item.image_url }">
+							</c:if>
+							<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
+								<img src="/resources/img/product/registed_img/${item.image_url }">
+							</c:if>
+						</div>
+					</c:forEach>
+					</div>
+					
+					
+					
+					
+					
 					<div class = "goods_review_QNA">
 						<div class="board_title on" onclick="showBoard('review')" data-board="review">리뷰</div>
 						<div class="board_title" onclick="showBoard('qna')" data-board="qna">Q&A</div>

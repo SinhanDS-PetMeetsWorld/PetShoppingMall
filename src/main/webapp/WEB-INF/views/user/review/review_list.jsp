@@ -121,6 +121,9 @@ font-size : 30px;
 							<c:if test="${review_list2[review_quant.index][0] != 'null' && !(fn:substring(review_list2[review_quant.index][0], 0, 1) == 'h') }">
 								<img src="/resources/img/product/review_img/${review_list2[review_quant.index][0] }" width="100" height="100">
 							</c:if>
+							<c:if test="${review_list2[review_quant.index][0] == 'null'}">
+								<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+							</c:if>
 						</div>	
 							<c:if test="${!empty review_list2[review_quant.index][1] }">
 							<input type="hidden" value= "${review_list2[review_quant.index][1] }">

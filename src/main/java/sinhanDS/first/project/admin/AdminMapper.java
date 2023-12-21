@@ -18,6 +18,7 @@ public interface AdminMapper {
 	public List<OrderMainVO> getOrderMainList(ProductSearchVO svo);
 	public List<OrderDetailVO> getOrderDetailList(ProductSearchVO svo);
 	public List<OrderDetailVO> getCancleAndRefound(ProductSearchVO svo);
+	public List<OrderDetailVO> getNeedConfirmationList();
 	
 	public int getNumberOfUser(ProductSearchVO svo);
 	public int getNumberOfSeller(ProductSearchVO svo);
@@ -25,4 +26,6 @@ public interface AdminMapper {
 	public int getNumberOfOrderMain(ProductSearchVO svo);
 	public int getNumberOfOrderDetail(ProductSearchVO svo);
 	public int getNumberOfCancleAndRefound(ProductSearchVO svo);
+	
+	public void confirmOrderDetail(int no);
 }

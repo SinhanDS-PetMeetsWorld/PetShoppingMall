@@ -60,16 +60,16 @@
 				</ul> 
 		   	</div>
 			<div class="bbsSearch">
-				<form method="get" name="searchForm" id="searchForm" action="/admin/productList.do">
+				<form method="get" name="searchForm" id="searchForm" action="/admin/orderMainList.do">
 	            	<span class="sortSelect">
 						<select name="sorttype">
-							<option value="maxprice" <c:if test="${productSearchVO.sorttype == 'maxprice'}">selected</c:if>>높은 가격 순</option>
-							<option value="minprice" <c:if test="${productSearchVO.sorttype == 'minprice'}">selected</c:if>>낮은 가격 순</option>
+							<option value="max_totalprice" <c:if test="${productSearchVO.sorttype == 'max_totalprice'}">selected</c:if>>높은 가격 순</option>
+							<option value="min_totalprice" <c:if test="${productSearchVO.sorttype == 'min_totalprice'}">selected</c:if>>낮은 가격 순</option>
 						</select>	
 	            	</span>
 					<span class="srchSelect">
 						<select name="searchType">
-							<option value="all">전체</option>
+							<!-- <option value="all">전체</option> -->
 							<option value="user_no" <c:if test="${productSearchVO.searchType == 'name'}">selected</c:if>>구매자 번호</option>
 						</select>
 					</span>
@@ -88,7 +88,7 @@
     </div>
 <script>
 	$('.pageButton').on('click', function(){
-		location.href="/admin/orderMainList.do?page=" + $(this).data('page');
+		location.href="/admin/orderMainList.do?page=" + $(this).data('page') + "&sorttype=${productSearchVO.sorttype}&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}";
 	})
 </script>
 </body>
