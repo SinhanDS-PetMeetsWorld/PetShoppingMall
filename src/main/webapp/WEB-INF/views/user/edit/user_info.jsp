@@ -80,7 +80,7 @@
 .check_ad{
 height:20px;
 width:1000px;
-text-align:center;
+text-align:left;
 
 }
 
@@ -187,14 +187,9 @@ text-align:center;
 						        <span>이름</span>
 						        </div>
 						        
-						        
 						       	<div class = "info_tag">
 						       	<input class ="aaa" type="text" name="name" placeholder="홍길동" value="${vo.name }">
 						       	</div>
-						        
-						        <div class = "info_tag">
-						        
-						        </div>
 						     
 					        </div> 
 					        
@@ -204,7 +199,6 @@ text-align:center;
 					        	<div class = "info_tag">
 					        	<span>아이디</span>
 						        <!-- <input type="text" name="id" placeholder="hong" disabled>  -->
-					        	
 					        	</div>
 					        	${vo.id }
 					        </div>
