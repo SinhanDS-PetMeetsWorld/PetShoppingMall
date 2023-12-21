@@ -47,6 +47,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public List<OrderDetailVO> getNeedConfirmationList(){
+		return mapper.getNeedConfirmationList();
+	}
+	
+	
+	
+	@Override
 	public int getNumberOfUser(ProductSearchVO svo) {
 		return mapper.getNumberOfUser(svo);
 	}
@@ -74,5 +81,14 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int getNumberOfCancleAndRefound(ProductSearchVO svo) {
 		return mapper.getNumberOfCancleAndRefound(svo);
+	}
+	
+	
+	
+	@Override
+	public void confirmOrderDetail(int[] no) {
+		for(int i = 0; i < no.length; i++) {
+			mapper.confirmOrderDetail(no[i]);
+		}
 	}
 }
