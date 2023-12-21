@@ -37,7 +37,7 @@ public class ProductSearchVO {
 	
 	/* 한 페이지당 표기할 수 있는 품목의 갯수를 설정할 수 있습니다. */
 	private int numberInPage_search = 15;
-	private int numberInPage_review = 3;
+	private int numberInPage_review = 4;
 	private int numberInPage_qna = 5;
 	
 	/* 관리자 페이지에서 애들 볼 떄 */

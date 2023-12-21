@@ -133,6 +133,7 @@ public class MvcConfig implements WebMvcConfigurer{
 						.excludePathPatterns("/user/login.do")
 						.excludePathPatterns("/user/idCheck.do")
 						.excludePathPatterns("/user/emailCheck.do")
+						.excludePathPatterns("/user/logout.do")
 						.excludePathPatterns("/user/regist.do");
 		
 		registry.addInterceptor(sellerLoginIntercepton())
@@ -141,6 +142,7 @@ public class MvcConfig implements WebMvcConfigurer{
 						.excludePathPatterns("/seller/join.do")
 						.excludePathPatterns("/seller/idCheck.do")
 						.excludePathPatterns("/seller/emailCheck.do")
+						.excludePathPatterns("/seller/logout.do")
 						.excludePathPatterns("/seller/regist.do");
 		
 		registry.addInterceptor(categoryInterceptor())
