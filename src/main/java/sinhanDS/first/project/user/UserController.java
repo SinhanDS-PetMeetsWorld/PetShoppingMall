@@ -463,8 +463,8 @@ public class UserController {
 			List<OrderDetailVO> possible_write_review = service.possible_write_review(user_no);
 		    System.out.println("오더 디테일" + possible_write_review); 
 		    
-		    List<ReviewVO> review_list = service.review_list(user_no);
-			System.out.println("리뷰 리스트 " +  review_list);	
+		   // List<ReviewVO> review_list = service.review_list(user_no);
+			//System.out.println("리뷰 리스트 " +  review_list);	
 			
 			List<String> product_image_list = service.product_image_list(possible_write_review);
 			System.out.println("image_list: " + product_image_list);
@@ -479,17 +479,11 @@ public class UserController {
 				List<String> possible_write_review1 = new ArrayList<String>();
 					
 					possible_write_review1.add(String.valueOf(product_image_list.get(i))); // 상품 이미지 0 
-					
-					for(int j = 0; j < review_list.size(); j++ ) {
-						if(possible_write_review.get(i).getOrder_no() != review_list.get(j).getOrder_no()) {
-							possible_write_review1.add(String.valueOf(possible_write_review.get(i).getNo())); // 주문번호 1
-							possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_name())); // 상품명 2
-							possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_price())); // 상품 가격 3 
-							possible_write_review1.add(String.valueOf(possible_write_review.get(i).getPurchase_confirmation_date())); // 구매 확정 일자 4
-							possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_no())); // 상품 번호 5 
-						}
-						
-					}
+					possible_write_review1.add(String.valueOf(possible_write_review.get(i).getNo())); // 주문번호 1
+					possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_name())); // 상품명 2
+					possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_price())); // 상품 가격 3 
+					possible_write_review1.add(String.valueOf(possible_write_review.get(i).getPurchase_confirmation_date())); // 구매 확정 일자 4
+					possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_no())); // 상품 번호 5 
 					possible_write_review2.add(possible_write_review1);
 					
 				}

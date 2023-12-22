@@ -50,8 +50,7 @@ hegiht : 100px;
  
 .goods_name_container{
 height : 20px;
-width : 400px;
-white-space: nowrap;
+width : 700px;
 }
 
 .goods_name {
@@ -73,14 +72,13 @@ overflow:hidden;
   
   
 .goods_price_container{
-width : 450px;
+width : 200px;
 height : 80px;
 }
 
 .price {
     float: left;
-    margin-top: 20px;
-    margin-left : 200px;
+    margin-top: 5px;
     font-size: 25px;
 }
 
@@ -104,9 +102,7 @@ width:200px;
 height:80px;
 
 }
-.buy_date{
-text-align:center;
-}
+
 
 a:visited {
     color: purple; 
@@ -136,7 +132,7 @@ a:active {
 				<c:forEach items="${possible_write_review2}" varStatus = "possible_write_review" >
 					<div>
 						<c:if test="${!empty possible_write_review2[possible_write_review.index] }">
-							<div class = "review_container">
+							<div class = "review_container" data-no="${possible_write_review2[possible_write_review.index][1]}">
 								<div class="goods_image">
 									<c:if test="${possible_write_review2[possible_write_review.index][0] }">
 										<img src="/resources/img/product/no_image.jpg" width="100" height="100">
@@ -155,6 +151,12 @@ a:active {
 										<h4><a href="/user/product/goods.do?no=${possible_write_review2[possible_write_review.index][5]}" > ${possible_write_review2[possible_write_review.index][2]}</a></h4>
 										</c:if>
 									</div>
+									<br>
+									<div class = "buy_date">	
+										<c:if test="${!empty possible_write_review2[possible_write_review.index][4] }">
+											구매일자:	${possible_write_review2[possible_write_review.index][4]} <br>
+										</c:if>
+									</div>
 
 								</div>	
 								
@@ -167,30 +169,25 @@ a:active {
 								</div>			
 
 								
-									<div class= "review_info">
-										
-												<c:if test="${!empty possible_write_review2[possible_write_review.index][5] }">
-												<input type = "hidden" value = "${possible_write_review2[possible_write_review.index][5]}">
-												</c:if>
-												
-													
-												<c:if test="${!empty possible_write_review2[possible_write_review.index][1] }">
-												<input type = "hidden" value ="${possible_write_review2[possible_write_review.index][1]}">
-												</c:if>
+								<div class= "review_info">
 									
-									</div>
+									<c:if test="${!empty possible_write_review2[possible_write_review.index][5] }">
+									<input type = "hidden" value = "${possible_write_review2[possible_write_review.index][5]}">
+									</c:if>
+									
+										
+									<c:if test="${!empty possible_write_review2[possible_write_review.index][1] }">
+									<input type = "hidden" value ="${possible_write_review2[possible_write_review.index][1]}">
+									</c:if>
+						
+								</div>
 							
 
 													
 								<div class = "button">	
-									<div class = "buy_date">	
-										<c:if test="${!empty possible_write_review2[possible_write_review.index][4] }">
-											구매일자:	${possible_write_review2[possible_write_review.index][4]} <br>
-										</c:if>
-									</div>
-										<c:if test="${!empty possible_write_review2[possible_write_review.index][1] }">
-										<button class ="goWriteReview" data-dno="${possible_write_review2[possible_write_review.index][1]}">리뷰 작성 </button>	<br>
-										</c:if>
+									<c:if test="${!empty possible_write_review2[possible_write_review.index][1] }">
+									<button class ="goWriteReview" data-dno="${possible_write_review2[possible_write_review.index][1]}">리뷰 작성 </button>	<br>
+									</c:if>
 								</div>
 							</div>
 						</c:if>
