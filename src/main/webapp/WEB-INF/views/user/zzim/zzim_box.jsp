@@ -75,12 +75,17 @@ height : 100px;
 }
 
  .price{
-float: left;
+    float: left;
     width:120px;
-    text-align:right;
+    text-align: right;
     margin-top: 15px;
+    margin-left: 2.08px;
     font-size: 25px;
  }
+
+.description {
+margin-top:10px;
+}
 
 .go_more {
 width :150px;
@@ -89,11 +94,12 @@ margin-top: 20px;
 margin-left: 20px;	
 }
 
-.goods_info {
-width: 200px;
-height : 100px;
-}
-
+.review_info {
+    float: left;
+    font-size: 13px;
+    margin-top: 40px;
+ }
+ 
 .button{
 float:left;
 width:300px;
@@ -101,6 +107,13 @@ height:100px;
 
 }
 
+.line {
+	margin-top : 10px;
+	margin-bottom : 10px;
+	width : 930px;
+    border: 1px solid #ccc;
+ }
+ 
 
 a:visited {
     color: purple; 
@@ -136,15 +149,15 @@ a:active {
 							<div class = "zzim_container"> 
 									<div class="goods_image">	
 										<c:if test="${empty save_list2[zzim_quant.index][0] }">
-<a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}"><img src="/resources/img/product/no_image.jpg" width="100" height="100"></a>
+											<a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}"><img src="/resources/img/product/no_image.jpg" width="100" height="100"></a>
 										</c:if>
 										
 										<c:if test="${!empty save_list2[zzim_quant.index][0] && fn:substring(save_list2[zzim_quant.index][0], 0, 1) == 'h' }">
-<a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}"><img src="${save_list2[zzim_quant.index][0] }" width="100" height="100"></a>
+											<a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}"><img src="${save_list2[zzim_quant.index][0] }" width="100" height="100"></a>
 										</c:if>
 										
 										<c:if test="${!empty save_list2[zzim_quant.index][0] && !(fn:substring(save_list2[zzim_quant.index][0], 0, 1) == 'h') }">
-<a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}"><img src="/resources/img/product/registed_img/${save_list2[zzim_quant.index][0]}" width="100" height="100"></a>
+											<a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}"><img src="/resources/img/product/registed_img/${save_list2[zzim_quant.index][0]}" width="100" height="100"></a>
 										</c:if>
 									</div>	
 									
@@ -153,7 +166,8 @@ a:active {
 											<c:if test = "${not empty save_list2[zzim_quant.index][1]}">
 									   			<h4> <a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}">${save_list2[zzim_quant.index][1]}</a></h4>
 									   		</c:if>
-									   		
+									   	</div>
+									   	<div class = "description">	
 									   		<c:if test = "${not empty save_list2[zzim_quant.index][2]}">
 											상품 설명 : ${save_list2[zzim_quant.index][2]} <br>
 											</c:if>
@@ -166,13 +180,16 @@ a:active {
 										</c:if>
 									</div>
 										
-																					<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
-																					<input type = "hidden" value ="${save_list2[zzim_quant.index][4]}"> <br>
-																					</c:if>
-																					<c:if test = "${not empty save_list2[zzim_quant.index][5]}">
-																					<input type="hidden" value="${save_list2[zzim_quant.index][5]}">	
-																					</c:if>
-																				
+									<div class = "review_info">
+											<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
+													<input type = "hidden" value ="${save_list2[zzim_quant.index][4]}"> <br>
+											</c:if>
+											
+											
+											<c:if test = "${not empty save_list2[zzim_quant.index][5]}">
+													<input type="hidden" value="${save_list2[zzim_quant.index][5]}">	
+											</c:if>
+									</div>
 									<div class = "button">
 										<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
 										<button class="zzim_Off" data-no="${save_list2[zzim_quant.index][4]}"> 찜 목록 해제 </button> <br>
@@ -182,6 +199,7 @@ a:active {
 								 </div>
 					</c:if>
 				</div>	 
+				<hr class = "line">
 			</c:forEach>			
 				<h1> 병천이 부탁 " 페이징 처리 5개씩 요청 "</h1>
 			</div>

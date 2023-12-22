@@ -100,14 +100,13 @@ height:100px;
 }
 
 
-a:visited {
-    color: purple; 
-}
-a:active {
-    color: red; 
-}
-
-
+ .line {
+ 		margin-top : 10px;
+ 		margin-bottom : 10px;
+ 		width : 930px;
+        border: 1px solid #ccc;
+ }
+ 
 </style>      
 
 </head>
@@ -131,7 +130,7 @@ a:active {
 							<div class = "review_container" data-no="${possible_write_review2[possible_write_review.index][1]}">
 								<div class="goods_image">
 									<c:if test="${possible_write_review2[possible_write_review.index][0] }">
-										<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+										<a href="/user/product/goods.do?no=${possible_write_review2[possible_write_review.index][5]}"><img src="/resources/img/product/no_image.jpg" width="100" height="100"></a>
 									</c:if>
 									<c:if test="${!empty possible_write_review2[possible_write_review.index][0] && fn:substring(possible_write_review2[possible_write_review.index][0], 0, 1) == 'h' }">
 										<a href="/user/product/goods.do?no=${possible_write_review2[possible_write_review.index][5]}"><img src="${possible_write_review2[possible_write_review.index][0] }" width="100" height="100"></a>
@@ -144,7 +143,7 @@ a:active {
 								<div class = "goods_name_container">
 									<div class = "goods_name">
 										<c:if test="${!empty possible_write_review2[possible_write_review.index][2] }">
-										<h4><a href="/user/product/goods.do?no=${possible_write_review2[possible_write_review.index][5]}" > ${possible_write_review2[possible_write_review.index][2]}</a></h4>
+										<h4><a>${possible_write_review2[possible_write_review.index][2]}</a></h4>
 										</c:if>
 										<div class = "buy_date">	
 										<c:if test="${!empty possible_write_review2[possible_write_review.index][4] }">
@@ -177,7 +176,6 @@ a:active {
 									</c:if>
 						
 								</div>
-
 													
 								<div class = "button">	
 									<c:if test="${!empty possible_write_review2[possible_write_review.index][1] }">
@@ -186,7 +184,8 @@ a:active {
 								</div>
 							</div>
 						</c:if>
-					</div>	
+					</div>
+					<hr class = "line"> 	
 			   </c:forEach>			
 				
 			</div>

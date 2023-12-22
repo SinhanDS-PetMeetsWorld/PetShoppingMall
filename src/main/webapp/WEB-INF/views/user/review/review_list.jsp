@@ -88,17 +88,13 @@ height : 100px;
     margin-left : 20px;
  }
 
-a:visited {
-    color: purple; 
-}
-a:active {
-    color: red; 
-}
+
 
 .button {
 float:left;
 font-size:13px;
 width:300px;
+margin-top: -8px;
 }
 
 .rating{
@@ -111,6 +107,14 @@ font-size : 30px;
 	font-size : 40px;
 
 }
+
+.line {
+	margin-top : 10px;
+	margin-bottom : 10px;
+	width : 930px;
+    border: 1px solid #ccc;
+ }
+ 
 </style>      
     
 </head>
@@ -127,6 +131,9 @@ font-size : 30px;
 			<input type ="hidden" value = "${userLoginInfo.no } ">
 						
 				<h1 class="menu_name" >작성한 리뷰</h1>
+				<c:if test="${empty review_list2 }"><br><h2>리뷰 내역이 존재하지 않습니다.</h2>
+				</c:if>
+				
 				<c:forEach items="${review_list2}" varStatus = "review_quant" >
 					<div class= "review_container">
 						<div class = "goods_image">	
@@ -145,7 +152,7 @@ font-size : 30px;
 						<div class = "goods_name_container">
 								<div class = "goods_name">
 									<c:if test="${!empty review_list2[review_quant.index][2] }">
-										<h4><a href="/user/product/goods.do?no=${review_list2[review_quant.index][5] }" > ${review_list2[review_quant.index][2] }</a></h4> 
+										<h4><a> ${review_list2[review_quant.index][2] }</a></h4> 
 									</c:if>
 								</div>	
 							
@@ -183,6 +190,7 @@ font-size : 30px;
 						</div>
 							
 					</div>
+				<hr class = "line">	
 			   </c:forEach>	
 			   		
 				<h1> 병천이 부탁 " 페이징 처리 5개씩 요청 "</h1>
