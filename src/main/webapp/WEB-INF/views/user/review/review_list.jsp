@@ -87,7 +87,6 @@ height : 100px;
     font-size: 15px;
     margin-left : 20px;
  }
- 
 
 a:visited {
     color: purple; 
@@ -170,10 +169,7 @@ font-size : 30px;
 										<a> ${review_list2[review_quant.index][3] }원</a><br>
 									</c:if>
 								</div>	
-								
-								
 						</div>
-						
 						
 						<div class = "button">
 							<div class = "rating">

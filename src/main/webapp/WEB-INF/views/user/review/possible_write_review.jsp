@@ -82,12 +82,9 @@ height : 100px;
     font-size: 25px;
 }
 
-
-
 .buy_date {
 margin-top:10px;
 }
-
 
 .review_info {
     float: left;
@@ -157,8 +154,6 @@ a:active {
 										
 									</div>
 									<br>
-									
-
 								</div>	
 								
 								<div class = "goods_price_container">
@@ -182,7 +177,6 @@ a:active {
 									</c:if>
 						
 								</div>
-							
 
 													
 								<div class = "button">	
