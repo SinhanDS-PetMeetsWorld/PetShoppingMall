@@ -180,8 +180,7 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 		if(r > 0) {
 			for(int i=0; i<dvo.getOrder_detail_list().size(); i++) {
 				dvo.getOrder_detail_list().get(i).setDelivery_no(delivery_no);
-				int success = mapper.update_deliveryNo(dvo.getOrder_detail_list().get(i));
-				if(success <= 0) return false;
+				mapper.update_deliveryNo(dvo.getOrder_detail_list().get(i));
 			}
 		}
 		return true;

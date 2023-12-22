@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sinhanDS.first.project.admin.vo.SettlementVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
@@ -90,5 +91,35 @@ public class AdminServiceImpl implements AdminService {
 		for(int i = 0; i < no.length; i++) {
 			mapper.confirmOrderDetail(no[i]);
 		}
+	}
+
+	
+	@Override
+	public List<SettlementVO> getSettlementReqList() {
+		return mapper.getSettlementReqList();
+	}
+
+	@Override
+	public List<SettlementVO> getSettlementComList() {
+		return mapper.getSettlementComList();
+	}
+
+	@Override
+	public boolean updateSettlement(int no) {
+		int date_suc = mapper.updateSettlementDate(no);
+		int status_suc = mapper.updateSettlementStatus(no);
+		if(date_suc > 0 && status_suc > 0) {	return true;	}
+		return false;
+	}
+
+	@Override
+	public boolean updateAllSettlement(List<Integer> list) {
+		if(list.size() > 0) {
+			for(int i=0; i<list.size(); i++) {
+				boolean suc = updateSettlement(list.get(i).intValue());
+				if(suc == false) return false;
+			}
+		}
+		return true;
 	}
 }

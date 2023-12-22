@@ -1,10 +1,12 @@
 package sinhanDS.first.project.admin;
 
+import java.net.http.HttpRequest;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
+import sinhanDS.first.project.admin.vo.SettlementVO;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
@@ -278,5 +282,38 @@ public class AdminController {
 		log.debug("no: " + Arrays.toString(no));
 		service.confirmOrderDetail(no);
 		return "redirect:/admin/needConfirmationList.do";
+	}
+	
+	@GetMapping("getSettlementReqList.do")
+	public String getSettlementReqList(Model model) {
+		List<SettlementVO> settlementReqList = service.getSettlementReqList();
+		model.addAttribute("settlementReqList", settlementReqList);
+		return "/admin/page/settlementReqList";
+	}
+	
+	@GetMapping("getSettlementComList.do")
+	public String getSettlementComList(Model model) {
+		List<SettlementVO> settlementComList = service.getSettlementComList();
+		model.addAttribute("settlementComList", settlementComList);
+		return "/admin/page/settlementComList";
+	}
+	
+	@ResponseBody
+	@GetMapping("updateSettlement.do")
+	public String updateSettlement(Model model, HttpServletRequest request) {
+		boolean res = false;
+		if(request.getParameter("settlement_no") != null || ("").equals(request.getParameter("settlement_no"))) {
+			int settlement_no = Integer.parseInt(request.getParameter("settlement_no"));
+			res = service.updateSettlement(settlement_no);
+		}
+		return String.valueOf(res);
+	}
+	
+	@ResponseBody
+	@GetMapping("updateAllSettlement.do")
+	public String updateAllSettlement(Model model, HttpServletRequest request, 
+			@RequestParam(value="settlement_no",required=true) List<Integer> settlement_list) {
+		boolean res = service.updateAllSettlement(settlement_list);
+		return String.valueOf(res);
 	}
 }

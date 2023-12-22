@@ -48,6 +48,8 @@ public interface OrderService {
 	public ReviewVO getReview(int order_dno);
 	public void updateProductRating(ReviewVO rvo);
 	
+	public CartVO cart_insert(CartVO cartvo);
+	public int setPrice(int product_no, List<String> option_list, int quantity);
 	public int delete_buyed_cart(int[] cart_no);
 	public int delete_buyed_option(int[] option_no);
 	public int update_cart_quantity(CartVO vo);

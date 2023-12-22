@@ -152,7 +152,16 @@
 		UPDATE product SET rating=#{rating}, review_cnt=#{review_cnt} WHERE no=#{no}
 	</update>
 	
-	
+	<insert id="cart_insert" parameterType="sinhanDS.first.project.user.vo.CartVO">
+		INSERT INTO cart (
+			user_no, product_no
+		) VALUES (
+			#{user_no}, #{product_no}
+		)
+		<selectKey keyProperty="no" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 	<delete id="delete_buyed_cart" parameterType = "int">
 		DELETE FROM cart WHERE no = #{no}
 	</delete>

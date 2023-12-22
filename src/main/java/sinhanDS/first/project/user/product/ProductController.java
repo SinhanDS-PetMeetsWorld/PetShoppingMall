@@ -288,7 +288,8 @@ public class ProductController {
 	
 	@ResponseBody
 	@PostMapping("/addcart.do")
-	public String cart_insert(Model model, HttpServletRequest request, @RequestParam(value="option_no",required=false) List<String> optionno_list,
+	public String cart_insert(Model model, HttpServletRequest request, 
+			@RequestParam(value="option_no",required=false) List<String> optionno_list,
 			CartVO cartvo, CartOptionVO cartoptionvo) {
 		boolean suc = optionno_list != null ? false : true;
 		int cart_no = service.cart_insert(cartvo);

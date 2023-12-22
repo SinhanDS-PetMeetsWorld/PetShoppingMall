@@ -29,6 +29,8 @@ import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.seller.product.SellerProductService;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.UserService;
+import sinhanDS.first.project.user.product.ProductService;
+import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
 import sinhanDS.first.project.user.vo.UserVO;
@@ -39,25 +41,107 @@ import sinhanDS.first.project.user.vo.UserVO;
 @Slf4j
 public class OrderController {
 	@Autowired
+	private ProductService productService;
+	@Autowired
 	private OrderService orderService;
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private SellerProductService sellerProductService;
 	
-//	@PostMapping("buy_now.do")
-//	public String buy_now(Model model, @RequestParam int product_no, @RequestParam int quantity) {
-//		
-//	}
+	@PostMapping("buy_now.do")
+	public String buy_now(HttpSession sess, Model model, HttpServletRequest request, 
+			@RequestParam(value="option_no",required=false) List<String> optionno_list,
+			CartVO cartvo, CartOptionVO cartoptionvo , @RequestParam(value="choose_number") int quantity) {
+		log.debug("optionno_list: " + optionno_list);
+		log.debug("cartvo: " + cartvo);
+		log.debug("optionno_list: " + optionno_list);
+		log.debug("quantity: " + quantity);
+		
+		int price = orderService.setPrice(cartvo.getProduct_no(), optionno_list, quantity);
+		log.debug("price: " + price);
+		
+		UserVO uvo = (UserVO)sess.getAttribute("userLoginInfo");
+		log.debug("user_no: " + uvo.getNo());
+		
+		int temp_cart_no = orderService.cart_insert(cartvo).getNo();
+		if(optionno_list != null) {
+			cartoptionvo.setCart_no(cartvo.getNo());
+
+			if(temp_cart_no>0) {
+				for(int i=0; i<optionno_list.size(); i++){
+					cartoptionvo.setOption_no(Integer.parseInt(optionno_list.get(i)));
+					productService.cart_option_insert(cartoptionvo);
+				}
+			}
+		}
+		int[] option_no = new int[optionno_list.size()];
+		int[] option_cart_no = new int[optionno_list.size()];
+		if(optionno_list.size() != 0) {
+			for(int i = 0; i < option_no.length; i++) {
+				option_no[i] = Integer.valueOf(optionno_list.get(i));
+				option_cart_no[i] = temp_cart_no;
+			}
+		}
+		
+		int[] cart_no = new int[] {temp_cart_no};
+		int[] quantity_list = new int[] {quantity};
+		int delivery_price = 2500;
+		int total_price = price;
+		
+		CartVO cvo = new CartVO();
+		cvo.setCart_no_list(cart_no);
+		log.debug("cvo: " + cvo);
+		cvo.setQuantity_list(quantity_list);
+		log.debug("quantity: " + Arrays.toString(quantity_list) );
+		
+		uvo.setNo(uvo.getNo());
+		
+		ProductOptionVO ovo = new ProductOptionVO();
+		ovo.setNo_list(option_no);
+		log.debug("option_no: " + Arrays.toString(option_no));
+		
+		OrderMainVO orderVO = new OrderMainVO();
+		orderVO.setTotal_price(total_price);
+		orderVO.setTotal_delivery_fee(delivery_price);
+		/* 리스트 들어오기 전 임시 끝*/
+		
+		model.addAttribute("userno", uvo.getNo());
+		model.addAttribute("userAddressList", userService.exist_addr(uvo));
+		model.addAttribute("userPaymentList", userService.exist_payment(uvo));
+		model.addAttribute("orderVO", orderVO);
+		
+		
+		/*cart no는 결제가 끝나고 지울 것이기 때문에 cart_no만 넘어가도 된다.*/
+		model.addAttribute("cno_list", cvo.getCart_no_list());
+		
+		log.debug("cart_no: " + cart_no);
+		List<ProductVO> product_list = orderService.getProductListByCartNoList(cart_no);
+		model.addAttribute("product_list", product_list);
+		log.debug("product_list: " + product_list);
+		model.addAttribute("quantity_list", cvo.getQuantity_list());
+		
+		List<ProductOptionVO> option_list = orderService.getOptionList(ovo.getNo_list());
+		model.addAttribute("option_list", option_list);
+		log.debug("option_list: " + option_list);
+		
+		model.addAttribute("cart_no", cart_no);
+		model.addAttribute("option_cart_no", option_cart_no);
+		model.addAttribute("option_no", option_no);
+		log.debug("cart_no: " + Arrays.toString(cart_no));
+		log.debug("option_cart_no: " + Arrays.toString(option_cart_no));
+		log.debug("option_no: " + Arrays.toString(option_no));
+		
+		model.addAttribute("paymentVO", new PaymentVO());
+		return "user/order/pay";
+	}
 	/* TODO: 리스트가 들어온 후에는 갯수가 얼마나 길어질지 모르니 POSTMAPPING으로 바꿔야한다*/
 	@PostMapping("pay.do")
-	public String pay(Model model, @RequestParam(required = false) int[] cart_no, 
+	public String pay(Model model, @RequestParam int[] cart_no, 
 					@RequestParam int[] quantity_list ,@RequestParam int delivery_price, 
 					@RequestParam int total_price, @RequestParam int[] cart_user_no, 
 					@RequestParam(required=false) int[] option_no, @RequestParam(required=false) int[]option_cart_no) {
-		/* 리스트 들어오기 전 임시 */
-		/* 리스트로 들어오면 얘들은 테스트로 넘겨주세용 ㅎㅎ */
-		
+		log.debug("실행은 되나? ");
 		log.debug("cart_no2: " + cart_no);
 		log.debug("delfee: " + delivery_price);
 		log.debug("cart_no2: " + Arrays.toString(cart_no));
@@ -112,20 +196,29 @@ public class OrderController {
 	}
 	
 	@PostMapping("buy.do")
-	public String pay_process(Model model, 
+	public String pay_process(HttpServletRequest request, Model model, 
 			@RequestParam int user_no,
 			@RequestParam int[] product_no, 
 			@RequestParam int[] cart_no,
 			@RequestParam(required=false) int[] option_no,
 			@RequestParam(required=false) int[] option_cart_no,
 			@RequestParam int[] quantity, OrderMainVO mvo) {
+		
+		log.debug("buy.do시작");
+		log.debug("user_no: " + user_no);
+		log.debug("product_no: " + Arrays.toString(product_no));
+		log.debug("cart_no: " + Arrays.toString(cart_no));
+		log.debug("option_no: " + Arrays.toString(option_no));
+		log.debug("option_cart_no: " + Arrays.toString(option_cart_no));
+		log.debug("quantity: " + Arrays.toString(quantity));
+		log.debug("mvo: " + mvo);
 		/*TODO: 나중에 인터셉터 달면 uvo를 인터셉터에서 가져온 걸로 바꿔주기 */
 		UserVO uvo = new UserVO();
 		uvo.setNo(user_no);
 		mvo.setUser_no(uvo.getNo());
 		mvo.setUser_name(userService.detail(uvo).getName());
 		mvo.setUser_phone(userService.detail(uvo).getPhone());
-		
+		log.debug(null);
 		
 		List<ProductVO> productList = orderService.getProductListByProductNoList(product_no);
 		mvo = orderService.setOrderName(mvo, productList.get(0).getName(), productList.size());
@@ -157,17 +250,9 @@ public class OrderController {
 		} else {
 			alert("카트상품 삭제안됨");
 		}
-		
-
-		
-		
-
 		return "redirect:/user/order/success.do";
 	}
-	private void alert(String string) {
-		// TODO Auto-generated method stub
-		
-	}
+	private void alert(String string) {}
 
 	@GetMapping("success.do")
 	public String payementSuccess() {
