@@ -150,6 +150,10 @@
 		SELECT * FROM  product
 	</select>
 	
+	<select id = "getProductListWithProductSearchVO" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
+		SELECT * FROM  product WHERE no=#{product_no}
+	</select>
+	
 	
 	<!-- (신정훈) 12 / 18 리뷰 리스트 구현 -->
 	<select id = "review_list" parameterType = "sinhanDS.first.project.product.vo.ReviewVO">

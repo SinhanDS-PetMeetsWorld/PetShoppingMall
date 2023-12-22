@@ -1,7 +1,6 @@
 package sinhanDS.first.project.user;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
@@ -361,14 +361,15 @@ public class UserController {
 	
 	// (신정훈) 찜 리스트 구현 12 - 18
 	@GetMapping("/list_user_zzim.do")
-	public String list_zzim(Model model , HttpSession sess , UserVO uvo , ProductVO prvo , SaveBoxVO savo){
+	public String list_zzim(Model model , HttpSession sess , UserVO uvo , ProductVO prvo , SaveBoxVO savo, ProductSearchVO svo){
 		
 		UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
 		int user_no = login.getNo();
 		
 		List<SaveBoxVO> zzim_list = service.zzim_list(user_no);
 		List<UserVO> user_list = service.user_list(user_no);
-		List<ProductVO> product_list = service.product_list(savo.getProduct_no());
+		List<ProductVO> product_list = service.getProductListWithProductSearchVO(zzim_list, svo);
+//		List<ProductVO> product_list = service.product_list(savo.getProduct_no());
 		
 		List<List<String>> save_list2 = new ArrayList<List<String>>();	
 		
@@ -378,22 +379,13 @@ public class UserController {
 			for (int i = 0; i < zzim_list.size(); i++ ) {
 			List<String> save_list = new ArrayList<String>();
 			
-				// 상품 정보 구하기
-				for (int k = 0; k < product_list.size(); k++) {
-					if (zzim_list.get(i).getProduct_no() == product_list.get(k).getNo()) {
-						save_list.add(String.valueOf(product_list.get(k).getImage_url())); // 상품 이미지 0
-						save_list.add(String.valueOf(product_list.get(k).getName())); // 상품 명 1
-						save_list.add(String.valueOf(product_list.get(k).getDescription())); // 상품 설명 2
-						save_list.add(String.valueOf(product_list.get(k).getPrice())); // 상품 가격 3
-						save_list.add(String.valueOf(product_list.get(k).getNo())); // 싱품 번호 4
-					}
-				}
-				// 유저 번호 구하기
-				for(int j = 0; j < user_list.size(); j++) {
-					if(zzim_list.get(i).getUser_no() == user_list.get(j).getNo()) {
-						save_list.add(String.valueOf(user_list.get(j).getNo())); // 유저 번호 6 
-					}
-				}
+				save_list.add(String.valueOf(product_list.get(i).getImage_url())); // 상품 이미지 0
+				save_list.add(String.valueOf(product_list.get(i).getName())); // 상품 명 1
+				save_list.add(String.valueOf(product_list.get(i).getDescription())); // 상품 설명 2
+				save_list.add(String.valueOf(product_list.get(i).getPrice())); // 상품 가격 3
+				save_list.add(String.valueOf(product_list.get(i).getNo())); // 싱품 번호 4
+				
+				save_list.add(String.valueOf(login.getNo())); // 유저 번호 6 
 				
 				save_list2.add(save_list);
 				System.out.println("세이블 2" + save_list2);

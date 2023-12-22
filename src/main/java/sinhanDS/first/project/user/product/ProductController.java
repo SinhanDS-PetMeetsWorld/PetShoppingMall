@@ -229,7 +229,7 @@ public class ProductController {
 	@GetMapping("/list.do")
 	public String searchByCategory(HttpServletRequest request, Model model, ProductSearchVO svo) {
 		log.debug("여기는오나? : " + svo);
-		if(svo.getNumberOfProductInPage() == 5) svo.setNumberOfProductInPage(svo.getNumberInPage_search());
+		svo.setNumberOfProductInPage(svo.getNumberInPage_search());
 		log.debug("svo: " + svo);
 		int count = service.getNumberOfProduct(svo);
 		log.debug("count: " + count);
@@ -239,9 +239,9 @@ public class ProductController {
         map.put("count", count);
         map.put("totalPage", totalPage);
         
-        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfProductInPage())*svo.getNumberOfProductInPage());
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList())*svo.getNumberOfPageInIndexList());
         log.debug("endPage: " + endPage);
-        int startPage = endPage - (svo.getNumberOfProductInPage() - 1);
+        int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
         if(endPage > totalPage) endPage = totalPage;
         boolean prev = startPage > 1;
         boolean next = endPage < totalPage;
