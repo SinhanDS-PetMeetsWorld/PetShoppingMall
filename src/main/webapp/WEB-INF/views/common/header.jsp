@@ -27,7 +27,7 @@
 							<a href="/user/product/list.do?category1=0">강아지</a>
 							<ul>
 								<c:forEach var="category2" items="${ProductCategoryVO.category[0]}" varStatus="status">
-									<li><a href="/user/product/list.do?category1=0&category2=${status.index }">${category2 }</a></li>
+									<li class="temptemp"><a href="/user/product/list.do?category1=0&category2=${status.index }">${category2 }</a></li>
 								</c:forEach>
 							</ul></li>
 						<li>
