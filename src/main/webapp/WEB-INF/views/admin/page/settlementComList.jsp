@@ -37,6 +37,7 @@
 							<td>${settlementComList.total_sales}</td>
 							<td>${settlementComList.total_charge}</td>
 							<td>${settlementComList.total_settlement}</td>
+							<td>${paymentVO. }</td>
 							<td>${settlementComList.account}</td>
 						</tr>
 					</c:forEach>
