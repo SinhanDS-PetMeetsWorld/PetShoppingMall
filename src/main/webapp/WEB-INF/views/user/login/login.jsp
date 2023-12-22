@@ -156,8 +156,7 @@
 						        </div>
 						        <a href="/seller/login.do">판매자로 로그인하기</a>
 						    </form>
-						    
-						    </div>
+						</div>
 				</div>
 			</div>
 
