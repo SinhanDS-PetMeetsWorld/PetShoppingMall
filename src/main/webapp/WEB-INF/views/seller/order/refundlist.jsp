@@ -11,12 +11,13 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/css/common/template.css">
     <style>
-    	<style>
+    	
     	.refund_table{
     		width:920px;
     		height:100px;
     		text-align: center;
     		border-collapse : collapse;
+    		margin-bottom:20px;
     		
     	}
     
@@ -52,15 +53,32 @@
     	}
     	
 		.refunder_info{
-			clear:both;
+			
 			line-height: 30px;
 		}
 		.refunder_bold{
 			font-weight:bold;
 		}
 		
+		.acceptbutton {
+			 outline: 0;
+			 border: none;
+			 cursor: pointer;
+			 padding: 0 24px;
+			 border-radius: 50px;
+			 width: 150px;
+			 height: 40px;
+			 font-size: 15px;
+			 background-color: #fd0;
+			 font-weight: 500;
+			 color: #222;
+			 margin:20px 0 20px 0;
+		}
+		
+		
+		
     </style>
-    </style>
+    
     
 </head>
 <body>
@@ -77,14 +95,14 @@
             </div>
 			<div class="contentsright">
 				<div>
-				환불목록
+				환불 요청 목록
 					<c:if test="${empty orderMainList}">
 						<h1>환불 요청된 상품이 없습니다(나중에 예쁜 이미지같은거 하나 넣어줄게욤~)</h1>
 					</c:if>
 					<c:if test="${not empty orderMainList}">
 						<c:forEach var="orders" items="${orderMainList}" varStatus="mainstatus">
 							<c:set var="deliverStatus" value="배송시작"/>
-							주문번호: ${orders.no }<br>
+							
 							<c:if test="${not empty orderDetailList}">
 								<c:forEach var="orderdetails" items="${orderDetailList[mainstatus.index]}" varStatus="status">
 									<c:if test="${orderdetails.delivery_status == 2}"><c:set var="deliverStatus" value="배송완료"/></c:if>
@@ -112,7 +130,8 @@
 										<button type="button" value="${orderdetails.no}" class="acceptbutton">환불승인</button>
 									</c:if>
 								</c:forEach>
-								<br>환불자정보<br>
+								<div class="refunder_info">
+								<span class="refunder_bold">환불자정보</span><br>
 								이름: ${orders.user_name } 연락처: ${orders.user_phone } <br>
 								주문일시: ${orders.order_date } 배송상태: ${deliverStatus}<br>
 								
@@ -121,8 +140,8 @@
 									<c:if test='${deliverStatus == "배송시작"}'>도착예정일: ${deliveryList[mainstatus.index].due_date}</c:if>
 									<c:if test='${deliverStatus == "배송완료"}'>도착일: ${deliveryList[mainstatus.index].arrival_date}</c:if>
 								</c:if>
-								
-								<br><br><hr><br>
+								</div>
+								<br><hr><br>
 							</c:if>
 						</c:forEach>
 					</c:if>

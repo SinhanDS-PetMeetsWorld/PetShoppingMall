@@ -18,8 +18,51 @@
 	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/resources/css/common/template.css">
 
+<style>
+
+	.contentsright h2{
+		margin-bottom:20px;
+	}
+
+	.pro_name{
+		margin-right:50px;
+	}
+
+	.pro_name_css{
+		width:300px;
+		height:25px;
+	}
+	
+	.regist_price{
+		margin-top:20px;
+		
+	}
+	
+	.regist_price input{
+		width:200px;
+		height:25px;	
+		margin-left:60px;	
+	}
+	
+	.regist_quantity{
+	
+		margin-left:100px;
+		margin-top:20px;
+	}
+	
+	.regist_quantity input{
+		width:200px;
+		height:25px;
+		margin-left:60px;	
+	}
+	
+	.category_all{
+		clear:both;
+	}
+</style>
 <script>
 	console.log("${sellerLoginInfo.no}");
+	
 </script>
 </head>
 <body>
@@ -39,18 +82,21 @@
 						<input type="hidden" name="seller_no"
 							value="${sellerLoginInfo.no}">
 						<div>
-							상품명*<br> <input type="text" name="name" required>
-						</div>
-						<div>
-							가격*<br> <input type="number" name="price" value="0" required>
-						</div>
-						<div>
-							재고*<br> <input type="number" name="stock" value="0" required>
-						</div>
+							<span class="pro_name">상품명*</span><input type="text" class="pro_name_css" name="name" required>
+						</div><br><hr>
+						<span class="regist_price">
+							가격* <input type="number" name="price" value="0" required>
+						</span>
+						<span class="regist_quantity">
+							재고* <input type="number" name="stock" value="0" required>
+						</span><br><hr>
+						
+						
 						<div class="category_body">
 							<div class="category">
+								<br>
 								<hr>
-								<div>
+								<div class="category_all">
 									카테고리 *<br> <select name="category1_list"
 										class="category1_list">
 										<c:forEach var="category_name" items="${category.category_name }" varStatus="status">
