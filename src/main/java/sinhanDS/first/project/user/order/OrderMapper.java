@@ -48,5 +48,6 @@ public interface OrderMapper {
 	public int update_cart_quantity(CartVO vo);
 	public int delete_cart_product(int no);
 	public int delete_cart_option(int cart_no);
+	public int cart_insert(CartVO cartvo);
 	
 }
