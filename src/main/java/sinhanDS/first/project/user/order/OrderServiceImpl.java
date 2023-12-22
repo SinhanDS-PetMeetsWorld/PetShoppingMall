@@ -102,7 +102,10 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 	}
-	
+	public CartVO cart_insert(CartVO cartvo) {
+		mapper.cart_insert(cartvo);
+		return cartvo;
+	}
 	
 	
 	public List<OrderDetailVO> makeOrderDetailList(OrderMainVO mvo, List<ProductVO> p_list, int[] quantity, int[] cart_no, int[] option_cart_no, List<ProductOptionVO> option_list){
@@ -253,6 +256,17 @@ public class OrderServiceImpl implements OrderService {
 		pvo.setReview_cnt(pvo.getReview_cnt() + 1);
 		pvo.setRating((total/pvo.getReview_cnt()));
 		mapper.updateProductRating(pvo);
+	}
+	
+	public int setPrice(int product_no, List<String> option_list, int quantity) {
+		ProductVO pvo = sellerProductMapper.getProduct(product_no); 
+		int price = pvo.getPrice() - pvo.getDiscount();
+		if(option_list.size() == 0) return price * quantity;
+		
+		for(int i = 0; i < option_list.size(); i++) {
+			price = price + mapper.getOption(Integer.valueOf(option_list.get(i))).getPrice();
+		}
+		return price * quantity;
 	}
 	
 	public int delete_buyed_cart(int[] cart_no) {

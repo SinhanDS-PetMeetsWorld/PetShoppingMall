@@ -54,9 +54,9 @@
 						                <div id="product_info">
 							                <input type='checkbox' class="check_product" id='chekbox[${status.index }]' name='check_cart' >
 							               
-					        				<input type="hidden" class="cart_user_no" name="cart_user_no" value="${cartvolist[status.index].user_no }">
-							                <input type="hidden" class="cart_no" name="cart_no" value="${cartvolist[status.index].no }">
-							                
+								        				<input type="hidden" class="cart_user_no" name="cart_user_no" value="${cartvolist[status.index].user_no }">
+										                <input type="hidden" class="cart_no" name="cart_no" value="${cartvolist[status.index].no }">
+										                
 							               
 							                <input type="hidden" class="seller_no" value="${vo.seller_no }">
 							                <div class='option_area'>
