@@ -12,6 +12,30 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
+    <style>
+    	.qna_info{
+    		line-height: 30px;
+    	}
+    	.qna_textbox{
+    		margin-top: 20px;
+    	}
+    	
+    	.writeAnswer {
+			 outline: 0;
+			 border: none;
+			 cursor: pointer;
+			 padding: 0 24px;
+			 border-radius: 50px;
+			 width: 150px;
+			 height: 40px;
+			 font-size: 15px;
+			 background-color: #fd0;
+			 font-weight: 500;
+			 color: #222;
+			 margin-left: 20px;
+		}
+    </style>
+    
 </head>
 <body>
 	<div class="wrap">
@@ -25,7 +49,7 @@
 			<div class="contentsright">
 				<div>	
 					<c:forEach items="${qna_array}" varStatus = "qna_quant">
-						<div>	
+						<div class="qna_info">	
 							<c:if test = "${not empty qna_array[qna_quant.index][0]}">
 							  제품명 : ${qna_array[qna_quant.index][0]} <br>
 							</c:if>	
@@ -55,6 +79,7 @@
 							  답변 등록일 : ${qna_array[qna_quant.index][6]} <br>
 							</c:if>		
 							<c:if test = "${not empty qna_array[qna_quant.index][7]}">
+							 	 <div class="qna_textbox">
 							 	 답변 내용 : 
 							 	 <c:if test="${'null' == qna_array[qna_quant.index][7]}">
 							 	 	<input type= text id ="answer_content" class="answer_content"  style="width:400px; height:50px"> 		  
@@ -64,7 +89,10 @@
 							 	 <c:if test="${'null' != qna_array[qna_quant.index][7]}">
 							 	 		${ qna_array[qna_quant.index][7]} <br><br>
 							 	 </c:if>
-							</c:if>		     	
+							 	 </div>
+							</c:if>		
+							<hr>
+							<br>     	
 					   </div>	
 				   </c:forEach>			
 				</div>
