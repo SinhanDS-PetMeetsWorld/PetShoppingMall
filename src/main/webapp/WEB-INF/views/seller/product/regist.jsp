@@ -35,6 +35,8 @@
 	
 	.regist_price{
 		margin-top:20px;
+		display:inline-block;
+		height:50px;
 		
 	}
 	
@@ -56,9 +58,53 @@
 		margin-left:60px;	
 	}
 	
+	.category{
+		height:50px;
+	}
+	
 	.category_all{
+		float:left;
+		
+		height:50px;
+		margin-top:20px;
+	}
+	.category1{
+		float:left;
+	}
+	
+	.category2{
+		float:left;
+		display:inline-block;
+		margin-left:60px;
+	}
+	
+	.category_remove{
+		float:left;
+		margin-left: 20px;
+		
+		margin-top:20px;
+	}
+	.category_add_button{
+		clear:both;
+		margin-bottom:20px;
+	}
+	
+	.category1_list{
+		margin-left:28px;
+	}
+	.category2_list{
+		margin-left:28px;
+	}
+	
+	.com_brand{
 		clear:both;
 	}
+	
+	a{
+		text-decoration:none;
+		color:black;
+	}
+	
 </style>
 <script>
 	console.log("${sellerLoginInfo.no}");
@@ -89,23 +135,23 @@
 						</span>
 						<span class="regist_quantity">
 							재고* <input type="number" name="stock" value="0" required>
-						</span><br><hr>
+						</span><br>
 						
 						
 						<div class="category_body">
 							<div class="category">
-								<br>
 								<hr>
 								<div class="category_all">
-									카테고리 *<br> <select name="category1_list"
-										class="category1_list">
-										<c:forEach var="category_name" items="${category.category_name }" varStatus="status">
-											<option value="${status.index}">${category_name }</option>
-										</c:forEach>
-									</select>
-
-									<div>
-										세부 카테고리 *<br> <select name="category2_list"
+									<div class="category1">
+										카테고리*  <select name="category1_list"
+											class="category1_list">
+											<c:forEach var="category_name" items="${category.category_name }" varStatus="status">
+												<option value="${status.index}">${category_name }</option>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="category2">
+										세부 카테고리* <select name="category2_list"
 											class="category2_list" data-no="${status.index }">
 											<c:forEach var="category" items="${category.category[0] }"
 												varStatus="status">
@@ -115,21 +161,24 @@
 									</div>
 
 								</div>
+								<div class="category_remove">
 								<a href="javascript:;" class="remove_btn_category"><img
 									src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a><br>
+								</div>
 							</div>
 							<div class ="category_add_button">
 								<a href="javascript:;" class="add_btn_category"><img
-													src="/resources/img/product/add.png" width="25" height="25" /> 카테고리 추가</a>
+													src="/resources/img/product/add.png" width="15" height="15" /> 카테고리 추가</a>
 							</div>
 						</div>
-						<div>
-							제조사 <input type="text" name="company">
+						<div class="com_brand">
+							<div>
+								제조사 <input type="text" name="company">
+							</div>
+							<div>
+								브랜드명 <input type="text" name="brand">
+							</div>
 						</div>
-						<div>
-							브랜드명 <input type="text" name="brand">
-						</div>
-						
 						<div class="option_body">
 							<div>
 								<a href="javascript:;" class="add_btn_option"><img
