@@ -54,6 +54,13 @@ public class RegistProductWithNaverAPI {
 	public void before() {
 		mock = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
+	
+	@Test
+	public void check_number() {
+		for(int i = 0; i < 100; i++) {
+			System.out.println((int)(Math.random() * 4) + 10);
+		}
+	}
 
 	@Test
 	public void check_product()throws Exception {
@@ -61,17 +68,18 @@ public class RegistProductWithNaverAPI {
         int number = 10;
         try {
         	/* 검색어 */
-            text = URLEncoder.encode("캣타워", "UTF-8");
+            text = URLEncoder.encode("햄스터 사료", "UTF-8");
             
-            /* 검색 갯수 */
-            number = 50;
+            /* 검색 갯수  max 100*/
+            number = 30;
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
 
 
         String apiURL = "https://openapi.naver.com/v1/search/shop?query=" + text +"&display=" + number;    // JSON 결과
-
+        
+     
 
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", clientId);
@@ -94,15 +102,15 @@ public class RegistProductWithNaverAPI {
         	String brand = (String)obj.get("brand");
         	String image_url = (String)obj.get("image");
         	
-        	String seller_no = "2";
+        	String seller_no = String.valueOf(((int)(Math.random() * 4) + 10));
         	String stock = String.valueOf((int)(Math.random() * 500));
         	
         	int discount_rate = (int)(Math.random() * 5 + 10);
         	int dis = (Integer.valueOf(price)/discount_rate) / 100 * 100;
         	String discount = String.valueOf(dis);
         	String description = "";
-        	String category1_list = "1";
-        	String category2_list = "5";
+        	String category1_list = "0";
+        	String category2_list = "3";
         	
         	System.out.println("seller_no: " + seller_no);
         	System.out.println("stock: " + stock);
@@ -127,10 +135,10 @@ public class RegistProductWithNaverAPI {
         int number = 10;
         try {
         	/* 검색어 */
-            text = URLEncoder.encode("캣타워", "UTF-8");
+            text = URLEncoder.encode("상어 인형", "UTF-8");
             
             /* 검색 갯수 */
-            number = 50;
+            number = 20;
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
@@ -162,14 +170,16 @@ public class RegistProductWithNaverAPI {
         	String image_url = (String)obj.get("image");
         	
         	
-        	String seller_no = "2";
+        	String seller_no = String.valueOf(((int)(Math.random() * 4) + 10));
         	String stock = String.valueOf((int)(Math.random() * 500));
         	
         	int discount_rate = (int)(Math.random() * 5 + 10);
         	int dis = (Integer.valueOf(price)/discount_rate) / 100 * 100;
         	String discount = String.valueOf(dis);
         	String description = "";
-        	String category1_list = "1";
+        	
+        	/*카테고리 변경*/
+        	String category1_list = "2";
         	String category2_list = "5";
         	
         	/* 옵션 가격 계산 */
@@ -194,10 +204,13 @@ public class RegistProductWithNaverAPI {
         			.param("category2_list", category2_list)
         			
         			/* 옵션을 더 추가하고 싶을실 경우 추가하시면 됩니다. */
-//    				.param("title_list", "사이즈").param("content_list", "small").param("price_list", "0")
-//    				.param("title_list", "사이즈").param("content_list", "middle").param("price_list", "" + optionPrice)
-//    				.param("title_list", "사이즈").param("content_list", "large").param("price_list", "" + (2 * optionPrice))
-        			
+    				.param("title_list", "선물여부").param("content_list", "내가 사용").param("price_list", "0")
+    				.param("title_list", "선물여부").param("content_list", "선물 포장").param("price_list", "1000")
+//    				.param("title_list", "안전포장여부").param("content_list", "일반 포장").param("price_list", "0")
+//    				.param("title_list", "안전포장여부").param("content_list", "안전 포장").param("price_list", "500")
+//    				.param("title_list", "유통기한").param("content_list", "60일").param("price_list", "0")
+//    				.param("title_list", "유통기한").param("content_list", "120일").param("price_list", "0")
+//    				.param("title_list", "유통기한").param("content_list", "180일").param("price_list", "1000")
         			;
         	
 			mock.perform(req);

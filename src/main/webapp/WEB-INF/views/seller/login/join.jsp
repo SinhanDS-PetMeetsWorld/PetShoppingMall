@@ -256,7 +256,7 @@
         <div>
             정산 계좌*<br>
             <select name="bank" id="bank">
-				<c:forEach var="bank" items="${vo.company_list[0]}" varStatus="status">
+				<c:forEach var="bank" items="${vo.company_list[1]}" varStatus="status">
 					<option value="${status.index}">${bank}</option>
 				</c:forEach>
             </select>

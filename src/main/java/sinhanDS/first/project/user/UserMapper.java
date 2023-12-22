@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
@@ -41,7 +42,7 @@ public interface UserMapper {
 	List<SaveBoxVO> zzim_list(int user_no);
 	List<UserVO> user_list(int user_no);
 	List<ProductVO> product_list(int product_no);
-	
+	ProductVO getProductListWithProductSearchVO(ProductSearchVO svo);
 	
 	List<ReviewVO> review_list(int user_no);
 	List<OrderDetailVO> order_detail(OrderDetailVO odvo);

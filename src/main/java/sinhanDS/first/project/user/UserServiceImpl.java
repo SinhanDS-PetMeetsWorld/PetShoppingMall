@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
@@ -227,6 +228,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<ProductVO> product_list(int product_no) {
 		List<ProductVO> product_list = mapper.product_list(product_no);
+		return product_list;
+	}
+	
+	@Override
+	public List<ProductVO> getProductListWithProductSearchVO(List<SaveBoxVO> zzim_list, ProductSearchVO svo){
+		List<ProductVO> product_list = new ArrayList<>();
+		for(int i = 0; i < zzim_list.size(); i++) {
+			svo.setProduct_no(zzim_list.get(i).getProduct_no());
+			product_list.add(mapper.getProductListWithProductSearchVO(svo));
+		}
 		return product_list;
 	}
 
