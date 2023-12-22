@@ -44,22 +44,27 @@ public class OrderController {
 	private UserService userService;
 	@Autowired
 	private SellerProductService sellerProductService;
+	
+//	@PostMapping("buy_now.do")
+//	public String buy_now(Model model, @RequestParam int product_no, @RequestParam int quantity) {
+//		
+//	}
 	/* TODO: 리스트가 들어온 후에는 갯수가 얼마나 길어질지 모르니 POSTMAPPING으로 바꿔야한다*/
 	@PostMapping("pay.do")
-	public String pay(Model model, @RequestParam int[] cart_no, @RequestParam int[] quantity_list ,@RequestParam int delivery_price, @RequestParam int total_price, @RequestParam int[] cart_user_no, @RequestParam(required=false) int[] option_no, @RequestParam(required=false) int[]option_cart_no) {
+	public String pay(Model model, @RequestParam(required = false) int[] cart_no, 
+					@RequestParam int[] quantity_list ,@RequestParam int delivery_price, 
+					@RequestParam int total_price, @RequestParam int[] cart_user_no, 
+					@RequestParam(required=false) int[] option_no, @RequestParam(required=false) int[]option_cart_no) {
 		/* 리스트 들어오기 전 임시 */
 		/* 리스트로 들어오면 얘들은 테스트로 넘겨주세용 ㅎㅎ */
 		
 		log.debug("cart_no2: " + cart_no);
 		log.debug("delfee: " + delivery_price);
-		System.out.println("cart_no2: " + Arrays.toString(cart_no));
+		log.debug("cart_no2: " + Arrays.toString(cart_no));
 		
 		CartVO cvo = new CartVO();
-		
 		cvo.setCart_no_list(cart_no);
 		log.debug("cvo: " + cvo);
-		//		cvo.setCart_no_list(new int[] {2, 3, 4});
-//		cvo.setQuantity_list(new int[] {1, 2, 3});
 		cvo.setQuantity_list(quantity_list);
 		log.debug("quantity: " + Arrays.toString(quantity_list) );
 		
@@ -79,6 +84,8 @@ public class OrderController {
 		model.addAttribute("userAddressList", userService.exist_addr(uvo));
 		model.addAttribute("userPaymentList", userService.exist_payment(uvo));
 		model.addAttribute("orderVO", orderVO);
+		
+		
 		/*cart no는 결제가 끝나고 지울 것이기 때문에 cart_no만 넘어가도 된다.*/
 		model.addAttribute("cno_list", cvo.getCart_no_list());
 		
