@@ -1,6 +1,6 @@
 package sinhanDS.first.project.admin.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.Data;
 
