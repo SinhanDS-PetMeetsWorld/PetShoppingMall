@@ -62,7 +62,7 @@ public class PaymentVO {
 	}
 	
 	/*
-	 type0은 은행, company1에 들어가는 리스트는 은행명
+	 type0 카드사, company1에 들어가는 리스트는 은행명
 	 type1이 카드사면 리스트로 카드사 목록 넣어주면 됨
 	 */
 }

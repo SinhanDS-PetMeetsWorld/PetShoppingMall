@@ -267,3 +267,6 @@ DROP COLUMN `charge`;
 
 ALTER TABLE `PetShoppingMall`.`order_detail` 
 ADD COLUMN `settlement_status` INT NULL DEFAULT '0' AFTER `purchase_confirmation_date`;
+
+ALTER TABLE `PetShoppingMall`.`settlement` 
+ADD COLUMN `bank` INT NULL DEFAULT NULL AFTER `account`;
