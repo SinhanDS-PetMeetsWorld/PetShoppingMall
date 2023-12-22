@@ -33,11 +33,12 @@ display : flex;
   background-color: #fd0;
   font-weight: 500;
   color: #222;
-  margin-top:5px;
+  
+  margin-left: 28px;
  }
  
 .menu_name {
-margin-bottom: 30px;	
+margin-bottom: 10px;	
 }
 
 .goods_image {
@@ -46,39 +47,45 @@ hegiht : 100px;
 }
 
 .goods_name_container{
-display : flex;
-flex-direction : column; 
 height : 20px;
-width : 200px;
-
-}
-
-.goods_name {
-margin-left : 30px;
-width: 700px;
-height: 30px;
-
-}
-
-.review_info_container {
-display : flex;
-flex-direction : column;
-height :80px;
 width : 500px;
 
 }
 
+.goods_name {
+margin-left : 20px;
+margin-top : 5px;
+width: 400px;
+height: 30px;
+}
+
+.goods_name a {
+    display: block;
+    width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.goods_price_container{
+display:flex;
+width : 200px;
+height : 100px;
+}
+
 .price {
     float: left;
-    margin-left: 45px;
-    margin-top: 20px;
+    width:180px;
+    text-align:right;
+    margin-top: 15px;
+    margin-right:26px;
     font-size: 25px;
 }
 
 .review_info {
     float: left;
-    font-size: 13px;
-    margin-top: 40px;
+    font-size: 15px;
+    margin-left : 20px;
  }
  
 
@@ -89,8 +96,14 @@ a:active {
     color: red; 
 }
 
+.button {
+float:left;
+font-size:13px;
+width:300px;
+}
+
 .rating{
-text-align:center;
+margin-left: 50px;
 font-size : 30px;
 }
 
@@ -119,10 +132,10 @@ font-size : 30px;
 					<div class= "review_container">
 						<div class = "goods_image">	
 							<c:if test="${review_list2[review_quant.index][0] != 'null' && !(fn:substring(review_list2[review_quant.index][0], 0, 1) == 'h') }">
-								<img src="/resources/img/product/review_img/${review_list2[review_quant.index][0] }" width="100" height="100">
+								<a href="/user/product/goods.do?no=${review_list2[review_quant.index][5] }" ><img src="/resources/img/product/review_img/${review_list2[review_quant.index][0] }" width="100" height="100"></a>
 							</c:if>
 							<c:if test="${review_list2[review_quant.index][0] == 'null'}">
-								<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+								<a href="/user/product/goods.do?no=${review_list2[review_quant.index][5] }" ><img src="/resources/img/product/no_image.jpg" width="100" height="100"></a>
 							</c:if>
 						</div>	
 							<c:if test="${!empty review_list2[review_quant.index][1] }">
@@ -133,22 +146,11 @@ font-size : 30px;
 						<div class = "goods_name_container">
 								<div class = "goods_name">
 									<c:if test="${!empty review_list2[review_quant.index][2] }">
-										<h4> <a href="/user/product/goods.do?no=${review_list2[review_quant.index][5] }" > ${review_list2[review_quant.index][2] }</a></h4> 
+										<h4><a href="/user/product/goods.do?no=${review_list2[review_quant.index][5] }" > ${review_list2[review_quant.index][2] }</a></h4> 
 									</c:if>
 								</div>	
-								
-								<div class = "price">
-									<c:if test="${!empty review_list2[review_quant.index][3] }">
-										<a> ${review_list2[review_quant.index][3] }원</a><br>
-									</c:if>
-								</div>	
-								
-						</div>
-						<div class = "review_info_container">			
 							
-															
 								<div class = "review_info">
-									
 									<c:if test="${!empty review_list2[review_quant.index][4] }">
 									리뷰 내용:	 ${review_list2[review_quant.index][4] } <br>
 									</c:if>
@@ -159,6 +161,17 @@ font-size : 30px;
 								    <input type="hidden" value="${review_list2[review_quant.index][5] }">
 									</c:if>
 								</div>	
+							
+						</div>
+						<div class = "goods_price_container">			
+							
+									<div class = "price">
+									<c:if test="${!empty review_list2[review_quant.index][3] }">
+										<a> ${review_list2[review_quant.index][3] }원</a><br>
+									</c:if>
+								</div>	
+								
+								
 						</div>
 						
 						
