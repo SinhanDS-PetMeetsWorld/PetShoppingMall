@@ -50,4 +50,7 @@ public interface UserMapper {
 	
 	List<OrderDetailVO> possible_write_review(int user_no);
 	String product_image_list(OrderDetailVO review_list);
+	
+	UserVO findId(UserVO vo);
+	int findPwd(UserVO vo);
 }
