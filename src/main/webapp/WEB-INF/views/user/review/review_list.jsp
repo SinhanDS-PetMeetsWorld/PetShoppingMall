@@ -151,17 +151,15 @@ font-size : 30px;
 						
 						<div class = "goods_name_container">
 								<div class = "goods_name">
-									<c:if test="${!empty review_list2[review_quant.index][2] }">
-										<h4><a> ${review_list2[review_quant.index][2] }</a></h4> 
-									</c:if>
+									<h4><a href="/user/product/goods.do?no=${review_list2[review_quant.index][8]}"> ${review_list2[review_quant.index][2] }</a></h4> 
 								</div>	
 							
 								<div class = "review_info">
 									<c:if test="${!empty review_list2[review_quant.index][4] }">
-									리뷰 내용:	 ${review_list2[review_quant.index][4] } <br>
+									내용:	 ${review_list2[review_quant.index][4] } <br>
 									</c:if>
 									<c:if test="${!empty review_list2[review_quant.index][6] }">
-									리뷰 작성일: ${review_list2[review_quant.index][6] } <br>
+									작성일: ${review_list2[review_quant.index][6] } <br>
 									</c:if>
 									<c:if test="${!empty review_list2[review_quant.index][5] }">
 								    <input type="hidden" value="${review_list2[review_quant.index][5] }">

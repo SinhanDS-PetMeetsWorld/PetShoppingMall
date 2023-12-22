@@ -435,6 +435,7 @@ public class UserController {
 				review_list1.add(String.valueOf(review_list.get(i).getProduct_no())); // 제품 번호 5				
 				review_list1.add(String.valueOf(review_list.get(i).getWrite_date())); // 작성일 6
 				review_list1.add(String.valueOf(review_list.get(i).getRating())); // 평점 7
+				review_list1.add(String.valueOf(review_list.get(i).getProduct_no())); // 상품 번호 8
 				
 				review_list2.add(review_list1);
 				
