@@ -78,7 +78,6 @@ margin-bottom: 30px;
  .recreateConfirm {
   display: inline-block;
   outline: 0;
-  border: none;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
