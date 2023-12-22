@@ -33,12 +33,13 @@ display : flex;
   background-color: #fd0;
   font-weight: 500;
   color: #222;
-  margin-top:5px;
+  
+  margin-top:15px;
   
  }
  
 .menu_name {
-margin-bottom: 30px;	
+margin-bottom: 10px;	
 }
 
 .goods_image {
@@ -46,49 +47,47 @@ width : 100px;
 hegiht : 100px;
 
 }
-
  
 .goods_name_container{
 height : 20px;
-width : 700px;
+width : 600px;
 }
 
 .goods_name {
 margin-left : 20px;
-margin-top : 10px;
+margin-top : 5px;
 width: 400px;
 height: 30px;
-overflow:hidden;
-
-
-
-			text-overflow: ellipsis;
-			word-wrap : break-word;
-			display      : inline-block;
-			white-space : nowrap;
-
 
 }
-  
+.goods_name a {
+    display: block;
+    width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
   
 .goods_price_container{
+display:flex;
 width : 200px;
-height : 80px;
+height : 100px;
 }
 
 .price {
     float: left;
-    margin-top: 5px;
+    width:120px;
+    text-align:right;
+    margin-top: 15px;
     font-size: 25px;
 }
 
-.review_info_container {
-display : flex;
-flex-direction : column;
-height :80px;
-width : 300px;
 
+
+.buy_date {
+margin-top:10px;
 }
+
 
 .review_info {
     float: left;
@@ -98,8 +97,8 @@ width : 300px;
 
 .button{
 float:left;
-width:200px;
-height:80px;
+width:300px;
+height:100px;
 
 }
 
@@ -138,10 +137,10 @@ a:active {
 										<img src="/resources/img/product/no_image.jpg" width="100" height="100">
 									</c:if>
 									<c:if test="${!empty possible_write_review2[possible_write_review.index][0] && fn:substring(possible_write_review2[possible_write_review.index][0], 0, 1) == 'h' }">
-										<img src="${possible_write_review2[possible_write_review.index][0] }" width="100" height="100">
+										<a href="/user/product/goods.do?no=${possible_write_review2[possible_write_review.index][5]}"><img src="${possible_write_review2[possible_write_review.index][0] }" width="100" height="100"></a>
 									</c:if>
 									<c:if test="${!empty possible_write_review2[possible_write_review.index][0] && !(fn:substring(possible_write_review2[possible_write_review.index][0], 0, 1) == 'h') }">
-										<img src="/resources/img/product/registed_img/${possible_write_review2[possible_write_review.index][0] }" width="100" height="100">
+										<a href="/user/product/goods.do?no=${possible_write_review2[possible_write_review.index][5]}"><img src="/resources/img/product/registed_img/${possible_write_review2[possible_write_review.index][0] }" width="100" height="100"></a>
 									</c:if>
 								</div>
 								
@@ -150,13 +149,15 @@ a:active {
 										<c:if test="${!empty possible_write_review2[possible_write_review.index][2] }">
 										<h4><a href="/user/product/goods.do?no=${possible_write_review2[possible_write_review.index][5]}" > ${possible_write_review2[possible_write_review.index][2]}</a></h4>
 										</c:if>
-									</div>
-									<br>
-									<div class = "buy_date">	
+										<div class = "buy_date">	
 										<c:if test="${!empty possible_write_review2[possible_write_review.index][4] }">
 											구매일자:	${possible_write_review2[possible_write_review.index][4]} <br>
 										</c:if>
 									</div>
+										
+									</div>
+									<br>
+									
 
 								</div>	
 								
