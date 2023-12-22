@@ -452,6 +452,10 @@ function addcart(){
 }
 
 function buy_now(){
+	if(login == null || login == ""){
+		alert("로그인 후 사용 가능합니다");
+		return;
+	}
 	var cart_form = $('#option_form').serialize();
 	cart_form = cart_form + "&quantity=" + $('.quantity').val();
 	if(Number($('.quantity').val()) <= 0){
@@ -461,10 +465,6 @@ function buy_now(){
 	console.log(cart_form);
 	var login = "${userLoginInfo}";
 	
-	if(login == null || login == ""){
-		alert("로그인 후 사용 가능합니다");
-		return;
-	}
 	
 	$.ajax({
 		type: "POST",
