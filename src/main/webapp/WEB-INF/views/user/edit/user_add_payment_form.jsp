@@ -22,15 +22,11 @@
 	<script>
 	$(function(){
 		$('#accountnum').click(function(){
-            //$('#accountnum').attr("class", "title_on");
-            //$('#card').attr("class", "title");
             $('#card_contents').css("display", "none");
             $('#accountnum_contents').css("display", "block");
         });
 
         $('#card').click(function(){
-//            $('#card').attr("class", "title_on");
-//            $('#accountnum').attr("class", "title");
             $('#accountnum_contents').css("display", "none");
             $('#card_contents').css("display", "block");
         });
@@ -90,7 +86,7 @@
 	            <span>카드정보 입력 </span>
 	            
 	            <select name="company" id="company">
-					<c:forEach var="card" items="${vo.company_list[1]}" varStatus="status">
+					<c:forEach var="card" items="${vo.company_list[0]}" varStatus="status">
 						<option value="${status.index}">${card}</option>
 					</c:forEach>
             	</select>
@@ -123,7 +119,7 @@
 	            <input type="hidden" name="type" id="type" value="1">
 	            <span>계좌이체 입력</span>
 	            <select name="company" id="company">
-					<c:forEach var="bank" items="${vo.company_list[0]}" varStatus="status">
+					<c:forEach var="bank" items="${vo.company_list[1]}" varStatus="status">
 						<option value="${status.index}">${bank}</option>
 					</c:forEach>
             	</select>

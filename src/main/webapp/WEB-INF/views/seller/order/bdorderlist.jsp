@@ -10,6 +10,87 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/css/common/template.css">
+    <style>
+    	.delivery_table{
+    		width:800px;
+    		height:100px;
+    		text-align: center;
+    		border-collapse : collapse;
+    		margin-bottom:20px;
+    		float:left;
+    		
+    	}
+    
+    	.delivery_table tr{
+    		height:40px;
+    	}
+    	
+    	.delivery_table tr th{
+    		background: linear-gradient(to left, #FFDE30, #ffe76b);
+    		border:1px solid black;
+    	}
+    	
+    	.delivery_table tr td{
+    		padding:20px;
+    	}
+    	
+    	.pro_name{
+    		width:400px;
+    	}
+    	
+    	.pro_opt{
+    		width:120px;
+    	}
+    	.pro_price{
+    		width:100px;
+    	}
+    	.pro_discount{
+    		width:100px;
+    	}
+    	
+    	
+    	
+    	
+	   	.canclebutton {
+			 outline: 0;
+			 border: none;
+			 cursor: pointer;
+			 padding: 0 24px;
+			 border-radius: 50px;
+			 width: 150px;
+			 height: 40px;
+			 font-size: 15px;
+			 background-color: #fd0;
+			 font-weight: 500;
+			 color: #222;
+			 margin: 30px 20px 30px 30px;
+			 float: left;
+		}
+		.buyer_info{
+			clear:both;
+			line-height: 30px;
+		}
+		.buyer_bold{
+			font-weight:bold;
+		}
+		
+		#regist_del{
+			outline: 0;
+			border: none;
+			cursor: pointer;
+			padding: 0 24px;
+			border-radius: 50px;
+			width: 150px;
+			height: 40px;
+			font-size: 15px;
+			background-color: #fd0;
+			font-weight: 500;
+			color: #222;
+		}
+		
+    	
+    </style>
+    
 </head>
 <body>
 	<div class="wrap">
@@ -29,14 +110,13 @@
 					</c:if>
 					<c:if test="${not empty orderMainList}">
 						<c:forEach var="orders" items="${orderMainList}" varStatus="mainstatus">
-							주문번호: ${orders.no }<br>
+							<br>
 							<c:set var="allcanclecheck" value="true"/>
 							
 							<c:if test="${not empty orderDetailList}">
 								<c:forEach var="orderdetails" items="${orderDetailList[mainstatus.index]}" varStatus="status">
-									${orderdetails.no}
-									<table border="1">
-										<thead><tr> <th>제품명</th><th>옵션</th><th>판매가</th><th>할인가</th><th>수량</th> </tr></thead>
+									<table border="1" class="delivery_table">
+										<thead><tr> <th class="pro_name">제품명</th><th class="pro_opt">옵션</th><th class="pro_price">판매가</th><th class="pro_discount">할인가</th><th class="pro_quantity">수량</th> </tr></thead>
 										<tr <c:if test="${orderdetails.cancle_status != 0}">style="color:red"</c:if>>
 											<td><c:if test="${orderdetails.cancle_status != 0}">(취소)</c:if>${orderdetails.product_name}</td>
 											<td>
@@ -56,14 +136,18 @@
 										<button type="button" value="${orderdetails.no}" class="canclebutton">주문취소</button>
 									</c:if>
 									<br><br>
-								</c:forEach>
+									
 								
-								수취인정보<br>
+								</c:forEach>
+								<div class="buyer_info">
+								<span class="buyer_bold">수취인정보</span>
+								<br>
 								이름: ${orders.user_name } 연락처: ${orders.user_phone } <br>
 								우편번호: ${orders.zipcode } 주소: ${orders.addr1 } 상세주소: ${orders.addr2 } <br><br>
-								주문일시: ${orders.order_date } 배송상태: 배송준비<br>
-									<form method="post" name="deliveryForm"  id="deliveryForm" action="regist_deliver.do">
+								주문일시: ${orders.order_date } <br> 배송상태: 배송준비 
 									
+									<form method="post" name="deliveryForm"  id="deliveryForm" action="regist_deliver.do">
+									<br>
 									<input type="submit" id="regist_del" value="배송시작" <c:if test='${allcanclecheck == "true"}'> disabled="disabled" </c:if>>
 									
 									<input type="hidden" name="receiver_name" value="${orders.user_name}">
@@ -79,8 +163,13 @@
 									<input type="hidden" name="order_no" value="${orders.no}">
 									<input type="hidden" name="seller_no" value="${svo.no}">
 									</form>	
+								<br>
 								
-								<br><br><hr><br>
+								</div>
+								
+								
+								<hr><br>
+								
 							</c:if>
 						</c:forEach>
 					</c:if>

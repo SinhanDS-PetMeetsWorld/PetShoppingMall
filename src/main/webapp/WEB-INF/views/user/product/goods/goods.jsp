@@ -18,16 +18,18 @@
 			height: 1000px;
 		}
 		
-		.left_side{
-			width: 50%;
+		.right_side{
+			width: 48%;
 			height: 650px;
-			float:left;
+			float:right;
+			margin-left:10px;
+			margin-top:50px;
 		}
 		
-		.right_side{
+		.left_side{
 			width:50%;
 			height:650px;
-			float:right;
+			float:left;
 			display:flex;
 			justify-content: center;
 			align-items:center;	
@@ -202,6 +204,21 @@
 		<div class="contents">
 			<div class="contentsright">
 				<div class="left_side">
+					<c:forEach var="item" items="${product_more}">
+						<div class="goods-photo">
+							<c:if test="${empty item.image_url }">
+								<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+							</c:if>
+							<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
+								<img src="${item.image_url }"  height="450">
+							</c:if>
+							<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
+								<img src="/resources/img/product/registed_img/${item.image_url }" height="450">
+							</c:if>
+						</div>
+					</c:forEach>
+					</div>
+				<div class="right_side">
 					<div id="goods_category">
 						<c:forEach var="item" items="${product_more_category}">
 							<span class="big_category">${catekor.category_name[item.category1]} > </span> 
@@ -279,25 +296,11 @@
 						</div>
 						<div>
 							<input type="button" class="push_cart" style="background-color: grey;" value="장바구니 담기" onclick="addcart()"> 
-							<input type="button" class="now_get" style="background-color: yellow" value="바로 구매">
+							<input type="button" class="now_get" style="background-color: yellow" value="바로 구매" onclick="buy_now()"> 
 						</div>	
 					</div>
 					
-					<div class="right_side">
-					<c:forEach var="item" items="${product_more}">
-						<div class="goods-photo">
-							<c:if test="${empty item.image_url }">
-								<img src="/resources/img/product/no_image.jpg" width="100" height="100">
-							</c:if>
-							<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
-								<img src="${item.image_url }"  width="590">
-							</c:if>
-							<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
-								<img src="/resources/img/product/registed_img/${item.image_url }" width="590">
-							</c:if>
-						</div>
-					</c:forEach>
-					</div>
+					
 					
 					
 					
@@ -427,29 +430,54 @@ function zzim(){
 
 </script>
 <script>
-	function addcart(){
-		var cart_form = $('#option_form').serialize();
-		var login = "${userLoginInfo}";
-		
-		if(login == null || login == ""){
-			alert("로그인 후 사용 가능합니다");
-			return;
-		}
-		
-		$.ajax({
-			type: "POST",
-			url:'addcart.do',
-			data: cart_form,
-			async: false,
-			success:function(res) {
-				if (res == 'true') {
-					alert('장바구니에 추가되었습니다');
-				} else {
-					alert('장바구니 추가에 실패했습니다.');
-				}
-			}
-		})
+function addcart(){
+	var cart_form = $('#option_form').serialize();
+	var login = "${userLoginInfo}";
+	
+	if(login == null || login == ""){
+		alert("로그인 후 사용 가능합니다");
+		return;
 	}
+	
+	$.ajax({
+		type: "POST",
+		url:'addcart.do',
+		data: cart_form,
+		async: false,
+		success:function(res) {
+			if (res == 'true') {
+				alert('장바구니에 추가되었습니다');
+			} else {
+				alert('장바구니 추가에 실패했습니다.');
+			}
+		}
+	})
+}
+
+function buy_now(){
+	if(login == null || login == ""){
+		alert("로그인 후 사용 가능합니다");
+		return;
+	}
+	var cart_form = $('#option_form').serialize();
+	cart_form = cart_form + "&quantity=" + $('.quantity').val();
+	if(Number($('.quantity').val()) <= 0){
+		alert("한 개 이하의 제품은 구매할 수 없습니다.");
+		return;
+	}
+	console.log(cart_form);
+	var login = "${userLoginInfo}";
+	
+	
+	$.ajax({
+		type: "POST",
+		url:'/user/order/buy_now.do',
+		data: cart_form,
+		async: false,
+		success:function(res) {
+		}
+	})
+}
 </script>	
 
 <script>
