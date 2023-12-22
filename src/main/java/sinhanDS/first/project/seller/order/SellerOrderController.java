@@ -20,6 +20,7 @@ import sinhanDS.first.project.delivery.vo.DeliveryVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
+import sinhanDS.first.project.user.vo.PaymentVO;
 
 
 @Controller
@@ -129,6 +130,10 @@ public class SellerOrderController {
 	public String settlement(HttpSession sess, Model model) {
 		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
 		model.addAttribute("svo", svo);
+		
+		PaymentVO pvo = new PaymentVO();
+		String bank_name = pvo.getCompany_list().get(1).get(svo.getBank());
+		sess.setAttribute("bank_name", bank_name);
 		
 		int settlement_list_count = service.settlement_list_count(svo.getNo());
 		int settlement_price = service.settlement_price(svo.getNo());
