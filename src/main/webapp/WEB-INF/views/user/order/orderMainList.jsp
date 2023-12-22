@@ -12,6 +12,82 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
+<style>
+
+.orderList_container {
+display : flex;
+}
+
+#more_purchase {
+  display: inline-block;
+  outline: 0;
+  border: 2px solid #fd0;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  width: 150px;
+  height: 35px;
+  font-size: 15px;
+  background-color:#F9FAFB;
+  font-weight: 500;
+  color: #222;
+  
+  margin-top : 14px;
+ }
+ 
+ 
+#delete_purchase {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  width: 150px;
+  height: 35px;
+  font-size: 15px;
+  background-color: #ff4742;
+  font-weight: 500;
+  color: #F9FAFB;
+
+ }
+ 
+.menu_name {
+margin-bottom: 10px;	
+}
+
+
+.order_list{
+width : 600px;
+height : 70px;
+float : left;
+}
+
+.button {
+float :left;
+fontsize : 13px;
+width : 400px;
+height : 70px;
+}
+
+.order_list #cut {
+    display: block;
+    width: 400px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.line {
+	margin-top : 10px;
+	margin-bottom : 10px;
+	width : 910px;
+    border: 1px solid #ccc;
+ }
+</style>    
+    
+    
 </head>
 <body>
 	<div class="wrap">
@@ -24,39 +100,38 @@
         	</c:if>
         </div>
 
-       	
-        
         <div class="contents">
         	<div class="quickmenu">
                 <%@ include file="/WEB-INF/views/common/quickmenu_user_info.jsp"%>
             </div>
 			<div class="contentsright">
-				<div>
-					<h1>구매 이력</h1>
+					<h1 class = "menu_name">구매 이력</h1>
 					<c:if test="${empty orderList }"><br><h2>구매이력이 존재하지 않습니다.</h2></c:if>
 
-					<c:forEach items="${orderList }" var="vo">
-						<div>
-							<div>
-								<div>
-									주문번호 : <span id="orderNo">${vo.no }</span> <input type="button" class="removeThisOrder" value="구매이력 삭제" data-no="${vo.no }">
-								</div>
-								<div>
-									${vo.name } 총 결제금액: ${vo.total_price }원
-								</div>
-							</div>
+							<c:forEach items="${orderList }" var="vo">
 							
-							<div>
-								<div>주문 상태:</div> 
-								<div><input type="button" class="seeOrderDetailButton" value="상세 보기" data-no="${vo.no }"></div>
-							</div>
-							<hr><br>
-						</div>
-					</c:forEach>
-				</div>
+								 <div class = "orderList_container">
+									
+									<div class = "order_list">
+										주문 번호 : <span id="orderNo">${vo.no }</span> 
+									 	<h3><a id ="cut"class="seeOrderDetailButton" data-no="${vo.no }">  ${vo.name }</a></h3>
+										총 결제금액: ${vo.total_price }원 <br>
+									</div>	
+									
+									<div class = "button">
+										
+									<input id = "more_purchase" type="button" class="seeOrderDetailButton" value="상세 보기" data-no="${vo.no }">
+									<input id = "delete_purchase" type="button" class="removeThisOrder" value="구매이력 삭제" data-no="${vo.no }">
+						
+									</div>	
+									
+								 </div>
+						    <hr class = "line">
+						    
+							</c:forEach>
+				
 			</div>
-			
-			
+		
 			
 			<div>
 				<ul class='paging'>
@@ -111,6 +186,27 @@
 		let no = $(this).data('no');
 		location.href='seeOrderDetail.do?no='+no;
 	}
+	
+	
+	 // JavaScript로 텍스트를 가공하여 앞부분을 자르고 ellipsis를 추가
+    var textContainer = document.getElementById('cut');
+    var originalText = textContainer.textContent;
+
+    // 원하는 길이만큼 텍스트를 앞부분에서 자르고 ellipsis를 추가
+    var maxLength = 50;
+    var truncatedText = originalText.length > maxLength ? '...' + originalText.slice(-maxLength) : originalText;
+
+    // 결과를 화면에 표시
+    textContainer.textContent = truncatedText;
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </script>
 </html>

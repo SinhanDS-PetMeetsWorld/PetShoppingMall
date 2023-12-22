@@ -16,7 +16,11 @@
     
  <style>
  
-.zzim_On {
+ .zzim_container {
+display : flex;
+}
+
+.zzim_Off {
   display: inline-block;
   outline: 0;
   border: none;
@@ -29,37 +33,58 @@
   background-color: #fd0;
   font-weight: 500;
   color: #222;
-  margin-top:5px;
+  
+  margin-top:15px;
   
  }
  
- .price{
- text-align: center;
- margin_top : 80px;
- margin-left: 40px;
- font-size: 20px;
- }
- 
-.goods_container {
-display : flex;
-
-}
-
-.menu_name {
-margin-bottom: 30px;	
+ .menu_name {
+margin-bottom: 10px;	
 }
 
 .goods_image {
 width : 100px;
 hegiht : 100px;
 }
+ 
+
+.goods_name_container{
+height : 20px;
+width : 600px;
+}
 
 .goods_name {
-position:relative;
-margin-left : 30px;
-margin-top : 20px;
-width: 1000px;
-height: 100px;
+margin-left : 20px;
+margin-top : 5px;
+width: 400px;
+height: 30px;
+}
+
+.goods_name a {
+    display: block;
+    width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.goods_price_container{
+display:flex;
+width : 200px;
+height : 100px;
+}
+
+ .price{
+    float: left;
+    width:120px;
+    text-align: right;
+    margin-top: 15px;
+    margin-left: 2.08px;
+    font-size: 25px;
+ }
+
+.description {
+margin-top:10px;
 }
 
 .go_more {
@@ -69,9 +94,32 @@ margin-top: 20px;
 margin-left: 20px;	
 }
 
-.goods_info {
-width: 200px;
-height : 100px;
+.review_info {
+    float: left;
+    font-size: 13px;
+    margin-top: 40px;
+ }
+ 
+.button{
+float:left;
+width:300px;
+height:100px;
+
+}
+
+.line {
+	margin-top : 10px;
+	margin-bottom : 10px;
+	width : 930px;
+    border: 1px solid #ccc;
+ }
+ 
+
+a:visited {
+    color: purple; 
+}
+a:active {
+    color: red; 
 }
 
 </style>      
@@ -92,53 +140,67 @@ height : 100px;
 				
 				<h1 class= "menu_name">찜 박스</h1>
 				<c:forEach items="${save_list2}" varStatus = "zzim_quant" >
-					<div class="goods_container">
-						<div class="goods_image">	
-							<c:if test="${empty save_list2[zzim_quant.index][0] }">
-								<img src="/resources/img/product/no_image.jpg" width="100" height="100">
-							</c:if>
-							
-							<c:if test="${!empty save_list2[zzim_quant.index][0] && fn:substring(save_list2[zzim_quant.index][0], 0, 1) == 'h' }">
-								<img src="${save_list2[zzim_quant.index][0] }" width="100" height="100">
-							</c:if>
-							
-							<c:if test="${!empty save_list2[zzim_quant.index][0] && !(fn:substring(save_list2[zzim_quant.index][0], 0, 1) == 'h') }">
-								<img src="/resources/img/product/registed_img/${save_list2[zzim_quant.index][0]}" width="100" height="100">
-							</c:if>
-						</div>	
-						
-						<div class="goods_name">
-							<c:if test = "${not empty save_list2[zzim_quant.index][1]}">
-						   	<h4> <a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}">${save_list2[zzim_quant.index][1]}</a></h4>
-						   	</c:if>
-						</div>
-
-						<div class="goods_info">	
-							<c:if test = "${not empty save_list2[zzim_quant.index][2]}">
-							${save_list2[zzim_quant.index][2]} <br>
-							</c:if>
-						</div>
-							
-							<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
-							<input type = "hidden" value ="${save_list2[zzim_quant.index][4]}"> <br>
-							</c:if>
-							<c:if test = "${not empty save_list2[zzim_quant.index][5]}">
-							<input type="hidden" value="${save_list2[zzim_quant.index][5]}">	
-							</c:if>
-						
-						<div class = "button">
-							<c:if test = "${not empty save_list2[zzim_quant.index][3]}">
-							<a class = "price">${save_list2[zzim_quant.index][3]}원 </a><br>
-							</c:if>
-						
-							<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
-							<button class="zzim_On" data-no="${save_list2[zzim_quant.index][4]}"> 찜 목록 해제 </button> <br>
-							</c:if>
-						</div>
-							
-					 </div>  
-				   </c:forEach>			
-				<c:if test="${empty save_list2[zzim_quant.index] }"><br><h2>찜 박스에 상품이 존재하지 않습니다.</h2></c:if>
+					<c:if test="${empty save_list2[zzim_quant.index] }"><br><h2>찜 박스에 상품이 존재하지 않습니다.</h2>
+					</c:if>
+				
+				<div>	
+					<c:if test="${!empty save_list2[zzim_quant.index] }">
+					
+							<div class = "zzim_container"> 
+									<div class="goods_image">	
+										<c:if test="${empty save_list2[zzim_quant.index][0] }">
+											<a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}"><img src="/resources/img/product/no_image.jpg" width="100" height="100"></a>
+										</c:if>
+										
+										<c:if test="${!empty save_list2[zzim_quant.index][0] && fn:substring(save_list2[zzim_quant.index][0], 0, 1) == 'h' }">
+											<a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}"><img src="${save_list2[zzim_quant.index][0] }" width="100" height="100"></a>
+										</c:if>
+										
+										<c:if test="${!empty save_list2[zzim_quant.index][0] && !(fn:substring(save_list2[zzim_quant.index][0], 0, 1) == 'h') }">
+											<a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}"><img src="/resources/img/product/registed_img/${save_list2[zzim_quant.index][0]}" width="100" height="100"></a>
+										</c:if>
+									</div>	
+									
+									<div class="goods_name_container">
+										<div class = "goods_name">
+											<c:if test = "${not empty save_list2[zzim_quant.index][1]}">
+									   			<h4> <a href="/user/product/goods.do?no=${save_list2[zzim_quant.index][4]}">${save_list2[zzim_quant.index][1]}</a></h4>
+									   		</c:if>
+									   	</div>
+									   	<div class = "description">	
+									   		<c:if test = "${not empty save_list2[zzim_quant.index][2]}">
+											상품 설명 : ${save_list2[zzim_quant.index][2]} <br>
+											</c:if>
+										</div>
+									</div>
+			
+									<div class="goods_price_container">	
+										<c:if test = "${not empty save_list2[zzim_quant.index][3]}">
+											<a class = "price">${save_list2[zzim_quant.index][3]}원 </a><br>
+										</c:if>
+									</div>
+										
+									<div class = "review_info">
+											<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
+													<input type = "hidden" value ="${save_list2[zzim_quant.index][4]}"> <br>
+											</c:if>
+											
+											
+											<c:if test = "${not empty save_list2[zzim_quant.index][5]}">
+													<input type="hidden" value="${save_list2[zzim_quant.index][5]}">	
+											</c:if>
+									</div>
+									<div class = "button">
+										<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
+										<button class="zzim_Off" data-no="${save_list2[zzim_quant.index][4]}"> 찜 목록 해제 </button> <br>
+										</c:if>
+									</div>
+										
+								 </div>
+					</c:if>
+				</div>	 
+				<hr class = "line">
+			</c:forEach>			
 				<h1> 병천이 부탁 " 페이징 처리 5개씩 요청 "</h1>
 			</div>
         </div>
@@ -149,7 +211,7 @@ height : 100px;
     </div>    
 <script>
 
-$(".zzim_On").on('click', zzim);
+$(".zzim_Off").on('click', zzim);
 
 function zzim(){
 	console.log($(this).data('no'));
