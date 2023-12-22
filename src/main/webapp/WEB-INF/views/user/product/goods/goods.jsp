@@ -23,6 +23,7 @@
 			height: 650px;
 			float:right;
 			margin-left:10px;
+			margin-top:50px;
 		}
 		
 		.left_side{
@@ -209,10 +210,10 @@
 								<img src="/resources/img/product/no_image.jpg" width="100" height="100">
 							</c:if>
 							<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
-								<img src="${item.image_url }"  width="590">
+								<img src="${item.image_url }"  height="450">
 							</c:if>
 							<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
-								<img src="/resources/img/product/registed_img/${item.image_url }" width="590">
+								<img src="/resources/img/product/registed_img/${item.image_url }" height="450">
 							</c:if>
 						</div>
 					</c:forEach>
