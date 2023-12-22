@@ -315,4 +315,21 @@
 		UPDATE order_detail SET purchase_confirmation_date=SYSDATE() WHERE no=#{no}
 	</update>
 	
+	
+	<select id="getSettlementReqList" resultType="sinhanDS.first.project.admin.vo.SettlementVO">
+		SELECT * FROM settlement WHERE settlement_date IS NULL
+	</select>
+	
+	<select id="getSettlementComList" resultType="sinhanDS.first.project.admin.vo.SettlementVO">
+		SELECT * FROM settlement WHERE settlement_date IS NOT NULL
+	</select>
+	
+	<update id="updateSettlementDate" parameterType="int">
+		UPDATE settlement SET settlement_date = NOW() WHERE no = #{no}
+	</update>
+	
+	<update id="updateSettlementStatus" parameterType="int">
+		UPDATE order_detail SET settlement_status = 2 WHERE settlement_no = #{settlement_no}
+	</update>
+	
 </mapper>

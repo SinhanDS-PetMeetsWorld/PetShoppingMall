@@ -13,6 +13,167 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
+    
+    <style>
+    	.nowsale_table{
+    		width:800px;
+    		height:140px;
+    		text-align: center;
+    		border-collapse : collapse;
+    		margin-bottom:20px;
+    		float:left;
+    		
+    	}
+    
+    	.nowsale_table tr{
+    		height:20px;
+    	}
+    	
+    	.nowsale_table_title td{
+    		background: linear-gradient(to left, #FFDE30, #ffe76b);
+    		border:1px solid black;
+    	}
+    	
+    	.pro_image{
+    		width:100px;
+    	}
+    	
+    	.pro_name{
+    		width:340px;
+    	}
+    	.pro_category{
+    		width:120px;
+    	}
+    	.pro_opt{
+    		width:150px;
+    	}
+    	.pro_price{
+    		width:80px;
+    	}
+    	.pro_quantity{
+    		width:50px;
+    	}
+    	
+    	.one_line{
+    		height:150px;
+    	}
+    	
+    	
+	   	.modify_button {
+			 outline: 0;
+			 border: none;
+			 cursor: pointer;
+			 border-radius: 50px;
+			 width: 150px;
+			 height: 40px;
+			 font-size: 15px;
+			 background-color: #fd0;
+			 font-weight: 500;
+			 color: #222;
+			 margin-left:20px;
+			 margin-bottom:10px;
+		}
+	   	.delete_button {
+			 outline: 0;
+			 border: none;
+			 cursor: pointer;
+			 border-radius: 50px;
+			 width: 150px;
+			 height: 40px;
+			 font-size: 15px;
+			 background-color: #fd0;
+			 font-weight: 500;
+			 color: #222;
+			margin-left:20px;
+			 margin-bottom:20px;
+		}
+		
+		.btn_wrap{
+			float:left;
+			margin-right:30px;
+			margin-bottom:20px;
+		}
+		
+		.buyer_info{
+			clear:both;
+			line-height: 30px;
+		}
+		.buyer_bold{
+			font-weight:bold;
+		}
+		
+		#regist_del{
+			outline: 0;
+			border: none;
+			cursor: pointer;
+			padding: 0 24px;
+			border-radius: 50px;
+			width: 150px;
+			height: 40px;
+			font-size: 15px;
+			background-color: #fd0;
+			font-weight: 500;
+			color: #222;
+		}
+		
+		
+		.paging_dif{
+			clear:both;
+		}
+		
+		
+		.paging_div{
+			height:30px;	
+			text-align:center;
+			width:1000px;
+			
+			margin-bottom:15px;
+		}
+	
+		
+		.paging li{
+			list-style: none;
+			margin-right:8px;
+			margin-top:15px;
+			
+			text-align:center;
+			display:inline-block;
+		}
+		
+		.paging li a{
+			width:20px;
+			height:20px;
+			background: white;
+			border-radius: 4px;
+			border: 1px solid black;
+			text-decoration: none;
+			font-size:13px;
+			color:black;
+			display:block;
+			line-height:18px;
+		}
+		
+		
+		
+		.paging li a:hover{
+			width:20px;
+			height:20px;
+			background: black;
+			color:white;
+			
+		}
+    
+    	.bbsSearch{
+    		width:1000px;
+    		text-align:center;
+    	}
+    	
+    	.search_keyword_btn{
+    		background-color:#FFDE30;
+    		border:1px solid gray;
+    	}
+    
+    </style>
 </head>
 <body>
 	<div class="wrap">
@@ -30,37 +191,25 @@
 				<div>
 					<ul>
 						<c:forEach items="${productList }" var="vo" varStatus="status">
-							<li>
-								<table border="1px">
-									<tr>
-										<td rowspan="2">
-											<c:if test="${empty vo.image_url }">
-												<img src="/resources/img/product/no_image.jpg" width="100" height="100">
-											</c:if>
-											<c:if test="${!empty vo.image_url && fn:substring(vo.image_url, 0, 1) == 'h' }">
-												<img src="${vo.image_url }" width="100" height="100">
-											</c:if>
-											<c:if test="${!empty vo.image_url && !(fn:substring(vo.image_url, 0, 1) == 'h') }">
-												<img src="/resources/img/product/registed_img/${vo.image_url }" width="100" height="100">
-											</c:if>
+							<li class="one_line">
+							
+								<table border="1px" class="nowsale_table">
+										<tr class="nowsale_table_title">
+											<td rowspan="2" class="pro_image">
+												<c:if test="${empty vo.image_url }">
+													<img src="/resources/img/product/no_image.jpg" width="100" height="100">
+												</c:if>
+												<c:if test="${!empty vo.image_url && fn:substring(vo.image_url, 0, 1) == 'h' }">
+													<img src="${vo.image_url }" width="100" height="100">
+												</c:if>
+												<c:if test="${!empty vo.image_url && !(fn:substring(vo.image_url, 0, 1) == 'h') }">
+													<img src="/resources/img/product/registed_img/${vo.image_url }" width="100" height="100">
+												</c:if>
+												
+											</td>
+											<td class="pro_name">제품명</td><td class="pro_category">카테고리</td> <td class="pro_opt">옵션</td><td class="pro_price">판매가</td><td class="pro_quantity">재고</td>
 											
-										</td>
-										<td>
-											제품명	
-										</td>
-										<td>
-											카테고리	
-										</td>
-										<td>
-											옵션	
-										</td>
-										<td>
-											판매가	
-										</td>
-										<td>
-											재고	
-										</td>
-									</tr>
+										</tr>
 									<tr>
 										<td>
 											${vo.name }
@@ -78,7 +227,7 @@
 											<c:forEach items="${optionList }" var="ovoList" varStatus="oList_status">
 												<c:if test="${status.index == oList_status.index }">
 													<c:forEach items="${ovoList }" var="ovo" varStatus="o_status">
-														${ovo.title } ${ovo.content } ${ovo.price } <br>
+														${ovo.title }:${ovo.content } <br>
 													</c:forEach>
 												</c:if>
 											</c:forEach>
@@ -92,27 +241,30 @@
 									</tr>
 								</table>
 								<br>
+								<div class="btn_wrap">
 									<form action="/seller/product/edit.do" method="get">
 										<input type="hidden" name="no" value="${vo.no }">
-										<input type="submit" value="수정하기">
+										<input type="submit" class="modify_button" value="수정하기">
 									</form>
 									
 									<form action="/seller/product/remove.do" method="post" onsubmit="return remove();">
 										<input type="hidden" name="no" value="${vo.no }">
 										<input type="hidden" name="image_url" value="${vo.image_url }">
-										<input type="submit" value="삭제하기">
+										<input type="submit" class="delete_button" value="삭제하기">
 									</form>
-								<br>
+								</div>
+								
+								
+							</li>	
 								<br>
 								<hr>
-								<br>
-							</li>						
+								<br>					
 						</c:forEach>
 					</ul>
 				</div>
 				
 				
-				<div>
+				<div class="paging_div">
 					<ul class='paging'>
                         <c:if test="${paging.prev }">
                         	<li><a href="list.do?page=${paging.startPage-1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> << </a></li>
@@ -152,7 +304,7 @@
                         </span>
                         <span class="searchWord">
                             <input type="text" id="sval" name="searchWord" value="${productSearchVO.searchWord}"  title="검색어 입력">
-                            <input type="submit" value="검색">
+                            <input type="submit" class="search_keyword_btn" value="검색">
                         </span>
                     </form>
                     
