@@ -92,7 +92,7 @@
 	</insert>
 	
 	<update id="update_deliveryNo" parameterType="sinhanDS.first.project.order.vo.OrderDetailVO">
-		UPDATE order_detail SET delivery_no = #{delivery_no}, delivery_status = 1 WHERE no = #{no}
+		UPDATE order_detail SET delivery_no = #{delivery_no}, delivery_status = 1 WHERE (no = #{no} AND cancle_status=0) 
 	</update>
 	
 	<select id="getDeliveryVO" parameterType="int" resultType="sinhanDS.first.project.delivery.vo.DeliveryVO">

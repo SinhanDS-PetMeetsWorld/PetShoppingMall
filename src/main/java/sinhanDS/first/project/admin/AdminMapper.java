@@ -3,6 +3,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import sinhanDS.first.project.admin.vo.SettlementVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
@@ -28,4 +29,13 @@ public interface AdminMapper {
 	public int getNumberOfCancleAndRefound(ProductSearchVO svo);
 	
 	public void confirmOrderDetail(int no);
+	
+	//getSettlementReqList 이건 정산일 없는(정산 요청된) settlement 불러오면됨
+	public List<SettlementVO> getSettlementReqList();
+	//getSettlementComList 이건 정산일 있는(정산 완료된)애들 목록 불러옴
+	public List<SettlementVO> getSettlementComList();
+	//updateSettlementStatus 정산번호 받아와서 해당 정산의 정산일 NOW()로 업뎃
+	public int updateSettlementDate(int no);
+	//updateSettlementStatus 정산번호 받아와서 해당 정산번호 갖고있는 주문상세들 정산상태 2로 업뎃
+	public int updateSettlementStatus(int no);
 }

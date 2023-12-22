@@ -5,6 +5,7 @@ import java.util.List;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.user.vo.CartOptionVO;
@@ -41,6 +42,7 @@ public interface UserService {
 	List<SaveBoxVO> zzim_list (int user_no);
 	List<UserVO> user_list (int user_no);
 	List<ProductVO> product_list(int product_no);
+	List<ProductVO> getProductListWithProductSearchVO(List<SaveBoxVO> zzim_list, ProductSearchVO svo);
 	
 	List<ReviewVO> review_list(int user_no);
 	List<OrderDetailVO> order_detail(OrderDetailVO odvo);

@@ -61,7 +61,7 @@ public class ProductCategoryVO {
 		category2.add("햄스터");//2
 		category2.add("토끼");//3
 		category2.add("고슴도치");//4
-		category2.add("기타동물");//5
+		category2.add("동물 인형");//5
 		category.add(category2);
 	}
 }

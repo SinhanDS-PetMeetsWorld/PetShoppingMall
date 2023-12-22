@@ -2,6 +2,7 @@ package sinhanDS.first.project.admin;
 
 import java.util.List;
 
+import sinhanDS.first.project.admin.vo.SettlementVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
@@ -26,4 +27,9 @@ public interface AdminService {
 	
 	
 	public void confirmOrderDetail(int[] no);
+	
+	public List<SettlementVO> getSettlementReqList();
+	public List<SettlementVO> getSettlementComList();
+	public boolean updateSettlement(int no);
+	public boolean updateAllSettlement(List<Integer> list);
 }

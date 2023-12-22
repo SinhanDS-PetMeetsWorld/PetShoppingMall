@@ -15,6 +15,9 @@
 	<button class="admin_menu_button" data-href="/admin/cancleAndRefoundList.do">취소/환불 목록 조회</button>
 	<br>
 	<button class="admin_menu_button" data-href="/admin/needConfirmationList.do">구매 확정될 목록 조회</button>
+	
+	<button class="admin_menu_button" data-href="/admin/getSettlementReqList.do">정산 요청 목록 조회</button>
+	<button class="admin_menu_button" data-href="/admin/getSettlementComList.do">정산 완료 목록 조회</button>
 </body>
 
 <script>
