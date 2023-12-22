@@ -23,8 +23,6 @@
 			word-wrap : break-word;
 			overflow     : hidden;
 			display      : inline-block;
-			max-height: 44px;
-			line-height: 21px;
 			white-space : nowrap;
 		}
 		.product_preview_info{
@@ -41,7 +39,30 @@
 			float: right;
 			text-align: right;
 		}
-
+		.detail_search input {
+				height : 25px;
+                padding: 3px 10px;
+                font-size: 13px;
+                line-height: 20px;
+                color: #24292e;
+                vertical-align: middle;
+                background-color: #ffffff;
+                background-repeat: no-repeat;
+                background-position: right 8px center;
+                border: 1px solid #9CA3AF;
+                border-radius: 6px;
+                outline: none;
+                box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+                :focus{
+                    border-color: #0366d6;
+                    outline: none;
+                    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+                }
+		}
+		.search_type {
+			
+		}
+		
     </style>
     
 </head>
@@ -68,6 +89,7 @@
                     	<input type="hidden" name="category1" value="${category1}">
                     	<input type="hidden" id="category2" name="category2" value="${category2}">
                     	<input type="hidden" name="totalSearchWord" value="${ProductSearchVO.totalSearchWord}">
+                    	<div>
                     	상세검색
                     	<span>
                         	<select class="searchType" name="searchType">
@@ -87,6 +109,7 @@
 	                        </span>
                         </span>
                         <br>
+                    	</div>
                         정렬
 		                <span class="sorttype">
 		                	<select name="sorttype" id="sorttype" onchange="changeSorttype();">
