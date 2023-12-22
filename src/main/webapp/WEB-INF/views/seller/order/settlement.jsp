@@ -54,7 +54,7 @@
 			<div class="contentsright">
 				<div>
 					
-					정산 계좌 <input type="text" placeholder="${svo.bank}" disabled>
+					정산 계좌 <input type="text" placeholder="${bank_name}" disabled>
 							<input type="text" placeholder="${svo.account}" disabled><br><br><hr><br>
 					정산 가능액 ${settlement_price - total_charge}원
 					<form method="post" name="deliveryForm"  id="deliveryForm" onsubmit="return get_set();" action="settlement_get.do">
@@ -65,6 +65,7 @@
                         <input type="hidden" name="total_settlement" value="${settlement_price}">
                         <input type="hidden" name="total_charge" value="${total_charge}">
                         <input type="hidden" name="account" value="${svo.account}">
+                        <input type="hidden" name="bank" value="${svo.bank}">
 					</form>	
 					<br><hr><br>
 					정산 예정액 ${unsettlement_price}원<br><br><hr><br>
@@ -105,7 +106,7 @@
 										<td>${orderdetails.product_name}</td>
 										<td>${orderdetails.order_date}</td>
 										<td>${orderdetails.purchase_confirmation_date}</td>
-										<td>${orderdetails.product_price - orderdetails.discount}</td>
+										<td>${(orderdetails.product_price - orderdetails.discount) * orderdetails.quantity}</td>
 										<td>${orderdetails.charge}</td>
 										<td>
 											<c:if test='${orderdetails.settlement_status == 0}'>정산 미신청</c:if>
@@ -153,6 +154,8 @@
     		if( total_charge.value=="" || total_charge.value==null){
     			total_charge.value = 0;
     		}
+    		
+    		var 
     		return true;
     	}
     </script>

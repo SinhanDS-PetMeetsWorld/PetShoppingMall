@@ -50,4 +50,7 @@ public interface UserService {
 	
 	List<OrderDetailVO> possible_write_review(int user_no);
 	List<String> product_image_list(List<OrderDetailVO> review_list);
+	
+	UserVO findId(UserVO vo);
+	int findPwd(UserVO vo);
 }

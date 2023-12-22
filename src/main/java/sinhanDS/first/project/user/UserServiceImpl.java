@@ -268,4 +268,16 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
+	@Override
+	public UserVO findId(UserVO vo) {
+		vo = mapper.findId(vo);
+		return vo;
+	}
+
+	@Override
+	public int findPwd(UserVO vo) {
+		int suc = mapper.findPwd(vo);
+		return suc;
+	}
+
 }

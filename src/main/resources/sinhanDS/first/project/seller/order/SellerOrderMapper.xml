@@ -139,9 +139,9 @@
 	
 	<insert id="settlement_regist" parameterType="sinhanDS.first.project.admin.vo.SettlementVO">
 		INSERT INTO settlement (
-			seller_no, request_date, total_sales, total_charge, total_settlement, account
+			seller_no, request_date, total_sales, total_charge, total_settlement, account, bank
 		) VALUES (
-			#{seller_no}, NOW(), #{total_charge} + #{total_settlement} , #{total_charge}, #{total_settlement}, #{account}
+			#{seller_no}, NOW(), #{total_charge} + #{total_settlement} , #{total_charge}, #{total_settlement}, #{account}, #{bank}
 		)
 		<selectKey keyProperty="no" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
