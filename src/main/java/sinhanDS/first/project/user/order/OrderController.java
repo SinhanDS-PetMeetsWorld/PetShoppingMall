@@ -29,6 +29,8 @@ import sinhanDS.first.project.product.vo.ReviewVO;
 import sinhanDS.first.project.seller.product.SellerProductService;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.UserService;
+import sinhanDS.first.project.user.product.ProductService;
+import sinhanDS.first.project.user.vo.CartOptionVO;
 import sinhanDS.first.project.user.vo.CartVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
 import sinhanDS.first.project.user.vo.UserVO;
@@ -39,19 +41,38 @@ import sinhanDS.first.project.user.vo.UserVO;
 @Slf4j
 public class OrderController {
 	@Autowired
+	private ProductService productService;
+	@Autowired
 	private OrderService orderService;
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private SellerProductService sellerProductService;
 	
-//	@PostMapping("buy_now.do")
-//	public String buy_now(Model model, @RequestParam int product_no, @RequestParam int quantity) {
-//		
-//	}
+	@PostMapping("buy_now.do")
+	public void buy_now(Model model, HttpServletRequest request, 
+			@RequestParam(value="option_no",required=false) List<String> optionno_list,
+			CartVO cartvo, CartOptionVO cartoptionvo , @RequestParam int quantity) {
+		log.debug("optionno_list: " + optionno_list);
+		log.debug("cartvo: " + cartvo);
+		log.debug("optionno_list: " + optionno_list);
+		log.debug("quantity: " + quantity);
+//		int cart_no = productService.cart_insert(cartvo);
+//		if(optionno_list != null) {
+//			cartoptionvo.setCart_no(cartvo.getNo());
+//
+//			if(cart_no>0) {
+//				for(int i=0; i<optionno_list.size(); i++){
+//					cartoptionvo.setOption_no(Integer.parseInt(optionno_list.get(i)));
+//					productService.cart_option_insert(cartoptionvo);
+//				}
+//			}
+//		}
+//		pay(model, new int[] {cart_no}, )
+	}
 	/* TODO: 리스트가 들어온 후에는 갯수가 얼마나 길어질지 모르니 POSTMAPPING으로 바꿔야한다*/
 	@PostMapping("pay.do")
-	public String pay(Model model, @RequestParam(required = false) int[] cart_no, 
+	public String pay(Model model, @RequestParam int[] cart_no, 
 					@RequestParam int[] quantity_list ,@RequestParam int delivery_price, 
 					@RequestParam int total_price, @RequestParam int[] cart_user_no, 
 					@RequestParam(required=false) int[] option_no, @RequestParam(required=false) int[]option_cart_no) {
@@ -157,17 +178,9 @@ public class OrderController {
 		} else {
 			alert("카트상품 삭제안됨");
 		}
-		
-
-		
-		
-
 		return "redirect:/user/order/success.do";
 	}
-	private void alert(String string) {
-		// TODO Auto-generated method stub
-		
-	}
+	private void alert(String string) {}
 
 	@GetMapping("success.do")
 	public String payementSuccess() {
