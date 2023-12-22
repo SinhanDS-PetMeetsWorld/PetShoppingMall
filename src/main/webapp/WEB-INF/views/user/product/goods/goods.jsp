@@ -279,7 +279,7 @@
 						</div>
 						<div>
 							<input type="button" class="push_cart" style="background-color: grey;" value="장바구니 담기" onclick="addcart()"> 
-							<input type="button" class="now_get" style="background-color: yellow" value="바로 구매">
+							<input type="button" class="now_get" style="background-color: yellow" value="바로 구매" onclick="buy_now()"> 
 						</div>	
 					</div>
 					
@@ -427,29 +427,54 @@ function zzim(){
 
 </script>
 <script>
-	function addcart(){
-		var cart_form = $('#option_form').serialize();
-		var login = "${userLoginInfo}";
-		
-		if(login == null || login == ""){
-			alert("로그인 후 사용 가능합니다");
-			return;
-		}
-		
-		$.ajax({
-			type: "POST",
-			url:'addcart.do',
-			data: cart_form,
-			async: false,
-			success:function(res) {
-				if (res == 'true') {
-					alert('장바구니에 추가되었습니다');
-				} else {
-					alert('장바구니 추가에 실패했습니다.');
-				}
-			}
-		})
+function addcart(){
+	var cart_form = $('#option_form').serialize();
+	var login = "${userLoginInfo}";
+	
+	if(login == null || login == ""){
+		alert("로그인 후 사용 가능합니다");
+		return;
 	}
+	
+	$.ajax({
+		type: "POST",
+		url:'addcart.do',
+		data: cart_form,
+		async: false,
+		success:function(res) {
+			if (res == 'true') {
+				alert('장바구니에 추가되었습니다');
+			} else {
+				alert('장바구니 추가에 실패했습니다.');
+			}
+		}
+	})
+}
+
+function buy_now(){
+	var cart_form = $('#option_form').serialize();
+	cart_form = cart_form + "&quantity=" + $('.quantity').val();
+	if(Number($('.quantity').val()) <= 0){
+		alert("한 개 이하의 제품은 구매할 수 없습니다.");
+		return;
+	}
+	console.log(cart_form);
+	var login = "${userLoginInfo}";
+	
+	if(login == null || login == ""){
+		alert("로그인 후 사용 가능합니다");
+		return;
+	}
+	
+	$.ajax({
+		type: "POST",
+		url:'/user/order/buy_now.do',
+		data: cart_form,
+		async: false,
+		success:function(res) {
+		}
+	})
+}
 </script>	
 
 <script>
