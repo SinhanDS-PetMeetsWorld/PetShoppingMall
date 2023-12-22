@@ -77,6 +77,7 @@
 			margin: 0 auto;
 	  		width: 80%;
 	  		height: 150px;
+	  		margin-top:15px;
 		}	
 		
 		.submit .sign_in {
