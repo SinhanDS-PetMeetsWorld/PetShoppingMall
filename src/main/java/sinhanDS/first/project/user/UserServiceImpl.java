@@ -204,9 +204,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<SaveBoxVO> zzim_list(int user_no) {
+	public int getNumberOfZZIMPage(ProductSearchVO svo) {
+		return mapper.getNumberOfZZIMPage(svo);
+	}
+	
+	@Override
+	public int getNumberOfReviewPage(ProductSearchVO svo) {
+		return mapper.getNumberOfReviewPage(svo);
+	}
+	
+	@Override
+	public int getNumberOfWritableReviewPage(ProductSearchVO svo) {
+		return mapper.getNumberOfWritableReviewPage(svo);
+	}
+	
+	@Override
+	public List<SaveBoxVO> zzim_list(ProductSearchVO svo) {
 		// TODO Auto-generated method stub
-		List<SaveBoxVO> zzim_list = mapper.zzim_list(user_no);
+		List<SaveBoxVO> zzim_list = mapper.zzim_list(svo);
 	
 		return zzim_list;
 	}
@@ -220,8 +235,8 @@ public class UserServiceImpl implements UserService {
 	/* (신정훈) 리뷰 구현 */ 
 	
 	@Override
-	public List<ReviewVO> review_list(int user_no) {
-		List<ReviewVO> review_list = mapper.review_list(user_no);
+	public List<ReviewVO> review_list(ProductSearchVO svo) {
+		List<ReviewVO> review_list = mapper.review_list(svo);
 		return review_list;
 	}
 
@@ -254,8 +269,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<OrderDetailVO> possible_write_review(int user_no) {
-		List<OrderDetailVO> possible_write_review = mapper.possible_write_review(user_no);
+	public List<OrderDetailVO> possible_write_review(ProductSearchVO svo) {
+		List<OrderDetailVO> possible_write_review = mapper.possible_write_review(svo);
 		return possible_write_review;
 	}
 

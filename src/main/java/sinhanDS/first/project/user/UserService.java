@@ -39,16 +39,20 @@ public interface UserService {
 	List<List<CartOptionVO>> cart_option_number(List<CartVO> vo);
 	List<List<ProductOptionVO>> get_product_option(List<List<CartOptionVO>> vo);
 	
-	List<SaveBoxVO> zzim_list (int user_no);
+	int getNumberOfZZIMPage(ProductSearchVO svo);
+	int getNumberOfReviewPage(ProductSearchVO svo);
+	int getNumberOfWritableReviewPage(ProductSearchVO svo);
+	
+	List<SaveBoxVO> zzim_list (ProductSearchVO svo);
 	List<UserVO> user_list (int user_no);
 	List<ProductVO> product_list(int product_no);
 	List<ProductVO> getProductListWithProductSearchVO(List<SaveBoxVO> zzim_list, ProductSearchVO svo);
 	
-	List<ReviewVO> review_list(int user_no);
+	List<ReviewVO> review_list(ProductSearchVO svo);
 	List<OrderDetailVO> order_detail(OrderDetailVO odvo);
 	List<OrderDetailOptionVO> order_detail_option(OrderDetailOptionVO odovo);
 	
-	List<OrderDetailVO> possible_write_review(int user_no);
+	List<OrderDetailVO> possible_write_review(ProductSearchVO svo);
 	List<String> product_image_list(List<OrderDetailVO> review_list);
 	
 	UserVO findId(UserVO vo);

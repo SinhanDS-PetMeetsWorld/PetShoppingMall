@@ -191,7 +191,45 @@ font-size : 30px;
 				<hr class = "line">	
 			   </c:forEach>	
 			   		
-				<h1> 병천이 부탁 " 페이징 처리 5개씩 요청 "</h1>
+				<div class="paging_div">
+					<ul class='paging'>
+                        <c:if test="${paging.prev }">
+                        	<li><a href="/user/list_user_review.do?page=${paging.startPage-1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> << </a></li>
+                        </c:if>
+                        <c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
+                        	<c:if test="${p == productSearchVO.page}">
+                            <li><a href='#;' class='current'>${p}</a></li>
+                            </c:if>
+                            <c:if test="${p != productSearchVO.page}">
+                            <li><a href='/user/list_user_review.do?page=${p}&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }'>${p}</a></li>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${paging.next }">
+                        	<li><a href="/user/list_user_review.do?page=${paging.endPage+1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> >> </a></li>
+                        </c:if>
+					</ul> 
+				</div>
+				
+                <div class="bbsSearch">
+                    <form method="get" name="searchForm" id="searchForm" action="/user/list_user_review.do">
+                    	<span class="sortSelect">
+                            <select name="sorttype">
+                                <option value="regist" <c:if test="${productSearchVO.sorttype == 'regist'}">selected</c:if>>등록일 순</option>
+                                <option value="maxrating" <c:if test="${productSearchVO.sorttype == 'maxstock'}">selected</c:if>>평점 높은 순</option>
+                                <option value="minrating" <c:if test="${productSearchVO.sorttype == 'minstock'}">selected</c:if>>평점 낮은 순</option>
+                            </select>
+                    	</span>
+                        <span class="srchSelect">
+                            <select name="searchType">
+                                <option value="name">상품명</option>
+                            </select>
+                        </span>
+                        <span class="searchWord">
+                            <input type="text" id="sval" name="searchWord" value="${productSearchVO.searchWord}"  title="검색어 입력">
+                            <input type="submit" class="search_keyword_btn" value="검색">
+                        </span>
+                    </form>
+                </div>
 			</div>
         </div>
         

@@ -201,7 +201,24 @@ a:active {
 				</div>	 
 				<hr class = "line">
 			</c:forEach>			
-				<h1> 병천이 부탁 " 페이징 처리 5개씩 요청 "</h1>
+			<div class="paging_div">
+				<ul class='paging'>
+                       <c:if test="${paging.prev }">
+                       	<li><a href="/user/list_user_zzim.do?page=${paging.startPage-1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> << </a></li>
+                       </c:if>
+                       <c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
+                       	<c:if test="${p == productSearchVO.page}">
+                           <li><a href='#;' class='current'>${p}</a></li>
+                           </c:if>
+                           <c:if test="${p != productSearchVO.page}">
+                           <li><a href='/user/list_user_zzim.do?page=${p}&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }'>${p}</a></li>
+                           </c:if>
+                       </c:forEach>
+                       <c:if test="${paging.next }">
+                       	<li><a href="/user/list_user_zzim.do?page=${paging.endPage+1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> >> </a></li>
+                       </c:if>
+				</ul> 
+			</div>
 			</div>
         </div>
         

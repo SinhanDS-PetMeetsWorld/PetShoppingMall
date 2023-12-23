@@ -196,6 +196,21 @@ width : 30px;
 					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
 					        
 					        <!--주소가 존재하는만큼 td를 생성-->
+					        <c:if test="${empty paymentvo }">
+					        	<tr class="table">
+						            <td>
+						                <br>
+						                <div>아직 등록된 주소가 없습니다.</div>
+						                <div>새 주소을 추가해주세요.</div>
+						                <br>
+						            </td>
+						        </tr>
+						        <tr>
+						        	<td colspan="2">
+					        		<hr>
+						        	</td>
+						    	</tr>
+					        </c:if>
 						    <c:forEach var="vo" items="${addressvo }">
 						    	
 						        <tr class = "table">
