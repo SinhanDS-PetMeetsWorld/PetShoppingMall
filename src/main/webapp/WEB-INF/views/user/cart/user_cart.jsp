@@ -16,6 +16,58 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
 
+<style>
+
+#product_info{
+display:flex;
+}
+
+#menu_name {
+margin-bottom : 15px;
+
+}
+
+#check_box{
+width : 50px;
+height : 100px;
+float: left;
+}
+
+#goods_image {
+width : 100px;
+height : 100px;
+float : left;
+
+}
+
+#goods_name {
+margin-left : 20px;
+margin-top : 5px;
+width: 300px;
+height: 30px;
+}
+
+#goods_name a {
+    display: block;
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#goods_option{
+width : 200px;
+height : 100px;
+float : left;
+}
+
+#option2{
+width : 300px;
+height : 100px;
+text-align :right;
+}
+
+</style>
 	
 	
 </head>
@@ -39,28 +91,24 @@
             
             <form name="cart_list" action="/user/order/pay.do" method="post" onsubmit="return emptyCheck();">
 			<div class="contentsright">
-				<div id="cart_content" width='50%'>
-					<h1>장바구니</h1>
+				<div id="cart_content">
+					<h1 id = "menu_name">장바구니</h1>
 					
-					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
-					        <!--카트에 상품이 존재하는만큼 td를 생성-->
+					  
+					    
 						    <c:forEach var="vo" items="${productvolist }" varStatus="status">
 						    	
-						    	
-						        <tr width="800">
-						            <td>
-						                <br>
+						    	<div id="product_info">
 						                
-						                <div id="product_info">
-							                <input type='checkbox' class="check_product" id='chekbox[${status.index }]' name='check_cart' >
-							               
-								        				<input type="hidden" class="cart_user_no" name="cart_user_no" value="${cartvolist[status.index].user_no }">
-										                <input type="hidden" class="cart_no" name="cart_no" value="${cartvolist[status.index].no }">
-										                
-							               
-							                <input type="hidden" class="seller_no" value="${vo.seller_no }">
-							                <div class='option_area'>
-								                <c:if test="${empty vo.image_url }">
+						                	
+						                <div id = "check_box">
+						                	<input type='checkbox' class="check_product" id='chekbox[${status.index }]' name='check_cart' >
+						                </div>	
+																					        				<input type="hidden" class="cart_user_no" name="cart_user_no" value="${cartvolist[status.index].user_no }">
+																							                <input type="hidden" class="cart_no" name="cart_no" value="${cartvolist[status.index].no }">
+																				               				 <input type="hidden" class="seller_no" value="${vo.seller_no }">
+							            <div id = "goods_image">    
+							                  <c:if test="${empty vo.image_url }">
 													<img src="/resources/img/product/no_image.jpg" width="100" height="100">
 												</c:if>
 												<c:if test="${!empty vo.image_url && fn:substring(vo.image_url, 0, 1) == 'h' }">
@@ -69,45 +117,51 @@
 												<c:if test="${!empty vo.image_url && !(fn:substring(vo.image_url, 0, 1) == 'h') }">
 													<img src="/resources/img/product/registed_img/${vo.image_url }" width="100" height="100">
 												</c:if>
-								                <div><a href="/user/product/goods.do?no=${vo.no }"> ${vo.name }</a> </div>
-								                <!-- 옵션이 존재한다면 보여주고 아니면 안보임 -->
-								                <c:forEach var="vo2" items="${optionlist[status.index] }" varStatus="tt">
-								                	<input type="hidden" class="option_cart_no" name="option_cart_no" value="${cartoptionvolist[status.index][tt.index].cart_no}">
-								                	<input type="hidden" class="option_no" name="option_no" value="${cartoptionvolist[status.index][tt.index].option_no}">
-								                	<div></div>
-								                	<input type="hidden" class="option_price" name="option_price[${status.index }]" value="${vo2.price }">
-									                <span>${vo2.title}</span>
-									                <span>${vo2.content}</span>
-									                <span>${vo2.price}원</span>
-									                <br>
-								                </c:forEach> 
-								                <div>${vo.price - vo.discount }원 </div>
-								                <div><c:if test="${vo.discount != 0 }">(${vo.price}원 - ${vo.discount }원)</c:if></div>
-								                <input type="hidden" class="price_list" name="price_list" value="${vo.price }">
-								                <input type="hidden" class="discount_list" name="discount_list" value="${vo.discount }">
-											</div>
-										</div>
-						                <br>
-						            </td>
-						            <td>
-						                <button type="button" class="delete_cart" name="cart_delete">장바구니에서 삭제</button>
-						                <input type="number" class="quantity_list" name="quantity_list" id="quantity_list[${status.index }]" value="${cartvolist[status.index].quantity}" data-cart_table_no="${cartvolist[status.index].no }">
-						                
+							            </div>    
 						               
+						                <div id = "goods_name" class='option_area' >
+							                <div>
+							                <a href="/user/product/goods.do?no=${vo.no }"> ${vo.name }</a> 
+							                </div>
+							            </div>   
+							                
+							                
+							            <div id = "goods_option">
+							            
+								            <div id = "option2">
+								            
+								            		<c:if test="${vo.discount != 0 }">(${vo.price}원 - ${vo.discount }원)</c:if> ${vo.price - vo.discount }원<br>
+								            		<c:forEach var="vo2" items="${optionlist[status.index] }" varStatus="tt">
+																						                	<input type="hidden" class="option_cart_no" name="option_cart_no" value="${cartoptionvolist[status.index][tt.index].cart_no}">
+																						                	<input type="hidden" class="option_no" name="option_no" value="${cartoptionvolist[status.index][tt.index].option_no}">
+																						                	<input type="hidden" class="option_price" name="option_price[${status.index }]" value="${vo2.price }">
+										                ${vo2.title} : ${vo2.content} ${vo2.price}원<br>
+								                	</c:forEach> 
+								            </div>	
+							            
+							            </div>    
+																							                <input type="hidden" class="price_list" name="price_list" value="${vo.price }">
+																							                <input type="hidden" class="discount_list" name="discount_list" value="${vo.discount }">
+										
+										<div id ="button">
+						   
+						               	 	<button type="button" class="delete_cart" name="cart_delete">장바구니에서 삭제</button>
+						                	<input type="number" class="quantity_list" name="quantity_list" id="quantity_list[${status.index }]" value="${cartvolist[status.index].quantity}" data-cart_table_no="${cartvolist[status.index].no }">
 						                
-						                <br>
-						            </td>
-						        </tr>
-						        <tr>
-						        	<td colspan="2">
-						        		<hr>
-						        	</td>
-						       	</tr>
+						   				</div>  
+								 
+								 </div>
+						              
+						              
+						               
+						       		          
+						                
+						           
+						   
 						        
 						    </c:forEach>
 						    
-					        
-					    </table>
+					  
 					    
 					    
      				</div>
