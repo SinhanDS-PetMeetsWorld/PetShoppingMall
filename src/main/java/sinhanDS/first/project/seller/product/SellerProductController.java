@@ -206,7 +206,6 @@ public class SellerProductController {
 
 	@GetMapping("/qnaanswer.do")
 	public String QnA_answer(Model model, HttpSession sess, HttpServletRequest request, ProductQnAVO qnavo) {
-		SellerVO seller = (SellerVO) sess.getAttribute("sellerLoginInfo");
 		int r = service.setQnAanswer(qnavo);
 		System.out.println("값이 들어가나??? " + r);
 

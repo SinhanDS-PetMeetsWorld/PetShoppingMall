@@ -142,6 +142,7 @@ public class MvcConfig implements WebMvcConfigurer{
 		
 		registry.addInterceptor(sellerLoginIntercepton())
 						.addPathPatterns("/seller/**")
+						.excludePathPatterns("/seller/index.do")
 						.excludePathPatterns("/seller/login.do")
 						.excludePathPatterns("/seller/join.do")
 						.excludePathPatterns("/seller/idCheck.do")
