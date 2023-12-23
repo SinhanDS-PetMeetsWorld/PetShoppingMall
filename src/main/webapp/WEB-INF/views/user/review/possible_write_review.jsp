@@ -49,7 +49,7 @@ hegiht : 100px;
 }
  
 .goods_name_container{
-height : 20px;
+height : 100px;
 width : 600px;
 }
 

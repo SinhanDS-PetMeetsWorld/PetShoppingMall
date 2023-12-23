@@ -234,12 +234,11 @@ display : flex;
 					        	</c:if>
 					        	<c:if test="${vo.type eq 1 }">
 					        		<tr class="table">
-							            <td>
+					        			<td class = "space"></td>
+							            <td class ="td_container">
 							                <br>
-							                <div><span>결제 수단 : 계좌 이체</span></div>
-							                <div><span>계좌 별명 : ${vo.name }</span></div>
-							                <div><span>계좌 번호 : </span></div>
-							                <div><span>${vo.account }</span></div>
+							                <div><span>결제 수단 : 계좌 이체 (${vo.name})</span><br></div>
+							                <div><span>계좌 번호 : ${vo.account }</span></div>
 							            </td>
 							            <td>
 							            <td class = "button_container">
