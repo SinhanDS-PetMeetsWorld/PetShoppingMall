@@ -48,7 +48,6 @@
 					<button type="button" id="acceptAllbutton">전체 일괄 정산하기</button>
 				</form>
 				</c:if>
-				
 			</div>
         </div>
         
