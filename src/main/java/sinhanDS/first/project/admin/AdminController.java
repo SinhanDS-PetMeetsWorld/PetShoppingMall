@@ -286,6 +286,9 @@ public class AdminController {
 	@GetMapping("getSettlementReqList.do")
 	public String getSettlementReqList(Model model) {
 		List<SettlementVO> settlementReqList = service.getSettlementReqList();
+		for(int i = 0; i < settlementReqList.size(); i++) {
+			log.debug("bank_info " + i + " : " + settlementReqList.get(i).getBank());
+		}
 		model.addAttribute("settlementReqList", settlementReqList);
 		model.addAttribute("paymentVO", new PaymentVO());
 		return "/admin/page/settlementReqList";
