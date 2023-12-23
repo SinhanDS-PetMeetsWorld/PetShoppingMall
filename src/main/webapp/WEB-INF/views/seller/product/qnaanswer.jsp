@@ -63,7 +63,7 @@
 							</c:if>	
 						    <div>
 								<c:if test = "${not empty qna_array[qna_quant.index][3]}">
-										<a class="quest_no" value="${qna_array[qna_quant.index][3]}">
+										<a class="quest_no" data-no="${qna_array[qna_quant.index][3]}">
 										질문 번호 :
 									    <span>${qna_array[qna_quant.index][3]}</span> 
 									    </a> 
@@ -108,11 +108,11 @@
 	$('.writeAnswer').on('click', qnaanswer);
 	
 	function qnaanswer() {
-			
-		console.log($(this.parentNode).find('.quest_no').find('span').text());
+		//console.log($(this.parentNode).find('.quest_no').find('span').text());
 
 		var answer_content = $(this.parentNode.querySelector("#answer_content")).val();
-		var no = $(this.parentNode).find('.quest_no').find('span').text();
+		console.log($(this.parentNode.parentNode).find('.quest_no').data('no'));
+		var no = $(this.parentNode.parentNode).find('.quest_no').data('no');
 		console.log(answer_content);
 		console.log(no);
 		

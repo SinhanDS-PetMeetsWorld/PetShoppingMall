@@ -75,13 +75,23 @@ public class OrderController {
 				}
 			}
 		}
-		int[] option_no = new int[optionno_list.size()];
-		int[] option_cart_no = new int[optionno_list.size()];
-		if(optionno_list.size() != 0) {
-			for(int i = 0; i < option_no.length; i++) {
-				option_no[i] = Integer.valueOf(optionno_list.get(i));
-				option_cart_no[i] = temp_cart_no;
+		
+		ProductOptionVO ovo = new ProductOptionVO();
+		if(optionno_list != null) {
+			int[] option_no = new int[optionno_list.size()];
+			int[] option_cart_no = new int[optionno_list.size()];
+			if(optionno_list.size() != 0) {
+				for(int i = 0; i < option_no.length; i++) {
+					option_no[i] = Integer.valueOf(optionno_list.get(i));
+					option_cart_no[i] = temp_cart_no;
+				}
 			}
+			ovo.setNo_list(option_no);
+			log.debug("option_no: " + Arrays.toString(option_no));
+			model.addAttribute("option_cart_no", option_cart_no);
+			model.addAttribute("option_no", option_no);
+			log.debug("option_cart_no: " + Arrays.toString(option_cart_no));
+			log.debug("option_no: " + Arrays.toString(option_no));
 		}
 		
 		int[] cart_no = new int[] {temp_cart_no};
@@ -97,9 +107,6 @@ public class OrderController {
 		
 		uvo.setNo(uvo.getNo());
 		
-		ProductOptionVO ovo = new ProductOptionVO();
-		ovo.setNo_list(option_no);
-		log.debug("option_no: " + Arrays.toString(option_no));
 		
 		OrderMainVO orderVO = new OrderMainVO();
 		orderVO.setTotal_price(total_price);
@@ -126,11 +133,7 @@ public class OrderController {
 		log.debug("option_list: " + option_list);
 		
 		model.addAttribute("cart_no", cart_no);
-		model.addAttribute("option_cart_no", option_cart_no);
-		model.addAttribute("option_no", option_no);
 		log.debug("cart_no: " + Arrays.toString(cart_no));
-		log.debug("option_cart_no: " + Arrays.toString(option_cart_no));
-		log.debug("option_no: " + Arrays.toString(option_no));
 		
 		model.addAttribute("paymentVO", new PaymentVO());
 		return "user/order/pay";

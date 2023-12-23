@@ -261,6 +261,7 @@ public class OrderServiceImpl implements OrderService {
 	public int setPrice(int product_no, List<String> option_list, int quantity) {
 		ProductVO pvo = sellerProductMapper.getProduct(product_no); 
 		int price = pvo.getPrice() - pvo.getDiscount();
+		if(option_list == null) return price * quantity;
 		if(option_list.size() == 0) return price * quantity;
 		
 		for(int i = 0; i < option_list.size(); i++) {
