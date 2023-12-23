@@ -21,14 +21,14 @@ display : flex;
 #more_purchase {
   display: inline-block;
   outline: 0;
-  border: 2px solid #fd0;
+  border: 2px solid #222;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
   width: 150px;
   height: 35px;
   font-size: 15px;
-  background-color:#F9FAFB;
+  background-color:#FFDE30;
   font-weight: 500;
   color: #222;
   

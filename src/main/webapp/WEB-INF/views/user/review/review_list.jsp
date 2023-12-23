@@ -23,7 +23,7 @@ display : flex;
 .Review_more {
   display: inline-block;
   outline: 0;
-  border: none;
+  border: 2px solid #222;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;

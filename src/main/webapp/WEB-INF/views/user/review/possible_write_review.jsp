@@ -23,14 +23,14 @@ display : flex;
 .goWriteReview {
   display: inline-block;
   outline: 0;
-  border: none;
+  border: 2px solid #222;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
   width: 150px;
   height: 35px;
   font-size: 15px;
-  background-color: #fd0;
+  background-color: #FFDE30;
   font-weight: 500;
   color: #222;
   

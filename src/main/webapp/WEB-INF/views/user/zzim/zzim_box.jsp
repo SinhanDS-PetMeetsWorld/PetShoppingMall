@@ -23,7 +23,7 @@ display : flex;
 .zzim_Off {
   display: inline-block;
   outline: 0;
-  border: none;
+  border: 2px solid #222;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
@@ -184,7 +184,6 @@ a:active {
 											<c:if test = "${not empty save_list2[zzim_quant.index][4]}">
 													<input type = "hidden" value ="${save_list2[zzim_quant.index][4]}"> <br>
 											</c:if>
-											
 											
 											<c:if test = "${not empty save_list2[zzim_quant.index][5]}">
 													<input type="hidden" value="${save_list2[zzim_quant.index][5]}">	

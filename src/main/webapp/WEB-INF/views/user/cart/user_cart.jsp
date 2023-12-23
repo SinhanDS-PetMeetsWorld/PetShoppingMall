@@ -30,8 +30,13 @@ margin-bottom : 15px;
 #check_box{
 width : 50px;
 height : 100px;
-float: left;
 }
+
+.check_product {
+
+ margin-top: 40px;
+ margin-left : 7px;
+ }
 
 #goods_image {
 width : 100px;
@@ -65,8 +70,115 @@ float : left;
 width : 300px;
 height : 100px;
 text-align :right;
+float:left;
+
 }
 
+#button{
+width : 300px;
+height : 100px;
+float : left;
+margin-left : 180px;
+}
+
+.quantity_list{
+	   background-color: #fff;
+       height: 30px;
+       width: 60px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       margin-right : 30px;
+       margin-top : 15px;
+    
+ }
+ 
+.delete_cart {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 15px;
+  border-radius: 50px;
+  width: 50px;
+  height: 35px;
+  font-size: 10px;
+  background-color: #ff4742;
+  font-weight: 500;
+  color: #F9FAFB;
+
+ }
+ 
+
+ #purchaseConfirm {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  width: 150px;
+  height: 40px;
+  font-size: 15px;
+  background-color: #fd0;
+  font-weight: 500;
+  color: #222;
+  
+  margin-left : 130px;
+ }
+
+
+ .line {
+ 		margin-top : 10px;
+ 		margin-bottom : 10px;
+ 		width : 1000px;
+        border: 1px solid #ccc;
+ } 
+ 
+  .final_line {
+ 		margin-top : 25px;
+ 		width : 1000px;
+        border: 1px solid #111;
+     }
+     
+#fin {
+display: flex;
+margin-top : 25px;
+}
+ 
+#final_total {
+width: 300px;
+height: 100px;
+text-align : left;
+color : #9CA3AF;
+font-size : 20px;
+}
+
+
+#final_money {
+
+width : 400px;
+height : 100px;
+text-align :right;
+float:left;
+font-size : 25px;
+}
+
+
+#go_purchase {
+width : 300px;
+height : 100px;
+float : left;
+} 
+ 
+ 
+ 
 </style>
 	
 	
@@ -94,13 +206,11 @@ text-align :right;
 				<div id="cart_content">
 					<h1 id = "menu_name">장바구니</h1>
 					
-					  
 					    
 						    <c:forEach var="vo" items="${productvolist }" varStatus="status">
 						    	
 						    	<div id="product_info">
-						                
-						                	
+
 						                <div id = "check_box">
 						                	<input type='checkbox' class="check_product" id='chekbox[${status.index }]' name='check_cart' >
 						                </div>	
@@ -144,51 +254,47 @@ text-align :right;
 																							                <input type="hidden" class="discount_list" name="discount_list" value="${vo.discount }">
 										
 										<div id ="button">
-						   
-						               	 	<button type="button" class="delete_cart" name="cart_delete">장바구니에서 삭제</button>
-						                	<input type="number" class="quantity_list" name="quantity_list" id="quantity_list[${status.index }]" value="${cartvolist[status.index].quantity}" data-cart_table_no="${cartvolist[status.index].no }">
-						                
+						   					<input type="number" class="quantity_list" name="quantity_list" id="quantity_list[${status.index }]" value="${cartvolist[status.index].quantity}" data-cart_table_no="${cartvolist[status.index].no }" min="0">
+						               	 	<button type="button" class="delete_cart" name="cart_delete">삭제</button>
 						   				</div>  
 								 
-								 </div>
-						              
-						              
-						               
-						       		          
-						                
-						           
-						   
-						        
+								</div>
+							        <hr class = "line">      
 						    </c:forEach>
-						    
-					  
-					    
 					    
      				</div>
      				<div>
      					<c:if test="${empty productvolist }"><h2>장바구니에 상품이 존재하지 않습니다.</h2></c:if>
      					<c:if test="${!empty productvolist }">
-	     					<div>결제 금액</div>
-	     					<div>
-		     					<span>총 주문 가격 : </span>
-		     					<span id="totalprice">0</span>원
-		     					<input type="hidden" id="total_price" name="total_price" value="" >
+	     					<h2>결제 금액</h2>
+	     					<hr class = "final_line">
+	     					
+	     					<div id = "fin">
+	     						<div id = "final_total">
+			     					총 주문 가격 : <span id="totalprice">0</span>원 <br>
+			     					
+			     																			<input type="hidden" id="total_price" name="total_price" value="" >
+		     				
+									할인 금액 : <span id="discountprice">0</span>원 <br>
+									
+																							<input type="hidden" id="discount_price" name="discount_price" value="" >
+								  					
+									총 배송비 : <span id="deliveryprice">0</span>원
+									
+																							<input type="hidden" id="delivery_price" name="delivery_price" value="" >
+																							<input type="hidden" id="final_price" name="final_price" value="" >
+								</div>
+								
+								
+								<div id ="final_money">
+									총 금액: <span id="finalprice">0</span>원
+								</div>
+								
+								<div id = "go_purchase">
+										<input type="submit" id ="purchaseConfirm" value="결제하러 가기" onclick="beforeSubmit()">
+								</div>
+	     					
 	     					</div>
-							<div>
-								<span>할인 금액 : </span>
-								<span id="discountprice">0</span>원
-								<input type="hidden" id="discount_price" name="discount_price" value="" >
-							</div>     					
-								<span>총 배송비 : </span>
-								<span id="deliveryprice">0</span>원
-								<input type="hidden" id="delivery_price" name="delivery_price" value="" >
-							<div>
-								<span>최종 결제액 : </span>
-								<span id="finalprice">0</span>원
-								<input type="hidden" id="final_price" name="final_price" value="" >
-							</div>
-							
-							<input type="submit" value="결제하러 가기" onclick="beforeSubmit()">
      					
      					</c:if>
      				</div>
@@ -418,9 +524,7 @@ text-align :right;
 			
     		location.href="/user/order/delete_cart.do?no=" + no ;    	
     	});
-    	
-    	
-   
+  
     		
     </script>
 </body>

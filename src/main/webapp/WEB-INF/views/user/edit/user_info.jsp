@@ -75,6 +75,7 @@ margin-bottom: 30px;
      box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
  	}
  }
+ 
  .recreateConfirm {
   display: inline-block;
   outline: 0;
@@ -302,7 +303,6 @@ text-align:left;
 					    <button class = "selected_tab_button" type="button" onclick="location.href='/user/edit.do'">기본정보 변경</button>
 					    <button class = "tab_button" type="button" onclick="location.href='/user/edit_addr.do'">주소 변경</button>
 					    <button class = "tab_button" type="button" onclick="location.href='/user/edit_payment.do'">결제 수단</button>
-					
 					
 						<hr class = "start_line">
 					    <form id="user_info_modify" name="user_info_modify" action="update.do" method="POST">
