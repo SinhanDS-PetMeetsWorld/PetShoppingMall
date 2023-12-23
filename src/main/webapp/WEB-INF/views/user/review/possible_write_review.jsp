@@ -187,7 +187,39 @@ height:100px;
 					</div>
 					<hr class = "line"> 	
 			   </c:forEach>			
+			   
+				<div class="paging_div">
+					<ul class='paging'>
+                        <c:if test="${paging.prev }">
+                        	<li><a href="/user/possible_write_review.do?page=${paging.startPage-1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> << </a></li>
+                        </c:if>
+                        <c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
+                        	<c:if test="${p == productSearchVO.page}">
+                            <li><a href='#;' class='current'>${p}</a></li>
+                            </c:if>
+                            <c:if test="${p != productSearchVO.page}">
+                            <li><a href='/user/possible_write_review.do?page=${p}&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }'>${p}</a></li>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${paging.next }">
+                        	<li><a href="/user/possible_write_review.do?page=${paging.endPage+1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}&sorttype=${productSearchVO.sorttype }"> >> </a></li>
+                        </c:if>
+					</ul> 
+				</div>
 				
+                <div class="bbsSearch">
+                    <form method="get" name="searchForm" id="searchForm" action="/user/possible_write_review.do">
+                        <span class="srchSelect">
+                            <select name="searchType">
+                                <option value="name">상품명</option>
+                            </select>
+                        </span>
+                        <span class="searchWord">
+                            <input type="text" id="sval" name="searchWord" value="${productSearchVO.searchWord}"  title="검색어 입력">
+                            <input type="submit" class="search_keyword_btn" value="검색">
+                        </span>
+                    </form>
+                </div>
 			</div>
         </div>
         

@@ -18,8 +18,97 @@
 	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/resources/css/common/template.css">
 
+<style>
+
+	.contentsright h2{
+		margin-bottom:20px;
+	}
+
+	.pro_name{
+		margin-right:50px;
+	}
+
+	.pro_name_css{
+		width:300px;
+		height:25px;
+	}
+	
+	.regist_price{
+		margin-top:20px;
+		display:inline-block;
+		height:50px;
+		
+	}
+	
+	.regist_price input{
+		width:200px;
+		height:25px;	
+		margin-left:60px;	
+	}
+	
+	.regist_quantity{
+	
+		margin-left:100px;
+		margin-top:20px;
+	}
+	
+	.regist_quantity input{
+		width:200px;
+		height:25px;
+		margin-left:60px;	
+	}
+	
+	.category{
+		height:50px;
+	}
+	
+	.category_all{
+		float:left;
+		
+		height:50px;
+		margin-top:20px;
+	}
+	.category1{
+		float:left;
+	}
+	
+	.category2{
+		float:left;
+		display:inline-block;
+		margin-left:60px;
+	}
+	
+	.category_remove{
+		float:left;
+		margin-left: 20px;
+		
+		margin-top:20px;
+	}
+	.category_add_button{
+		clear:both;
+		margin-bottom:20px;
+	}
+	
+	.category1_list{
+		margin-left:28px;
+	}
+	.category2_list{
+		margin-left:28px;
+	}
+	
+	.com_brand{
+		clear:both;
+	}
+	
+	a{
+		text-decoration:none;
+		color:black;
+	}
+	
+</style>
 <script>
 	console.log("${sellerLoginInfo.no}");
+	
 </script>
 </head>
 <body>
@@ -39,27 +128,30 @@
 						<input type="hidden" name="seller_no"
 							value="${sellerLoginInfo.no}">
 						<div>
-							상품명*<br> <input type="text" name="name" required>
-						</div>
-						<div>
-							가격*<br> <input type="number" name="price" value="0" required>
-						</div>
-						<div>
-							재고*<br> <input type="number" name="stock" value="0" required>
-						</div>
+							<span class="pro_name">상품명*</span><input type="text" class="pro_name_css" name="name" required>
+						</div><br><hr>
+						<span class="regist_price">
+							가격* <input type="number" name="price" value="0" required>
+						</span>
+						<span class="regist_quantity">
+							재고* <input type="number" name="stock" value="0" required>
+						</span><br>
+						
+						
 						<div class="category_body">
 							<div class="category">
 								<hr>
-								<div>
-									카테고리 *<br> <select name="category1_list"
-										class="category1_list">
-										<c:forEach var="category_name" items="${category.category_name }" varStatus="status">
-											<option value="${status.index}">${category_name }</option>
-										</c:forEach>
-									</select>
-
-									<div>
-										세부 카테고리 *<br> <select name="category2_list"
+								<div class="category_all">
+									<div class="category1">
+										카테고리*  <select name="category1_list"
+											class="category1_list">
+											<c:forEach var="category_name" items="${category.category_name }" varStatus="status">
+												<option value="${status.index}">${category_name }</option>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="category2">
+										세부 카테고리* <select name="category2_list"
 											class="category2_list" data-no="${status.index }">
 											<c:forEach var="category" items="${category.category[0] }"
 												varStatus="status">
@@ -69,21 +161,24 @@
 									</div>
 
 								</div>
+								<div class="category_remove">
 								<a href="javascript:;" class="remove_btn_category"><img
 									src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a><br>
+								</div>
 							</div>
 							<div class ="category_add_button">
 								<a href="javascript:;" class="add_btn_category"><img
-													src="/resources/img/product/add.png" width="25" height="25" /> 카테고리 추가</a>
+													src="/resources/img/product/add.png" width="15" height="15" /> 카테고리 추가</a>
 							</div>
 						</div>
-						<div>
-							제조사 <input type="text" name="company">
+						<div class="com_brand">
+							<div>
+								제조사 <input type="text" name="company">
+							</div>
+							<div>
+								브랜드명 <input type="text" name="brand">
+							</div>
 						</div>
-						<div>
-							브랜드명 <input type="text" name="brand">
-						</div>
-						
 						<div class="option_body">
 							<div>
 								<a href="javascript:;" class="add_btn_option"><img

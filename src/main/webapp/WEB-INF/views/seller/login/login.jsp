@@ -40,7 +40,7 @@
 	.login_form{
 		border: 1px solid gray;
 		border-radius: 5%;
-		height: 400px;
+		height: 470px;
 	}
 	
 	.id{
@@ -82,7 +82,7 @@
 		margin: 0 auto;
   		width: 80%;
   		height: 150px;
-  		margin-top:10px;
+  		margin-top:15px;
 	}	
 	
 	.submit .sign_in {
@@ -161,6 +161,7 @@
 							</div>
 							
 						</div>
+							<a href="/user/login.do">구매자로 로그인하기</a>
 					</form>
 					</div>
 				</div>

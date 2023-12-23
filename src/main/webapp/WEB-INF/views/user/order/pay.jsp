@@ -59,7 +59,6 @@
 								<li>
 									<input type="radio" class="payment_selector" name="payment_selector" value=${status.index }  
 										<c:if test="${status.index == 0}">checked</c:if>>
-									타입: ${paymentVO.type_list[vo.type] } <br>
 									${paymentVO.company_list[vo.type][vo.company]}<br>
 									${paymentVO.account_list[vo.type] } : ${vo.account }<br>
 									<br><hr>
@@ -89,13 +88,12 @@
 							상품 수량: ${quantity_list[status.index]}<br>
 							제조사: ${vo.company }<br>
 							브랜드: ${vo.brand }<br>
-							
-							옵션 리스트<br>
+							<br>
 							<c:forEach items="${option_list }" var="ovo" varStatus="ovoStatus">
 								<c:if test="${cart_no[status.index] == option_cart_no[ovoStatus.index] }">
 									<input type="hidden" name="option_no" value="${ovo.no }">
 									<input type="hidden" name="option_cart_no" value="${cno_list[status.index] }">
-									 <pre> 옵션 - ${ovo.title } ${ovo.content } ${ovo.price }<br> </pre>
+									옵션 - ${ovo.title } ${ovo.content } ${ovo.price }<br>
 								</c:if>
 							</c:forEach>
 							<hr>

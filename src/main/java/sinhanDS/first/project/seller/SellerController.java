@@ -76,7 +76,7 @@ public class SellerController {
 	@GetMapping("/logout.do")
 	public String logout(HttpSession sess) {
 		sess.invalidate();
-		return "redirect:/";
+		return "redirect:/seller/login.do";
 	}
 	
 	

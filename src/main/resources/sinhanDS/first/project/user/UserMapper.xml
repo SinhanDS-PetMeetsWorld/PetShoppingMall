@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.user.UserMapper">
+	<sql id="possible_write_review">
+		<where>
+			purchase_confirmation_date is not null AND user_no = ${user_no}
+			AND no not in (select order_dno from review where user_no=${user_no})
+			<if test="searchWord != null and searchWord != ''">
+				AND product_no in (select  no from product where name like '%${searchWord}%')
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="review_where">
+		<where>
+			user_no = ${user_no}
+			<if test="searchWord != null and searchWord != ''">
+				AND product_no in (select  no from product where name like '%${searchWord}%')
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="review_order">
+		<if test="sorttype == 'regist' || sorttype == null || sorttype==''">
+			order by no desc
+		</if>
+		<if test="sorttype == 'maxrating'">
+			order by rating desc, no desc
+		</if>
+		<if test="sorttype == 'minrating'">
+			order by rating asc, no desc
+		</if>
+	</sql>
 
 	<select id="check_password" parameterType="sinhanDS.first.project.user.vo.UserVO" resultType="int">
 		SELECT count(*) FROM user WHERE no = #{no} AND password = MD5(#{password})
@@ -132,13 +162,34 @@
 	
 	
 	
+	<select id = "getNumberOfZZIMPage" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="int">
+		SELECT count(*) 
+		FROM  save_box  
+		where user_no = ${user_no}
+	</select>
+	
+	<select id = "getNumberOfReviewPage" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="int">
+		SELECT count(*) 
+		FROM  review  
+		<include refid="review_where"/>
+	</select>
+	
+	<select id = "getNumberOfWritableReviewPage" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="int">
+		SELECT count(*) 
+		FROM  order_detail  
+		<include refid="possible_write_review"/>
+	</select>
 	
 	
 	<!-- (신정훈) 12 / 18 찜 리스트 구현 -->
+	
+	
 	<select id = "zzim_list" parameterType="sinhanDS.first.project.user.vo.SaveBoxVO">
 		SELECT * 
 		FROM  save_box  
 		where user_no = ${user_no}
+		order by no desc
+		LIMIT #{startIdx}, #{numberOfProductInPage}
 	</select>
 	
 	<select id = "user_list" parameterType="sinhanDS.first.project.user.vo.UserVO">
@@ -156,9 +207,11 @@
 	
 	
 	<!-- (신정훈) 12 / 18 리뷰 리스트 구현 -->
-	<select id = "review_list" parameterType = "sinhanDS.first.project.product.vo.ReviewVO">
+	<select id = "review_list" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType = "sinhanDS.first.project.product.vo.ReviewVO">
 		SELECT * FROM review
-		where user_no = ${user_no}
+		<include refid="review_where"/>
+		<include refid="review_order"/>
+		LIMIT #{startIdx}, #{numberOfProductInPage}
 	</select>
 	
 	<select id = "order_detail" parameterType = "sinhanDS.first.project.order.vo.OrderDetailVO">
@@ -169,16 +222,23 @@
 		SELECT * FROM order_detail_option
 	</select>
 	
-	<select id = "possible_write_review" parameterType = "sinhanDS.first.project.order.vo.OrderDetailVO">
+	<select id = "possible_write_review" parameterType = "sinhanDS.first.project.product.vo.ProductSearchVO">
 		SELECT  * FROM order_detail 
-		where purchase_confirmation_date is not null AND user_no = ${user_no}
-		AND no not in (select order_dno from review where user_no=${user_no})
+		<include refid="possible_write_review"/>
+		ORDER BY no desc
+		LIMIT #{startIdx}, #{numberOfProductInPage}
 	</select>
 	
 	<select id = "product_image_list" parameterType = "sinhanDS.first.project.order.vo.OrderDetailVO" resultType="string">
 		select image_url from product where no=${product_no}
 	</select>
 	
+	<select id="findId" parameterType="sinhanDS.first.project.user.vo.UserVO" resultType="sinhanDS.first.project.user.vo.UserVO">
+		SELECT id from user WHERE name = #{name} AND email = #{email}
+	</select>
 	
+	<update id="findPwd" parameterType="sinhanDS.first.project.user.vo.UserVO">
+		UPDATE user SET password = MD5(#{password}) WHERE id = #{id} AND name = #{name} AND email = #{email}
+	</update>
 	
 </mapper>

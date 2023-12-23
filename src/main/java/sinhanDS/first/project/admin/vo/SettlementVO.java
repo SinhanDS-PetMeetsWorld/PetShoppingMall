@@ -15,4 +15,5 @@ public class SettlementVO {
 	private int total_charge;
 	private int total_settlement;
 	private String account;
+	private int bank;
 }

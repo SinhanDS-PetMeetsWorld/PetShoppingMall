@@ -200,8 +200,8 @@ display : flex;
 					        	<tr class="table">
 						            <td>
 						                <br>
-						                <div>아직 등록된 결제 수단(주소)이 없습니다.</div>
-						                <div>새 결제 수단(주소)을 추가해주세요.</div>
+						                <div>아직 등록된 결제 수단이 없습니다.</div>
+						                <div>새 결제 수단을 추가해주세요.</div>
 						                <br>
 						            </td>
 						        </tr>

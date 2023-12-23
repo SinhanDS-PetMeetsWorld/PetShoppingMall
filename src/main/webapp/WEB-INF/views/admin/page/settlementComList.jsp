@@ -27,7 +27,7 @@
 			<c:if test="${not empty settlementComList}">
 				<table border="1">
 					<thead><tr> <th>정산번호</th><th>판매자번호</th><th>정산요청일</th><th>정산완료일</th><th>매출액</th>
-								<th>수수료</th><th>정산액</th><th>정산계좌</th> </tr></thead>
+								<th>수수료</th><th>정산액</th><th>은행명</th><th>정산계좌</th> </tr></thead>
 					<c:forEach var="settlementComList" items="${settlementComList}" varStatus="status">									
 						<tr>
 							<td>${settlementComList.no}</td>
@@ -37,6 +37,7 @@
 							<td>${settlementComList.total_sales}</td>
 							<td>${settlementComList.total_charge}</td>
 							<td>${settlementComList.total_settlement}</td>
+							<td>${paymentVO.company_list[1][settlementComList.bank] }</td>
 							<td>${settlementComList.account}</td>
 						</tr>
 					</c:forEach>

@@ -145,7 +145,8 @@
 						            </div>
 						            
 						            <div class="find_idpwd">
-						                <a href="">아이디 찾기</a>	&nbsp&nbsp&nbsp&nbsp/&nbsp&nbsp&nbsp&nbsp <a href="">비밀번호 찾기</a>
+						                <a href="/user/findIdPage.do">아이디 찾기</a>	&nbsp&nbsp&nbsp&nbsp/&nbsp&nbsp&nbsp&nbsp 
+						                <a href="/user/findPwdPage.do">비밀번호 찾기</a>
 									</div>
 						            <div class="submit">
 						                <input type="submit" value="로그인">
@@ -156,8 +157,7 @@
 						        </div>
 						        <a href="/seller/login.do">판매자로 로그인하기</a>
 						    </form>
-						    
-						    </div>
+						</div>
 				</div>
 			</div>
 

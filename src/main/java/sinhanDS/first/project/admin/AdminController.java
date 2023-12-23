@@ -1,6 +1,5 @@
 package sinhanDS.first.project.admin;
 
-import java.net.http.HttpRequest;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -287,7 +286,11 @@ public class AdminController {
 	@GetMapping("getSettlementReqList.do")
 	public String getSettlementReqList(Model model) {
 		List<SettlementVO> settlementReqList = service.getSettlementReqList();
+		for(int i = 0; i < settlementReqList.size(); i++) {
+			log.debug("bank_info " + i + " : " + settlementReqList.get(i).getBank());
+		}
 		model.addAttribute("settlementReqList", settlementReqList);
+		model.addAttribute("paymentVO", new PaymentVO());
 		return "/admin/page/settlementReqList";
 	}
 	
@@ -295,6 +298,7 @@ public class AdminController {
 	public String getSettlementComList(Model model) {
 		List<SettlementVO> settlementComList = service.getSettlementComList();
 		model.addAttribute("settlementComList", settlementComList);
+		model.addAttribute("paymentVO", new PaymentVO());
 		return "/admin/page/settlementComList";
 	}
 	

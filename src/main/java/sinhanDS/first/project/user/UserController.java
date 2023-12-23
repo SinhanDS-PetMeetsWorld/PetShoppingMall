@@ -1,7 +1,9 @@
 package sinhanDS.first.project.user;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
@@ -35,6 +38,7 @@ import sinhanDS.first.project.user.vo.UserVO;
 
 @Controller
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
 	@Autowired
 	private UserService service;
@@ -128,7 +132,7 @@ public class UserController {
 	            helper.setSubject("Pet Meets World의 이메일 인증 번호입니다.");
 	            helper.setText(
 	            		"이메일 인증 번호는 ["+checkNum+"] 입니다."+
-	            		"회원가입 화면으로 돌아가 이메일 인증 번호 입력 창에 입력하신 뒤, '이메일 인증하기' 버튼을 눌러주세요."
+	            		"이메일 인증 번호 입력 창에 입력하신 뒤, '이메일 인증하기' 버튼을 눌러주세요."
 	            		);
 	            helper.setFrom("meetsworldpet@gmail.com");
 	            helper.setTo(email);
@@ -362,14 +366,37 @@ public class UserController {
 	// (신정훈) 찜 리스트 구현 12 - 18
 	@GetMapping("/list_user_zzim.do")
 	public String list_zzim(Model model , HttpSession sess , UserVO uvo , ProductVO prvo , SaveBoxVO savo, ProductSearchVO svo){
-		
 		UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
 		int user_no = login.getNo();
+		svo.setUser_no(user_no);
+		svo.setNumberOfProductInPage(svo.getNumberInPage_zzim());
 		
-		List<SaveBoxVO> zzim_list = service.zzim_list(user_no);
-		List<UserVO> user_list = service.user_list(user_no);
+		int count = service.getNumberOfZZIMPage(svo);
+		log.debug("count: " + count);
+		int totalPage = count / svo.getNumberOfProductInPage();
+        if (count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
+        map.put("totalPage", totalPage);
+        
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList())*svo.getNumberOfPageInIndexList());
+        log.debug("endPage: " + endPage);
+        int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+        if(endPage > totalPage) endPage = totalPage;
+        boolean prev = startPage > 1;
+        boolean next = endPage < totalPage;
+        map.put("endPage", endPage);
+        map.put("startPage", startPage);
+        map.put("prev", prev);
+        map.put("next", next);
+        
+        model.addAttribute("paging", map);
+        
+        
+        
+		List<SaveBoxVO> zzim_list = service.zzim_list(svo);
 		List<ProductVO> product_list = service.getProductListWithProductSearchVO(zzim_list, svo);
-//		List<ProductVO> product_list = service.product_list(savo.getProduct_no());
 		
 		List<List<String>> save_list2 = new ArrayList<List<String>>();	
 		
@@ -400,12 +427,35 @@ public class UserController {
 	
 	// (신정훈) 작성한 리뷰 리스트 구현 12 - 19
 	@GetMapping("/list_user_review.do")
-	public String possible_write_review(Model model , HttpSession sess , UserVO uvo , ReviewVO revo , ProductOptionVO povo , OrderDetailVO odvo , OrderDetailOptionVO odovo){
-			
+	public String possible_write_review(Model model, HttpSession sess, ProductSearchVO svo , UserVO uvo , ReviewVO revo , ProductOptionVO povo , OrderDetailVO odvo , OrderDetailOptionVO odovo){
 		UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
 		int user_no = login.getNo();
+		svo.setUser_no(user_no);
+		svo.setNumberOfProductInPage(svo.getNumberInPage_reviewList());
+		log.debug("sorttype: " + svo.getSorttype());
+		int count = service.getNumberOfReviewPage(svo);
+		log.debug("count: " + count);
+		int totalPage = count / svo.getNumberOfProductInPage();
+        if (count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
+        map.put("totalPage", totalPage);
+        
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList())*svo.getNumberOfPageInIndexList());
+        log.debug("endPage: " + endPage);
+        int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+        if(endPage > totalPage) endPage = totalPage;
+        boolean prev = startPage > 1;
+        boolean next = endPage < totalPage;
+        map.put("endPage", endPage);
+        map.put("startPage", startPage);
+        map.put("prev", prev);
+        map.put("next", next);
+        
+        model.addAttribute("paging", map);
 		 
-		List<ReviewVO> review_list = service.review_list(user_no);
+		List<ReviewVO> review_list = service.review_list(svo);
 		System.out.println("리뷰 리스트 " +  review_list);	
 		
 	    List<OrderDetailVO> order_detail = service.order_detail(odvo);
@@ -435,6 +485,7 @@ public class UserController {
 				review_list1.add(String.valueOf(review_list.get(i).getProduct_no())); // 제품 번호 5				
 				review_list1.add(String.valueOf(review_list.get(i).getWrite_date())); // 작성일 6
 				review_list1.add(String.valueOf(review_list.get(i).getRating())); // 평점 7
+				review_list1.add(String.valueOf(review_list.get(i).getProduct_no())); // 상품 번호 8
 				
 				review_list2.add(review_list1);
 				
@@ -447,43 +498,139 @@ public class UserController {
 
 		// (신정훈) 리뷰 등록 가능 리스트 구현 12 - 19
 	@GetMapping("/possible_write_review.do")
-	public String list_review(Model model , HttpSession sess , UserVO uvo , ReviewVO revo , ProductOptionVO povo , OrderDetailVO odvo , OrderDetailOptionVO odovo){
+	public String list_review(Model model , HttpSession sess, ProductSearchVO svo , UserVO uvo , ReviewVO revo , ProductOptionVO povo , OrderDetailVO odvo , OrderDetailOptionVO odovo){
+		UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
+		int user_no = login.getNo();
+		svo.setUser_no(user_no);
+		svo.setNumberOfProductInPage(svo.getNumberInPage_reviewList());
+		log.debug("sorttype: " + svo.getSorttype());
+		int count = service.getNumberOfWritableReviewPage(svo);
+		log.debug("count: " + count);
+		int totalPage = count / svo.getNumberOfProductInPage();
+        if (count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
+        map.put("totalPage", totalPage);
+        
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList())*svo.getNumberOfPageInIndexList());
+        log.debug("endPage: " + endPage);
+        int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+        if(endPage > totalPage) endPage = totalPage;
+        boolean prev = startPage > 1;
+        boolean next = endPage < totalPage;
+        map.put("endPage", endPage);
+        map.put("startPage", startPage);
+        map.put("prev", prev);
+        map.put("next", next);
+        
+        model.addAttribute("paging", map);
 			
-			UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
-			int user_no = login.getNo();
 			
-			List<OrderDetailVO> possible_write_review = service.possible_write_review(user_no);
-		    System.out.println("오더 디테일" + possible_write_review); 
-		    
-		   // List<ReviewVO> review_list = service.review_list(user_no);
-			//System.out.println("리뷰 리스트 " +  review_list);	
+		List<OrderDetailVO> possible_write_review = service.possible_write_review(svo);
+	    System.out.println("오더 디테일" + possible_write_review); 
+	    
+		List<String> product_image_list = service.product_image_list(possible_write_review);
+		System.out.println("image_list: " + product_image_list);
+		
+		
+		List<List<String>> possible_write_review2 = new ArrayList<List<String>>();	
+		
+		
+		if (possible_write_review.size() != 0) {
 			
-			List<String> product_image_list = service.product_image_list(possible_write_review);
-			System.out.println("image_list: " + product_image_list);
-			
-			
-			List<List<String>> possible_write_review2 = new ArrayList<List<String>>();	
-			
-			
-			if (possible_write_review.size() != 0) {
+			for (int i = 0; i < possible_write_review.size(); i++ ) {
+			List<String> possible_write_review1 = new ArrayList<String>();
 				
-				for (int i = 0; i < possible_write_review.size(); i++ ) {
-				List<String> possible_write_review1 = new ArrayList<String>();
-					
-					possible_write_review1.add(String.valueOf(product_image_list.get(i))); // 상품 이미지 0 
-					possible_write_review1.add(String.valueOf(possible_write_review.get(i).getNo())); // 주문번호 1
-					possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_name())); // 상품명 2
-					possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_price())); // 상품 가격 3 
-					possible_write_review1.add(String.valueOf(possible_write_review.get(i).getPurchase_confirmation_date())); // 구매 확정 일자 4
-					possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_no())); // 상품 번호 5 
-					possible_write_review2.add(possible_write_review1);
-					
-				}
-				System.out.println("오늘 폼 미쳤다 3" + possible_write_review2);
-				model.addAttribute("possible_write_review2" , possible_write_review2);	
+				possible_write_review1.add(String.valueOf(product_image_list.get(i))); // 상품 이미지 0 
+				possible_write_review1.add(String.valueOf(possible_write_review.get(i).getNo())); // 주문번호 1
+				possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_name())); // 상품명 2
+				possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_price())); // 상품 가격 3 
+				possible_write_review1.add(String.valueOf(possible_write_review.get(i).getPurchase_confirmation_date())); // 구매 확정 일자 4
+				possible_write_review1.add(String.valueOf(possible_write_review.get(i).getProduct_no())); // 상품 번호 5 
+				possible_write_review2.add(possible_write_review1);
+				
 			}
-			
-			return "user/review/possible_write_review";
+			model.addAttribute("possible_write_review2" , possible_write_review2);	
 		}
+		return "user/review/possible_write_review";
+	}
+	
+	@GetMapping("/findIdPage.do")
+	public String findIdPage() {
+		return "user/login/findId";
+	}
+	
+	@GetMapping("/findPwdPage.do")
+	public String findPwdPage() {
+		return "user/login/findPwd";
+	}
+	
+	@PostMapping("/findId.do")
+	public String findId(UserVO vo, Model model) {
+		UserVO foundID = service.findId(vo);
+		if(foundID != null) {
+			try {
+	            MimeMessage message = javaMailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	            
+	            helper.setSubject("Pet Meets World 고객님의 ID 전달드립니다.");
+	            helper.setText("회원님의 ID는 [ "+foundID.getId()+" ] 입니다. 해당 ID로 로그인을 진행해주세요.");
+	            helper.setFrom("meetsworldpet@gmail.com");
+	            helper.setTo(vo.getEmail());
+	            javaMailSender.send(message);
+	            
+	            model.addAttribute("cmd", "move");
+				model.addAttribute("msg", "이메일로 ID를 전송했습니다. 로그인을 진행해주세요.");
+				model.addAttribute("url", "/user/login.do");
+			}catch(Exception e) {
+	            e.printStackTrace();
+	        }
+		} else {
+            model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "문제가 발생했습니다. 입력하신 성함과 이메일 주소가 올바른지 다시 확인하시고,"
+					+ " 동일한 문제가 반복해서 발생 시 페이지 하단에 기입된 연락처로 관리자에게 문의해주세요.");
+			model.addAttribute("url", "/user/findIdPage.do");
+		}
+		return "common/alert";
+	}
+	
+	@PostMapping("/findPwd.do")
+	public String findPwd(UserVO vo, Model model) {
+		
+		int checkNum = (int)(Math.random()*899999) + 100000;
+		System.out.println("확인: "+checkNum);
+		vo.setPassword(String.valueOf(checkNum));
+		
+		int temp = service.findPwd(vo);
+		
+		if(temp > 0) {
+			try {
+	            MimeMessage message = javaMailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	            
+	            helper.setSubject("Pet Meets World 고객님의 임시 비밀번호 전달드립니다.");
+	            helper.setText("회원님의 임시 비밀번호는 [ "+checkNum+" ] 입니다. 해당 비밀번호로 로그인을 진행해주세요./n"
+	            		+"로그인 후 개인정보 보호를 위해 새로운 비밀번호로 변경을 권장합니다.");
+	            helper.setFrom("meetsworldpet@gmail.com");
+	            helper.setTo(vo.getEmail());
+	            javaMailSender.send(message);
+	            
+	            model.addAttribute("cmd", "move");
+				model.addAttribute("msg", "이메일로 임시 비밀번호를 전송했습니다. 로그인을 진행해주세요.");
+				model.addAttribute("url", "/user/login.do");
+			}catch(Exception e) {
+	            e.printStackTrace();
+	        }
+		} else {
+            model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "문제가 발생했습니다. 입력하신 성함과 id, 이메일 주소가 올바른지 다시 확인하시고,"
+					+ " 동일한 문제가 반복해서 발생 시 페이지 하단에 기입된 연락처로 관리자에게 문의해주세요.");
+			model.addAttribute("url", "/user/findPwdPage.do");
+		}
+		return "common/alert";
+	}
+	
+	
 	
 }
