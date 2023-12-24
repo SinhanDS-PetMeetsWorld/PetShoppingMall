@@ -66,6 +66,10 @@
 			 margin: 30px 20px 30px 30px;
 			 float: left;
 		}
+		.reason_cancel{
+			float:left;
+			margin: 30px 20px 30px 30px;
+		}
 		.buyer_info{
 			clear:both;
 			line-height: 30px;
@@ -131,10 +135,10 @@
 											<c:if test='${orderdetails.cancle_status == 0}'><c:set var="allcanclecheck" value="false"/></c:if>
 										</tr>
 									</table>
-									<c:if test="${orderdetails.cancle_status != 0}">취소 사유: ${orderdetails.reason}</c:if>
 									<c:if test="${orderdetails.cancle_status == 0}">
 										<button type="button" value="${orderdetails.no}" class="canclebutton">주문취소</button>
 									</c:if>
+									<div class="reason_cancel"><c:if test="${orderdetails.cancle_status != 0}">취소 사유: ${orderdetails.reason}</c:if></div>
 									<br><br>
 									
 								
