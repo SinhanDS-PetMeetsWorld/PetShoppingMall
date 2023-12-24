@@ -196,7 +196,7 @@ width : 30px;
 					    <table style="border: 1px solid #FFDE30; border-collapse: collapse;" width="800" >
 					        
 					        <!--주소가 존재하는만큼 td를 생성-->
-					        <c:if test="${empty paymentvo }">
+					        <c:if test="${empty addressvo }">
 					        	<tr class="table">
 						            <td>
 						                <br>

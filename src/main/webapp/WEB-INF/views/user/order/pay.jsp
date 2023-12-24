@@ -143,7 +143,7 @@ font-size : 20px;
 
 width : 400px;
 height : 100px;
-text-align :right;
+text-align :left;
 float:left;
 font-size : 25px;
 }
@@ -191,9 +191,10 @@ float : left;
 					
 					<h2 class ="menu_name">상품 정보 출력</h2>
 						<c:forEach items="${product_list }" var="vo" varStatus="status">
-																											<input type="hidden" name="product_no" value="${vo.no }">
-																											<input type="hidden" name="cart_no" value="${cno_list[status.index] }">
-																											<input type="hidden" name="quantity" value="${quantity_list[status.index] }">
+							<input type="hidden" name="product_no" value="${vo.no }">
+							<input type="hidden" name="cart_no" value="${cno_list[status.index] }">
+							<input type="hidden" name="quantity" value="${quantity_list[status.index] }">
+							
 							<div id = "product_info">
 							
 								<div id = "goods_image">    
@@ -215,8 +216,12 @@ float : left;
 							                </div>
 							                
 							                <div><br>
-											제조사: ${vo.company }<br>
-											브랜드: ${vo.brand }<br>
+							                	<c:if test="${!empty vo.company }">
+													제조사: ${vo.company }<br>
+							                	</c:if>
+							                	<c:if test="${!empty vo.brand }">
+													브랜드: ${vo.brand }<br>
+							                	</c:if>
 							                </div>
 							                
 							    </div>   
@@ -245,7 +250,7 @@ float : left;
 					
 					
 					
-																										<input type="hidden" class="user_no" name="user_no" value="${userno }">
+					<input type="hidden" class="user_no" name="user_no" value="${userno }">
 					
 					<h2 class ="menu_name">주소 선택</h2>
 					<ol>
@@ -254,7 +259,7 @@ float : left;
 							<div id = "addr">
 							
 								<div id ="check_box">
-									<input type="radio" class="address_selector" name="address_selector" value=${status.index }<c:if test="${status.index == 0}">checked</c:if>>  
+									<input type="radio" class="address_selector" name="address_selector" value="${status.index }" <c:if test="${status.index == 0}">checked</c:if>>  
 								</div>
 									
 								
@@ -270,14 +275,14 @@ float : left;
 							<hr class = "line">		
 						</c:forEach>
 							
-																											<div class="address_value_list">
-																												<input type="hidden" class="zipcode" name="zipcode" value="${userAddressList[0].zipcode }">
-																												<input type="hidden" class="addr1" name="addr1" value="${userAddressList[0].addr1 }">
-																												<input type="hidden" class="addr2" name="addr2" value="${userAddressList[0].addr2 }">
-																												<input type="hidden" class="" name="user_name" value="${userAddressList[0].name }">
-																												<input type="hidden" class="" name="user_phone" value="${userAddressList[0].phone }">
-																											</div>
-						</ol>
+						<div class="address_value_list">
+							<input type="hidden" class="zipcode" name="zipcode" value="${userAddressList[0].zipcode }">
+							<input type="hidden" class="addr1" name="addr1" value="${userAddressList[0].addr1 }">
+							<input type="hidden" class="addr2" name="addr2" value="${userAddressList[0].addr2 }">
+							<input type="hidden" class="" name="user_name" value="${userAddressList[0].name }">
+							<input type="hidden" class="" name="user_phone" value="${userAddressList[0].phone }">
+						</div>
+					</ol>
 						
 						<h2 class ="menu_name">결제 수단 선택</h2>
 						<ol>
@@ -286,8 +291,9 @@ float : left;
 								<div id = "addr">
 								
 									<div id ="check_box">
-										<input type="radio" class="payment_selector" name="payment_selector" value=${status.index }<c:if test="${status.index == 0}">checked</c:if>>
+										<input type="radio" class="payment_selector" name="payment_selector" value="${status.index }" <c:if test="${status.index == 0}">checked</c:if>>
 									</div>	
+										
 										
 									
 									<div id = "addr_info">
