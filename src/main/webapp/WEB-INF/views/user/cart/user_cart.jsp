@@ -311,158 +311,82 @@ float : left;
         </div>
     </div>
     <script>
-    	/*
-    	$('.temp_temp').on('change', change);
-    	function change(){
-    		console.log(this);
-    		console.log(this.parentNode);
-    		console.log(this.parentNode.querySelector('input'));
-    		*/
+		$('.check_product').each(function(i, e){
+			$(e).prop('checked',true);
+		})
+	    calculatePrice();
+		
+    	// 가격 계산 부분
+    	$('.check_product').on('click', calculatePrice);	
     		
-    		/*
-    		
-    		//판매자 no를 받아올 배열 선언
-    		var sellers = new Array();
-    		//각 상품의 판매자가 누구인지 받아오는 부분, 중복을 제거해야 배송비 계산시 쓸 수 있다.
-    		for(var i=0; i < $('.seller_no').length; i++){	// 판매자 no를 받아올 배열 초기화
-				sellers[i] = $('.seller_no')[i].value;
-    		}	
-    		
-    		// 각 상품의 판매자 no가 담겨있는 배열에서 중복 제거하는 코드 new Set
-    		const sellers_no = Array.from(new Set(sellers));
-    		console.log(sellers_no);
-    		
-    		*/
-    		
-    		// 가격 계산 부분
-    		$('.check_product').on('click', function(){		// 체크박스 클릭시 이벤트 추가
-    			var sellers = new Array();
-    			var totalPrice = 0;
-    			var discountPrice = 0;
-    			var deliveryPrice = 0;
-    			var finalPrice = 0;
-    			
-    			$('.check_product').each(function(i,e) {		// 클래스가 check_product인 태그들을 배열로 가져오고, each로 반복문 / e는 각 체크박스 요소들임.(즉, 각 상품)
-	                if($('.check_product').eq(i).prop('checked')){	// check_product로 가져온 태그 중 i번째인 태그의 checked 속성을 검사
-	                	
-	                	var totalOptionPrice = 0;
-	                	$('.option_area').eq(i).children('.option_price').each(function(j,e){
-	                		console.log(e);
-	             			totalOptionPrice += Number($(e).val());
-	                	})
-	             
-	                	totalPrice += (Number($(".price_list").eq(i).val()) + totalOptionPrice/*Number($(".option_price").eq(i).val())*/ - Number($(".discount_list").eq(i).val()) ) * Number($(".quantity_list").eq(i).val())
-	                	discountPrice += Number($(".discount_list").eq(i).val()) * Number($(".quantity_list").eq(i).val())
-	                	
-	                	
-	                	// 판매자 no를 받아와 배열에 저장, 이후 중복제거 할 것임
-	                	sellers.push($(".seller_no").eq(i).val())
-	                } 
-	                /*else{
-	                	$('.cart_user_no').eq(i).attr("disabled", true);
-	                	$('.cart_no_list').eq(i).attr("disabled", true);
-	                	$('.seller_no').eq(i).attr("disabled", true);
-	                	$('.option_cart_no').eq(i).attr("disabled", true);
-	                	$('.option_no').eq(i).attr("disabled", true);
-	                	$('.option_price').eq(i).attr("disabled", true);
-	                	$('.price_list').eq(i).attr("disabled", true);
-	                	$('.discount_list').eq(i).attr("disabled", true);
-	                	$('.quantity_list').eq(i).attr("disabled", true);
-	                }*/
-	                
-    			});
-    			// 중복제거한 판매자 no 리스트 sellers_no, 이 배열의 길이를 사용해 배송비를 계산한다.
-    			const sellers_no = Array.from(new Set(sellers));
-    			deliveryPrice = sellers_no.length * 2500;
-    			finalPrice = totalPrice + deliveryPrice;
-    			
-    			
-    			console.log('총주문가격:'+totalPrice);
-    			console.log('할인금액:'+discountPrice);
-    			console.log('배송비:'+deliveryPrice);
-    			console.log('최종결제액(배송비포함):'+finalPrice);
-    			
-    			
-    			document.getElementById('totalprice').innerHTML=totalPrice;
-    			document.getElementById('discountprice').innerHTML=discountPrice;
-    			document.getElementById('deliveryprice').innerHTML=deliveryPrice;
-    			document.getElementById('finalprice').innerHTML=finalPrice;
-
-    			$('#total_price').val(totalPrice);
-    			$('#discount_price').val(discountPrice);
-    			$('#delivery_price').val(deliveryPrice);
-    			$('#final_price').val(finalPrice);
-    		});	
-   			
-    		
-    		$('.quantity_list').on('change', function(){	// 무조건 처음부터 다 다시 검사해야 하므로 totalPrice를 0으로 초기화해도 괜찮음
-    			
-    			//var full_url = '/user/order/modify_quantity.do?cartno=' + $(this).data("cartno") + '&quantity=' + $(this).val();
-    			//console.log(full_url);
-    			var cart_table_no = $(this).data("cart_table_no");
-    			console.log(cart_table_no);
-    			var quantity = $(this).val();
-    			console.log(quantity);
-    			   
-    			$.ajax({
-    				type:"GET",
-    				url: '/user/order/modify_quantity.do',
-    				data: {  
-    					cart_no_table : cart_table_no,
-    					quantity : quantity
-    				},
-    				
-    				async: false,
-    				//dataType:'HTML',
-    				
-    	  			success: function(res){
-						console.log("ㅎㅎㅎ");
-    	  			}
-    			});
-    		
-    			var sellers = new Array();
-    			var totalPrice = 0;
-    			var discountPrice = 0;
-    			var deliveryPrice = 0;
-    			var finalPrice = 0;
-    			$('.check_product').each(function(i,e) {		// 클래스가 check_product인 태그들을 배열로 가져오고, each로 반복문 / e는 각 체크박스 요소들임.(즉, 각 상품)
-	                if($('.check_product').eq(i).prop('checked')){	// check_product로 가져온 태그 중 i번째인 태그의 checked 속성을 검사
-	                	var totalOptionPrice = 0;
-	                	$('.option_area').eq(i).children('.option_price').each(function(j,e){
-	             			totalOptionPrice += Number($(e).val());
-	                	})
-	             
-	             
-	                	totalPrice += (Number($(".price_list").eq(i).val()) + totalOptionPrice - Number($(".discount_list").eq(i).val()) ) * Number($(".quantity_list").eq(i).val())
-	                	discountPrice += Number($(".discount_list").eq(i).val()) * Number($(".quantity_list").eq(i).val())
-	                	
-	                	// 판매자 no를 받아와 배열에 저장, 이후 중복제거 할 것임
-	                	sellers.push($(".seller_no").eq(i).val())
-	                }
-	                
-    			});
-    			// 중복제거한 판매자 no 리스트 sellers_no, 이 배열의 길이를 사용해 배송비를 계산한다.
-    			const sellers_no = Array.from(new Set(sellers));
-    			deliveryPrice = sellers_no.length * 2500;
-    			finalPrice = totalPrice + deliveryPrice;
-    			
-    			
-    			//console.log('총주문가격:'+totalPrice);
-    			//console.log('할인금액:'+discountPrice);
-    			//console.log('배송비:'+deliveryPrice);
-    			//console.log('최종결제액(배송비포함):'+finalPrice);
-    			
-    			
-    			document.getElementById('totalprice').innerHTML=totalPrice;
-    			document.getElementById('discountprice').innerHTML=discountPrice;
-    			document.getElementById('deliveryprice').innerHTML=deliveryPrice;
-    			document.getElementById('finalprice').innerHTML=finalPrice;
-    			
-    			$('#total_price').val(totalPrice);
-    			$('#discount_price').val(discountPrice);
-    			$('#delivery_price').val(deliveryPrice);
-    			$('#final_price').val(finalPrice);
-            });	
+    	$('.quantity_list').on('change', saveQuantity);	
+    	$('.quantity_list').on('change', calculatePrice);	
+		
+    	function saveQuantity(){
+    		var cart_table_no = $(this).data("cart_table_no");
+			console.log(cart_table_no);
+			var quantity = $(this).val();
+			console.log(quantity);
+			   
+			$.ajax({
+				type:"GET",
+				url: '/user/order/modify_quantity.do',
+				data: {  
+					cart_no_table : cart_table_no,
+					quantity : quantity
+				},
+				
+				async: false,
+				//dataType:'HTML',
+				
+	  			success: function(res){
+					console.log("ㅎㅎㅎ");
+	  			}
+			});
+    	}
+    	function calculatePrice(){
+			var sellers = new Array();
+			var totalPrice = 0;
+			var discountPrice = 0;
+			var deliveryPrice = 0;
+			var finalPrice = 0;
+			$('.check_product').each(function(i,e) {		// 클래스가 check_product인 태그들을 배열로 가져오고, each로 반복문 / e는 각 체크박스 요소들임.(즉, 각 상품)
+                if($('.check_product').eq(i).prop('checked')){	// check_product로 가져온 태그 중 i번째인 태그의 checked 속성을 검사
+                	var totalOptionPrice = 0;
+                	$('.option_area').eq(i).children('.option_price').each(function(j,e){
+             			totalOptionPrice += Number($(e).val());
+                	})
+             
+                	totalPrice += (Number($(".price_list").eq(i).val()) + totalOptionPrice - Number($(".discount_list").eq(i).val()) ) * Number($(".quantity_list").eq(i).val())
+                	discountPrice += Number($(".discount_list").eq(i).val()) * Number($(".quantity_list").eq(i).val())
+                	
+                	// 판매자 no를 받아와 배열에 저장, 이후 중복제거 할 것임
+                	sellers.push($(".seller_no").eq(i).val())
+                }
+                
+			});
+			// 중복제거한 판매자 no 리스트 sellers_no, 이 배열의 길이를 사용해 배송비를 계산한다.
+			const sellers_no = Array.from(new Set(sellers));
+			deliveryPrice = sellers_no.length * 2500;
+			finalPrice = totalPrice + deliveryPrice;
+			
+			
+			//console.log('총주문가격:'+totalPrice);
+			//console.log('할인금액:'+discountPrice);
+			//console.log('배송비:'+deliveryPrice);
+			//console.log('최종결제액(배송비포함):'+finalPrice);
+			
+			
+			document.getElementById('totalprice').innerHTML=totalPrice + discountPrice;
+			document.getElementById('discountprice').innerHTML=discountPrice;
+			document.getElementById('deliveryprice').innerHTML=deliveryPrice;
+			document.getElementById('finalprice').innerHTML=finalPrice;
+			
+			$('#total_price').val(totalPrice);
+			$('#discount_price').val(discountPrice);
+			$('#delivery_price').val(deliveryPrice);
+			$('#final_price').val(finalPrice);
+        }
     		
     	function emptyCheck(){
     		if($("#total_price").val() == 0){
