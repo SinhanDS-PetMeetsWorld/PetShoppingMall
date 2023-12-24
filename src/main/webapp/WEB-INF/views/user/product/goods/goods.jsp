@@ -34,6 +34,20 @@
 			justify-content: center;
 			align-items:center;	
 		}
+		.goods-photo{
+			width:100%;
+			height:100%;
+			display: flex;
+    		justify-content: center;
+    		/*align-items: center;*/
+		}
+		
+		.goods-photo img{
+			max-width:100%;	
+			/*height:auto;*/
+			
+		}
+		
 		
 		
 		#goods_category{
@@ -210,10 +224,10 @@
 								<img src="/resources/img/product/no_image.jpg" width="100" height="100">
 							</c:if>
 							<c:if test="${!empty item.image_url && fn:substring(item.image_url, 0, 1) == 'h' }">
-								<img src="${item.image_url }"  height="450">
+								<img src="${item.image_url }">
 							</c:if>
 							<c:if test="${!empty item.image_url && !(fn:substring(item.image_url, 0, 1) == 'h') }">
-								<img src="/resources/img/product/registed_img/${item.image_url }" height="450">
+								<img src="/resources/img/product/registed_img/${item.image_url }">
 							</c:if>
 						</div>
 					</c:forEach>
