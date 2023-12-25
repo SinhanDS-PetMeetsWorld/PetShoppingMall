@@ -198,16 +198,19 @@ width : 30px;
 					        <!--주소가 존재하는만큼 td를 생성-->
 					        <c:if test="${empty addressvo }">
 					        	<tr class="table">
-						            <td>
+					        	
+					        		<td class ="space"></td>
+						            
+						            <td class ="td_container">
 						                <br>
 						                <div>아직 등록된 주소가 없습니다.</div>
-						                <div>새 주소을 추가해주세요.</div>
+						                <div>아래에서 새 주소을 추가해주세요.</div>
 						                <br>
 						            </td>
 						        </tr>
 						        <tr>
 						        	<td colspan="2">
-					        		<hr>
+					        		<hr class = "line">
 						        	</td>
 						    	</tr>
 					        </c:if>

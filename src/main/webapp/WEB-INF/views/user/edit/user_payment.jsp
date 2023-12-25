@@ -198,16 +198,18 @@ display : flex;
 					        <!--결제수단이 존재하는만큼 td를 생성-->
 					        <c:if test="${empty paymentvo }">
 					        	<tr class="table">
-						            <td>
+					        		<td class = "space"></td>
+						            
+						            <td class ="td_container">
 						                <br>
-						                <div>아직 등록된 결제 수단이 없습니다.</div>
-						                <div>새 결제 수단을 추가해주세요.</div>
+						                <div><span>아직 등록된 결제 수단이 없습니다.</span></div>
+						                <div>아래에서 새 결제 수단을 추가해주세요.</div>
 						                <br>
 						            </td>
 						        </tr>
 						        <tr>
 						        	<td colspan="2">
-					        		<hr>
+					        		<hr class = "line">
 						        	</td>
 						    	</tr>
 					        </c:if>

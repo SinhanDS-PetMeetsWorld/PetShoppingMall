@@ -31,7 +31,7 @@
 				success:function(res) {
 					console.log(res);
 					if (res == 'true') {
-						alert('ID가 중복되었습니다.');
+						alert('사용중인 ID입니다.');
 						$("#id").val('');
 						$("#id").focus();
 						isCon = false;
@@ -113,13 +113,19 @@
     	}
     	$(function() {
     		$("#idCheck").click(function() {
+    			var id = $('#id').val(); // 입력값 변수화; 
+    			
     			$.ajax({
     				url:'idCheck.do',
     				data:{id:$('#id').val()},
     				success:function(res) {
     					if (res == 'true') {
-    						alert('ID가 중복되었습니다.');
+    						alert('사용중인 ID입니다.');
     						$("#id").val('');
+    						$("#id").focus();
+    					}else if (id === ''){
+							alert('ID를 입력해주세요.');  // 빈값 입력 처리 추가
+							$("#id").val('');
     						$("#id").focus();
     					} else {
     						dupCheck = true;
@@ -133,6 +139,12 @@
     	var email_auth_num = '';
     	$(function() {
     		$('#emailchecknum_btn').click(function() {    		
+    			var email = $('#email').val(); // 입력값 변수화
+    			
+    			   if (email === '') {
+    		            alert('이메일을 입력해주세요.'); // 이메일 빈값 처리 추가
+    		            return;
+    		      		 }
         		$.ajax({
         			type : 'post',
         			url : 'emailCheck.do',
@@ -145,6 +157,7 @@
         		});
         	});
     	})
+    	
     	var email_auth = false;
     	$(function(){
     		$('#emailcheck_btn').click(function(){
