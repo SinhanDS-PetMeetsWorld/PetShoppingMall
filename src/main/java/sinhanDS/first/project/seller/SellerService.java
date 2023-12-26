@@ -17,4 +17,6 @@ public interface SellerService {
 	SellerVO detail(SellerVO vo);
 	int edit(SellerVO vo);
 	
+
+	int withdrawal(int seller_no);
 }

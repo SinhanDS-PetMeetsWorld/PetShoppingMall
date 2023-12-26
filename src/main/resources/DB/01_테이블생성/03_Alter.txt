@@ -270,3 +270,10 @@ ADD COLUMN `settlement_status` INT NULL DEFAULT '0' AFTER `purchase_confirmation
 
 ALTER TABLE `PetShoppingMall`.`settlement` 
 ADD COLUMN `bank` INT NULL DEFAULT NULL AFTER `account`;
+ALTER TABLE `PetShoppingMall`.`product` 
+ADD COLUMN `withdrawal_status` INT NOT NULL DEFAULT 0 AFTER `description`;
+ALTER TABLE `PetShoppingMall`.`seller` 
+ADD COLUMN `withdrawal_status` INT NULL DEFAULT 0 AFTER `restricted`;
+ALTER TABLE `PetShoppingMall`.`seller` 
+DROP COLUMN `withdrawal_status`,
+ADD COLUMN `withdrawal_date` DATE NULL AFTER `restricted`;
