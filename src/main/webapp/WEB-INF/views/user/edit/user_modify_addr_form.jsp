@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>배송지 수정</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -75,29 +75,94 @@
 	
 	
     </script>
+    
+<style>
+
+.aaa{
+	   background-color: #fff;
+    height: 30px;
+    width: 320px;
+    padding: 3px 7px;
+    line-height: normal;
+    border: 1px solid #a6a6a6;
+    border-top-color: #949494;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+    outline: 0;
+    color: #111;
+    font-size: 13px;
+    
+    :focus{
+        border-color: #e77600;
+        box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+    }
+}
+
+.btn {
+ display: inline-block;
+ outline: 0;
+ cursor: pointer;
+ border-radius: 6px;
+ border: 2px solid #FFDE30;
+ color: #0F1111;
+ background-color: white;
+ padding-left : 10px;
+ padding-right : 10px;
+ box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;
+ font-weight: 800;
+ font-size: 12px;
+ width : 100px;
+ height: 40px;
+}
+
+.modifyConfirm {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  border: none;
+  width: 150px;
+  height: 40px;
+  font-size: 15px;
+  background-color: #fd0;
+  font-weight: 800;
+  color: #222;
+  margin-top:25px;
+  margin-left: 150px;
+ }
+ 
+
+</style>    
 </head>
 <body>
     <div>
-        배송지 추가
+        <h2>배송지 수정</h2>
         <form action="modify_addr.do" id="modify_addr" method="POST">
             <div>
-                <input type="text" placeholder="받는이 성명" name="name" id="name" value="${vo.name }">
+                <input class = "aaa" type="text" placeholder="받는이 성명" name="name" id="name" value="${vo.name }">
+            </div>
+            <br>
+            <div>
+                <input class = "aaa" type="text" placeholder="전화번호" name="phone" id="phone" value="${vo.phone }">
             </div>
             <div>
-                <input type="text" placeholder="전화번호" name="phone" id="phone" value="${vo.phone }">
-            </div>
+           
+            <h2>주소 수정</h2>
             <div>
-                주소
-                <div><input type="text" readonly placeholder="우편번호" name="zipcode" id="zipcode" value="${vo.zipcode }"> <button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button></div>
-                <div><input type="text" readonly placeholder="기본주소" name="addr1" id="addr1" value="${vo.addr1 }"></div>
-                <div><input type="text" placeholder="상세주소" name="addr2" id="addr2" value="${vo.addr2 }"></div>
+                <input class = "aaa" type="text" readonly placeholder="우편번호" name="zipcode" id="zipcode" value="${vo.zipcode }">
+                <button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button></div>
+                <div><input class = "aaa" type="text" readonly placeholder="기본주소" name="addr1" id="addr1" value="${vo.addr1 }"></div>
+                <div><input class = "aaa" type="text" placeholder="상세주소" name="addr2" id="addr2" value="${vo.addr2 }"></div>
                 <input type="hidden" name="no" value="${vo.no }">
             </div>
+            
+            <h2>별명</h2>
             <div>
-                <input type="text" placeholder="별칭(ex:집)" name="comment" id="comment" value="${vo.comment }">
+                <input class = "aaa" type="text" placeholder="별칭(ex:집)" name="comment" id="comment" value="${vo.comment }">
             </div>
             <div>
-                 <input type="button" onclick="doCheck();" value="수정">
+                 <input class = "modifyConfirm" type="button" onclick="doCheck();" value="수정">
             </div>
             
         </form>

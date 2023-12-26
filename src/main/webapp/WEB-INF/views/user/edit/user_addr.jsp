@@ -7,7 +7,7 @@
 <html lang="ko">
 <head> 
     <meta charset="utf-8">
-    <title></title>
+    <title>구매자 :: 주소 변경</title>
     <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -225,7 +225,7 @@ width : 30px;
   								            <div><span>Contact : </span> <span>${vo.phone}</span> </div>      
 						            </td>
 						            <td class ="button_container">
-							            	<button class ="confirm_recreate" type="button" name="modify" onclick="window.open('/user/modify_addr_form.do?no=${vo.no}&addr1=${vo.addr1 }&addr2=${vo.addr2 }&zipcode=${vo.zipcode }&name=${vo.name }&phone=${vo.phone }&comment=${vo.comment }','user_modify_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>&nbsp&nbsp&nbsp&nbsp                
+							            	<button class ="confirm_recreate" type="button" name="modify" onclick="window.open('/user/modify_addr_form.do?no=${vo.no}&addr1=${vo.addr1 }&addr2=${vo.addr2 }&zipcode=${vo.zipcode }&name=${vo.name }&phone=${vo.phone }&comment=${vo.comment }','user_modify_addr_form', 'width=460px,height=612px,location=no,status=no,scrollbars=yes');">수정</button>&nbsp&nbsp&nbsp&nbsp                
 							            	<button class ="confirm_delete" type="button" name="delete" onclick="location.href='/user/delete_addr.do?no=${vo.no}'">삭제</button>
 						            </td>
 						        </tr>
@@ -238,7 +238,7 @@ width : 30px;
 						    </c:forEach>
 					        <tr class = "table">
 					            <td>
-					                <button class ="add_addr" onclick="window.open('/user/add_addr_form.do','user_add_addr_form', 'width=430,height=500,location=no,status=no,scrollbars=yes');">+ 배송지 추가</button>
+					                <button class ="add_addr" onclick="window.open('/user/add_addr_form.do','user_add_addr_form', 'width=460px,height=612px,location=no,status=no,scrollbars=yes');">+ 배송지 추가</button>
 					            </td>
 					        </tr>
 					    </table>

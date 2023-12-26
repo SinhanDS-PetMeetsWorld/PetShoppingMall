@@ -216,6 +216,10 @@
 margin-bottom: 10px;	
 }
 
+.contentsright{
+margin-left : 125px;
+}
+
 .aaa{
 	   background-color: #fff;
        height: 30px;

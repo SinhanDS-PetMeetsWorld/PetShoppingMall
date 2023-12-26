@@ -112,6 +112,7 @@ height:100px;
         margin-bottom : 10px;
         width : 930px;
    }
+   
 .line {
 	margin-top : 10px;
 	margin-bottom : 10px;
@@ -156,8 +157,8 @@ a:active {
 			<div class="contentsright">
 			
 			<input type ="hidden"  value = "${userLoginInfo.no }">
-				
 				<h1 class= "menu_name">찜 박스</h1>
+				
 				<hr class = "start_line">
 					<c:if test="${empty save_list2 }">
 						<div class="messagebody">

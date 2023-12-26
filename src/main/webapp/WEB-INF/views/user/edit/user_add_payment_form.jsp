@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>구매자 :: 결제수단 추가</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -24,11 +24,16 @@
 		$('#accountnum').click(function(){
             $('#card_contents').css("display", "none");
             $('#accountnum_contents').css("display", "block");
+            $('#accountnum').css("background" , "#FFDE30");
+            $('#card').css("background" , "#F9FAFB");
+            
         });
 
         $('#card').click(function(){
             $('#accountnum_contents').css("display", "none");
             $('#card_contents').css("display", "block");
+            $('#card').css("background" , "#FFDE30");      
+            $('#accountnum').css("background" , "#F9FAFB");
         });
     });
 	</script>
@@ -72,7 +77,136 @@
 	}
     </script>
     
-    
+<style>
+
+.contents {
+margin-left : 27px;
+}
+
+#card{
+ display: inline-block;
+ outline: 0;
+ cursor: pointer;
+ border-radius: 7px;
+ background: #FFDE30;
+ border:1px solid #FFDE30;
+ font-size: 25px;
+ height: 40px;
+ padding: 0 11px;
+ text-align: center;
+ width: 20%;
+ min-width: 200px;
+ font-weight: 500;
+ color: #0F1111;
+
+
+ border-bottom-left-radius: 0%;
+ border-bottom-right-radius: 0%;
+ border-bottom : none;
+ :hover{
+     background: #F7CA00;
+     border-color: #F2C200;
+     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+ 	}
+ }
+
+ #accountnum {
+ display: inline-block;
+ outline: 0;
+ cursor: pointer;
+ border-radius: 7px;
+ background: #F9FAFB;
+ border:1px solid #FFDE30;
+ font-size: 25px;
+ height: 40px;
+ padding: 0 11px;
+ text-align: center;
+ width: 20%;
+ min-width: 200px;
+ font-weight: 500;
+ color: #0F1111;
+ border-bottom-left-radius: 0%;
+ border-bottom-right-radius: 0%;
+ border-bottom : none;
+ :hover{
+     background: #F7CA00;
+     border-color: #F2C200;
+     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+ 	}
+ }
+
+
+.line {
+border : 1px solid black;
+  border-collapse : collapse;
+
+}
+
+.aaa{
+	   background-color: #fff;
+       height: 30px;
+       width: 150px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+ }
+
+.aaa_selectbank{
+	   background-color: #fff;
+       height: 38px;
+       width: 140px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+ }
+ 
+.info_tag{
+ height : 30px;
+ width : 191px;
+ float : left;
+ text-align : left;
+ margin-top : 3px;
+}
+
+ .addConfirm {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  border: none;
+  width: 150px;
+  height: 40px;
+  font-size: 16px;
+  background-color: #fd0;
+  font-weight: 800;
+  color: #222;
+  margin-top:15px;
+  margin-left: 120px;
+ }
+</style>    
     
 </head>
 <body>
@@ -81,57 +215,81 @@
         <span class="title" id="accountnum">계좌</span>
        
         <div class="contents" id="card_contents">
-	        <form action="insert_payment.do" id="insert_payment" method="GET">
-	            <input type="hidden" name="type" id="type" value="0">
-	            <span>카드정보 입력 </span>
-	            
-	            <select name="company" id="company">
-					<c:forEach var="card" items="${vo.company_list[0]}" varStatus="status">
-						<option value="${status.index}">${card}</option>
-					</c:forEach>
-            	</select>
-	            <div>
-	                <input type="text" placeholder="- 를 포함해서 입력하세요" name="account" id="account">
-	            </div>
-	            <div>
-	            	카드 유효기간 입력
-	            </div>
-	            <div>
-	                <input type="text" placeholder="MM / YYYY" name="valid_date" id="valid_date">
-	            </div>
-	            <div>
-	                별칭 입력
-	                <div><input type="text" placeholder="(ex: 엄마카드)" name="name" id="name"></div>
-	            </div>
-	            <div>
-	            	카드 CVC코드(카드뒷면 숫자3자리) 입력
-	                <div><input type="text" placeholder="CVC" name="cvc" id="cvc"></div>
-	            </div>
-	            <div>
-	                 <input type="button" onclick="doCheck();" value="입력 완료">
-	            </div>
-	            
-	        </form>
+      		        <form action="insert_payment.do" id="insert_payment" method="GET">
+			
+			            <input type="hidden" name="type" id="type" value="0">
+			            
+			          
+			            <h2>카드 정보 입력</h2>
+			        
+			            카드사&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<select class = "aaa_selectbank" name="company" id="company">
+							<c:forEach var="card" items="${vo.company_list[0]}" varStatus="status">
+								<option value="${status.index}">${card}</option>
+							</c:forEach>
+		            	</select>
+			           <input class ="aaa" type="text" placeholder="- 를 포함해서 입력하세요" name="account" id="account">
+			            
+			            <div class ="info_tag">
+			            	<br>카드 유효기간 입력
+			            </div>
+			           
+			            <div>
+			                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input class="aaa" type="text" placeholder="MM / YYYY" name="valid_date" id="valid_date">
+			            </div>
+			            
+			            <div class ="info_tag">
+			                <br>별칭 입력
+			            </div>
+			            
+		            	<div>
+		            	<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input class ="aaa" type="text" placeholder="(ex: 엄마카드)" name="name" id="name">
+		            	</div>
+		            	
+			            <div>
+			            	<br> 카드 CVC코드(카드뒷면 숫자3자리) 입력
+			            </div>
+			            
+			            <div>
+			            	<input class ="aaa" type="text" placeholder="CVC" name="cvc" id="cvc">
+			            </div>
+			            <div>
+			                 <input class ="addConfirm" type="button" onclick="doCheck();" value="입력 완료">
+			       		</div> 
+			       	
+			       	 </form>   
+	       
         </div>
         
          <div class="contents" id="accountnum_contents">
         	<form action="insert_payment.do" id="insert_payment2" method="GET">
 	            <input type="hidden" name="type" id="type" value="1">
-	            <span>계좌이체 입력</span>
-	            <select name="company" id="company">
-					<c:forEach var="bank" items="${vo.company_list[1]}" varStatus="status">
-						<option value="${status.index}">${bank}</option>
-					</c:forEach>
-            	</select>
-	            <div>
-	                <input type="text" placeholder="- 를 포함해서 입력하세요" name="account" id="account2">
-	            </div>
-	            <div>
+	            
+	            
+	            <h2>계좌 등록</h2>
+	            
+	            
+			            
+			    
+			    <br><br>
+			    <div>
+				계좌 정보   <select class = "aaa_selectbank" name="company" id="company">
+							<c:forEach var="bank" items="${vo.company_list[1]}" varStatus="status">
+								<option value="${status.index}">${bank}</option>
+							</c:forEach>
+		            	</select>
+				    <input class ="aaa" type="text" placeholder="- 를 포함해서 입력하세요" name="account" id="account2">
+			    </div>
+	            <br>
+	            <div class ="info_tag">
 	                별칭 입력
-	                <div><input type="text" placeholder="(ex: 비상금 계좌)" name="name" id="name2"></div>
-	            </div>
+	            </div> 
+	            
 	            <div>
-	                 <input type="button" onclick="doCheck2();" value="입력 완료">
+	            	&nbsp&nbsp&nbsp&nbsp&nbsp<input class ="aaa" type="text" placeholder="(ex: 비상금 계좌)" name="name" id="name2">
+	            </div>
+	           
+	            <div>
+	                 <input class ="addConfirm" type="button" onclick="doCheck2();" value="입력 완료">
 	            </div>
 	            
 	        </form>

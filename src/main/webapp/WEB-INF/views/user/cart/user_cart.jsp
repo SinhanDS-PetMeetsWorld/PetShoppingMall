@@ -23,7 +23,7 @@ display:flex;
 }
 
 #menu_name {
-margin-bottom : 15px;
+margin-bottom : 10px;
 
 }
 

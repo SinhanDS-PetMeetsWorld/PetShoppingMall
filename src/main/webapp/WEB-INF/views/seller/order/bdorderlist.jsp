@@ -154,7 +154,7 @@
 											<c:if test='${orderdetails.cancle_status == 0}'><c:set var="allcanclecheck" value="false"/></c:if>
 										</tr>
 									</table>
-									<c:if test="${orderdetails.cancle_status == 0}">
+									<c:if test="${orderdetails.cancle_status == 0 && orderdetails.purchase_confirmation_date==null}">
 										<button type="button" value="${orderdetails.no}" class="canclebutton">주문취소</button>
 									</c:if>
 									<div class="reason_cancel"><c:if test="${orderdetails.cancle_status != 0}">취소 사유: ${orderdetails.reason}</c:if></div>

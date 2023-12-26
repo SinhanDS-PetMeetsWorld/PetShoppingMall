@@ -22,7 +22,47 @@ String formattedDate = dateFormat.format(currentDate);
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/resources/css/common/template.css">
+<style>
 
+#question_content{
+	   background-color: #fff;
+       height: 180px;
+       width: 320px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       resize :none;
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+ }
+ 
+.qna_write {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  width: 420px;
+  height: 35px;
+  font-size: 15px;
+  background-color: #fd0;
+  font-weight: 500;
+  color: #222;
+  margin-top:5px;
+ } 
+
+
+
+</style>
 </head>
 <body>
 	<div class="contentsright">
@@ -65,7 +105,7 @@ String formattedDate = dateFormat.format(currentDate);
 				</table>
 				<div class="btnSet">
 				
-					<input type="submit" value="저장">
+					<input class = "qna_write" type="submit" value="저장">
 				</div>
 			</form>
 

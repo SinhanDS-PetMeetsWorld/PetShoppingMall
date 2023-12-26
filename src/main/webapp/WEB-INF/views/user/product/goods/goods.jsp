@@ -357,7 +357,7 @@ function goQnawrite_popup(){
 	
 	var product_no = ${product_no};
 	var qnaWrite = 'qnawrite.do?no='+ product_no;
-	window.open(qnaWrite , 'Q&A등록', 'width=500, height=600');
+	window.open(qnaWrite , 'Q&A등록', 'width=470px, height=500px');
 }
 
 // 질문 ,해답 하나씩 켜고 끄기
