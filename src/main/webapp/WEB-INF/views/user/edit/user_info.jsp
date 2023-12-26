@@ -461,5 +461,11 @@ text-align:left;
 			<div class="footer-color"></div>
         </div>
     </div>
+<script>
+	$('.confirm_withdrawal').on('click', function(){
+		confirm("회원 탈퇴 후에는 복구가 불가능합니다. \n정말 삭제하겠습니까?");
+		location.href="/user/withdrawal.do";
+	})
+</script>
 </body>
 </html>

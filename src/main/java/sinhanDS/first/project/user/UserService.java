@@ -57,4 +57,6 @@ public interface UserService {
 	
 	UserVO findId(UserVO vo);
 	int findPwd(UserVO vo);
+	
+	int withdrawal(int userNo);
 }

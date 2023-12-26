@@ -631,6 +631,26 @@ public class UserController {
 		return "common/alert";
 	}
 	
-	
-	
+	@GetMapping("/withdrawal.do")
+	public String withdrawal(Model model, HttpSession sess) {
+		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
+		String msg = "";
+		String url = "/user/afterwithdrawal.do";
+		int r = service.withdrawal(vo.getNo());
+		if (r > 0) {
+			msg = "계정이 삭제되었습니다.";
+			model.addAttribute("cmd","move");
+		} else {
+			msg = "계정 삭제 실패";
+			model.addAttribute("cmd","back");
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return "common/alert";
+	}
+	@GetMapping("afterwithdrawal.do")
+	public String afterwithdrawal(HttpSession sess) {
+		sess.invalidate();
+		return "redirect:/";
+	}
 }

@@ -295,4 +295,8 @@ public class UserServiceImpl implements UserService {
 		return suc;
 	}
 
+	@Override
+	public int withdrawal(int userNo) {
+		return mapper.withdrawal(userNo);
+	}
 }
