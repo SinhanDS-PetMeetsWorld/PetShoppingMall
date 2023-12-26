@@ -108,6 +108,12 @@ font-size : 30px;
 
 }
 
+.start_line {
+        border: 1px solid #FFDE30;
+        margin-bottom : 10px;
+        width : 930px;
+   }
+
 .line {
 	margin-top : 10px;
 	margin-bottom : 10px;
@@ -131,6 +137,7 @@ font-size : 30px;
 			<input type ="hidden" value = "${userLoginInfo.no } ">
 						
 				<h1 class="menu_name" >작성한 리뷰</h1>
+				<hr class ="start_line">
 				<c:if test="${empty review_list2 }"><br><h2>리뷰 내역이 존재하지 않습니다.</h2>
 				</c:if>
 				

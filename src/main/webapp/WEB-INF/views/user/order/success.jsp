@@ -12,6 +12,21 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
+    
+    <style>
+	    .messagebody{
+			margin-top : 100px;
+		}
+	    .messagebox{
+			margin : 0 auto;
+			width : 700px;
+			height : 300px;
+			text-align : center;
+		}
+		.homebtn {
+			margin : 40px;
+		}
+    </style>
 </head>
 <body>
 	<div class="wrap">
@@ -21,16 +36,23 @@
         
         <div class="contents">
 			<div class="contentsright">
-				<div>
-					결제완료 페이지 만들예정~
+				<div class="messagebody">
+					<div class="messagebox">
+						<div>
+							<img src="/resources/img/common/yellow_checkmark.png">
+							<h1>결제가 완료되었습니다</h1>
+						</div>
+						<div>
+							<br>마이페이지 > 구매이력 > 상세보기에서 주문하신 상품 목록을 확인할 수 있습니다.
+						</div>
+						<div class="homebtn">
+							<a href="/"><img src="/resources/img/common/returnhomebtn.png"></a>
+						</div>
+					</div>
 				</div>
 			</div>
         </div>
         
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
 	<div class="footer">
 		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
