@@ -234,8 +234,7 @@
 								<hr>
 								<div class="category_all">
 									<div class="category1">
-										카테고리*  <select name="category1_list"
-											class="category1_list">
+										카테고리*  <select name="category1_list" class="category1_list">
 											<c:forEach var="category_name" items="${category.category_name }" varStatus="status">
 												<option value="${status.index}">${category_name }</option>
 											</c:forEach>
