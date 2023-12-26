@@ -162,7 +162,9 @@
 				            	<input type="text" placeholder="- 를 제외하고 입력하세요" name="account" id="account" value="${vo.account}" >
 					        </div>
 					      	
-					        <button type="button">회원 탈퇴</button>
+					        	<div class = "withdrawal">
+					        		<button class ="confirm_withdrawal" type="button">회원 탈퇴</button>
+					        	</div> 
 					        <br>
 					        <input type="button" onclick="doEdit();" value="수정">
 					        
@@ -179,4 +181,10 @@
         </div>
     </div>
 </body>
+<script>
+	$('.confirm_withdrawal').on('click', function(){
+		confirm("회원 탈퇴 시 1년 동안 회원 탈퇴를 철회 할 수 있습니다.\n 해당 기간동안은 이 계정에서 올린 상품들은 검색되지 않습니다.\n 1년이 지나면 계정을 복구할 수 없습니다. 정말 삭제하시겠습니까??");
+		location.href="/seller/withdrawal.do";
+	})
+</script>
 </html>

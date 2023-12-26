@@ -81,4 +81,10 @@ public class SellerServiceImpl implements SellerService {
 		}
 		
 	}
+	
+	@Override
+	public int withdrawal(int seller_no) {
+		mapper.withdrawalProduct(seller_no);
+		return mapper.withdrawal(seller_no);
+	}
 }

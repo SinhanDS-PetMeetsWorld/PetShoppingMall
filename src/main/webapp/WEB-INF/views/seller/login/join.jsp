@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="ko">
+<head> 
+    <meta charset="utf-8">
+    <title></title>
+    <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <title>판매자 회원가입</title>
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/resources/css/common/template.css">
+<script>
     var dupCheck = false;
     	function goSave() {
     		if ($("#id").val() == '') {
@@ -162,7 +165,7 @@
     	$(function(){
     		$('#emailcheck_btn').click(function(){
     			if($('#emailcheck_num').val() == email_auth_num){
-    				alert("이메일 인증 성공");
+    				alert("인증되었습니다.");
     				email_auth = true;
     				return;
     			} else {
@@ -209,77 +212,233 @@
 	        }).open();
 	    }
 	</script>
+	
+<style>
+ .menu_name {
+margin-bottom: 10px;	
+}
+
+.aaa{
+	   background-color: #fff;
+       height: 30px;
+       width: 185px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+ }
+
+.createConfirm {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  width: 150px;
+  height: 40px;
+  font-size: 15px;
+  background-color: #fd0;
+  font-weight: 500;
+  color: #222;
+  margin-top:5px;
+  margin-left: 350px;
+ }
+
+.check {
+ display: inline-block;
+ outline: 0;
+ cursor: pointer;
+ border-radius: 6px;
+ border: 2px solid #FFDE30;
+ color: #0F1111;
+ background-color: white;
+ padding-left : 10px;
+ padding-right : 10px;
+ box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;
+ font-weight: 800;
+ font-size: 11px;
+ height: 30px;
+}
+
+.info_tag_container {
+ 	height : 30px;
+ 	width : 1000px;
+ 	display: flex;
+}
+
+.info_tag{
+ height : 30px;
+ width : 130px;
+ float : left;
+ text-align : left;
+ margin-top : 5px;
+}
+
+.info_space {
+ height : 30px;
+ width : 70px;
+}
+
+.insert_tag{
+ height : 30px;
+ width : 870px;
+ float : left;
+
+}
+
+ .line {
+ 		margin-top : 10px;
+ 		margin-bottom : 10px;
+ 		width : 900px;
+        border: 1px solid #ccc;
+}
+
+</style>
 </head>
 <body>
-    <h2>판매자 회원 가입</h2>
-    <form name="regist_form" id="frm" action="regist.do" method="post">
-        <div>
-            아이디*<br>
-            <input type="text" name="id" id="id">
-            <button type="button" id="idCheck">아이디 중복 확인</button>
+	<div class="wrap">
+        <div class="header">
+            <%@ include file="/WEB-INF/views/common/header_seller.jsp" %>
         </div>
-        <hr>
-        
-        <div>
-            성명*<br>
-            <input type="text" name="name" id="name">
-        </div>
-        <div>
-            이메일*<br>
-            <input type="text" name="email" id="email">
-            <button type="button" id="emailchecknum_btn">이메일 인증 번호 발송</button><br>
-            <input type="text" name="emailcheck_num" id="emailcheck_num">
-            <button type="button" id="emailcheck_btn" disabled="disabled">이메일 인증하기</button>
-        </div>
-        <hr>
 
-        <div>
-            주소
-            <div><input type="text" name="zipcode" id="zipcode" readonly placeholder="우편번호">
-            <button type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button></div>
-            <div><input type="text" name="addr1" id="addr1" readonly placeholder="기본주소"></div>
-            <div><input type="text" name="addr2" id="addr2" placeholder="상세주소"></div>
-        </div>
-        <hr>
+       	
+        
+        <div class="contents">
+        	<div class="quickmenu">
+                <%@ include file="/WEB-INF/views/common/quickmenu_seller.jsp"%>
+            </div>
+			<div class="contentsright">
+				<div class="login_seller">
+					
+					
+					<h1 class ="menu_name">판매자 회원 가입</h1>
+    
+				    <form name="regist_form" id="frm" action="regist.do" method="post">
+				    
+						<div class = "info_tag_container">
+						
+							<div class = "info_tag"><span>아이디* </span></div>
+							
+							<div class = "insert_tag">
+					            <input class = "aaa" type="text" name="id" id="id">
+					            <button class = "check" type="button" id="idCheck">아이디 중복 확인</button>
+					        </div>
+						
+						</div>    	
+				        
+				        <hr class = "line">
+				        
+				        <div class = "info_tag_container">
+				            <div class = "info_tag"><span>성명* </span></div>
+				            <input class = "aaa" type="text" name="name" id="name">
+				        </div>
+				       
+				        <hr class = "line">
+				        
+				        <div class = "info_tag_container">
+				            
+				            <div class = "info_tag"><span>이메일* </span></div>
+				            
+				            <div class = "insert_tag">
+				           		<input class = "aaa" type="text" name="email" id="email">
+					            <button class ="check" type="button" id="emailchecknum_btn">인증번호 발송</button>
+					            <input class = "aaa" type="text" name="emailcheck_num" id="emailcheck_num">
+					            <button class = "check" type="button" id="emailcheck_btn" disabled="disabled">이메일 인증</button>
+				            </div>
+					            
+				        </div>
+				       
+				        <hr class = "line">
+				
+				        <div class = "info_tag_container">
+				            
+				            <div class = "info_tag"><span>주소</span></div>
+				            
+				            
+				            <div class ="insert_tag">
+					            <input class="aaa" type="text" name="zipcode" id="zipcode" readonly placeholder="우편번호">
+					            <button class ="check" type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button>
+					            <input class ="aaa" type="text" name="addr1" id="addr1" readonly placeholder="기본주소">
+					            <input class = "aaa" type="text" name="addr2" id="addr2" placeholder="상세주소">
+				        	</div>
+				        	
+				        </div>	
+				        
+				        <hr class = "line">
+				
+				        <div class ="info_tag_container">
+				            <div class = "info_tag"><span>비밀번호*</span></div>
+				            
+				            <div class = "insert_tag">
+				            <input class = "aaa" type="password" name="password" id="password">
+				        	<span>비밀번호 확인</span>&nbsp&nbsp&nbsp&nbsp&nbsp
+				            <input class ="aaa" type="password" id="password_check">
+				       		</div>
+				       	</div>	
+				        <hr class ="line">
+				        
+				        <div class = "info_tag_container">
+				            <div class = "info_tag"><span>연락처*</span></div>
+				        	
+				        	<div class = "insert_tag">    
+				            <input class ="aaa" type="text" maxlength="3" value="010" name="phone0" id="phone0"> 
+				            - <input class = "aaa"type="text" maxlength="4" placeholder="XXXX" name="phone1" id="phone1"> 
+				            - <input class ="aaa" type="text" maxlength="4" placeholder="XXXX" name="phone2" id="phone2">
+				        	</div>
+				        </div>
+				        <hr class = "line">
+				        
+				        <div class = "info_tag_container">
+				            <div class = "info_tag"><span>사업자 등록번호*</span></div>
+				            
+				            <div class ="insert_tag">
+				            	<input class ="aaa" type="text" id="business_number" name="business_number" placeholder="10자리, '-'없이 숫자만 입력하세요">
+				            </div>
+				            
+				        </div>
+				        <hr class = "line">
+				        
+				        <div class = "info_tag_container" >
+				            <div class = "info_tag"><span>정산 계좌*</span></div>
+				            
+					        <div class = "insert_tag">
+					        	<select class = "aaa" name="bank" id="bank">
+									<c:forEach var="bank" items="${vo.company_list[1]}" varStatus="status">
+										<option value="${status.index}">${bank}</option>
+									</c:forEach>
+					            </select>
+					            <input class ="aaa" type="text" name="account" id="account" placeholder="'-'없이 숫자만 입력하세요">
+					        </div>    
+					            
+				        </div>
+				        <hr class ="line">
+				        
+				        <div class ="sign_in_btn">
+				            <input class =" createConfirm" type="button" value="가입하기" onclick="goSave();">
+				        </div>
+				    </form>
+					
+					
+					
+				</div>
+			</div>
 
-        <div>
-            비밀번호*<br>
-            <input type="password" name="password" id="password">
         </div>
-        <div>
-            비밀번호 확인*<br>
-            <input type="password" id="password_check">
-        </div>
-        <hr>
         
-        <div>
-            연락처*<br>
-            <input type="text" maxlength="3" value="010" name="phone0" id="phone0"> 
-            - <input type="text" maxlength="4" placeholder="XXXX" name="phone1" id="phone1"> 
-            - <input type="text" maxlength="4" placeholder="XXXX" name="phone2" id="phone2">
-        </div>
-        <hr>
         
-        <div>
-            사업자 등록번호*<br>
-            <input type="text" id="business_number" name="business_number" placeholder="10자리, '-'없이 숫자만 입력하세요">
+        <div class="footer">
+			<div class="footer-color"></div>
         </div>
-        <hr>
-        
-        <div>
-            정산 계좌*<br>
-            <select name="bank" id="bank">
-				<c:forEach var="bank" items="${vo.company_list[1]}" varStatus="status">
-					<option value="${status.index}">${bank}</option>
-				</c:forEach>
-            </select>
-            <input type="text" name="account" id="account" placeholder="'-'없이 숫자만 입력하세요">
-        </div>
-        <hr>
-        
-        <div>
-            <input type="button" value="가입하기" onclick="goSave();">
-        </div>
-    </form>
+    </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.user.product.ProductMapper">
 	<sql id="whereSql">
-		WHERE product_category.category1 = #{category1} 
+		WHERE withdrawal_status=0 AND product_category.category1 = #{category1} 
 		<if test="category2 != 9999">AND product_category.category2 = #{category2} </if>
 		AND price >= #{minprice} AND #{maxprice} >= price
 		<if test="totalSearchWord != null and totalSearchWord != ''">
@@ -114,7 +114,7 @@
 	<select id="total_product_search" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
 		SELECT DISTINCT *
 		FROM product INNER JOIN product_category ON product.no = product_category.product_no
-		WHERE category1 = #{category1} AND 
+		WHERE withdrawal_status=0 AND category1 = #{category1} AND 
 			(name LIKE '%${totalSearchWord}%' OR company LIKE '%${totalSearchWord}%' OR brand LIKE '%${totalSearchWord}%')
 		GROUP BY product.no
 		ORDER BY rating DESC
@@ -124,7 +124,7 @@
 	<select id="total_product_searchcount" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="int">
 		SELECT COUNT(DISTINCT product.no)
 		FROM product INNER JOIN product_category ON product.no = product_category.product_no
-		WHERE category1 = #{category1} AND 
+		WHERE withdrawal_status=0 AND category1 = #{category1} AND 
 			(name LIKE '%${totalSearchWord}%' OR company LIKE '%${totalSearchWord}%' OR brand LIKE '%${totalSearchWord}%');
 	</select>
 	

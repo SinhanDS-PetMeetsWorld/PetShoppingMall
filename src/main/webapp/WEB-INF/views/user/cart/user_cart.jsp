@@ -303,13 +303,11 @@ float : left;
      			</form>
      			
 			</div>
-
         
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
+        <div class="footer">
+			<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+        </div>
     <script>
 		$('.check_product').each(function(i, e){
 			$(e).prop('checked',true);
