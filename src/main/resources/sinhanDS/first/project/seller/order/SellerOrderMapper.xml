@@ -8,7 +8,7 @@
 			<if test='settlementType == "completed"'> AND settlement_status = 2 </if>
 			<if test='settlementType == "requseted"'> AND settlement_status = 1 </if>
 			<if test='settlementType == "none"'> AND settlement_no IS NULL </if>
-		AND purchase_confirmation_date IS NOT NULL;
+		AND purchase_confirmation_date IS NOT NULL
 	</sql>
 
 	<select id="getOrderNoList_bd" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
@@ -106,7 +106,8 @@
 	<select id="settlement_list" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT * FROM order_detail 
 		WHERE seller_no = #{no} AND LAST_DAY(NOW() - interval 1 month) >= purchase_confirmation_date
-			AND purchase_confirmation_date IS NOT NULL AND settlement_no IS NULL;
+			AND purchase_confirmation_date IS NOT NULL AND settlement_no IS NULL
+		ORDER BY no DESC;
 	</select>
 	
 	<select id="settlement_list_count" parameterType="int" resultType="Integer">
@@ -130,6 +131,7 @@
 	<select id="settlement_search_list" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT * FROM order_detail 
 		<include refid="whereSql"/>
+		ORDER BY no DESC;
 	</select>
 	
 	<select id="settlement_search_price" parameterType="map" resultType="Integer">
