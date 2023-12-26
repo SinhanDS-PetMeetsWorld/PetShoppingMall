@@ -232,11 +232,10 @@ font-size : 30px;
                 </div>
 			</div>
         </div>
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div> 
+    <div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
      
  <script>
 $(".Review_more").on('click', goReviewmore_popup);

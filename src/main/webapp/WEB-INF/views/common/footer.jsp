@@ -12,9 +12,11 @@
 		margin: 0 auto;
 		width : 1200px;
 		height : 500px;
+		position: relative;
+		z-index : -1;
 	}
 	.footerbox{
-		margin : 50px 0 0 0;
+		margin : 100px 0 0 0;
 		width : 100%;
 		height : 100%;
 		background-color : #F0F0F0;
