@@ -120,6 +120,7 @@ margin-top : 12px;
   font-weight: 800;
   color: #fff;
  }
+ 
 #cancledOrder {
   display: inline-block;
   outline: 0;
@@ -135,6 +136,7 @@ margin-top : 12px;
   font-weight: 800;
   color: #fff;
  }
+ 
 #cancledOrder:hover{
 	cursor:default;
 }
@@ -155,12 +157,18 @@ margin-top : 12px;
   margin-left: 28px;
  }
 
+.start_line {
+        border: 1px solid #FFDE30;
+        margin-bottom : 10px;
+        width : 930px;
+   }
+   
 .line {
  		margin-bottom : 10px;
- 		width : 910px;
- 		margin-left: 25px;
+ 		width : 930px;
         border: 1px solid #ccc;
      }
+
 
 .go_back{
 width : 930px;
@@ -190,6 +198,7 @@ text-align : right;
 				<div>
 					<div>
 						<h1 class ="menu_name">구매내역 상세보기</h1>
+						<hr class = "start_line">
 					</div>
 					<div>
 						<ul>
@@ -273,7 +282,6 @@ text-align : right;
 								<hr class ="line">
 							
 							</c:forEach>
-							
 						</ul>
 					</div>
 				</div>

@@ -23,6 +23,25 @@
   margin-top:5px;
  }
 
+.aaa{
+	   background-color: #fff;
+       height: 30px;
+       width: 315px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+ }
 
 #starForm fieldset{
     display: inline-block;
@@ -49,16 +68,30 @@
 #starForm input[type=radio]:checked ~ label{
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 }
-#reviewContents {
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: solid 1.5px #D3D3D3;
-    border-radius: 5px;
-    font-size: 16px;
-    resize: none;
-}
+
+
+
+#reviewContents{
+	   background-color: #fff;
+       height: 180px;
+       width: 315px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       resize :none;
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+ }
+
+
 </style>
 </head>
 <body>
@@ -67,8 +100,8 @@
 		<input type="hidden" name="order_no" value="${dvo.order_no }">
 		<input type="hidden" name="order_dno" value="${dvo.no }">
 		<div>
-			사진 첨부
-			<input type="file" name="filename">
+			<h2>리뷰 작성</h2>
+			<input class ="aaa" type="file" name="filename"> 
 		</div>
 		<br>
 		<span class="text-bold">별점을 선택해주세요</span>
