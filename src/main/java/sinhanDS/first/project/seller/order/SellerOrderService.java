@@ -5,9 +5,9 @@ import java.util.Map;
 
 import sinhanDS.first.project.admin.vo.SettlementVO;
 import sinhanDS.first.project.delivery.vo.DeliveryVO;
-import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 
 public interface SellerOrderService {
 	List<OrderDetailVO> getOrderNoList_bd(int no);
@@ -47,4 +47,7 @@ public interface SellerOrderService {
 	boolean settlement_get(SettlementVO stvo);
 	
 	boolean refoundAccept_seller(int no);
+	
+	int getNumberOfRefoundEndListPage(ProductSearchVO svo);
+	List<OrderDetailVO> getOrderNoList_rfendBySearchVO(ProductSearchVO svo);
 }

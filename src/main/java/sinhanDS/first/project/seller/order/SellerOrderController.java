@@ -15,16 +15,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import sinhanDS.first.project.admin.vo.SettlementVO;
 import sinhanDS.first.project.delivery.vo.DeliveryVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
 
 
 @Controller
 @RequestMapping("/seller/order")
+@Slf4j
 public class SellerOrderController {
 	@Autowired
 	private SellerOrderService service;
@@ -207,13 +210,41 @@ public class SellerOrderController {
 	}
 	
 	@GetMapping("/refundendlist.do")
-	public String refundendlist(HttpSession sess, Model model) {
-		SellerVO svo = (SellerVO)sess.getAttribute("sellerLoginInfo");
-		model.addAttribute("svo", svo);
+	public String refundendlist(HttpSession sess, Model model, ProductSearchVO svo) {
+		SellerVO sellerVO = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		model.addAttribute("svo", sellerVO);
+		svo.setSeller_no(sellerVO.getNo());
 		
-		List<OrderDetailVO> orderNoList = service.getOrderNoList_rfend(svo.getNo());
+		svo.setNumberOfProductInPage(svo.getNumberinPage_refoundEndList());
+		int count = service.getNumberOfRefoundEndListPage(svo);
+		int totalPage = count / svo.getNumberOfProductInPage();
+        if (count % svo.getNumberOfProductInPage() > 0) totalPage++;
+		
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
+        map.put("totalPage", totalPage);
+        
+        int endPage = (int)(Math.ceil(svo.getPage()/(float)svo.getNumberOfPageInIndexList())*svo.getNumberOfPageInIndexList());
+        log.debug("endPage: " + endPage);
+        int startPage = endPage - (svo.getNumberOfPageInIndexList() - 1);
+        if(endPage > totalPage) endPage = totalPage;
+        boolean prev = startPage > 1;
+        boolean next = endPage < totalPage;
+        map.put("endPage", endPage);
+        map.put("startPage", startPage);
+        map.put("prev", prev);
+        map.put("next", next);
+        
+        model.addAttribute("paging", map);
+        
+        
+        
+		List<OrderDetailVO> orderNoList = service.getOrderNoList_rfendBySearchVO(svo);
+		log.debug("orderNoList: " + orderNoList);
 		List<List<OrderDetailVO>> orderDetailList = service.getOrderDetailList_rfend(orderNoList);
+		log.debug("orderDetailList: " + orderDetailList);
 		List<DeliveryVO> deliveryList = service.getDeliveryList(orderDetailList);
+		log.debug("deliveryList: " + deliveryList);
 		List<OrderMainVO> orderMainList = service.getOrderMainList(orderNoList);
 		
 		model.addAttribute("orderDetailList", orderDetailList);

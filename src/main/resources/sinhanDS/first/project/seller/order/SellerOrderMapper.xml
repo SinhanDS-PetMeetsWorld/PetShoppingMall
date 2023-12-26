@@ -8,7 +8,7 @@
 			<if test='settlementType == "completed"'> AND settlement_status = 2 </if>
 			<if test='settlementType == "requseted"'> AND settlement_status = 1 </if>
 			<if test='settlementType == "none"'> AND settlement_no IS NULL </if>
-		AND purchase_confirmation_date IS NOT NULL;
+		AND purchase_confirmation_date IS NOT NULL
 	</sql>
 
 	<select id="getOrderNoList_bd" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
@@ -39,6 +39,30 @@
 		SELECT DISTINCT(order_no), seller_no FROM order_detail 
 		WHERE seller_no = #{no} AND delivery_status != 0 AND refound_status = 2
 		ORDER BY order_no DESC;
+	</select>
+	<sql id="refund_whereSql">
+		WHERE seller_no = #{seller_no} AND delivery_status != 0 AND refound_status = 2
+		<if test="searchWord != null and searchWord != ''">
+			AND 
+			<if test="searchType == 'all'">
+				product_name LIKE '%${searchWord}%'
+			</if>
+			<if test="searchType != 'all'">
+				${searchType} LIKE '%${searchWord}%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="getNumberOfRefoundEndListPage" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="int">
+		SELECT count(DISTINCT(order_no)) FROM order_detail 
+		<include refid="refund_whereSql"/>
+		ORDER BY order_no DESC;
+	</select>
+	<select id="getOrderNoList_rfendBySearchVO" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
+		SELECT DISTINCT(order_no), seller_no FROM order_detail 
+		<include refid="refund_whereSql"/>
+		ORDER BY order_no DESC
+		LIMIT #{startIdx}, #{numberOfProductInPage}
 	</select>
 	
 	<select id="getOrderDetails" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
@@ -106,7 +130,8 @@
 	<select id="settlement_list" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT * FROM order_detail 
 		WHERE seller_no = #{no} AND LAST_DAY(NOW() - interval 1 month) >= purchase_confirmation_date
-			AND purchase_confirmation_date IS NOT NULL AND settlement_no IS NULL;
+			AND purchase_confirmation_date IS NOT NULL AND settlement_no IS NULL
+		ORDER BY no DESC;
 	</select>
 	
 	<select id="settlement_list_count" parameterType="int" resultType="Integer">
@@ -130,6 +155,7 @@
 	<select id="settlement_search_list" parameterType="map" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT * FROM order_detail 
 		<include refid="whereSql"/>
+		ORDER BY no DESC;
 	</select>
 	
 	<select id="settlement_search_price" parameterType="map" resultType="Integer">

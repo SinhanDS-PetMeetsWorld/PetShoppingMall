@@ -10,6 +10,7 @@ import sinhanDS.first.project.delivery.vo.DeliveryVO;
 import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 
 @Mapper
 public interface SellerOrderMapper {
@@ -48,4 +49,6 @@ public interface SellerOrderMapper {
 	int settlementNo_update(Map map);
 	
 	int refoundAccept_seller(int no);
+	int getNumberOfRefoundEndListPage(ProductSearchVO svo);
+	List<OrderDetailVO> getOrderNoList_rfendBySearchVO(ProductSearchVO svo);
 }
