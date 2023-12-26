@@ -123,7 +123,7 @@
 			height:30px;	
 			text-align:center;
 			width:1000px;
-			
+			clear:both;
 			margin-bottom:15px;
 		}
 	
@@ -168,21 +168,9 @@
     	.search_keyword_btn{
     		background-color:#FFDE30;
     		border:1px solid gray;
+    		width:40px;
     	}
-    </style>
-    <style>
-	    .messagebody{
-			margin-top : 80px;
-		}
-	    .messagebox{
-			margin : 0 auto;
-			width : 700px;
-			height : 300px;
-			text-align : center;
-		}
-		.messagebox > img {
-			margin-bottom : 20px;
-		}
+    	
     	.aaa2{
 			background-color: #fff;
 			height: 30px;
@@ -226,9 +214,20 @@
 		.searchWord input{
 			height:30px;
 		}
-		
-		.search_keyword_btn{
-			width:40px;
+    	
+    </style>
+    <style>
+	    .messagebody{
+			margin-top : 80px;
+		}
+	    .messagebox{
+			margin : 0 auto;
+			width : 700px;
+			height : 300px;
+			text-align : center;
+		}
+		.messagebox > img {
+			margin-bottom : 20px;
 		}
     </style>
 </head>

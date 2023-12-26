@@ -67,7 +67,7 @@
 			 float: left;
 		}
 		.reason_cancel{
-			float:left;
+			clear:both;
 			margin: 30px 20px 30px 30px;
 		}
 		.buyer_info{
@@ -158,7 +158,7 @@
 										<button type="button" value="${orderdetails.no}" class="canclebutton">주문취소</button>
 									</c:if>
 									<div class="reason_cancel"><c:if test="${orderdetails.cancle_status != 0}">취소 사유: ${orderdetails.reason}</c:if></div>
-									<br><br>
+									
 									
 								
 								</c:forEach>
