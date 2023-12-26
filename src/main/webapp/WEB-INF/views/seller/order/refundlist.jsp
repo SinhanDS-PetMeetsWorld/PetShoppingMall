@@ -74,11 +74,70 @@
 			 color: #222;
 			 margin:20px 0 20px 0;
 		}
+		 .menu_name {
+			margin-bottom: 10px;	
+		}
 		
+    	.selected_tab_button {
+			 display: inline-block;
+			 outline: 0;
+			 cursor: pointer;
+			 border-radius: 7px;
+			 background: #FFDE30;
+			 border:2px solid #FFDE30;
+			 font-size: 18px;
+			 height: 40px;
+			 padding: 0 11px;
+			 text-align: center;
+			 width: 20%;
+			 min-width: 200px;
+			 font-weight: 500;
+			 color: #0F1111;
+			 margin-right: -4px;
+			 border-bottom-left-radius: 0%;
+			 border-bottom-right-radius: 0%;
+			 :hover{
+			     background: #F7CA00;
+			     border-color: #F2C200;
+			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+			 	}
+			 }
+			
+			 .tab_button {
+			 display: inline-block;
+			 outline: 0;
+			 cursor: pointer;
+			 border-radius: 7px;
+			 background: #F9FAFB;
+			 border:1px solid #FFDE30;
+			 font-size: 18px;
+			 height: 40px;
+			 padding: 0 11px;
+			 text-align: center;
+			 width: 20%;
+			 min-width: 200px;
+			 font-weight: 500;
+			 color: #0F1111;
+			 margin-right: -4px;
+			 margin-top: -1px;
+			 border-bottom-left-radius: 0%;
+			 border-bottom-right-radius: 0%;
+			 border-bottom : none;
+			 :hover{
+			     background: #F7CA00;
+			     border-color: #F2C200;
+			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+			 	}
+			 	
+			 .start_line {
+			        border: 1px solid #FFDE30;
+			        margin-bottom : 10px;
+			        width : 800px;
+			     }
     </style>
     <style>
 	    .messagebody{
-			margin-top : 80px;
+			margin-top : 50px;
 		}
 	    .messagebox{
 			margin : 0 auto;
@@ -106,7 +165,10 @@
             </div>
 			<div class="contentsright">
 				<div>
-				<h2>환불 요청 목록</h2><br>
+				<h1 class = "menu_name">환불 목록</h1>
+					<button class="selected_tab_button" type="button" onclick="location.href='/seller/order/refundlist.do'">환불요청</button>
+					<button class="tab_button" type="button" onclick="location.href='/seller/order/refundendlist.do'">환불완료</button>
+					<hr class = "start_line"><br>
 					<c:if test="${empty orderMainList}">
 						<div class="messagebody">
 							<div class="messagebox">
