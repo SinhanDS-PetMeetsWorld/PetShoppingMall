@@ -93,7 +93,7 @@
 					</form><br>
 					
 					<div>
-						<c:if test="${empty settlement_search_list}">정산 내역이 없습니다</c:if><br>
+						<c:if test="${empty settlement_search_list}"><h3>정산 내역이 없습니다</h3></c:if><br>
 						<c:if test="${not empty settlement_search_list}">
 							결제내역 합계 : ${settlement_search_price}<br>
 							결제수수료 : ${charge_search_price}<br>

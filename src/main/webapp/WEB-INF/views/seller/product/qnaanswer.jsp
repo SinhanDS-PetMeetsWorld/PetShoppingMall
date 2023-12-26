@@ -35,6 +35,20 @@
 			 margin-left: 20px;
 		}
     </style>
+    <style>
+	    .messagebody{
+			margin-top : 80px;
+		}
+	    .messagebox{
+			margin : 0 auto;
+			width : 700px;
+			height : 300px;
+			text-align : center;
+		}
+		.messagebox > img {
+			margin-bottom : 20px;
+		}
+    </style>
     
 </head>
 <body>
@@ -48,6 +62,14 @@
             </div>
 			<div class="contentsright">
 				<div>	
+					<c:if test="${empty qna_array}">
+						<div class="messagebody">
+							<div class="messagebox">
+									<img src="/resources/img/common/emptybox.png">
+									<h2>고객 문의가 아직 없습니다</h2>
+							</div>
+						</div>
+					</c:if>
 					<c:forEach items="${qna_array}" varStatus = "qna_quant">
 						<div class="qna_info">	
 							<c:if test = "${not empty qna_array[qna_quant.index][0]}">

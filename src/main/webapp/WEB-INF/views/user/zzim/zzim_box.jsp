@@ -127,7 +127,21 @@ a:active {
     color: red; 
 }
 
-</style>      
+</style>  
+<style>
+	    .messagebody{
+			margin-top : 50px;
+		}
+	    .messagebox{
+			margin : 0 auto;
+			width : 600px;
+			height : 300px;
+			text-align : center;
+		}
+		.messagebox > img {
+			margin-bottom : 20px;
+		}
+</style>
 
 </head>
 <body>
@@ -145,9 +159,15 @@ a:active {
 				
 				<h1 class= "menu_name">찜 박스</h1>
 				<hr class = "start_line">
-				<c:forEach items="${save_list2}" varStatus = "zzim_quant" >
-					<c:if test="${empty save_list2[zzim_quant.index] }"><br><h2>찜 박스에 상품이 존재하지 않습니다.</h2>
+					<c:if test="${empty save_list2 }">
+						<div class="messagebody">
+							<div class="messagebox">
+									<img src="/resources/img/common/emptybox.png">
+									<h2>찜한 상품이 없습니다</h2>
+							</div>
+						</div>
 					</c:if>
+				<c:forEach items="${save_list2}" varStatus = "zzim_quant" >
 				
 				<div>	
 					<c:if test="${!empty save_list2[zzim_quant.index] }">

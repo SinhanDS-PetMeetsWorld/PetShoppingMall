@@ -98,7 +98,20 @@ height : 70px;
         border: 1px solid #FFDE30;
    } 
 </style>    
-    
+    <style>
+	    .messagebody{
+			margin-top : 50px;
+		}
+	    .messagebox{
+			margin : 0 auto;
+			width : 600px;
+			height : 300px;
+			text-align : center;
+		}
+		.messagebox > img {
+			margin-bottom : 20px;
+		}
+    </style> 
     
 </head>
 <body>
@@ -119,7 +132,14 @@ height : 70px;
 			<div class="contentsright">
 					<h1 class = "menu_name">구매 이력</h1>
 					<hr class = "start_line">
-					<c:if test="${empty orderList }"><br><h2>구매이력이 존재하지 않습니다.</h2></c:if>
+					<c:if test="${empty orderList }">
+						<div class="messagebody">
+							<div class="messagebox">
+									<img src="/resources/img/common/emptybox.png">
+									<h2>구매 이력이 없습니다</h2>
+							</div>
+						</div>
+					</c:if>
 
 							<c:forEach items="${orderList }" var="vo">
 							

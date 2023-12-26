@@ -169,7 +169,20 @@
     		background-color:#FFDE30;
     		border:1px solid gray;
     	}
-    	
+    </style>
+    <style>
+	    .messagebody{
+			margin-top : 80px;
+		}
+	    .messagebox{
+			margin : 0 auto;
+			width : 700px;
+			height : 300px;
+			text-align : center;
+		}
+		.messagebox > img {
+			margin-bottom : 20px;
+		}
     	.aaa2{
 			background-color: #fff;
 			height: 30px;
@@ -217,8 +230,6 @@
 		.search_keyword_btn{
 			width:40px;
 		}
-    	
-    
     </style>
 </head>
 <body>
@@ -235,6 +246,14 @@
             </div>
 			<div class="contentsright">
 				<div>
+					<c:if test="${empty productList}">
+						<div class="messagebody">
+							<div class="messagebox">
+									<img src="/resources/img/common/emptybox.png">
+									<h2>판매 중인 상품이 없습니다</h2>
+							</div>
+						</div>
+					</c:if>
 					<ul>
 						<c:forEach items="${productList }" var="vo" varStatus="status">
 							<li class="one_line">

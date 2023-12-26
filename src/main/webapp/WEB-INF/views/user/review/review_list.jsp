@@ -121,7 +121,21 @@ font-size : 30px;
     border: 1px solid #ccc;
  }
  
-</style>      
+</style>
+<style>
+	    .messagebody{
+			margin-top : 50px;
+		}
+	    .messagebox{
+			margin : 0 auto;
+			width : 600px;
+			height : 300px;
+			text-align : center;
+		}
+		.messagebox > img {
+			margin-bottom : 20px;
+		}
+    </style>       
     
 </head>
 <body>
@@ -138,7 +152,13 @@ font-size : 30px;
 						
 				<h1 class="menu_name" >작성한 리뷰</h1>
 				<hr class ="start_line">
-				<c:if test="${empty review_list2 }"><br><h2>리뷰 내역이 존재하지 않습니다.</h2>
+				<c:if test="${empty review_list2 }">
+					<div class="messagebody">
+						<div class="messagebox">
+								<img src="/resources/img/common/emptybox.png">
+								<h2>구매 이력이 없습니다</h2>
+						</div>
+					</div>
 				</c:if>
 				
 				<c:forEach items="${review_list2}" varStatus = "review_quant" >
@@ -253,7 +273,7 @@ function goReviewmore_popup(){
 	
 	var dno = $(this).data('dno');
 	var url = '/user/order/read_review.do?no='+ dno;
-	window.open(url, '리뷰 상세 보기', 'width=300px, height=355px');
+	window.open(url, '리뷰 상세 보기', 'width=320px, height=420px');
 }
 
 </script> 

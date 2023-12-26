@@ -2,7 +2,6 @@ package sinhanDS.first.project.seller;
 import org.apache.ibatis.annotations.Mapper;
 
 import sinhanDS.first.project.seller.vo.SellerVO;
-import sinhanDS.first.project.user.vo.UserVO;
 
 @Mapper
 public interface SellerMapper {
@@ -15,4 +14,7 @@ public interface SellerMapper {
 	
 	int withdrawalProduct(int seller_no);
 	int withdrawal(int seller_no);
+	
+	SellerVO findId(SellerVO vo);
+	int findPwd(SellerVO vo);
 }

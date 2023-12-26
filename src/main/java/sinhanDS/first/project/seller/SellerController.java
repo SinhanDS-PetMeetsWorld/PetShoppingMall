@@ -29,7 +29,6 @@ import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
-import sinhanDS.first.project.user.vo.UserVO;
 import sinhanDS.first.project.util.file.FileNameVO;
 import sinhanDS.first.project.util.file.FileController;
 
@@ -187,5 +186,80 @@ public class SellerController {
 	public String afterwithdrawal(HttpSession sess) {
 		sess.invalidate();
 		return "redirect:/";
+	}
+	
+	@GetMapping("/findIdPage.do")
+	public String findIdPage() {
+		return "seller/login/findId";
+	}
+	
+	@GetMapping("/findPwdPage.do")
+	public String findPwdPage() {
+		return "seller/login/findPwd";
+	}
+	
+	@PostMapping("/findId.do")
+	public String findId(SellerVO vo, Model model) {
+		SellerVO foundID = service.findId(vo);
+		if(foundID != null) {
+			try {
+	            MimeMessage message = javaMailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	            
+	            helper.setSubject("Pet Meets World 고객님의 ID 전달드립니다.");
+	            helper.setText("회원님의 ID는 [ "+foundID.getId()+" ] 입니다. 해당 ID로 로그인을 진행해주세요.");
+	            helper.setFrom("meetsworldpet@gmail.com");
+	            helper.setTo(vo.getEmail());
+	            javaMailSender.send(message);
+	            
+	            model.addAttribute("cmd", "move");
+				model.addAttribute("msg", "이메일로 ID를 전송했습니다. 로그인을 진행해주세요.");
+				model.addAttribute("url", "/seller/login.do");
+			}catch(Exception e) {
+	            e.printStackTrace();
+	        }
+		} else {
+            model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "문제가 발생했습니다. 입력하신 성함과 이메일 주소가 올바른지 다시 확인하시고,"
+					+ " 동일한 문제가 반복해서 발생 시 페이지 하단에 기입된 연락처로 관리자에게 문의해주세요.");
+			model.addAttribute("url", "/seller/findIdPage.do");
+		}
+		return "common/alert";
+	}
+	
+	@PostMapping("/findPwd.do")
+	public String findPwd(SellerVO vo, Model model) {
+		
+		int checkNum = (int)(Math.random()*899999) + 100000;
+		System.out.println("확인: "+checkNum);
+		vo.setPassword(String.valueOf(checkNum));
+		
+		int temp = service.findPwd(vo);
+		
+		if(temp > 0) {
+			try {
+	            MimeMessage message = javaMailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	            
+	            helper.setSubject("Pet Meets World 고객님의 임시 비밀번호 전달드립니다.");
+	            helper.setText("회원님의 임시 비밀번호는 [ "+checkNum+" ] 입니다. 해당 비밀번호로 로그인을 진행해주세요./n"
+	            		+"로그인 후 개인정보 보호를 위해 새로운 비밀번호로 변경을 권장합니다.");
+	            helper.setFrom("meetsworldpet@gmail.com");
+	            helper.setTo(vo.getEmail());
+	            javaMailSender.send(message);
+	            
+	            model.addAttribute("cmd", "move");
+				model.addAttribute("msg", "이메일로 임시 비밀번호를 전송했습니다. 로그인을 진행해주세요.");
+				model.addAttribute("url", "/seller/login.do");
+			}catch(Exception e) {
+	            e.printStackTrace();
+	        }
+		} else {
+            model.addAttribute("cmd", "back");
+			model.addAttribute("msg", "문제가 발생했습니다. 입력하신 성함과 id, 이메일 주소가 올바른지 다시 확인하시고,"
+					+ " 동일한 문제가 반복해서 발생 시 페이지 하단에 기입된 연락처로 관리자에게 문의해주세요.");
+			model.addAttribute("url", "/seller/findPwdPage.do");
+		}
+		return "common/alert";
 	}
 }
