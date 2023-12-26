@@ -70,13 +70,10 @@
        			 </div>
 
         </div>
-        <a href="/common/makeerror.jsp">에러페이지 이동테스트</a>
-        
-        
     </div>
-        <div class="footer">
-	        <%@ include file="/WEB-INF/views/common/footer.jsp" %>
-        </div>
+	<div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
 
 
 </body>

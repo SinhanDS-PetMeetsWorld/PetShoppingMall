@@ -107,11 +107,11 @@ margin-left : 180px;
   cursor: pointer;
   padding: 0 15px;
   border-radius: 50px;
-  width: 50px;
+  width: 70px;
   height: 35px;
-  font-size: 10px;
+  font-size: 16px;
   background-color: #ff4742;
-  font-weight: 500;
+  font-weight: 800;
   color: #F9FAFB;
 
  }
@@ -123,11 +123,12 @@ margin-left : 180px;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
+  border : none;
   width: 150px;
   height: 40px;
   font-size: 15px;
   background-color: #fd0;
-  font-weight: 500;
+  font-weight: 800;
   color: #222;
   
   margin-left : 130px;
@@ -305,9 +306,9 @@ float : left;
 			</div>
         
     </div>
-        <div class="footer">
-			<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-        </div>
+	<div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
     <script>
 		$('.check_product').each(function(i, e){
 			$(e).prop('checked',true);
