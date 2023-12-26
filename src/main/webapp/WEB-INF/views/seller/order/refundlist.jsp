@@ -107,7 +107,7 @@
 								<c:forEach var="orderdetails" items="${orderDetailList[mainstatus.index]}" varStatus="status">
 									<c:if test="${orderdetails.delivery_status == 2}"><c:set var="deliverStatus" value="배송완료"/></c:if>
 									<table border="1" class="refund_table">
-										<thead><tr> <th class="pro_name">제품명</th><th class="pro_opt">옵션</th><th class="pro_price">판매가</th><th class="pro_discount">할인가</th><th class="pro_quantity">수량</th> <th class="pro_refund_status">환불상태</th> </tr></thead>
+										<thead><tr> <th class="pro_name">제품명</th><th class="pro_opt">옵션</th><th class="pro_price">판매가</th><th class="pro_discount">할인가</th><th class="pro_quantity">수량</th> </tr></thead>
 										<tr <c:if test="${orderdetails.refound_status == 1}">style="color:red"</c:if>>
 											<td>${orderdetails.product_name}</td>
 											<td>
@@ -119,10 +119,6 @@
 												<c:if test="${empty orderdetails.options}">옵션없음</c:if>
 											
 											<td>${orderdetails.product_price}</td><td>${orderdetails.discount}</td><td>${orderdetails.quantity}</td>
-											<td>
-												<c:if test='${orderdetails.refound_status == 1}'>환불요청</c:if>
-												<c:if test='${orderdetails.refound_status == 2}'>환불완료</c:if>
-											</td>
 										</tr>
 									</table>
 									환불 사유: ${orderdetails.reason}<br>

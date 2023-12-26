@@ -42,7 +42,7 @@ public class ProductSearchVO {
 	private int numberInPage_qna = 3;
 	private int numberInPage_zzim = 10;
 	private int numberInPage_reviewList = 10; //사용자 정보의 리뷰 노출 개수 
-	
+	private int numberinPage_refoundEndList = 5; //판매자 환불 완료 목록 노출 개수
 	/* 관리자 페이지에서 애들 볼 떄 */
 	private int numberInPage_UserVO = 30;
 }
