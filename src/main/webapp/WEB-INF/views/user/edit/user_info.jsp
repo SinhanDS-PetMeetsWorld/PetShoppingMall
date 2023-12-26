@@ -6,7 +6,7 @@
 <html lang="ko">
 <head> 
     <meta charset="utf-8">
-    <title></title>
+    <title>구매자:: 회원 정보</title>
     <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -213,7 +213,7 @@ text-align:left;
  .final_line {
  		margin-bottom : 10px;
  		width : 800px;
-        border: 1px solid #ccc;
+        border: 1px solid #FFDE30;
      }
  
 .info_tag_container_final {
@@ -310,7 +310,6 @@ text-align:left;
 						        <input type="hidden" name="temp" id="phone" value="${vo.phone }">
 						        <input type="hidden" name="birth" id="birth" value="${vo.birth_date }">
 						        <input type="hidden" name="no" id="no" value="${vo.no }">
-<!-- 						        <input type="hidden" name="vo_password" id="vo_password" value="${vo.password }">   -->
 					        </div>
 					        
 					        <div class = "info_tag_container">
@@ -324,14 +323,11 @@ text-align:left;
 						     
 					        </div> 
 					        
-					        
-					        
 					        <hr class = "line">
 					        
 					        <div class = "info_tag_container">
 					        	<div class = "info_tag">
 					        	<span class = "text">아이디</span>
-						        <!-- <input type="text" name="id" placeholder="hong" disabled>  -->
 					        	</div>
 								<div class = "info_tag">
 									${vo.id }
