@@ -41,10 +41,10 @@
 			text-align: right;
 		}
 		.detail_search input {
-				height : 25px;
-                padding: 3px 10px;
+				height : 30px;
+                padding: 3px 7px;
                 font-size: 13px;
-                line-height: 20px;
+                line-height: normal;
                 color: #24292e;
                 vertical-align: middle;
                 background-color: #ffffff;
@@ -65,6 +65,125 @@
 		}
 		
     </style>
+    <style>
+    	.paging_div{
+			height:30px;	
+			text-align:center;
+			width:1000px;
+			clear:both;
+			margin-bottom:15px;
+		}
+		
+		
+		.paging li{
+			list-style: none;
+			margin-right:8px;
+			margin-top:15px;
+			
+			text-align:center;
+			display:inline-block;
+		}
+		
+		.paging li a{
+			width:20px;
+			height:20px;
+			background: white;
+			border-radius: 4px;
+			border: 1px solid black;
+			text-decoration: none;
+			font-size:13px;
+			color:black;
+			display:block;
+			line-height:18px;
+		}
+		
+		
+		
+		.paging li a:hover{
+			width:20px;
+			height:20px;
+			background: black;
+			color:white;
+			
+		}
+		
+		li{
+			list-style:none;
+		}
+		
+		.searchType{
+			background-color: #fff;
+			height: 30px;
+			width: 100px;
+			padding: 3px 7px;
+			line-height: normal;
+			border: 1px solid #a6a6a6;
+			border-top-color: #949494;
+			border-radius: 3px;
+			box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+			outline: 0;
+			color: #111;
+			font-size: 13px;
+			
+			:focus{
+				border-color: #e77600;
+				box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+			}
+		}
+		
+		#sorttype{
+			background-color: #fff;
+			height: 30px;
+			width: 100px;
+			padding: 3px 7px;
+			line-height: normal;
+			border: 1px solid #a6a6a6;
+			border-top-color: #949494;
+			border-radius: 3px;
+			box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+			outline: 0;
+			color: #111;
+			font-size: 13px;
+			
+			:focus{
+				border-color: #e77600;
+				box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+			}
+		}
+		
+		#sortnum{
+			background-color: #fff;
+			height: 30px;
+			width: 100px;
+			padding: 3px 7px;
+			line-height: normal;
+			border: 1px solid #a6a6a6;
+			border-top-color: #949494;
+			border-radius: 3px;
+			box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+			outline: 0;
+			color: #111;
+			font-size: 13px;
+			
+			:focus{
+				border-color: #e77600;
+				box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+			}
+		}
+		
+		.first_line{
+			margin-bottom:10px;
+		}
+		.second_line{
+			margin-bottom:10px;
+		}
+		.third_line{
+			margin-bottom:10px;
+		}
+		
+		
+    </style>
+    
     
 </head>
 <body>
@@ -91,42 +210,43 @@
                     	<input type="hidden" id="category2" name="category2" value="${category2}">
                     	<input type="hidden" name="totalSearchWord" value="${ProductSearchVO.totalSearchWord}">
                     	<div>
-                    	상세검색
-                    	<span>
-                        	<select class="searchType" name="searchType">
-                        		<option value="all">전체</option>
-                            	<option value="name" <c:if test="${ProductSearchVO.searchType == 'name'}">selected</c:if>>상품명</option>
-                                <option value="company" <c:if test="${ProductSearchVO.searchType == 'company'}">selected</c:if>>제조사명</option>
-                                <option value="brand" <c:if test="${ProductSearchVO.searchType == 'brand'}">selected</c:if>>브랜드명</option>
-                            </select>
-                        </span>
-                        <span>
-                            <input type="text" name="searchWord" value="${ProductSearchVO.searchWord}" placeholder="카테고리 내 검색">
-                            <span class="searchPrice">
-                            	가격
-	                            <input type="number" id="minprice" name="minprice" placeholder="0" value="${ProductSearchVO.minprice}">~
+                    		<div class="first_line">
+		                    	상세검색
+		                    	<span>
+		                        	<select class="searchType" name="searchType">
+		                        		<option value="all">전체</option>
+		                            	<option value="name" <c:if test="${ProductSearchVO.searchType == 'name'}">selected</c:if>>상품명</option>
+		                                <option value="company" <c:if test="${ProductSearchVO.searchType == 'company'}">selected</c:if>>제조사명</option>
+		                                <option value="brand" <c:if test="${ProductSearchVO.searchType == 'brand'}">selected</c:if>>브랜드명</option>
+		                            </select>
+		                        </span>
+		                        <input type="text" name="searchWord" value="${ProductSearchVO.searchWord}" placeholder="카테고리 내 검색">
+	                        </div>
+	                        <div class="second_line"">
+	                           	가격
+	                            <input type="number" id="minprice" name="minprice" placeholder="0" value="${ProductSearchVO.minprice}"> ~
 	                            <input type="number" id="maxprice" name="maxprice" placeholder="999,999,999" value="${ProductSearchVO.maxprice}">
 	                            <input type="submit" id="" value="검색">
-	                        </span>
-                        </span>
-                        <br>
-                    	</div>
-                        정렬
-		                <span class="sorttype">
-		                	<select name="sorttype" id="sorttype" onchange="changeSorttype();">
-		                   		<option value="sortrating">평점순</option>
-		                        <option value="sortname" <c:if test="${ProductSearchVO.sorttype == 'sortname'}">selected</c:if>>제품명순</option>
-		                        <option value="sortminprice" <c:if test="${ProductSearchVO.sorttype == 'sortminprice'}">selected</c:if>>최저가순</option>
-		                        <option value="sortmaxprice" <c:if test="${ProductSearchVO.sorttype == 'sortmaxprice'}">selected</c:if>>최고가순</option>
-		           	        </select>
-		                </span>
-		                <span class="sortnum">
-		                  	<select name="numberOfProductInPage" onchange="changeSorttype();">
-		                      	<option value="15"  <c:if test="${ProductSearchVO.numberOfProductInPage==15 }">selected</c:if>>15개씩</option>
-		                        <option value="25"  <c:if test="${ProductSearchVO.numberOfProductInPage==25 }">selected</c:if>>25개씩</option>
-		                        <option value="40"  <c:if test="${ProductSearchVO.numberOfProductInPage==40 }">selected</c:if>>40개씩</option>
-		                    </select>
-		                </span>
+	                        </div>
+	                    	<div class="third_line">
+		                        정렬
+				                <span class="sorttype">
+				                	<select name="sorttype" id="sorttype" onchange="changeSorttype();">
+				                   		<option value="sortrating">평점순</option>
+				                        <option value="sortname" <c:if test="${ProductSearchVO.sorttype == 'sortname'}">selected</c:if>>제품명순</option>
+				                        <option value="sortminprice" <c:if test="${ProductSearchVO.sorttype == 'sortminprice'}">selected</c:if>>최저가순</option>
+				                        <option value="sortmaxprice" <c:if test="${ProductSearchVO.sorttype == 'sortmaxprice'}">selected</c:if>>최고가순</option>
+				           	        </select>
+				                </span>
+				                <span class="sortnum">
+				                  	<select name="numberOfProductInPage" id="sortnum" onchange="changeSorttype();">
+				                      	<option value="15"  <c:if test="${ProductSearchVO.numberOfProductInPage==15 }">selected</c:if>>15개씩</option>
+				                        <option value="25"  <c:if test="${ProductSearchVO.numberOfProductInPage==25 }">selected</c:if>>25개씩</option>
+				                        <option value="40"  <c:if test="${ProductSearchVO.numberOfProductInPage==40 }">selected</c:if>>40개씩</option>
+				                    </select>
+				                </span>
+				            </div>
+		                </div>
                     </form>
 				</div>
 				
@@ -169,7 +289,7 @@
 					</c:forEach>
 					</c:if>
 				</div>
-				<div>
+				<div class="paging_div">
 																																																													
 					<ul class='paging'>
                         <c:if test="${paging.prev }">
