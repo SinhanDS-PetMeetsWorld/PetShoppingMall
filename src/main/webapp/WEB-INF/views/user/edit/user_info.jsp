@@ -455,12 +455,10 @@ text-align:left;
 			</div>
 
         </div>
-        
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
+    <div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
 <script>
 	$('.confirm_withdrawal').on('click', function(){
 		confirm("회원 탈퇴 후에는 복구가 불가능합니다. \n정말 삭제하겠습니까?");

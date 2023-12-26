@@ -313,12 +313,10 @@
 			</div>
 
         </div>
-        
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
+    <div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
     <script>
 		function remove(){
 			if(confirm("해당 제품을 정말 삭제하시겠습니까?") == true) return true;

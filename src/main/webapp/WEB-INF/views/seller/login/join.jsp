@@ -434,11 +434,6 @@ margin-bottom: 10px;
 			</div>
 
         </div>
-        
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
 </body>
 </html>

@@ -168,10 +168,10 @@ height : 70px;
 		        </div>		
 			</c:if>
         </div>
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
+    <div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
 </body>
 <script>
 	$('.removeThisOrder').on('click', removeThisOrder);
