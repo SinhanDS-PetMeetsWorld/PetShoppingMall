@@ -244,13 +244,14 @@ margin-bottom: 10px;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
+  border :none;
   width: 150px;
   height: 40px;
   font-size: 15px;
   background-color: #fd0;
-  font-weight: 500;
+  font-weight: 800;
   color: #222;
-  margin-top:5px;
+  margin-top:15px;
   margin-left: 350px;
  }
 
@@ -296,6 +297,12 @@ margin-bottom: 10px;
 
 }
 
+.start_line {
+        border: 1px solid #FFDE30;
+        margin-bottom : 10px;
+        width : 900px;
+   }
+
  .line {
  		margin-top : 10px;
  		margin-bottom : 10px;
@@ -303,6 +310,11 @@ margin-bottom: 10px;
         border: 1px solid #ccc;
 }
 
+ .final_line {
+ 		margin-top : 10px;
+ 		width : 900px;
+        border: 1px solid #FFDE30;
+   }
 </style>
 </head>
 <body>
@@ -314,15 +326,12 @@ margin-bottom: 10px;
        	
         
         <div class="contents">
-        	<div class="quickmenu">
-                <%@ include file="/WEB-INF/views/common/quickmenu_seller.jsp"%>
-            </div>
 			<div class="contentsright">
 				<div class="login_seller">
-					
-					
+						
 					<h1 class ="menu_name">판매자 회원 가입</h1>
-    
+    				
+    				<hr class = "start_line">
 				    <form name="regist_form" id="frm" action="regist.do" method="post">
 				    
 						<div class = "info_tag_container">
@@ -421,7 +430,7 @@ margin-bottom: 10px;
 					        </div>    
 					            
 				        </div>
-				        <hr class ="line">
+				        <hr class ="final_line">
 				        
 				        <div class ="sign_in_btn">
 				            <input class =" createConfirm" type="button" value="가입하기" onclick="goSave();">

@@ -21,7 +21,7 @@ display : flex;
 #more_purchase {
   display: inline-block;
   outline: 0;
-  border: 2px solid #222;
+  border: none;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
@@ -29,7 +29,7 @@ display : flex;
   height: 35px;
   font-size: 15px;
   background-color:#FFDE30;
-  font-weight: 500;
+  font-weight: 800;
   color: #222;
   
   margin-top : 14px;
@@ -47,7 +47,7 @@ display : flex;
   height: 35px;
   font-size: 15px;
   background-color: #ff4742;
-  font-weight: 500;
+  font-weight: 800;
   color: #F9FAFB;
 
  }
