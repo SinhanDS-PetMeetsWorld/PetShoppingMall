@@ -241,4 +241,7 @@
 		UPDATE user SET password = MD5(#{password}) WHERE id = #{id} AND name = #{name} AND email = #{email}
 	</update>
 	
+	<delete id="withdrawal" parameterType="int">
+		DELETE FROM user WHERE no = #{no}
+	</delete>
 </mapper>
