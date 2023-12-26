@@ -9,13 +9,19 @@ import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
 import sinhanDS.first.project.product.vo.ProductSearchVO;
 import sinhanDS.first.project.product.vo.ProductVO;
+import sinhanDS.first.project.seller.product.SellerProductMapper;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.vo.UserVO;
+import sinhanDS.first.project.util.file.FileController;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	AdminMapper mapper;
+	@Autowired
+	private SellerProductMapper sellerProductMapper;
+	@Autowired
+	private FileController fileController;
 	
 	@Override
 	public List<UserVO> getUserList(ProductSearchVO svo){
@@ -121,5 +127,36 @@ public class AdminServiceImpl implements AdminService {
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public List<SellerVO> getWithdrawalSellerBeforeYear(){
+		return mapper.getWithdrawalSellerBeforeYear();
+	}
+	
+	@Override
+	public List<SellerVO> getWithdrawalSellerAfterYear(){
+		return mapper.getWithdrawalSellerAfterYear();
+	}
+	
+	
+	@Override
+	public void removeSeller(int seller_no) {
+		List<ProductVO> pvoList = sellerProductMapper.getProductList(seller_no);
+		for(int i = 0; i < pvoList.size(); i++) {
+			ProductVO vo = pvoList.get(i);
+			if(!("".equals(vo.getImage_url()) || "h".equals(vo.getImage_url().substring(0, 1)))) {
+				fileController.remove(vo);
+			}
+			sellerProductMapper.remove(vo.getNo());
+		}
+		
+		mapper.removeSeller(seller_no);
+	}
+	
+	@Override
+	public void restoreSeller(int seller_no) {
+		mapper.restoreSeller(seller_no);
+		mapper.restoreSellerProduct(seller_no);
 	}
 }

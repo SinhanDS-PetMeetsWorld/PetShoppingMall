@@ -58,4 +58,6 @@ public interface UserMapper {
 	
 	UserVO findId(UserVO vo);
 	int findPwd(UserVO vo);
+	
+	public int withdrawal(int userNo);
 }

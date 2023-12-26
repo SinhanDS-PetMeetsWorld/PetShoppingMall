@@ -12,4 +12,7 @@ public interface SellerMapper {
 	int dupId(String id);
 	SellerVO detail(int no);
 	int edit(SellerVO vo);
+	
+	int withdrawalProduct(int seller_no);
+	int withdrawal(int seller_no);
 }

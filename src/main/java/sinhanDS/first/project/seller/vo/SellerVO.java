@@ -1,5 +1,6 @@
 package sinhanDS.first.project.seller.vo;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class SellerVO {
 	private String account;
 	private String new_password;
 	private boolean restricted;
+	private Date withdrawal_date;
 	
 	private List<ArrayList<String>> company_list;
 	public SellerVO(){

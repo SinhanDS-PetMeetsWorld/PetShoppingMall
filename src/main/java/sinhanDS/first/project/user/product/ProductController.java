@@ -228,7 +228,6 @@ public class ProductController {
 	
 	@GetMapping("/list.do")
 	public String searchByCategory(HttpServletRequest request, Model model, ProductSearchVO svo) {
-		log.debug("여기는오나? : " + svo);
 		if(svo.getNumberOfProductInPage() == 5) svo.setNumberOfProductInPage(svo.getNumberInPage_search());
 		//svo.setNumberOfProductInPage(svo.getNumberInPage_search());
 		log.debug("svo: " + svo);

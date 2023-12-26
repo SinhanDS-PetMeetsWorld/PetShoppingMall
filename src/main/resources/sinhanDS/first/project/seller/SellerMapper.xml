@@ -144,6 +144,17 @@
 			account = #{account}
 		WHERE no = #{no}
 	</update>
+	
+	
+	<update id="withdrawalProduct" parameterType="int">
+		UPDATE product SET withdrawal_status=1
+		WHERE seller_no = #{no}
+	</update>
+	
+	<update id="withdrawal" parameterType="int">
+		UPDATE seller SET withdrawal_date=sysdate()
+		WHERE no = #{no}
+	</update>
 
 	
 </mapper>
