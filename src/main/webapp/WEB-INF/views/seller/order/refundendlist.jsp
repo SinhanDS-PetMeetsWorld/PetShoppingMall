@@ -87,7 +87,7 @@
 								<c:forEach var="orderdetails" items="${orderDetailList[mainstatus.index]}" varStatus="status">
 									<c:if test="${orderdetails.delivery_status == 2}"><c:set var="deliverStatus" value="배송완료"/></c:if>
 									<table border="1" class="refund_table">
-										<thead><tr> <th class="pro_name">제품명</th><th class="pro_opt">옵션</th><th class="pro_price">판매가</th><th class="pro_discount">할인가</th><th class="pro_quantity">수량</th> <th class="pro_refund_status">환불상태</th> </tr></thead>
+										<thead><tr> <th class="pro_name">제품명</th><th class="pro_opt">옵션</th><th class="pro_price">판매가</th><th class="pro_discount">할인가</th><th class="pro_quantity">수량</th> </tr></thead>
 										<tr <c:if test="${orderdetails.refound_status == 1}">style="color:red"</c:if>>
 											<td>${orderdetails.product_name}</td>
 											<td>
@@ -99,10 +99,6 @@
 												<c:if test="${empty orderdetails.options}">옵션없음</c:if>
 											
 											<td>${orderdetails.product_price}</td><td>${orderdetails.discount}</td><td>${orderdetails.quantity}</td>
-											<td>
-												<c:if test='${orderdetails.refound_status == 1}'>환불요청</c:if>
-												<c:if test='${orderdetails.refound_status == 2}'>환불완료</c:if>
-											</td>
 										</tr>
 									</table>
 									
@@ -127,6 +123,40 @@
 					</c:if>
 					
 				</div>
+				
+				<div class="paging_div">
+					<ul class='paging'>
+                        <c:if test="${paging.prev }">
+                        	<li><a href="/seller/order/refundendlist.do?page=${paging.startPage-1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}"> << </a></li>
+                        </c:if>
+                        <c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
+                        	<c:if test="${p == productSearchVO.page}">
+                            <li><a href='#;' class='current'>${p}</a></li>
+                            </c:if>
+                            <c:if test="${p != productSearchVO.page}">
+                            <li><a href='/seller/order/refundendlist.do?page=${p}&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}'>${p}</a></li>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${paging.next }">
+                        	<li><a href="/seller/order/refundendlist.do?page=${paging.endPage+1 }&searchType=${productSearchVO.searchType}&searchWord=${productSearchVO.searchWord}"> >> </a></li>
+                        </c:if>
+					</ul> 
+				</div>
+				
+                <div class="bbsSearch">
+                    <form method="get" name="searchForm" id="searchForm" action="/seller/order/refundendlist.do">
+                        <span class="srchSelect">
+                            <select name="searchType">
+                                <option value="product_name" <c:if test="${productSearchVO.searchType == 'product_name'}">selected</c:if>>상품명</option>
+                            </select>
+                        </span>
+                        <span class="searchWord">
+                            <input type="text" id="sval" name="searchWord" value="${productSearchVO.searchWord}"  title="검색어 입력">
+                            <input type="submit" class="search_keyword_btn" value="검색">
+                        </span>
+                    </form>
+                    
+                </div>			
 			</div>
 
         </div>

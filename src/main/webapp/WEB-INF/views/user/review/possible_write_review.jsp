@@ -99,6 +99,11 @@ height:100px;
 
 }
 
+.start_line {
+        border: 1px solid #FFDE30;
+        margin-bottom : 10px;
+        width : 930px;
+   }
 
  .line {
  		margin-top : 10px;
@@ -124,6 +129,7 @@ height:100px;
 						<input type = "hidden"  value = "${userLoginInfo.no }"> 
 						
 				<h1 class= "menu_name">작성 가능한 리뷰</h1>	
+				<hr class ="start_line">
 				<c:forEach items="${possible_write_review2}" varStatus = "possible_write_review" >
 					<div>
 						<c:if test="${!empty possible_write_review2[possible_write_review.index] }">
@@ -235,7 +241,7 @@ function goReviewwrite_popup(){
 	
 	var dno = $(this).data('dno');
 	var url = '/user/order/write_review.do?no='+ dno;
-	window.open(url, '리뷰 등록', 'width=300px, height=355px');
+	window.open(url, '리뷰 등록', 'width=310px, height=400px');
 }
 
 </script>      

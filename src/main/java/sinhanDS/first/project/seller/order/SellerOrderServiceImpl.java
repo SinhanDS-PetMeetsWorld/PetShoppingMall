@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import sinhanDS.first.project.admin.vo.SettlementVO;
 import sinhanDS.first.project.delivery.vo.DeliveryVO;
-import sinhanDS.first.project.order.vo.OrderDetailOptionVO;
 import sinhanDS.first.project.order.vo.OrderDetailVO;
 import sinhanDS.first.project.order.vo.OrderMainVO;
+import sinhanDS.first.project.product.vo.ProductSearchVO;
 
 @Service
 public class SellerOrderServiceImpl implements SellerOrderService {
@@ -189,7 +189,8 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 	@Override
 	public List<DeliveryVO> getDeliveryList(List<List<OrderDetailVO>> orderDetailList) {
 		List<DeliveryVO> deliveryList = new ArrayList<>();
-			for(int i=0; i<orderDetailList.size(); i++) {
+		if(orderDetailList.size() == 0) return deliveryList;
+		for(int i=0; i<orderDetailList.size(); i++) {
 				DeliveryVO dvo = mapper.getDeliveryVO(orderDetailList.get(i).get(0).getDelivery_no());
 				deliveryList.add(dvo);
 		}
@@ -272,4 +273,13 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 		else return false;
 	}
 
+	@Override
+	public int getNumberOfRefoundEndListPage(ProductSearchVO svo) {
+		return mapper.getNumberOfRefoundEndListPage(svo);
+	}
+	
+	@Override
+	public List<OrderDetailVO> getOrderNoList_rfendBySearchVO(ProductSearchVO svo){
+		return mapper.getOrderNoList_rfendBySearchVO(svo);
+	}
 }

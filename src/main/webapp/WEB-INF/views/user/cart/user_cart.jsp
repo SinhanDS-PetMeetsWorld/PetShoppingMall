@@ -134,7 +134,11 @@ margin-left : 180px;
   margin-left : 130px;
  }
 
-
+.start_line {
+        border: 1px solid #FFDE30;
+        margin-bottom : 10px;
+        width : 1000px;
+   }
  .line {
  		margin-top : 10px;
  		margin-bottom : 10px;
@@ -146,7 +150,7 @@ margin-left : 180px;
  		margin-top : 25px;
  		width : 1000px;
         border: 1px solid #111;
-     }
+ }
      
 #fin {
 display: flex;
@@ -206,7 +210,7 @@ float : left;
 			<div class="contentsright">
 				<div id="cart_content">
 					<h1 id = "menu_name">장바구니</h1>
-					
+						<hr class ="start_line">
 					    
 						    <c:forEach var="vo" items="${productvolist }" varStatus="status">
 						    	

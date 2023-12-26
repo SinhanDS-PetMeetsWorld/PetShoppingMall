@@ -78,6 +78,11 @@ height : 70px;
     white-space: nowrap;
 }
 
+.start_line {
+        border: 1px solid #FFDE30;
+        margin-bottom : 10px;
+        width : 910px;
+   }
 
 .line {
 	margin-top : 10px;
@@ -85,6 +90,13 @@ height : 70px;
 	width : 910px;
     border: 1px solid #ccc;
  }
+ 
+ .final_line {
+ 		margin-bottom : 10px;
+ 		margin-top : 10px;
+ 		width : 910px;
+        border: 1px solid #FFDE30;
+   } 
 </style>    
     
     
@@ -106,6 +118,7 @@ height : 70px;
             </div>
 			<div class="contentsright">
 					<h1 class = "menu_name">구매 이력</h1>
+					<hr class = "start_line">
 					<c:if test="${empty orderList }"><br><h2>구매이력이 존재하지 않습니다.</h2></c:if>
 
 							<c:forEach items="${orderList }" var="vo">
@@ -124,9 +137,9 @@ height : 70px;
 									<input id = "delete_purchase" type="button" class="removeThisOrder" value="구매이력 삭제" data-no="${vo.no }">
 						
 									</div>	
-									
+								
 								 </div>
-						    <hr class = "line">
+						    <hr class = "line">	
 						    
 							</c:forEach>
 				

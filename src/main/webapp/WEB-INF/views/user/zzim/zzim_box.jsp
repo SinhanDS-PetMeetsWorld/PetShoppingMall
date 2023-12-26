@@ -107,6 +107,11 @@ height:100px;
 
 }
 
+.start_line {
+        border: 1px solid #FFDE30;
+        margin-bottom : 10px;
+        width : 930px;
+   }
 .line {
 	margin-top : 10px;
 	margin-bottom : 10px;
@@ -139,6 +144,7 @@ a:active {
 			<input type ="hidden"  value = "${userLoginInfo.no }">
 				
 				<h1 class= "menu_name">찜 박스</h1>
+				<hr class = "start_line">
 				<c:forEach items="${save_list2}" varStatus = "zzim_quant" >
 					<c:if test="${empty save_list2[zzim_quant.index] }"><br><h2>찜 박스에 상품이 존재하지 않습니다.</h2>
 					</c:if>
