@@ -381,10 +381,10 @@ margin-bottom: 10px;
 				</div>
 			</div>
         </div>
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
+    <div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
 </body>
 <script>
 	$('.confirm_withdrawal').on('click', function(){

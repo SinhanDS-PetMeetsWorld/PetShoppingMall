@@ -47,11 +47,11 @@ public class SellerController {
 	
 	@GetMapping("/index.do")
 	public String index() {
-		return "seller/index";
+		return "redirect:/seller/order/settlement.do";
 	}
 	@GetMapping("/login.do")
 	public String login() {
-		return "seller/login/login";
+		return "/seller/login/login";
 	}
 	
 	@PostMapping("/login.do")
@@ -73,7 +73,7 @@ public class SellerController {
 			sess.removeAttribute("userLoginInfo");
 			sess.removeAttribute("adminLoginInfo");
 			sess.setAttribute("sellerLoginInfo", login);
-			return "redirect:/seller/index.do";
+			return "redirect:/seller/order/settlement.do";
 		}
 	}
 	

@@ -251,12 +251,10 @@ text-align : right;
 				</div>
 			</div>
         </div>
-        
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
+    <div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
     <script>
     	$('.purchase_confirm').on('click', purchase_confirm);
     	$('.request_cancle').on('click', request_cancle);

@@ -39,7 +39,7 @@ public class ProductSearchVO {
 	/* 한 페이지당 표기할 수 있는 품목의 갯수를 설정할 수 있습니다. */
 	private int numberInPage_search = 15;
 	private int numberInPage_review = 4; //주문 상세의 리뷰 노출 개수 
-	private int numberInPage_qna = 5;
+	private int numberInPage_qna = 3;
 	private int numberInPage_zzim = 10;
 	private int numberInPage_reviewList = 10; //사용자 정보의 리뷰 노출 개수 
 	

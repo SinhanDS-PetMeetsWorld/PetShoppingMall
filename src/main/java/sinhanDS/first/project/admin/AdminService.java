@@ -32,4 +32,10 @@ public interface AdminService {
 	public List<SettlementVO> getSettlementComList();
 	public boolean updateSettlement(int no);
 	public boolean updateAllSettlement(List<Integer> list);
+	
+	public List<SellerVO> getWithdrawalSellerBeforeYear();
+	public List<SellerVO> getWithdrawalSellerAfterYear();
+	
+	public void removeSeller(int seller_no);
+	public void restoreSeller(int seller_no);
 }

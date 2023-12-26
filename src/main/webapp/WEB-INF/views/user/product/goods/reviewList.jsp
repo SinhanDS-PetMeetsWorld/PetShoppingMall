@@ -19,7 +19,7 @@
 		
 	}
 	.review{
-		width:30%;
+		width:24%;
 		float:left;
 		border:1px solid grey;
 		text-align:center;

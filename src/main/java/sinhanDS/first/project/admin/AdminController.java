@@ -36,6 +36,8 @@ import sinhanDS.first.project.user.vo.UserVO;
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	
+	
 	@Autowired OrderService orderService;
 	
 	@GetMapping("")
@@ -319,5 +321,28 @@ public class AdminController {
 			@RequestParam(value="settlement_no",required=true) List<Integer> settlement_list) {
 		boolean res = service.updateAllSettlement(settlement_list);
 		return String.valueOf(res);
+	}
+	
+	@GetMapping("/getWithdrawaledSellerList.do")
+	public String getWithdrawaledSellerList(Model model) {
+		
+		List<SellerVO> beforeYear = service.getWithdrawalSellerBeforeYear();
+		List<SellerVO> afterYear = service.getWithdrawalSellerAfterYear();
+		log.debug("beforeYear: " + beforeYear);
+		log.debug("afterYear: " + afterYear);
+		model.addAttribute("beforeYear", beforeYear);
+		model.addAttribute("afterYear", afterYear);
+		return "/admin/page/withdrawalSellerList";
+	}
+	
+	@GetMapping("/removeSeller.do")
+	public String removeSeller(SellerVO svo) {
+		service.removeSeller(svo.getNo());
+		return "redirect:/admin/getWithdrawaledSellerList.do";
+	}
+	@GetMapping("/restoreSeller.do")
+	public String restoreSeller(SellerVO svo) {
+		service.restoreSeller(svo.getNo());
+		return "redirect:/admin/getWithdrawaledSellerList.do";
 	}
 }

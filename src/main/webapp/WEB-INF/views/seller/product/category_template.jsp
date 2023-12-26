@@ -27,7 +27,7 @@
 		src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a><br>
 	</div>
 </div>
-<div class ="category_add_button" margin-bottom:20px;">
+<div class ="category_add_button" style="display: none;">
 	<a href="javascript:;" class="add_btn_category"><img
 						src="/resources/img/product/add.png" width="15" height="15" /> 카테고리 추가</a>
 </div>

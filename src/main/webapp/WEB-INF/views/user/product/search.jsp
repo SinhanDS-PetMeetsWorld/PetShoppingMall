@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/resources/css/common/template.css">
     
     <style>
+    	
     	.product_preview{
     		float : left;
     		margin : 20px;
@@ -192,12 +193,10 @@
 				</div>
 			</div>
         </div>
-        
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
+    <div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
     
     <script>
     	function detailsearch(){
