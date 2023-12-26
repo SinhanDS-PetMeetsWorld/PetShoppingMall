@@ -32,7 +32,10 @@
 margin-bottom: 10px;	
 }
 
+.contentsright {
+ margin-left : 200px;
 
+}
 .info_tag_container {
  	height : 30px;
  	width : 1000px;
