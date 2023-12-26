@@ -73,6 +73,7 @@
 	
 	.category{
 		height:50px;
+		margin-bottom:2px;
 	}
 	
 	.category_all{
@@ -188,6 +189,11 @@
 		margin-right:20px;
 	}
 	
+	.option_add_button{
+		clear:both;
+		margin-top:20px;
+	}
+	
 	
 	a{
 		text-decoration:none;
@@ -230,7 +236,8 @@
 						<div class="category_body">
 							<c:forEach items="${categoryList }" var="cvo">
 								<div class="category">
-									<hr>
+								<hr>
+									
 									<div class="category_all">
 										<div  class="category1">
 											카테고리* <select name="category1_list" class="category1_list">
@@ -309,7 +316,9 @@
 									</div>
 								</c:if>
 							</c:forEach>
-							<div class="option_add_button" >
+							
+								
+							<div class="option_add_button">
 								<a href="javascript:;" class="add_btn_option"><img
 									src="/resources/img/product/add.png" width="15" height="15" />옵션 추가</a>
 							</div>

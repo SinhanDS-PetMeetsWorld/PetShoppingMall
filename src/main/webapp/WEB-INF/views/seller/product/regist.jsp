@@ -275,7 +275,7 @@
 						
 						<div class="option_body">
 							
-							<div>
+							<div class="option_add_button">
 								<a href="javascript:;" class="add_btn_option"><img
 									src="/resources/img/product/add.png" width="15" height="15" /> 옵션 추가</a>
 							</div>
