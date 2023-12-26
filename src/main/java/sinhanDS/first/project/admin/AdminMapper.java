@@ -38,4 +38,12 @@ public interface AdminMapper {
 	public int updateSettlementDate(int no);
 	//updateSettlementStatus 정산번호 받아와서 해당 정산번호 갖고있는 주문상세들 정산상태 2로 업뎃
 	public int updateSettlementStatus(int no);
+	
+	
+	public List<SellerVO> getWithdrawalSellerBeforeYear();
+	public List<SellerVO> getWithdrawalSellerAfterYear();
+	
+	public void restoreSeller(int seller_no);
+	public void restoreSellerProduct(int seller_no);
+	public void removeSeller(int seller_no);
 }

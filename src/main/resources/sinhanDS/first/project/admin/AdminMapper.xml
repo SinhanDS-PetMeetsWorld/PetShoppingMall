@@ -332,4 +332,19 @@
 		UPDATE order_detail SET settlement_status = 2 WHERE settlement_no = #{settlement_no}
 	</update>
 	
+	<select id="getWithdrawalSellerBeforeYear" resultType="sinhanDS.first.project.seller.vo.SellerVO">
+		select * from seller where 365 >= DATEDIFF(SYSDATE(), withdrawal_date);
+	</select>
+	<select id="getWithdrawalSellerAfterYear" resultType="sinhanDS.first.project.seller.vo.SellerVO">
+		select * from seller where DATEDIFF(SYSDATE(), withdrawal_date) > 365;
+	</select>
+	<update id="restoreSeller" parameterType="int">
+		UPDATE seller SET withdrawal_date = null WHERE no = #{no}
+	</update>
+	<update id="restoreSellerProduct" parameterType="int">
+		UPDATE product SET withdrawal_status = 0 WHERE seller_no = #{no}
+	</update>
+	<update id="removeSeller" parameterType="int">
+		DELETE FROM seller WHERE no = #{no}
+	</update>
 </mapper>
