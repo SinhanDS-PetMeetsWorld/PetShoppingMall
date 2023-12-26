@@ -13,6 +13,161 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
+
+<style>
+
+.order_container {
+display : flex;
+}
+
+.menu_name {
+margin-bottom: 10px;	
+}
+
+.goods_name_container{
+height : 20px;
+width : 500px;
+
+}
+
+.goods_name {
+margin-left : 20px;
+margin-top : 5px;
+width: 400px;
+height: 30px;
+}
+
+.goods_name a {
+    display: block;
+    width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.goods_option {
+    float: left;
+    font-size: 15px;
+    margin-left : 20px;
+ }
+
+
+.goods_price_container{
+display:flex;
+width : 200px;
+height : 100px;
+}
+
+.price {
+    float: left;
+    width:180px;
+    text-align:right;
+    margin-top: 15px;
+    margin-right:26px;
+    font-size: 25px;
+}
+
+.button {
+float:left;
+font-size:13px;
+width:300px;
+margin-top : 12px;
+}
+
+#confirmPurchase {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 12px;
+  border-radius: 50px;
+  width: 90px;
+  height: 35px;
+  font-size: 15px;
+  background-color: #FFDE30;
+  font-weight: 800;
+  color: #222;
+  
+ }
+
+#confirmCancel {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 12px;
+  border-radius: 50px;
+  width: 90px;
+  height: 35px;
+  font-size: 15px;
+  background-color: #ff4742;
+  font-weight: 800;
+  color: #fff;
+  
+ }
+#refoundInfo {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 12px;
+  border-radius: 50px;
+  margin: 0 0 0 60px;
+  width: 90px;
+  height: 35px;
+  font-size: 15px;
+  background-color: gray;
+  font-weight: 800;
+  color: #fff;
+ }
+#cancledOrder {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 12px;
+  border-radius: 50px;
+   margin: 0 0 0 50px;
+  width: 110px;
+  height: 35px;
+  font-size: 15px;
+  background-color: gray;
+  font-weight: 800;
+  color: #fff;
+ }
+#cancledOrder:hover{
+	cursor:default;
+}
+#goWriteReview {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  width: 150px;
+  height: 35px;
+  font-size: 15px;
+  background-color: #fd0;
+  font-weight: 800;
+  color: #222;
+  
+  margin-left: 28px;
+ }
+
+.line {
+ 		margin-bottom : 10px;
+ 		width : 910px;
+ 		margin-left: 25px;
+        border: 1px solid #ccc;
+     }
+
+.go_back{
+width : 930px;
+text-align : right;
+}
+
+</style>
 </head>
 <body>
 	<div class="wrap">
@@ -34,78 +189,100 @@
 			<div class="contentsright">
 				<div>
 					<div>
-						<h2>구매내역 상세보기</h2>
-						<a href="list.do">구매이력 목록으로 돌아가기</a>
+						<h1 class ="menu_name">구매내역 상세보기</h1>
 					</div>
 					<div>
 						<ul>
 							<c:forEach items="${dvo_list }" var="dvo" varStatus="status">
-								<form >
-									<li>
+							
+								<form>
 										<div>
 											<c:if test="${empty img_list[status.index] }">
 												<br><h3>삭제된 상품입니다</h3>
 											</c:if>
 
+											<div class ="order_container">
+												<div class ="goods_image">
+													<c:if test="${!empty img_list[status.index] && fn:substring(img_list[status.index], 0, 1) == 'h' }">
+														<img src="${img_list[status.index] }" width="100" height="100">
+													</c:if>
+													<c:if test="${!empty img_list[status.index] && !(fn:substring(img_list[status.index], 0, 1) == 'h') }">
+														<img src="/resources/img/product/registed_img/${img_list[status.index] }" width="100" height="100">
+													</c:if>
+												</div>
 											
-											<c:if test="${!empty img_list[status.index] && fn:substring(img_list[status.index], 0, 1) == 'h' }">
-												<img src="${img_list[status.index] }" width="100" height="100">
-											</c:if>
-											<c:if test="${!empty img_list[status.index] && !(fn:substring(img_list[status.index], 0, 1) == 'h') }">
-												<img src="/resources/img/product/registed_img/${img_list[status.index] }" width="100" height="100">
-											</c:if>
-										</div>
-										<div>
-											${dvo.product_name } <br>
-											<c:forEach items="${ovo_list[status.index] }" var="ovo">
-												${ovo.title } ${ovo.content }<br>
-											</c:forEach>
-											
-										</div>
-										<div>
-											${dvo.product_price }원  / ${dvo.quantity }개<br>
+										
+												
+												<div class = "goods_name_container">
+													
+													<div class ="goods_name">
+														<h4><a href="/user/product/goods.do?no=${dvo.product_no }"> ${dvo.product_name }</a></h4> 
+													</div>
+													
+													<div class = "goods_option">
+														<c:forEach items="${ovo_list[status.index] }" var="ovo">
+															${ovo.title } ${ovo.content }<br>
+														</c:forEach>
+													</div>
+													
+													
+												</div>
+												
+												<div class = "goods_price_container">
+													<div class = "price">
+													${dvo.product_price }원  / ${dvo.quantity }개
+													</div>
+												</div>
+										
+										<div class ="button">
 											
 											<c:if test="${dvo.purchase_confirmation_date == null && dvo.cancle_status == 0 && dvo.refound_status == 0}">
-												<input type="button" class="purchase_confirm" value="구매확정" data-no="${dvo.no }">
+												
+												
+												<input id ="confirmPurchase" type="button" class="purchase_confirm" value="구매 확정" data-no="${dvo.no }">
 												<c:if test="${dvo.delivery_status == 0 }">
-													<input type="button" class="request_cancle" value="취소신청" data-no="${dvo.no }">
+													<input id ="confirmCancel" type="button" class="request_cancle" value="취소 신청" data-no="${dvo.no }">
 												</c:if>
 												<c:if test="${dvo.delivery_status != 0 }">
-													<input type="button" class="request_refound" value="환불신청" data-no="${dvo.no }">
+													<input id ="confirmCancel" type="button" class="request_refound" value="환불 신청" data-no="${dvo.no }">
 												</c:if>
 											</c:if>
 											<c:if test="${dvo.cancle_status != 0 }">
-												주문 취소됨
+												<input type="button" id="cancledOrder" value="취소된 주문">
 											</c:if>
 											<c:if test="${dvo.refound_status != 0 }">
-												<input type="button" class="refound_info" value="반품정보" data-no="${dvo.no }">
+												<input  id ="refoundInfo" type="button" class="refound_info" value="반품 정보" data-no="${dvo.no }">
 											</c:if>
 											<c:if test="${!empty img_list[status.index] }">
 												<c:if test="${dvo.purchase_confirmation_date != null }">
 													<c:if test="${review_list[status.index] == 0 }">
-														<input type="button" class="write_review" value="리뷰작성" data-no="${dvo.no }">
+														<input id ="goWriteReview" type="button" class="write_review" value="리뷰작성" data-no="${dvo.no }">
 													</c:if>
 													<c:if test="${review_list[status.index] != 0 }">
-														<input type="button" class="read_review" value="리뷰보기" data-no="${dvo.no }">
+														<input id ="goWriteReview" type="button" class="read_review" value="리뷰보기" data-no="${dvo.no }">
 													</c:if>
 												</c:if>
 											</c:if>
 										</div>
-										<hr>
-									</li>
+									</div>
+								
+								</div>
+									
 								</form>
+								
+								<hr class ="line">
+							
 							</c:forEach>
+							
 						</ul>
 					</div>
 				</div>
 			</div>
         </div>
-        
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
+    <div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
     <script>
     	$('.purchase_confirm').on('click', purchase_confirm);
     	$('.request_cancle').on('click', request_cancle);

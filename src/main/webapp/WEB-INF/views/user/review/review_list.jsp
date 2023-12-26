@@ -23,7 +23,7 @@ display : flex;
 .Review_more {
   display: inline-block;
   outline: 0;
-  border: 2px solid #222;
+  border: none;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
@@ -31,7 +31,7 @@ display : flex;
   height: 35px;
   font-size: 15px;
   background-color: #fd0;
-  font-weight: 500;
+  font-weight: 800;
   color: #222;
   
   margin-left: 28px;
@@ -232,11 +232,10 @@ font-size : 30px;
                 </div>
 			</div>
         </div>
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div> 
+    <div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
      
  <script>
 $(".Review_more").on('click', goReviewmore_popup);

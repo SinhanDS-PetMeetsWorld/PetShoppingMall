@@ -352,17 +352,14 @@
 			</div>
 
 		</div>
-
-		<div class="footer">
-			<div class="footer-color"></div>
-		</div>
-		
 		<div class="need">
 			<%@ include file="/WEB-INF/views/seller/product/category_template.jsp"%>
 			<%@ include file="/WEB-INF/views/seller/product/option_template.jsp"%>
 		</div>
 	</div>
-	
+	<div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
 	<script>
 		var category2 = new Array();
 		

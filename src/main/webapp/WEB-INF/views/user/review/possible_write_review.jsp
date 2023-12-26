@@ -23,7 +23,7 @@ display : flex;
 .goWriteReview {
   display: inline-block;
   outline: 0;
-  border: 2px solid #222;
+  border: none;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
@@ -31,7 +31,7 @@ display : flex;
   height: 35px;
   font-size: 15px;
   background-color: #FFDE30;
-  font-weight: 500;
+  font-weight: 800;
   color: #222;
   
   margin-top:15px;
@@ -222,11 +222,10 @@ height:100px;
                 </div>
 			</div>
         </div>
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
+    <div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
   <script>
 $(".goWriteReview").on('click', goReviewwrite_popup);
 

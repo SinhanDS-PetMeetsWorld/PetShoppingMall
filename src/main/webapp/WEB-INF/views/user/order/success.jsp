@@ -22,7 +22,7 @@
         <div class="contents">
 			<div class="contentsright">
 				<div>
-					
+					결제완료 페이지 만들예정~
 				</div>
 			</div>
         </div>
@@ -32,7 +32,8 @@
 			<div class="footer-color"></div>
         </div>
     </div>
-    <script>
-    </script>
+	<div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
 </body>
 </html>

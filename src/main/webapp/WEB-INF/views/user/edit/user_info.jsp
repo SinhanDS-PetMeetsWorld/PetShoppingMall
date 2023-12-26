@@ -6,7 +6,7 @@
 <html lang="ko">
 <head> 
     <meta charset="utf-8">
-    <title></title>
+    <title>구매자:: 회원 정보</title>
     <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -82,11 +82,12 @@ margin-bottom: 30px;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
+  border: none;
   width: 150px;
   height: 40px;
-  font-size: 15px;
+  font-size: 16px;
   background-color: #fd0;
-  font-weight: 500;
+  font-weight: 800;
   color: #222;
   margin-top:5px;
   margin-left: 300px;
@@ -213,7 +214,7 @@ text-align:left;
  .final_line {
  		margin-bottom : 10px;
  		width : 800px;
-        border: 1px solid #ccc;
+        border: 1px solid #FFDE30;
      }
  
 .info_tag_container_final {
@@ -310,7 +311,6 @@ text-align:left;
 						        <input type="hidden" name="temp" id="phone" value="${vo.phone }">
 						        <input type="hidden" name="birth" id="birth" value="${vo.birth_date }">
 						        <input type="hidden" name="no" id="no" value="${vo.no }">
-<!-- 						        <input type="hidden" name="vo_password" id="vo_password" value="${vo.password }">   -->
 					        </div>
 					        
 					        <div class = "info_tag_container">
@@ -324,14 +324,11 @@ text-align:left;
 						     
 					        </div> 
 					        
-					        
-					        
 					        <hr class = "line">
 					        
 					        <div class = "info_tag_container">
 					        	<div class = "info_tag">
 					        	<span class = "text">아이디</span>
-						        <!-- <input type="text" name="id" placeholder="hong" disabled>  -->
 					        	</div>
 								<div class = "info_tag">
 									${vo.id }
@@ -455,12 +452,10 @@ text-align:left;
 			</div>
 
         </div>
-        
-        
-        <div class="footer">
-			<div class="footer-color"></div>
-        </div>
     </div>
+    <div class="footer">
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	</div>
 <script>
 	$('.confirm_withdrawal').on('click', function(){
 		confirm("회원 탈퇴 후에는 복구가 불가능합니다. \n정말 삭제하겠습니까?");
