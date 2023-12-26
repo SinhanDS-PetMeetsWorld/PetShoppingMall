@@ -94,7 +94,6 @@ display : flex;
  	}
  }
 
-
   .confirm_recreate {
  display: inline-block;
  outline: 0;

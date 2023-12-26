@@ -211,8 +211,7 @@
 	    }
 	</script>
 
- <style>
- 
+<style>
  .menu_name {
 margin-bottom: 10px;	
 }
@@ -261,17 +260,17 @@ margin-bottom: 10px;
  border: 2px solid #FFDE30;
  color: #0F1111;
  background-color: white;
- padding: 8px;
+ padding-left : 10px;
+ padding-right : 10px;
  box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;
  font-weight: 800;
  font-size: 11px;
  height: 30px;
- margin-top:5px;
-
 }
+
 .info_tag_container {
  	height : 30px;
- 	width : 1100px;
+ 	width : 1000px;
  	display: flex;
 }
 
@@ -280,7 +279,7 @@ margin-bottom: 10px;
  width : 130px;
  float : left;
  text-align : left;
- margin-top : 6px;
+ margin-top : 5px;
 }
 
 .info_space {
@@ -302,9 +301,7 @@ margin-bottom: 10px;
         border: 1px solid #ccc;
 }
 
-</style>
-
-	
+</style>	
 </head>
 
 
@@ -314,8 +311,6 @@ margin-bottom: 10px;
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
         </div>
 
-       	
-        
         <div class="contents">
         	
 			<div class="contentsright">
@@ -331,16 +326,12 @@ margin-bottom: 10px;
 				    <form name="regist_form" id="frm" action="regist.do" method="post">
 				        
 				       <div class ="info_tag_container">
-				       
-				       		<div class = "info_tag">
-				       			<span>아이디* </span> 
-				       		</div>
+				       		<div class = "info_tag"><span>아이디* </span></div>
 				       		
 				       		<div class= "insert_tag">
 				       				<input class ="aaa" type="text" name="id" id="id">
 				            		<button class = "check" type="button" id="idCheck">아이디 중복 확인</button>
 				       		</div>
-								
 				        </div>
 				        
 				        <hr class ="line">
