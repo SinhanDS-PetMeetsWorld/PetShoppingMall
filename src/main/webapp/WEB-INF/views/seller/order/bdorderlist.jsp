@@ -49,8 +49,6 @@
     	}
     	
     	
-    	
-    	
 	   	.canclebutton {
 			 outline: 0;
 			 border: none;
@@ -67,7 +65,7 @@
 			 float: left;
 		}
 		.reason_cancel{
-			float:left;
+			clear:both;
 			margin: 30px 20px 30px 30px;
 		}
 		.buyer_info{
@@ -91,8 +89,67 @@
 			font-weight: 500;
 			color: #222;
 		}
+		 .menu_name {
+			margin-bottom: 10px;	
+		}
 		
-    	
+    	.selected_tab_button {
+			 display: inline-block;
+			 outline: 0;
+			 cursor: pointer;
+			 border-radius: 7px;
+			 background: #FFDE30;
+			 border:2px solid #FFDE30;
+			 font-size: 18px;
+			 height: 40px;
+			 padding: 0 11px;
+			 text-align: center;
+			 width: 20%;
+			 min-width: 200px;
+			 font-weight: 500;
+			 color: #0F1111;
+			 margin-right: -4px;
+			 border-bottom-left-radius: 0%;
+			 border-bottom-right-radius: 0%;
+			 :hover{
+			     background: #F7CA00;
+			     border-color: #F2C200;
+			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+			 	}
+			 }
+			
+			 .tab_button {
+			 display: inline-block;
+			 outline: 0;
+			 cursor: pointer;
+			 border-radius: 7px;
+			 background: #F9FAFB;
+			 border:1px solid #FFDE30;
+			 font-size: 18px;
+			 height: 40px;
+			 padding: 0 11px;
+			 text-align: center;
+			 width: 20%;
+			 min-width: 200px;
+			 font-weight: 500;
+			 color: #0F1111;
+			 margin-right: -4px;
+			 margin-top: -1px;
+			 border-bottom-left-radius: 0%;
+			 border-bottom-right-radius: 0%;
+			 border-bottom : none;
+			 :hover{
+			     background: #F7CA00;
+			     border-color: #F2C200;
+			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+			 	}
+			 	
+			 .start_line {
+			        border: 1px solid #FFDE30;
+			        margin-bottom : 10px;
+			        width : 800px;
+			     }
+ }
     </style>
     <style>
 	    .messagebody{
@@ -122,7 +179,12 @@
             </div>
 			<div class="contentsright">
 				<div>
-				<h2>배송전 목록</h2><br>
+				<h1 class = "menu_name">주문 목록</h1>
+					<button class="selected_tab_button" type="button" onclick="location.href='/seller/order/bd_orderlist.do'">배송전</button>
+					<button class="tab_button" type="button" onclick="location.href='/seller/order/od_orderlist.do'">배송중</button>
+					<button class="tab_button" type="button" onclick="location.href='/seller/order/ad_orderlist.do'">배송완료</button>
+					<hr class = "start_line">
+					
 					<c:if test="${empty orderMainList}">
 						<div class="messagebody">
 							<div class="messagebox">
@@ -158,7 +220,7 @@
 										<button type="button" value="${orderdetails.no}" class="canclebutton">주문취소</button>
 									</c:if>
 									<div class="reason_cancel"><c:if test="${orderdetails.cancle_status != 0}">취소 사유: ${orderdetails.reason}</c:if></div>
-									<br><br>
+									
 									
 								
 								</c:forEach>

@@ -126,7 +126,85 @@ height:100px;
 		.messagebox > img {
 			margin-bottom : 20px;
 		}
-    </style> 
+    </style>
+    <style>
+    	.paging_div{
+			height:30px;	
+			text-align:center;
+			width:1000px;
+			clear:both;
+			margin-bottom:15px;
+		}
+		
+		
+		.paging li{
+			list-style: none;
+			margin-right:8px;
+			margin-top:15px;
+			
+			text-align:center;
+			display:inline-block;
+		}
+		
+		.paging li a{
+			width:20px;
+			height:20px;
+			background: white;
+			border-radius: 4px;
+			border: 1px solid black;
+			text-decoration: none;
+			font-size:13px;
+			color:black;
+			display:block;
+			line-height:18px;
+		}
+		
+		
+		
+		.paging li a:hover{
+			width:20px;
+			height:20px;
+			background: black;
+			color:white;
+			
+		}
+		
+		.bbsSearch{
+			width:1000px;
+			text-align:center;
+		}
+		
+		.search_keyword_btn{
+			background-color:#FFDE30;
+			border:1px solid gray;
+			width:40px;
+		}
+		
+		.aaa8{
+			background-color: #fff;
+			height: 30px;
+			width: 80px;
+			padding: 3px 7px;
+			line-height: normal;
+			border: 1px solid #a6a6a6;
+			border-top-color: #949494;
+			border-radius: 3px;
+			box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+			outline: 0;
+			color: #111;
+			font-size: 13px;
+			
+			:focus{
+				border-color: #e77600;
+				box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+			}
+		}
+		
+		.searchWord input{
+			height:30px;
+		}
+    </style>
+    
 
 </head>
 <body>
@@ -238,7 +316,7 @@ height:100px;
                 <div class="bbsSearch">
                     <form method="get" name="searchForm" id="searchForm" action="/user/possible_write_review.do">
                         <span class="srchSelect">
-                            <select name="searchType">
+                            <select class="aaa8" name="searchType">
                                 <option value="name">상품명</option>
                             </select>
                         </span>

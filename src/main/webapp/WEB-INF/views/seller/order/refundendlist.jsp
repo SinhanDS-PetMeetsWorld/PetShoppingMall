@@ -57,10 +57,148 @@
 		.refunder_bold{
 			font-weight:bold;
 		}
+
+		 .menu_name {
+			margin-bottom: 10px;	
+		}
+		
+    	.selected_tab_button {
+			 display: inline-block;
+			 outline: 0;
+			 cursor: pointer;
+			 border-radius: 7px;
+			 background: #FFDE30;
+			 border:2px solid #FFDE30;
+			 font-size: 18px;
+			 height: 40px;
+			 padding: 0 11px;
+			 text-align: center;
+			 width: 20%;
+			 min-width: 200px;
+			 font-weight: 500;
+			 color: #0F1111;
+			 margin-right: -4px;
+			 border-bottom-left-radius: 0%;
+			 border-bottom-right-radius: 0%;
+			 :hover{
+			     background: #F7CA00;
+			     border-color: #F2C200;
+			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+			 	}
+			 }
+			
+			 .tab_button {
+			 display: inline-block;
+			 outline: 0;
+			 cursor: pointer;
+			 border-radius: 7px;
+			 background: #F9FAFB;
+			 border:1px solid #FFDE30;
+			 font-size: 18px;
+			 height: 40px;
+			 padding: 0 11px;
+			 text-align: center;
+			 width: 20%;
+			 min-width: 200px;
+			 font-weight: 500;
+			 color: #0F1111;
+			 margin-right: -4px;
+			 margin-top: -1px;
+			 border-bottom-left-radius: 0%;
+			 border-bottom-right-radius: 0%;
+			 border-bottom : none;
+			 :hover{
+			     background: #F7CA00;
+			     border-color: #F2C200;
+			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+			 	}
+			 	
+			 .start_line {
+			        border: 1px solid #FFDE30;
+			        margin-bottom : 10px;
+			        width : 800px;
+			     }
+		
+		.paging_div{
+			height:30px;	
+			text-align:center;
+			width:1000px;
+			clear:both;
+			margin-bottom:15px;
+		}
+		
+		
+		.paging li{
+			list-style: none;
+			margin-right:8px;
+			margin-top:15px;
+			
+			text-align:center;
+			display:inline-block;
+		}
+		
+		.paging li a{
+			width:20px;
+			height:20px;
+			background: white;
+			border-radius: 4px;
+			border: 1px solid black;
+			text-decoration: none;
+			font-size:13px;
+			color:black;
+			display:block;
+			line-height:18px;
+		}
+		
+		
+		
+		.paging li a:hover{
+			width:20px;
+			height:20px;
+			background: black;
+			color:white;
+			
+		}
+		
+		.bbsSearch{
+			width:1000px;
+			text-align:center;
+		}
+		
+		.search_keyword_btn{
+			background-color:#FFDE30;
+			border:1px solid gray;
+			width:40px;
+		}
+		
+		.aaa4{
+			background-color: #fff;
+			height: 30px;
+			width: 80px;
+			padding: 3px 7px;
+			line-height: normal;
+			border: 1px solid #a6a6a6;
+			border-top-color: #949494;
+			border-radius: 3px;
+			box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+			outline: 0;
+			color: #111;
+			font-size: 13px;
+			
+			:focus{
+				border-color: #e77600;
+				box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+			}
+		}
+		
+		.searchWord input{
+			height:30px;
+		}
+		
     </style>
     <style>
 	    .messagebody{
-			margin-top : 80px;
+			margin-top : 50px;
 		}
 	    .messagebox{
 			margin : 0 auto;
@@ -88,7 +226,10 @@
             </div>
 			<div class="contentsright">
 				<div>
-				<h2>환불 완료 목록</h2><br>
+				<h1 class = "menu_name">환불 목록</h1>
+					<button class="tab_button" type="button" onclick="location.href='/seller/order/refundlist.do'">환불요청</button>
+					<button class="selected_tab_button" type="button" onclick="location.href='/seller/order/refundendlist.do'">환불완료</button>
+					<hr class = "start_line"><br>
 					<c:if test="${empty orderMainList}">
 						<div class="messagebody">
 							<div class="messagebox">
@@ -164,7 +305,7 @@
                 <div class="bbsSearch">
                     <form method="get" name="searchForm" id="searchForm" action="/seller/order/refundendlist.do">
                         <span class="srchSelect">
-                            <select name="searchType">
+                            <select class="aaa4" name="searchType">
                                 <option value="product_name" <c:if test="${productSearchVO.searchType == 'product_name'}">selected</c:if>>상품명</option>
                             </select>
                         </span>

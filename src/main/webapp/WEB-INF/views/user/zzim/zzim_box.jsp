@@ -143,6 +143,49 @@ a:active {
 			margin-bottom : 20px;
 		}
 </style>
+	<style>
+		.paging_div{
+			height:30px;	
+			text-align:center;
+			width:1000px;
+			clear:both;
+			margin-bottom:15px;
+		}
+		
+		
+		.paging li{
+			list-style: none;
+			margin-right:8px;
+			margin-top:15px;
+			
+			text-align:center;
+			display:inline-block;
+		}
+		
+		.paging li a{
+			width:20px;
+			height:20px;
+			background: white;
+			border-radius: 4px;
+			border: 1px solid black;
+			text-decoration: none;
+			font-size:13px;
+			color:black;
+			display:block;
+			line-height:18px;
+		}
+		
+		
+		
+		.paging li a:hover{
+			width:20px;
+			height:20px;
+			background: black;
+			color:white;
+			
+		}
+		
+	</style>
 
 </head>
 <body>

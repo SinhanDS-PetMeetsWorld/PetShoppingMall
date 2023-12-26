@@ -76,21 +76,6 @@
 							  제품명 : ${qna_array[qna_quant.index][0]} <br>
 							</c:if>	
 							
-							<c:if test = "${not empty qna_array[qna_quant.index][1]}">
-							  상태 : ${qna_array[qna_quant.index][1]} <br>
-							</c:if>
-																
-							<c:if test = "${not empty qna_array[qna_quant.index][2]}">
-							  제품 번호 : ${qna_array[qna_quant.index][2]} <br>
-							</c:if>	
-						    <div>
-								<c:if test = "${not empty qna_array[qna_quant.index][3]}">
-										<a class="quest_no" data-no="${qna_array[qna_quant.index][3]}">
-										질문 번호 :
-									    <span>${qna_array[qna_quant.index][3]}</span> 
-									    </a> 
-								</c:if>		
-							</div>	
 							<c:if test = "${not empty qna_array[qna_quant.index][4]}">
 							  질문 등록일 : ${qna_array[qna_quant.index][4]} <br>
 							</c:if>		
