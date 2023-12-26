@@ -25,9 +25,97 @@
     		$("#frm").submit();
     	}
 	</script>
-	
-</head>
 
+<style>
+
+.menu_name {
+margin-bottom: 10px;	
+}
+
+.contentsright {
+ margin-left : 200px;
+
+}
+.info_tag_container {
+ 	height : 30px;
+ 	width : 1000px;
+ 	display: flex;
+}
+
+.info_tag{
+ height : 30px;
+ width : 130px;
+ float : left;
+ text-align : left;
+ margin-top : 5px;
+}
+
+.insert_tag{
+ height : 30px;
+ width : 900px;
+ float : left;
+
+}
+.aaa{
+	   background-color: #fff;
+       height: 30px;
+       width: 185px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+ }
+
+.findID {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  border: none;
+  width: 150px;
+  height: 40px;
+  font-size: 15px;
+  background-color: #fd0;
+  font-weight: 800;
+  color: #222;
+  margin-top:5px;
+  margin-left: 290px;
+ }
+
+
+.start_line {
+        border: 1px solid #FFDE30;
+        margin-bottom : 10px;
+        width : 750px;
+   }
+ 
+.line {
+ 		margin-top : 10px;
+ 		margin-bottom : 10px;
+ 		width : 750px;
+        border: 1px solid #ccc;
+} 
+
+ .final_line {
+ 		margin-bottom : 10px;
+ 		margin-top : 10px;
+ 		width : 750px;
+        border: 1px solid #FFDE30;
+   }
+
+</style>
+</head>
 
 <body>
 	<div class="wrap">
@@ -40,20 +128,38 @@
 			<div class="contentsright">
 				<div class="find_id">
 				
-				    <h1>ID 찾기</h1>
-			
+				    <h1 class = "menu_name">ID 찾기</h1>
+					
+					<hr class = "start_line">
 				    <form name="findId_form" id="frm" action="findId.do" method="post">
-				        <div>
-				            성명*(가입하실 때 사용한 성함과 동일하게 입력해주세요.)<br>
-				            <input type="text" name="name" id="name">
+				    	<div class = "space"></div>
+				    	
+				        <div class = "info_tag_container">
+					          <div class = "info_tag"><span>성명</span></div>
+					       
+					       
+					         <div class = "insert_tag">
+					        	 <input class="aaa" type="text" name="name" id="name">
+					        	 가입하실 때 사용한 성함과 동일하게 입력해주세요.
+					         </div> 
+				            
 				        </div>
-				        <hr>
-				        <div>
-				            이메일*(가입하실 때 사용한 이메일과 동일한 주소로 입력해주세요. 입력하신 이메일 주소로 ID가 전송됩니다.)<br>
-				            <input type="text" name="email" id="email">
-				        </div>
-				            <button type="button" id="findbtn" onclick="findID();">ID 찾기</button>
-				        <hr>
+				        <hr class = "line">
+				       
+				        <div class = "info_tag_container">
+				            
+				            <div class ="info_tag"><span>이메일*</span></div>
+				            
+				            <div class = "insert_tag">
+				            <input class ="aaa" type="text" name="email" id="email">
+				            가입하실 때 사용한 이메일과 동일한 주소로 입력해주세요.
+				        	</div>
+				            
+				       </div>   
+				       
+				       <hr class = "final_line">
+				       <button class = "findID" type="button" id="findbtn" onclick="findID();">ID 찾기</button>
+				            
 				    </form>
 				
 				</div>
