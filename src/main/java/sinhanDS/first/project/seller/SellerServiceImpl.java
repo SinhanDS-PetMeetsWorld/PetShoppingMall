@@ -13,7 +13,6 @@ import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
-import sinhanDS.first.project.user.vo.UserVO;
 
 @Service
 public class SellerServiceImpl implements SellerService {
@@ -86,5 +85,17 @@ public class SellerServiceImpl implements SellerService {
 	public int withdrawal(int seller_no) {
 		mapper.withdrawalProduct(seller_no);
 		return mapper.withdrawal(seller_no);
+	}
+	
+	@Override
+	public SellerVO findId(SellerVO vo) {
+		vo = mapper.findId(vo);
+		return vo;
+	}
+
+	@Override
+	public int findPwd(SellerVO vo) {
+		int suc = mapper.findPwd(vo);
+		return suc;
 	}
 }

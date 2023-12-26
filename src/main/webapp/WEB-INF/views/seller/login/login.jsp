@@ -150,7 +150,8 @@
 									name="password">
 							</div>
 							<div class="find_idpwd">
-								<a href="">아이디 찾기</a>	&nbsp&nbsp&nbsp&nbsp/&nbsp&nbsp&nbsp&nbsp <a href="">비밀번호 찾기</a>
+								<a href="/seller/findIdPage.do">아이디 찾기</a>	&nbsp&nbsp&nbsp&nbsp/&nbsp&nbsp&nbsp&nbsp 
+								<a href="/seller/findPwdPage.do">비밀번호 찾기</a>
 							</div>
 							
 							<div class="submit">

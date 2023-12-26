@@ -6,7 +6,6 @@ import sinhanDS.first.project.product.vo.ProductCategoryVO;
 import sinhanDS.first.project.product.vo.ProductOptionVO;
 import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
-import sinhanDS.first.project.user.vo.UserVO;
 
 public interface SellerService {
 	public SellerVO login(SellerVO vo);
@@ -19,4 +18,7 @@ public interface SellerService {
 	
 
 	int withdrawal(int seller_no);
+	
+	SellerVO findId(SellerVO vo);
+	int findPwd(SellerVO vo);
 }
