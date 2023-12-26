@@ -12,7 +12,7 @@
 	
 	.admin_menu_button{
 	
-		height:20px;
+		height:25px;
 		background: white;
 		border-radius: 2px;
 		border: 1px solid black;
@@ -20,20 +20,18 @@
 		font-size:13px;
 		color:black;
 		display:inline;
-		line-height:18px;
-		
-	}
-	.admin_menu_button_selected{
-		height:20px;
-		background: black;
-		color:white;
+		line-height:15px;
+		margin-bottom:5px;
+		padding: 0 3px 0 3px;
 	}
 	
+	
 	.admin_menu_button:hover{
-		height:20px;
+		height:25px;
 		background: black;
 		color:white;
 		cursor:pointer;
+		
 	}
 	
 
