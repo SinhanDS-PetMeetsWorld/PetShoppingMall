@@ -65,6 +65,10 @@ public class SellerController {
 			model.addAttribute("msg", "사용이 제한된 계정입니다. 관리자에게 문의하세요.");
 			model.addAttribute("cmd", "back");
 			return "common/alert";
+		}  else if (login.getWithdrawal_date() != null) { // 로그인 실패
+			model.addAttribute("msg", "회원 탈퇴된 계정입니다. 관리자에게 문의하세요.");
+			model.addAttribute("cmd", "back");
+			return "common/alert";
 		} else { // 로그인 성공
 			sess.removeAttribute("userLoginInfo");
 			sess.removeAttribute("adminLoginInfo");
@@ -162,5 +166,26 @@ public class SellerController {
 		return "common/alert";
 	}
 	
-	
+	@GetMapping("/withdrawal.do")
+	public String withdrawal(Model model, HttpSession sess) {
+		SellerVO vo = (SellerVO)sess.getAttribute("sellerLoginInfo");
+		String msg = "";
+		String url = "/seller/afterwithdrawal.do";
+		int r = service.withdrawal(vo.getNo());
+		if (r > 0) {
+			msg = "계정이 삭제되었습니다.";
+			model.addAttribute("cmd","move");
+		} else {
+			msg = "계정 삭제 실패";
+			model.addAttribute("cmd","back");
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return "common/alert";
+	}
+	@GetMapping("afterwithdrawal.do")
+	public String afterwithdrawal(HttpSession sess) {
+		sess.invalidate();
+		return "redirect:/";
+	}
 }
