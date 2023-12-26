@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
-    <title>회원가입</title>
+    <title>구매자:: 회원가입</title>
     <script>
     var dupCheck = false;
     	function goSave() {
@@ -242,11 +242,12 @@ margin-bottom: 10px;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
+  border: none;
   width: 150px;
   height: 40px;
   font-size: 15px;
   background-color: #fd0;
-  font-weight: 500;
+  font-weight: 800;
   color: #222;
   margin-top:5px;
   margin-left: 350px;
@@ -294,11 +295,30 @@ margin-bottom: 10px;
 
 }
 
+.start_line {
+        border: 1px solid #FFDE30;
+        margin-bottom : 10px;
+        width : 900px;
+   }
+
+
  .line {
  		margin-top : 10px;
  		margin-bottom : 10px;
  		width : 900px;
         border: 1px solid #ccc;
+}
+
+ .final_line {
+ 		margin-bottom : 10px;
+ 		width : 900px;
+        border: 1px solid #FFDE30;
+   }
+   
+.signin_seller {
+width : 900px;
+text-align : right;
+
 }
 
 </style>	
@@ -317,10 +337,10 @@ margin-bottom: 10px;
 				<div class="login_all">
 				
 				    <h1 id = "menu_name">회원 가입</h1>
-			
-				    <div class="signin_seller">
+				    
+				    <div class="signin_seller"> 
 				        <a href="/seller/join.do">판매자로 가입하기</a>
-				   		<br>
+				        <hr class = "start_line">
 				    </div>
 			
 				    <form name="regist_form" id="frm" action="regist.do" method="post">
@@ -426,7 +446,7 @@ margin-bottom: 10px;
 				            <input type="checkbox" name="advertisement" checked> 광고성 마케팅 수신 동의(선택사항)
 				        </div>
 				        
-				        <hr class = "line">
+				        <hr class = "final_line">
 					    
 					    <div class="sign_in_btn">
 					            <input class = "createConfirm" type="button" value="가입하기" onclick="goSave();">
