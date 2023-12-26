@@ -113,6 +113,20 @@ height:100px;
  }
  
 </style>      
+<style>
+	    .messagebody{
+			margin-top : 50px;
+		}
+	    .messagebox{
+			margin : 0 auto;
+			width : 600px;
+			height : 300px;
+			text-align : center;
+		}
+		.messagebox > img {
+			margin-bottom : 20px;
+		}
+    </style> 
 
 </head>
 <body>
@@ -130,6 +144,14 @@ height:100px;
 						
 				<h1 class= "menu_name">작성 가능한 리뷰</h1>	
 				<hr class ="start_line">
+						<c:if test="${empty possible_write_review2}">
+							<div class="messagebody">
+								<div class="messagebox">
+										<img src="/resources/img/common/emptybox.png">
+										<h2>작성 가능한 리뷰가 없습니다</h2>
+								</div>
+							</div>
+						</c:if>
 				<c:forEach items="${possible_write_review2}" varStatus = "possible_write_review" >
 					<div>
 						<c:if test="${!empty possible_write_review2[possible_write_review.index] }">

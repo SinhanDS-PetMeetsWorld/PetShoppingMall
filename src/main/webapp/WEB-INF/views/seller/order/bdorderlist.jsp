@@ -127,7 +127,7 @@
 						<div class="messagebody">
 							<div class="messagebox">
 									<img src="/resources/img/common/emptybox.png">
-									<h2>조회할 목록이 없습니다</h2>
+									<h2>배송 전 주문이 없습니다</h2>
 							</div>
 						</div>
 					</c:if>

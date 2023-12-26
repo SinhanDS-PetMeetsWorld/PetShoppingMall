@@ -75,10 +75,21 @@
 			 margin:20px 0 20px 0;
 		}
 		
-		
-		
     </style>
-    
+    <style>
+	    .messagebody{
+			margin-top : 80px;
+		}
+	    .messagebox{
+			margin : 0 auto;
+			width : 700px;
+			height : 300px;
+			text-align : center;
+		}
+		.messagebox > img {
+			margin-bottom : 20px;
+		}
+    </style>
     
 </head>
 <body>
@@ -95,9 +106,14 @@
             </div>
 			<div class="contentsright">
 				<div>
-				환불 요청 목록
+				<h2>환불 요청 목록</h2><br>
 					<c:if test="${empty orderMainList}">
-						<h1>환불 요청된 상품이 없습니다(나중에 예쁜 이미지같은거 하나 넣어줄게욤~)</h1>
+						<div class="messagebody">
+							<div class="messagebox">
+									<img src="/resources/img/common/emptybox.png">
+									<h2>환불 요청이 없습니다</h2>
+							</div>
+						</div>
 					</c:if>
 					<c:if test="${not empty orderMainList}">
 						<c:forEach var="orders" items="${orderMainList}" varStatus="mainstatus">

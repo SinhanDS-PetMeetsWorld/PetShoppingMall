@@ -182,10 +182,21 @@ height : 100px;
 float : left;
 } 
  
- 
- 
 </style>
-	
+<style>
+	    .messagebody{
+			margin-top : 50px;
+		}
+	    .messagebox{
+			margin : 0 auto;
+			width : 600px;
+			height : 300px;
+			text-align : center;
+		}
+		.messagebox > img {
+			margin-bottom : 20px;
+		}
+    </style>
 	
 </head>
 <body>
@@ -269,7 +280,14 @@ float : left;
 					    
      				</div>
      				<div>
-     					<c:if test="${empty productvolist }"><h2>장바구니에 상품이 존재하지 않습니다.</h2></c:if>
+     					<c:if test="${empty productvolist }">
+     						<div class="messagebody">
+								<div class="messagebox">
+										<img src="/resources/img/common/emptybox.png">
+										<h2>장바구니에 추가한 상품이 없습니다</h2>
+								</div>
+							</div>
+     					</c:if>
      					<c:if test="${!empty productvolist }">
 	     					<h2>결제 금액</h2>
 	     					<hr class = "final_line">
