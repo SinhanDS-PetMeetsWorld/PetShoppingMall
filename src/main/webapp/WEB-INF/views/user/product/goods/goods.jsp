@@ -348,6 +348,13 @@
 <script>
 
 function goQnawrite_popup(){
+	var login = "${userLoginInfo}";
+	
+	if(login == null || login == ""){
+		alert("로그인 후 사용 가능합니다");
+		return;
+	}
+	
 	var product_no = ${product_no};
 	var qnaWrite = 'qnawrite.do?no='+ product_no;
 	window.open(qnaWrite , 'Q&A등록', 'width=500, height=600');

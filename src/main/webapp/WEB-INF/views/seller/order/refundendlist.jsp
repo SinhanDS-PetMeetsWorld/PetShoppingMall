@@ -105,9 +105,9 @@
 											</td>
 										</tr>
 									</table>
-									<br>
-									환불 사유: ${orderdetails.reason}<br>
 									
+									환불 사유: ${orderdetails.reason}<br>
+									<br>
 								</c:forEach>
 								<div class="refunder_info">
 								<br>

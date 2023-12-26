@@ -105,7 +105,39 @@ margin-top : 12px;
   color: #fff;
   
  }
-
+#refoundInfo {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 12px;
+  border-radius: 50px;
+  margin: 0 0 0 60px;
+  width: 90px;
+  height: 35px;
+  font-size: 15px;
+  background-color: gray;
+  font-weight: 800;
+  color: #fff;
+ }
+#cancledOrder {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 12px;
+  border-radius: 50px;
+   margin: 0 0 0 50px;
+  width: 110px;
+  height: 35px;
+  font-size: 15px;
+  background-color: gray;
+  font-weight: 800;
+  color: #fff;
+ }
+#cancledOrder:hover{
+	cursor:default;
+}
 #goWriteReview {
   display: inline-block;
   outline: 0;
@@ -184,7 +216,7 @@ text-align : right;
 												<div class = "goods_name_container">
 													
 													<div class ="goods_name">
-														<h4><a href="/user/product/goods.do?no=${dvo.product_name }"> ${dvo.product_name }</a></h4> 
+														<h4><a href="/user/product/goods.do?no=${dvo.product_no }"> ${dvo.product_name }</a></h4> 
 													</div>
 													
 													<div class = "goods_option">
@@ -216,10 +248,10 @@ text-align : right;
 												</c:if>
 											</c:if>
 											<c:if test="${dvo.cancle_status != 0 }">
-												주문 취소됨
+												<input type="button" id="cancledOrder" value="취소된 주문">
 											</c:if>
 											<c:if test="${dvo.refound_status != 0 }">
-												<input type="button" class="refound_info" value="반품정보" data-no="${dvo.no }">
+												<input  id ="refoundInfo" type="button" class="refound_info" value="반품 정보" data-no="${dvo.no }">
 											</c:if>
 											<c:if test="${!empty img_list[status.index] }">
 												<c:if test="${dvo.purchase_confirmation_date != null }">
@@ -243,10 +275,6 @@ text-align : right;
 							</c:forEach>
 							
 						</ul>
-						<div class ="go_back">
-								<a href="list.do">구매이력 목록으로 돌아가기</a>
-						</div>
-						
 					</div>
 				</div>
 			</div>

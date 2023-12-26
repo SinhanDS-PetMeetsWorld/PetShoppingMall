@@ -277,3 +277,4 @@ ADD COLUMN `withdrawal_status` INT NULL DEFAULT 0 AFTER `restricted`;
 ALTER TABLE `PetShoppingMall`.`seller` 
 DROP COLUMN `withdrawal_status`,
 ADD COLUMN `withdrawal_date` DATE NULL AFTER `restricted`;
+DROP TABLE `PetShoppingMall`.`report`
