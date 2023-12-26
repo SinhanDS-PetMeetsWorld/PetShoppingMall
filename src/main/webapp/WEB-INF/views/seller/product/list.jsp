@@ -117,9 +117,6 @@
 		}
 		
 		
-		.paging_dif{
-			clear:both;
-		}
 		
 		
 		.paging_div{
@@ -172,6 +169,55 @@
     		background-color:#FFDE30;
     		border:1px solid gray;
     	}
+    	
+    	.aaa2{
+			background-color: #fff;
+			height: 30px;
+			width: 100px;
+			padding: 3px 7px;
+			line-height: normal;
+			border: 1px solid #a6a6a6;
+			border-top-color: #949494;
+			border-radius: 3px;
+			box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+			outline: 0;
+			color: #111;
+			font-size: 13px;
+			
+			:focus{
+				border-color: #e77600;
+				box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+			}
+		}
+		
+    	.aaa3{
+			background-color: #fff;
+			height: 30px;
+			width: 70px;
+			padding: 3px 7px;
+			line-height: normal;
+			border: 1px solid #a6a6a6;
+			border-top-color: #949494;
+			border-radius: 3px;
+			box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+			outline: 0;
+			color: #111;
+			font-size: 13px;
+			
+			:focus{
+				border-color: #e77600;
+				box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+			}
+		}
+		
+		.searchWord input{
+			height:30px;
+		}
+		
+		.search_keyword_btn{
+			width:40px;
+		}
+    	
     
     </style>
 </head>
@@ -286,7 +332,7 @@
                 <div class="bbsSearch">
                     <form method="get" name="searchForm" id="searchForm" action="/seller/product/list.do">
                     	<span class="sortSelect">
-                            <select name="sorttype">
+                            <select class="aaa2" name="sorttype">
                                 <option value="regist" <c:if test="${productSearchVO.sorttype == 'regist'}">selected</c:if>>등록일 순</option>
                                 <option value="maxprice" <c:if test="${productSearchVO.sorttype == 'maxprice'}">selected</c:if>>최고 가격 순</option>
                                 <option value="minprice" <c:if test="${productSearchVO.sorttype == 'minprice'}">selected</c:if>>최저 가격 순</option>
@@ -295,7 +341,7 @@
                             </select>
                     	</span>
                         <span class="srchSelect">
-                            <select name="searchType">
+                            <select class="aaa3" name="searchType">
                                 <option value="all">전체</option>
                                 <option value="name" <c:if test="${productSearchVO.searchType == 'name'}">selected</c:if>>상품명</option>
                                 <option value="brand" <c:if test="${productSearchVO.searchType == 'brand'}">selected</c:if>>브랜드</option>
