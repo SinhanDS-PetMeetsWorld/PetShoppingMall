@@ -158,19 +158,21 @@ float : left;
 .purchaseConfirm {
   display: inline-block;
   outline: 0;
+  border: none;
   cursor: pointer;
   padding: 0 24px;
   border-radius: 50px;
-  width: 200px;
+  width: 160px;
   height: 60px;
-  font-size: 30px;
-  background-color: #fd0;
-  font-weight: 500;
+  font-size: 25px;
+  background-color:#FFDE30;
+  font-weight: 800;
   color: #222;
   
   margin-left : 160px;
   margin-top : 20px;
- }
+ } 
+ 
 </style>
 
 

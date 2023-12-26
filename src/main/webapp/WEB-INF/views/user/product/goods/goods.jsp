@@ -299,7 +299,7 @@
 								
 							</div>
 							<div>
-								수량 : <input class="quantity" type="number" name="choose_number" value=0>
+								수량 : <input class="quantity" type="number" name="choose_number" value = "1" min ="1">
 									
 									<c:if test ="${empty zzim_check}">	
 										찜: <img id="zzim_Off" onclick="zzim();" src="${pageContext.request.contextPath}/resources/img/product/empty_heart.png"/>
