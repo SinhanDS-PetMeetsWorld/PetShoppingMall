@@ -22,7 +22,7 @@
         <div class="contents">
 			<div class="contentsright">
 				<div>
-					
+					결제완료 페이지 만들예정~
 				</div>
 			</div>
         </div>

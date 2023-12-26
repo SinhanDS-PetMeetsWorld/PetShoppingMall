@@ -36,6 +36,10 @@ a {
 	list-style: none;
 }
 
+.header_menu {
+	position : relative;
+	z-index:2;
+}
 
 .header_menu > ul > li > a {
 	text-decoration: none;

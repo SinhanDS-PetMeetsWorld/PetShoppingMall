@@ -70,6 +70,7 @@
        			 </div>
 
         </div>
+        <a href="/common/makeerror.jsp">에러페이지 이동테스트</a>
         
         
     </div>
