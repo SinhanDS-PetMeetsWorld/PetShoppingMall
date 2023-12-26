@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/resources/css/common/template.css">
     
     <style>
+    	
     	.product_preview{
     		float : left;
     		margin : 20px;
@@ -195,7 +196,7 @@
         
         
         <div class="footer">
-			<div class="footer-color"></div>
+			<%@ include file="/WEB-INF/views/common/footer.jsp" %>
         </div>
     </div>
     
