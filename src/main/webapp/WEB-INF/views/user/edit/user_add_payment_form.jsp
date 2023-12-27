@@ -79,9 +79,13 @@
     
 <style>
 
+
 .contents {
-margin-left : 27px;
+	border: 1px solid #FFDE30;
+	border-top : 1px solid #F9FAFB; 
+    width : 452px;
 }
+
 
 #card{
  display: inline-block;
@@ -182,14 +186,6 @@ border : 1px solid black;
        }
  }
  
-.info_tag{
- height : 30px;
- width : 191px;
- float : left;
- text-align : left;
- margin-top : 3px;
-}
-
  .addConfirm {
   display: inline-block;
   outline: 0;
@@ -206,6 +202,33 @@ border : 1px solid black;
   margin-top:15px;
   margin-left: 120px;
  }
+ 
+ 
+.info_tag_container{
+width : 500px;
+height : 60px;
+display : flex;
+}
+
+.info_tag_container a {
+font-size : 14px;
+color : #9CA3AF;
+margin-top :10px;
+}
+
+.info_tag{
+ height : 30px;
+ width : 120px;
+ float : left;
+ text-align : left;
+ margin-top : 7px;
+}
+
+.info_space {
+width : 10px;
+height : 30px;
+} 
+ 
 </style>    
     
 </head>
@@ -218,15 +241,20 @@ border : 1px solid black;
       		        <form action="insert_payment.do" id="insert_payment" method="GET">
 			
 			            <input type="hidden" name="type" id="type" value="0">
+			            <h2>결제 카드</h2>
+			        	
+			        	<div class = "info_tag_container">
+	            	 		<div class = "info_tag">
+	           		 		<span>카드정보 입력</span>
+	            			</div>
+			        		<select class = "aaa_selectbank" name="company" id="company">
+								<c:forEach var="card" items="${vo.company_list[0]}" varStatus="status">
+									<option value="${status.index}">${card}</option>
+								</c:forEach>
+		            		</select>
+			        	</div>
+			        	
 			            
-			          
-			            <h2>카드 정보 입력</h2>
-			        
-			            카드사&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<select class = "aaa_selectbank" name="company" id="company">
-							<c:forEach var="card" items="${vo.company_list[0]}" varStatus="status">
-								<option value="${status.index}">${card}</option>
-							</c:forEach>
-		            	</select>
 			           <input class ="aaa" type="text" placeholder="- 를 포함해서 입력하세요" name="account" id="account">
 			            
 			            <div class ="info_tag">
