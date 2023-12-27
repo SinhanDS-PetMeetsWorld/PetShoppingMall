@@ -83,7 +83,8 @@
 .contents {
 	border: 1px solid #FFDE30;
 	border-top : 1px solid #F9FAFB; 
-    width : 452px;
+    width : 442px;
+    padding-left : 10px;
 }
 
 
@@ -199,13 +200,14 @@ border : 1px solid black;
   background-color: #fd0;
   font-weight: 800;
   color: #222;
-  margin-top:15px;
+ 
   margin-left: 120px;
+  margin-bottom:20px;
  }
  
  
 .info_tag_container{
-width : 500px;
+width : 450px;
 height : 60px;
 display : flex;
 }
@@ -247,43 +249,44 @@ height : 30px;
 	            	 		<div class = "info_tag">
 	           		 		<span>카드정보 입력</span>
 	            			</div>
+	            			
 			        		<select class = "aaa_selectbank" name="company" id="company">
 								<c:forEach var="card" items="${vo.company_list[0]}" varStatus="status">
 									<option value="${status.index}">${card}</option>
 								</c:forEach>
 		            		</select>
+		            		
+		            		<div class ="info_space"></div>
+		            		
+		            		<input class ="aaa" type="text" placeholder="- 를 포함해서 입력하세요" name="account" id="account">
+		            		
 			        	</div>
-			        	
-			            
-			           <input class ="aaa" type="text" placeholder="- 를 포함해서 입력하세요" name="account" id="account">
-			            
-			            <div class ="info_tag">
-			            	<br>카드 유효기간 입력
-			            </div>
+			         
+			            <div class = "info_tag_container">
+	            			<div class = "info_tag">
+	            				<span>유효기간 입력 </span>
+	            			</div>
+			          		<input class="aaa" type="text" placeholder="MM / YYYY" name="valid_date" id="valid_date">
+			           </div>
 			           
-			            <div>
-			                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input class="aaa" type="text" placeholder="MM / YYYY" name="valid_date" id="valid_date">
+			           
+			            <div class = "info_tag_container">
+				            <div class ="info_tag">
+				                <span>별칭 입력</span>
+				            </div>
+				            <input class ="aaa" type="text" placeholder="(ex: 엄마카드)" name="name" id="name">
 			            </div>
-			            
-			            <div class ="info_tag">
-			                <br>별칭 입력
-			            </div>
-			            
-		            	<div>
-		            	<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input class ="aaa" type="text" placeholder="(ex: 엄마카드)" name="name" id="name">
-		            	</div>
 		            	
-			            <div>
-			            	<br> 카드 CVC코드(카드뒷면 숫자3자리) 입력
+		            	
+		            	<div class ="info_tag_container">
+			            	<div class = "info_tag">
+			            	<span>카드 CVC 입력</span>
+			                </div>
+		            	
+			            	<input class ="aaa" type="text" placeholder="CVC" name="cvc" id="cvc"><a>&nbsp카드 뒷면 숫자 3자리</a>
 			            </div>
-			            
-			            <div>
-			            	<input class ="aaa" type="text" placeholder="CVC" name="cvc" id="cvc">
-			            </div>
-			            <div>
-			                 <input class ="addConfirm" type="button" onclick="doCheck();" value="입력 완료">
-			       		</div> 
-			       	
+			                 <input class ="addConfirm" type="button" onclick="doCheck();" value="등록">
+			       		
 			       	 </form>   
 	       
         </div>
@@ -295,36 +298,36 @@ height : 30px;
 	            
 	            <h2>계좌 등록</h2>
 	            
-	            
-			            
+			    <div class = "info_tag_container">
 			    
-			    <br><br>
-			    <div>
-				계좌 정보   <select class = "aaa_selectbank" name="company" id="company">
+			    	<div class = "info_tag">
+	            	<span>계좌 정보</span>
+	                </div>
+
+   			        <select class = "aaa_selectbank" name="company" id="company">
 							<c:forEach var="bank" items="${vo.company_list[1]}" varStatus="status">
 								<option value="${status.index}">${bank}</option>
 							</c:forEach>
-		            	</select>
+		            </select>
+		            	
+		            <div class ="info_space"></div>
+		            	
 				    <input class ="aaa" type="text" placeholder="- 를 포함해서 입력하세요" name="account" id="account2">
 			    </div>
-	            <br>
-	            <div class ="info_tag">
-	                별칭 입력
+	
+	            <div class ="info_tag_container">
+	            	
+	            	<div class = "info_tag">
+	                <span>별칭 입력</span>
+	                </div>
+	                
+	                 <input class ="aaa" type="text" placeholder="(ex: 비상금 계좌)" name="name" id="name2">
+	                 
 	            </div> 
-	            
-	            <div>
-	            	&nbsp&nbsp&nbsp&nbsp&nbsp<input class ="aaa" type="text" placeholder="(ex: 비상금 계좌)" name="name" id="name2">
-	            </div>
-	           
-	            <div>
-	                 <input class ="addConfirm" type="button" onclick="doCheck2();" value="입력 완료">
-	            </div>
+	                 <input class ="addConfirm" type="button" onclick="doCheck2();" value="등록">
 	            
 	        </form>
         </div>
-        
-        
-        
     </div>
 </body>
 </html>

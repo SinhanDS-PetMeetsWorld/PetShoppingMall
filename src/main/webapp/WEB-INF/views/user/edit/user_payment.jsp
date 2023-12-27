@@ -259,7 +259,7 @@ display : flex;
 						    </c:forEach>
 					        <tr class = "table">
 					            <td>
-									<button class = "add_addr" onclick="window.open('/user/add_payment_form.do','user_add_payment_form', 'width=470px,height=500px,location=no,status=no,scrollbars=yes');">+ 결제 수단 추가</button>
+									<button class = "add_addr" onclick="window.open('/user/add_payment_form.do','user_add_payment_form', 'width=470px,height=465px,location=no,status=no,scrollbars=yes');">+ 결제 수단 추가</button>
 					            </td>
 					        </tr>
 					    </table>
