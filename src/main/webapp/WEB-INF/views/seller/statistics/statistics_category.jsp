@@ -17,22 +17,23 @@
 			clear : both;
 			
 		}
-		.bigchartbox{
-			width : 600px;
-			height : 600px;
+		.category1area{
+			width : 950px;
+			height : 650px;
+			border : 1px solid;
 		}
 		.category2area{
 			width : 950px;
 			height : 650px;
 			border : 1px solid;
 		}
-		.cat2big {
+		.bigchart {
 			width : 600px;
 			height : 600px;
 			border : 1px solid;
 			float : left;
 		}
-		.cat2small {
+		.smallchart {
 			width : 300px;
 			height : 300px;
 			border : 1px solid;
@@ -111,7 +112,9 @@
 			var salesList = [];
 			var cancleList = [];
 			var refoundList = [];
-			var ctx = document.getElementById('chart1');
+			var ctx1 = document.getElementById('cat1chart1');
+			var ctx2 = document.getElementById('cat1chart2');
+			var ctx3 = document.getElementById('cat1chart3');
 			
 			var name_list = new Array();
 			<c:forEach items="${cvo.category_name}" var="vo">
@@ -130,11 +133,10 @@
 						refoundList.push(data[i].refound);
 					}
 					
-					new Chart(ctx, {
+					new Chart(ctx1, {
 						type: 'doughnut',
 						data: {
 						       datasets: [{
-						           label: '주문',
 						           data: salesList,
 						           backgroundColor: [
 						        	      'rgb(255, 99, 132)',
@@ -143,12 +145,36 @@
 						        	    ],
 						       }],
 						       labels: category1List
-						   },
-						   options : {
-							   title : {
-								   display : true,
-								   text : "카테고리별"
-							   }
+						   }
+					});
+					
+					new Chart(ctx2, {
+						type: 'doughnut',
+						data: {
+						       datasets: [{
+						           data: cancleList,
+						           backgroundColor: [
+						        	      'rgb(255, 99, 132)',
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 205, 86)'
+						        	    ],
+						       }],
+						       labels: category1List
+						   }
+					});
+					
+					new Chart(ctx3, {
+						type: 'doughnut',
+						data: {
+						       datasets: [{
+						           data: refoundList,
+						           backgroundColor: [
+						        	      'rgb(255, 99, 132)',
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 205, 86)'
+						        	    ],
+						       }],
+						       labels: category1List
 						   }
 					});
 				},
@@ -158,12 +184,19 @@
 			})
 		}
 		
-		function getCategory2Graph(){
+		function getCategory2Graph_dog(){
 			var category2List = [];
 			var salesList = [];
 			var cancleList = [];
 			var refoundList = [];
-			var ctx = document.getElementById('chart2');
+			var ctx1 = document.getElementById('cat2chart1');
+			var ctx2 = document.getElementById('cat2chart2');
+			var ctx3 = document.getElementById('cat2chart3');
+			
+			var name_list = new Array();
+			<c:forEach items="${cvo.category[0]}" var="vo">
+			name_list.push("${vo}");
+		</c:forEach>
 			
 			$.ajax({
 				type: "GET",
@@ -172,43 +205,63 @@
 						catogory1 : 0 },
 				success:function(data) {
 					for(var i=0; i<data.length; i++){
-						category2List.push(data[i].category2);
+						category2List.push(name_list[data[i].category2]);
 						salesList.push(data[i].sale);
 						cancleList.push(data[i].cancle);
 						refoundList.push(data[i].refound);
 					}
 					
-					new Chart(ctx, {
+					new Chart(ctx1, {
 						type: 'doughnut',
-						   data: {
+						data: {
 						       datasets: [{
-						           label: '주문',
 						           data: salesList,
-						           borderColor: 'rgb(54, 162, 235)',
-						           backgroundColor: 'rgb(54, 162, 235, 0.3)',
-						           order: 3
-						       }, {
-						           label: '취소',
-						           data: cancleList,
-						           type: 'dougnut',
-						           fill: false,
-						           borderColor: 'rgb(255, 99, 132)',
-						           order: 2
-						       }, {
-						           label: '환불',
-						           data: refoundList,
-						           type: 'dougnut',
-						           fill: false,
-						           borderColor: '#B771ED',
-						           order: 1
+						           backgroundColor: [
+						        	      'rgb(255, 99, 132)',
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 205, 86)',
+						        	      '#5a5e9a', '#FCA5A5', '#34D399',
+						        	      '#8B5CF6', '#005e36', '#a3acff',
+						        	      '#ee243c', '#e8600a'
+						        	    ],
 						       }],
 						       labels: category2List
-						   },
-						   options : {
-							   title : {
-								   display : true,
-								   text : "최근 일주일 총 결제금액 대비 취소, 환불 금액"
-							   }
+						   }
+					});
+					
+					new Chart(ctx2, {
+						type: 'doughnut',
+						data: {
+						       datasets: [{
+						           data: cancleList,
+						           backgroundColor: [
+						        	   'rgb(255, 99, 132)',
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 205, 86)',
+						        	      '#5a5e9a', '#FCA5A5', '#34D399',
+						        	      '#8B5CF6', '#005e36', '#a3acff',
+						        	      '#ee243c', '#e8600a'
+						        	    ],
+						       }],
+						       labels: category2List
+						   }
+					});
+					
+					new Chart(ctx3, {
+						type: 'doughnut',
+						data: {
+						       datasets: [{
+						           data: refoundList,
+						           backgroundColor: [
+						        	   'rgb(255, 99, 132)',
+						        	   'rgb(54, 162, 235)',
+						        	   'rgb(255, 205, 86)',
+						        	   '#5a5e9a', '#FCA5A5', '#34D399',
+						        	   '#8B5CF6', '#005e36', '#a3acff',
+						        	   '#ee243c', '#e8600a'
+						        	    ],
+						       }],
+						       labels: category2List
 						   }
 					});
 				},
@@ -241,15 +294,23 @@
 					<hr class = "start_line">
 			
 					<div class="chartarea">
-						<div class="bigchartbox">
-							<canvas id="chart1"></canvas>
+					
+						<div class="category1area">
+							<div class="bigchart"><canvas id="cat1chart1"></canvas></div>
+							<div class="smallchart"><canvas id="cat1chart2"></canvas></div>
+							<div class="smallchart"><canvas id="cat1chart3"></canvas></div>
 						</div>
-						<button id="chartbtn" onclick="getCategory2Graph();">강아지</button>
+						
+						<button id="chartbtn" onclick="getCategory2Graph_dog();">강아지</button>
+						<button id="chartbtn" onclick="getCategory2Graph_cat();">고양이</button>
+						<button id="chartbtn" onclick="getCategory2Graph_etc();">기타</button>
+						
 						<div class="category2area">
-							<div class="cat2big"><canvas id="chart2"></canvas></div>
-							<div class="cat2small"><canvas id="chart3"></canvas></div>
-							<div class="cat2small"><canvas id="chart4"></canvas></div>
+							<div class="bigchart"><canvas id="cat2chart1"></canvas></div>
+							<div class="smallchart"><canvas id="cat2chart2"></canvas></div>
+							<div class="smallchart"><canvas id="cat2chart3"></canvas></div>
 						</div>
+						
 					</div>
 					
 					
