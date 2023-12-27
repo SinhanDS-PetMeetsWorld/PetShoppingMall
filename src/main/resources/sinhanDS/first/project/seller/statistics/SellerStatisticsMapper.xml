@@ -1,4 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.seller.statistics.SellerStatisticsMapper">
+
+	<select id="weekTotalscr" parameterType="sinhanDS.first.project.statistics.vo.SellerStatisticsVO" 
+							resultType="sinhanDS.first.project.statistics.vo.SellerStatisticsVO">
+		SELECT order_date, COUNT(no) AS sale, SUM(cancle) AS cancle, SUM(refound) AS refound 
+		FROM(
+			SELECT order_date, no, 
+			   CASE
+			      WHEN cancle_status != 0 THEN 1
+			        ELSE 0
+			   END AS cancle,
+			   CASE
+			      WHEN refound_status != 0 THEN 1
+			        ELSE 0
+			   END AS refound
+			FROM order_detail 
+			WHERE seller_no = #{seller_no} AND order_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW()
+		) t 
+		GROUP BY order_date 
+		ORDER BY order_date;
+	</select>
+	
+	<select id="weekTotalPricescr" parameterType="sinhanDS.first.project.statistics.vo.SellerStatisticsVO" 
+							resultType="sinhanDS.first.project.statistics.vo.SellerStatisticsVO">
+		SELECT order_date, SUM(sales) AS sale, SUM(cancle) AS cancle, SUM(refound) AS refound 
+		FROM (
+			SELECT order_date, (product_price-discount)*quantity AS sales, 
+			CASE
+				WHEN cancle_status != 0 THEN (product_price-discount)*quantity
+			        ELSE 0
+			END AS cancle,
+			CASE
+				WHEN refound_status != 0 THEN (product_price-discount)*quantity
+			        ELSE 0
+			   END AS refound
+			FROM order_detail 
+			WHERE seller_no = #{seller_no} AND order_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW()
+		) t 
+		GROUP BY order_date
+		ORDER BY order_date;
+	</select>
+	
 </mapper>
