@@ -151,8 +151,6 @@
     		if( total_charge.value=="" || total_charge.value==null){
     			total_charge.value = 0;
     		}
-    		
-    		var 
     		return true;
     	}
     </script>

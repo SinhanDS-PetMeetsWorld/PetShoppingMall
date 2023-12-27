@@ -44,8 +44,7 @@
 		
 		.goods-photo img{
 			max-width:100%;	
-			height:auto;
-			
+			max-heigh:100%;
 		}
 		
 		
@@ -208,8 +207,6 @@
     </style>
 </head>
 <body>
-	
-
 	<div class="wrap">
 		<div class="header">
 			<%@ include file="/WEB-INF/views/common/header.jsp"%>
