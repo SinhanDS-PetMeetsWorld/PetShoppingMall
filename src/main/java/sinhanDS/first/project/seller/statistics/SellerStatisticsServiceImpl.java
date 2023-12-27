@@ -42,4 +42,16 @@ public class SellerStatisticsServiceImpl implements SellerStatisticsService {
 		List<StatisticsVO> list = mapper.category2scr(vo);
 		return list;
 	}
+
+	@Override
+	public List<StatisticsVO> genderscr(StatisticsVO vo) {
+		List<StatisticsVO> list = mapper.genderscr(vo);
+		return list;
+	}
+
+	@Override
+	public List<StatisticsVO> agescr(StatisticsVO vo) {
+		List<StatisticsVO> list = mapper.agescr(vo);
+		return list;
+	}
 }

@@ -12,4 +12,6 @@ public interface SellerStatisticsService {
 	
 	List<StatisticsVO> category1scr(StatisticsVO vo);
 	List<StatisticsVO> category2scr(StatisticsVO vo);
+	List<StatisticsVO> genderscr(StatisticsVO vo);
+	List<StatisticsVO> agescr(StatisticsVO vo);
 }

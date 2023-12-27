@@ -91,4 +91,42 @@
 		order by sales desc;
 	</select>
 	
+	<select id="genderscr" parameterType="sinhanDS.first.project.statistics.vo.StatisticsVO" 
+							resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		select gender, sum(sales) as sale, sum(cancle) as cancle, sum(refound) as refound
+		from(
+		select gender, ((d.product_price - discount) * d.quantity) as sales,
+			CASE
+				WHEN d.cancle_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as cancle,
+		    CASE
+				WHEN d.refound_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as refound
+		from user u join order_detail d
+		where u.no = d.user_no AND seller_no = #{seller_no}) t
+		group by gender;
+	</select>
+	
+	<select id="agescr" parameterType="sinhanDS.first.project.statistics.vo.StatisticsVO" 
+							resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		select age, sum(sales) as sale, sum(cancle) as cancle, sum(refound) as refound
+		from(
+		select ((d.product_price - discount) * d.quantity) as sales,
+			CASE
+				WHEN d.cancle_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as cancle,
+		    CASE
+				WHEN d.refound_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as refound,
+			TRUNCATE((to_days(now()) - to_days(birth_date)) / 3650, 0) * 10 as age
+		from user u join order_detail d
+		where u.no = d.user_no) t
+		group by age
+		order by sales desc;
+	</select>
+	
 </mapper>
