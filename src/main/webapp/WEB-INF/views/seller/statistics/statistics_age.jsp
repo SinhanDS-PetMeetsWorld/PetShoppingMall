@@ -12,17 +12,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 	
 	<style>
-		.totalbox{
-			width : 160px;
-			height : 110px;
-			border : 1px solid;
-			float : left;
-			margin : 40px 0px 0px 40px;
-		}
-		.totalboxarea{
-			height : 230px;
-			margin-top : 20px;
-		}
+		
 		.chartarea {
 			clear : both;
 			
@@ -237,21 +227,13 @@
             
 			<div class="contentsright">
 				<h1 class = "menu_name">통계 확인</h1>
-					<button class="selected_tab_button" type="button" onclick="location.href='/seller/statistics/statistics.do'">전체 통계</button>
+					<button class="tab_button" type="button" onclick="location.href='/seller/statistics/statistics.do'">전체 통계</button>
 					<button class="tab_button" type="button" onclick="location.href='/seller/statistics/statistics_category.do'">카테고리 통계</button>
 					<button class="tab_button" type="button" onclick="location.href='/seller/statistics/statistics_gender.do'">성별 통계</button>
-					<button class="tab_button" type="button" onclick="location.href='/seller/statistics/statistics_age.do'">나이 통계</button>
+					<button class="selected_tab_button" type="button" onclick="location.href='/seller/statistics/statistics_age.do'">나이 통계</button>
 					<hr class = "start_line">
 			
-				<div class="totalboxarea">
-					<h2>최근 일주일 매출 통계(totalbox부분 피그마 참고해서 수정...부탁드립니다)</h2>
-					<div class="totalbox">총 결제건수  <h3>${totalStatistics.orders} 건</h3></div>
-					<div class="totalbox">총 결제 금액  <h3>${totalStatistics.sale} 원</h3></div>
-					<div class="totalbox">총 실매출 금액  <h3>${totalStatistics.realsales} 원</h3></div>
-					<div class="totalbox">총 결제 상품수량  <h3>${totalStatistics.quantity} 개</h3></div>
-				</div>
 					<div class="chartarea">
-						<h2>통계 상세 보기</h2>
 						<div class="bigchartbox">
 							<canvas id="chart1"></canvas>
 						</div>

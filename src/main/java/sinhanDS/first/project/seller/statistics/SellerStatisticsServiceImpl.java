@@ -30,4 +30,16 @@ public class SellerStatisticsServiceImpl implements SellerStatisticsService {
 		List<StatisticsVO> list = mapper.weekTotalPricescr(vo);
 		return list;
 	}
+
+	@Override
+	public List<StatisticsVO> category1scr(StatisticsVO vo) {
+		List<StatisticsVO> list = mapper.category1scr(vo);
+		return list;
+	}
+
+	@Override
+	public List<StatisticsVO> category2scr(StatisticsVO vo) {
+		List<StatisticsVO> list = mapper.category2scr(vo);
+		return list;
+	}
 }

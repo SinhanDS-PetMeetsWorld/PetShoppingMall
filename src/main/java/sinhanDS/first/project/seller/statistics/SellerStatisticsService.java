@@ -9,4 +9,7 @@ public interface SellerStatisticsService {
 	StatisticsVO weekTotal(int no);
 	List<StatisticsVO> weekTotalscr(StatisticsVO vo);
 	List<StatisticsVO> weekTotalPricescr(StatisticsVO vo);
+	
+	List<StatisticsVO> category1scr(StatisticsVO vo);
+	List<StatisticsVO> category2scr(StatisticsVO vo);
 }

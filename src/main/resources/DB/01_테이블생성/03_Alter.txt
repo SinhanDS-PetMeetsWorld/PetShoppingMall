@@ -278,3 +278,46 @@ ALTER TABLE `PetShoppingMall`.`seller`
 DROP COLUMN `withdrawal_status`,
 ADD COLUMN `withdrawal_date` DATE NULL AFTER `restricted`;
 DROP TABLE `PetShoppingMall`.`report`
+ALTER TABLE `PetShoppingMall`.`payment` 
+DROP FOREIGN KEY `FK_user_TO_payment_1`;
+ALTER TABLE `PetShoppingMall`.`payment` 
+ADD CONSTRAINT `FK_user_TO_payment_1`
+  FOREIGN KEY (`user_no`)
+  REFERENCES `PetShoppingMall`.`user` (`no`)
+  ON DELETE CASCADE;
+ALTER TABLE `PetShoppingMall`.`address` 
+DROP FOREIGN KEY `FK_user_TO_address_1`;
+ALTER TABLE `PetShoppingMall`.`address` 
+ADD CONSTRAINT `FK_user_TO_address_1`
+  FOREIGN KEY (`user_no`)
+  REFERENCES `PetShoppingMall`.`user` (`no`)
+  ON DELETE CASCADE;
+  ALTER TABLE `PetShoppingMall`.`cart` 
+DROP FOREIGN KEY `FK_user_TO_cart_1`;
+ALTER TABLE `PetShoppingMall`.`cart` 
+ADD CONSTRAINT `FK_user_TO_cart_1`
+  FOREIGN KEY (`user_no`)
+  REFERENCES `PetShoppingMall`.`user` (`no`)
+  ON DELETE CASCADE;
+  ALTER TABLE `PetShoppingMall`.`product_qna` 
+DROP FOREIGN KEY `FK_user_TO_product_qna_1`;
+ALTER TABLE `PetShoppingMall`.`product_qna` 
+ADD CONSTRAINT `FK_user_TO_product_qna_1`
+  FOREIGN KEY (`user_no`)
+  REFERENCES `PetShoppingMall`.`user` (`no`)
+  ON DELETE CASCADE;
+  ALTER TABLE `PetShoppingMall`.`review` 
+DROP FOREIGN KEY `FK_user_TO_review_1`;
+ALTER TABLE `PetShoppingMall`.`review` 
+ADD CONSTRAINT `FK_user_TO_review_1`
+  FOREIGN KEY (`user_no`)
+  REFERENCES `PetShoppingMall`.`user` (`no`)
+  ON DELETE CASCADE;
+  ALTER TABLE `PetShoppingMall`.`save_box` 
+DROP FOREIGN KEY `FK_user_TO_save_box_1`;
+ALTER TABLE `PetShoppingMall`.`save_box` 
+ADD CONSTRAINT `FK_user_TO_save_box_1`
+  FOREIGN KEY (`user_no`)
+  REFERENCES `PetShoppingMall`.`user` (`no`)
+  ON DELETE CASCADE;
+  
