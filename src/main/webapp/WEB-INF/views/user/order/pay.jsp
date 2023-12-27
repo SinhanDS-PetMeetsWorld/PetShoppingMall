@@ -231,6 +231,7 @@ var newtime = hours.toString() + minutes.toString() + seconds.toString() + milli
 var buyer_name = "${username}";
 var buyer_email = "${useremail}";
 var buyer_phone = "${userphone}";
+var amount = ${orderVO.total_price } + ${orderVO.total_delivery_fee };
 
 function iniPay() {
 		
@@ -238,8 +239,8 @@ function iniPay() {
            pg: 'html5_inicis', // PG사 코드표에서 선택
            pay_method: 'card', // 결제 방식
            merchant_uid: "IMP" + newtime, // 결제 고유 번호
-           name: '상품', // 제품명
-           amount: 1, // 가격
+           name: '-', // 제품명
+           amount: amount, // 가격
            //구매자 정보 ↓
            buyer_email: buyer_email,
            buyer_name: buyer_name,
@@ -250,10 +251,12 @@ function iniPay() {
            if (rsp.success) { //결제 성공시
                 console.log(rsp);
                 var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
+		        /*
+                msg += '고유ID : ' + rsp.imp_uid;
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        */
 		        alert(msg)
 		        result ='0';
 		       
@@ -340,15 +343,15 @@ function iniPay() {
 												<c:if test="${cart_no[status.index] == option_cart_no[ovoStatus.index] }">
 													<input type="hidden" name="option_no" value="${ovo.no }">
 													<input type="hidden" name="option_cart_no" value="${cno_list[status.index] }">
-													옵션 - ${ovo.title } ${ovo.content } 추가 금액 : ${ovo.price }<br>
+													옵션 - ${ovo.title } ${ovo.content } 추가 금액 : ${ovo.price }원<br>
 												</c:if>
 											</c:forEach>
 									</div>
 									
 									<div id ="price">
-											상품 수량: ${quantity_list[status.index]}<br>
-											가격: ${vo.price }<br>
-											할인가격: ${vo.discount }<br>
+											상품 수량: ${quantity_list[status.index]}개<br>
+											가격: ${vo.price }원<br>
+											할인가격: ${vo.discount }원<br>
 									</div>											
 							   </div>
 											
@@ -434,8 +437,8 @@ function iniPay() {
 						
 						<h2 class = "menu_name">결제</h2>
 						<div id ="final_money">
-							<h2> 총 가격: ${orderVO.total_price }</h2>
-							<h2>총 배송비: ${orderVO.total_delivery_fee }</h2>
+							<h2> 총 가격: ${orderVO.total_price }원</h2>
+							<h2>총 배송비: ${orderVO.total_delivery_fee }원</h2>
 						</div>
 							<input type="hidden" name="total_price" value="${orderVO.total_price }">
 							<input type="hidden" name="total_delivery_fee" value="${orderVO.total_delivery_fee }">
