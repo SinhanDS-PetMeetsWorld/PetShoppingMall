@@ -103,7 +103,20 @@
 	</select>
 	
 	<select id="product_list" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
-		SELECT *
+		SELECT 
+			`product`.`no`,
+		    `product`.`seller_no`,
+		    `product`.`name`,
+		    `product`.`price`,
+		    `product`.`discount`,
+		    `product`.`stock`,
+		    `product`.`company`,
+		    `product`.`brand`,
+		    round(`product`.`rating`, 1) as rating,
+		    `product`.`review_cnt`,
+		    `product`.`image_url`,
+		    `product`.`description`,
+		    `product`.`withdrawal_status`
 		FROM product INNER JOIN product_category 
 			ON product.no = product_category.product_no
 		<include refid="whereSql"/>
@@ -112,7 +125,20 @@
 	</select>
 	
 	<select id="total_product_search" parameterType="sinhanDS.first.project.product.vo.ProductSearchVO" resultType="sinhanDS.first.project.product.vo.ProductVO">
-		SELECT DISTINCT *
+		SELECT 
+			`product`.`no`,
+		    `product`.`seller_no`,
+		    `product`.`name`,
+		    `product`.`price`,
+		    `product`.`discount`,
+		    `product`.`stock`,
+		    `product`.`company`,
+		    `product`.`brand`,
+		    round(`product`.`rating`, 1) as rating,
+		    `product`.`review_cnt`,
+		    `product`.`image_url`,
+		    `product`.`description`,
+		    `product`.`withdrawal_status`
 		FROM product INNER JOIN product_category ON product.no = product_category.product_no
 		WHERE withdrawal_status=0 AND category1 = #{category1} AND 
 			(name LIKE '%${totalSearchWord}%' OR company LIKE '%${totalSearchWord}%' OR brand LIKE '%${totalSearchWord}%')

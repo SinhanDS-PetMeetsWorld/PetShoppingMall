@@ -39,11 +39,12 @@ function add_category() {
 }
 
 function change_category2(){
+	console.log('cc');
 	let target = this.parentNode.parentNode.querySelector('.category2_list');
 	$(target).empty(); 
 	
 	for(var i = 0; i < category2[this.value].length; i++){
-		var newObj = $('<option value=' + i + '>' + category2[this.value][i] + '</option>');
+		var newObj = $('<option value=' + '\"' + i + '\">' + category2[this.value][i] + '</option>');
 		newObj.appendTo(target);
 	}
 }
