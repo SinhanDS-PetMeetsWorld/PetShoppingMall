@@ -370,7 +370,7 @@ function goReviewmore_popup(){
 	
 	var dno = $(this).data('dno');
 	var url = '/user/order/read_review.do?no='+ dno;
-	window.open(url, '리뷰 상세 보기', 'width=320px, height=420px');
+	window.open(url, '리뷰 상세 보기', 'width=340px, height=460px');
 }
 
 </script> 

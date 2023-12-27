@@ -341,7 +341,7 @@ function goReviewwrite_popup(){
 	
 	var dno = $(this).data('dno');
 	var url = '/user/order/write_review.do?no='+ dno;
-	window.open(url, '리뷰 작성', 'width=315px, height=400px');
+	window.open(url, '리뷰 작성', 'width=345px, height=440px');
 }
 
 </script>      
