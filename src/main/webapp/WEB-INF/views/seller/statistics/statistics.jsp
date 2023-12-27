@@ -58,7 +58,7 @@
 		
 		$.ajax({
 			type: "GET",
-			url:'',
+			url:'statisticsDate.do',
 			data: {},
 			success:function(data) {
 				alert("success");
