@@ -149,11 +149,6 @@ margin-bottom: 10px;
        }
  }
  
-.info_space {
- height : 30px;
- width : 70px;
-} 
- 
  .line {
  		margin-top : 10px;
  		margin-bottom : 10px;
@@ -311,7 +306,6 @@ margin-bottom: 10px;
 					</div>			
 							      
 					<hr class = "line">      
-					      
 					        
 					<div class = 'info_tag_container'>
 							<div class ="info_tag"><span>연락처</span></div>

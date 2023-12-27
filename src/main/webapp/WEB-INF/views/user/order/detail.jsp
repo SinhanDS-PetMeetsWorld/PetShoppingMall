@@ -313,12 +313,12 @@ text-align : right;
     	function request_refound(e){
     		e.preventDefault();
     		let no = $(this).data('no');
-    		window.open('/user/order/request_refound.do?no=' + no + "&order_no=" + ${dvo_list[0].order_no} + "&seller_no=" + ${dvo_list[0].seller_no},'request_refound', 'width=425px,height=470px,location=no,status=no,scrollbars=yes');
+    		window.open('/user/order/request_refound.do?no=' + no + "&order_no=" + ${dvo_list[0].order_no} + "&seller_no=" + ${dvo_list[0].seller_no},'request_refound', 'width=440px,height=510px,location=no,status=no,scrollbars=yes');
     	}
     	function refound_info(e){
     		e.preventDefault();
     		let no = $(this).data('no');
-    		window.open('/user/order/refound_info.do?no=' + no + "&order_no=" + ${dvo_list[0].order_no} + "&seller_no=" + ${dvo_list[0].seller_no},'request_refound', 'width=425px,height=470px,location=no,status=no,scrollbars=yes');
+    		window.open('/user/order/refound_info.do?no=' + no + "&order_no=" + ${dvo_list[0].order_no} + "&seller_no=" + ${dvo_list[0].seller_no},'request_refound', 'width=440px,height=510px,location=no,status=no,scrollbars=yes');
     	}
     	function write_review(e){
     		e.preventDefault();

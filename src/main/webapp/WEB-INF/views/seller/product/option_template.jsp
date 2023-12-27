@@ -23,7 +23,6 @@
 			</div>		
 		</div>
 	</div>
-
 </div>
 <div class="option_add_button" style="display: none;">
 	<a href="javascript:;" class="add_btn_option"><img

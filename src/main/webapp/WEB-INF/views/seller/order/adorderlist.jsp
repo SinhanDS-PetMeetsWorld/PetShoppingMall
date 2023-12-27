@@ -112,8 +112,8 @@
         border: 1px solid #FFDE30;
         margin-bottom : 10px;
         width : 800px;
-     }
- }
+	 }
+	 }
     </style>
     <style>
 	    .messagebody{
@@ -136,8 +136,6 @@
         <div class="header">
             <%@ include file="/WEB-INF/views/common/header_seller.jsp" %>
         </div>
-
-       	
         
         <div class="contents">
         	<div class="quickmenu">
