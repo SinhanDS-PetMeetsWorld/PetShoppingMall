@@ -9,34 +9,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/css/common/template.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	
 	<style>
-		.totalbox{
-			width : 160px;
-			height : 110px;
-			border : 1px solid;
-			float : left;
-			margin : 40px 0px 0px 40px;
-		}
-		.totalboxarea{
-			height : 230px;
-			margin-top : 20px;
-		}
+		
 		.chartarea {
 			clear : both;
 			
 		}
 		.bigchartbox{
-			margin-left : 30px;
-			margin-top : 30px;
-			width : 800px;
-			height : 400px;
+			width : 600px;
+			height : 600px;
 		}
+		.category2area{
+			width : 950px;
+			height : 650px;
+			border : 1px solid;
+		}
+		.cat2big {
+			width : 600px;
+			height : 600px;
+			border : 1px solid;
+			float : left;
+		}
+		.cat2small {
+			width : 300px;
+			height : 300px;
+			border : 1px solid;
+			float : left;
+		}
+		
 		 .menu_name {
 			margin-bottom: 10px;	
 		}
-		
     	.selected_tab_button {
 			 display: inline-block;
 			 outline: 0;
@@ -92,65 +97,57 @@
 			        border: 1px solid #FFDE30;
 			        margin-bottom : 10px;
 			        width : 800px;
-			     }
+			  }
+		
 	</style>
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
-			getQuantityGraph();
-			getPriceGraph();
+			getCategory1Graph();
 		});
 		
-		function getQuantityGraph(){
-			var dateList = [];
+		function getCategory1Graph(){
+			var category1List = [];
 			var salesList = [];
 			var cancleList = [];
 			var refoundList = [];
 			var ctx = document.getElementById('chart1');
 			
+			var name_list = new Array();
+			<c:forEach items="${cvo.category_name}" var="vo">
+				name_list.push("${vo}");
+			</c:forEach>
+			
 			$.ajax({
 				type: "GET",
-				url:'QuantityRecentWeek.do',
+				url:'statistics_category1.do',
 				data: { seller_no : "${seller.no}" },
 				success:function(data) {
 					for(var i=0; i<data.length; i++){
-						dateList.push(data[i].order_date);
+						category1List.push(name_list[data[i].category1]);
 						salesList.push(data[i].sale);
 						cancleList.push(data[i].cancle);
 						refoundList.push(data[i].refound);
 					}
 					
 					new Chart(ctx, {
-						type: 'bar',
-						   data: {
+						type: 'doughnut',
+						data: {
 						       datasets: [{
 						           label: '주문',
 						           data: salesList,
-						           borderColor: 'rgb(54, 162, 235)',
-						           backgroundColor: 'rgb(54, 162, 235, 0.3)',
-						           borderWidth : 1,
-						           order: 3
-						       }, {
-						           label: '취소',
-						           data: cancleList,
-						           type: 'line',
-						           fill: false,
-						           borderColor: 'rgb(255, 99, 132)',
-						           order: 2
-						       }, {
-						           label: '환불',
-						           data: refoundList,
-						           type: 'line',
-						           fill: false,
-						           borderColor: '#B771ED',
-						           order: 1
+						           backgroundColor: [
+						        	      'rgb(255, 99, 132)',
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 205, 86)'
+						        	    ],
 						       }],
-						       labels: dateList
+						       labels: category1List
 						   },
 						   options : {
 							   title : {
 								   display : true,
-								   text : "최근 일주일 총 주문건수 대비 취소, 환불건수"
+								   text : "카테고리별"
 							   }
 						   }
 					});
@@ -161,8 +158,8 @@
 			})
 		}
 		
-		function getPriceGraph(){
-			var dateList = [];
+		function getCategory2Graph(){
+			var category2List = [];
 			var salesList = [];
 			var cancleList = [];
 			var refoundList = [];
@@ -170,42 +167,42 @@
 			
 			$.ajax({
 				type: "GET",
-				url:'PriceRecentWeek.do',
-				data: { seller_no : "${seller.no}" },
+				url:'statistics_category2.do',
+				data: { seller_no : "${seller.no}",
+						catogory1 : 0 },
 				success:function(data) {
 					for(var i=0; i<data.length; i++){
-						dateList.push(data[i].order_date);
+						category2List.push(data[i].category2);
 						salesList.push(data[i].sale);
 						cancleList.push(data[i].cancle);
 						refoundList.push(data[i].refound);
 					}
 					
 					new Chart(ctx, {
-						type: 'bar',
+						type: 'doughnut',
 						   data: {
 						       datasets: [{
 						           label: '주문',
 						           data: salesList,
 						           borderColor: 'rgb(54, 162, 235)',
 						           backgroundColor: 'rgb(54, 162, 235, 0.3)',
-						           borderWidth : 1,
 						           order: 3
 						       }, {
 						           label: '취소',
 						           data: cancleList,
-						           type: 'line',
+						           type: 'dougnut',
 						           fill: false,
 						           borderColor: 'rgb(255, 99, 132)',
 						           order: 2
 						       }, {
 						           label: '환불',
 						           data: refoundList,
-						           type: 'line',
+						           type: 'dougnut',
 						           fill: false,
 						           borderColor: '#B771ED',
 						           order: 1
 						       }],
-						       labels: dateList
+						       labels: category2List
 						   },
 						   options : {
 							   title : {
@@ -237,28 +234,25 @@
             
 			<div class="contentsright">
 				<h1 class = "menu_name">통계 확인</h1>
-					<button class="selected_tab_button" type="button" onclick="location.href='/seller/statistics/statistics.do'">전체 통계</button>
-					<button class="tab_button" type="button" onclick="location.href='/seller/statistics/statistics_category.do'">카테고리 통계</button>
+					<button class="tab_button" type="button" onclick="location.href='/seller/statistics/statistics.do'">전체 통계</button>
+					<button class="selected_tab_button" type="button" onclick="location.href='/seller/statistics/statistics_category.do'">카테고리 통계</button>
 					<button class="tab_button" type="button" onclick="location.href='/seller/statistics/statistics_gender.do'">성별 통계</button>
 					<button class="tab_button" type="button" onclick="location.href='/seller/statistics/statistics_age.do'">나이 통계</button>
 					<hr class = "start_line">
 			
-				<div class="totalboxarea">
-					<h2>최근 일주일 매출 통계(totalbox부분 피그마 참고해서 수정...부탁드립니다)</h2>
-					<div class="totalbox">총 결제건수  <h3>${totalStatistics.orders} 건</h3></div>
-					<div class="totalbox">총 결제 금액  <h3>${totalStatistics.sale} 원</h3></div>
-					<div class="totalbox">총 실매출 금액  <h3>${totalStatistics.realsales} 원</h3></div>
-					<div class="totalbox">총 결제 상품수량  <h3>${totalStatistics.quantity} 개</h3></div>
-				</div>
 					<div class="chartarea">
-						<h2>통계 상세 보기</h2>
 						<div class="bigchartbox">
 							<canvas id="chart1"></canvas>
 						</div>
-						<div class="bigchartbox">
-							<canvas id="chart2"></canvas>
+						<button id="chartbtn" onclick="getCategory2Graph();">강아지</button>
+						<div class="category2area">
+							<div class="cat2big"><canvas id="chart2"></canvas></div>
+							<div class="cat2small"><canvas id="chart3"></canvas></div>
+							<div class="cat2small"><canvas id="chart4"></canvas></div>
 						</div>
 					</div>
+					
+					
 			</div>
 
         </div>

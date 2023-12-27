@@ -56,4 +56,39 @@
 		ORDER BY order_date;
 	</select>
 	
+	<select id="category1scr" parameterType="sinhanDS.first.project.statistics.vo.StatisticsVO" 
+							resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		select category1, sum(sales) as sale, sum(cancle) as cancle, sum(refound) as refound
+		from(select category1, category2, ((d.product_price - discount) * d.quantity) as sales,
+			CASE
+				WHEN d.cancle_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as cancle,
+		    CASE
+				WHEN d.refound_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as refound
+		from product_category c join order_detail d
+		where c.product_no = d.product_no AND seller_no = #{seller_no}) t
+		group by category1;
+	</select>
+	
+	<select id="category2scr" parameterType="sinhanDS.first.project.statistics.vo.StatisticsVO" 
+							resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		select category1, category2, sum(sales) as sale, sum(cancle) as cancle, sum(refound) as refound
+		from(select category1, category2, ((d.product_price - discount) * d.quantity) as sales,
+			CASE
+				WHEN d.cancle_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as cancle,
+		    CASE
+				WHEN d.refound_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as refound
+		from product_category c join order_detail d
+		where c.product_no = d.product_no AND seller_no = #{seller_no} AND category1 = #{category1}) AS t
+		group by category2
+		order by sales desc;
+	</select>
+	
 </mapper>

@@ -15,13 +15,11 @@ public interface SellerStatisticsMapper {
 	List<StatisticsVO> weekTotalscr(StatisticsVO vo);
 	//최근 일주일 간의 일별 매출, 취소, 환불 금액
 	List<StatisticsVO> weekTotalPricescr(StatisticsVO vo);
-	//일단 주간을 만들고 시간 괜찮으면 일간, 월간 만들자...
-	//주간 카테고리1별 매출(환불, 취소금액 미리 제외)
-	
-	//주간 카테고리1=0 카테고리2별 매출(환불, 취소금액 미리 제외)
-	//주간 카테고리1=1 카테고리2별 매출(환불, 취소금액 미리 제외)
-	//주간 카테고리1=2 카테고리2별 매출(환불, 취소금액 미리 제외)
 
+	//주간 카테고리1별 매출(환불, 취소금액 미리 제외)
+	List<StatisticsVO> category1scr(StatisticsVO vo);
+	//주간 카테고리1 정해졌을 때 카테고리2별 매출(환불, 취소금액 미리 제외)
+	List<StatisticsVO> category2scr(StatisticsVO vo);
 	//주간 카테고리별 취소나 환불율(건당으로 계산)
 	
 	//주간 성별당 매출(환불, 취소금액 미리 제외)
