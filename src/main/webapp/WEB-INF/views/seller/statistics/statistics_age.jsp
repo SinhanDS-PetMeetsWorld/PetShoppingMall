@@ -151,7 +151,7 @@
 					       labels: ageList
 					   },
 					 options: {
-						 title : { display : true, text : '대분류별 매출' }
+						 title : { display : true, text : '나이대별 매출액' }
 					 }
 				});
 				
@@ -170,7 +170,10 @@
 					        	    ],
 					       }],
 					       labels: ageList
-					   }
+					   },
+					options: {
+						title : { display : true, text : '나이대별 취소액' }
+					}
 				});
 				
 				new Chart(ctx3, {
@@ -188,7 +191,10 @@
 					        	    ],
 					       }],
 					       labels: ageList
-					   }
+					   },
+					options: {
+						title : { display : true, text : '나이대별 환불액' }
+					}
 				});
 			},
 			error:function(data){

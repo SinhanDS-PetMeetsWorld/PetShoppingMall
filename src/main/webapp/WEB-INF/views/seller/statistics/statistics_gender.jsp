@@ -148,7 +148,7 @@
 						       labels: genderList
 						   },
 						 options: {
-							 title : { display : true, text : '대분류별 매출' }
+							 title : { display : true, text : '성별별 매출액' }
 						 }
 					});
 					
@@ -163,7 +163,10 @@
 						        	    ],
 						       }],
 						       labels: genderList
-						   }
+						   },
+						options: {
+							title : { display : true, text : '성별별 취소액' }
+						}
 					});
 					
 					new Chart(ctx3, {
@@ -177,7 +180,10 @@
 						        	    ],
 						       }],
 						       labels: genderList
-						   }
+						   },
+						options: {
+							title : { display : true, text : '성별별 환불액' }
+						}
 					});
 				},
 				error:function(data){

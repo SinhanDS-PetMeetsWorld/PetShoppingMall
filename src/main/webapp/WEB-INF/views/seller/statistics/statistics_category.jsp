@@ -146,7 +146,7 @@
 						       labels: category1List
 						   },
 						 options: {
-							 title : { display : true, text : '대분류별 매출' }
+							 title : { display : true, text : '대분류별 매출액' }
 						 }
 					});
 					
@@ -162,7 +162,10 @@
 						        	    ],
 						       }],
 						       labels: category1List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '대분류별 취소액' }
+						}
 					});
 					
 					new Chart(ctx3, {
@@ -177,7 +180,10 @@
 						        	    ],
 						       }],
 						       labels: category1List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '대분류별 환불액' }
+						}
 					});
 				},
 				error:function(data){
@@ -241,7 +247,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 매출액' }
+						}
 					});
 					
 					new Chart(ctx2, {
@@ -259,7 +268,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 취소액' }
+						}
 					});
 					
 					new Chart(ctx3, {
@@ -277,7 +289,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 환불액' }
+						}
 					});
 				},
 				error:function(data){
@@ -341,7 +356,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 매출액' }
+						}
 					});
 					
 					new Chart(ctx2, {
@@ -359,7 +377,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 취소액' }
+						}
 					});
 					
 					new Chart(ctx3, {
@@ -377,7 +398,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 환불액' }
+						}
 					});
 				},
 				error:function(data){
@@ -441,7 +465,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 매출액' }
+						}
 					});
 					
 					new Chart(ctx2, {
@@ -459,7 +486,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 취소액' }
+						}
 					});
 					
 					new Chart(ctx3, {
@@ -477,7 +507,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 환불액' }
+						}
 					});
 				},
 				error:function(data){
