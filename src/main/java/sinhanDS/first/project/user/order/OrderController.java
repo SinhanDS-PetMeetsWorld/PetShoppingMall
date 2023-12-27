@@ -63,6 +63,8 @@ public class OrderController {
 		
 		UserVO uvo = (UserVO)sess.getAttribute("userLoginInfo");
 		log.debug("user_no: " + uvo.getNo());
+		log.debug("user_눼임 " + uvo.getName());
+		
 		
 		int temp_cart_no = orderService.cart_insert(cartvo).getNo();
 		if(optionno_list != null) {
@@ -113,6 +115,9 @@ public class OrderController {
 		orderVO.setTotal_delivery_fee(delivery_price);
 		/* 리스트 들어오기 전 임시 끝*/
 		
+		model.addAttribute("username", uvo.getName());
+		model.addAttribute("useremail", uvo.getEmail());
+		model.addAttribute("userphone", uvo.getPhone());
 		model.addAttribute("userno", uvo.getNo());
 		model.addAttribute("userAddressList", userService.exist_addr(uvo));
 		model.addAttribute("userPaymentList", userService.exist_payment(uvo));
@@ -140,7 +145,7 @@ public class OrderController {
 	}
 	/* TODO: 리스트가 들어온 후에는 갯수가 얼마나 길어질지 모르니 POSTMAPPING으로 바꿔야한다*/
 	@PostMapping("pay.do")
-	public String pay(Model model, @RequestParam int[] cart_no, 
+	public String pay(HttpSession sess, Model model, @RequestParam int[] cart_no, 
 					@RequestParam int[] quantity_list ,@RequestParam int delivery_price, 
 					@RequestParam int total_price, @RequestParam int[] cart_user_no, 
 					@RequestParam(required=false) int[] option_no, @RequestParam(required=false) int[]option_cart_no) {
@@ -155,7 +160,7 @@ public class OrderController {
 		cvo.setQuantity_list(quantity_list);
 		log.debug("quantity: " + Arrays.toString(quantity_list) );
 		
-		UserVO uvo = new UserVO();
+		UserVO uvo = (UserVO)sess.getAttribute("userLoginInfo");
 		uvo.setNo(cart_user_no[0]);
 		
 		ProductOptionVO ovo = new ProductOptionVO();
@@ -167,6 +172,12 @@ public class OrderController {
 		orderVO.setTotal_delivery_fee(delivery_price);
 		/* 리스트 들어오기 전 임시 끝*/
 		
+		
+
+		log.debug("user_눼임2 " + uvo.getName());
+		model.addAttribute("username", uvo.getName());
+		model.addAttribute("useremail", uvo.getEmail());
+		model.addAttribute("userphone", uvo.getPhone());
 		model.addAttribute("userno", uvo.getNo());
 		model.addAttribute("userAddressList", userService.exist_addr(uvo));
 		model.addAttribute("userPaymentList", userService.exist_payment(uvo));

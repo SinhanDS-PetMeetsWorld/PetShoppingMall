@@ -24,6 +24,7 @@ public class PaymentVO {
 		type_list = new ArrayList<>();
 		type_list.add("카드");
 		type_list.add("계좌");
+		type_list.add("이니시스");
 		
 		account_list = new ArrayList<>();
 		account_list.add("카드 번호");
@@ -59,6 +60,12 @@ public class PaymentVO {
 		company1.add("한국수출입은행");
 		company1.add("우체국예금");
 		company_list.add(company1);
+		
+		ArrayList<String> company2 = new ArrayList<>();
+		company2.add("무슨카드");
+		company2.add("땡땡카드");
+		company_list.add(company1);
+		
 	}
 	
 	/*

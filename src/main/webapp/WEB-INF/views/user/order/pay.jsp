@@ -14,6 +14,16 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
+    
+    
+    <!-- 포트원 결제 -->
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<!-- 포트원 결제 -->
+    
 
 <style>
 .menu_name{
@@ -91,6 +101,11 @@ height : 100px;
 width : 700px;
 height : 100px;
 float : left;
+margin-top:10px;
+}
+
+#other_payment{
+	margin-top:22px;
 }
 
 #info2{
@@ -173,8 +188,90 @@ float : left;
   margin-top : 20px;
  } 
  
+ #paypay{
+  display: none;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  width: 240px;
+  height: 60px;
+  font-size: 25px;
+  background-color:#FFDE30;
+  font-weight: 800;
+  color: #222;
+  
+  margin-left : 160px;
+  margin-top : 20px;
+ }
+ 
 </style>
 
+
+<script>
+
+
+// 결제창 함수 넣어주기
+$(document).ready(function(){
+		$("#paypay").click(function(){
+			iniPay();
+		});
+})
+
+var IMP = window.IMP;
+IMP.init("imp85807434"); // 가맹점 식별코드
+
+var today = new Date();
+var hours = today.getHours(); // 시
+var minutes = today.getMinutes();  // 분
+var seconds = today.getSeconds();  // 초
+var milliseconds = today.getMilliseconds();
+var newtime = hours.toString() + minutes.toString() + seconds.toString() + milliseconds.toString();
+var buyer_name = "${username}";
+var buyer_email = "${useremail}";
+var buyer_phone = "${userphone}";
+
+function iniPay() {
+		
+       IMP.request_pay({
+           pg: 'html5_inicis', // PG사 코드표에서 선택
+           pay_method: 'card', // 결제 방식
+           merchant_uid: "IMP" + newtime, // 결제 고유 번호
+           name: '상품', // 제품명
+           amount: 1, // 가격
+           //구매자 정보 ↓
+           buyer_email: buyer_email,
+           buyer_name: buyer_name,
+           buyer_tel : buyer_phone
+           //buyer_addr : '서울특별시 강남구 삼성동',
+           //buyer_postcode : '12631'
+       }, async function (rsp) { // callback
+           if (rsp.success) { //결제 성공시
+               console.log(rsp);
+               var msg = '결제가 완료되었습니다.';
+		       msg += '고유ID : ' + rsp.imp_uid;
+		       msg += '상점 거래ID : ' + rsp.merchant_uid;
+		       msg += '결제 금액 : ' + rsp.paid_amount;
+		       msg += '카드 승인번호 : ' + rsp.apply_num;
+		       alert(msg)
+		       result ='0';
+		
+				
+               	/*if (response.status == 200) { // DB저장 성공시
+                   alert('결제 완료!')
+                   window.location.reload();
+               	} else { // 결제완료 후 DB저장 실패시
+                   alert(`error:[${response.status}]\n결제요청이 승인된 경우 관리자에게 문의바랍니다.`);
+                   // DB저장 실패시 status에 따라 추가적인 작업 가능성
+	         	}*/
+		     } else if (rsp.success == false) { // 결제 실패시
+		        alert(rsp.error_msg)
+		     	result = '1';
+	     	}
+	     });
+}
+</script>
 
 
 </head>
@@ -187,7 +284,7 @@ float : left;
         <div class="contents">
 			<div class="contentsright">
 				<div>
-					<h1 class = "menu_name">구매자 ${userno }의 Pay 페이지 입니다.</h1>
+					<h1 class = "menu_name">${username }님의 결제 페이지</h1>
 					
 					<form method="post" action="buy.do" onsubmit='return checkAddress();'>
 					
@@ -307,11 +404,22 @@ float : left;
 								</div>
 								<hr class = "pay_line">		
 							</c:forEach>
-																											<div class="payment_value_list">
-																												<input type="hidden" class="payment_type" name="payment_type" value="${userPaymentList[0].type }">
-																												<input type="hidden" class="payment_company" name="payment_company" value="${userPaymentList[0].company }">
-																												<input type="hidden" class="payment_account" name="payment_account" value="${userPaymentList[0].account }">
-																											</div>	
+							
+							<div id = "addr">
+								<div id="check_box">
+									<input type="radio" class="payment_selector" name="payment_selector" value="999">
+								</div>
+								
+								<div id= "other_payment">
+									<h2>다른 카드로 결제하기</h2>
+								</div>
+							</div>
+							
+							<div class="payment_value_list">
+								<input type="hidden" class="payment_type" name="payment_type" value="${userPaymentList[0].type }">
+								<input type="hidden" class="payment_company" name="payment_company" value="${userPaymentList[0].company }">
+								<input type="hidden" class="payment_account" name="payment_account" value="${userPaymentList[0].account }">
+							</div>	
 						</ol>
 						
 						
@@ -320,10 +428,13 @@ float : left;
 							<h2> 총 가격: ${orderVO.total_price }</h2>
 							<h2>총 배송비: ${orderVO.total_delivery_fee }</h2>
 						</div>
-																											<input type="hidden" name="total_price" value="${orderVO.total_price }">
-																											<input type="hidden" name="total_delivery_fee" value="${orderVO.total_delivery_fee }">
+							<input type="hidden" name="total_price" value="${orderVO.total_price }">
+							<input type="hidden" name="total_delivery_fee" value="${orderVO.total_delivery_fee }">
 						
-						<input class ="purchaseConfirm" type="submit" value="구매">
+						<input class ="purchaseConfirm" type="submit" id="buy_btn" value="구매">
+						
+						<button type="button" id="paypay">다른 카드로 구매</button>
+						
 						
 						<hr class = "final_line">
 					</form>
@@ -377,13 +488,24 @@ float : left;
     		payment.push(temp);
     	</c:forEach>
     	function changePayment(){
-			var payment_value_list = document.querySelector('.payment_value_list');
-			var type = payment_value_list.querySelector('.payment_type');
-			var company = payment_value_list.querySelector('.payment_company');
-			var account = payment_value_list.querySelector('.payment_account');
-			type.value = payment[this.value][0];
-			company.value = payment[this.value][1];
-			account.value = payment[this.value][2];
+    		var check_val = $('input[name=payment_selector]:checked').val();
+    		console.log(check_val);
+    		
+    		if(check_val != 999){
+    			document.getElementById('buy_btn').style.display = 'inline-block';
+				document.getElementById('paypay').style.display = 'none';
+				
+				var payment_value_list = document.querySelector('.payment_value_list');
+				var type = payment_value_list.querySelector('.payment_type');
+				var company = payment_value_list.querySelector('.payment_company');
+				var account = payment_value_list.querySelector('.payment_account');
+				type.value = payment[this.value][0];
+				company.value = payment[this.value][1];
+				account.value = payment[this.value][2];    			
+    		} else{
+				document.getElementById('buy_btn').style.display = 'none';
+				document.getElementById('paypay').style.display = 'inline-block';
+    		}
     	}
     </script>
     
