@@ -104,6 +104,50 @@
     
 }
 
+.addr_aaa{
+	   background-color: #fff;
+    height: 30px;
+    width: 170px;
+    padding: 3px 7px;
+    line-height: normal;
+    border: 1px solid #a6a6a6;
+    border-top-color: #949494;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+    outline: 0;
+    color: #111;
+    font-size: 13px;
+    
+    :focus{
+        border-color: #e77600;
+        box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+    }
+    
+    
+}
+
+.addr_aaa2{
+	   background-color: #fff;
+    height: 30px;
+    width: 280px;
+    padding: 3px 7px;
+    line-height: normal;
+    border: 1px solid #a6a6a6;
+    border-top-color: #949494;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+    outline: 0;
+    color: #111;
+    font-size: 13px;
+    
+    :focus{
+        border-color: #e77600;
+        box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+    }
+    
+    
+}
+
 .check {
  display: inline-block;
  outline: 0;
@@ -134,38 +178,95 @@
   background-color: #fd0;
   font-weight: 800;
   color: #222;
-  margin-top:25px;
   margin-left: 150px;
+  margin-top : 15px;
  }
  
+ 
+ .info_tag_container{
+width : 416px;
+height : 60px;
+display : flex;
+}
+ 
+.info_tag{
+ height : 30px;
+ width : 120px;
+ float : left;
+ text-align : center;
+ margin-top : 7px;
+}
+
+.info_space {
+width : 10px;
+height : 30px;
+}
+
+
 </style>
 </head>
 <body>
     <div>
         <h2>배송지 추가</h2>
         <form action="insert_addr.do" id="insert_addr" method="GET">
-            <div>
-                <input class ="aaa" type="text" placeholder="받는이 성명" name="name" id="name">
-            </div>
-            <br>
-            <div>
-                <input class ="aaa" type="text" placeholder="전화번호" name="phone" id="phone">
-            </div>
-            <div>
-               <h2> 주소 </h2>
-                <div><input class = "aaa" type="text" readonly placeholder="우편번호" name="zipcode" id="zipcode"> 
-                <button class ="check" type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button></div>
-                <div><input class = "aaa"  type="text" readonly placeholder="기본주소" name="addr1" id="addr1"></div>
-                <div><input class = "aaa" type="text" placeholder="상세주소" name="addr2" id="addr2"></div>
+           
+           <div class = "info_tag_container">
+           		
+           		<div class = "info_tag">
+           			<span>수령인</span>
+           		</div>
+           		<div class = "info_space"></div>
+           		<input class ="aaa" type="text" name="name" id="name">
+           
+           </div>
+           
+           <div class = "info_tag_container">
+                <div class = "info_tag">
+                	<span>전화 번호</span>
+                </div>
+                <div class = "info_space"></div>
+                <input class ="aaa" type="text" name="phone" id="phone">
             </div>
             
-            <div>
-            	<h2>별명</h2>
+            <h2> 주소 </h2>
+            
+            <div class = "info_tag_container">
+               
+                <div class ="info_tag">
+                <span>우편번호</span>
+               	</div>
+               	
+                <input class = "addr_aaa" type="text"  name="zipcode" id="zipcode" readonly> 
+                <div class ="info_space"></div>
+                <button class ="check" type="button" class="btn" onclick="zipcode_search();">우편번호 검색</button>
+             </div>  
+             
+             <div class ="info_tag_container">
+             	<div class ="info_tag">
+             	<span>기본주소</span>
+             	</div>
+             	<input class = "addr_aaa2"  type="text" readonly name="addr1" id="addr1">
+             </div>
+               
+             <div class ="info_tag_container">
+             	<div class ="info_tag">
+             	<span>상세주소</span>
+             	</div>
+             	<input class = "addr_aaa2" type="text" name="addr2" id="addr2">
+             </div>   
+                
+             <h2>별명</h2>
+            
+            <div class ="info_tag_container">
+            
+            	<div class ="info_tag">
+             	<span>별칭 (ex. 집)</span>
+             	</div>
+             	<div class = "info_space"></div>
             	<input class ="aaa" type="text" placeholder="별칭(ex:집)" name="comment" id="comment">
             </div>
-            <div>
-                 <input class ="createConfirm " type="button" onclick="doCheck();" value="추가">
-            </div>
+    
+            <input class ="createConfirm " type="button" onclick="doCheck();" value="추가">
             
         </form>
     </div>

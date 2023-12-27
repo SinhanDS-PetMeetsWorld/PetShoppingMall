@@ -35,6 +35,8 @@ public class PaymentVO {
 		company0.add("하나카드");
 		company0.add("우리카드");
 		company0.add("농협카드");
+		company0.add("현대카드");
+		company0.add("삼성카드");
 		
 		company_list.add(company0);
 		

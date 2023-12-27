@@ -225,7 +225,7 @@ width : 30px;
   								            <div><span>Contact : </span> <span>${vo.phone}</span> </div>      
 						            </td>
 						            <td class ="button_container">
-							            	<button class ="confirm_recreate" type="button" name="modify" onclick="window.open('/user/modify_addr_form.do?no=${vo.no}&addr1=${vo.addr1 }&addr2=${vo.addr2 }&zipcode=${vo.zipcode }&name=${vo.name }&phone=${vo.phone }&comment=${vo.comment }','user_modify_addr_form', 'width=460px,height=612px,location=no,status=no,scrollbars=yes');">수정</button>&nbsp&nbsp&nbsp&nbsp                
+							            	<button class ="confirm_recreate" type="button" name="modify" onclick="window.open('/user/modify_addr_form.do?no=${vo.no}&addr1=${vo.addr1 }&addr2=${vo.addr2 }&zipcode=${vo.zipcode }&name=${vo.name }&phone=${vo.phone }&comment=${vo.comment }','user_modify_addr_form', 'width=460px,height=660px,location=no,status=no,scrollbars=yes');">수정</button>&nbsp&nbsp&nbsp&nbsp                
 							            	<button class ="confirm_delete" type="button" name="delete" onclick="location.href='/user/delete_addr.do?no=${vo.no}'">삭제</button>
 						            </td>
 						        </tr>
@@ -238,7 +238,7 @@ width : 30px;
 						    </c:forEach>
 					        <tr class = "table">
 					            <td>
-					                <button class ="add_addr" onclick="window.open('/user/add_addr_form.do','user_add_addr_form', 'width=460px,height=612px,location=no,status=no,scrollbars=yes');">+ 배송지 추가</button>
+					                <button class ="add_addr" onclick="window.open('/user/add_addr_form.do','user_add_addr_form', 'width=460px,height=660px,location=no,status=no,scrollbars=yes');">+ 배송지 추가</button>
 					            </td>
 					        </tr>
 					    </table>
