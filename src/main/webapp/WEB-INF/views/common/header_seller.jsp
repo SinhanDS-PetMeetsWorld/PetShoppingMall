@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pet Makes the world</title>
+<title>Pet Meets World</title>
 <!-- 헤더스타일로 이름 -->
 <link rel="stylesheet" href="/resources/css/common/header.css">
 

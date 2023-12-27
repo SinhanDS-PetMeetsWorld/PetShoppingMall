@@ -308,27 +308,27 @@ text-align : right;
     	function request_cancle(e){
     		e.preventDefault();
     		let no = $(this).data('no');
-    		window.open('/user/order/request_cancle.do?no=' + no + "&order_no=" + ${dvo_list[0].order_no},'request_cancle', 'width=390px,height=420px,location=no,status=no,scrollbars=yes');
+    		window.open('/user/order/request_cancle.do?no=' + no + "&order_no=" + ${dvo_list[0].order_no},'request_cancle', 'width=425px,height=470px,location=no,status=no,scrollbars=yes');
     	}
     	function request_refound(e){
     		e.preventDefault();
     		let no = $(this).data('no');
-    		window.open('/user/order/request_refound.do?no=' + no + "&order_no=" + ${dvo_list[0].order_no} + "&seller_no=" + ${dvo_list[0].seller_no},'request_refound', 'width=390px,height=420px,location=no,status=no,scrollbars=yes');
+    		window.open('/user/order/request_refound.do?no=' + no + "&order_no=" + ${dvo_list[0].order_no} + "&seller_no=" + ${dvo_list[0].seller_no},'request_refound', 'width=425px,height=470px,location=no,status=no,scrollbars=yes');
     	}
     	function refound_info(e){
     		e.preventDefault();
     		let no = $(this).data('no');
-    		window.open('/user/order/refound_info.do?no=' + no + "&order_no=" + ${dvo_list[0].order_no} + "&seller_no=" + ${dvo_list[0].seller_no},'request_refound', 'width=390px,height=420px,location=no,status=no,scrollbars=yes');
+    		window.open('/user/order/refound_info.do?no=' + no + "&order_no=" + ${dvo_list[0].order_no} + "&seller_no=" + ${dvo_list[0].seller_no},'request_refound', 'width=425px,height=470px,location=no,status=no,scrollbars=yes');
     	}
     	function write_review(e){
     		e.preventDefault();
     		let no = $(this).data('no');
-    		window.open('/user/order/write_review.do?no=' + no,'write_review', 'width=320px,height=420px,location=no,status=no,scrollbars=yes');
+    		window.open('/user/order/write_review.do?no=' + no,'write_review', 'width=345px, height=440px,location=no,status=no,scrollbars=yes');
     	}
     	function read_review(e){
     		e.preventDefault();
     		let no = $(this).data('no');
-    		window.open('/user/order/read_review.do?no=' + no,'write_review', 'width=320px,height=420px,location=no,status=no,scrollbars=yes');
+    		window.open('/user/order/read_review.do?no=' + no,'write_review', 'width=340px, height=460px,location=no,status=no,scrollbars=yes');
     	}
     </script>
 </body>
