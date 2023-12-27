@@ -248,15 +248,24 @@ function iniPay() {
            //buyer_postcode : '12631'
        }, async function (rsp) { // callback
            if (rsp.success) { //결제 성공시
-               console.log(rsp);
-               var msg = '결제가 완료되었습니다.';
-		       msg += '고유ID : ' + rsp.imp_uid;
-		       msg += '상점 거래ID : ' + rsp.merchant_uid;
-		       msg += '결제 금액 : ' + rsp.paid_amount;
-		       msg += '카드 승인번호 : ' + rsp.apply_num;
-		       alert(msg)
-		       result ='0';
-		
+                console.log(rsp);
+                var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        alert(msg)
+		        result ='0';
+		       
+		       	var payment_value_list = document.querySelector('.payment_value_list');
+				var type = payment_value_list.querySelector('.payment_type');
+				var company = payment_value_list.querySelector('.payment_company');
+				var account = payment_value_list.querySelector('.payment_account');
+				type.value = 2;
+				company.value = 0;
+				account.value = rsp.apply_num;
+				
+				document.getElementById('gopay').submit();
 				
                	/*if (response.status == 200) { // DB저장 성공시
                    alert('결제 완료!')
@@ -286,7 +295,7 @@ function iniPay() {
 				<div>
 					<h1 class = "menu_name">${username }님의 결제 페이지</h1>
 					
-					<form method="post" action="buy.do" onsubmit='return checkAddress();'>
+					<form method="post" id="gopay" action="buy.do" onsubmit='return checkAddress();'>
 					
 					<h2 class ="menu_name">상품 정보 출력</h2>
 						<c:forEach items="${product_list }" var="vo" varStatus="status">
@@ -505,6 +514,7 @@ function iniPay() {
     		} else{
 				document.getElementById('buy_btn').style.display = 'none';
 				document.getElementById('paypay').style.display = 'inline-block';
+				
     		}
     	}
     </script>
