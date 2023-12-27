@@ -12,6 +12,12 @@ public class SellerStatisticsServiceImpl implements SellerStatisticsService {
 
 	@Autowired
 	SellerStatisticsMapper mapper;
+	
+	@Override
+	public StatisticsVO weekTotal(int no) {
+		StatisticsVO svo = mapper.weekTotal(no);
+		return svo;
+	}
 
 	@Override
 	public List<StatisticsVO> weekTotalscr(StatisticsVO vo) {

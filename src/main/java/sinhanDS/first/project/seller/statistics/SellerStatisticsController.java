@@ -24,7 +24,10 @@ public class SellerStatisticsController {
 	@GetMapping("/statistics.do")
 	public String statistics(HttpSession sess, Model model) {
 		SellerVO seller = (SellerVO) sess.getAttribute("sellerLoginInfo");
+		StatisticsVO vo = service.weekTotal(seller.getNo());
+		
 		model.addAttribute("seller", seller);
+		model.addAttribute("totalStatistics", vo);
 		return "/seller/statistics/statistics";
 	}
 	
@@ -41,4 +44,5 @@ public class SellerStatisticsController {
 		List<StatisticsVO> stList = service.weekTotalPricescr(svo);
 		return stList;
 	}
+	
 }

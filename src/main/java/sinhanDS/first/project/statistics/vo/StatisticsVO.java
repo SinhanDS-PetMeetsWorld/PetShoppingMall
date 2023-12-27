@@ -9,4 +9,8 @@ public class StatisticsVO {
 	private int sale;
 	private int cancle;
 	private int refound;
+	
+	private int orders;
+	private int quantity;
+	private int realsales;
 }

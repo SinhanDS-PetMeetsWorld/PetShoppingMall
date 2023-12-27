@@ -9,8 +9,8 @@ import sinhanDS.first.project.statistics.vo.StatisticsVO;
 @Mapper
 public interface SellerStatisticsMapper {
 
-	//오늘의 주문건수, 매출 & 어제의 주문건수, 매출(비교용)
-	
+	//이번주의 주문건수, 매출, 실매출, 총수량
+	StatisticsVO weekTotal(int no);
 	//최근 일주일 간의 일별 주문, 취소, 환불 건수
 	List<StatisticsVO> weekTotalscr(StatisticsVO vo);
 	//최근 일주일 간의 일별 매출, 취소, 환불 금액
