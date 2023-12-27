@@ -49,7 +49,7 @@
 	}
 		
 	#input_tag {
-		background-color: #fff;
+	   background-color: #fff;
        height: 30px;
        width: 100px;
        padding: 3px 7px;
@@ -119,7 +119,7 @@
 	.category2{
 		float:left;
 		display:inline-block;
-		margin-left:60px;
+		margin-left:35px;
 	}
 	
 	.category_remove{
@@ -134,10 +134,47 @@
 	}
 	
 	.category1_list{
-		margin-left:28px;
+	   background-color: #fff;
+       height: 30px;
+       width: 100px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       margin-left:28px;
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+		
 	}
 	.category2_list{
-		margin-left:28px;
+	
+	   background-color: #fff;
+       height: 30px;
+       width: 120px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       margin-left:28px;
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+		
 	}
 	
 	.com_brand{
@@ -145,15 +182,14 @@
 	}
 	
 	.company{
-		
-		padding:20px 0;
-		float: left;
+	   padding:20px 0;
+	   float: left;
 	}
 	
 	.brand{
 		padding:20px 0;
 		float: left;
-		margin-left: 100px;
+		margin-left:65px;
 	}
 	
 	.option_body{
@@ -209,6 +245,8 @@
 	}
 	.add_file_button{
 		width: 200px;
+		margin-left : 85px;
+		
 	}
 	
 	
@@ -230,21 +268,222 @@
 		color:black;
 	}
 
- .start_line {
+.start_line {
  		margin-top : 10px;
  		margin-bottom : 20px;
- 		width : 800px;
+ 		width : 580px;
         border: 1px solid #FFDE30;
 } 
 
 .line {
-
+		margin-top :10px;
  		margin-bottom : 10px;
- 		width : 800px;
+ 		width : 580px;
         border: 1px solid #ccc
 }
 
+.category_line{
+
+width : 580px;
+border: 1px solid #ccc;
+
+}
+
+.option_line{
+
+width : 580px;
+border: 1px solid #ccc;
+margin-top : 10px;
+}
+
+.remove_btn_category{
+       
+       height: 30px;
+       width: 50px;
+      
+
+}
+#company{
+       background-color: #fff;
+       height: 30px;
+       width: 100px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       margin-left:50px;
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+
+}
 	
+#brand {
+	   background-color: #fff;
+       height: 30px;
+       width: 100px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+
+}	
+
+.displayed_image{
+	   background-color: #fff;
+       height: 100px;
+       width: 100px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+
+
+
+}
+
+#description_insert{
+       background-color: #fff;
+       height: 150px;
+       width: 449.5px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       resize :none;
+       margin-left: 14px;
+       
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+
+
+}
+
+
+#registConfirm{
+
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  padding: 0 24px;
+  border-radius: 50px;
+  border: none;
+  width: 150px;
+  height: 40px;
+  font-size: 15px;
+  background-color: #fd0;
+  font-weight: 800;
+  color: #222;
+  margin-top:25px;
+  margin-left: 10px;
+
+
+}
+
+.option_title_list{
+
+       background-color: #fff;
+       height: 30px;
+       width: 170px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       margin-left: 25px;
+       
+       
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+
+}
+
+
+.option_content_list{
+
+       background-color: #fff;
+       height: 30px;
+       width: 170px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       margin-left: 25px;
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+
+}
+
+.option_price_list {
+
+       background-color: #fff;
+       height: 30px;
+       width: 170px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       margin-left: 65px;
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+
+
+}
 </style>
 <script>
 	console.log("${sellerLoginInfo.no}");
@@ -274,13 +513,13 @@
 						<br>
 						<hr class = "line">
 						<span class="regist_price">
-							가격* <input id = "input_tag" type="number" name="price" value="0" min="0" required>
+							가격* <input id = "input_tag" type="number" name="price" value="0" required>
 						</span>
 						<span class="regist_quantity">
-							재고* <input id ="input_tag" type="number" name="stock" value="0" min="0" required>
-						</span><br>
+							재고* <input id ="input_tag" type="number" name="stock" value="0" required>
+						</span>
 						<div class="price_discount">
-								할인 가격 <input type="number" name="discount" value="0" required>
+								할인 가격 <input id ="input_tag" type="number" name="discount" value="0" required>
 						</div>
 						
 						
@@ -308,7 +547,7 @@
 								</div>
 								<div class="category_remove">
 								<a href="javascript:;" class="remove_btn_category"><img
-									src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a><br>
+									src="/resources/img/product/option_content_remove.png" width="30" height="30" /></a><br>
 								</div>
 							</div>
 							<div class ="category_add_button" data-ori="9999">
@@ -317,7 +556,7 @@
 							</div>
 						</div>
 						<div class="com_brand">
-							<hr>
+							<hr class ="line">
 							<div class="company">
 								제조사 <input type="text" id="company" name="company">
 							</div>
@@ -339,32 +578,28 @@
 
 						<div class="image_section">
 							<br>
-							<hr>
+							<hr class ="line">
 							<div class="image_top">
 								<div class="image_fileinput">
 									상품 이미지	 <input class="add_file_button" type="file" name="filename" onchange="readURL(this);" required> 
 								</div>
 								<div class="displayed_image_section">
-									<img class="displayed_image" width="100" height="100">
+									<img class="displayed_image">
 									<br>
 								</div>
 							</div>
 						
-							<br>
-							<hr>
-							<br>
-							
-						
+							<hr class = "line">
 	
 							<div class="image_section_detail">
 								<div class="image_detail_detail">
 								상품 설명
 								</div>
-								<textarea name="description" rows="10" cols="40"></textarea>
+								<textarea id ="description_insert" name="description" rows="10" cols="40"></textarea>
 								
 							</div>
 						</div>
-						<input type="submit" value="등록">
+						<input id ="registConfirm" type="submit" value="등록">
 					</form>
 				</div>
 			</div>

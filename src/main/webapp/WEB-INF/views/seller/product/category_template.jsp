@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div class="category_original"  style="display: none;">
-	<hr>
+	<hr class = "category_line">
 	<div class="category_all">
 		<div class="category1">
 			카테고리*  <select name="category1_list"
@@ -24,7 +24,7 @@
 	</div>
 	<div class="category_remove">
 	<a href="javascript:;" class="remove_btn_category"><img
-		src="/resources/img/product/option_content_remove.png" width="25" height="25" /></a><br>
+		src="/resources/img/product/option_content_remove.png" width="30" height="30" /></a><br>
 	</div>
 </div>
 <div class ="category_add_button" style="display: none;">
