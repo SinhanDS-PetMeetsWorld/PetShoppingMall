@@ -211,7 +211,7 @@
 			</div>
 			<div class="contentsright">
 				<div>
-					<h2>상품 등록</h2>
+					<h1 class ="menu_name">상품 등록</h1>
 					<form action="regist.do" method="post" onsubmit="return regist();" enctype="multipart/form-data">
 						<input type="hidden" name="seller_no"
 							value="${sellerLoginInfo.no}">

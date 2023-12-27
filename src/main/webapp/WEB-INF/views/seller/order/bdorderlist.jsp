@@ -143,13 +143,13 @@
 			     border-color: #F2C200;
 			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
 			 	}
-			 	
+		 	
 			 .start_line {
 			        border: 1px solid #FFDE30;
 			        margin-bottom : 10px;
 			        width : 800px;
 			     }
- }
+ }	
     </style>
     <style>
 	    .messagebody{
