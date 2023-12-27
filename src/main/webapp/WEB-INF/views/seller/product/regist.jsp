@@ -29,9 +29,44 @@
 	}
 
 	.pro_name_css{
-		width:300px;
-		height:25px;
+	   background-color: #fff;
+       height: 30px;
+       width: 185px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
 	}
+		
+	#input_tag {
+		background-color: #fff;
+       height: 30px;
+       width: 100px;
+       padding: 3px 7px;
+       line-height: normal;
+       border: 1px solid #a6a6a6;
+       border-top-color: #949494;
+       border-radius: 3px;
+       box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+       outline: 0;
+       color: #111;
+       font-size: 13px;
+       
+       :focus{
+           border-color: #e77600;
+           box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+       }
+	}	
 	
 	.regist_price{
 		margin-top:20px;
@@ -47,7 +82,7 @@
 	}
 	
 	.regist_quantity{
-		margin-left:100px;
+		margin-left:30px;
 		margin-top:20px;
 	}
 	
@@ -194,6 +229,21 @@
 		text-decoration:none;
 		color:black;
 	}
+
+ .start_line {
+ 		margin-top : 10px;
+ 		margin-bottom : 20px;
+ 		width : 800px;
+        border: 1px solid #FFDE30;
+} 
+
+.line {
+
+ 		margin-bottom : 10px;
+ 		width : 800px;
+        border: 1px solid #ccc
+}
+
 	
 </style>
 <script>
@@ -214,17 +264,20 @@
 			<div class="contentsright">
 				<div>
 					<h1 class ="menu_name">상품 등록</h1>
+					<hr class = "start_line">
 					<form action="regist.do" method="post" onsubmit="return regist();" enctype="multipart/form-data">
 						<input type="hidden" name="seller_no"
 							value="${sellerLoginInfo.no}">
 						<div>
 							<span class="pro_name">상품명*</span><input type="text" class="pro_name_css" name="name" required>
-						</div><br><hr>
+						</div>
+						<br>
+						<hr class = "line">
 						<span class="regist_price">
-							가격* <input type="number" name="price" value="0" required>
+							가격* <input id = "input_tag" type="number" name="price" value="0" min="0" required>
 						</span>
 						<span class="regist_quantity">
-							재고* <input type="number" name="stock" value="0" required>
+							재고* <input id ="input_tag" type="number" name="stock" value="0" min="0" required>
 						</span><br>
 						<div class="price_discount">
 								할인 가격 <input type="number" name="discount" value="0" required>
@@ -233,7 +286,7 @@
 						
 						<div class="category_body">
 							<div class="category">
-								<hr>
+								<hr class = "line">
 								<div class="category_all">
 									<div class="category1">
 										카테고리*  <select name="category1_list" class="category1_list">
