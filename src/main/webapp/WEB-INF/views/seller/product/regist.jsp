@@ -158,6 +158,9 @@
 	.options{
 		clear:both;
 	}
+	.option{
+		clear:both;
+	}
 	
 	
 	.image_top{
