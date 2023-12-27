@@ -47,7 +47,6 @@
 	}
 	
 	.regist_quantity{
-	
 		margin-left:100px;
 		margin-top:20px;
 	}
