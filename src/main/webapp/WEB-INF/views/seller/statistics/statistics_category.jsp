@@ -145,7 +145,10 @@
 						        	    ],
 						       }],
 						       labels: category1List
-						   }
+						   },
+						 options: {
+							 title : { display : true, text : '대분류별 매출' }
+						 }
 					});
 					
 					new Chart(ctx2, {
@@ -204,6 +207,219 @@
 				data: { seller_no : "${seller.no}",
 						catogory1 : 0 },
 				success:function(data) {
+					var chartStatus = Chart.getChart('cat2chart1');
+					if (chartStatus !== undefined) {
+					  chartStatus.destroy();
+					}
+					var chartStatus = Chart.getChart('cat2chart2');
+					if (chartStatus !== undefined) {
+					  chartStatus.destroy();
+					}
+					var chartStatus = Chart.getChart('cat2chart3');
+					if (chartStatus !== undefined) {
+					  chartStatus.destroy();
+					}
+					
+					for(var i=0; i<data.length; i++){
+						category2List.push(name_list[data[i].category2]);
+						salesList.push(data[i].sale);
+						cancleList.push(data[i].cancle);
+						refoundList.push(data[i].refound);
+					}
+					
+					new Chart(ctx1, {
+						type: 'doughnut',
+						data: {
+						       datasets: [{
+						           data: salesList,
+						           backgroundColor: [
+						        	      'rgb(255, 99, 132)',
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 205, 86)',
+						        	      '#5a5e9a', '#FCA5A5', '#34D399',
+						        	      '#8B5CF6', '#005e36', '#a3acff',
+						        	      '#ee243c', '#e8600a'
+						        	    ],
+						       }],
+						       labels: category2List
+						   }
+					});
+					
+					new Chart(ctx2, {
+						type: 'doughnut',
+						data: {
+						       datasets: [{
+						           data: cancleList,
+						           backgroundColor: [
+						        	   'rgb(255, 99, 132)',
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 205, 86)',
+						        	      '#5a5e9a', '#FCA5A5', '#34D399',
+						        	      '#8B5CF6', '#005e36', '#a3acff',
+						        	      '#ee243c', '#e8600a'
+						        	    ],
+						       }],
+						       labels: category2List
+						   }
+					});
+					
+					new Chart(ctx3, {
+						type: 'doughnut',
+						data: {
+						       datasets: [{
+						           data: refoundList,
+						           backgroundColor: [
+						        	   'rgb(255, 99, 132)',
+						        	   'rgb(54, 162, 235)',
+						        	   'rgb(255, 205, 86)',
+						        	   '#5a5e9a', '#FCA5A5', '#34D399',
+						        	   '#8B5CF6', '#005e36', '#a3acff',
+						        	   '#ee243c', '#e8600a'
+						        	    ],
+						       }],
+						       labels: category2List
+						   }
+					});
+				},
+				error:function(data){
+					alert('통계 데이터를 불러오지 못했습니다.');
+				}
+			})
+		}
+		
+		function getCategory2Graph_cat(){
+			var category2List = [];
+			var salesList = [];
+			var cancleList = [];
+			var refoundList = [];
+			var ctx1 = document.getElementById('cat2chart1');
+			var ctx2 = document.getElementById('cat2chart2');
+			var ctx3 = document.getElementById('cat2chart3');
+			
+			var name_list = new Array();
+			<c:forEach items="${cvo.category[1]}" var="vo">
+			name_list.push("${vo}");
+		</c:forEach>
+			
+			$.ajax({
+				type: "GET",
+				url:'statistics_category2.do',
+				data: { seller_no : "${seller.no}",
+						category1 : 1 },
+				success:function(data) {
+					var chartStatus = Chart.getChart('cat2chart1');
+					if (chartStatus !== undefined) {
+					  chartStatus.destroy();
+					}
+					var chartStatus = Chart.getChart('cat2chart2');
+					if (chartStatus !== undefined) {
+					  chartStatus.destroy();
+					}
+					var chartStatus = Chart.getChart('cat2chart3');
+					if (chartStatus !== undefined) {
+					  chartStatus.destroy();
+					}
+					
+					for(var i=0; i<data.length; i++){
+						category2List.push(name_list[data[i].category2]);
+						salesList.push(data[i].sale);
+						cancleList.push(data[i].cancle);
+						refoundList.push(data[i].refound);
+					}
+					
+					new Chart(ctx1, {
+						type: 'doughnut',
+						data: {
+						       datasets: [{
+						           data: salesList,
+						           backgroundColor: [
+						        	      'rgb(255, 99, 132)',
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 205, 86)',
+						        	      '#5a5e9a', '#FCA5A5', '#34D399',
+						        	      '#8B5CF6', '#005e36', '#a3acff',
+						        	      '#ee243c', '#e8600a'
+						        	    ],
+						       }],
+						       labels: category2List
+						   }
+					});
+					
+					new Chart(ctx2, {
+						type: 'doughnut',
+						data: {
+						       datasets: [{
+						           data: cancleList,
+						           backgroundColor: [
+						        	   'rgb(255, 99, 132)',
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 205, 86)',
+						        	      '#5a5e9a', '#FCA5A5', '#34D399',
+						        	      '#8B5CF6', '#005e36', '#a3acff',
+						        	      '#ee243c', '#e8600a'
+						        	    ],
+						       }],
+						       labels: category2List
+						   }
+					});
+					
+					new Chart(ctx3, {
+						type: 'doughnut',
+						data: {
+						       datasets: [{
+						           data: refoundList,
+						           backgroundColor: [
+						        	   'rgb(255, 99, 132)',
+						        	   'rgb(54, 162, 235)',
+						        	   'rgb(255, 205, 86)',
+						        	   '#5a5e9a', '#FCA5A5', '#34D399',
+						        	   '#8B5CF6', '#005e36', '#a3acff',
+						        	   '#ee243c', '#e8600a'
+						        	    ],
+						       }],
+						       labels: category2List
+						   }
+					});
+				},
+				error:function(data){
+					alert('통계 데이터를 불러오지 못했습니다.');
+				}
+			})
+		}
+		
+		function getCategory2Graph_etc(){
+			var category2List = [];
+			var salesList = [];
+			var cancleList = [];
+			var refoundList = [];
+			var ctx1 = document.getElementById('cat2chart1');
+			var ctx2 = document.getElementById('cat2chart2');
+			var ctx3 = document.getElementById('cat2chart3');
+			
+			var name_list = new Array();
+			<c:forEach items="${cvo.category[2]}" var="vo">
+			name_list.push("${vo}");
+		</c:forEach>
+			
+			$.ajax({
+				type: "GET",
+				url:'statistics_category2.do',
+				data: { seller_no : "${seller.no}",
+						category1 : 2 },
+				success:function(data) {
+					var chartStatus = Chart.getChart('cat2chart1');
+					if (chartStatus !== undefined) {
+					  chartStatus.destroy();
+					}
+					var chartStatus = Chart.getChart('cat2chart2');
+					if (chartStatus !== undefined) {
+					  chartStatus.destroy();
+					}
+					var chartStatus = Chart.getChart('cat2chart3');
+					if (chartStatus !== undefined) {
+					  chartStatus.destroy();
+					}
+					
 					for(var i=0; i<data.length; i++){
 						category2List.push(name_list[data[i].category2]);
 						salesList.push(data[i].sale);
@@ -296,7 +512,7 @@
 					<div class="chartarea">
 					
 						<div class="category1area">
-							<div class="bigchart"><canvas id="cat1chart1"></canvas></div>
+							<div class="bigchart"><canvas id="cat1chart1" width="550px" height="550px"></canvas></div>
 							<div class="smallchart"><canvas id="cat1chart2"></canvas></div>
 							<div class="smallchart"><canvas id="cat1chart3"></canvas></div>
 						</div>

@@ -64,6 +64,7 @@ public class SellerStatisticsController {
 	@GetMapping("/statistics_category2.do")
 	@ResponseBody
 	public List<StatisticsVO> statistics_category2(StatisticsVO svo) {
+		System.out.println("확인 "+svo.getCategory1());
 		List<StatisticsVO> stList = service.category2scr(svo);
 		return stList;
 	}
