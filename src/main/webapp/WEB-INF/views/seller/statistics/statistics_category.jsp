@@ -487,7 +487,24 @@
 			})
 		}
 	</script>
-	
+	<style>
+		.titleInGraphe{
+			position:absolute;
+			margin-top : 560px;
+		}
+		.titleInGraphe2{
+			position:absolute;
+			margin-top : 260px;
+		}
+		.titleInGraphe1_2{
+			position:absolute;
+			margin-top : 560px;
+		}
+		.titleInGraphe2_2{
+			position:absolute;
+			margin-top : 260px;
+		}
+	</style>
 </head>
 <body>
 <div class="wrap">
@@ -512,9 +529,9 @@
 					<div class="chartarea">
 					
 						<div class="category1area">
-							<div class="bigchart"><canvas id="cat1chart1" width="550px" height="550px"></canvas></div>
-							<div class="smallchart"><canvas id="cat1chart2"></canvas></div>
-							<div class="smallchart"><canvas id="cat1chart3"></canvas></div>
+							<div class="bigchart"><div class="titleInGraphe"><h2>총매출</h2></div><canvas id="cat1chart1" width="550px" height="550px"></canvas></div>
+							<div class="smallchart"><div class="titleInGraphe2"><h2>취소</h2></div><canvas id="cat1chart2"></canvas></div>
+							<div class="smallchart"><div class="titleInGraphe2"><h2>환불</h2></div><canvas id="cat1chart3"></canvas></div>
 						</div>
 						
 						<button id="chartbtn" onclick="getCategory2Graph_dog();">강아지</button>
@@ -522,9 +539,9 @@
 						<button id="chartbtn" onclick="getCategory2Graph_etc();">기타</button>
 						
 						<div class="category2area">
-							<div class="bigchart"><canvas id="cat2chart1"></canvas></div>
-							<div class="smallchart"><canvas id="cat2chart2"></canvas></div>
-							<div class="smallchart"><canvas id="cat2chart3"></canvas></div>
+							<div class="bigchart"><div class="titleInGraphe1_2"><h2>총매출</h2></div><canvas id="cat2chart1"></canvas></div>
+							<div class="smallchart"><div class="titleInGraphe2_2"><h2>취소</h2></div><canvas id="cat2chart2"></canvas></div>
+							<div class="smallchart"><div class="titleInGraphe2_2"><h2>환불</h2></div><canvas id="cat2chart3"></canvas></div>
 						</div>
 						
 					</div>
