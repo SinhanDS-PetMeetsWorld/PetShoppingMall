@@ -70,7 +70,8 @@
 		    END as refound
 		from product_category c join order_detail d
 		where c.product_no = d.product_no AND seller_no = #{seller_no}) t
-		group by category1;
+		group by category1
+		ORDER BY category1;
 	</select>
 	
 	<select id="category2scr" parameterType="sinhanDS.first.project.statistics.vo.StatisticsVO" 
@@ -88,7 +89,7 @@
 		from product_category c join order_detail d
 		where c.product_no = d.product_no AND seller_no = #{seller_no} AND category1 = #{category1}) AS t
 		group by category2
-		order by sales desc;
+		order by category2;
 	</select>
 	
 	<select id="genderscr" parameterType="sinhanDS.first.project.statistics.vo.StatisticsVO" 
@@ -106,7 +107,8 @@
 		    END as refound
 		from user u join order_detail d
 		where u.no = d.user_no AND seller_no = #{seller_no}) t
-		group by gender;
+		group by gender
+		ORDER BY gender;
 	</select>
 	
 	<select id="agescr" parameterType="sinhanDS.first.project.statistics.vo.StatisticsVO" 
@@ -126,7 +128,7 @@
 		from user u join order_detail d
 		where u.no = d.user_no) t
 		group by age
-		order by sales desc;
+		order by age;
 	</select>
 	
 </mapper>

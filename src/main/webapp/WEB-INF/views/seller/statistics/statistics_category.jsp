@@ -528,7 +528,7 @@
 					<div class="chartarea">
 					
 						<div class="category1area">
-							<div class="bigchart"><div class="titleInGraphe"><h2>총매출</h2></div><canvas id="cat1chart1" width="550px" height="550px"></canvas></div>
+							<div class="bigchart"><div class="titleInGraphe"><h2>총매출</h2></div><canvas id="cat1chart1"></canvas></div>
 							<div class="smallchart"><div class="titleInGraphe2"><h2>취소</h2></div><canvas id="cat1chart2"></canvas></div>
 							<div class="smallchart"><div class="titleInGraphe2"><h2>환불</h2></div><canvas id="cat1chart3"></canvas></div>
 						</div>

@@ -14,13 +14,20 @@
 	<style>
 		
 		.chartarea {
-			clear : both;
+			width : 950px;
+			height : 650px;
 		}
-		.bigchartbox{
-			margin-left : 30px;
-			margin-top : 30px;
-			width : 800px;
-			height : 400px;
+		.bigchart {
+			width : 600px;
+			height : 600px;
+			border : 1px solid;
+			float : left;
+		}
+		.smallchart {
+			width : 300px;
+			height : 300px;
+			border : 1px solid;
+			float : left;
 		}
 		 .menu_name {
 			margin-bottom: 10px;	
@@ -83,33 +90,46 @@
 			        width : 800px;
 			     }
 	</style>
-	
+	<style>
+		.titleInGraphe{
+			position:absolute;
+			margin-top : 560px;
+		}
+		.titleInGraphe2{
+			position:absolute;
+			margin-top : 260px;
+		}
+		.titleInGraphe1_2{
+			position:absolute;
+			margin-top : 560px;
+		}
+		.titleInGraphe2_2{
+			position:absolute;
+			margin-top : 260px;
+		}
+	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			getGenderGraph();
 		});
 		
 		function getGenderGraph(){
-			var category1List = [];
+			var nameList = ["남자", "여자"];
+			var genderList = [];
 			var salesList = [];
 			var cancleList = [];
 			var refoundList = [];
-			var ctx1 = document.getElementById('cat1chart1');
-			var ctx2 = document.getElementById('cat1chart2');
-			var ctx3 = document.getElementById('cat1chart3');
-			
-			var name_list = new Array();
-			<c:forEach items="${cvo.category_name}" var="vo">
-				name_list.push("${vo}");
-			</c:forEach>
+			var ctx1 = document.getElementById('chart1');
+			var ctx2 = document.getElementById('chart2');
+			var ctx3 = document.getElementById('chart3');
 			
 			$.ajax({
 				type: "GET",
-				url:'statistics_category1.do',
+				url:'statistics_genderchart.do',
 				data: { seller_no : "${seller.no}" },
 				success:function(data) {
 					for(var i=0; i<data.length; i++){
-						category1List.push(name_list[data[i].category1]);
+						genderList.push(nameList[data[i].gender]);
 						salesList.push(data[i].sale);
 						cancleList.push(data[i].cancle);
 						refoundList.push(data[i].refound);
@@ -121,12 +141,11 @@
 						       datasets: [{
 						           data: salesList,
 						           backgroundColor: [
-						        	      'rgb(255, 99, 132)',
 						        	      'rgb(54, 162, 235)',
-						        	      'rgb(255, 205, 86)'
+						        	      'rgb(255, 99, 132)'
 						        	    ],
 						       }],
-						       labels: category1List
+						       labels: genderList
 						   },
 						 options: {
 							 title : { display : true, text : '대분류별 매출' }
@@ -139,12 +158,11 @@
 						       datasets: [{
 						           data: cancleList,
 						           backgroundColor: [
-						        	      'rgb(255, 99, 132)',
 						        	      'rgb(54, 162, 235)',
-						        	      'rgb(255, 205, 86)'
+						        	      'rgb(255, 99, 132)'
 						        	    ],
 						       }],
-						       labels: category1List
+						       labels: genderList
 						   }
 					});
 					
@@ -154,12 +172,11 @@
 						       datasets: [{
 						           data: refoundList,
 						           backgroundColor: [
-						        	      'rgb(255, 99, 132)',
 						        	      'rgb(54, 162, 235)',
-						        	      'rgb(255, 205, 86)'
+						        	      'rgb(255, 99, 132)'
 						        	    ],
 						       }],
-						       labels: category1List
+						       labels: genderList
 						   }
 					});
 				},
@@ -192,12 +209,9 @@
 					<hr class = "start_line">
 			
 					<div class="chartarea">
-						<div class="bigchartbox">
-							<canvas id="chart1"></canvas>
-						</div>
-						<div class="bigchartbox">
-							<canvas id="chart2"></canvas>
-						</div>
+						<div class="bigchart"><div class="titleInGraphe"><h2>총매출</h2></div><canvas id="chart1"></canvas></div>
+						<div class="smallchart"><div class="titleInGraphe2"><h2>취소</h2></div><canvas id="chart2"></canvas></div>
+						<div class="smallchart"><div class="titleInGraphe2"><h2>환불</h2></div><canvas id="chart3"></canvas></div>
 					</div>
 			</div>
 
