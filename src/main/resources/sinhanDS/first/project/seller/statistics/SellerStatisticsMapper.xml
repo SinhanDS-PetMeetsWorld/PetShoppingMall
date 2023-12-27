@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.seller.statistics.SellerStatisticsMapper">
 
-	<select id="weekTotalscr" parameterType="sinhanDS.first.project.statistics.vo.SellerStatisticsVO" 
-							resultType="sinhanDS.first.project.statistics.vo.SellerStatisticsVO">
+	<select id="weekTotalscr" parameterType="sinhanDS.first.project.statistics.vo.StatisticsVO" 
+							resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
 		SELECT order_date, COUNT(no) AS sale, SUM(cancle) AS cancle, SUM(refound) AS refound 
 		FROM(
 			SELECT order_date, no, 
@@ -22,8 +22,8 @@
 		ORDER BY order_date;
 	</select>
 	
-	<select id="weekTotalPricescr" parameterType="sinhanDS.first.project.statistics.vo.SellerStatisticsVO" 
-							resultType="sinhanDS.first.project.statistics.vo.SellerStatisticsVO">
+	<select id="weekTotalPricescr" parameterType="sinhanDS.first.project.statistics.vo.StatisticsVO" 
+							resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
 		SELECT order_date, SUM(sales) AS sale, SUM(cancle) AS cancle, SUM(refound) AS refound 
 		FROM (
 			SELECT order_date, (product_price-discount)*quantity AS sales, 

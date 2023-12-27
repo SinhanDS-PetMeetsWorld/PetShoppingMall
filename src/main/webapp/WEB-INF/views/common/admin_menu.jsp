@@ -53,6 +53,8 @@
 	<button class="admin_menu_button" data-href="/admin/getSettlementComList.do">정산 완료 목록 조회</button>
 	
 	<br>
+	<button class="admin_menu_button" data-href="">통계버튼(예정)</button>
+	<br>
 	<button class="admin_menu_button" data-href="/admin/getWithdrawaledSellerList.do">탈퇴한 판매자 조회</button>
 </div>
 </body>

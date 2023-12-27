@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sinhanDS.first.project.statistics.vo.SellerStatisticsVO;
+import sinhanDS.first.project.statistics.vo.StatisticsVO;
 
 @Service
 public class SellerStatisticsServiceImpl implements SellerStatisticsService {
@@ -14,14 +14,14 @@ public class SellerStatisticsServiceImpl implements SellerStatisticsService {
 	SellerStatisticsMapper mapper;
 
 	@Override
-	public List<SellerStatisticsVO> weekTotalscr(SellerStatisticsVO vo) {
-		List<SellerStatisticsVO> list = mapper.weekTotalscr(vo);
+	public List<StatisticsVO> weekTotalscr(StatisticsVO vo) {
+		List<StatisticsVO> list = mapper.weekTotalscr(vo);
 		return list;
 	}
 
 	@Override
-	public List<SellerStatisticsVO> weekTotalPricescr(SellerStatisticsVO vo) {
-		List<SellerStatisticsVO> list = mapper.weekTotalPricescr(vo);
+	public List<StatisticsVO> weekTotalPricescr(StatisticsVO vo) {
+		List<StatisticsVO> list = mapper.weekTotalPricescr(vo);
 		return list;
 	}
 }
