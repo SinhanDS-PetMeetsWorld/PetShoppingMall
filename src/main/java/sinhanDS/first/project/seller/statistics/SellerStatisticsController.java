@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sinhanDS.first.project.seller.vo.SellerVO;
-import sinhanDS.first.project.statistics.vo.SellerStatisticsVO;
+import sinhanDS.first.project.statistics.vo.StatisticsVO;
 
 @Controller
 @RequestMapping("/seller/statistics")
@@ -30,15 +30,15 @@ public class SellerStatisticsController {
 	
 	@GetMapping("/QuantityRecentWeek.do")
 	@ResponseBody
-	public List<SellerStatisticsVO> QuantityRecentWeek(SellerStatisticsVO svo) {
-		List<SellerStatisticsVO> stList = service.weekTotalscr(svo);
+	public List<StatisticsVO> QuantityRecentWeek(StatisticsVO svo) {
+		List<StatisticsVO> stList = service.weekTotalscr(svo);
 		return stList;
 	}
 	
 	@GetMapping("/PriceRecentWeek.do")
 	@ResponseBody
-	public List<SellerStatisticsVO> PriceRecentWeek(SellerStatisticsVO svo) {
-		List<SellerStatisticsVO> stList = service.weekTotalPricescr(svo);
+	public List<StatisticsVO> PriceRecentWeek(StatisticsVO svo) {
+		List<StatisticsVO> stList = service.weekTotalPricescr(svo);
 		return stList;
 	}
 }

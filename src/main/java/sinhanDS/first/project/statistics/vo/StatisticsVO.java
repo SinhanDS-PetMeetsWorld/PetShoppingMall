@@ -3,7 +3,7 @@ package sinhanDS.first.project.statistics.vo;
 import lombok.Data;
 
 @Data
-public class SellerStatisticsVO {
+public class StatisticsVO {
 	private int seller_no;
 	private String order_date;
 	private int sale;
