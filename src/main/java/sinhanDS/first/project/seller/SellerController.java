@@ -1,18 +1,11 @@
 package sinhanDS.first.project.seller;
 
-import java.net.URL;
-
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
-import java.util.Map;
-
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -22,16 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import sinhanDS.first.project.product.vo.ProductCategoryVO;
-import sinhanDS.first.project.product.vo.ProductOptionVO;
-import sinhanDS.first.project.product.vo.ProductVO;
 import sinhanDS.first.project.seller.vo.SellerVO;
 import sinhanDS.first.project.user.vo.PaymentVO;
-import sinhanDS.first.project.util.file.FileNameVO;
-import sinhanDS.first.project.util.file.FileController;
-
 
 @Controller
 @RequestMapping("/seller")
