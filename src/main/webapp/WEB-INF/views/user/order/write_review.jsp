@@ -93,7 +93,7 @@
 		<div>
 			<textarea class="col-auto form-control" type="text" name="content"
 				id="reviewContents"
-				placeholder="리뷰를 남겨주세요!"></textarea>
+				placeholder="리뷰를 남겨주세요!" maxlength="34"></textarea>
 		</div>
 		<input id="confirmWrite" type="submit" value="제출">
 	</form>

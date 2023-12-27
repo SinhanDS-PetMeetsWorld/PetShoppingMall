@@ -80,7 +80,7 @@
 						<img src="/resources/img/product/no_image.jpg">
 					</c:if>
 		            <p>평점 : ${item.rating} </p>
-		            <p>내용 : ${item.content} </p>
+		            <p>${item.content} </p>
 		            <p>작성일 : ${item.write_date} </p>
 		    	</div>
 		   	</c:forEach>
