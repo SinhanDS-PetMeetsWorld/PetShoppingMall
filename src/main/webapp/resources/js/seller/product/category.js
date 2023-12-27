@@ -43,7 +43,7 @@ function change_category2(){
 	$(target).empty(); 
 	
 	for(var i = 0; i < category2[this.value].length; i++){
-		var newObj = $('<option value="i">' + category2[this.value][i] + '</option>');
+		var newObj = $('<option value=' + i + '>' + category2[this.value][i] + '</option>');
 		newObj.appendTo(target);
 	}
 }
