@@ -20,6 +20,9 @@
 
 <style>
 
+ .menu_name {
+margin-bottom: 10px;	
+}
 	.contentsright h2{
 		margin-bottom:20px;
 	}
@@ -409,8 +412,8 @@ margin-top : 10px;
   background-color: #fd0;
   font-weight: 800;
   color: #222;
-  margin-top:25px;
-  margin-left: 10px;
+  margin-top:30px;
+  margin-left: 225px;
 
 
 }

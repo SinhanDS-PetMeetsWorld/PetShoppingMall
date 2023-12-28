@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/resources/css/common/quick_menu.css">
 </head>
   <div class="quick_menu">
-    Category
+    회원 정보
       <div class = "quick_menu_category">
         <a href="/seller/edit.do">회원 정보</a><br>
         <a href="/seller/order/settlement.do">정산 관리</a><br>

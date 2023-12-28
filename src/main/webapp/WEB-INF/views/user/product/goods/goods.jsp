@@ -577,6 +577,7 @@ function buy_now(){
 			$(this).next(".A").siblings(".A").slideUp(300); // 1개씩 펼치기
 		});
 	}
+	
 </script>
 </body>
 </html>
