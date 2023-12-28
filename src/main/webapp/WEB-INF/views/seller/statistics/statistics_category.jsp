@@ -12,7 +12,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	
 	<style>
-		
 		.chartarea {
 			clear : both;
 			
@@ -144,7 +143,7 @@
 						       labels: category1List
 						   },
 						 options: {
-							 title : { display : true, text : '대분류별 매출' }
+							 title : { display : true, text : '대분류별 매출액' }
 						 }
 					});
 					
@@ -160,7 +159,10 @@
 						        	    ],
 						       }],
 						       labels: category1List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '대분류별 취소액' }
+						}
 					});
 					
 					new Chart(ctx3, {
@@ -175,7 +177,10 @@
 						        	    ],
 						       }],
 						       labels: category1List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '대분류별 환불액' }
+						}
 					});
 				},
 				error:function(data){
@@ -239,7 +244,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 매출액' }
+						}
 					});
 					
 					new Chart(ctx2, {
@@ -257,7 +265,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 취소액' }
+						}
 					});
 					
 					new Chart(ctx3, {
@@ -275,7 +286,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 환불액' }
+						}
 					});
 				},
 				error:function(data){
@@ -339,7 +353,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 매출액' }
+						}
 					});
 					
 					new Chart(ctx2, {
@@ -357,7 +374,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 취소액' }
+						}
 					});
 					
 					new Chart(ctx3, {
@@ -375,7 +395,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 환불액' }
+						}
 					});
 				},
 				error:function(data){
@@ -439,7 +462,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 매출액' }
+						}
 					});
 					
 					new Chart(ctx2, {
@@ -457,7 +483,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 취소액' }
+						}
 					});
 					
 					new Chart(ctx3, {
@@ -475,7 +504,10 @@
 						        	    ],
 						       }],
 						       labels: category2List
-						   }
+						   },
+						options: {
+							title : { display : true, text : '소분류별 환불액' }
+						}
 					});
 				},
 				error:function(data){
@@ -526,7 +558,7 @@
 					<div class="chartarea">
 					
 						<div class="category1area">
-							<div class="bigchart"><div class="titleInGraphe"><h2>총매출</h2></div><canvas id="cat1chart1" width="550px" height="550px"></canvas></div>
+							<div class="bigchart"><div class="titleInGraphe"><h2>총매출</h2></div><canvas id="cat1chart1"></canvas></div>
 							<div class="smallchart"><div class="titleInGraphe2"><h2>취소</h2></div><canvas id="cat1chart2"></canvas></div>
 							<div class="smallchart"><div class="titleInGraphe2"><h2>환불</h2></div><canvas id="cat1chart3"></canvas></div>
 						</div>

@@ -14,13 +14,20 @@
 	<style>
 		
 		.chartarea {
-			clear : both;
+			width : 950px;
+			height : 650px;
 		}
-		.bigchartbox{
-			margin-left : 30px;
-			margin-top : 30px;
-			width : 800px;
-			height : 400px;
+		.bigchart {
+			width : 600px;
+			height : 600px;
+			border : 1px solid;
+			float : left;
+		}
+		.smallchart {
+			width : 300px;
+			height : 300px;
+			border : 1px solid;
+			float : left;
 		}
 		 .menu_name {
 			margin-bottom: 10px;	
@@ -83,125 +90,100 @@
 			        width : 800px;
 			     }
 	</style>
-	
+	<style>
+		.titleInGraphe{
+			position:absolute;
+			margin-top : 560px;
+		}
+		.titleInGraphe2{
+			position:absolute;
+			margin-top : 260px;
+		}
+		.titleInGraphe1_2{
+			position:absolute;
+			margin-top : 560px;
+		}
+		.titleInGraphe2_2{
+			position:absolute;
+			margin-top : 260px;
+		}
+	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			getQuantityGraph();
-			getPriceGraph();
+			getGenderGraph();
 		});
 		
-		function getQuantityGraph(){
-			var dateList = [];
+		function getGenderGraph(){
+			var nameList = ["남자", "여자"];
+			var genderList = [];
 			var salesList = [];
 			var cancleList = [];
 			var refoundList = [];
-			var ctx = document.getElementById('chart1');
+			var ctx1 = document.getElementById('chart1');
+			var ctx2 = document.getElementById('chart2');
+			var ctx3 = document.getElementById('chart3');
 			
 			$.ajax({
 				type: "GET",
-				url:'QuantityRecentWeek.do',
+				url:'statistics_genderchart.do',
 				data: { seller_no : "${seller.no}" },
 				success:function(data) {
 					for(var i=0; i<data.length; i++){
-						dateList.push(data[i].order_date);
+						genderList.push(nameList[data[i].gender]);
 						salesList.push(data[i].sale);
 						cancleList.push(data[i].cancle);
 						refoundList.push(data[i].refound);
 					}
 					
-					new Chart(ctx, {
-						type: 'bar',
-						   data: {
+					new Chart(ctx1, {
+						type: 'doughnut',
+						data: {
 						       datasets: [{
-						           label: '주문',
 						           data: salesList,
-						           borderColor: 'rgb(54, 162, 235)',
-						           backgroundColor: 'rgb(54, 162, 235, 0.3)',
-						           borderWidth : 1,
-						           order: 3
-						       }, {
-						           label: '취소',
-						           data: cancleList,
-						           type: 'line',
-						           fill: false,
-						           borderColor: 'rgb(255, 99, 132)',
-						           order: 2
-						       }, {
-						           label: '환불',
-						           data: refoundList,
-						           type: 'line',
-						           fill: false,
-						           borderColor: '#B771ED',
-						           order: 1
+						           backgroundColor: [
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 99, 132)'
+						        	    ],
 						       }],
-						       labels: dateList
+						       labels: genderList
 						   },
-						   options : {
-							   title : {
-								   display : true,
-								   text : "최근 일주일 총 주문건수 대비 취소, 환불건수"
-							   }
-						   }
+						 options: {
+							 title : { display : true, text : '성별별 매출액' }
+						 }
 					});
-				},
-				error:function(data){
-					alert('통계 데이터를 불러오지 못했습니다.');
-				}
-			})
-		}
-		
-		function getPriceGraph(){
-			var dateList = [];
-			var salesList = [];
-			var cancleList = [];
-			var refoundList = [];
-			var ctx = document.getElementById('chart2');
-			
-			$.ajax({
-				type: "GET",
-				url:'PriceRecentWeek.do',
-				data: { seller_no : "${seller.no}" },
-				success:function(data) {
-					for(var i=0; i<data.length; i++){
-						dateList.push(data[i].order_date);
-						salesList.push(data[i].sale);
-						cancleList.push(data[i].cancle);
-						refoundList.push(data[i].refound);
-					}
 					
-					new Chart(ctx, {
-						type: 'bar',
-						   data: {
+					new Chart(ctx2, {
+						type: 'doughnut',
+						data: {
 						       datasets: [{
-						           label: '주문',
-						           data: salesList,
-						           borderColor: 'rgb(54, 162, 235)',
-						           backgroundColor: 'rgb(54, 162, 235, 0.3)',
-						           borderWidth : 1,
-						           order: 3
-						       }, {
-						           label: '취소',
 						           data: cancleList,
-						           type: 'line',
-						           fill: false,
-						           borderColor: 'rgb(255, 99, 132)',
-						           order: 2
-						       }, {
-						           label: '환불',
-						           data: refoundList,
-						           type: 'line',
-						           fill: false,
-						           borderColor: '#B771ED',
-						           order: 1
+						           backgroundColor: [
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 99, 132)'
+						        	    ],
 						       }],
-						       labels: dateList
+						       labels: genderList
 						   },
-						   options : {
-							   title : {
-								   display : true,
-								   text : "최근 일주일 총 결제금액 대비 취소, 환불 금액"
-							   }
-						   }
+						options: {
+							title : { display : true, text : '성별별 취소액' }
+						}
+					});
+					
+					new Chart(ctx3, {
+						type: 'doughnut',
+						data: {
+						       datasets: [{
+						           data: refoundList,
+						           backgroundColor: [
+						        	      'rgb(54, 162, 235)',
+						        	      'rgb(255, 99, 132)'
+						        	    ],
+						       }],
+						       labels: genderList
+						   },
+						options: {
+							title : { display : true, text : '성별별 환불액' }
+						}
 					});
 				},
 				error:function(data){
@@ -233,12 +215,9 @@
 					<hr class = "start_line">
 			
 					<div class="chartarea">
-						<div class="bigchartbox">
-							<canvas id="chart1"></canvas>
-						</div>
-						<div class="bigchartbox">
-							<canvas id="chart2"></canvas>
-						</div>
+						<div class="bigchart"><div class="titleInGraphe"><h2>총매출</h2></div><canvas id="chart1"></canvas></div>
+						<div class="smallchart"><div class="titleInGraphe2"><h2>취소</h2></div><canvas id="chart2"></canvas></div>
+						<div class="smallchart"><div class="titleInGraphe2"><h2>환불</h2></div><canvas id="chart3"></canvas></div>
 					</div>
 			</div>
 

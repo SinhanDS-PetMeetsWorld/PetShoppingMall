@@ -64,7 +64,6 @@ public class SellerStatisticsController {
 	@GetMapping("/statistics_category2.do")
 	@ResponseBody
 	public List<StatisticsVO> statistics_category2(StatisticsVO svo) {
-		System.out.println("확인 "+svo.getCategory1());
 		List<StatisticsVO> stList = service.category2scr(svo);
 		return stList;
 	}
@@ -76,11 +75,25 @@ public class SellerStatisticsController {
 		return "/seller/statistics/statistics_gender";
 	}
 	
+	@GetMapping("/statistics_genderchart.do")
+	@ResponseBody
+	public List<StatisticsVO> statistics_genderchart(StatisticsVO svo) {
+		List<StatisticsVO> stList = service.genderscr(svo);
+		return stList;
+	}
+	
 	@GetMapping("/statistics_age.do")
 	public String statisticsAge(HttpSession sess, Model model) {
 		SellerVO seller = (SellerVO) sess.getAttribute("sellerLoginInfo");
 		model.addAttribute("seller", seller);
 		return "/seller/statistics/statistics_age";
+	}
+	
+	@GetMapping("/statistics_agechart.do")
+	@ResponseBody
+	public List<StatisticsVO> statistics_agechart(StatisticsVO svo) {
+		List<StatisticsVO> stList = service.agescr(svo);
+		return stList;
 	}
 	
 }
