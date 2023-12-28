@@ -13,6 +13,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
     <style>
+    
+    .start_line {
+        border: 1px solid #FFDE30;
+        margin-bottom : 10px;
+        width : 100%;
+     }
+
+     .menu_name {
+        margin-bottom: 10px;	
+     }
+    
+    
     	.qna_info{
     		line-height: 30px;
     	}
@@ -61,6 +73,8 @@
                 <%@ include file="/WEB-INF/views/common/quickmenu_seller.jsp"%>
             </div>
 			<div class="contentsright">
+				<h1 class ="menu_name">Q&A 관리</h1>
+					<hr class = "start_line">
 				<div>	
 					<c:if test="${empty qna_array}">
 						<div class="messagebody">

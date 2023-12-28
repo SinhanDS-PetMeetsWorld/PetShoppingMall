@@ -7,9 +7,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/resources/css/common/quick_menu.css">
+<style>
+    .quick_menu {
+      position:fixed;
+    }
+  	
+  	.contentsright{
+  	 margin-left: 130px;
+  	}
+</style>
+
+<script>
+
+
+
+
+</script>
 </head>
 <div class="quick_menu">
-	Category
+	<h2>상품</h2>
 	<div class="quick_menu_category">
 		<c:forEach var="category" items="${ProductCategoryVO.category}" varStatus="status">
 			<c:if test="${status.index == category1 }">
@@ -24,5 +40,7 @@
 		</c:forEach>
 	</div>
 </div>
+
+
 </html>
 

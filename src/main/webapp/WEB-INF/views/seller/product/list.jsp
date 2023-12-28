@@ -214,7 +214,17 @@
 		.searchWord input{
 			height:30px;
 		}
-    	
+
+.start_line {
+        border: 1px solid #FFDE30;
+        margin-bottom : 10px;
+        width : 100%;
+     }
+
+ .menu_name {
+margin-bottom: 10px;	
+}
+
     </style>
     <style>
 	    .messagebody{
@@ -245,6 +255,8 @@
             </div>
 			<div class="contentsright">
 				<div>
+				<h1 class ="menu_name">판매중인 상품</h1>
+					<hr class = "start_line">
 					<c:if test="${empty productList}">
 						<div class="messagebody">
 							<div class="messagebox">
