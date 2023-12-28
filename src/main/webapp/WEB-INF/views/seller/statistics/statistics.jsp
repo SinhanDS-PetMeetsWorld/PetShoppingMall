@@ -14,11 +14,22 @@
 	<style>
 		.totalbox{
 			width : 160px;
-			height : 110px;
-			border : 1px solid;
+			height : 90px;
+			border : 1px solid #E2E2E2;
+			border-top : 2px solid #a0a0a0;
 			float : left;
 			margin : 40px 0px 0px 40px;
 		}
+		.totalbox_name{
+			margin : 17px 0 10px 15px;
+			color : #a9a9a9;
+			font-weight : bold;
+			font-size : 12px;
+		}
+		.totalbox_data{
+			margin-left : 15px;
+		}
+		
 		.totalboxarea{
 			height : 230px;
 			margin-top : 20px;
@@ -244,11 +255,10 @@
 					<hr class = "start_line">
 			
 				<div class="totalboxarea">
-					<h2>최근 일주일 매출 통계(totalbox부분 피그마 참고해서 수정...부탁드립니다)</h2>
-					<div class="totalbox">총 결제건수  <h3>${totalStatistics.orders} 건</h3></div>
-					<div class="totalbox">총 결제 금액  <h3>${totalStatistics.sale} 원</h3></div>
-					<div class="totalbox">총 실매출 금액  <h3>${totalStatistics.realsales} 원</h3></div>
-					<div class="totalbox">총 결제 상품수량  <h3>${totalStatistics.quantity} 개</h3></div>
+					<div class="totalbox"><div class="totalbox_name">총 결제건수</div>  <h3 class="totalbox_data">${totalStatistics.orders} 건</h3></div>
+					<div class="totalbox"><div class="totalbox_name">총 결제 금액</div>  <h3 class="totalbox_data">${totalStatistics.sale} 원</h3></div>
+					<div class="totalbox"><div class="totalbox_name">총 실매출 금액</div>  <h3 class="totalbox_data">${totalStatistics.realsales} 원</h3></div>
+					<div class="totalbox"><div class="totalbox_name">총 결제 상품수량</div>  <h3 class="totalbox_data">${totalStatistics.quantity} 개</h3></div>
 				</div>
 					<div class="chartarea">
 						<h2>통계 상세 보기</h2>

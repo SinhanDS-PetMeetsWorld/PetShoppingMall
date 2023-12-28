@@ -9,7 +9,11 @@
 <title>Pet Meets World</title>
 <!-- 헤더스타일로 이름 -->
 <link rel="stylesheet" href="/resources/css/common/header.css">
-
+<style>
+	.header_unlogin{
+		margin: 25px 0 0 330px;
+	}
+</style>
 
 </head>
 <body>

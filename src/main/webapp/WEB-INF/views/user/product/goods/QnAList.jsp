@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 
 <style>
-	.wrap{
+	.gg{
 		margin-top:30px;
 		width:1200px;
 	}
@@ -58,38 +58,40 @@
 
 </head>
 <body>
-	<div class="wrap">
-		
-		<c:forEach var="item" items="${qna_list}">
-		<div class="qna">
-			<div class="Q" onclick="toggleAnswer(this)" >
-		    	<p> ${item.question_content} (질문 작성일 : ${item.question_write_date}) </p>
+	<div class="gg">
+		<div class="wrap">
+			
+			<c:forEach var="item" items="${qna_list}">
+			<div class="qna">
+				<div class="Q" onclick="toggleAnswer(this)" >
+			    	<p> ${item.question_content} (질문 작성일 : ${item.question_write_date}) </p>
+				</div>
+				<div class="A" style="display:none;">
+					<p style="color : red;"> ${item.answer_content} (답변 작성일 : ${item.answer_write_date})</p>
+				</div>
 			</div>
-			<div class="A" style="display:none;">
-				<p style="color : red;"> ${item.answer_content} (답변 작성일 : ${item.answer_write_date})</p>
-			</div>
-		</div>
-		</c:forEach>
-		
-		<div class="pages">
-		
-	   		<ul class='paging'>
-	            <c:if test="${qnaPaging.prev }">
-	            	<li><button class="qnaPageButton" data-page="${qnaPaging.startPage-1 }"> << </button></li>
-	            </c:if>
-	            <c:forEach var="p" begin="${qnaPaging.startPage}" end="${qnaPaging.endPage}">
-	            	<c:if test="${p == qna_svo.page}">
-		            	<li> <button data-page=${p }>${p }</button></li>
-	                </c:if>
-	                <c:if test="${p != qna_svo.page}">
-	                	<li> <button class="qnaPageButton" data-page=${p }>${p }</button></li>
-	                </c:if>
-	            </c:forEach>
-	            <c:if test="${qnaPaging.next }">
-	            	<li><button class="qnaPageButton" data-page="${qnaPaging.endPage+1 }"> >> </button></li>
-	            </c:if>
-			</ul> 
+			</c:forEach>
+			
+			<div class="pages">
+			
+		   		<ul class='paging'>
+		            <c:if test="${qnaPaging.prev }">
+		            	<li><button class="qnaPageButton" data-page="${qnaPaging.startPage-1 }"> << </button></li>
+		            </c:if>
+		            <c:forEach var="p" begin="${qnaPaging.startPage}" end="${qnaPaging.endPage}">
+		            	<c:if test="${p == qna_svo.page}">
+			            	<li> <button data-page=${p }>${p }</button></li>
+		                </c:if>
+		                <c:if test="${p != qna_svo.page}">
+		                	<li> <button class="qnaPageButton" data-page=${p }>${p }</button></li>
+		                </c:if>
+		            </c:forEach>
+		            <c:if test="${qnaPaging.next }">
+		            	<li><button class="qnaPageButton" data-page="${qnaPaging.endPage+1 }"> >> </button></li>
+		            </c:if>
+				</ul> 
+		   	</div>
 	   	</div>
-   	</div>
+	</div>
 </body>
 </html>

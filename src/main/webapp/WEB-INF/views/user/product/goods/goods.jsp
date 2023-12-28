@@ -64,6 +64,7 @@
 		.goods-name{
 			margin-bottom:30px;
 		}
+		
 		.goods-score{
 			font-size:20px;
 			margin-bottom:10px;
