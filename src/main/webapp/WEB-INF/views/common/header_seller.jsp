@@ -10,8 +10,14 @@
 <!-- 헤더스타일로 이름 -->
 <link rel="stylesheet" href="/resources/css/common/header.css">
 <style>
-	.header_unlogin{
-		margin: 25px 0 0 330px;
+	.header_unlogin2{
+		width: 150px;
+    	height: 30px;
+    	margin: 25px 0 0 285px;
+    	display: inline-block;
+    	position: absolute;
+   	 	border: 1px;
+    	cursor: pointer;
 	}
 	.shopname_seller{
 		float:right;
@@ -41,7 +47,7 @@
 				</div>
 				
 				<c:if test="${empty sellerLoginInfo }">
-					<div class="header_unlogin">
+					<div class="header_unlogin2">
 						<a href="/user/login.do">로그인</a> | <a href="/seller/join.do">회원가입</a>
 					</div>
 				</c:if>
