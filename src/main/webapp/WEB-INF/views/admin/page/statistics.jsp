@@ -15,17 +15,28 @@
     <style>
     	.totalbox{
 			width : 160px;
-			height : 110px;
-			border : 1px solid;
+			height : 90px;
+			border : 1px solid #E2E2E2;
+			border-top : 2px solid #a0a0a0;
 			float : left;
 			margin : 40px 0px 0px 40px;
 		}
+		.totalbox_name{
+			margin : 17px 0 10px 15px;
+			color : #a9a9a9;
+			font-weight : bold;
+			font-size : 12px;
+		}
+		.totalbox_data{
+			margin-left : 15px;
+		}
 		.totalboxarea{
-			height : 230px;
+			height : 180px;
 			margin-top : 20px;
 		}
 		.chartarea {
 			clear : both;
+			margin-left : 40px;
 		}
 		.bigchartarea{
 			margin-bottom : 30px;
@@ -51,6 +62,67 @@
 			height : 300px;
 			float : left;
 		}
+		
+		.menu_name2{
+			margin-top : 20px;
+			margin-bottom : 20px;
+		}
+		
+		.selected_tab_button {
+			 display: inline-block;
+			 outline: 0;
+			 cursor: pointer;
+			 border-radius: 7px;
+			 background: #FFDE30;
+			 border:2px solid #FFDE30;
+			 font-size: 18px;
+			 height: 40px;
+			 padding: 0 11px;
+			 text-align: center;
+			 width: 20%;
+			 min-width: 200px;
+			 font-weight: 500;
+			 color: #0F1111;
+			 margin-right: -4px;
+			
+			 :hover{
+			     background: #F7CA00;
+			     border-color: #F2C200;
+			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+			 	}
+			 }
+			
+		 .tab_button {
+			 display: inline-block;
+			 outline: 0;
+			 cursor: pointer;
+			 border-radius: 7px;
+			 background: #F9FAFB;
+			 border:1px solid #FFDE30;
+			 font-size: 18px;
+			 height: 40px;
+			 padding: 0 11px;
+			 text-align: center;
+			 width: 20%;
+			 min-width: 200px;
+			 font-weight: 500;
+			 color: #0F1111;
+			 margin-right: -4px;
+			 margin-top: -1px;
+			 
+			 
+			 :hover{
+			     background: #F7CA00;
+			     border-color: #F2C200;
+			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+			 	}
+			 	
+		 .start_line {
+		        border: 1px solid #FFDE30;
+		        margin-bottom : 10px;
+		        width : 800px;
+		     }
+		
 	</style>
 	<style>
 		.titleInGraphe{
@@ -212,11 +284,10 @@
 					<div class="chartarea">
 					
 						<div class="totalboxarea">
-							<h2>최근 일주일 매출 통계(totalbox부분 피그마 참고해서 수정...부탁드립니다)</h2>
-							<div class="totalbox">총 결제건수  <h3>${totalStatistics.orders} 건</h3></div>
-							<div class="totalbox">총 결제 금액  <h3>${totalStatistics.sale} 원</h3></div>
-							<div class="totalbox">총 실매출 금액  <h3>${totalStatistics.realsales} 원</h3></div>
-							<div class="totalbox">총 결제 상품수량  <h3>${totalStatistics.quantity} 개</h3></div>
+							<div class="totalbox"><div class="totalbox_name">총 결제건수</div>  <h3 class="totalbox_data">${totalStatistics.orders} 건</h3></div>
+							<div class="totalbox"><div class="totalbox_name">총 결제 금액</div>  <h3 class="totalbox_data">${totalStatistics.sale} 원</h3></div>
+							<div class="totalbox"><div class="totalbox_name">총 실매출 금액</div>  <h3 class="totalbox_data">${totalStatistics.realsales} 원</h3></div>
+							<div class="totalbox"><div class="totalbox_name">총 결제 상품수량</div>  <h3 class="totalbox_data">${totalStatistics.quantity} 개</h3></div>
 						</div>
 						
 						<div class="bigchartarea">
@@ -229,14 +300,15 @@
 							</div>
 						</div>
 						
-						<h2>항목별 세부 통계</h2>
-						<button id="chartbtn" onclick="getCategory1Graph();">대분류별</button>
-						<button id="chartbtn" onclick="getGenderGraph();">성별별</button>
-						<button id="chartbtn" onclick="getAgeGraph();">나이별</button>
-						<button id="chartbtn" onclick="getSellerGraph();">판매자별</button><br>
-						<button id="chartbtn" onclick="getCategory2Graph_dog();">소분류별 : 강아지</button>
-						<button id="chartbtn" onclick="getCategory2Graph_cat();">소분류별 : 고양이</button>
-						<button id="chartbtn" onclick="getCategory2Graph_etc();">소분류별 : 기타</button>
+						<h2 class="menu_name2">항목별 세부 통계</h2>
+						<button class="selected_tab_button  chartbtn" type="button" id="chartbtn" onclick="getCategory1Graph();">대분류별</button>
+						<button class="tab_button chartbtn" type="button" id="chartbtn" onclick="getGenderGraph();">성별별</button>
+						<button class="tab_button chartbtn" type="button" id="chartbtn" onclick="getAgeGraph();">나이별</button>
+						<button class="tab_button chartbtn" type="button" id="chartbtn" onclick="getSellerGraph();">판매자별</button><br>
+						<button class="tab_button chartbtn" type="button" id="chartbtn" onclick="getCategory2Graph_dog();">소분류별 : 강아지</button>
+						<button class="tab_button chartbtn" type="button" id="chartbtn" onclick="getCategory2Graph_cat();">소분류별 : 고양이</button>
+						<button class="tab_button chartbtn" type="button" id="chartbtn" onclick="getCategory2Graph_etc();">소분류별 : 기타</button>
+						<hr class = "start_line">
 						
 						<div class="detailchartarea">
 							<div class="bigchart"><div class="titleInGraphe1_2"><h2>총매출</h2></div><canvas id="detailchart1"></canvas></div>
@@ -253,6 +325,15 @@
 			<div class="footer-color"></div>
         </div>
     </div>
+    <script>
+		$('.chartbtn').on('click', fill);
+		function fill(){
+			$('.selected_tab_button').addClass('tab_button');
+			$('.selected_tab_button').removeClass('selected_tab_button');
+			$(this).attr('class', 'selected_tab_button');				
+		}
+	</script>
+    
     
     <script>
 	function clearChart(){

@@ -20,13 +20,11 @@
 		.bigchart {
 			width : 600px;
 			height : 600px;
-			border : 1px solid;
 			float : left;
 		}
 		.smallchart {
 			width : 300px;
 			height : 300px;
-			border : 1px solid;
 			float : left;
 		}
 		 .menu_name {

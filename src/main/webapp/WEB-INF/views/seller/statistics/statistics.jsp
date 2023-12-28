@@ -255,7 +255,6 @@
 					<hr class = "start_line">
 			
 				<div class="totalboxarea">
-					<h2>최근 일주일 매출 통계(totalbox부분 피그마 참고해서 수정...부탁드립니다)</h2>
 					<div class="totalbox"><div class="totalbox_name">총 결제건수</div>  <h3 class="totalbox_data">${totalStatistics.orders} 건</h3></div>
 					<div class="totalbox"><div class="totalbox_name">총 결제 금액</div>  <h3 class="totalbox_data">${totalStatistics.sale} 원</h3></div>
 					<div class="totalbox"><div class="totalbox_name">총 실매출 금액</div>  <h3 class="totalbox_data">${totalStatistics.realsales} 원</h3></div>
