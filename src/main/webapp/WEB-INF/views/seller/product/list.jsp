@@ -85,9 +85,9 @@
 			 width: 150px;
 			 height: 40px;
 			 font-size: 15px;
-			 background-color: #fd0;
+			 background-color: #ff4742;
 			 font-weight: 500;
-			 color: #222;
+			 color: #fff;
 			margin-left:20px;
 			 margin-bottom:20px;
 		}
