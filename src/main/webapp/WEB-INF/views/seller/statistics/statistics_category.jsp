@@ -104,6 +104,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			getCategory1Graph();
+			getCategory2Graph_dog();
 		});
 		
 		function getCategory1Graph(){

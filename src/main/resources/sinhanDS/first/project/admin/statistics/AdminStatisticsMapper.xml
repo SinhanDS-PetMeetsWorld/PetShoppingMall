@@ -1,4 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sinhanDS.first.project.admin.statistics.AdminStatisticsMapper">
+
+	<select id="weekTotal" resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		SELECT COUNT(no) AS orders, SUM(sales) AS sale, SUM(quantity) AS quantity, SUM(realsales) AS realsales 
+		FROM (
+			SELECT no, (product_price-discount)*quantity AS sales, quantity, 
+			CASE
+			   WHEN cancle_status = 0 AND refound_status = 0 THEN (product_price-discount)*quantity
+			      	ELSE 0
+			   END AS realsales
+			FROM order_detail 
+			WHERE order_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW()
+		) t ;
+	</select>
+	
+	<select id="weekTotalscr" resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		SELECT order_date, COUNT(no) AS sale, SUM(cancle) AS cancle, SUM(refound) AS refound 
+		FROM(
+			SELECT order_date, no, 
+			   CASE
+			      WHEN cancle_status != 0 THEN 1
+			        ELSE 0
+			   END AS cancle,
+			   CASE
+			      WHEN refound_status != 0 THEN 1
+			        ELSE 0
+			   END AS refound
+			FROM order_detail 
+			WHERE order_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW()
+		) t 
+		GROUP BY order_date 
+		ORDER BY order_date;
+	</select>
+	
+	<select id="weekTotalPricescr" resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		SELECT order_date, SUM(sales) AS sale, SUM(cancle) AS cancle, SUM(refound) AS refound 
+		FROM (
+			SELECT order_date, (product_price-discount)*quantity AS sales, 
+			CASE
+				WHEN cancle_status != 0 THEN (product_price-discount)*quantity
+			        ELSE 0
+			END AS cancle,
+			CASE
+				WHEN refound_status != 0 THEN (product_price-discount)*quantity
+			        ELSE 0
+			   END AS refound
+			FROM order_detail 
+			WHERE order_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW()
+		) t 
+		GROUP BY order_date
+		ORDER BY order_date;
+	</select>
+	
+	<select id="category1scr" resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		select category1, sum(sales) as sale, sum(cancle) as cancle, sum(refound) as refound
+		from(select category1, category2, ((d.product_price - discount) * d.quantity) as sales,
+			CASE
+				WHEN d.cancle_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as cancle,
+		    CASE
+				WHEN d.refound_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as refound
+		from product_category c join order_detail d
+		where c.product_no = d.product_no) t
+		group by category1
+		ORDER BY category1;
+	</select>
+	
+	<select id="category2scr" resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		select category1, category2, sum(sales) as sale, sum(cancle) as cancle, sum(refound) as refound
+		from(select category1, category2, ((d.product_price - discount) * d.quantity) as sales,
+			CASE
+				WHEN d.cancle_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as cancle,
+		    CASE
+				WHEN d.refound_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as refound
+		from product_category c join order_detail d
+		where c.product_no = d.product_no AND category1 = #{category1}) AS t
+		group by category2
+		order by category2;
+	</select>
+	
+	<select id="genderscr" resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		select gender, sum(sales) as sale, sum(cancle) as cancle, sum(refound) as refound
+		from(
+		select gender, ((d.product_price - discount) * d.quantity) as sales,
+			CASE
+				WHEN d.cancle_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as cancle,
+		    CASE
+				WHEN d.refound_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as refound
+		from user u join order_detail d
+		where u.no = d.user_no ) t
+		group by gender
+		ORDER BY gender;
+	</select>
+	
+	<select id="agescr" resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		select age, sum(sales) as sale, sum(cancle) as cancle, sum(refound) as refound
+		from(
+		select ((d.product_price - discount) * d.quantity) as sales,
+			CASE
+				WHEN d.cancle_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as cancle,
+		    CASE
+				WHEN d.refound_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as refound,
+			TRUNCATE((to_days(now()) - to_days(birth_date)) / 3650, 0) * 10 as age
+		from user u join order_detail d
+		where u.no = d.user_no ) t
+		group by age
+		order by age;
+	</select>
+	
+	<select id="sellerscr" resultType="sinhanDS.first.project.statistics.vo.StatisticsVO">
+		select seller_no, sum(sales) as sale, sum(cancle) as cancle, sum(refound) as refound
+		from(
+		select seller_no, ((d.product_price - discount) * d.quantity) as sales,
+			CASE
+				WHEN d.cancle_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as cancle,
+		    CASE
+				WHEN d.refound_status != 0 THEN ((d.product_price - discount) * d.quantity)
+		        ELSE 0
+		    END as refound
+		from seller s join order_detail d
+		where s.no = d.seller_no) t
+		group by seller_no
+		order by sales desc;
+	</select>
+	
 </mapper>

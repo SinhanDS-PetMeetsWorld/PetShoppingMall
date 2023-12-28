@@ -126,7 +126,7 @@
 		    END as refound,
 			TRUNCATE((to_days(now()) - to_days(birth_date)) / 3650, 0) * 10 as age
 		from user u join order_detail d
-		where u.no = d.user_no) t
+		where u.no = d.user_no AND seller_no = #{seller_no}) t
 		group by age
 		order by age;
 	</select>
