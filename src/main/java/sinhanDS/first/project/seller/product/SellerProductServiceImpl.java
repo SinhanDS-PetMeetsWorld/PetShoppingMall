@@ -114,10 +114,8 @@ public class SellerProductServiceImpl implements SellerProductService {
 	public List<List<ProductCategoryVO>> getCategoryLists(List<ProductVO> productList){
 		List<List<ProductCategoryVO>> categoryList = new ArrayList<>();
 		for(int i = 0; i < productList.size(); i++) {
-			System.out.println("productNO: " + productList.get(i).getNo());
 			List<ProductCategoryVO> categoryVO = mapper.getCategoriesList(productList.get(i).getNo());
 			categoryList.add(categoryVO);
-			System.out.println(categoryVO);
 		}
 		return categoryList;
 	}
@@ -129,10 +127,8 @@ public class SellerProductServiceImpl implements SellerProductService {
 	public List<List<ProductOptionVO>> getOptionLists(List<ProductVO> productList){
 		List<List<ProductOptionVO>> optionList = new ArrayList<>();
 		for(int i = 0; i < productList.size(); i++) {
-			System.out.println("productNO: " + productList.get(i).getNo());
 			List<ProductOptionVO> optionVO = mapper.getOptionsList(productList.get(i).getNo());
 			optionList.add(optionVO);
-			System.out.println(optionVO);
 		}
 		return optionList;
 	}

@@ -144,7 +144,6 @@ public class SellerProductController {
 
 	@PostMapping("/remove.do")
 	public String remove(ProductVO vo) {
-		System.out.println("product image_url체크  :" + vo.getImage_url());
 		service.remove_file(vo);
 		service.removeCategory(vo.getNo());
 		service.removeOption(vo.getNo());
@@ -157,7 +156,6 @@ public class SellerProductController {
 	@RequestMapping(value = "/qnalist.do", method = RequestMethod.GET)
 	public String QnA_list(Model model, HttpSession sess, HttpServletRequest request, HttpServletResponse response,  ProductVO pvo,
 			ProductQnAVO qnavo) throws IOException {
-		System.out.println("체크체크");
 		SellerVO seller = (SellerVO) sess.getAttribute("sellerLoginInfo");
 
 		int seller_no = seller.getNo();
@@ -189,10 +187,8 @@ public class SellerProductController {
 					putName.add(qna_list.get(i).getQuestion_content()); // 질문 내용 동결? // 질문 내용: 6번
 					putName.add(String.valueOf(qna_list.get(i).getAnswer_write_date())); //답변 등록 날짜 7번 
 					putName.add(String.valueOf(qna_list.get(i).getAnswer_content())); // 답변 내용 8번
-					System.out.println("체크: " + putName);
 					qna_array.add(putName);
 				}
-				System.out.println(" QnA리스트 확인 : "  + qna_array);
 			} 
 			 
 
@@ -207,7 +203,6 @@ public class SellerProductController {
 	@GetMapping("/qnaanswer.do")
 	public String QnA_answer(Model model, HttpSession sess, HttpServletRequest request, ProductQnAVO qnavo) {
 		int r = service.setQnAanswer(qnavo);
-		System.out.println("값이 들어가나??? " + r);
 
 		return "seller/product/qnaanswer";
 	}

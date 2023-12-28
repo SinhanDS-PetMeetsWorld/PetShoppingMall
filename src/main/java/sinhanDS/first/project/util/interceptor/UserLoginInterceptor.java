@@ -17,10 +17,8 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 							Object handler) throws Exception {
 		HttpSession sess = request.getSession();
 		UserVO login = (UserVO)sess.getAttribute("userLoginInfo");
-		System.out.println("url체크: " + request.getRequestURL());
 		
 		String url = ("" + request.getRequestURL());
-		System.out.println("url 변수 체크: " + url);
 		
 		if (login == null) {
 		
