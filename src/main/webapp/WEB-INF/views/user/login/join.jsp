@@ -414,7 +414,7 @@ text-align : right;
 				            
 				            <div class = "insert_tag">
 				            	<input class="aaa" type="password" name="password" id="password">
-				        		<span>비밀번호 확인*</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				        		<span>비밀번호 확인*</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 				            	<input class="aaa" type="password" id="password_check">
 				            </div>
 				            

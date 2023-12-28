@@ -6,18 +6,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/resources/css/common/quick_menu.css">
-<style>
-    .quick_menu {
-      position:fixed;
-    }
-  	
-  	.contentsright{
-  	 margin-left: 140px;
-  	}
-</style>
 
 
-</head>
   <div class="quick_menu">
     회원 정보
       <div class = "quick_menu_category">

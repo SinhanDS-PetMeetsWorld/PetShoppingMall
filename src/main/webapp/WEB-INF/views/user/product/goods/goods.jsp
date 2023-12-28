@@ -16,6 +16,7 @@
 		.contentsright{
 			width: 100%;
 			height: 1000px;
+			margin-left : -35px;
 		}
 		
 		.right_side{
@@ -157,7 +158,7 @@
         }
 
         .board_title.on {
-            background-color: #ddd;
+            background-color: #FFDE30;
             display: inline-block;
 		 	outline: 0;
 			cursor: pointer;
@@ -203,7 +204,11 @@
 			font-weight: bolder;
         	
         }
-        
+    .line {
+        border: 1px solid #ccc;
+        margin-bottom : 10px;
+        width : 800px;
+     }    
     </style>
 </head>
 <body>
