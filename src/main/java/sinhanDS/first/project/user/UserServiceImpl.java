@@ -43,7 +43,6 @@ public class UserServiceImpl implements UserService {
 	public int edit(UserVO vo) {
 		
 		
-		System.out.println(vo);
 		String phone0 = vo.getPhone0();
 		String phone1 = vo.getPhone1();
 		String phone2 = vo.getPhone2();
@@ -54,10 +53,8 @@ public class UserServiceImpl implements UserService {
 		SimpleDateFormat sdf = new SimpleDateFormat(vo.getBirth0() + "-" + vo.getBirth1() + "-" + vo.getBirth2());
 		String ss = sdf.format(new java.util.Date());
 		Date birth_date = java.sql.Date.valueOf(ss);
-		System.out.println(birth_date);
 		vo.setBirth_date(birth_date);
 		
-		System.out.println(vo);
 
 		if(vo.getPassword()=="") {
 			return mapper.edit(vo);
@@ -82,7 +79,6 @@ public class UserServiceImpl implements UserService {
 		SimpleDateFormat sdf = new SimpleDateFormat(vo.getBirth0() + "-" + vo.getBirth1() + "-" + vo.getBirth2());
 		String ss = sdf.format(new java.util.Date());
 		Date birth_date = java.sql.Date.valueOf(ss);
-		System.out.println(birth_date);
 		vo.setBirth_date(birth_date);
 		
 		return mapper.user_regist(vo);
@@ -156,7 +152,6 @@ public class UserServiceImpl implements UserService {
 	// 현재 로그인 중인 유저의 no를 받아와 카트VO의 user_no와 일치하는 컬럼을 리스트로 전부 가져옴
 	public List<CartVO> exist_cart(UserVO vo){
 		List<CartVO> list = mapper.exist_cart(vo.getNo());
-		System.out.println("카트브이오" + list);
 		return list;
 	}
 	
@@ -169,7 +164,6 @@ public class UserServiceImpl implements UserService {
 			ProductVO product_vo = mapper.search_cart_product(cartvo.get(i).getProduct_no());
 			list.add(product_vo);
 		}
-		System.out.println("프로덕트브이오 " + list);
 		return list; 
 	}
 	
@@ -182,7 +176,6 @@ public class UserServiceImpl implements UserService {
 			cart_op_vo.add(mapper.cart_option_number(cartvo.get(i).getNo()));
 
 		}
-		System.out.println("카트옵션브이오 : " + cart_op_vo);
 		return cart_op_vo;
 	}
 	
@@ -199,7 +192,6 @@ public class UserServiceImpl implements UserService {
 			}
 				list.add(list2);
 		}
-		System.out.println("프로덕트옵션 : " + list);
 		return list;
 	}
 

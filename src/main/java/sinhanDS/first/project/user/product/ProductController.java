@@ -53,16 +53,13 @@ public class ProductController {
 		 * 로그인 필요 여부에 따라서 적용*/
 		 
 			int user_no = login.getNo();
-			System.out.println("생명의 전화 번호 : " + user_no);
 			
 			
 			savo.setUser_no(user_no);
 			savo.setProduct_no(Integer.valueOf(product_no));
-			System.out.println("원피스 사보의 모험 : " + savo );
 			
 			List<SaveBoxVO> zzim_check = service.zzim_check(savo);
 			
-			System.out.println("찜 리스트 나오냐?? "+ zzim_check);
 			model.addAttribute("zzim_check" , zzim_check);
 			
 		}
@@ -154,7 +151,6 @@ public class ProductController {
 	*/	
 		int r = service.zzim_insert(savo);
 		
-		System.out.println("savo 체크 : " + savo);
 		
 		return "user/product/goods/goods";
 
@@ -173,7 +169,6 @@ public class ProductController {
 		
 		int r = service.zzim_cancel(savo);
 		
-		System.out.println("savo 체크 : " + savo);
 
 		return "user/product/goods/goods";
 	}
@@ -189,11 +184,7 @@ public class ProductController {
 				
 		int no = pvo.getNo() ;	
 		
-		System.out.println("제품 번호 찍히나??" + no);
-		System.out.println("product_no 체크: " + request.getParameter("no"));
-		
 		int seller_no = service.Seller_no(Integer.valueOf(no));
-		System.out.println("qna_search_seller 체크: " + seller_no);
 		pvo.setSeller_no(seller_no);
 		
 		model.addAttribute("product_no", no);
@@ -210,9 +201,7 @@ public class ProductController {
 		HttpSession loginsess = request.getSession();
 		UserVO login = (UserVO)loginsess.getAttribute("userLoginInfo");
 		
-		System.out.println("qnavo 체크 : " + qnavo);
 		int r = service.QNA_insert(qnavo , request);
-		System.out.println("r값 확인 :" +  r);
 		
 		if (r == 1) { // 정상적으로 DB에 insert 
 			model.addAttribute("cmd", "finish");

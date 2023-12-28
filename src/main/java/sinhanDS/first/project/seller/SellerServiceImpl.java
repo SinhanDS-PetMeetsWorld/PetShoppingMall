@@ -61,14 +61,12 @@ public class SellerServiceImpl implements SellerService {
 	@Override
 	public int edit(SellerVO vo) {
 		
-		System.out.println(vo);
 		String phone0 = vo.getPhone0();
 		String phone1 = vo.getPhone1();
 		String phone2 = vo.getPhone2();
 		String phone = phone0 + "-" + phone1 + "-" + phone2;
 		vo.setPhone(phone);
 		
-		System.out.println("vo 뭐냐 : " +  vo);
 		
 		if(vo.getPassword()=="") {
 			return mapper.edit(vo);

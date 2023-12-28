@@ -123,7 +123,6 @@ public class UserController {
 	@PostMapping("/emailCheck.do")
 	public String emailCheck(@RequestParam String email) {
 		int checkNum = (int)(Math.random()*899999) + 100000;
-		System.out.println(checkNum);
         
 		try {
 	            MimeMessage message = javaMailSender.createMimeMessage();
@@ -146,7 +145,6 @@ public class UserController {
 	
 	@PostMapping("/update.do")
 	public String edit(UserVO vo, Model model) {
-		System.out.println("전송 : " + vo);
 		
 		int r = service.edit(vo);
 		String msg = "";
@@ -186,7 +184,6 @@ public class UserController {
 		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
 			
 		jspvo.setUser_no(vo.getNo());
-		System.out.println(jspvo);		// 현재 로그인한 유저의 no가 들어간 주소VO객체
 		int r = service.insert_addr(jspvo);
 
 		
@@ -258,7 +255,6 @@ public class UserController {
 	public String addpayment(Model model) {
 		PaymentVO vo = new PaymentVO();
 		model.addAttribute("vo", vo);
-		System.out.println(model);
 		return "user/edit/user_add_payment_form";
 	}
 	
@@ -267,7 +263,6 @@ public class UserController {
 		UserVO vo = (UserVO)sess.getAttribute("userLoginInfo");
 			
 		payvo.setUser_no(vo.getNo());
-		System.out.println(payvo);		// 현재 로그인한 유저의 no가 들어간 PaymentVO객체
 		int r = service.insert_payment(payvo);
 
 		
@@ -297,7 +292,6 @@ public class UserController {
 		String url = "add_payment_form.do";
 		
 		int r = service.modify_payment(payvo);
-		System.out.println("페이페이 : " + payvo);
 		if (r > 0) {
 			msg = "정상적으로 수정되었습니다.";
 		} else {
@@ -344,19 +338,15 @@ public class UserController {
 		//현재 세션에 로그인된 유저의 모든 장바구니를 모델에 담음
 		List<CartVO> cartvolist = service.exist_cart(vo);
 		model.addAttribute("cartvolist", cartvolist);
-		System.out.println("카트VO 리스트" + cartvolist);
 		
 		List<List<CartOptionVO>> cartop = service.cart_option_number(cartvolist);
 		model.addAttribute("cartoptionvolist", cartop);
-		System.out.println("카트옵션VO 리스트 : " + cartop);
 		
 		List<List<ProductOptionVO>> provopt = service.get_product_option(cartop);
 		model.addAttribute("optionlist", service.get_product_option(cartop));
-		System.out.println("프로덕트옵션VO 리스트: " + provopt);
 		
 		List<ProductVO> prov = service.search_cart_product(cartvolist);
 		model.addAttribute("productvolist", service.search_cart_product(cartvolist));
-		System.out.println("상품VO 리스트 : " + prov);
 		
 		
 		return "user/cart/user_cart";
@@ -415,7 +405,6 @@ public class UserController {
 				save_list.add(String.valueOf(login.getNo())); // 유저 번호 6 
 				
 				save_list2.add(save_list);
-				System.out.println("세이블 2" + save_list2);
 				
 				}
 		}
@@ -456,10 +445,8 @@ public class UserController {
         model.addAttribute("paging", map);
 		 
 		List<ReviewVO> review_list = service.review_list(svo);
-		System.out.println("리뷰 리스트 " +  review_list);	
 		
 	    List<OrderDetailVO> order_detail = service.order_detail(odvo);
-	    System.out.println("오더 디테일" + order_detail);
 
 		List<List<String>> review_list2 = new ArrayList<List<String>>();	
 		
@@ -490,7 +477,6 @@ public class UserController {
 				review_list2.add(review_list1);
 				
 			}
-			System.out.println("오늘 폼 미쳤다 2" + review_list2);
 			model.addAttribute("review_list2" , review_list2);
 		}
 		return "user/review/review_list";
@@ -528,10 +514,8 @@ public class UserController {
 			
 			
 		List<OrderDetailVO> possible_write_review = service.possible_write_review(svo);
-	    System.out.println("오더 디테일" + possible_write_review); 
 	    
 		List<String> product_image_list = service.product_image_list(possible_write_review);
-		System.out.println("image_list: " + product_image_list);
 		
 		
 		List<List<String>> possible_write_review2 = new ArrayList<List<String>>();	
@@ -599,7 +583,6 @@ public class UserController {
 	public String findPwd(UserVO vo, Model model) {
 		
 		int checkNum = (int)(Math.random()*899999) + 100000;
-		System.out.println("확인: "+checkNum);
 		vo.setPassword(String.valueOf(checkNum));
 		
 		int temp = service.findPwd(vo);
