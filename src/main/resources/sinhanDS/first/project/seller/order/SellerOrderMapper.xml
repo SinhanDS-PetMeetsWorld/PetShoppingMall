@@ -20,7 +20,7 @@
 	<select id="getOrderNoList_od" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">
 		SELECT DISTINCT(order_no), seller_no FROM order_detail 
 		WHERE  seller_no = #{no} AND delivery_status = 1
-		ORDER BY order_no DESC;
+		ORDER BY delivery_no DESC;
 	</select>
 	
 	<select id="getOrderNoList_ad" parameterType="int" resultType="sinhanDS.first.project.order.vo.OrderDetailVO">

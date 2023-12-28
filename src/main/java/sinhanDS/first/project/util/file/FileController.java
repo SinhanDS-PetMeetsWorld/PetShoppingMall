@@ -54,7 +54,6 @@ public class FileController {
 	}
 	
 	public void remove(ProductVO vo) {
-		System.out.println("삭제 파일명 체크 : " + registed_img_path + "/" + vo.getImage_url());
 		Path filePath = Paths.get(registed_img_path + "/" + vo.getImage_url());
 		try {
 			Files.deleteIfExists(filePath);
