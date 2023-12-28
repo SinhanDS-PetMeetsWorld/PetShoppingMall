@@ -13,18 +13,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
     <style>
-    
-    .start_line {
-        border: 1px solid #FFDE30;
-        margin-bottom : 10px;
-        width : 100%;
-     }
-
-     .menu_name {
-        margin-bottom: 10px;	
-     }
-    
-    
     	.qna_info{
     		line-height: 30px;
     	}
@@ -73,8 +61,6 @@
                 <%@ include file="/WEB-INF/views/common/quickmenu_seller.jsp"%>
             </div>
 			<div class="contentsright">
-				<h1 class ="menu_name">Q&A 관리</h1>
-					<hr class = "start_line">
 				<div>	
 					<c:if test="${empty qna_array}">
 						<div class="messagebody">
@@ -90,6 +76,8 @@
 							  제품명 : ${qna_array[qna_quant.index][0]} <br>
 							</c:if>	
 							
+							<input class="quest_no" type="hidden" data-no="${qna_array[qna_quant.index][3] }"  value="${qna_array[qna_quant.index][3] }">
+							
 							<c:if test = "${not empty qna_array[qna_quant.index][4]}">
 							  질문 등록일 : ${qna_array[qna_quant.index][4]} <br>
 							</c:if>		
@@ -101,12 +89,12 @@
 							</c:if>		
 							<c:if test = "${not empty qna_array[qna_quant.index][7]}">
 							 	 <div class="qna_textbox">
-							 	 답변 내용 : 
-							 	 <c:if test="${'null' == qna_array[qna_quant.index][7]}">
-							 	 	<input type= text id ="answer_content" class="answer_content"  style="width:400px; height:50px"> 		  
-					  				<input type="button" id="submit" name = "등록" value="등록" class="writeAnswer" >
-					  				<br><br>	
-							 	 </c:if>
+								 	 답변 내용 : 
+								 	 <c:if test="${'null' == qna_array[qna_quant.index][7]}">
+								 	 	<input type= text id ="answer_content" class="answer_content"  style="width:400px; height:50px"> 		  
+						  				<input type="button" id="submit" name = "등록" value="등록" class="writeAnswer" >
+						  				<br><br>	
+								 	 </c:if>
 							 	 <c:if test="${'null' != qna_array[qna_quant.index][7]}">
 							 	 		${ qna_array[qna_quant.index][7]} <br><br>
 							 	 </c:if>
@@ -129,12 +117,9 @@
 	
 	function qnaanswer() {
 		//console.log($(this.parentNode).find('.quest_no').find('span').text());
-
+		
 		var answer_content = $(this.parentNode.querySelector("#answer_content")).val();
-		console.log($(this.parentNode.parentNode).find('.quest_no').data('no'));
 		var no = $(this.parentNode.parentNode).find('.quest_no').data('no');
-		console.log(answer_content);
-		console.log(no);
 		
 		$.ajax({
 			method:'GET',
@@ -151,7 +136,7 @@
 			error: function (error) {
 	        }
 		});
-
+		
 	}
 
 </script>
