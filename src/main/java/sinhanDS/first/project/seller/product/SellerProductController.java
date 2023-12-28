@@ -131,8 +131,10 @@ public class SellerProductController {
 	@PostMapping("/edit.do")
 	public String edit2(@RequestParam MultipartFile filename, ProductVO vo, ProductCategoryVO cvo,
 			ProductOptionVO ovo) {
-		service.remove_file(vo);
-		service.upload_file(filename, vo);
+		if(filename.getOriginalFilename() != "") {
+			service.remove_file(vo);
+			service.upload_file(filename, vo);
+		}
 
 		service.editProduct(vo);
 		service.removeCategory(vo.getNo());
