@@ -110,10 +110,10 @@
 	</style>
 	<script type="text/javascript">
 	$(document).ready(function(){
-		getGenderGraph();
+		getAgeGraph();
 	});
 	
-	function getGenderGraph(){
+	function getAgeGraph(){
 		var ageList = [];
 		var salesList = [];
 		var cancleList = [];

@@ -19,12 +19,10 @@
 		.category1area{
 			width : 950px;
 			height : 650px;
-			border : 1px solid;
 		}
 		.category2area{
 			width : 950px;
 			height : 650px;
-			border : 1px solid;
 		}
 		.bigchart {
 			width : 600px;
@@ -43,67 +41,67 @@
 			margin-bottom: 10px;	
 		}
     	.selected_tab_button {
-			 display: inline-block;
-			 outline: 0;
-			 cursor: pointer;
-			 border-radius: 7px;
-			 background: #FFDE30;
-			 border:2px solid #FFDE30;
-			 font-size: 18px;
-			 height: 40px;
-			 padding: 0 11px;
-			 text-align: center;
-			 width: 20%;
-			 min-width: 200px;
-			 font-weight: 500;
-			 color: #0F1111;
-			 margin-right: -4px;
-			 border-bottom-left-radius: 0%;
-			 border-bottom-right-radius: 0%;
-			 :hover{
-			     background: #F7CA00;
-			     border-color: #F2C200;
-			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
-			 	}
-			 }
-			
-			 .tab_button {
-			 display: inline-block;
-			 outline: 0;
-			 cursor: pointer;
-			 border-radius: 7px;
-			 background: #F9FAFB;
-			 border:1px solid #FFDE30;
-			 font-size: 18px;
-			 height: 40px;
-			 padding: 0 11px;
-			 text-align: center;
-			 width: 20%;
-			 min-width: 200px;
-			 font-weight: 500;
-			 color: #0F1111;
-			 margin-right: -4px;
-			 margin-top: -1px;
-			 border-bottom-left-radius: 0%;
-			 border-bottom-right-radius: 0%;
-			 border-bottom : none;
-			 :hover{
-			     background: #F7CA00;
-			     border-color: #F2C200;
-			     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
-			 	}
-			 	
-			 .start_line {
-			        border: 1px solid #FFDE30;
-			        margin-bottom : 10px;
-			        width : 800px;
-			  }
+		 display: inline-block;
+		 outline: 0;
+		 cursor: pointer;
+		 border-radius: 7px;
+		 background: #FFDE30;
+		 border:2px solid #FFDE30;
+		 font-size: 18px;
+		 height: 40px;
+		 padding: 0 11px;
+		 text-align: center;
+		 width: 20%;
+		 min-width: 200px;
+		 font-weight: 500;
+		 color: #0F1111;
+		 margin-right: -4px;
+		 border-bottom-left-radius: 0%;
+		 border-bottom-right-radius: 0%;
+		 :hover{
+		     background: #F7CA00;
+		     border-color: #F2C200;
+		     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+		 	}
+		 }
+		
+		 .tab_button {
+		 display: inline-block;
+		 outline: 0;
+		 cursor: pointer;
+		 border-radius: 7px;
+		 background: #F9FAFB;
+		 border:1px solid #FFDE30;
+		 font-size: 18px;
+		 height: 40px;
+		 padding: 0 11px;
+		 text-align: center;
+		 width: 20%;
+		 min-width: 200px;
+		 font-weight: 500;
+		 color: #0F1111;
+		 margin-right: -4px;
+		 margin-top: -1px;
+		 border-bottom-left-radius: 0%;
+		 border-bottom-right-radius: 0%;
+		 border-bottom : none;
+		 :hover{
+		     background: #F7CA00;
+		     border-color: #F2C200;
+		     box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+		 	}
+		 	
+		 .start_line {
+		        border: 1px solid #FFDE30;
+		        margin-bottom : 10px;
+		  }
 		
 	</style>
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
 			getCategory1Graph();
+			getCategory2Graph_dog();
 		});
 		
 		function getCategory1Graph(){
@@ -566,10 +564,10 @@
 							<div class="smallchart"><div class="titleInGraphe2"><h2>환불</h2></div><canvas id="cat1chart3"></canvas></div>
 						</div>
 						
-						<button id="chartbtn" onclick="getCategory2Graph_dog();">강아지</button>
-						<button id="chartbtn" onclick="getCategory2Graph_cat();">고양이</button>
-						<button id="chartbtn" onclick="getCategory2Graph_etc();">기타</button>
-						
+						<button class="tab_button chartbtn" id="chartbtn" onclick="getCategory2Graph_dog();">강아지</button>
+						<button class="tab_button chartbtn" id="chartbtn" onclick="getCategory2Graph_cat();">고양이</button>
+						<button class="tab_button chartbtn" id="chartbtn" onclick="getCategory2Graph_etc();">기타</button>
+						<hr class = "start_line">
 						<div class="category2area">
 							<div class="bigchart"><div class="titleInGraphe1_2"><h2>총매출</h2></div><canvas id="cat2chart1"></canvas></div>
 							<div class="smallchart"><div class="titleInGraphe2_2"><h2>취소</h2></div><canvas id="cat2chart2"></canvas></div>
@@ -586,8 +584,13 @@
     <div class="footer">
 		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	</div>
-
-
-
+	<script>
+		$('.chartbtn').on('click', fill);
+		function fill(){
+			$('.selected_tab_button').addClass('tab_button');
+			$('.selected_tab_button').removeClass('selected_tab_button');
+			$(this).attr('class', 'selected_tab_button');				
+		}
+	</script>
 </body>
 </html>
