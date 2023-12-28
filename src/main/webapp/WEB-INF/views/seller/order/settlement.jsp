@@ -285,7 +285,7 @@ width : 350px;
 						
 							<div class ="insert_tag">
 							  		<form method="post" name="deliveryForm"  id="deliveryForm" onsubmit="return get_set();" action="settlement_get.do">
-										<input class ="moneyConfirm" "type="submit" id="settlement_btn" value="정산 요청" 
+										<input class ="moneyConfirm" type="submit" id="settlement_btn" value="정산 요청" 
 											<c:if test='${settlement_list_count == 0}'> disabled="disabled" </c:if>>
 												<input type="hidden" name="seller_no" value="${svo.no}">
 						                        <input type="hidden" name="total_settlement" value="${settlement_price}">
