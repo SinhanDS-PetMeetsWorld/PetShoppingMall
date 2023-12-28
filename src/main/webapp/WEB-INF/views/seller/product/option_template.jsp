@@ -27,5 +27,4 @@
 <div class="option_add_button" style="display: none;">
 	<a href="javascript:;" class="add_btn_option"><img
 		src="/resources/img/product/add.png" width="15" height="15" /> 옵션 추가</a>
-		<hr class ="option_line">
 </div>

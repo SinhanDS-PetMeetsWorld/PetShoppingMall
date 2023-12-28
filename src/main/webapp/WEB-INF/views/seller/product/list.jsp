@@ -34,6 +34,10 @@
     		border:1px solid black;
     	}
     	
+    	.nowsale_table_title td:first-child{
+    		background: white;
+    	}
+    	
     	.pro_image{
     		width:100px;
     	}
