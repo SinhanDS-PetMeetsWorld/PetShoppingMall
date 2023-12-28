@@ -13,6 +13,14 @@
 	.header_unlogin{
 		margin: 25px 0 0 330px;
 	}
+	.shopname_seller{
+		float:right;
+		font-size:35px;
+		margin-left:10px;
+		margin-top:10px;
+		
+	}
+	
 </style>
 
 </head>
@@ -24,9 +32,10 @@
 		<div class="header_wrapbar">
 			<div class="header_title">
 				<!-- 헤더타이틀로 다바꾸기 -->
-				<h1 id="header_shopname";>
-					<a href="/seller/index.do"><b> Pet Meets World 판매자</b></a>
-				</h1>
+				<div id="header_shopname";>
+					<a href="/seller/index.do"><img class="header_name" src="/resources/img/common/name_img.png"><b class="shopname_seller">판매자</b></a>
+					
+				</div>
 				<div class="header_menu">
 					
 				</div>

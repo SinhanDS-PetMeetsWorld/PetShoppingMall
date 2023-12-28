@@ -19,7 +19,7 @@
 			<div class="header_title">
 				<!-- 헤더타이틀로 다바꾸기 -->
 				<h1 id="header_shopname";>
-					<a href="/"><b> Pet Meets World </b></a>
+					<a href="/"><img class="header_name" src="/resources/img/common/name_img.png"></a>
 				</h1>
 				<div class="header_menu">
 					<ul>
