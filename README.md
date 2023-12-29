@@ -28,15 +28,20 @@
     <td><a href="https://github.com/powerpress0809">@powerpress0809</a></td>
   </tr>
 </table>
-![spring](https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/7a667f94-b9b2-448e-8e83-9bb37153ef8e)
-![mysql](https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/3e7d7588-127c-482b-a166-dba5fd92d952)
 
 <br>
 <h2>사용 기술</h2>
-<li>Spring Framwork</li>
-<li>JQuery, Ajax</li>
-<li>JUnit</li>
-<li>MySQL</li>
-<li>MyBatis</li>
-<li>Docker</li>
-<li>AWS</li>
+<h3>Spring Framwork</h3>
+<h3>MySQL</h3>
+<h3>MyBatis</h3>
+<h3>Docker</h3>
+<h3>AWS</h3>
+<h3>JQuery</h3>
+<h3>Ajax</h3>
+<h3>JUnit</h3>
+
+<h2>개발기간</h2>
+<li>11월 19일 ~ 12월 28일</li>
+<img width="725" alt="일정" src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/b0044ca1-dc77-491e-ad35-28c4326cc83c">
+
+<h2>프로젝트 구조</h2>
