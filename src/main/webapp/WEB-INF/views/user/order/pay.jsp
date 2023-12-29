@@ -240,7 +240,7 @@ function iniPay() {
            pay_method: 'card', // 결제 방식
            merchant_uid: "IMP" + newtime, // 결제 고유 번호
            name: '-', // 제품명
-           amount: /*amount*/ 1, // 가격
+           amount: amount, // 가격
            //구매자 정보 ↓
            buyer_email: buyer_email,
            buyer_name: buyer_name,
