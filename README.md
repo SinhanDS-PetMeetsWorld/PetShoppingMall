@@ -1,4 +1,4 @@
-<h1>Peet Shopping Mall</h1>
+<h1>Pet Meets World</h1>
 <h2>신한 DS 아카데미 프로젝트</h2>
 
 <img width="960" alt="메인페이지" src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/3cc8f834-2b23-40e7-bd71-079cd32ed912">
@@ -7,7 +7,7 @@
 
 
 <br>
-<h2>팀원 소개</h2>
+<h2>팀원 구성</h2>
 <table>
   <tr>
     <td>이미지</td>
@@ -27,5 +27,16 @@
     <td><a href="https://github.com/lyegoos">@lagu</a></td>
     <td><a href="https://github.com/powerpress0809">@powerpress0809</a></td>
   </tr>
-  
 </table>
+![spring](https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/7a667f94-b9b2-448e-8e83-9bb37153ef8e)
+![mysql](https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/3e7d7588-127c-482b-a166-dba5fd92d952)
+
+<br>
+<h2>사용 기술</h2>
+<li>Spring Framwork</li>
+<li>JQuery, Ajax</li>
+<li>JUnit</li>
+<li>MySQL</li>
+<li>MyBatis</li>
+<li>Docker</li>
+<li>AWS</li>
