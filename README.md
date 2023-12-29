@@ -51,8 +51,7 @@
 <h4>구매자</h4>
 <img width="450" height="427" alt="일정" src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/9b6a4a17-ff2d-4b54-97f8-1f3ebf918139">
 <img width="450" alt="일정" src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/b7eababe-099a-4d37-b71d-1eb1d4349cda">
-<h4>판매자</h4>
-<img width="500" alt="일정" src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/e2b84f25-910b-46f4-952b-0e3275558ac0">
-<h4>관리자</h4>
-<img width="500" alt="일정" src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/b0de9447-2923-40d4-88f5-319e1ba9c165">
+<h4>판매자/관리자</h4>
+<img width="450" alt="일정" src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/e2b84f25-910b-46f4-952b-0e3275558ac0">
+<img width="450" height="456" alt="일정" src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/b0de9447-2923-40d4-88f5-319e1ba9c165">
 
