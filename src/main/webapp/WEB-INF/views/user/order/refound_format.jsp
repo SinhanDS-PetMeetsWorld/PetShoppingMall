@@ -7,7 +7,7 @@
  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
    
 <meta charset="UTF-8">
-<title>환불 신청</title>
+<title>구매자:: 환불 신청</title>
 
 <style>
 
