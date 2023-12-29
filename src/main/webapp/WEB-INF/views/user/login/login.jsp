@@ -4,7 +4,7 @@
 <html lang="ko">
 <head> 
     <meta charset="utf-8">
-    <title>로그인</title>
+    <title>구매자:: 로그인</title>
     <META name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>

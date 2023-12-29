@@ -45,7 +45,7 @@
  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
    
 <meta charset="UTF-8">
-<title>환불 요청</title>
+<title>구매자:: 환불 정보</title>
 </head>
 <body>
 	<h2>환불 사유</h2>

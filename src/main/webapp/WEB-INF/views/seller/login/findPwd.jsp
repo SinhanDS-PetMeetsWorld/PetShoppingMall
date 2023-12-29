@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/resources/css/common/template.css">
-    <title>회원가입</title>
+    <title>판매자:: 비밀번호 찾기</title>
     <script>
     	function findPwd() {
     		if ($("#id").val() == '') {
