@@ -262,7 +262,6 @@ height : 70px;
                     </c:if>
 				</ul> 
 			</div>
-	        <c:if test="${!empty orderList }">
 		        <div class="bbsSearch">
 		            <form method="get" name="searchForm" id="searchForm" action="list.do">
 			            <span class="srchSelect">
@@ -277,7 +276,6 @@ height : 70px;
 						</span>
 		        	</form>
 		        </div>		
-			</c:if>
         </div>
     </div>
     <div class="footer">
