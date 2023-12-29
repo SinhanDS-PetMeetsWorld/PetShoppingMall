@@ -104,7 +104,6 @@ public class SellerController {
 	@PostMapping("/emailCheck.do")
 	public String emailCheck(@RequestParam String email) {
 		int checkNum = (int)(Math.random()*899999) + 100000;
-		System.out.println(checkNum);
         
 		try {
 	            MimeMessage message = javaMailSender.createMimeMessage();
@@ -134,7 +133,6 @@ public class SellerController {
 	
 	@PostMapping("/update.do")
 	public String edit(SellerVO vo, Model model) {
-		System.out.println("전송 : " + vo);
 		
 		int r = service.edit(vo);
 		String msg = "";
@@ -217,7 +215,6 @@ public class SellerController {
 	public String findPwd(SellerVO vo, Model model) {
 		
 		int checkNum = (int)(Math.random()*899999) + 100000;
-		System.out.println("확인: "+checkNum);
 		vo.setPassword(String.valueOf(checkNum));
 		
 		int temp = service.findPwd(vo);

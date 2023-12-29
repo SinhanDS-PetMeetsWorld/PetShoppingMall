@@ -10,9 +10,23 @@
 <!-- 헤더스타일로 이름 -->
 <link rel="stylesheet" href="/resources/css/common/header.css">
 <style>
-	.header_unlogin{
-		margin: 25px 0 0 330px;
+	.header_unlogin2{
+		width: 150px;
+    	height: 30px;
+    	margin: 25px 0 0 285px;
+    	display: inline-block;
+    	position: absolute;
+   	 	border: 1px;
+    	cursor: pointer;
 	}
+	.shopname_seller{
+		float:right;
+		font-size:35px;
+		margin-left:10px;
+		margin-top:10px;
+		
+	}
+	
 </style>
 
 </head>
@@ -24,15 +38,16 @@
 		<div class="header_wrapbar">
 			<div class="header_title">
 				<!-- 헤더타이틀로 다바꾸기 -->
-				<h1 id="header_shopname";>
-					<a href="/seller/index.do"><b> Pet Meets World 판매자</b></a>
-				</h1>
+				<div id="header_shopname";>
+					<a href="/seller/index.do"><img class="header_name" src="/resources/img/common/name_img.png"><b class="shopname_seller">판매자</b></a>
+					
+				</div>
 				<div class="header_menu">
 					
 				</div>
 				
 				<c:if test="${empty sellerLoginInfo }">
-					<div class="header_unlogin">
+					<div class="header_unlogin2">
 						<a href="/user/login.do">로그인</a> | <a href="/seller/join.do">회원가입</a>
 					</div>
 				</c:if>

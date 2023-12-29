@@ -17,11 +17,6 @@ public class AmdinLoginInterceptor implements HandlerInterceptor {
 							Object handler) throws Exception {
 		HttpSession sess = request.getSession();
 		String login = (String)sess.getAttribute("adminLoginInfo");
-		System.out.println("url체크: " + request.getRequestURL());
-		System.out.println("login check: " + login);
-		if("".equals(login))System.out.println("흠...체크");
-		String url = ("" + request.getRequestURL());
-		System.out.println("url 변수 체크: " + url);
 		
 		if (login == null) {
 			response.setContentType("text/html; charset=utf-8");

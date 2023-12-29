@@ -250,17 +250,10 @@ public class OrderController {
 		log.debug("optionList체크: " + option_list);
 		log.debug("detailList: " + detailList);
 		
-		int k = orderService.delete_buyed_option(option_no);
-		if(k==1) {
-			System.out.println("카트옵션 삭제됨");
-		} else {
-			System.out.println("옵션삭제안됨");
-		}
+		orderService.delete_buyed_option(option_no);
 		
 		int r = orderService.delete_buyed_cart(cart_no);
-		
 		if(r==1) {
-			System.out.println("카트상품 삭제됨");
 		} else {
 			alert("카트상품 삭제안됨");
 		}
@@ -389,7 +382,6 @@ public class OrderController {
 		dvo = orderService.getFullOrderDetailVO(dvo);
 		
 		
-		System.out.println("이게 뭐지?? " + dvo);
 		
 		model.addAttribute("dvo", dvo);
 		return "/user/order/write_review";
@@ -418,22 +410,11 @@ public class OrderController {
 	
 	@GetMapping("modify_quantity.do")
 	public String modify_quantity(Model model, @RequestParam int cart_no_table, @RequestParam int quantity) {
-		
-		System.out.println("수량수정 카트" + cart_no_table);
-		System.out.println("수량수정 양" + quantity);
-		
 		CartVO vo = new CartVO();
 		vo.setNo(cart_no_table);
 		vo.setQuantity(quantity);
 		
 		int r = orderService.update_cart_quantity(vo);
-		
-		if (r == 1) {
-			System.out.println("수정완");
-		} else {
-			System.out.println("수정안댐");
-		}
-		
 		
 		return "/user/cart/user_cart";
 	}

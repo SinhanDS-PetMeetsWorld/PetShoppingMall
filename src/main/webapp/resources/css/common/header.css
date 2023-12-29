@@ -28,8 +28,8 @@ a {
 }
 
 #header_shopname {
-	display: inline;
-	
+	display: inline-block;
+	height:64px;
 }
 
 .header_wrap > .header_wrapbar > .header_title > .header_menu ul li{
@@ -182,3 +182,9 @@ a {
 	float: left;
 }
 
+.header_name{
+	width:300px;
+	margin-top: 10px;
+	margin-left:10px;
+	
+}

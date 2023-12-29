@@ -226,7 +226,7 @@ height : 70px;
 									<div class = "order_list">
 										주문 번호 : <span id="orderNo" >${vo.no }</span> 
 									 	<h3><a id ="cut"class="seeOrderDetailButton" data-no="${vo.no }">  ${vo.name }</a></h3>
-										총 결제금액: ${vo.total_price }원 <br>
+										총 결제금액: ${vo.total_price + vo.total_delivery_fee}원 <br>
 									</div>	
 									
 									<div class = "button">
