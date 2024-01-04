@@ -9,7 +9,7 @@
 <h2>팀원 구성</h2>
 <table>
   <tr>
-    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/8b4a3c60-6168-4d8d-a9e0-0d8a10b317dc" width=150></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/266de2b0-086b-4cf9-8ead-fccc5daaa533" width=150></td>
     <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/8b4a3c60-6168-4d8d-a9e0-0d8a10b317dc" width=150></td>
     <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/415f8d3a-3c0f-4bdf-936f-eadd3b028fa2" width=150></td>
     <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/8b4a3c60-6168-4d8d-a9e0-0d8a10b317dc" width=150></td>
@@ -59,4 +59,10 @@
 
 
 <h2>도커화</h2>
+<a href="https://github.com/kimcider/PetShoppingMall-DockerFile/blob/main/README.md">프로젝트 도커화 링크</a>
 
+<h2>프로젝트 후기</h2>
+<h3>김병천</h3>
+<h3>류정현</h3>
+<h3>류진환</h3>
+<h3>신정훈</h3>
