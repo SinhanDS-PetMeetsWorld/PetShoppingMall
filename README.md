@@ -10,10 +10,11 @@
 <table>
   <tr>
     <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/266de2b0-086b-4cf9-8ead-fccc5daaa533" width=150></td>
-    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/8b4a3c60-6168-4d8d-a9e0-0d8a10b317dc" width=150></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/109725457/9a927716-5958-4f26-85dc-ccfbd997d9f3" width=150></td>
     <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/415f8d3a-3c0f-4bdf-936f-eadd3b028fa2" width=150></td>
     <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/8b4a3c60-6168-4d8d-a9e0-0d8a10b317dc" width=150></td>
   </tr>
+
   <tr>
     <td>김병천</td>
     <td>류정현</td>
