@@ -5,15 +5,14 @@
 <li>오픈마켓 형식의 쇼핑몰</li>
 <li>여러 판매자가 입점하여 각자의 상품을 등록, 판매 할 수 있으며, 사이트 관리자가 별도로 존재한다.</li>
 
-
 <br>
 <h2>팀원 구성</h2>
 <table>
   <tr>
-    <td>이미지</td>
-    <td>이미지</td>
-    <td>이미지</td>
-    <td>이미지</td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/8b4a3c60-6168-4d8d-a9e0-0d8a10b317dc" width=150></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/8b4a3c60-6168-4d8d-a9e0-0d8a10b317dc" width=150></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/415f8d3a-3c0f-4bdf-936f-eadd3b028fa2" width=150></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/8b4a3c60-6168-4d8d-a9e0-0d8a10b317dc" width=150></td>
   </tr>
   <tr>
     <td>김병천</td>
@@ -46,6 +45,9 @@
 
 <h2>프로젝트 구조</h2>
 <h3>DB구조</h3>
+<a href="https://www.erdcloud.com/d/KGqDcSuSKXQpqoHQN" target="_blank">erd 링크</a>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/b4b08974-9209-4d1d-8e63-503a08ba034c">
+
 
 <h3>페이지/기능 목록</h3>
 <h4>구매자</h4>
