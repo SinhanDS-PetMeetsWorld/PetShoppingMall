@@ -45,7 +45,7 @@
 
 <h2>프로젝트 구조</h2>
 <h3>DB구조</h3>
-<a href="https://www.erdcloud.com/d/KGqDcSuSKXQpqoHQN" onclick="window.open(this.href);">erd 자세히 보러가기</a>
+<a href="https://www.erdcloud.com/d/KGqDcSuSKXQpqoHQN" target="_blank" rel="noopener">erd 자세히 보러가기</a>
 <img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/b4b08974-9209-4d1d-8e63-503a08ba034c">
 
 
