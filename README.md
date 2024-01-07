@@ -1,4 +1,3 @@
-![스크린샷 2024-01-07 오후 3 59 59(2)](https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/a28d2f4b-a00d-4117-90d7-ee6f1a1a4f64)<h1>Pet Meets World</h1>
 <h2>신한 DS 아카데미 프로젝트</h2>
 
 <img width="960" alt="메인페이지" src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/3cc8f834-2b23-40e7-bd71-079cd32ed912">
