@@ -1,4 +1,4 @@
-<h1>Pet Meets World</h1>
+![스크린샷 2024-01-07 오후 3 59 59(2)](https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/a28d2f4b-a00d-4117-90d7-ee6f1a1a4f64)<h1>Pet Meets World</h1>
 <h2>신한 DS 아카데미 프로젝트</h2>
 
 <img width="960" alt="메인페이지" src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/3cc8f834-2b23-40e7-bd71-079cd32ed912">
@@ -92,3 +92,22 @@
 <img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/81898cb3-de4b-47b2-a8b2-0322e3fc9d0e" width=700>
 <h4>이니시스 결제 페이지</h4>
 <img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/a02eec03-5779-4406-94ed-feaf56928f1e" width=700>
+<h4>구매이력 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/d97cf286-b46e-4639-9e79-ea4603de7415" width=700>
+<h4>구매이력 상세 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/3bc6e7a5-da68-4d75-87ed-03e4e56a75f4" width=700>
+<h4>작성한 리뷰 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/59ea2e19-786f-4c23-8469-1baac7b9b416" width=700>
+<h4>판매자 로그인 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/67a0fbd6-b329-40ed-8748-2965d0a78a08" width=700>
+<h4>매출 통계 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/331e1d66-9304-4d97-8fbb-6a18e278dc13" width=700>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/6d36ab62-08f7-40ff-a8f6-b78605816480" width=700>
+<h4>판매자 상품 등록 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/1fd3c109-eedb-41fb-981b-61f05387d7a2" width=700>
+<h4>판매 상품 목록 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/4def1625-ec87-4509-b9f1-784d74d54812" width=700>
+<h4>관리자 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/f338e971-bd9c-414a-91d1-a2c95b8be387" width=700>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/ee8d9a61-4794-4e1b-8274-372f4963bfca" width=700>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/e2e09461-aed0-4afd-8b99-effac855d0d8" width=700>
