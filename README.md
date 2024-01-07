@@ -28,36 +28,23 @@
     <td><a href="https://github.com/powerpress0809">@powerpress0809</a></td>
   </tr>
 </table>
-
 <br>
 <h2>사용 기술</h2>
 <table>
   <tr>
-    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/38768713-013f-48f7-87d4-ff84955ae135"></td>
-
-  </tr>
-  <tr>
-    <td><h3>Spring Framwork</h3></td>
-    <td><h3>MySQL</h3></td>
-    <td><h3>MyBatis</h3></td>
-    <td><h3>Docker</h3></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/38768713-013f-48f7-87d4-ff84955ae135" width=80 height=80><h3>Spring</h3></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/0def22de-5638-4bd0-9991-f91f099f31d2" width=80 height=80><h3>MySQL</h3></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/4c2ce37d-bbf3-4ce0-b5d3-a214026d345a" width=80 height=80><h3>MyBatis</h3></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/b38c7ecb-7bf7-4528-bfb6-bcad1d415dec" width=80 height=80><h3>Docker</h3></td>    
   </tr>
 
   <tr>
-    
-  </tr>
-  <tr>
-    <td><h3>AWS</h3></td>
-    <td><h3>JQuery</h3></td>
-    <td><h3>Ajax</h3></td>
-    <td><h3>JUnit</h3></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/591f9c66-7dbf-4a14-842a-3f5f23e75a09" width=80 height=80><h3>AWS</h3></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/4841675d-995f-4915-80b2-5bffe56c9800" width=80 height=80><h3>jQuery</h3></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/83515328-a166-4ba0-ba6a-3886e038325c" width=80 height=80><h3>Ajax</h3></td>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/97985a64-60ae-4ade-9b67-0c1676f402b8" width=80 height=80><h3>JUnit</h3></td>
   </tr>
 </table>
-
-
-
-
-
 
 
 <h2>개발기간</h2>
