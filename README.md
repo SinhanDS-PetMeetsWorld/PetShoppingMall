@@ -74,3 +74,21 @@
 <h3>류정현</h3> 기본기에 충실하자는 마음으로 임했습니다. 스프링으로 하나의 프로젝트를 완성한건 처음인데, 팀원들 덕분에 즐겁게 작업했어요. 늘 감사합니다!
 <h3>류진환</h3>
 <h3>신정훈</h3> 항상 "팀에게 피해는 주지 말자."라는 마음으로 작업을 했던 것 같습니다. 그 마음이 팀의 결속력을 더 키웠고, 성공적인 마무리가 되었습니다. 감사합니다.
+
+<h2>페이지 시연</h2>
+<h4>메인 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/4e3a7850-5cdc-4529-bd05-c4da0380f554" width=700>
+<h4>로그인 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/b4de500f-8472-492b-9a0a-d839aa1ae721" width=700>
+<h4>상품 검색 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/2eb678b1-3805-496a-a1a6-c8c1b60fb218" width=700>
+<h4>상품 목록 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/2315497a-7337-4147-bc57-3c815f9dc879" width=700>
+<h4>상품 상세 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/47f2ca5c-ead4-4763-aff9-1376bcba4a6d" width=700>
+<h4>장바구니 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/11e19be2-9743-4448-842e-3b641f0a8796" width=700>
+<h4>결제 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/81898cb3-de4b-47b2-a8b2-0322e3fc9d0e" width=700>
+<h4>이니시스 결제 페이지</h4>
+<img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/a02eec03-5779-4406-94ed-feaf56928f1e" width=700>
