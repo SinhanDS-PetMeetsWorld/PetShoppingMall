@@ -31,14 +31,34 @@
 
 <br>
 <h2>사용 기술</h2>
-<h3>Spring Framwork</h3>
-<h3>MySQL</h3>
-<h3>MyBatis</h3>
-<h3>Docker</h3>
-<h3>AWS</h3>
-<h3>JQuery</h3>
-<h3>Ajax</h3>
-<h3>JUnit</h3>
+<table>
+  <tr>
+    <td><img src="https://github.com/SinhanDS-PetMeetsWorld/PetShoppingMall/assets/105146508/38768713-013f-48f7-87d4-ff84955ae135"></td>
+
+  </tr>
+  <tr>
+    <td><h3>Spring Framwork</h3></td>
+    <td><h3>MySQL</h3></td>
+    <td><h3>MyBatis</h3></td>
+    <td><h3>Docker</h3></td>
+  </tr>
+
+  <tr>
+    
+  </tr>
+  <tr>
+    <td><h3>AWS</h3></td>
+    <td><h3>JQuery</h3></td>
+    <td><h3>Ajax</h3></td>
+    <td><h3>JUnit</h3></td>
+  </tr>
+</table>
+
+
+
+
+
+
 
 <h2>개발기간</h2>
 <li>11월 19일 ~ 12월 28일</li>
